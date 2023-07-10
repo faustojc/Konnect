@@ -1,0 +1,128 @@
+/**
+ * @param {string} target Target element to validate
+ * @returns {boolean} Returns true if the form is valid, false otherwise
+ */
+function validateForm(target) {
+    const form = document.querySelector(target);
+    let isValid = false;
+
+    form.addEventListener('submit', function (event) {
+        isValid = this.checkValidity();
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        form.classList.add('was-validated');
+    });
+
+    form.dispatchEvent(new Event('submit'));
+
+    return isValid;
+}
+
+/**
+ * Makes the textarea element a TinyMCE editor
+ * @param {string} selector Selects the textarea element based on id or class.
+ * @param {number} height Set the height of the editor, this is optional.
+ * @param {function} setupFunction An optional function for setting up the editor.s
+ */
+function textareaEditor(selector, height = 350, setupFunction = () => {
+}) {
+    tinymce.init({
+        selector: selector,
+        height: height,
+        menubar: false,
+        browser_spellcheck: true,
+        setup: function (editor) {
+            setupFunction(editor);
+        },
+        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
+        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+        tinycomments_mode: 'embedded',
+        tinycomments_author: 'Author name',
+        mergetags_list: [
+            {value: 'First.Name', title: 'First Name'},
+            {value: 'Email', title: 'Email'},
+        ]
+    });
+}
+
+/**
+ * @param {string} url URL to send request
+ * @param {string} request_type Type of form method (GET, POST, PUT, etc.)
+ * @param {object} data Data to be sent
+ * @param {function} callback An optional callback function that executes only if the request is successful
+ */
+function formAction(url, request_type, data, callback) {
+    if (data instanceof FormData) {
+        $.ajax({
+            url: url,
+            type: request_type,
+            data: data,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                successFunc(response);
+            },
+            error: function (response) {
+                errorFunc(response);
+            }
+        });
+    } else {
+        $.ajax({
+            url: url,
+            type: request_type,
+            data: data,
+            success: function (response) {
+                successFunc(response);
+            },
+            error: function (response) {
+                errorFunc(response);
+            }
+        });
+    }
+
+    const successFunc = (response) => {
+        try {
+            const data = JSON.parse(response);
+            callback(data);
+        } catch (e) {
+            console.log(response);
+            callback();
+        }
+    }
+
+    const errorFunc = (response) => {
+        try {
+            const data = JSON.parse(response);
+            error('ERROR', data.message, 3000);
+        } catch (e) {
+            error('ERROR', 'Something went wrong', 3000);
+        } finally {
+            console.log(response);
+        }
+    }
+}
+
+function success(title, message, delay) {
+    createToast(title, message, delay, 'bg-success', 'fa fa-check');
+}
+
+function error(title, message, delay) {
+    createToast(title, message, delay, 'bg-danger', 'fa fa-times');
+}
+
+function createToast(title, message, delay = 4000, class_names, icon) {
+    $(document).Toasts('create', {
+        title: title,
+        body: message,
+        position: 'bottomRight',
+        class: 'my-2 p-2 ' + class_names,
+        icon: icon,
+        fixed: true,
+        autohide: true,
+        autoremove: true,
+        delay: delay,
+        fade: true
+    });
+}

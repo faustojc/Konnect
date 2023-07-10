@@ -1,0 +1,181 @@
+<?php
+defined('BASEPATH') or exit('No direct script access allowed');
+
+class Employee_profile extends MY_Controller
+{
+	private $data = [];
+	protected $session;
+	public function __construct()
+	{
+		parent::__construct();
+		$this->session = (object) get_userdata(USER);
+
+		// if(is_empty_object($this->session)){
+		// 	redirect(base_url().'login/authentication', 'refresh');
+		// }
+
+		$model_list = [
+			'employee_profile/employee_profile_model' => 'eModel',
+			'employer/Employer_model' => 'employer_model'
+		];
+		$this->load->model($model_list);
+	}
+
+
+
+	/** load main page */
+	public function index()
+	{
+		// if (
+		// 	!check_permission($this->session->User_type, ['admin'])
+		// ) {
+		// 	redirect(base_url() . 'landing_page', 'refresh');
+		// }
+
+		// $this->data['session'] =  $this->session;
+		$ID = $this->uri->segment(3);
+		$this->eModel->ID = $ID;
+
+		$this->data['details'] = $this->eModel->get_employee();
+
+		$this->data['educ_val'] = $this->eModel->get_educations();
+		$this->data['train_val'] = $this->eModel->get_training();
+
+		// $this->data['detdet'] = $this->eModel->get_employees();
+
+		$this->data['employers'] = $this->employer_model->get_employers();
+
+		$this->data['content'] = 'index';
+		//index^
+		$this->load->view('layout', $this->data);
+
+	}
+
+	// public function get_employee(){
+	// 	$this->data['details'] = $this->eModel->get_employee();
+	// 	$this->data['value'] = "hello";
+	// 	$this->data['content'] = 'index';
+	// 	$this->load->view('layout',$this->data);
+	// }
+
+
+	public function add_skill()
+	{
+		$this->data['details'] = $this->eModel->get_skill();
+		$this->data['content'] = 'index';
+		$this->load->view('layout', $this->data);
+	}
+
+	public function get_skill()
+	{
+		$ID = $this->uri->segment(3);
+		$this->eModel->ID = $ID;
+
+
+		$this->data['details'] = $this->eModel->get_skill();
+		$this->data['content'] = 'grid/load_skill';
+		$this->load->view('layout', $this->data);
+	}
+
+	public function edit_skill()
+	{
+		$ID = $this->uri->segment(3);
+		$this->eModel->ID = $ID;
+
+		$this->data['details'] = $this->eModel->edit_skill();
+		$this->data['content'] = 'edit_skill';
+		$this->load->view('layout', $this->data);
+	}
+
+	// Employee Education Section
+	public function add_employee_educ()
+	{
+		$this->data['details'] = $this->eModel->get_employees();
+		$this->data['content'] = 'education';
+		$this->load->view('layout', $this->data);
+	}
+
+	public function get_educations()
+	{
+		$ID = $this->uri->segment(3);
+		$this->eModel->ID = $ID;
+
+		$this->data['educ_val'] = $this->eModel->get_educations();
+		// $this->data['educ'] = $this->eModel->get_education_only();
+		$this->data['content'] = 'grid/load_educations';
+		$this->load->view('layout', $this->data);
+	}
+
+	public function education_edit()
+	{
+
+		$ID = $this->uri->segment(3);
+		$this->eModel->ID = $ID;
+
+		$this->data['educ_val'] = $this->eModel->education_edit();
+		$this->data['content'] = 'education_edit';
+		// $this->data['content'] = 'education';
+
+
+		$this->load->view('layout', $this->data);
+	}
+	// /Employee Education Section
+
+	// Training
+	public function add_employee_train()
+	{
+		$this->data['details'] = $this->eModel->get_employees();
+		$this->data['content'] = 'education';
+		$this->load->view('layout', $this->data);
+	}
+
+	public function get_training()
+	{
+		$ID = $this->uri->segment(3);
+		$this->eModel->ID = $ID;
+
+
+
+		$this->data['train_val'] = $this->eModel->get_training();
+		$this->data['content'] = 'grid/load_training';
+		$this->load->view('layout', $this->data);
+	}
+
+	public function training_edit()
+	{
+
+		$ID = $this->uri->segment(3);
+		$this->eModel->ID = $ID;
+
+		$this->data['train_val'] = $this->eModel->education_edit();
+		$this->data['content'] = 'education_edit';
+		// $this->data['content'] = 'education';
+
+
+		$this->load->view('layout', $this->data);
+	}
+
+	// /Training
+
+	public function get_all_employments()
+	{
+		$ID = $this->uri->segment(3);
+		$this->eModel->ID = $ID;
+
+		$this->data['details'] = $this->eModel->get_all_employments();
+		$this->data['content'] = 'grid/load_employments';
+		$this->load->view('layout', $this->data);
+
+
+	}
+
+	public function edit_employment()
+	{
+		$ID = $this->uri->segment(3);
+
+		$data['details'] = $this->eModel->get_employment($ID);
+		$data['content'] = 'grid/load_employments';
+		$this->load->view('layout', $data);
+	}
+	// /Employment Section
+}

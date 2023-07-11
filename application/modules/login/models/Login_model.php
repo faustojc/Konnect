@@ -22,10 +22,10 @@ class Login_model extends CI_Model
     public function authentication($info)
     {
         try {
-            if (empty($info['username']) || empty($info['password'])) {
+            if (empty($info['email']) || empty($info['password'])) {
                 return array('message' => REQUIRED_FIELD, 'has_error' => true);
             }
-            // $from = 'admin'; to be clarified
+
             $query = $this->db->select()
                 ->from('tbl_user')
                 ->where('username', $info['username'])
@@ -39,8 +39,6 @@ class Login_model extends CI_Model
                 return array('message' => NOT_MATCH, 'has_error' => true);
             }
 
-            // $query->from = $from; to be clarified
-            //set session????? to be clarified
             set_userdata(USER, $query);
             return array(
                 'has_error' => false,

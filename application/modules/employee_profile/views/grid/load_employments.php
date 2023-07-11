@@ -6,8 +6,8 @@ if (!empty($details)) {
         $employment = $value['employment'];
 
         ?>
-        <div class="card-body card-widget widget-user-2">
-            <div class="card-body">
+        <div class="card-body card-widget widget-user-2" style="padding-top:0px;padding-bottom:5px;padding-left:35px">
+            
                 <div id="content">
                     <input type="text" class="form-control" id="employmentID" value="<?= @$employment->ID ?>" hidden>
                     <input type="text" class="form-control" id="employerID" value="<?= @$employment->employer_id ?>" hidden>
@@ -80,22 +80,23 @@ if (!empty($details)) {
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary" id="edit_employment">Save edit</button>
+                                        <button type="button" class="btn btn-info" id="edit_employment">Save edit</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                     <div id="employment">
-                        <h5><?= ucwords(@$employer->employer_name) ?></h5>
-                        <h6><?= ucwords(@$employment->position) ?> </h6>
-                        <p><?= $employment->start_date ?> to <?= $employment->end_date ?></p>
+                        <h5 style="font-weight:650;"><?= ucwords(@$employer->employer_name) ?></h5>
+                        <h6 style="margin-bottom:0px;"><?= ucwords(@$employment->position) ?> </h6>
+                        <p class="text-muted" style="margin:0px;"><?= date("M Y", strtotime(@$employment->start_date)) ?> to <?= date("M Y", strtotime(@$employment->end_date)) ?></p>
                         <?php if ($employment->show_status == 1): ?>
                             <p class="status"><?= ucwords(@$employment->status) ?></p>
                         <?php endif; ?>
                     </div>
+                    &nbsp;
                 </div>
-            </div>
+            
         </div>
 
         <?php

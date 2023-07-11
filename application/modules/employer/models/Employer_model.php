@@ -36,4 +36,9 @@ class Employer_model extends CI_Model
     {
         return $this->db->select()->from($this->Table->employer)->where('id', $employer_id)->get()->row();
     }
+
+    public function where($column_name, $value)
+    {
+        return $this->db->select()->from($this->Table->employer)->where($column_name, $value)->get()->row();
+    }
 }

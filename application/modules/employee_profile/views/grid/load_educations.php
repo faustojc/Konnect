@@ -15,7 +15,7 @@ if (!empty($educ_val)) {
                     </div>
                     <!-- /.widget-user-image -->
 
-                    <h5 class="widget-user-username mt-0" style="font-size: 18px; font-weight: 500;"><?= (@$value->Institution) ?></h5>
+                    <h5 class="widget-user-username mt-0" style="font-size: 18px; font-weight: 650;"><?= (@$value->Institution) ?></h5>
                     <h6 class="widget-user-desc mb-0" style="font-weight: normal; font-size: 16px;"><?= (@$value->Title) ?></h6>
                     <p class="widget-user-desc mb-0 mt-0 text-muted" style="font-weight: normal; font-size: 16px;"><?= (@$value->Level) ?></p>
                     <p class="widget-user-desc mb-0 mt-1 text-muted" style="font-weight: normal; font-size: 16px;"><?= date("Y", strtotime(@$value->Start_date)) ?> - <?= date("Y", strtotime(@$value->End_date)) ?></p>
@@ -32,7 +32,7 @@ if (!empty($educ_val)) {
                 </div>
 
             </div>
-
+            &nbsp;
 
         </div>
         <div class="modal fade" id="ModalEducEdit<?= $key ?>" tabindex="-1" role="dialog" aria-labelledby="ModalEducEdit<?= $key ?>" aria-hidden="true">
@@ -79,10 +79,11 @@ if (!empty($educ_val)) {
 
                                 <div class="row pb-4">
                                     <div class="col-md">
-                                        <label>Description</label>
+                                        <label>Grade Level</label>
                                         <!-- <input type="text" class="form-control" id="Description"  placeholder="Enter Description"> -->
                                         <div>
-                                            <textarea class="form-control" name="description" id="Description2" rows="4" placeholder="Enter Description"><?= @$value->Description ?></textarea>
+                                            <!-- <textarea class="form-control" name="description" id="Description2" rows="4" placeholder="Enter Description"><?= @$value->Description ?></textarea> -->
+                                            <input type="text" class="form-control" value="<?= @$value->Description ?>" id="Description2" placeholder="Enter ...">
                                         </div>
 
                                     </div>

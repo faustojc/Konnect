@@ -16,7 +16,8 @@ class Employee_profile extends MY_Controller
 
 		$model_list = [
 			'employee_profile/employee_profile_model' => 'eModel',
-			'employer/Employer_model' => 'employer_model'
+			'employer/Employer_model' => 'employer_model',
+            'employee/Employee_model' => 'employee_model'
 		];
 		$this->load->model($model_list);
 	}
@@ -33,17 +34,32 @@ class Employee_profile extends MY_Controller
 		// }
 
 		// $this->data['session'] =  $this->session;
+        $this->load->driver('cache');
+
 		$ID = $this->uri->segment(3);
 		$this->eModel->ID = $ID;
 
 		$this->data['details'] = $this->eModel->get_employee();
-
 		$this->data['educ_val'] = $this->eModel->get_educations();
 		$this->data['train_val'] = $this->eModel->get_training();
 
-		// $this->data['detdet'] = $this->eModel->get_employees();
+        if (!$employers_follow_section_view = $this->cache->get('employers_follow_section_view')) {
+            // If not, generate the view and cache it for 10 minutes
+            $this->data['employers'] = $this->employer_model->get_employers(4);
+            $employers_follow_section_view = $this->load->view('grid/load_employers', $this->data, TRUE);
+            $this->cache->save('employers_follow_section_view', $employers_follow_section_view, 600);
+        }
+        if (!$employees_follow_section_view = $this->cache->get('employees_follow_section_view')) {
+            // If not, generate the view and cache it for 10 minutes
+            $this->data['employees'] = $this->employee_model->get_all_employees(4, $ID);
+            $employees_follow_section_view = $this->load->view('grid/load_employees', $this->data, TRUE);
+            $this->cache->save('employees_follow_section_view', $employees_follow_section_view, 600);
+        }
 
-		$this->data['employers'] = $this->employer_model->get_employers();
+        $this->data['employers_follow_section_view'] = $employers_follow_section_view;
+        $this->data['employees_follow_section_view'] = $employees_follow_section_view;
+
+//		$this->data['employers'] = $this->employer_model->get_employers();
 
 		$this->data['content'] = 'index';
 		//index^
@@ -177,5 +193,21 @@ class Employee_profile extends MY_Controller
 		$data['content'] = 'grid/load_employments';
 		$this->load->view('layout', $data);
 	}
-	// /Employment Section
+
+	public function get_employees_follow_section()
+	{
+        $id = $this->uri->segment(3);
+
+		$this->data['employees'] = $this->employee_model->get_all_employees(4, $id);
+		$this->data['content'] = 'grid/load_employees';
+		$this->load->view('layout', $this->data);
+	}
+
+	public function get_employers_follow_section()
+	{
+		$this->data['employers'] = $this->employer_model->get_employers(4);
+		$this->data['content'] = 'grid/load_employers';
+		$this->load->view('layout', $this->data);
+	}
+
 }

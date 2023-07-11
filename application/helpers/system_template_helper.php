@@ -2,7 +2,7 @@
 function main_header($menubar = [])
 {
     defined('BASEPATH') or exit('No direct script access allowed');
-    $session = get_userdata(USER);
+    $userdata = get_userdata(USER);
     // $ci = &get_instance();
     ?>
     <!DOCTYPE html>
@@ -52,10 +52,9 @@ function main_header($menubar = [])
 
         <!-- TinyMCE -->
         <script src="<?= base_url() ?>assets/theme/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
-        <script src="https://cdn.tiny.cloud/1/po91tb6h2o7qabnoabk6vrw3060y6k3lbut6ob4d0fdb9kik/tinymce/6/plugins.min.js" referrerpolicy="origin"></script>
     </head>
 
-    <body class="hold-transition  light-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed" style="background-color:#f3f2ef ;" >
+    <body class="hold-transition  light-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed" style="background-color:#F1F6F9 ;" >
     <div class="wrapper">
     <!-- Navbar -->
     <div class="container px-5">

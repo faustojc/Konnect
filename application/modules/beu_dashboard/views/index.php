@@ -122,61 +122,10 @@ main_header(['Employer_profile']);
     <div class="container-fluid">
         <div class="row pl-3 pr-3" style="margin-top: 3.5rem;">
             <div class="col-12 col-md-3 mt-4">
-                <!-- Widget: user widget style 1 -->
-                <div class="card card-widget widget-user">
-                    <!-- Add the bg color to the header using any of the bg-* classes -->
-                    <div class="widget-user-header text-white"
-                         style="background: url('assets/images/Logo/Profile/wallpapersample.jpg') center center; background-repeat: no-repeat; background-size: cover;">
-                    </div>
-                    <div class="widget-user-image">
-                        <img class="img-circle img-fluid" src="assets/images/Logo/Profile/default.png" alt="User Avatar" style="object-fit: cover; min-width: 90px; max-width: 90px;min-height: 90px; max-height: 90px;">
-                    </div>
-                    <div class="card-footer" style="padding-top: 35px;">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="description-block">
-                                    <h4 class="widget-user-username text-center" style="font-weight: 500; font-size: 20px;">John Doe</h4>
-                                    <h6 class="widget-user-desc text-center text-muted mt-1" style="font-weight: normal; font-size: 14px;">Web Designer</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.row -->
-                    </div>
+                <!-- -->
+                <div id="user">
 
-                    <div class="card-footer border-top pt-2">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="description-block mb-0">
-                                    <h6 class="widget-user-desc text-left mt-1 mb-1" style="font-weight: 500; font-size: 16px;"> Heading</h6>
-                                    <h6 class="widget-user-desc text-left mt-1 mb-1" style="font-weight: normal; font-size: 14px;"> Lorem ipsum dolor sit amet</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.row -->
-                    </div>
-
-                    <div class="card-footer border-top pt-2">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="description-block mb-0">
-                                    <h6 class="widget-user-desc text-left mt-1 mb-1" style="font-weight: normal; font-size: 14px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.row -->
-                    </div>
-
-                    <div class="card-footer border-top pt-3 pb-3">
-                        <div class="row">
-                            <div class="col-12">
-                                <a href="#" class="hoveropac">
-                                    <p class="mb-0 text-center fw-500 text-muted fs-14">View Profile <i class="fa-solid fa-arrow-right fs-14 ml-1"></i></p>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-                <!-- /.widget-user -->
 
                 <div class="card card-info">
                     <div class="card-header">
@@ -222,67 +171,39 @@ main_header(['Employer_profile']);
             <div class="col-12 col-md-6 mt-4">
                 <div class="card">
                     <div class="card-body">
-                        <div class="tab-content">
-                            <!-- Post -->
-                            <div class="post">
-                                <div class="user-block">
-                                    <img class="img-circle img-bordered-sm" src="assets/images/Logo/Profile/default.png" alt="User Image" style="object-fit: cover; min-width: 40px; max-width: 40px; min-height: 40px; max-height: 40px;">
-                                    <span class="username">
-                          <p class="mb-0 fs-16">Adam Jones</p>
-                          <a href="#" class="float-right btn-tool"><i class="fa-solid fa-ellipsis"></i></a>
-                        </span>
-                                    <span class="description">5 days ago</span>
-                                </div>
-                                <!-- /.user-block -->
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vitae ante tortor. Pellentesque a massa eget sapien sagittis rutrum. Donec laoreet in ex aliquet cursus. Sed lacinia, est et varius feugiat,
-                                            elit tortor gravida tortor, et consectetur diam elit id odio. Aliquam urna dolor, posuere ac hendrerit nec, cursus eget ipsum. Sed viverra enim at metus finibus posuere. Pellentesque ac neque erat. Nam
-                                            tincidunt, augue eu lacinia varius, mi augue dictum turpis, egestas venenatis dolor elit id risus.
-                                        </p>
-                                        <img class="img-fluid" src="assets/images/Logo/Profile/samplepic.jpg" alt="Photo">
-                                    </div>
-                                    <!-- /.col -->
-                                </div>
-                                <!-- /.row -->
-                            </div>
-                            <!-- /.post -->
+                        <div class="job-post">
+                        <div class="job-header">
+                            <h4 class="job-title fw-bold">Frontend Developer</h4>
+                            <p class="job-company">ABC Company</p>
+                            <p class="job-location">San Francisco, CA</p>
                         </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-body">
-                        <div class="tab-content">
-                            <!-- Post -->
-                            <div class="post">
-                                <div class="user-block">
-                                    <img class="img-circle img-bordered-sm" src="assets/images/Logo/Profile/default.png" alt="User Image" style="object-fit: cover; min-width: 40px; max-width: 40px; min-height: 40px; max-height: 40px;">
-                                    <span class="username">
-                          <p class="mb-0 fs-16">Adam Jones</p>
-                          <a href="#" class="float-right btn-tool"><i class="fa-solid fa-ellipsis"></i></a>
-                        </span>
-                                    <span class="description">5 days ago</span>
+                            <div class="job-details">
+                                <!-- <ul class="job-info">
+                                    <li>
+                                        <i class="fas fa-calendar"></i>
+                                        <span class="job-info-label">Posted:</span>
+                                        <span class="job-info-value">5 days ago</span>
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-clock"></i>
+                                        <span class="job-info-label">Type:</span>
+                                        <span class="job-info-value">Full-time</span>
+                                    </li>
+                                </ul> -->
+                                <div class="job-description">
+                                    <p class="fs-14 mb-0 text-muted">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vitae ante tortor. Pellentesque a massa eget sapien sagittis rutrum.
+                                        Donec laoreet in ex aliquet cursus. Sed lacinia, est et varius feugiat, elit tortor gravida tortor, et consectetur diam elit id odio.
+                                        Aliquam urna dolor, posuere ac hendrerit nec, cursus eget ipsum. Sed viverra enim at metus finibus posuere. Pellentesque ac neque erat.
+                                        Nam tincidunt, augue eu lacinia varius, mi augue dictum turpis, egestas venenatis dolor elit id risus.
+                                    </p>
                                 </div>
-                                <!-- /.user-block -->
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vitae ante tortor. Pellentesque a massa eget sapien sagittis rutrum. Donec laoreet in ex aliquet cursus. Sed lacinia, est et varius feugiat,
-                                            elit tortor gravida tortor, et consectetur diam elit id odio. Aliquam urna dolor, posuere ac hendrerit nec, cursus eget ipsum. Sed viverra enim at metus finibus posuere. Pellentesque ac neque erat. Nam
-                                            tincidunt, augue eu lacinia varius, mi augue dictum turpis, egestas venenatis dolor elit id risus.
-                                        </p>
-                                    </div>
-                                    <!-- /.col -->
-                                </div>
-                                <!-- /.row -->
                             </div>
-                            <!-- /.post -->
                         </div>
                     </div>
                 </div>
             </div>
+
 
             <div class="col-12 col-md-3 mt-4">
                 <div class="card card-widget widget-user-2">

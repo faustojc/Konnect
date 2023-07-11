@@ -85,8 +85,7 @@ class Employee_profile_service extends MY_Controller
         $this->esModel->end_date = $this->input->post("end_date");
         $this->esModel->status = $this->input->post("status");
         $this->esModel->rating = $this->input->post("rating");
-        // $this->esModel->job_description = $this->input->post("job_description");
-        // $this->esModel->show_status = $this->input->post("show_status");
+        $this->esModel->show_status = $this->input->post("show_status");
 
         $response = $this->esModel->save_employment();
         echo json_encode($response);
@@ -95,7 +94,7 @@ class Employee_profile_service extends MY_Controller
     public function delete_employment()
     {
         $employment_id = $this->input->post("employment_id");
-        $response = $this->esModel->delete($employment_id);
+        $response = $this->esModel->delete_employment($employment_id);
 
         echo json_encode($response);
     }

@@ -117,8 +117,7 @@ class Employee_profile_services_model extends CI_Model
                 'end_date' => $this->end_date,
                 'status' => $this->status,
                 'rating' => $this->rating,
-                // 'job_description' => $this->job_description,
-                // 'show_status' => $this->show_status,
+                'show_status' => $this->show_status,
                 'date_created' => date('Y-m-d H:i:s')
             );
 

@@ -6,6 +6,7 @@ function auth_head()
     <!DOCTYPE html>
     <html lang="en">
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title><?= SYSTEM_NAME ?></title>
         <link rel="icon" type="image/x-icon" href="<?= base_url() ?>assets/images/Logo/Konnect2.ico">
 

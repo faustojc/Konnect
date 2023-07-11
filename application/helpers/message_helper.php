@@ -1,47 +1,47 @@
 <?php
-define('DUPLICATE_RECORD', 'Duplicate record already found in the system.');
-define('EXIST_COLLECTION_LINE', 'Sorry this transaction cannot be process, this invoice was collected. ');
-define('EXIST_INVOICE_TRANSACTION', 'Sorry this transaction cannot be process, this client has invoice transacted. ');
-define('EXIST_COLLECTION_TRANSACTION', 'Sorry this transaction cannot be process, this invoice has collection transacted. ');
-define('REQUIRED_FIELD', 'Please fill in required fields.');
-define('PASSWORD_LENGTH', 'Password should not be less than 6 (six) characters long.');
-define('USERNAME_LENGTH', 'Username should not be less than 6 (six) characters long.');
-define('NO_ACCOUNT', 'No existing account.');
-define('INVALID_USERNAME_PASSWORD', 'Invalid password.');
-define('ACCOUNT_DISABLED', 'Account is currently disabled.');
-define('SAVED_SUCCESSFUL', 'Details saved successfully.');
-define('DELETED_SUCCESSFUL', 'Details deleted successfully.');
-define('RENEW_SUCCESSFUL', 'Application successfully saved.');
-define('CONFIRM_RENEWAL', 'Submit this application?');
-define('NO_CRYPTO', 'No Cryptographically Secure Random Function Available.');
-define('CANNOT_MODIFY', 'Sorry, the process cannot be proceed.');
-define('ERROR_API_KEY', 'Error validating security key.');
-define('NO_CURRENT_APPLICATION', 'You have no current application.');
-define('EMAIL_FORMAT', 'Username must not be in email format.');
-define('ERROR_PROCESSING', 'Error Processing.');
-define('MISSING_DETAILS', 'Missing Details. Double check any empty fields that is required to be filled.');
-define('MISSING_USERNAME', 'Username field is empty.');
-define('MISSING_NAME_DETAILS', 'Missing Details. Please fill up the input boxes related to the personnel name');
-define('UPDATE_SUCCESSFUL', 'Updated successfully.');
-define('MISSING_INSP', 'Please check the checkbox to assign the inspector to their respective tabs.');
-define('SUCCESS', 'SUCCESS TRANSACTION.');
-define('EMPTY_FIELDS', 'One of these forms must not be empty.');
+const DUPLICATE_RECORD = 'Duplicate record already found in the system.';
+const EXIST_COLLECTION_LINE = 'Sorry this transaction cannot be process, this invoice was collected. ';
+const EXIST_INVOICE_TRANSACTION = 'Sorry this transaction cannot be process, this client has invoice transacted. ';
+const EXIST_COLLECTION_TRANSACTION = 'Sorry this transaction cannot be process, this invoice has collection transacted. ';
+const REQUIRED_FIELD = 'Please fill in required fields.';
+const PASSWORD_LENGTH = 'Password should not be less than 6 (six) characters long.';
+const USERNAME_LENGTH = 'Username should not be less than 6 (six) characters long.';
+const NO_ACCOUNT = 'No existing account.';
+const INVALID_USERNAME_PASSWORD = 'Invalid password.';
+const ACCOUNT_DISABLED = 'Account is currently disabled.';
+const SAVED_SUCCESSFUL = 'Details saved successfully.';
+const DELETED_SUCCESSFUL = 'Details deleted successfully.';
+const RENEW_SUCCESSFUL = 'Application successfully saved.';
+const CONFIRM_RENEWAL = 'Submit this application?';
+const NO_CRYPTO = 'No Cryptographically Secure Random Function Available.';
+const CANNOT_MODIFY = 'Sorry, the process cannot be proceed.';
+const ERROR_API_KEY = 'Error validating security key.';
+const NO_CURRENT_APPLICATION = 'You have no current application.';
+const EMAIL_FORMAT = 'Username must not be in email format.';
+const ERROR_PROCESSING = 'Error Processing.';
+const MISSING_DETAILS = 'Missing Details. Double check any empty fields that is required to be filled.';
+const MISSING_USERNAME = 'Username field is empty.';
+const MISSING_NAME_DETAILS = 'Missing Details. Please fill up the input boxes related to the personnel name';
+const UPDATE_SUCCESSFUL = 'Updated successfully.';
+const MISSING_INSP = 'Please check the checkbox to assign the inspector to their respective tabs.';
+const SUCCESS = 'SUCCESS TRANSACTION.';
+const EMPTY_FIELDS = 'One of these forms must not be empty.';
 
 /** user messages */
-define('DEFAULT_PASSWORD', 'Do not use the default password. Please create new password.');
-define('NOT_MATCH', 'Your password does not match. Please try again.');
-define('DUPLICATE_USERNAME_FOUND', 'Username is already taken, please try again.');
+const DEFAULT_PASSWORD = 'Do not use the default password. Please create new password.';
+const NOT_MATCH = 'Your password does not match. Please try again.';
+const DUPLICATE_USERNAME_FOUND = 'Username is already taken, please try again.';
 
 /** default messages */
-define('DEFAULT_LOGIN_PASSWORD', 'password1234*');
-define('CHAR_SET', 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$11<>?!@#$%^&*()~\/.');
-define('USER', '');
-define('SYSTEM_NAME', 'Konnect');
-define('SYSTEM_ALT', '');
-define('FOOTER_NAME', '');
-define('FOOTER_YEAR', '');
-define('SYSTEM_MODULE', 'Konnect');
-define('MB', 1048576);
+const DEFAULT_LOGIN_PASSWORD = 'password1234*';
+const CHAR_SET = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$11<>?!@#$%^&*()~\/.';
+const USER = null | array();
+const SYSTEM_NAME = 'Konnect';
+const SYSTEM_ALT = '';
+const FOOTER_NAME = '';
+const FOOTER_YEAR = '';
+const SYSTEM_MODULE = 'Konnect';
+const MB = 1048576;
 
 $array = array(
     // 'customer' =>  'tbl_customers',

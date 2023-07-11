@@ -128,7 +128,6 @@ main_header(['Employer_profile']);
     body {
         background-color: #e9ebed;
     }
-
 </style>
 
 <section class="content">
@@ -151,7 +150,9 @@ main_header(['Employer_profile']);
                                 <div class="description-block">
                                     <div class="row">
                                         <div class="col-md-6 mb-3 m-md-0">
-                                            <h5 class="widget-user-username text-left" style="font-weight: 500;"><?= $current_employer->tradename ?></h5>
+                                            <h5 class="widget-user-username text-left" style="font-weight: 500;">
+                                                <?= $current_employer->tradename ?>
+                                            </h5>
                                             <p class="text-left mb-1">
                                                 <?php if (empty($current_employer->employer_name)) {
                                                     echo $current_employer->tradename;
@@ -159,7 +160,8 @@ main_header(['Employer_profile']);
                                                     echo $current_employer->employer_name;
                                                 } ?>
                                             </p>
-                                            <h6 class="widget-user-desc text-left text-muted" style="font-weight: normal; font-size:15px;"> <?= $current_employer->business_type ?>|
+                                            <h6 class="widget-user-desc text-left text-muted" style="font-weight: normal; font-size:15px;">
+                                                <?= $current_employer->business_type ?>|
                                                 <a class="text-info" data-toggle="modal" data-target="#contact" style=" cursor: pointer;">Contact details</a>
                                             </h6>
                                         </div>
@@ -263,7 +265,8 @@ main_header(['Employer_profile']);
                     <div class="card-body card-widget widget-user-2">
                         <div class="widget-user-header">
                             <h5 class="mt-0" style="font-size: 18px; font-weight: 500;">
-                                <i class="fa-solid fa-user-gear mr-1"></i> Skill or Capabilities or Something</h5>
+                                <i class="fa-solid fa-user-gear mr-1"></i> Skill or Capabilities or Something
+                            </h5>
                             <h6 class="mb-0" style="font-weight: normal; font-size: 16px;">Lorem Ipsum dolor sit amet</h6>
                         </div>
                     </div>
@@ -271,7 +274,8 @@ main_header(['Employer_profile']);
                     <div class="card-body card-widget widget-user-2 border-top">
                         <div class="widget-user-header">
                             <h5 class="mt-0" style="font-size: 18px; font-weight: 500;">
-                                <i class="fa-solid fa-user-gear mr-1"></i> Skill or Capabilities or Something</h5>
+                                <i class="fa-solid fa-user-gear mr-1"></i> Skill or Capabilities or Something
+                            </h5>
                             <h6 class="mb-0" style="font-weight: normal; font-size: 16px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur posuere quam massa, quis facilisis enim mollis eget. Sed sollicitudin tortor vel nibh
                                 sollicitudin sagittis. Fusce tempor arcu at leo venenatis</h6>
                         </div>
@@ -366,13 +370,16 @@ main_header(['Employer_profile']);
                         </div>
                     </div>
                     <div class="card-body" style="padding-top:10px;padding-bottom:10px">
-                        <strong>City: </strong><?= $current_employer->city ?>
+                        <strong>City: </strong>
+                        <?= $current_employer->city ?>
                     </div>
                     <div class="card-body" style="padding-top:10px;padding-bottom:10px">
-                        <strong>Barangay: </strong><?= $current_employer->barangay ?>
+                        <strong>Barangay: </strong>
+                        <?= $current_employer->barangay ?>
                     </div>
                     <div class="card-body" style="padding-top:10px;padding-bottom:10px">
-                        <strong>Address: </strong><?= $current_employer->address ?>
+                        <strong>Address: </strong>
+                        <?= $current_employer->address ?>
                     </div>
                 </div>
 
@@ -420,16 +427,20 @@ main_header(['Employer_profile']);
                         </div>
                     </div>
                     <div class="card-body" style="padding-top:10px;padding-bottom:10px">
-                        <strong>Trade Name: </strong><?= $current_employer->tradename ?>
+                        <strong>Trade Name: </strong>
+                        <?= $current_employer->tradename ?>
                     </div>
                     <div class="card-body" style="padding-top:10px;padding-bottom:10px">
-                        <strong>Business Type: </strong><?= $current_employer->business_type ?>
+                        <strong>Business Type: </strong>
+                        <?= $current_employer->business_type ?>
                     </div>
                     <div class="card-body" style="padding-top:10px;padding-bottom:10px">
-                        <strong>SSS Number: </strong><?= $current_employer->sss ?>
+                        <strong>SSS Number: </strong>
+                        <?= $current_employer->sss ?>
                     </div>
                     <div class="card-body" style="padding-top:10px;padding-bottom:10px">
-                        <strong>TIN Number: </strong><?= $current_employer->tin ?>
+                        <strong>TIN Number: </strong>
+                        <?= $current_employer->tin ?>
                     </div>
                 </div>
 
@@ -490,11 +501,6 @@ main_header(['Employer_profile']);
                     </div>
                     <div id="load_employees_follow_section">
                         <?= $employees_follow_section_view ?>
-                        <!--                        <div class="d-flex justify-content-center my-3 loading-employees">-->
-                        <!--                            <div class="spinner-border" role="status">-->
-                        <!--                                <span class="sr-only">Loading...</span>-->
-                        <!--                            </div>-->
-                        <!--                        </div>-->
                     </div>
                 </div>
 
@@ -505,11 +511,6 @@ main_header(['Employer_profile']);
                     </div>
                     <div id="load_employers_follow_section">
                         <?= $employers_follow_section_view ?>
-                        <!--                        <div class="d-flex justify-content-center my-3 loading-employers">-->
-                        <!--                            <div class="spinner-border" role="status">-->
-                        <!--                                <span class="sr-only">Loading...</span>-->
-                        <!--                            </div>-->
-                        <!--                        </div>-->
                     </div>
                 </div>
             </div>

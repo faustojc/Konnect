@@ -8,7 +8,7 @@ class Add_personnel_model extends CI_Model
     public function __construct()
     {
         parent::__construct();
-        $this->session = (object)get_userdata(USER);
+        $this->session = get_userdata(USER);
 
         // if(is_empty_object($this->session)){
         // 	redirect(base_url().'login/authentication', 'refresh');
@@ -25,12 +25,14 @@ class Add_personnel_model extends CI_Model
             $locker = locker();
             $password = sha1(password_generator($info['password'], $locker));
             $info['password'] = $password;
+            $info['locker'] = $locker;
 
             $this->db->trans_start();
             $this->db->insert('tbl_user', $info);
             $this->db->trans_complete();
 
             if ($this->db->trans_status()) {
+                set_userdata(USER, $info);
                 return array(
                     'has_error' => false,
                     'message' => 'User Added',

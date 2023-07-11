@@ -33,7 +33,9 @@ $(document).ready(function () {
     load_training();
     load_employment();
     load_skill();
-    // education_edit();
+
+    load_employees_follow_section();
+    load_employers_follow_section();
 
     // TinyMCE
     textareaEditor('#training_description', 400);
@@ -232,6 +234,8 @@ $(document).on('click', '#btn_submit_employment', function () {
     const isValid = validateForm('#needs-validation');
 
     if (isValid) {
+        const show_status = (document.querySelector('#show_status').checked === true) ? 1 : 0;
+
         $.ajax({
             url: baseUrl + 'employee_profile/service/employee_profile_service/save_employment',
             type: 'POST',
@@ -242,11 +246,12 @@ $(document).on('click', '#btn_submit_employment', function () {
                 start_date: $('#start_date').val(),
                 end_date: $('#end_date').val(),
                 status: $('#status').val(),
-                // show_status    : $('#show_status').val(),
+                show_status: show_status,
                 rating: $('#rating').val(),
                 // job_description    : $('#job_description').val()
             },
             success: function (response) {
+                load_employment();
                 success('SUCCESS', 'Employment successfully added');
             },
             error: function (response) {
@@ -287,7 +292,7 @@ $(document).on('click', '#edit_employment', function () {
 });
 
 $(document).on('click', '#delete_employment', function () {
-    formAction(baseUrl + 'employee_profile/service/employee_profile_service/delete', 'POST', {ID: $(this).data('id')}, function (data) {
+    formAction(baseUrl + 'employee_profile/service/employee_profile_service/delete_employment', 'POST', {employment_id: $(this).data('id')}, function (data) {
         load_employment();
         success('SUCCESS', 'Employment successfully deleted');
     });

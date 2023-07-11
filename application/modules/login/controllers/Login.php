@@ -34,7 +34,7 @@ class Login extends MY_Controller
         unset_userdata(USER);
 
         $info = array(
-            'username' => $this->input->post("username"),
+            'email' => $this->input->post("email"),
             'password' => $this->input->post("password"),
         );
 
@@ -44,10 +44,12 @@ class Login extends MY_Controller
         } else {
             $response = $this->login_model->authentication($info);
 
+            $this->load->library('session');
             if (!$response['has_error']) {
-                redirect(base_url() . 'dashboard', 'refresh');
+                $this->session->set_flashdata('auth', $info);
+
+                redirect(base_url() . 'beu_dashboard', 'refresh');
             } else {
-                $this->load->library('session');
                 $this->session->set_flashdata('error_message', $response['message']);
 
                 redirect(base_url() . 'login', 'refresh');

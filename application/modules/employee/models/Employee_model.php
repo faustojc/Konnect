@@ -28,13 +28,17 @@ class Employee_model extends CI_Model
         return $query;
     }
 
-    public function get_all_employees($limit)
+    public function get_all_employees($limit = 0, $id = null)
     {
-        if ($limit == 0) {
-            return $this->db->select()->from($this->Table->employee)->get()->result();
-        } else {
+        if ($limit == 0 && $id != null) {
+            return $this->db->select()->from($this->Table->employee)->where('ID !=', $id)->get()->result();
+        } else if ($limit != 0 && $id != null) {
+            return $this->db->select()->from($this->Table->employee)->where('ID !=', $id)->limit($limit)->get()->result();
+        } else if ($limit != 0 && $id == null) {
             return $this->db->select()->from($this->Table->employee)->limit($limit)->get()->result();
         }
+
+        return $this->db->select()->from($this->Table->employee)->get()->result();
     }
 
     public function register()
@@ -44,6 +48,14 @@ class Employee_model extends CI_Model
         // $this->db->where('ID', $this->ID);
         $query = $this->db->get()->row();
         return $query;
+    }
+
+    public function get_specific_employee($email)
+    {
+        return $this->db->select()
+            ->from($this->Table->employee)
+            ->where('Email', $email)
+            ->get()->row();
     }
 
     public function get_employees($Employee_id)
@@ -65,46 +77,6 @@ class Employee_model extends CI_Model
         );
 
         return $result;
-
-
-//        $this->db->select('ee.Level,'.
-//        'ee.Institution,'.
-//        'ee.Title,'.
-//        'ee.Description,'.
-//        'ee.Start_date,'.
-//        'ee.End_date,'.
-//        'ee.Hours,'.
-//        'e.ID,'.
-//        'e.Fname,'.
-//        'e.Lname,'.
-//        'e.Mname,'.
-//        'e.Bday,'.
-//        'e.Gender,'.
-//        'e.Cstat,'.
-//        'e.Religion,'.
-//        'e.Cnum,'.
-//        'e.Email,'.
-//        'e.City,'.
-//        'e.Barangay,'.
-//        'e.Address,'.
-//        'e.SSS,'.
-//        'e.Tin,'.
-//        'e.Phil_health,'.
-//        'e.Pag_ibig,');
-//        $this->db->join($this->Table->employee . ' e', ' e.ID = ee.Employee_id', 'inner');
-//        $this->db->where('ee.Employee_id', $Employee_id);
-//
-//        $this->db->from($this->Table->employee_educ. ' ee');
-//        $query = $this->db->get()->row();
-//        return $query;
-
-
-        // return $this->db->select()
-        // ->from($this->Table->employee.' e')
-        // ->join($this->Table->employee_educ.' ed', 'ed.Employee_id = e.ID', 'left')
-        // ->where('Employee_id', $employee_id)
-        // ->get()
-        // ->row();
     }
 
     public function get_educ()

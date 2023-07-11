@@ -43,19 +43,25 @@ class Add_personnel extends MY_Controller
             $response = $this->personnel_model->add_personnel($info);
 
             if (!$response['has_error']) {
-                redirect(base_url() . 'dashboard', 'refresh');
+                redirect(base_url() . 'login', 'refresh');
             } else {
                 $this->load->library('session');
                 $this->session->set_flashdata('error_message', $response['message']);
 
-                redirect(base_url() . 'login', 'refresh');
-            }
+                redirect(base_url() . 'add_personnel', 'refresh');
+             }
         }
     }
 
-    public function register()
+    public function nextform()
     {
-        $this->data['content'] = 'login';
+        $this->data['content'] = 'nextform';
+        $this->load->view('layout', $this->data);
+    }
+
+    public function create()
+    {
+        $this->data['content'] = 'create';
         $this->load->view('layout', $this->data);
     }
 }

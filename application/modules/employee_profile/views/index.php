@@ -119,6 +119,29 @@ main_header(['employee_profile']);
     #modalAddEmp {
         color: black;
     }
+
+
+    /* Adjustments for smaller screens */
+    @media (max-width: 768px) {
+        .widget-user-image {
+            margin-left: 0;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .widget-user-image img {
+            width: 100px;
+            height: 100px;
+        }
+    }
+
+    /* Adjustments for even smaller screens */
+    @media (max-width: 480px) {
+        .widget-user-image img {
+            width: 80px;
+            height: 80px;
+        }
+    }
 </style>
 
 <section class="content">
@@ -131,20 +154,19 @@ main_header(['employee_profile']);
                     <div class="widget-user-header text-white" style="background: url('assets/images/Logo/Profile/wallpapersample.jpg') center center; min-height: 25vh; max-height: 50vh; background-repeat: no-repeat; background-size: cover;">
                     </div>
 
-                    <div class="card-footer" style="padding-top: 45px;">
+                    <div class="card-footer" style="padding-top: 45px;background-color:#f4faff;">
                         <!-- Profile Picture -->
-                        <div class="row">
-                            <div class="widget-user-image" style="left: 0; top: 0; margin-left: 15px; margin-top:100px;">
-                                <img class="img-circle img-fluid" src="<?= base_url() ?>assets/images/employee/profile_pic/<?= $details->Employee_image ?>" alt="User Avatar" style="
-                            object-fit: cover;
-                            min-width: 150px;
-                            max-width: 150px;
-                            min-height: 150px;
-                            max-height: 150px;">
-                            </div>
+
+                        <div class="widget-user-image" style="left: 0; top: 0; margin-left: 15px; margin-top:100px;">
+                            <img class="img-circle img-fluid" src="<?= base_url() ?>assets/images/employee/profile_pic/<?= $details->Employee_image ?>" alt="User Avatar" style="
+                                                  object-fit: cover;
+                                                  min-width: 100px;
+                                                  max-width: 100px;
+                                                  min-height: 100px;
+                                                  max-height: 100px;">
                         </div>
                         <div class="row">
-                            <div class="col-12 pt-3">
+                            <div class="col-12">
                                 <div class="description-block">
 
                                     <div class="d-flex justify-content-between">
@@ -260,27 +282,39 @@ main_header(['employee_profile']);
                                                         <input type="text" class="form-control" id="status" placeholder="Enter Status">
                                                     </div>
 
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-6">
                                                         <label for="rating">Rating</label>
                                                         <input type="number" class="form-control" id="rating" placeholder="Enter Rating">
+                                                    </div>
+                                                </div>
+
+                                                <div class="row py-2 px-4">
+                                                    <div class="col-md-6">
+                                                        <input type="checkbox" name="inputCheck" id="show_status">
+                                                        <label for="show_status" class="mb-0 mr-2">Show Status</label>
                                                     </div>
                                                 </div>
                                             </form>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary" id="btn_submit_employment">Add Details</button>
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_submit_employment">Add Details</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- /.card-tools -->
+
                     </div>
                     <!-- /.card-header -->
+                    <div class="pb-3">
+
+                    </div>
                     <div id="load_employments">
 
                     </div>
+
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
@@ -424,8 +458,7 @@ main_header(['employee_profile']);
                             <button type="button" data-toggle="modal" data-target="#ModalTrain" class="btn btn-tool">
                                 <i class="fa-solid fa-plus" style=" font-size: 16.5px;"></i>
                             </button>
-                            <button type="button" class="btn btn-tool"><i class="fa-solid fa-pen" style=""></i>
-                            </button>
+                            
                         </div>
                         <!-- /.card-tools -->
                     </div>
@@ -581,311 +614,225 @@ main_header(['employee_profile']);
                         <b>PAG IBIG:</b>
                         <?= ucwords(@$details->Pag_ibig) ?>
                     </div>
-                    <!-- /.card-body -->
                 </div>
-                <!-- /.card -->
 
-                <div class="card card-white card-widget widget-user-2">
-                    <!-- Add the bg color to the header using any of the bg-* classes -->
+                <!-- EMPLOYEES -->
+                <div class="card card-widget widget-user-2">
                     <div class="card-header">
                         <h3 class="card-title fw-500">Employees</h3>
                     </div>
-
-                    <div class="widget-user-header whitebg">
-                        <div class="widget-user-image">
-                            <img class="img-circle img-fluid" src="assets/images/Logo/Profile/default.png" alt="User Avatar" style="object-fit: cover; min-width: 60px; max-width: 60px; min-height: 60px; max-height: 60px;">
-                        </div>
-                        <!-- /.widget-user-image -->
-                        <div class="d-flex justify-content-between">
-                            <h5 class="widget-user-username ml-3" style="font-size: 18px; font-weight: 500;">Jane Doe</h5>
-                            <button type="button" class="btn btn-outline-info pb-0 pt-0 fw-500">
-                                <i class="fa-solid fa-user mr-1"></i> Follow
-                            </button>
-                        </div>
-                        <h6 class="widget-user-desc text-muted" style="font-weight: normal; font-size: 16px;">Lead Developer</h6>
-                    </div>
-
-                    <!-- 2nd and onwards has border on top -->
-                    <div class="widget-user-header whitebg border-top">
-                        <div class="widget-user-image">
-                            <img class="img-circle img-fluid" src="assets/images/Logo/Profile/default.png" alt="User Avatar" style="object-fit: cover; min-width: 60px; max-width: 60px; min-height: 60px; max-height: 60px;">
-                        </div>
-                        <!-- /.widget-user-image -->
-                        <div class="d-flex justify-content-between">
-                            <h5 class="widget-user-username ml-3" style="font-size: 18px; font-weight: 500;">Jane Doe</h5>
-                            <button type="button" class="btn btn-outline-info pb-0 pt-0 fw-500">
-                                <i class="fa-solid fa-user mr-1"></i> Follow
-                            </button>
-                        </div>
-                        <h6 class="widget-user-desc text-muted" style="font-weight: normal; font-size: 16px;">Lead Developer</h6>
-                    </div>
-
-                    <div class="widget-user-header whitebg border-top">
-                        <div class="widget-user-image">
-                            <img class="img-circle img-fluid" src="assets/images/Logo/Profile/default.png" alt="User Avatar" style="object-fit: cover; min-width: 60px; max-width: 60px; min-height: 60px; max-height: 60px;">
-                        </div>
-                        <!-- /.widget-user-image -->
-                        <div class="d-flex justify-content-between">
-                            <h5 class="widget-user-username ml-3" style="font-size: 18px; font-weight: 500;">Jane Doe</h5>
-                            <button type="button" class="btn btn-outline-info pb-0 pt-0 fw-500">
-                                <i class="fa-solid fa-user mr-1"></i> Follow
-                            </button>
-                        </div>
-                        <h6 class="widget-user-desc text-muted" style="font-weight: normal; font-size: 16px;">Lead Developer</h6>
+                    <div id="load_employees_follow_section">
+                        <?= $employees_follow_section_view ?>
                     </div>
                 </div>
-                <!-- /.widget-user -->
 
-                <div class="card card-white card-widget widget-user-2 mt-2">
-                    <!-- Add the bg color to the header using any of the bg-* classes -->
+                <!-- EMPLOYERS -->
+                <div class="card card-widget widget-user-2">
                     <div class="card-header">
                         <h3 class="card-title fw-500">Employers</h3>
                     </div>
-
-                    <div class="widget-user-header whitebg">
-                        <div class="widget-user-image">
-                            <img class="img-circle img-fluid" src="assets/images/Logo/Profile/default.png" alt="User Avatar" style="object-fit: cover; min-width: 60px; max-width: 60px; min-height: 60px; max-height: 60px;">
-                        </div>
-                        <!-- /.widget-user-image -->
-                        <div class="d-flex justify-content-between">
-                            <h5 class="widget-user-username ml-3" style="font-size: 18px; font-weight: 500;">Jane Doe</h5>
-                            <button type="button" class="btn btn-outline-info pb-0 pt-0 fw-500">
-                                <i class="fa-solid fa-user mr-1"></i> Follow
-                            </button>
-                        </div>
-                        <h6 class="widget-user-desc text-muted" style="font-weight: normal; font-size: 16px;">Lead Developer</h6>
-                    </div>
-
-                    <!-- 2nd and onwards has border on top -->
-                    <div class="widget-user-header whitebg border-top">
-                        <div class="widget-user-image">
-                            <img class="img-circle img-fluid" src="assets/images/Logo/Profile/default.png" alt="User Avatar" style="object-fit: cover; min-width: 60px; max-width: 60px; min-height: 60px; max-height: 60px;">
-                        </div>
-                        <!-- /.widget-user-image -->
-                        <div class="d-flex justify-content-between">
-                            <h5 class="widget-user-username ml-3" style="font-size: 18px; font-weight: 500;">Jane Doe</h5>
-                            <button type="button" class="btn btn-outline-info pb-0 pt-0 fw-500">
-                                <i class="fa-solid fa-user mr-1"></i> Follow
-                            </button>
-                        </div>
-                        <h6 class="widget-user-desc text-muted" style="font-weight: normal; font-size: 16px;">Lead Developer</h6>
-                    </div>
-
-                    <div class="widget-user-header whitebg border-top">
-                        <div class="widget-user-image">
-                            <img class="img-circle img-fluid" src="assets/images/Logo/Profile/default.png" alt="User Avatar" style="object-fit: cover; min-width: 60px; max-width: 60px; min-height: 60px; max-height: 60px;">
-                        </div>
-                        <!-- /.widget-user-image -->
-                        <div class="d-flex justify-content-between">
-                            <h5 class="widget-user-username ml-3" style="font-size: 18px; font-weight: 500;">Jane Doe</h5>
-                            <button type="button" class="btn btn-outline-info pb-0 pt-0 fw-500">
-                                <i class="fa-solid fa-user mr-1"></i> Follow
-                            </button>
-                        </div>
-                        <h6 class="widget-user-desc text-muted" style="font-weight: normal; font-size: 16px;">Lead Developer</h6>
+                    <div id="load_employers_follow_section">
+                        <?= $employers_follow_section_view ?>
                     </div>
                 </div>
-                <!-- /.widget-user -->
+            </div>
+        </div><!--container fluid-->
 
-            </div> <!-- col-->
-        </div> <!--row-->
-    </div><!--container fluid-->
+        <!-- Contact Modal -->
+        <div class="modal fade" id="contact" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">
+                            <?= ucwords(@$details->Fname) . " " . ucwords(@$details->Mname) . " " . ucwords(@$details->Lname) ?>
+                        </h5>
 
-    <!-- Contact Modal -->
-    <div class="modal fade" id="contact" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">
-                        <?= ucwords(@$details->Fname) . " " . ucwords(@$details->Mname) . " " . ucwords(@$details->Lname) ?>
-                    </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h5>Contact Details</h5>
+                        <br>
+                        <h6 style="font-weight: normal;"><i class="fas fa-map-pin"></i> Address</h6>
+                        <h6 style="font-weight: normal;">
+                            <?= ucwords(@$details->City) ?>
+                        </h6>
+                        <br>
+                        <h6 style="font-weight: normal;"><i class="fa fa-envelope"></i> Email</h6>
+                        <h6 style="font-weight: normal;">
+                            <?= ucwords(@$details->Email) ?>
+                        </h6>
+                        <br>
+                        <h6 style="font-weight: normal;"><i class="fa fa-phone"></i> Number</h6>
+                        <h6 style="font-weight: normal;">
+                            <?= ucwords(@$details->Cnum) ?>
+                        </h6>
+                        <br>
+                        <h6 style="font-weight: normal;"><i class="	fa fa-birthday-cake"></i> Birthday</h6>
+                        <h6 style="font-weight: normal;">
+                            <?= ucwords(@$details->Bday) ?>
+                        </h6>
 
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <h5>Contact Details</h5>
-                    <br>
-                    <h6 style="font-weight: normal;"><i class="fas fa-map-pin"></i> Address</h6>
-                    <h6 style="font-weight: normal;">
-                        <?= ucwords(@$details->City) ?>
-                    </h6>
-                    <br>
-                    <h6 style="font-weight: normal;"><i class="fa fa-envelope"></i> Email</h6>
-                    <h6 style="font-weight: normal;">
-                        <?= ucwords(@$details->Email) ?>
-                    </h6>
-                    <br>
-                    <h6 style="font-weight: normal;"><i class="fa fa-phone"></i> Number</h6>
-                    <h6 style="font-weight: normal;">
-                        <?= ucwords(@$details->Cnum) ?>
-                    </h6>
-                    <br>
-                    <h6 style="font-weight: normal;"><i class="	fa fa-birthday-cake"></i> Birthday</h6>
-                    <h6 style="font-weight: normal;">
-                        <?= ucwords(@$details->Bday) ?>
-                    </h6>
-
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Description Modal -->
+        <!-- Description Modal -->
 
-    <div class="modal fade bd-example-modal-lg" id="Introduction_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Enter Introduction</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div>
-                        <input type="text" id="ID" value="<?= @$details->ID ?>" hidden>
-                        <textarea class="form-control" name="Introduction" id="Introduction_Text" rows="4" placeholder="Enter Introduction"><?= @$details->Introduction ?></textarea>
+        <div class="modal fade bd-example-modal-lg" id="Introduction_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Enter Introduction</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="btn_update">Save</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Address Modal -->
-    <div class="modal fade" id="address_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Address</h5>
-
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-
-                    <div class="row pb-3">
-                        <div class="col-md-12">
+                    <div class="modal-body">
+                        <div>
                             <input type="text" id="ID" value="<?= @$details->ID ?>" hidden>
-                            <label>Street</label>
-                            <input type="text" class="form-control" id="Address" value="<?= @$details->Address ?>" placeholder="Enter First Name">
+                            <textarea class="form-control" name="Introduction" id="Introduction_Text" rows="4" placeholder="Enter Introduction"><?= @$details->Introduction ?></textarea>
                         </div>
                     </div>
-
-                    <div class="row pb-3">
-                        <div class="col-md-6">
-                            <label>Barangay</label>
-                            <input type="text" class="form-control" id="Barangay" value="<?= @$details->Barangay ?>" placeholder="Enter First Name">
-                        </div>
-
-                        <div class="col-md-6">
-                            <label>City</label>
-                            <input type="text" class="form-control" id="City" value="<?= @$details->City ?>" placeholder="Enter First Name">
-                        </div>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="update_address">Save</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ID Modal -->
-    <div class="modal fade" id="id_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Government ID</h5>
-
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-
-                    <div class="row pb-3">
-                        <div class="col-md-6">
-                            <input type="text" id="ID" value="<?= @$details->ID ?>" hidden>
-                            <label>SSS</label>
-                            <input type="text" class="form-control" id="SSS" value="<?= @$details->SSS ?>" placeholder="Enter First Name">
-                        </div>
-
-                        <div class="col-md-6">
-                            <label>Tin</label>
-                            <input type="text" class="form-control" id="Tin" value="<?= @$details->Tin ?>" placeholder="Enter First Name">
-                        </div>
-                    </div>
-
-                    <div class="row pb-3">
-                        <div class="col-md-6">
-                            <label>Phil_health</label>
-                            <input type="text" class="form-control" id="Phil_health" value="<?= @$details->Phil_health ?>" placeholder="Enter First Name">
-                        </div>
-
-                        <div class="col-md-6">
-                            <label>Pag_ibig</label>
-                            <input type="text" class="form-control" id="Pag_ibig" value="<?= @$details->Pag_ibig ?>" placeholder="Enter First Name">
-                        </div>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <form>
+                    <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="update_id" formaction="employee_profile/views/index">Save</button>
-                    </form>
+                        <button type="button" class="btn btn-primary" id="btn_update">Save</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Add Skill Modal -->
-    <div class="modal fade" id="skill_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Skill</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="needs-validation">
-                        <div class="form-group">
-                            <label for="skill" class="col-form-label">Skill Name:</label>
-                            <input type="text" class="form-control" id="skill">
+        <!-- Address Modal -->
+        <div class="modal fade" id="address_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Address</h5>
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row pb-3">
+                            <div class="col-md-12">
+                                <input type="text" id="ID" value="<?= @$details->ID ?>" hidden>
+                                <label>Street</label>
+                                <input type="text" class="form-control" id="Address" value="<?= @$details->Address ?>" placeholder="Enter First Name">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="proficiency">Proficiency</label>
-                            <select class="form-control" style="width:100%;" name="proficiency" id="proficiency">
-                                <option value="beginner"> Beginner</option>
-                                <option value="intermediate"> Intermediate</option>
-                                <option value="advance"> Advance</option>
-                                <option value="expert"> Expert</option>
-                            </select>
+
+                        <div class="row pb-3">
+                            <div class="col-md-6">
+                                <label>Barangay</label>
+                                <input type="text" class="form-control" id="Barangay" value="<?= @$details->Barangay ?>" placeholder="Enter First Name">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label>City</label>
+                                <input type="text" class="form-control" id="City" value="<?= @$details->City ?>" placeholder="Enter First Name">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="years_exp" class="col-form-label">Years of Experience:</label>
-                            <input type="text" class="form-control" id="years_exp">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="btn_skill">Add</button>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="update_address">Save</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
+        <!-- ID Modal -->
+        <div class="modal fade" id="id_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Government ID</h5>
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row pb-3">
+                            <div class="col-md-6">
+                                <input type="text" id="ID" value="<?= @$details->ID ?>" hidden>
+                                <label>SSS</label>
+                                <input type="text" class="form-control" id="SSS" value="<?= @$details->SSS ?>" placeholder="Enter First Name">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label>Tin</label>
+                                <input type="text" class="form-control" id="Tin" value="<?= @$details->Tin ?>" placeholder="Enter First Name">
+                            </div>
+                        </div>
+
+                        <div class="row pb-3">
+                            <div class="col-md-6">
+                                <label>Phil_health</label>
+                                <input type="text" class="form-control" id="Phil_health" value="<?= @$details->Phil_health ?>" placeholder="Enter First Name">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label>Pag_ibig</label>
+                                <input type="text" class="form-control" id="Pag_ibig" value="<?= @$details->Pag_ibig ?>" placeholder="Enter First Name">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <form>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="update_id" formaction="employee_profile/views/index">Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Skill Modal -->
+        <div class="modal fade" id="skill_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add Skill</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="needs-validation">
+                            <div class="form-group">
+                                <label for="skill" class="col-form-label">Skill Name:</label>
+                                <input type="text" class="form-control" id="skill">
+                            </div>
+                            <div class="form-group">
+                                <label for="proficiency">Proficiency</label>
+                                <select class="form-control" style="width:100%;" name="proficiency" id="proficiency">
+                                    <option value="beginner"> Beginner</option>
+                                    <option value="intermediate"> Intermediate</option>
+                                    <option value="advance"> Advance</option>
+                                    <option value="expert"> Expert</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="years_exp" class="col-form-label">Years of Experience:</label>
+                                <input type="text" class="form-control" id="years_exp">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="btn_skill">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 </section>

@@ -34,9 +34,6 @@ $(document).ready(function () {
     load_employment();
     load_skill();
 
-    load_employees_follow_section();
-    load_employers_follow_section();
-
     // TinyMCE
     textareaEditor('#training_description', 400);
 });

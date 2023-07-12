@@ -227,6 +227,17 @@ main_header(['employee_profile']);
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
+                <div class="card card-white">
+                    <div class="card-header">
+                        <h3 class="card-title fw-500" style="font-weight:600;">Skills</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-toggle="modal" data-target="#skill_modal">
+                                <i class="fa-solid fa-plus" style=" font-size: 16.5px;"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row py-4 px-4" id="load_skill"></div>
+                </div>
 
                 <div class="card card-white">
                     <div class="card-header">
@@ -458,7 +469,7 @@ main_header(['employee_profile']);
                             <button type="button" data-toggle="modal" data-target="#ModalTrain" class="btn btn-tool">
                                 <i class="fa-solid fa-plus" style=" font-size: 16.5px;"></i>
                             </button>
-                            
+
                         </div>
                         <!-- /.card-tools -->
                     </div>
@@ -544,17 +555,7 @@ main_header(['employee_profile']);
                 </div>
                 <!-- Training -->
 
-                <div class="card card-white">
-                    <div class="card-header">
-                        <h3 class="card-title fw-500" style="font-weight:600;">Skills</h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-toggle="modal" data-target="#skill_modal">
-                                <i class="fa-solid fa-plus" style=" font-size: 16.5px;"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="row py-4 px-4" id="load_skill"></div>
-                </div>
+
             </div>
 
             <div class="col-12 col-md-4 pl-2 pr-2 mt-4">

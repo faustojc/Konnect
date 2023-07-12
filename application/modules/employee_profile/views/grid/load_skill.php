@@ -7,7 +7,7 @@ if (!empty($details)) {
         ?>
 
 
-        <div class="col-6 py-1">
+        <!-- <div class="col-6 py-1">
             <div class="card card-white">
                 <div class="card-header">
                     <h3 class="card-title fw-500" style="font-weight:600;">
@@ -27,7 +27,60 @@ if (!empty($details)) {
                     </p>
                 </div>
             </div>
+        </div> -->
+
+        <div class="px-2 py-2">
+            <button type="button" class="btn btn-light" data-toggle="modal" data-target="#view_skill<?= $key ?>">
+                <?= ucwords(@$value->skill) ?>
+            </button>
         </div>
+
+
+
+
+        <!-- View Skill Modal -->
+        <div class="modal fade" id="view_skill<?= $key ?>" tabindex="-1" role="dialog" aria-labelledby="view_skill<?= $key ?>" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-6 pl-4">
+                                <h3 style="font-weight:600;">
+                                    <?= ucwords(@$value->skill) ?>
+                                </h3>
+                            </div>
+                            <div class="col-5">
+
+                            </div>
+
+
+                            <div class="col-1 pr-2">
+                                <button type="button" class="btn btn-tool"><i class="fa-solid fa-trash"></i>
+                                </button>
+                            </div>
+
+                        </div>
+
+                        <div class="px-3 py-3">
+                            <h5 class="widget-user-desc mb-1" style="font-weight: normal; font-size: 16px;"><b>Proficiency:</b>
+                                <?= ucwords(@$value->proficiency) ?>
+                            </h5>
+
+                            <h5 class="widget-user-desc mb-0" style="font-weight: normal; font-size: 16px;"><b>Years of Experience:</b>
+                                <?= (@$value->years_exp) ?>
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#skill<?= $key ?>" data-proficiency="<?= ucwords(@$value->proficiency) ?>">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 
         <!-- Edit Skill Modal -->
         <div class="modal fade" id="skill<?= $key ?>" tabindex="-1" role="dialog" aria-labelledby="skill<?= $key ?>" aria-hidden="true">
@@ -36,10 +89,7 @@ if (!empty($details)) {
                     <div class="modal-header">
 
                         <h5 class="modal-title" id="exampleModalLabel">Edit Skill</h5>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool"><i class="fa-solid fa-trash"></i>
-                            </button>
-                        </div>
+
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

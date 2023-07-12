@@ -4,6 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class beu_dashboard extends MY_Controller
 {
     protected $userdata;
+    private $user_type = '';
     private $data = [];
 
     public function __construct()
@@ -13,6 +14,9 @@ class beu_dashboard extends MY_Controller
 
         if (empty($this->userdata)) {
             redirect(base_url() . 'login');
+        } else {
+            $this->load->driver('session');
+            $this->user_type = $this->session->flashdata('auth')['user_type'];
         }
 
         $model_list = [
@@ -27,13 +31,12 @@ class beu_dashboard extends MY_Controller
     /** load main page */
     public function index()
     {
-        $this->load->driver('session');
-        $auth = $this->session->flashdata('auth');
+        $this->data['details'] = $this->userdata;
 
-        if ($auth['user_type'] == 'EMPLOYEE') {
-            $this->data['details'] = $this->employee_model->get_specific_employee($this->userdata->ID);
-        } else if ($auth['user_type'] == 'EMPLOYER') {
-            $this->data['details'] = $this->employer_model->where('id', $this->userdata->id);
+        if ($this->user_type == 'EMPLOYER') {
+            $this->data['user_display'] = $this->load->view('grid/employer', $this->data, true);
+        } else {
+            $this->data['user_display'] = $this->load->view('grid/employee', $this->data, true);
         }
 
         $this->data['content'] = 'index';

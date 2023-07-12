@@ -86,6 +86,8 @@ $tables = array(
     'jobposting' => 'tbl_jobposting',
     'skill' => 'tbl_skill',
     'training' => 'tbl_training',
+    'applicant' => 'tbl_applicant',
+    'user' => 'tbl_user',
 );
 
 define('TABLE', json_encode($tables));

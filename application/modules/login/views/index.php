@@ -34,7 +34,7 @@
                     <div class="d-flex justify-content-center">
                         <p>
                             New to Konnect?
-                            <a href="<?= base_url() ?>login">Create Account!</a>
+                            <a href="<?= base_url() ?>register">Create Account!</a>
                         </p>
                     </div>
                 </div>

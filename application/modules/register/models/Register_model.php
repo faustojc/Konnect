@@ -19,26 +19,25 @@ class Register_model extends CI_Model
         $this->Table = json_decode(TABLE);
     }
 
-    public function register($info)
+    public function register($user, $info)
     {
         try {
-            $has_registered = $this->db->get_where($this->Table->user, ['email' => $info['email']])->row();
-
-            if (!empty($has_registered)) {
-                return array('message' => 'Email is already in used', 'has_error' => true);
-            }
-
             $locker = locker();
             $password = sha1(password_generator($info['password'], $locker));
-            $info['password'] = $password;
-            $info['locker'] = $locker;
+            $user['password'] = $password;
+            $user['locker'] = $locker;
 
             $this->db->trans_start();
-            $this->db->insert('tbl_user', $info);
+            $this->db->insert($this->Table->user, $user);
+            // Get the ID of the newly inserted user record
+            $user_id = $this->db->insert_id();
+            // Set the user_id foreign key in the employer table
+            $info['user_id'] = $user_id;
+            $this->db->insert($this->Table->employer, $info);
             $this->db->trans_complete();
 
             if ($this->db->trans_status()) {
-                set_userdata(USER, $info);
+                // set_userdata(USER, $info);
                 return array(
                     'has_error' => false,
                     'message' => 'User Added',
@@ -49,5 +48,10 @@ class Register_model extends CI_Model
         } catch (Exception $e) {
             return array('message' => $e->getMessage(), 'has_error' => true);
         }
+    }
+    
+    public function records()
+    {
+        return $this->db->get($this->Table->user)->result();
     }
 }

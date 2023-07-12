@@ -124,7 +124,7 @@ main_header(['Employer_profile']);
             <div class="col-12 col-md-3 mt-4">
                 <!-- -->
                 <div id="user">
-
+                    <?= $user_display ?>
                 </div>
 
                 <div class="card card-info">
@@ -158,7 +158,8 @@ main_header(['Employer_profile']);
                     <div class="card-body border-top pt-3 pb-3">
                         <div class="widget-user-header">
                             <a href="#" class="hoveropac">
-                                <p class="mb-0 text-center fw-500 text-muted fs-14">See More <i class="fa-solid fa-arrow-right fs-14 ml-1"></i></p>
+                                <p class="mb-0 text-center fw-500 text-muted fs-14">See More
+                                    <i class="fa-solid fa-arrow-right fs-14 ml-1"></i></p>
                             </a>
                         </div>
                     </div>
@@ -172,11 +173,11 @@ main_header(['Employer_profile']);
                 <div class="card">
                     <div class="card-body">
                         <div class="job-post">
-                        <div class="job-header">
-                            <h4 class="job-title fw-bold">Frontend Developer</h4>
-                            <p class="job-company">ABC Company</p>
-                            <p class="job-location">San Francisco, CA</p>
-                        </div>
+                            <div class="job-header">
+                                <h4 class="job-title fw-bold">Frontend Developer</h4>
+                                <p class="job-company">ABC Company</p>
+                                <p class="job-location">San Francisco, CA</p>
+                            </div>
                             <div class="job-details">
                                 <!-- <ul class="job-info">
                                     <li>
@@ -219,7 +220,9 @@ main_header(['Employer_profile']);
                         <!-- /.widget-user-image -->
                         <div class="d-flex justify-content-between">
                             <h5 class="widget-user-username ml-3" style="font-size: 18px; font-weight: 500;">Jane Doe</h5>
-                            <button type="button" class="btn btn-outline-info pb-0 pt-0 fw-500"><i class="fa-solid fa-user mr-1"></i> Follow</button>
+                            <button type="button" class="btn btn-outline-info pb-0 pt-0 fw-500">
+                                <i class="fa-solid fa-user mr-1"></i> Follow
+                            </button>
                         </div>
                         <h6 class="widget-user-desc text-muted" style="font-weight: normal; font-size: 16px;">Lead Developer</h6>
                     </div>
@@ -232,7 +235,9 @@ main_header(['Employer_profile']);
                         <!-- /.widget-user-image -->
                         <div class="d-flex justify-content-between">
                             <h5 class="widget-user-username ml-3" style="font-size: 18px; font-weight: 500;">Jane Doe</h5>
-                            <button type="button" class="btn btn-outline-info pb-0 pt-0 fw-500"><i class="fa-solid fa-user mr-1"></i> Follow</button>
+                            <button type="button" class="btn btn-outline-info pb-0 pt-0 fw-500">
+                                <i class="fa-solid fa-user mr-1"></i> Follow
+                            </button>
                         </div>
                         <h6 class="widget-user-desc text-muted" style="font-weight: normal; font-size: 16px;">Lead Developer</h6>
                     </div>
@@ -244,14 +249,17 @@ main_header(['Employer_profile']);
                         <!-- /.widget-user-image -->
                         <div class="d-flex justify-content-between">
                             <h5 class="widget-user-username ml-3" style="font-size: 18px; font-weight: 500;">Jane Doe</h5>
-                            <button type="button" class="btn btn-outline-info pb-0 pt-0 fw-500"><i class="fa-solid fa-user mr-1"></i> Follow</button>
+                            <button type="button" class="btn btn-outline-info pb-0 pt-0 fw-500">
+                                <i class="fa-solid fa-user mr-1"></i> Follow
+                            </button>
                         </div>
                         <h6 class="widget-user-desc text-muted" style="font-weight: normal; font-size: 16px;">Lead Developer</h6>
                     </div>
 
                     <div class="card-body border-top pt-3 pb-3">
                         <a href="#" class="hoveropac">
-                            <p class="mb-0 text-center fw-500 text-muted fs-14">See More <i class="fa-solid fa-arrow-right fs-14 ml-1"></i></p>
+                            <p class="mb-0 text-center fw-500 text-muted fs-14">See More
+                                <i class="fa-solid fa-arrow-right fs-14 ml-1"></i></p>
                         </a>
                     </div>
                 </div>
@@ -270,7 +278,9 @@ main_header(['Employer_profile']);
                         <!-- /.widget-user-image -->
                         <div class="d-flex justify-content-between">
                             <h5 class="widget-user-username ml-3" style="font-size: 18px; font-weight: 500;">Jane Doe</h5>
-                            <button type="button" class="btn btn-outline-info pb-0 pt-0 fw-500"><i class="fa-solid fa-user mr-1"></i> Follow</button>
+                            <button type="button" class="btn btn-outline-info pb-0 pt-0 fw-500">
+                                <i class="fa-solid fa-user mr-1"></i> Follow
+                            </button>
                         </div>
                         <h6 class="widget-user-desc text-muted" style="font-weight: normal; font-size: 16px;">Lead Developer</h6>
                     </div>
@@ -283,7 +293,9 @@ main_header(['Employer_profile']);
                         <!-- /.widget-user-image -->
                         <div class="d-flex justify-content-between">
                             <h5 class="widget-user-username ml-3" style="font-size: 18px; font-weight: 500;">Jane Doe</h5>
-                            <button type="button" class="btn btn-outline-info pb-0 pt-0 fw-500"><i class="fa-solid fa-user mr-1"></i> Follow</button>
+                            <button type="button" class="btn btn-outline-info pb-0 pt-0 fw-500">
+                                <i class="fa-solid fa-user mr-1"></i> Follow
+                            </button>
                         </div>
                         <h6 class="widget-user-desc text-muted" style="font-weight: normal; font-size: 16px;">Lead Developer</h6>
                     </div>
@@ -295,14 +307,17 @@ main_header(['Employer_profile']);
                         <!-- /.widget-user-image -->
                         <div class="d-flex justify-content-between">
                             <h5 class="widget-user-username ml-3" style="font-size: 18px; font-weight: 500;">Jane Doe</h5>
-                            <button type="button" class="btn btn-outline-info pb-0 pt-0 fw-500"><i class="fa-solid fa-user mr-1"></i> Follow</button>
+                            <button type="button" class="btn btn-outline-info pb-0 pt-0 fw-500">
+                                <i class="fa-solid fa-user mr-1"></i> Follow
+                            </button>
                         </div>
                         <h6 class="widget-user-desc text-muted" style="font-weight: normal; font-size: 16px;">Lead Developer</h6>
                     </div>
 
                     <div class="card-body border-top pt-3 pb-3">
                         <a href="#" class="hoveropac">
-                            <p class="mb-0 text-center fw-500 text-muted fs-14">See More <i class="fa-solid fa-arrow-right fs-14 ml-1"></i></p>
+                            <p class="mb-0 text-center fw-500 text-muted fs-14">See More
+                                <i class="fa-solid fa-arrow-right fs-14 ml-1"></i></p>
                         </a>
                     </div>
                 </div>

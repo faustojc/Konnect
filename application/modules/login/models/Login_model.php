@@ -19,7 +19,7 @@ class Login_model extends CI_Model
         $this->Table = json_decode(TABLE);
     }
 
-    public function authentication($info)
+    public function authenticate($info)
     {
         try {
             if (empty($info['email']) || empty($info['password'])) {
@@ -27,8 +27,8 @@ class Login_model extends CI_Model
             }
 
             $query = $this->db->select()
-                ->from('tbl_user')
-                ->where('username', $info['username'])
+                ->from($this->Table->user)
+                ->where('email', $info['email'])
                 ->get()->row();
 
             if (empty($query)) {
@@ -39,7 +39,19 @@ class Login_model extends CI_Model
                 return array('message' => NOT_MATCH, 'has_error' => true);
             }
 
-            set_userdata(USER, $query);
+            if ($info['user_type'] == 'EMPLOYER') {
+                $user = $this->db->select()
+                    ->from($this->Table->employer)
+                    ->join('tbl_user', 'tbl_user.id = tbl_employer.user_id')
+                    ->get()->row();
+            } else {
+                $user = $this->db->select()
+                    ->from($this->Table->employee)
+                    ->join('tbl_user', 'tbl_user.id = tbl_employee.user_id')
+                    ->get()->row();
+            }
+
+            set_userdata(USER, $user);
             return array(
                 'has_error' => false,
                 'message' => 'Login Success',

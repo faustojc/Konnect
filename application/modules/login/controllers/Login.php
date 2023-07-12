@@ -24,42 +24,35 @@ class Login extends MY_Controller
     /** load main page */
     public function index()
     {
-        // if (
-        // 	!check_permission($this->session->User_type, ['admin'])
-        // ) {
-        // 	redirect(base_url() . 'landing_page', 'refresh');
-        // }
-
-        // $this->data['session'] =  $this->session;
+        
         unset_userdata(USER);
 
+        $this->data['content'] = 'index';
+        $this->load->view('layout', $this->data);
+    }
+
+    public function authenticate()
+    {
         $info = array(
             'email' => $this->input->post("email"),
             'password' => $this->input->post("password"),
         );
 
-        if (empty($info['email']) || empty($info['password'])) {
-            $this->data['content'] = 'index';
-            $this->load->view('layout', $this->data);
-        } else {
-            $response = $this->login_model->authentication($info);
+        $response = $this->login_model->authenticate($info);
 
+        if (!$response['has_error']) {
             $this->load->library('session');
-            if (!$response['has_error']) {
-                $this->session->set_flashdata('auth', $info);
+            $this->session->set_flashdata('auth', $info);
 
-                redirect(base_url() . 'beu_dashboard', 'refresh');
-            } else {
-                $this->session->set_flashdata('error_message', $response['message']);
-
-                redirect(base_url() . 'login', 'refresh');
-            }
+            redirect(base_url() . 'beu_dashboard', 'refresh');
+        } else {
+            echo json_encode($response);
         }
     }
 
     public function getLoginForm()
     {
         $this->data['content'] = 'grid/login';
-        return $this->load->view('layout', $this->data, true);
+        echo $this->load->view('layout', $this->data, true);
     }
 }

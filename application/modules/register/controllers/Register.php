@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Add_personnel extends MY_Controller
+class Register extends MY_Controller
 {
     protected $userdata;
     private $data = [];
@@ -16,7 +16,7 @@ class Add_personnel extends MY_Controller
         // }
 
         $model_list = [
-            'add_personnel/Add_personnel_Model' => 'personnel_model',
+            'register/Register_model' => 'register_model',
         ];
         $this->load->model($model_list);
     }
@@ -24,23 +24,17 @@ class Add_personnel extends MY_Controller
     /** load main page */
     public function index()
     {
-        // if (
-        // 	!check_permission($this->session->User_type, ['admin'])
-        // ) {
-        // 	redirect(base_url() . 'landing_page', 'refresh');
-        // }
-
         $info = array(
-            'username' => $this->input->post("username"),
+            'email' => $this->input->post("email"),
             'password' => $this->input->post("password"),
             'user_type' => $this->input->post("user_type"),
         );
 
-        if (empty($info['username']) || empty($info['password']) || empty($info['user_type'])) {
+        if (empty($info['email']) || empty($info['password']) || empty($info['user_type'])) {
             $this->data['content'] = 'index';
             $this->load->view('layout', $this->data);
         } else {
-            $response = $this->personnel_model->add_personnel($info);
+            $response = $this->register_model->register($info);
 
             if (!$response['has_error']) {
                 redirect(base_url() . 'login', 'refresh');
@@ -48,15 +42,9 @@ class Add_personnel extends MY_Controller
                 $this->load->library('session');
                 $this->session->set_flashdata('error_message', $response['message']);
 
-                redirect(base_url() . 'add_personnel', 'refresh');
-             }
+                redirect(base_url() . 'Register', 'refresh');
+            }
         }
-    }
-
-    public function nextform()
-    {
-        $this->data['content'] = 'nextform';
-        $this->load->view('layout', $this->data);
     }
 
     public function create()

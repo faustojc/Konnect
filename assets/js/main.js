@@ -7,12 +7,25 @@ function validateForm(target) {
     let isValid = false;
 
     form.addEventListener('submit', function (event) {
-        isValid = this.checkValidity();
+        const inputs = form.querySelectorAll('input');
+        let errors = 0;
+
+        for (const input of inputs) {
+            errors = input.value === '' ? errors + 1 : errors;
+
+            if (input.value === '') {
+                input.classList.add('is-invalid');
+                input.classList.remove('is-valid');
+            } else {
+                input.classList.add('is-valid');
+                input.classList.remove('is-invalid');
+            }
+        }
+
+        isValid = errors === 0;
 
         event.preventDefault();
         event.stopPropagation();
-
-        form.classList.add('was-validated');
     });
 
     form.dispatchEvent(new Event('submit'));

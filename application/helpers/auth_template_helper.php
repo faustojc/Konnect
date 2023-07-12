@@ -24,6 +24,10 @@ function auth_head()
 
 function auth_footer()
 { ?>
+    <!-- REQUIRED SCRIPTS -->
+    <script>
+        const baseUrl = '<?= base_url() ?>';
+    </script>
     <script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/jquery/jquery.min.js" type="text/javascript"></script>
     <script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js" type="text/javascript"></script>
     </body>

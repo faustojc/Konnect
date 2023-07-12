@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Add_personnel_model extends CI_Model
+class Register_model extends CI_Model
 {
     public $Table;
 
@@ -19,9 +19,15 @@ class Add_personnel_model extends CI_Model
         $this->Table = json_decode(TABLE);
     }
 
-    public function add_personnel($info)
+    public function register($info)
     {
         try {
+            $has_registered = $this->db->get_where($this->Table->user, ['email' => $info['email']])->row();
+
+            if (!empty($has_registered)) {
+                return array('message' => 'Email is already in used', 'has_error' => true);
+            }
+
             $locker = locker();
             $password = sha1(password_generator($info['password'], $locker));
             $info['password'] = $password;

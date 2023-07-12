@@ -38,8 +38,8 @@ class Login extends MY_Controller
             'password' => $this->input->post("password"),
         );
 
-        if (empty($info['username']) || empty($info['password'])) {
-            $this->data['content'] = 'login';
+        if (empty($info['email']) || empty($info['password'])) {
+            $this->data['content'] = 'index';
             $this->load->view('layout', $this->data);
         } else {
             $response = $this->login_model->authentication($info);
@@ -55,11 +55,5 @@ class Login extends MY_Controller
                 redirect(base_url() . 'login', 'refresh');
             }
         }
-    }
-
-    public function login()
-    {
-        $this->data['content'] = 'login';
-        $this->load->view('layout', $this->data);
     }
 }

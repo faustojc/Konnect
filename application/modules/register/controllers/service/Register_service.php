@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Add_personnel_service extends MY_Controller
+class Register_service extends MY_Controller
 {
     protected $session;
     private $data = [];
@@ -16,16 +16,14 @@ class Add_personnel_service extends MY_Controller
         // }
 
         $model_list = [
-            'add_personnel/service/Add_personnel_services_model' => 'apsModel'
+            'register/service/Register_services_model' => 'registerServicesModel',
         ];
         $this->load->model($model_list);
     }
 
     public function save()
     {
-
-
-        $response = $this->apsModel->save();
+        $response = $this->registerServicesModel->save();
 
         echo json_encode($response);
     }

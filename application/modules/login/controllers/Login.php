@@ -56,4 +56,10 @@ class Login extends MY_Controller
             }
         }
     }
+
+    public function getLoginForm()
+    {
+        $this->data['content'] = 'grid/login';
+        return $this->load->view('layout', $this->data, true);
+    }
 }

@@ -18,17 +18,17 @@ function auth_head()
         <link rel="stylesheet" href="<?= base_url() ?>assets/theme/bootstrap/dist/css/bootstrap.min.css">
 
         <link href='<?= base_url() ?>/assets/css/auth/style.css' rel="stylesheet" type="text/css"/>
+
+        <!-- REQUIRED SCRIPTS -->
+        <script>
+            const baseUrl = '<?= base_url() ?>';
+        </script>
     </head>
     <body class="fade-in d-flex justify-content-center align-items-center h-100">
 <?php }
 
 function auth_footer()
 { ?>
-    <!-- REQUIRED SCRIPTS -->
-    
-    <script>
-        const baseUrl = '<?= base_url() ?>';
-    </script>
     <script src="<?= base_url() ?>assets/js/main.js"></script>
     <script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/jquery/jquery.min.js" type="text/javascript"></script>
     <script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js" type="text/javascript"></script>

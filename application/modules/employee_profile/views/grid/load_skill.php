@@ -35,9 +35,6 @@ if (!empty($details)) {
             </button>
         </div>
 
-
-
-
         <!-- View Skill Modal -->
         <div class="modal fade" id="view_skill<?= $key ?>" tabindex="-1" role="dialog" aria-labelledby="view_skill<?= $key ?>" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -51,15 +48,14 @@ if (!empty($details)) {
                                 </h3>
                             </div>
                             <div class="col-5">
-
                             </div>
-
-
                             <div class="col-1 pr-2">
-                                <button type="button" class="btn btn-tool"><i class="fa-solid fa-trash"></i>
+                                <!-- <button type="button" id="delete_skill" class="btn btn-tool"><i class="fa-solid fa-trash"></i>
+                                </button> -->
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-
                         </div>
 
                         <div class="px-3 py-3">
@@ -73,8 +69,8 @@ if (!empty($details)) {
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#skill<?= $key ?>" data-proficiency="<?= ucwords(@$value->proficiency) ?>">Edit</button>
+                        <button type="button" class="btn btn-danger" id="delete_skill" data-dismiss="modal" data-id="<?= $value->id ?>">Delete</button>
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#skill<?= $key ?>" data-proficiency="<?= ucwords(@$value->proficiency) ?>">Edit</button>
                     </div>
                 </div>
             </div>
@@ -128,7 +124,7 @@ if (!empty($details)) {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="btn_update_skill">Save</button>
+                        <button type="button" class="btn btn-info" id="btn_update_skill">Save</button>
                     </div>
                 </div>
             </div>

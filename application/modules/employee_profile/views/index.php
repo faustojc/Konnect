@@ -120,6 +120,14 @@ main_header(['employee_profile']);
         color: black;
     }
 
+    .training-hover:hover{
+            transform: scale(1.02);
+            background-color: #F1F6F9;
+            transition: .3s transform;
+            box-shadow: 0 2px 5px rgba(0,0,0,.12);
+            
+        }
+
 
     /* Adjustments for smaller screens */
     @media (max-width: 768px) {
@@ -151,19 +159,19 @@ main_header(['employee_profile']);
                 <!-- Widget: user widget style 1 -->
                 <div class="card card-widget widget-user">
                     <!-- Add the bg color to the header using any of the bg-* classes -->
-                    <div class="widget-user-header text-white" style="background: url('assets/images/Logo/Profile/wallpapersample.jpg') center center; min-height: 25vh; max-height: 50vh; background-repeat: no-repeat; background-size: cover;">
+                    <div class="widget-user-header text-white" style="background: url('<?= base_url() ?>assets/images/Logo/cover-place.jpg') center center; min-height: 25vh; max-height: 50vh; background-repeat: no-repeat; background-size: cover; border-radius: 15px 15px 0px 0px;">
                     </div>
 
-                    <div class="card-footer" style="padding-top: 45px;background-color:#f4faff;">
+                    <div class="card-footer bg-white" style="padding-top: 45px;">
                         <!-- Profile Picture -->
 
                         <div class="widget-user-image" style="left: 0; top: 0; margin-left: 15px; margin-top:100px;">
                             <img class="img-circle img-fluid" src="<?= base_url() ?>assets/images/employee/profile_pic/<?= $details->Employee_image ?>" alt="User Avatar" style="
                                                   object-fit: cover;
-                                                  min-width: 100px;
-                                                  max-width: 100px;
-                                                  min-height: 100px;
-                                                  max-height: 100px;">
+                                                  min-width: 130px;
+                                                  max-width: 130px;
+                                                  min-height: 130px;
+                                                  max-height: 130px;">
                         </div>
                         <div class="row">
                             <div class="col-12">
@@ -205,6 +213,7 @@ main_header(['employee_profile']);
 
                 <div class="card card-white">
                     <div class="card-header" style="">
+
                         <h3 class="card-title fw-500 text-dark" style="font-weight:600;">About</h3>
 
                         <div class="card-tools">
@@ -216,10 +225,10 @@ main_header(['employee_profile']);
                         <!-- /.card-tools -->
                     </div>
                     <!-- /.card-header -->
-                    <div class="card-body card-widget widget-user-2">
+                    <div class="card-body card-widget widget-user-2" style="padding-top:0.5rem;">
                         <div class="widget-user-header" style="padding:0;">
 
-                            <p class="text-justify px-3" style="font-size:15px; font-weight: 400;">
+                            <p class="text-justify px-3 py-3" style="font-size:15px; font-weight: 400;">
                                 <?= @$details->Introduction ?>
                             </p>
                         </div>
@@ -236,7 +245,7 @@ main_header(['employee_profile']);
                             </button>
                         </div>
                     </div>
-                    <div class="row py-4 px-4" id="load_skill"></div>
+                    <div class="row pt-0 pb-4 px-4 py-3" id="load_skill"></div>
                 </div>
 
                 <div class="card card-white">
@@ -319,12 +328,12 @@ main_header(['employee_profile']);
 
                     </div>
                     <!-- /.card-header -->
-                    <div class="pb-3">
+                    <div class="py-4">
+                        <div id="load_employments">
 
+                        </div>
                     </div>
-                    <div id="load_employments">
 
-                    </div>
 
                     <!-- /.card-body -->
                 </div>
@@ -443,7 +452,7 @@ main_header(['employee_profile']);
                     <!-- Modal Body -->
 
 
-                    <div id="load_educations">
+                    <div class="py-3 px-3" id="load_educations">
 
                     </div>
 
@@ -461,7 +470,7 @@ main_header(['employee_profile']);
                 <!-- /.card -->
 
                 <!-- Training -->
-                <div class="card card-white">
+                <div class="card  card-white">
                     <div class="card-header">
                         <h3 class="card-title fw-500" style="font-weight:600;">Training</h3>
 
@@ -514,7 +523,7 @@ main_header(['employee_profile']);
                                                 <div class="col-md-6">
                                                     <label>City</label>
                                                     <div>
-                                                        <input type="text" class="form-control" id="city" name="city" required>
+                                                        <input type="text" class="form-control" id="t_city" name="t_city" required>
                                                     </div>
                                                 </div>
                                         </section>
@@ -622,7 +631,7 @@ main_header(['employee_profile']);
                     <div class="card-header">
                         <h3 class="card-title fw-500">Employees</h3>
                     </div>
-                    <div id="load_employees_follow_section">
+                    <div id="load_employees_follow_section" style="margin-left: 1rem; margin-right:1rem;">
                         <?= $employees_follow_section_view ?>
                     </div>
                 </div>
@@ -632,7 +641,7 @@ main_header(['employee_profile']);
                     <div class="card-header">
                         <h3 class="card-title fw-500">Employers</h3>
                     </div>
-                    <div id="load_employers_follow_section">
+                    <div id="load_employers_follow_section" style="margin-left:1rem; margin-right:1rem;">
                         <?= $employers_follow_section_view ?>
                     </div>
                 </div>

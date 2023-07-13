@@ -8,7 +8,7 @@ class Employee_profile_service extends MY_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->session = (object)get_userdata(USER);
+        $this->session = (object) get_userdata(USER);
 
         // if(is_empty_object($this->session)){
         // 	redirect(base_url().'login/authentication', 'refresh');
@@ -29,6 +29,24 @@ class Employee_profile_service extends MY_Controller
         $response = $this->esModel->update();
         echo json_encode($response);
     }
+
+    public function update_train()
+    {
+        // echo json_encode("a00");
+        $this->esModel->ID = $this->input->post("ID");
+        $this->esModel->Employee_id = $this->input->post("Employee_id");
+        $this->esModel->title = $this->input->post("title");
+        $this->esModel->training_description = $this->input->post("training_description");
+        $this->esModel->venue = $this->input->post("venue");
+        $this->esModel->t_city = $this->input->post("t_city");
+        $this->esModel->s_date = $this->input->post("s_date");
+        $this->esModel->e_date = $this->input->post("e_date");
+        $this->esModel->hours = $this->input->post("hours");
+
+        $response = $this->esModel->update_train();
+        echo json_encode($response);
+    }
+
 
     public function update_address()
     {
@@ -129,7 +147,7 @@ class Employee_profile_service extends MY_Controller
             'title' => $this->input->post("title"),
             'training_description' => $this->input->post("training_description"),
             'venue' => $this->input->post("venue"),
-            'city' => $this->input->post("city"),
+            't_city' => $this->input->post("t_city"),
             's_date' => $this->input->post("s_date"),
             'e_date' => $this->input->post("e_date"),
             'hours' => $this->input->post("hours"),
@@ -178,6 +196,14 @@ class Employee_profile_service extends MY_Controller
         $response = $this->esModel->edit_skill();
         echo json_encode($response);
         // echo json_encode($this->esModel->id);
+    }
+    public function delete_skill()
+    {
+        $id = $this->input->post("skill_id");
+
+        $response = $this->esModel->delete_skill($id);
+
+        echo json_encode($response);
     }
 
     public function delete_training()

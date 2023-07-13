@@ -34,8 +34,6 @@ class Register extends MY_Controller
             $this->data['content'] = 'index';
             $this->load->view('layout', $this->data);
         } else {
-            $info = array();
-
             if ($user['user_type'] == 'EMPLOYEE') {
                 $info = array(
                     'Fname' => $this->input->post("Fname"),
@@ -49,22 +47,27 @@ class Register extends MY_Controller
                     'Gender' => $this->input->post('Gender'),
                     'Cstat' => $this->input->post('Cstat'),
                     'Bday' => $this->input->post('Bday'),
+                    'Employee_image' => 'default.png',
+                    'Email' => $user['email'],
                 );
             } else {
                 $info = array(
                     'employer_name' => $this->input->post("employer_name"),
                     'tradename' => $this->input->post("tradename"),
+                    'business_type' => $this->input->post("business_type"),
                     'address' => $this->input->post("address"),
                     'barangay' => $this->input->post("barangay"),
                     'city' => $this->input->post("city"),
                     'contact_number' => $this->input->post("contact_number"),
+                    'image' => 'default.png',
+                    'email' => $user['email'],
                 );
             }
 
-            $response = $this->register_model->register($info);
+            $response = $this->register_model->register($user, $info);
 
             if (!$response['has_error']) {
-                redirect(base_url() . 'login', 'refresh');
+                echo json_encode(['redirect' => base_url() . 'login', $response]);
             } else {
                 echo json_encode($response);
             }

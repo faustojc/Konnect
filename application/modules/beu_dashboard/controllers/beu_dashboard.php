@@ -15,8 +15,7 @@ class beu_dashboard extends MY_Controller
         if (empty($this->userdata)) {
             redirect(base_url() . 'login');
         } else {
-            $this->load->driver('session');
-            $this->user_type = $this->session->flashdata('auth')['user_type'];
+            $this->user_type = get_userdata('auth')['user_type'];
         }
 
         $model_list = [
@@ -34,9 +33,9 @@ class beu_dashboard extends MY_Controller
         $this->data['details'] = $this->userdata;
 
         if ($this->user_type == 'EMPLOYER') {
-            $this->data['user_display'] = $this->load->view('grid/employer', $this->data, true);
+            $this->data['user_display'] = $this->load->view('grid/load_employer', $this->data, true);
         } else {
-            $this->data['user_display'] = $this->load->view('grid/employee', $this->data, true);
+            $this->data['user_display'] = $this->load->view('grid/load_employee', $this->data, true);
         }
 
         $this->data['content'] = 'index';

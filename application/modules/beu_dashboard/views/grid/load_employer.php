@@ -2,7 +2,7 @@
     <div class="card card-widget widget-user">
         <div class="widget-user-header text-white" style="background: url('assets/images/Logo/Profile/wallpapersample.jpg') center center; background-repeat: no-repeat; background-size: cover;"></div>
         <div class="widget-user-image">
-            <img class="img-circle img-fluid" src="<?= base_url() ?>assets/images/employer/profile_pic<?= $details->image ?>" alt="User Avatar" style="object-fit: cover; min-width: 90px; max-width: 90px;min-height: 90px; max-height: 90px;">
+            <img class="img-circle img-fluid" src="<?= base_url() ?>assets/images/employer/profile_pic/<?= $details->image ?>" alt="User Avatar" style="object-fit: cover; min-width: 90px; max-width: 90px;min-height: 90px; max-height: 90px;">
         </div>
         <div class="card-footer" style="padding-top: 35px;">
             <div class="row">

@@ -26,6 +26,7 @@ class Login extends MY_Controller
     {
         
         unset_userdata(USER);
+        unset_userdata('auth');
 
         $this->data['content'] = 'index';
         $this->load->view('layout', $this->data);
@@ -36,18 +37,19 @@ class Login extends MY_Controller
         $info = array(
             'email' => $this->input->post("email"),
             'password' => $this->input->post("password"),
+            'user_type' => $this->input->post("user_type"),
         );
 
         $response = $this->login_model->authenticate($info);
 
         if (!$response['has_error']) {
-            $this->load->library('session');
-            $this->session->set_flashdata('auth', $info);
+            set_userdata('auth', $info);
 
-            redirect(base_url() . 'beu_dashboard', 'refresh');
+            echo json_encode(['redirect' => base_url() . 'beu_dashboard']);
         } else {
             echo json_encode($response);
         }
+
     }
 
     public function getLoginForm()

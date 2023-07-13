@@ -35,7 +35,7 @@ $(document).ready(function () {
     load_skill();
 
     // TinyMCE
-    textareaEditor('#training_description', 400);
+    textareaEditor('textarea', 400);
 });
 
 $(document).on('keyup', '#search_employee', function () {
@@ -77,7 +77,7 @@ $(document).on('click', '#btn_save_training', function () {
             title: document.querySelector('#title').value,
             training_description: training_description,
             venue: document.querySelector('#venue').value,
-            city: document.querySelector('#city').value,
+            t_city: document.querySelector('#t_city').value,
             s_date: document.querySelector('#s_date').value,
             e_date: document.querySelector('#e_date').value,
             hours: document.querySelector('#hours').value
@@ -139,6 +139,37 @@ $(document).on('click', '#btn_edit_educ', function () {
         },
         error: function (response) {
             error('ERROR', 'Education failed to update');
+        }
+    });
+});
+
+$(document).on('click', '#btn_edit_train', function () {
+    const form = this.closest('.modal-content').querySelector('form');
+
+    const data = {
+        ID: form.querySelector('#ID').value,
+        Employee_id: form.querySelector('#Employee_id').value,
+        title: form.querySelector('#title').value,
+        training_description: form.querySelector('#training_description').value,
+        venue: form.querySelector('#venue').value,
+        t_city: form.querySelector('#t_city').value,
+        s_date: form.querySelector('#s_date').value,
+        e_date: form.querySelector('#e_date').value,
+        hours: form.querySelector('#hours').value
+    };
+
+    $.ajax({
+        url: baseUrl + 'employee_profile/service/employee_profile_service/update_train',
+        type: 'POST',
+        data: data,
+        success: function (response) {
+            // Handle the success response (optional)
+            success('SUCCESS', 'Introduction successfully updated');
+            load_training();
+        },
+        error: function (response) {
+            const data = JSON.parse(response.responseText);
+            error('ERROR', data.message);
         }
     });
 });
@@ -346,6 +377,16 @@ $(document).on('click', '#btn_update_skill', function () {
         }
     });
 });
+
+$(document).on('click', '#delete_skill', function () {
+    const id = $('#emp_id').val();
+
+    formAction(baseUrl + 'employee_profile/service/employee_profile_service/delete_skill', 'POST', {skill_id: $(this).data('id'), employee_id: id}, function (data) {
+        load_skill();
+        success('SUCCESS', 'Skill successfully deleted');
+    });
+});
+
 
 // Filter the dropdown list of Level element
 $(document).on('input', '#Level2', function () {

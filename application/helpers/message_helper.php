@@ -35,7 +35,7 @@ const DUPLICATE_USERNAME_FOUND = 'Username is already taken, please try again.';
 /** default messages */
 const DEFAULT_LOGIN_PASSWORD = 'password1234*';
 const CHAR_SET = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$11<>?!@#$%^&*()~\/.';
-const USER = null | array();
+const USER = 'user';
 const SYSTEM_NAME = 'Konnect';
 const SYSTEM_ALT = '';
 const FOOTER_NAME = '';

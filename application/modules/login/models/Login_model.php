@@ -42,12 +42,12 @@ class Login_model extends CI_Model
             if ($info['user_type'] == 'EMPLOYER') {
                 $user = $this->db->select()
                     ->from($this->Table->employer)
-                    ->join('tbl_user', 'tbl_user.id = tbl_employer.user_id')
+                    ->where('user_id', $query->id)
                     ->get()->row();
             } else {
                 $user = $this->db->select()
                     ->from($this->Table->employee)
-                    ->join('tbl_user', 'tbl_user.id = tbl_employee.user_id')
+                    ->where('user_id', $query->id)
                     ->get()->row();
             }
 

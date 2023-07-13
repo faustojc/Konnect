@@ -21,20 +21,30 @@ main_header(['employer']);
                 </div>
             </div>
         </div>
-        <table class="table table-hover d-block d-md-table overflow-auto w-100">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Employer Name</th>
-                    <th scope="col">Trade Name</th>
-                    <th scope="col">Business Type</th>
-                    <th scope="col">SSS</th>
-                    <th scope="col">TIN</th>
-                    <th scope="col">Actions</th>
-                </tr>
-            </thead>
+
+        <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">List of Employers</h3>
+              </div>
+              <!-- ./card-header -->
+              <div class="card-body">
+        <div class="table-responsive">   
+        <table class="table table table-bordered">
+            <thead class="thead-dark"></thead>
+            <tr>
+                <th>#</th>
+                <th>Employer Name</th>
+                <th>Trade Name</th>
+                <th>Business Type</th>
+                <th>SSS</th>
+				<th>TIN</th>
+				<th>Actions</th>     
+            </tr>
             <tbody id="employer_list"></tbody>
         </table>
+        </div>
+        </div>
+        
     </div>
 </section>
 

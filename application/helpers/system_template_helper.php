@@ -3,7 +3,24 @@ function main_header($menubar = [])
 {
     defined('BASEPATH') or exit('No direct script access allowed');
     $userdata = get_userdata(USER);
-    // $ci = &get_instance();
+    $auth = get_userdata('auth');
+
+    $image_url = '';
+    $name = '';
+    $profile_url = '';
+
+    if (!empty($auth)) {
+        if ($auth['user_type'] == 'EMPLOYEE') {
+            $image_url = base_url() . 'assets/images/employee/profile_pic/' . $userdata->Employee_image;
+            $name = $userdata->Fname . $userdata->Lname;
+            $profile_url = base_url() . 'employee_profile/index/' . $userdata->ID;
+        } else {
+            $image_url = base_url() . 'assets/images/employer/profile_pic/' . $userdata->image;
+            $name = $userdata->tradename;
+            $profile_url = base_url() . 'employer_profile?id=' . $userdata->id;
+        }
+    }
+
     ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -136,21 +153,22 @@ function main_header($menubar = [])
                             <!-- Message Start -->
                             <div class="media ml-3 mt-3 mb-3 d-flex justify-content-center align-items-center">
                                 <!-- <img src="../dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle"> -->
-                                <img class="img-circle img-fluid mr-3" src="assets/images/Logo/Profile/samplepic.jpg"
-                                     alt="User Avatar"
-                                     style="object-fit: cover; min-width: 60px; max-width: 60px; min-height: 60px;max-height: 60px;">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title" style="font-weight: 500;">
-                                        John Doe
-                                    </h3>
-                                    <a href="#" class="text-info">View Profile </a>
-                                </div>
+                                <?php if (!empty($userdata)): ?>
+                                    <img class="img-circle img-fluid mr-3" src="<?= $image_url ?>"
+                                         alt="User Avatar"
+                                         style="object-fit: cover; min-width: 60px; max-width: 60px; min-height: 60px;max-height: 60px;">
+                                    <div class="media-body">
+                                        <h3 class="dropdown-item-title" style="font-weight: 500;">
+                                            <?= $name ?>
+                                        </h3>
+                                        <a href="<?= $profile_url ?>" class="text-info">View Profile </a>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                             <!-- Message End -->
                         </div>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">Sign Up</a>
-                        <a href="#" class="dropdown-item dropdown-footer">Log out</a>
+                        <a href="<?= base_url() ?>login" class="dropdown-item dropdown-footer">Log out</a>
                     </div>
                 </li>
 

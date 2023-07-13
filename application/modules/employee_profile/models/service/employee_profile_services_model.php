@@ -9,7 +9,7 @@ class Employee_profile_services_model extends CI_Model
     public function __construct()
     {
         parent::__construct();
-        $this->session = (object)get_userdata(USER);
+        $this->session = (object) get_userdata(USER);
 
         // if(is_empty_object($this->session)){
         // 	redirect(base_url().'login/authentication', 'refresh');
@@ -61,6 +61,41 @@ class Employee_profile_services_model extends CI_Model
             $this->db->where('ID', $this->ID);
             // $this->db->join($this->Table->employee_educ.' ed', 'ed.Employee_id = e.ID', 'left');
             $this->db->update($this->Table->employee, $data);
+            // $this->db->update($this->Table->employee_educ, $data);
+            $this->db->trans_complete();
+
+            if ($this->db->trans_status()) {
+                $this->db->trans_commit();
+                return array('message' => SAVED_SUCCESSFUL, 'has_error' => false);
+            } else {
+                $this->db->trans_rollback();
+                throw new Exception(ERROR_PROCESSING, true);
+            }
+        } catch (Exception $e) {
+            return array('message' => $e->getMessage(), 'has_error' => true);
+        }
+    }
+
+    public function update_train()
+    {
+        try {
+            $data = array(
+                'ID' => $this->ID,
+                'Employee_id' => $this->Employee_id,
+                'title' => $this->title,
+                'training_description' => $this->Introduction,
+                'venue' => $this->Introduction,
+                't_city' => $this->t_city,
+                's_date' => $this->s_date,
+                'e_date' => $this->e_date,
+                'hours' => $this->hours,
+
+            );
+
+            $this->db->trans_start();
+            $this->db->where('ID', $this->ID);
+            // $this->db->join($this->Table->employee_educ.' ed', 'ed.Employee_id = e.ID', 'left');
+            $this->db->update($this->Table->training, $data);
             // $this->db->update($this->Table->employee_educ, $data);
             $this->db->trans_complete();
 
@@ -398,6 +433,25 @@ class Employee_profile_services_model extends CI_Model
             $this->db->trans_start();
             $this->db->where('id', $this->id);
             $this->db->update($this->Table->employee_skill, $data);
+            $this->db->trans_complete();
+
+            if ($this->db->trans_status() === FALSE) {
+                $this->db->trans_rollback();
+                return array('message' => ERROR_PROCESSING, 'has_error' => true);
+            } else {
+                $this->db->trans_commit();
+                return array('message' => SAVED_SUCCESSFUL, 'has_error' => false);
+            }
+        } catch (Exception $msg) {
+            return (array('message' => $msg->getMessage(), 'has_error' => true));
+        }
+    }
+
+    public function delete_skill($id)
+    {
+        try {
+            $this->db->trans_start();
+            $this->db->where('id', $id)->delete($this->Table->employee_skill);
             $this->db->trans_complete();
 
             if ($this->db->trans_status() === FALSE) {

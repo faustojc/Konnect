@@ -2,7 +2,7 @@
 // $ci = & get_instance();
 if (!empty($educ_val)) {
     foreach ($educ_val as $key => $value) { ?>
-        <div class="card-body card-widget widget-user-2 border-top">
+        <div class="card-body card-widget widget-user-2" style="padding-bottom:0.5rem; padding-top:0.5rem;">
             <div class="row">
                 <div class="col-10  ">
                     <div class="widget-user-image">

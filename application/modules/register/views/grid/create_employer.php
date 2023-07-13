@@ -1,15 +1,31 @@
 <form id="needs-validation">
     <div class="row pb-3">
+        <div class="col-md-12">
+            <label for="tradename">Trade Name</label>
+            <input type="text" class="form-control" name="tradename" id="tradename" style=" font-size:14px">
+        </div>
+
         <div class="col-md-6">
             <label for="employer_name">Employer Name</label>
             <input type="text" class="form-control" name="employer_name" id="employer_name" style=" font-size:14px">
         </div>
 
         <div class="col-md-6">
-            <label for="tradename">Trade Name</label>
-            <input type="text" class="form-control" name="tradename" id="tradename" style=" font-size:14px">
+            <label for="business_type">Business Type</label>
+            <select class="custom-select" name="business_type" id="business_type">
+                <option value="Retail">Retail</option>
+                <option value="Food and Beverages">Food and Beverages</option>
+                <option value="Information Technology">Information Technology</option>
+                <option value="Finance and Banking">Finance and Banking</option>
+                <option value="Healthcare">Healthcare</option>
+                <option value="Education">Education</option>
+                <option value="Manufacturing and Engineering">Manufacturing and Engineering</option>
+                <option value="Hospitality and Tourism">Hospitality and Tourism</option>
+                <option value="Media and Entertainment">Media and Entertainment</option>
+                <option value="Energy and Utilities">Energy and Utilities</option>
+                <option value="Transportation and Logistics">Transportation and Logistics</option>
+            </select>
         </div>
-
     </div>
 
     <div class="row pb-3">

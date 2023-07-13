@@ -135,7 +135,8 @@ main_header(['Employer_profile']);
         <div class="row pl-3 pr-3" style="margin-top: 3.5rem;">
             <div class="col-12 col-md-8 pl-2 pr-2 mt-4">
                 <div class="card card-widget widget-user">
-                    <div class="widget-user-header text-white" style="min-height: 25vh; max-height: 50vh; background: url('assets/images/Logo/Profile/wallpapersample.jpg') no-repeat center center; background-size: cover;"></div>
+                <div class="widget-user-header text-white" style="background: url('<?= base_url() ?>assets/images/Logo/cover-place.jpg') center center; min-height: 25vh; max-height: 50vh; background-repeat: no-repeat; background-size: cover; border-radius: 15px 15px 0px 0px;">
+                    </div>
                     <div class="widget-user-image" style="left: 0; top: 0; margin-left: 15px; margin-top:100px;">
                         <img class="img-circle img-fluid" src="<?= base_url() ?>assets/images/employer/profile_pic/<?= $current_employer->image ?>" alt="User Avatar" style="
                           object-fit: cover;
@@ -144,7 +145,7 @@ main_header(['Employer_profile']);
                           min-height: 100px;
                           max-height: 100px;">
                     </div>
-                    <div class="card-footer" style="padding-top: 45px;">
+                    <div class="card-footer" style="padding-top: 45px;background-color:#f4faff;">
                         <div class="row">
                             <div class="col-12">
                                 <div class="description-block">
@@ -161,7 +162,7 @@ main_header(['Employer_profile']);
                                                 } ?>
                                             </p>
                                             <h6 class="widget-user-desc text-left text-muted" style="font-weight: normal; font-size:15px;">
-                                                <?= $current_employer->business_type ?>|
+                                                <?= $current_employer->business_type ?> |
                                                 <a class="text-info" data-toggle="modal" data-target="#contact" style=" cursor: pointer;">Contact details</a>
                                             </h6>
                                         </div>

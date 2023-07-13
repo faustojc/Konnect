@@ -35,21 +35,21 @@ function validateForm(target) {
 
 /**
  * Makes the textarea element a TinyMCE editor
- * @param {string} selector Selects the textarea element based on id or class.
+ * @param {string} selector Selects the textarea element based on element or id or class.
  * @param {number} height Set the height of the editor, this is optional.
  * @param {function} setupFunction An optional function for setting up the editor.s
  */
 function textareaEditor(selector, height = 350, setupFunction = () => {
 }) {
     tinymce.init({
-        selector: selector,
+        target: selector,
         height: height,
         menubar: false,
         browser_spellcheck: true,
         setup: function (editor) {
             setupFunction(editor);
         },
-        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
+        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
         toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
         tinycomments_mode: 'embedded',
         tinycomments_author: 'Author name',

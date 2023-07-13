@@ -15,7 +15,10 @@ const loadFormLogin = () => {
             })
                 .then(response => response.json())
                 .then(data => {
-                    if (data.status !== 'success') {
+                    if (data.redirect) {
+                        window.location.href = data.redirect;
+                    }
+                    else if (data.status !== 'success') {
                         let errorContainer = document.createElement('div');
                         errorContainer.classList.add('alert', 'alert-danger');
                         errorContainer.setAttribute('role', 'alert');

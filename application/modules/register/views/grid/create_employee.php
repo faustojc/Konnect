@@ -65,7 +65,7 @@
 
         <div class="col-md-6">
             <label>Civil Status</label>
-            <select name="cstat" class="form-control" id="Cstat">
+            <select class="form-control" name="Cstat" id="Cstat">
                 <option value="single">Single</option>
                 <option value="married">Married</option>
                 <option value="widowed">Widowed</option>

@@ -235,17 +235,11 @@ main_header(['Employer_profile']);
                                 <i class="fa-solid fa-pen" style="color: grey;"></i>
                             </a>
                         </div>
-                        <!-- /.card-tools -->
                     </div>
 
                     <!-- JOB POSTINGS -->
                     <div class="accordion rounded-0" id="load_jobpostings">
                         <?= $jobpostings_view ?>
-                        <!--                        <div class="d-flex justify-content-center loading-jobpostings my-3">-->
-                        <!--                            <div class="spinner-border" role="status">-->
-                        <!--                                <span class="sr-only">Loading...</span>-->
-                        <!--                            </div>-->
-                        <!--                        </div>-->
                     </div>
                 </div>
 
@@ -281,9 +275,7 @@ main_header(['Employer_profile']);
                                 sollicitudin sagittis. Fusce tempor arcu at leo venenatis</h6>
                         </div>
                     </div>
-                    <!-- /.card-body -->
                 </div>
-                <!-- /.card -->
 
                 <div class="card card-white">
                     <div class="card-header">
@@ -297,9 +289,7 @@ main_header(['Employer_profile']);
                                 <i class="fa-solid fa-pen" style="color: grey;"></i>
                             </button>
                         </div>
-                        <!-- /.card-tools -->
                     </div>
-                    <!-- /.card-header -->
 
                     <div class="row">
                         <div class="col-6 col-md-6">
@@ -308,26 +298,22 @@ main_header(['Employer_profile']);
                                     <div class="widget-user-image">
                                         <img class="img-square img-fluid" src="assets/images/Logo/Profile/samplepic.jpg" alt="User Avatar" style="object-fit: cover;min-width: 60px; max-width: 60px; min-height: 60px; max-height: 60px;">
                                     </div>
-                                    <!-- /.widget-user-image -->
                                     <h5 class="widget-user-username mt-0" style="font-size: 18px; font-weight: 500;">Text or something</h5>
                                     <h6 class="widget-user-desc mb-0" style="font-weight: normal; font-size: 16px;">Details</h6>
                                     <p class="widget-user-desc mb-0 mt-1 text-muted" style="font-weight: normal; font-size: 16px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                 </div>
                             </div>
-                            <!-- /.card-body -->
 
                             <div class="card-body card-widget widget-user-2">
                                 <div class="widget-user-header">
                                     <div class="widget-user-image">
                                         <img class="img-square img-fluid" src="assets/images/Logo/Profile/samplepic.jpg" alt="User Avatar" style="object-fit: cover; min-width: 60px; max-width: 60px; min-height: 60px;max-height: 60px;">
                                     </div>
-                                    <!-- /.widget-user-image -->
                                     <h5 class="widget-user-username mt-0" style="font-size: 18px; font-weight: 500;">Text here 2</h5>
                                     <h6 class="widget-user-desc mb-0" style="font-weight: normal; font-size: 16px;">Details or additional info</h6>
                                     <p class="widget-user-desc mb-0 mt-1 text-muted" style="font-weight: normal; font-size: 16px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                 </div>
                             </div>
-                            <!-- /.card-body -->
                         </div>
 
                         <div class="col-6 col-md-6">
@@ -342,14 +328,12 @@ main_header(['Employer_profile']);
                                     <p class="widget-user-desc mb-0 mt-1 text-muted" style="font-weight: normal; font-size: 16px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                 </div>
                             </div>
-                            <!-- /.card-body -->
 
                             <div class="card-body card-widget widget-user-2">
                                 <div class="widget-user-header">
                                     <div class="widget-user-image">
                                         <img class="img-square img-fluid" src="assets/images/Logo/Profile/samplepic.jpg" alt="User Avatar" style="object-fit: cover; min-width: 60px; max-width: 60px; min-height: 60px;max-height: 60px;">
                                     </div>
-                                    <!-- /.widget-user-image -->
                                     <h5 class="widget-user-username mt-0" style="font-size: 18px; font-weight: 500;">Text 4</h5>
                                     <h6 class="widget-user-desc mb-0" style="font-weight: normal; font-size: 16px;">Details or info</h6>
                                     <p class="widget-user-desc mb-0 mt-1 text-muted" style="font-weight: normal; font-size: 16px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -552,13 +536,11 @@ main_header(['Employer_profile']);
                                 <?= $current_employer->contact_number ?>
                             </h6>
                             <br>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </section>
 

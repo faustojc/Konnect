@@ -30,10 +30,6 @@ const load_employment = () => {
 
 $(document).ready(function () {
     load_employee();
-    // load_education();
-    // load_training();
-    // load_employment();
-    // load_skill();
 
     // TinyMCE
     textareaEditor('textarea', 400);
@@ -175,7 +171,7 @@ $(document).on('click', '#btn_edit_train', function () {
         data: data,
         success: function (response) {
             // Handle the success response (optional)
-            success('SUCCESS', 'Introduction successfully updated');
+            success('SUCCESS', 'Training successfully updated');
             load_training();
         },
         error: function (response) {
@@ -189,7 +185,7 @@ $(document).on('click', '#update_introduction', function () {
     const intro = tinymce.activeEditor.getContent();
 
     const data = {
-        ID: $('#ID').val(),
+        ID: $('#emp_id').val(),
         Introduction: intro,
     };
 
@@ -200,7 +196,6 @@ $(document).on('click', '#update_introduction', function () {
         success: function (response) {
             // Handle the success response (optional)
             success('SUCCESS', 'Introduction successfully updated');
-            window.location.reload();
         },
         error: function (response) {
             const data = JSON.parse(response.responseText);

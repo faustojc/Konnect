@@ -66,22 +66,11 @@ function textareaEditor(selector, height = 350, setupFunction = () => {
  * @param {object} data Data to be sent
  * @param {function} callback An optional callback function that executes only if the request is successful
  */
-function formAction(url, request_type, data, callback) {
+async function formAction(url, request_type, data, callback) {
     if (data instanceof FormData) {
         fetch(url, {
             method: request_type,
             body: data
-        })
-            .then(response => response.json())
-            .then(response => successFunc(response))
-            .catch(response => errorFunc(response));
-    } else if (typeof data === 'object') {
-        fetch(url, {
-            method: request_type,
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
         })
             .then(response => response.json())
             .then(response => successFunc(response))
@@ -98,7 +87,18 @@ function formAction(url, request_type, data, callback) {
             .then(response => successFunc(response))
             .catch(response => errorFunc(response));
     } else {
-        // handle other types of data here
+        const params = new URLSearchParams(data);
+
+        fetch(url, {
+            method: request_type,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: params
+        })
+            .then(response => response.json())
+            .then(response => successFunc(response))
+            .catch(response => errorFunc(response));
     }
 
     const successFunc = (response) => {
@@ -122,6 +122,7 @@ function formAction(url, request_type, data, callback) {
         }
     }
 }
+
 
 function success(title, message, delay) {
     createToast(title, message, delay, 'bg-success', 'fa fa-check');

@@ -12,7 +12,7 @@ if (!empty($train_val)) {
                     <h6 class="widget-user-desc mb-2 text-muted">Duration: <?= (@$value->hours) ?> hours</h6>
                     <p class="card-text text-justify"><?= (@$value->training_description) ?></p>
                     <div class="d-flex justify-content-end px-3 py-3">
-                        <button class="btn btn-tool  delete" id="delete_train" data-id="<?= @$value->ID ?>">
+                        <button class="btn btn-tool delete" id="delete_train" data-id="<?= @$value->ID ?>">
                             <i class="fa fa-trash"></i>
                         </button>
 

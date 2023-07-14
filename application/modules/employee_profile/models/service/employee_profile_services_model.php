@@ -95,4 +95,12 @@ class Employee_profile_services_model extends CI_Model
             return (array('message' => $msg->getMessage(), 'has_error' => true));
         }
     }
+
+    public function getEmployeeImage($id)
+    {
+        return $this->db->select('Employee_image')
+            ->from($this->Table->employee)
+            ->where('ID', $id)
+            ->get()->row();
+    }
 }

@@ -57,6 +57,13 @@ class Employee_profile_service extends MY_Controller
             'Employee_image' => isset($img) ? $img['file_name'] : 'default.png'
         );
 
+        // Check if employer has image already
+        $image = $this->esModel->getEmployeeImage($data['ID']);
+
+        if (empty($image)) {
+            $data['image'] = isset($img) ? $img['file_name'] : 'default.png';
+        }
+
         $response = $this->esModel->update('tbl_employee', $data);
         echo json_encode($response);
     }

@@ -50,8 +50,14 @@ class employer_profile_service extends MY_Controller
             'email' => $this->input->post("email"),
             'sss' => $this->input->post('sss'),
             'tin' => $this->input->post('tin'),
-            'image' => isset($data) ? $data['file_name'] : 'default.png',
         );
+
+        // Check if employer has image already
+        $image = $this->input->post('image');
+
+        if (empty($image)) {
+            $info['image'] = isset($data) ? $data['file_name'] : 'default.png';
+        }
 
         $response[] = $this->employer_profile_service_model->save($info);
         echo json_encode($response);

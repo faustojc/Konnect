@@ -11,7 +11,7 @@ function validateForm(target) {
         let errors = 0;
 
         for (const input of inputs) {
-            errors = (input.value === '' || (input.type === 'file' && input.required)) ? errors + 1 : errors;
+            errors = (input.value === '' && (input.required || input.defaultValue === '')) ? errors + 1 : errors;
 
             if (input.value === '') {
                 input.classList.add('is-invalid');
@@ -68,31 +68,37 @@ function textareaEditor(selector, height = 350, setupFunction = () => {
  */
 function formAction(url, request_type, data, callback) {
     if (data instanceof FormData) {
-        $.ajax({
-            url: url,
-            type: request_type,
-            data: data,
-            processData: false,
-            contentType: false,
-            success: function (response) {
-                successFunc(response);
+        fetch(url, {
+            method: request_type,
+            body: data
+        })
+            .then(response => response.json())
+            .then(response => successFunc(response))
+            .catch(response => errorFunc(response));
+    } else if (typeof data === 'object') {
+        fetch(url, {
+            method: request_type,
+            headers: {
+                'Content-Type': 'application/json'
             },
-            error: function (response) {
-                errorFunc(response);
-            }
-        });
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(response => successFunc(response))
+            .catch(response => errorFunc(response));
+    } else if (typeof data === 'string') {
+        fetch(url, {
+            method: request_type,
+            headers: {
+                'Content-Type': 'text/plain'
+            },
+            body: data
+        })
+            .then(response => response.json())
+            .then(response => successFunc(response))
+            .catch(response => errorFunc(response));
     } else {
-        $.ajax({
-            url: url,
-            type: request_type,
-            data: data,
-            success: function (response) {
-                successFunc(response);
-            },
-            error: function (response) {
-                errorFunc(response);
-            }
-        });
+        // handle other types of data here
     }
 
     const successFunc = (response) => {

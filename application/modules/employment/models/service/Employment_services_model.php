@@ -20,27 +20,20 @@ class Employment_services_model extends CI_Model
         $this->Table = json_decode(TABLE);
     }
 
-    public function save()
+    /**
+     * Saves a record to the database
+     * @param string $table The table to save the data
+     * @param array $data The data to insert a new record to table
+     * @return array Returns an array with message and a boolean has_error
+     * @throws Exception Throws an Exception
+     */
+    public function save(string $table, array $data): array
     {
         try {
-            $data = array(
-                'employee_id' => $this->employee_id,
-                'employer_id' => $this->employer_id,
-                'position' => $this->position,
-                'start_date' => $this->start_date,
-                'end_date' => $this->end_date,
-                'status' => $this->status,
-                'rating' => $this->rating,
-                'job_description' => $this->job_description,
-                'show_status' => $this->show_status,
-                'date_created' => date('Y-m-d H:i:s')
-            );
-
             $this->db->trans_start();
-
-            $this->db->insert($this->Table->employment, $data);
-
+            $this->db->insert($table, $data);
             $this->db->trans_complete();
+
             if ($this->db->trans_status() === FALSE) {
                 $this->db->trans_rollback();
                 throw new Exception(ERROR_PROCESSING, true);
@@ -48,7 +41,7 @@ class Employment_services_model extends CI_Model
                 $this->db->trans_commit();
                 return array('message' => SAVED_SUCCESSFUL, 'has_error' => false);
             }
-        } catch (Exception$msg) {
+        } catch (Exception $msg) {
             return (array('message' => $msg->getMessage(), 'has_error' => true));
         }
     }

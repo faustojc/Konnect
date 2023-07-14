@@ -20,6 +20,25 @@ class employer_profile_services_model extends CI_Model
         $this->Table = json_decode(TABLE);
     }
 
+    public function save($data)
+    {
+        try {
+            $this->db->trans_start();
+            $this->db->insert($this->Table->employer, $data);
+            $this->db->trans_complete();
+
+            if ($this->db->trans_status() === FALSE) {
+                $this->db->trans_rollback();
+                return array('message' => ERROR_PROCESSING, 'has_error' => true);
+            } else {
+                $this->db->trans_commit();
+                return array('message' => SAVED_SUCCESSFUL, 'has_error' => false);
+            }
+        } catch (Exception $msg) {
+            return array('message' => $msg->getMessage(), 'has_error' => true);
+        }
+    }
+
     public function update($info)
     {
         try {
@@ -32,7 +51,7 @@ class employer_profile_services_model extends CI_Model
                 return array('message' => ERROR_PROCESSING, 'has_error' => true);
             } else {
                 $this->db->trans_commit();
-                return array('message' => SAVED_SUCCESSFUL, 'has_error' => false);
+                return array('message' => UPDATE_SUCCESSFUL, 'has_error' => false);
             }
         } catch (Exception $msg) {
             return array('message' => $msg->getMessage(), 'has_error' => true);

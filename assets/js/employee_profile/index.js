@@ -45,6 +45,22 @@ $(document).on('keyup', '#search_employee', function () {
     });
 });
 
+// Update employee profile
+$(document).on('click', '#update_profile', function () {
+    const isValid = validateForm('#needs-validation');
+
+    if (isValid) {
+        const form = document.querySelector('#needs-validation');
+        const formData = new FormData(form);
+
+        formAction(baseUrl + 'employee_profile/service/Employee_profile_service/update_profile', 'POST', formData, function (response) {
+            success('SUCCESS', 'Profile successfully updated');
+            setTimeout(() => {
+                window.location.href = baseUrl + 'employee_profile/index/' + formData.get('ID');
+            }, 500);
+        });
+    }
+});
 
 $(document).on('click', '#save_education', function () {
     const data = {
@@ -72,36 +88,23 @@ $(document).on('click', '#save_education', function () {
     });
 });
 $(document).on('click', '#btn_save_training', function () {
-    const isValid = validateForm('#needs-validation');
+    const form = this.closest('.modal-content').querySelector('form');
+    const isValid = validateForm(form);
 
     if (isValid) {
-        const id = document.querySelector('#Employee_id').value;
+        const formData = new FormData(form);
         const training_description = tinymce.activeEditor.getContent();
 
-        const data = {
-            Employee_id: id,
-            title: document.querySelector('#title').value,
-            training_description: training_description,
-            venue: document.querySelector('#venue').value,
-            t_city: document.querySelector('#t_city').value,
-            s_date: document.querySelector('#s_date').value,
-            e_date: document.querySelector('#e_date').value,
-            hours: document.querySelector('#hours').value
+        formData.append('training_description', training_description);
+
+        let data = {};
+        for (const [key, value] in formData.entries()) {
+            data[key] = value;
         }
 
-        $.ajax({
-            url: baseUrl + 'employee_profile/service/employee_profile_service/save_training',
-            type: 'POST',
-            data: data,
-            success: function () {
-                // Handle the success response (optional)
-                success('SUCCESS', 'Training successfully added');
-                load_training();
-            },
-            error: function (response) {
-                const data = JSON.parse(response.responseText);
-                error('ERROR', data.message);
-            }
+        formAction(baseUrl + 'employee_profile/service/employee_profile_service/save_training', 'POST', formData, function (response) {
+            success('SUCCESS', 'Training successfully added');
+            load_training();
         });
     }
 });
@@ -266,33 +269,19 @@ $(document).on('click', '#update_id', function () {
     });
 });
 
-$(document).on('click', '#btn_submit_employment', function () {
-    const isValid = validateForm('#needs-validation');
+$(document).on('click', '#btn_save_employment', function () {
+    const form = this.closest('.modal-content').querySelector('form');
+    const isValid = validateForm(form);
 
     if (isValid) {
-        const show_status = (document.querySelector('#show_status').checked === true) ? 1 : 0;
+        const formData = new FormData(form);
+        const show_status = (form.querySelector('#show_status').checked === true) ? 1 : 0;
 
-        $.ajax({
-            url: baseUrl + 'employee_profile/service/employee_profile_service/save_employment',
-            type: 'POST',
-            data: {
-                employee_id: $('#employee_id').val(),
-                employer_id: $('#employer_id').val(),
-                position: $('#position').val(),
-                start_date: $('#start_date').val(),
-                end_date: $('#end_date').val(),
-                status: $('#status').val(),
-                show_status: show_status,
-                rating: $('#rating').val(),
-                // job_description    : $('#job_description').val()
-            },
-            success: function (response) {
-                load_employment();
-                success('SUCCESS', 'Employment successfully added');
-            },
-            error: function (response) {
-                error('ERROR', 'Failed to add employment');
-            }
+        formData.set('show_status', show_status.toString());
+
+        formAction(baseUrl + 'employment/service/Employment_service/save', 'POST', formData, function () {
+            load_employment();
+            success('SUCCESS', 'Employment successfully added');
         });
     }
 });

@@ -61,7 +61,7 @@ class Employee_profile_services_model extends CI_Model
 
             if ($this->db->trans_status()) {
                 $this->db->trans_commit();
-                return array('message' => SAVED_SUCCESSFUL, 'has_error' => false);
+                return array('message' => UPDATE_SUCCESSFUL, 'has_error' => false);
             } else {
                 $this->db->trans_rollback();
                 throw new Exception(ERROR_PROCESSING, true);
@@ -89,7 +89,7 @@ class Employee_profile_services_model extends CI_Model
                 throw new Exception(ERROR_PROCESSING, true);
             } else {
                 $this->db->trans_commit();
-                return array('message' => SAVED_SUCCESSFUL, 'has_error' => false);
+                return array('message' => DELETED_SUCCESSFUL, 'has_error' => false);
             }
         } catch (Exception $msg) {
             return (array('message' => $msg->getMessage(), 'has_error' => true));

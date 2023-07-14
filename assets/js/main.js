@@ -1,9 +1,9 @@
 /**
- * @param {string} target Target element to validate
+ * @param {any} target Target element to validate
  * @returns {boolean} Returns true if the form is valid, false otherwise
  */
 function validateForm(target) {
-    const form = document.querySelector(target);
+    const form = (target instanceof HTMLFormElement) ? target : document.querySelector(target);
     let isValid = false;
 
     form.addEventListener('submit', function (event) {
@@ -11,7 +11,7 @@ function validateForm(target) {
         let errors = 0;
 
         for (const input of inputs) {
-            errors = input.value === '' ? errors + 1 : errors;
+            errors = (input.value === '' || (input.type === 'file' && input.required)) ? errors + 1 : errors;
 
             if (input.value === '') {
                 input.classList.add('is-invalid');

@@ -23,18 +23,18 @@ class Employment_service extends MY_Controller
 
     public function save()
     {
-        $this->esModel->employment_id = $this->input->post("employment_id");
-        $this->esModel->employee_id = $this->input->post("employee_id");
-        $this->esModel->employer_id = $this->input->post("employer_id");
-        $this->esModel->position = $this->input->post("position");
-        $this->esModel->start_date = $this->input->post("start_date");
-        $this->esModel->end_date = $this->input->post("end_date");
-        $this->esModel->status = $this->input->post("status");
-        $this->esModel->rating = $this->input->post("rating");
-        $this->esModel->job_description = $this->input->post("job_description");
-        $this->esModel->show_status = $this->input->post("show_status");
+        $data = array(
+            'employee_id' => $this->input->post("employee_id"),
+            'employer_id' => $this->input->post("employer_id"),
+            'position' => $this->input->post("position"),
+            'start_date' => $this->input->post("start_date"),
+            'end_date' => $this->input->post("end_date"),
+            'status' => $this->input->post("status"),
+            'rating' => $this->input->post("rating"),
+            'show_status' => $this->input->post("show_status")
+        );
 
-        $response = $this->esModel->save();
+        $response = $this->esModel->save('tbl_employment', $data);
         echo json_encode($response);
     }
 
@@ -49,7 +49,7 @@ class Employment_service extends MY_Controller
         $this->esModel->status = $this->input->post("status");
         $this->esModel->show_status = $this->input->post("show_status");
         $this->esModel->rating = $this->input->post("rating");
-        
+
         $response = $this->esModel->edit();
         echo json_encode($response);
     }

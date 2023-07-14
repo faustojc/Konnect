@@ -19,14 +19,9 @@ class Employee_profile_model extends CI_Model
         $this->Table = json_decode(TABLE);
     }
 
-    public function get_employee()
+    public function get_employee($id)
     {
-        $this->db->select('*');
-        $this->db->from($this->Table->employee);
-        $this->db->where('ID', $this->ID);
-        $query = $this->db->get()->row();
-        return $query;
-        // echo json_encode($query);
+        return $this->db->get_where($this->Table->employee, ['ID' => $id])->row();
     }
 
     // Employee Education Section

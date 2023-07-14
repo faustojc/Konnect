@@ -40,7 +40,7 @@ class Employee_profile extends MY_Controller
         $ID = $this->uri->segment(3);
         $this->eModel->ID = $ID;
 
-        $this->data['details'] = $this->eModel->get_employee();
+        $this->data['details'] = $this->eModel->get_employee($ID);
         $this->data['educ_val'] = $this->eModel->get_educations();
         $this->data['train_val'] = $this->eModel->get_training();
         $this->data['employments'] = $this->eModel->get_all_employments($ID);
@@ -110,14 +110,23 @@ class Employee_profile extends MY_Controller
         $this->load->view('layout', $this->data);
     }
 
-    // Employee Education Section
-
     public function get_skill()
     {
         $ID = $this->uri->segment(3);
 
         $this->data['details'] = $this->eModel->get_skill($ID);
         $this->data['content'] = 'grid/load_skill';
+        $this->load->view('layout', $this->data);
+    }
+
+    // Employee Education Section
+
+    public function edit()
+    {
+        $ID = $this->input->get('id');
+
+        $this->data['employee'] = $this->eModel->get_employee($ID);
+        $this->data['content'] = 'edit';
         $this->load->view('layout', $this->data);
     }
 

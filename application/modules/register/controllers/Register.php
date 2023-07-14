@@ -67,7 +67,8 @@ class Register extends MY_Controller
             $response = $this->register_model->register($user, $info);
 
             if (!$response['has_error']) {
-                echo json_encode(['redirect' => base_url() . 'login', $response]);
+                $this->data['content'] = 'thankyou';
+                $this->load->view('layout', $this->data);
             } else {
                 echo json_encode($response);
             }

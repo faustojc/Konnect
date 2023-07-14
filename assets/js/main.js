@@ -66,7 +66,7 @@ function textareaEditor(selector, height = 350, setupFunction = () => {
  * @param {object} data Data to be sent
  * @param {function} callback An optional callback function that executes only if the request is successful
  */
-async function formAction(url, request_type, data, callback) {
+function formAction(url, request_type, data, callback) {
     if (data instanceof FormData) {
         fetch(url, {
             method: request_type,

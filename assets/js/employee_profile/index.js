@@ -205,7 +205,7 @@ $(document).on('click', '#update_introduction', function () {
 });
 
 $(document).on('click', '#delete_educ', function () {
-    formAction(baseUrl + 'employee_profile/service/employee_profile_service/delete', 'POST', {ID: $(this).data('id')}, function () {
+    formAction(baseUrl + 'employee_profile/service/employee_profile_service/delete_education', 'POST', {ID: $(this).data('id')}, function () {
         load_education();
         success('SUCCESS', 'Education successfully deleted');
     });

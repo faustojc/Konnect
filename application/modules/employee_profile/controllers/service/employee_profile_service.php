@@ -121,11 +121,11 @@ class Employee_profile_service extends MY_Controller
         echo json_encode($response);
     }
 
-    public function delete()
+    public function delete_education()
     {
         $ID = $this->input->post("ID");
 
-        $response = $this->esModel->delete($ID);
+        $response = $this->esModel->delete('tbl_employee_educ', $ID);
         echo json_encode($response);
     }
 

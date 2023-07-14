@@ -182,7 +182,7 @@ main_header(['employee_profile']);
 
                                         <div class="row">
                                             <div class="col-md-5">
-                                                <a href="<?php echo base_url() ?>employee/profile/<?= $details->ID ?>" type="button" class="btn btn-outline-info btn-sm btn-block mb-2">Edit Profile</a>
+                                                <a href="<?php echo base_url() ?>employee_profile/edit?id=<?= $details->ID ?>" type="button" class="btn btn-outline-info btn-sm btn-block mb-2">Edit Profile</a>
                                             </div>
                                             <div class="col-md-7">
                                                 <button type="button" class="btn btn-info btn-sm btn-block mb-2" style="width:150px;">
@@ -253,12 +253,12 @@ main_header(['employee_profile']);
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form>
+                                            <form id="#needs-validation">
+                                                <input type="text" class="form-control" id="employee_id" name="employee_id" value="<?= @$details->ID ?>" hidden readonly>
                                                 <div class="row p-4">
                                                     <div class="col-md">
-                                                        <input type="text" class="form-control" id="employee_id" value="<?= @$details->ID ?>" hidden>
                                                         <label for="employer_id">Select Employer</label>
-                                                        <select class="form-control" id="employer_id">
+                                                        <select class="form-control" id="employer_id" name="employer_id">
                                                             <?php foreach ($employers as $employer) { ?>
                                                                 <option value="<?php echo $employer->id ?>"><?php echo $employer->employer_name ?></option>
                                                             <?php } ?>
@@ -268,7 +268,7 @@ main_header(['employee_profile']);
                                                 <div class="row p-4">
                                                     <div class="col-md">
                                                         <label for="position">Position</label>
-                                                        <input type="text" class="form-control" id="position" placeholder="Enter Position">
+                                                        <input type="text" class="form-control" id="position" name="position" placeholder="Enter Position">
                                                     </div>
                                                 </div>
                                                 <div class="row p-4">
@@ -285,26 +285,28 @@ main_header(['employee_profile']);
                                                 <div class="row p-4">
                                                     <div class="col-md-4">
                                                         <label for="status">Status</label>
-                                                        <input type="text" class="form-control" id="status" placeholder="Enter Status">
+                                                        <input type="text" class="form-control" id="status" name="status" placeholder="Enter Status">
                                                     </div>
 
                                                     <div class="col-md-6">
                                                         <label for="rating">Rating</label>
-                                                        <input type="number" class="form-control" id="rating" placeholder="Enter Rating">
+                                                        <input type="number" class="form-control" id="rating" name="rating" placeholder="Enter Rating">
                                                     </div>
                                                 </div>
 
                                                 <div class="row py-2 px-4">
                                                     <div class="col-md-6">
-                                                        <input type="checkbox" name="inputCheck" id="show_status">
-                                                        <label for="show_status" class="mb-0 mr-2">Show Status</label>
+                                                        <label for="show_status" class="mb-0 mr-2">
+                                                            <input type="checkbox" id="show_status" name="show_status">
+                                                            Show Status
+                                                        </label>
                                                     </div>
                                                 </div>
                                             </form>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_submit_employment">Add Details</button>
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_save_employment">Add Details</button>
                                         </div>
                                     </div>
                                 </div>
@@ -436,13 +438,11 @@ main_header(['employee_profile']);
                                 </div>
                                 <div class="modal-body">
                                     <form class="px-2 py-2" id="needs-validation">
-                                        <div class="pb-3">
-                                            <input type="text" value="<?= @$details->ID ?>" id="Employee_id" hidden>
-                                        </div>
+                                        <input type="text" id="employee_id" name="employee_id" value="<?= @$details->ID ?>" hidden readonly>
                                         <div class="row pb-3">
                                             <div class="col-md-12">
                                                 <label for="title">Title</label>
-                                                <input type="text" class="form-control" id="title" placeholder="Enter Title" required>
+                                                <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title" required>
                                             </div>
                                         </div>
                                         <div class="row pb-4">
@@ -462,7 +462,7 @@ main_header(['employee_profile']);
                                                 <div class="col-md-6">
                                                     <label>City</label>
                                                     <div>
-                                                        <input type="text" class="form-control" id="t_city" name="t_city" required>
+                                                        <input type="text" class="form-control" id="city" name="city" required>
                                                     </div>
                                                 </div>
                                         </section>
@@ -479,7 +479,7 @@ main_header(['employee_profile']);
                                             </div>
                                             <div class="col-md-4">
                                                 <label>Hours</label>
-                                                <input type="Number" class="form-control" id="hours" placeholder="Enter Hours" required>
+                                                <input type="Number" class="form-control" id="hours" name="hours" placeholder="Enter Hours" required>
                                             </div>
                                         </div>
                                     </form>

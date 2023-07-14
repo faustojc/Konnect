@@ -20,6 +20,47 @@ class Employee_profile_service extends MY_Controller
         $this->load->model($model_list);
     }
 
+    public function update_profile()
+    {
+        $file['upload_path'] = './assets/images/employee/profile_pic/';
+        $file['allowed_types'] = 'jpg|png|jpeg';
+        $file['max_size'] = '2000';
+
+        $this->load->library('upload', $file);
+
+        if (!$this->upload->do_upload('Employee_image')) {
+            $response['file_error'] = $this->upload->display_errors();
+        } else {
+            $img = $this->upload->data();
+            $response['file_success'] = 'File ' . $img['file_name'] . ' uploaded successfully';
+        }
+
+        $data = array(
+            'ID' => $this->input->post('ID'),
+            'Fname' => $this->input->post('Fname'),
+            'Mname' => $this->input->post('Mname'),
+            'Lname' => $this->input->post('Lname'),
+            'Bday' => $this->input->post('Bday'),
+            'Gender' => $this->input->post('Gender'),
+            'Cstat' => $this->input->post('Cstat'),
+            'Religion' => $this->input->post('Religion'),
+            'Cnum' => $this->input->post('Cnum'),
+            'Email' => $this->input->post('Email'),
+            'City' => $this->input->post('City'),
+            'Barangay' => $this->input->post('Barangay'),
+            'Address' => $this->input->post('Address'),
+            'Title' => $this->input->post('Title'),
+            'SSS' => $this->input->post('SSS'),
+            'Tin' => $this->input->post('Tin'),
+            'Phil_health' => $this->input->post('Phil_health'),
+            'Pag_ibig' => $this->input->post('Pag_ibig'),
+            'Employee_image' => isset($img) ? $img['file_name'] : 'default.png'
+        );
+
+        $response = $this->esModel->update('tbl_employee', $data);
+        echo json_encode($response);
+    }
+
     public function update_introduction()
     {
         $data = array(
@@ -95,24 +136,6 @@ class Employee_profile_service extends MY_Controller
         echo json_encode($response);
     }
 
-    public function save_employment()
-    {
-        $data = array(
-            'ID' => $this->input->post("employment_id"),
-            'employee_id' => $this->input->post("employee_id"),
-            'employer_id' => $this->input->post("employer_id"),
-            'position' => $this->input->post("position"),
-            'start_date' => $this->input->post("start_date"),
-            'end_date' => $this->input->post("end_date"),
-            'status' => $this->input->post("status"),
-            'rating' => $this->input->post("rating"),
-            'show_status' => $this->input->post("show_status")
-        );
-
-        $response = $this->esModel->update('tbl_employment', $data);
-        echo json_encode($response);
-    }
-
     public function delete_employment()
     {
         $employment_id = $this->input->post("employment_id");
@@ -148,7 +171,7 @@ class Employee_profile_service extends MY_Controller
     public function save_training()
     {
         $data = array(
-            'Employee_id' => $this->input->post("Employee_id"),
+            'employee_id' => $this->input->post("employee_id"),
             'title' => $this->input->post("title"),
             'training_description' => $this->input->post("training_description"),
             'venue' => $this->input->post("venue"),

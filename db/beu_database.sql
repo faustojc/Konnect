@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 13, 2023 at 10:06 AM
+-- Generation Time: Jul 14, 2023 at 03:42 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -42,7 +42,7 @@ CREATE TABLE `tbl_applicant` (
 CREATE TABLE `tbl_employee` (
   `ID` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `Date_created` datetime NOT NULL DEFAULT current_timestamp(),
+  `Date_created` datetime NOT NULL,
   `Fname` varchar(255) NOT NULL,
   `Lname` varchar(255) NOT NULL,
   `Mname` varchar(255) NOT NULL,
@@ -69,14 +69,9 @@ CREATE TABLE `tbl_employee` (
 --
 
 INSERT INTO `tbl_employee` (`ID`, `user_id`, `Date_created`, `Fname`, `Lname`, `Mname`, `Bday`, `Gender`, `Cstat`, `Religion`, `Cnum`, `Email`, `City`, `Barangay`, `Address`, `Title`, `SSS`, `Tin`, `Phil_health`, `Pag_ibig`, `Introduction`, `Employee_image`) VALUES
-(1, 0, '2023-06-27 03:45:52', 'John Martin', 'Demonteverde', 'Cusi', '2002-06-05', 'male', 'single', 'Catholic', '09604436812', 'johnmartin@outlook.com', 'Bacolod City', 'Granada', 'Patricia Homes', 'Web Developer', '23234', '55555', '44444', '26262', 'Hello! I\'m JD, a highly motivated and passionate fourth-year Computer Science student with a strong interest in software development. I have a solid foundation in programming languages like Java, Python, and C++, along with expertise in data structures, algorithms, and web development using HTML, CSS, and JavaScript. I thrive in collaborative environments, possess excellent problem-solving abilities, and actively seek opportunities to learn and grow. Currently seeking internship opportunities, I am eager to apply my skills and contribute to building innovative solutions as a software developer. Let\'s connect and discuss how I can add value to your organization!', 'IMG_0313_(1).JPG'),
+(1, 0, '2023-06-27 03:45:52', 'John Marti', 'Demonteverde', 'Cusi', '2002-06-05', 'male', 'single', 'Catholic', '09604436812', 'johnmartin@outlook.com', 'Bacolod Cityy', 'Granada', 'Patricia Homes', 'Mobile Dev', '23234', '55555', '44444', '26262', '<p style=\"line-height: 1.4;\">Hello! I\'m JD, a highly motivated and passionate fourth-year Computer Science student with a strong interest in software development. I have a solid foundation in programming languages like <span style=\"text-decoration: underline;\"><strong>Java</strong></span>, <span style=\"text-decoration: underline;\"><strong>Python</strong></span>, and <span style=\"text-decoration: underline;\"><strong>C++</strong></span>, along with expertise in data structures, algorithms, and web development using <span style=\"text-decoration: underline;\"><strong>HTML</strong></span>, <span style=\"text-decoration: underline;\"><strong>CSS</strong></span>, and <span style=\"text-decoration: underline;\"><strong>JavaScript</strong></span>.</p>\n<p><strong><span style=\"font-family: georgia, palatino, serif;\">I thrive in collaborative environments, possess excellent problem-solving abilities, and actively seek opportunities to learn and grow. Currently seeking internship opportunities, I am eag', 'IMG_0313_(1).JPG'),
 (14, 0, '2023-06-27 11:03:31', 'Paul Martin', 'Cuenca', 'Benedicto', '2001-11-24', 'male', 'single', 'Catholic', '09479505192', '@polcuenca', 'Bacolod City', 'Mansilingan', 'adelfa st. victorina heights', 'Web Dev', '1929222222', '757875', '8686', '8686', 'Hello! I\'m Paul, a highly motivated and passionate fourth-year Computer Science student with a strong interest in software development. I have a solid foundation in programming languages like Java, Python, and C++, along with expertise in data structures, algorithms, and web development using HTML, CSS, and JavaScript. I thrive in collaborative environments, possess excellent problem-solving abilities, and actively seek opportunities to learn and grow. Currently seeking internship opportunities, I am eager to apply my skills and contribute to building innovative solutions as a software developer. Let\'s connect and discuss how I can add value to your organization!', '347548042_184571507478516_7611925746711583073_n1.jpg'),
-(18, 0, '2023-06-27 11:15:14', 'Gonrad', 'Castañeda', 'G.', '2023-06-27', 'male', 'single', 'Yes', '62622003', '@igonrad', 'Bacolod City', 'Villamonte', 'Circle Inn', 'Game Developer', '15262626', '181515', '0651518515', '258181', 'Hello! I\'m Gon, a highly motivated and passionate fourth-year Computer Science student with a strong interest in software development. I have a solid foundation in programming languages like Java, Python, and C++, along with expertise in data structures, algorithms, and web development using HTML, CSS, and JavaScript. I thrive in collaborative environments, possess excellent problem-solving abilities, and actively seek opportunities to learn and grow. Currently seeking internship opportunities, I am eager to apply my skills and contribute to building innovative solutions as a software developer. Let\'s connect and discuss how I can add value to your organization!', 'default.png'),
-(27, 0, '2023-06-29 10:55:16', 'Katrina', 'Sheesh', 'God', '2023-06-29', 'male', 'single', 'Catholic', '5555555', '@katrinadiz', 'BACOLOD CITY', 'Villamonte', 'Kats Street', '', '616216161', '515165151', '15151515', '5151515', 'Yes I am Kat', 'default.png'),
-(28, 0, '2023-06-29 13:04:08', 'Fred', 'Cuenca', 'O.', '1970-02-24', 'male', 'single', 'Catholic', '5435', '@fred', 'Bacolod City', 'Mansilingan', 'Blk11', '', '55555', '55555', '5555', '55555', '', 'default.png'),
-(29, 0, '2023-06-29 15:45:08', 'Kayla', 'Pajanconi', 'Tangub', '1999-10-13', 'female', 'single', 'Religion', '09090909', '@kayla', 'Hinigaran', 'Barangay', 'Hinigaran City', '', '111', '222', '333', '444', '', 'default.png'),
-(31, 0, '2023-06-30 10:28:14', 'Fausto', 'Boko', 'John', '2023-06-30', 'male', 'single', 'rgrgrgr', '252626', '@boko', 'grgrg', 'rgvregvre', 'edfvdfvrdfv', '', '4578', '7575', '57575', '75757', '', 'default.png'),
-(32, 12, '0000-00-00 00:00:00', 'Mark', 'Zuck', 'GIveMe', '2023-07-04', 'others', 'separated', 'Zuckism', '123123', 'zuck@gmail.com', 'Zuckland', 'Brgy Zuck', 'Meta', '', '', '', '', '', '', 'default.png');
+(27, 0, '2023-06-29 10:55:16', 'Katrina', 'Sheesh', 'God', '2023-06-29', 'male', 'single', 'Catholic', '5555555', '@katrinadiz', 'BACOLOD CITY', 'Villamonte', 'Kats Street', 'GOD', '616216161', '515165151', '15151515', '5151515', 'Yes I am Kat', 'CheatEngine-logo1.png');
 
 -- --------------------------------------------------------
 
@@ -102,12 +97,10 @@ CREATE TABLE `tbl_employee_educ` (
 
 INSERT INTO `tbl_employee_educ` (`ID`, `Employee_id`, `Level`, `Institution`, `Title`, `Description`, `Start_date`, `End_date`, `Hours`) VALUES
 (1, 1, 'ELEMENTARY', 'Colegio San Agustin - Bacolod', 'Student', 'Grade 1 - Grade 12', '2023-07-28', '2023-08-05', 100),
-(25, 14, 'College', 'University of St. La Salle', 'Student', '', '2023-07-10', '2023-07-27', 10),
-(36, 27, '4th', 'Colegio San Agustin - Bacolod', 'Student', '', '2023-07-04', '2023-07-06', 100),
-(38, 29, '4th', 'University Of St. La Salle', 'Student', 'Hi', '2023-07-04', '2023-07-06', 123),
-(41, 18, '12312123123123', '1123123', '123123', '12312321', '2023-07-06', '2023-07-12', 123123),
-(45, 14, 'Junior High', 'St. Joseph School La Salle', 'Student', '', '2023-07-12', '2023-07-28', 123123),
-(58, 1, 'COLLEGE', 'University Of Saint La Salle - Bacolod', 'Student', '1st - 4th year', '2023-07-07', '2023-07-28', 200);
+(25, 14, '4th', 'University of St. La Salle', 'Student', '', '2023-07-10', '2023-07-27', 10),
+(36, 27, '4th', 'Colegio San Agustin - Bacolod', 'Student', '1st - 4rd year', '2023-07-04', '2023-07-06', 100),
+(43, 14, 'qweqwe', 'qweqwe', 'qweqweqwe', '', '2023-07-03', '2023-07-06', 123123),
+(58, 1, 'COLLEGE', 'University Of Saint La Salle - Bacolod', 'Student', '1st - 5th year', '2023-07-07', '2023-07-28', 200);
 
 -- --------------------------------------------------------
 
@@ -132,9 +125,9 @@ INSERT INTO `tbl_employee_skill` (`id`, `employee_id`, `skill`, `proficiency`, `
 (12, 1, 'Photoshop', 'expert', 5),
 (13, 1, 'Java', 'intermediate', 2),
 (15, 14, 'laravel', 'beginner', 3),
+(22, 14, 'C++', 'advance', 1),
 (23, 1, 'C++', 'advance', 99),
-(24, 27, 'PHP', 'beginner', 1),
-(26, 32, 'ZUCK!', 'expert', 4);
+(24, 14, 'PHP', 'intermediate', 2);
 
 -- --------------------------------------------------------
 
@@ -166,10 +159,9 @@ CREATE TABLE `tbl_employer` (
 
 INSERT INTO `tbl_employer` (`id`, `user_id`, `employer_name`, `email`, `summary`, `tradename`, `city`, `barangay`, `address`, `business_type`, `contact_number`, `sss`, `tin`, `image`, `date_created`) VALUES
 (1, 3, 'LOPUES EAST', 'lopues@gmail.com', '<p>In the year 1992, Lopue\'s Department Store incorporated underwent changes in its corporate structure and establishes three (3) new independent corporations. From mere branch, Lopue\'s San Sebastian had stood independently to rebuild its own image and identity as it has under the stewardship of Mr. Leonito D. Lopue. <br><br>Despite the store reorganization, it has maintained its structure as one of the top taxpayers of Bacolod City. Starting with annual sales of 35 million, the store had steadily increased its share in the market to i85 million and now relishes a sales volume of 220 million. as befits a pioneer organization has stood the test of time as it has maintained its image as \"<strong>Your complete Department store and supermarket for high quality products and services.</strong>\"</p>', 'lopues east', 'bacolod', 'villamonte', 'Sa lopues east ngayunn', 'Retail', '123456', '123456789', 2147483647, 'lopues.jpg', '2023-06-27 09:47:55'),
-(6, 2, 'Fausto JC E. Boko', 'faustojcboko@gmail.com', '<p><span style=\"font-family: \'arial black\', sans-serif;\">Table of truth</span></p>\n<table style=\"border-collapse: collapse; width: 99.9807%;\" border=\"1\"><colgroup><col style=\"width: 25.0241%;\"><col style=\"width: 25.0241%;\"><col style=\"width: 25.0241%;\"><col style=\"width: 25.0241%;\"></colgroup>\n<tbody>\n<tr>\n<td style=\"text-align: center;\">&nbsp;</td>\n<td style=\"text-align: center;\">gwapo</td>\n<td style=\"text-align: center;\">mas gwapo</td>\n<td style=\"text-align: center;\">pinaka gwapo</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">bok</td>\n<td style=\"text-align: center;\">x</td>\n<td style=\"text-align: center;\">x</td>\n<td style=\"text-align: center;\">x</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">pol</td>\n<td style=\"text-align: center;\">x</td>\n<td style=\"text-align: center;\">x</td>\n<td style=\"text-align: center;\">x</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">jide</td>\n<td style=\"text-align: center;\">&nbsp;</td>\n<td style=\"text-align: center;\">x</td>\n<td style=\"text-align: center;\">x</td>\n</tr>\n</tbody>\n</table>', 'Business Inn', 'Bacolod', 'Granadaaa', 'Charito Heights', 'Information Technology', '0908', '222222', 90855, 'to-infinity-and-beyond-chad4.jpg', '2023-06-27 16:23:54'),
-(7, 0, 'Pol B. Cuenca', 'pol@gmail.com', '<p>TELUS International designs, builds and delivers next-generation digital solutions to enhance the customer experience (CX) for global and disruptive brands. The company&rsquo;s services support the full lifecycle of its clients&rsquo; digital transformation journeys and enable them to more quickly embrace next-generation digital technologies to deliver better business outcomes. TELUS International&rsquo;s integrated solutions and capabilities span digital strategy, innovation, consulting and design, digital transformation and IT lifecycle solutions, data annotation and intelligent automation, and omnichannel CX solutions that include content moderation, trust and safety solutions, and other managed solutions. Fueling all stages of company growth, TELUS International partners with brands across high growth industry verticals, including tech and games, communications and media, eCommerce and fintech, healthcare, and travel and hospitality.</p>\n<p><strong>Industry</strong><br><span style=\"color: rgb(126, 140, 141);\">IT Services and IT Consulting</span><br><br><strong>Company size</strong><br><span style=\"color: rgb(126, 140, 141);\">10,001+ employees</span><br><span style=\"color: rgb(126, 140, 141);\">29,162 on LinkedIn&nbsp;</span><br><br><strong>Headquarters</strong><br><span style=\"color: rgb(126, 140, 141);\">Vancouver, British Columbia</span></p>', 'Lopues North-West', 'Bacolod', 'Brgy Balay', 'Balay', 'Education', '13579', '9999', 8888, 'giga_chad_steven.jpg', '2023-06-29 10:57:41'),
-(8, 0, 'Jideh C. Demonteverde', 'jd@gmail.com', '', 'Spark ni Jd', 'Bacolod', 'Patricia Homes', 'Balay ni jd', 'Transportation and Logistics', '111112', '767676', 5555, 'default.png', '2023-06-29 11:00:18'),
-(14, 8, 'Its gelo', 'tripod@gmail.com', '', 'Tripod Ni Boks', 'Bacolod city', 'Granada', 'P3 B8 L2 charito hieght subd', 'Media and Entertainment', '123', '', 0, 'default.png', '2023-07-13 15:41:29');
+(6, 2, 'Fausto JC E. Boko', 'faustojcboko@gmail.com', '<p><span style=\"font-family: \'arial black\', sans-serif;\">Table of truth</span></p>\n<table style=\"border-collapse: collapse; width: 99.9807%;\" border=\"1\"><colgroup><col style=\"width: 25.0241%;\"><col style=\"width: 25.0241%;\"><col style=\"width: 25.0241%;\"><col style=\"width: 25.0241%;\"></colgroup>\n<tbody>\n<tr>\n<td style=\"text-align: center;\">&nbsp;</td>\n<td style=\"text-align: center;\">gwapo</td>\n<td style=\"text-align: center;\">mas gwapo</td>\n<td style=\"text-align: center;\">pinaka gwapo</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">bok</td>\n<td style=\"text-align: center;\">x</td>\n<td style=\"text-align: center;\">x</td>\n<td style=\"text-align: center;\">x</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">pol</td>\n<td style=\"text-align: center;\">x</td>\n<td style=\"text-align: center;\">x</td>\n<td style=\"text-align: center;\">&nbsp;</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">jide</td>\n<td style=\"text-align: center;\">&nbsp;</td>\n<td style=\"text-align: center;\">x</td>\n<td style=\"text-align: center;\">x</td>\n</tr>\n</tbody>\n</table>', 'Business Inn', 'Bacolod', 'Granadaaa', 'Charito Heights', 'Information Technology', '0908', '222222', 90855, 'to-infinity-and-beyond-chad4.jpg', '2023-06-27 16:23:54'),
+(7, 4, 'Pol B. Cuenca', 'pol@gmail.com', '<p>TELUS International designs, builds and delivers next-generation digital solutions to enhance the customer experience (CX) for global and disruptive brands. The company&rsquo;s services support the full lifecycle of its clients&rsquo; digital transformation journeys and enable them to more quickly embrace next-generation digital technologies to deliver better business outcomes. TELUS International&rsquo;s integrated solutions and capabilities span digital strategy, innovation, consulting and design, digital transformation and IT lifecycle solutions, data annotation and intelligent automation, and omnichannel CX solutions that include content moderation, trust and safety solutions, and other managed solutions. Fueling all stages of company growth, TELUS International partners with brands across high growth industry verticals, including tech and games, communications and media, eCommerce and fintech, healthcare, and travel and hospitality.</p>\n<p><strong>Industry</strong><br><span style=\"color: rgb(126, 140, 141);\">IT Services and IT Consulting</span><br><br><strong>Company size</strong><br><span style=\"color: rgb(126, 140, 141);\">10,001+ employees</span><br><span style=\"color: rgb(126, 140, 141);\">29,162 on LinkedIn&nbsp;</span><br><br><strong>Headquarters</strong><br><span style=\"color: rgb(126, 140, 141);\">Vancouver, British Columbia</span></p>', 'Lopues North-West', 'Bacolod', 'Brgy Balay', 'Balay', 'Education', '13579', '9999', 8888, 'giga_chad_steven.jpg', '2023-06-29 10:57:41'),
+(10, 5, 'Chicken', 'gabchicken@gmail.com', '', 'CHICKEN NI GAB ', 'City of Gab\'s Chicken', 'Brgy Gab', 'Balay ni gab', 'Information Technology', '123', '', 0, 'default.png', '2023-07-13 19:46:33');
 
 -- --------------------------------------------------------
 
@@ -197,14 +189,12 @@ CREATE TABLE `tbl_employment` (
 --
 
 INSERT INTO `tbl_employment` (`ID`, `employer_id`, `employee_id`, `position`, `start_date`, `end_date`, `status`, `rating`, `job_description`, `date_created`, `show_status`, `verified`) VALUES
-(38, 7, 29, 'manager sa tanan', '2011-01-18', '2023-06-30', 'Expired', 10, 'its me ', '2023-06-30 00:00:00', 0, '0000-00-00'),
-(39, 6, 14, 'member', '2023-06-02', '2023-06-30', 'not hired', 2, 'hehehe', '2023-06-30 00:00:00', 0, '0000-00-00'),
-(40, 8, 31, 'janitor', '2023-06-03', '2023-06-30', 'wala', 2, 'hahahaha', '2023-06-30 15:29:37', 0, '0000-00-00'),
-(41, 1, 27, 'CEO', '2009-02-18', '2021-02-02', 'its status', 10, 'a god dizon', '2023-06-30 15:30:55', 0, '0000-00-00'),
-(42, 6, 28, 'Manager', '2023-06-06', '2023-06-29', 'Bakod', 999, 'SSSSSSSS', '2023-06-30 16:03:54', 0, '0000-00-00'),
+(37, 1, 1, 'assistant manager', '2023-06-07', '2023-06-17', 'part time', 5, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur posuere quam massa, quis facilisis enim mollis eget. Sed sollicitudin tortor vel nibh sollicitudin sagittis. Fusce tempor arcu at leo venenatis', '2023-06-30 00:00:00', 1, '0000-00-00'),
+(39, 6, 14, 'member', '2023-06-02', '2023-06-30', 'not hired', 2, 'hehehe', '2023-06-30 00:00:00', 1, '0000-00-00'),
+(41, 1, 27, 'CEO', '2009-02-18', '2021-02-02', 'its status', 10, 'a god dizon', '2023-06-30 15:30:55', 1, '0000-00-00'),
+(50, 1, 14, 'WORKER', '2023-02-08', '2023-07-20', 'full time', 3, '', '2023-07-06 11:19:17', 1, NULL),
 (55, 6, 1, 'manager', '2023-05-12', '2023-07-14', 'full time', 5, '', '2023-07-07 14:14:34', 1, NULL),
-(62, 8, 1, 'Customer', '2023-07-11', '2023-07-19', 'Semi Full Time', 99, '', '2023-07-11 14:51:06', 1, NULL),
-(64, 7, 1, 'assistant manager', '2023-07-06', '2023-10-19', 'Full Time', 3, '', '2023-07-13 14:46:05', 1, NULL);
+(63, 10, 27, 'CHICKEN GOD', '2023-05-24', '2023-07-19', 'THE CHICKEN', 99, '', '2023-07-14 21:21:03', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -275,7 +265,7 @@ CREATE TABLE `tbl_training` (
   `title` varchar(255) NOT NULL,
   `training_description` varchar(1000) NOT NULL,
   `venue` varchar(255) NOT NULL,
-  `t_city` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
   `s_date` date NOT NULL,
   `e_date` date NOT NULL,
   `hours` int(255) NOT NULL
@@ -285,11 +275,11 @@ CREATE TABLE `tbl_training` (
 -- Dumping data for table `tbl_training`
 --
 
-INSERT INTO `tbl_training` (`ID`, `Employee_id`, `title`, `training_description`, `venue`, `t_city`, `s_date`, `e_date`, `hours`) VALUES
-(1, 1, 'Interactive Workshop on UI/UX Design: Crafting Engaging User Experiences', 'In today\'s digital landscape, user experience (UX) and user interface (UI) design play a crucial role in the success of any product or service. Creating engaging and intuitive experiences for users is essential to capture their attention, build trust, and drive conversions. This interactive workshop on UI/UX design is designed to equip participants with the knowledge and skills needed to craft exceptional user experiences.', 'SMX Function Hall', 'Bacolod City', '2023-07-06', '2023-07-06', 3),
-(2, 1, 'TestTitleFront-End Web Development Workshop: Building Modern and Responsive User Interfaces', '', '', 'Bacolod Cityadasdas', '2021-07-06', '2023-07-28', 512),
-(3, 1, 'Full-Stack Web Development Workshop: Creating Dynamic and Scalable Web Applications', '', '', 'Bacolod City', '2023-07-07', '2023-07-28', 1),
-(8, 27, 'Yes I am Kat', '<p style=\"text-align: justify;\">Yes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am Kat</p>', 'Kat Function Halll', 'Meow City', '2023-04-14', '2023-11-29', 2000);
+INSERT INTO `tbl_training` (`ID`, `Employee_id`, `title`, `training_description`, `venue`, `city`, `s_date`, `e_date`, `hours`) VALUES
+(1, 1, 'Interactive Workshop on UI/UX Design: Crafting Engaging User Experiences', '<p style=\"line-height: 1.4;\">Hello! I\'m JD, a highly motivated and passionate fourth-year Computer Science student with a strong interest in software development. I have a solid foundation in programming languages like <span style=\"text-decoration: underline;\"><strong>Java</strong></span>, <span style=\"text-decoration: underline;\"><strong>Python</strong></span>, and <span style=\"text-decoration: underline;\"><strong>C++</strong></span>, along with expertise in data structures, algorithms, and web development using <span style=\"text-decoration: underline;\"><strong>HTML</strong></span>, <span style=\"text-decoration: underline;\"><strong>CSS</strong></span>, and <span style=\"text-decoration: underline;\"><strong>JavaScript</strong></span>.</p>', 'SMX Convention', '', '2023-07-06', '2023-07-06', 600),
+(4, 14, 'Test', '<p>Hello! I\'m Paul, a highly motivated and passionate fourth-year Computer Science student with a strong interest in software development. I have a solid foundation in programming languages like Java, Python, and C++, along with expertise in data structures, algorithms, and web development using HTML, CSS, and JavaScript. I thrive in collaborative environments, possess excellent problem-solving abilities, and actively seek opportunities to learn and grow. Currently seeking internship opportunities, I am eager to apply my skills and contribute to building innovative solutions as a software developer. Let\'s connect and discuss how I can add value to your organization!</p>', 'Balay ni pol', '', '2023-05-25', '2023-07-13', 12),
+(8, 27, 'Yes I am Kat', '<p style=\"text-align: justify;\"><s><strong>Yes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes&nbsp;</strong></s></p>', 'Kat Function Halll', '', '2023-04-14', '2023-11-29', 2000),
+(9, 27, 'IBM Full Stack Software Developer Professional Certificate', '<p><em><strong>LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM&nbsp;</strong></em></p>', 'SA GYM', '', '2023-02-14', '2023-07-12', 200);
 
 -- --------------------------------------------------------
 
@@ -312,8 +302,8 @@ CREATE TABLE `tbl_user` (
 INSERT INTO `tbl_user` (`id`, `email`, `password`, `user_type`, `locker`) VALUES
 (2, 'faustojcboko@gmail.com', '95d04a4f3e63f77b08a01dd95694292320e952aa', 'EMPLOYER', 'u@$~jgJJD4U1w^smk1G.w(Y&2C8RXOFCD0NUTvIQ1AsY9V<~hD'),
 (3, 'lopues@gmail.com', '488ba4bc58d39f02c84d51f2d579ebcb6f614b6f', 'EMPLOYER', 'f~oZ!yr7%Q^CEpMV&S#Z8TICz(r$?(GOrQaYM>rjK&Gt64gCUO'),
-(8, 'tripod@gmail.com', '498f942e5bc3fb37a25c50476f9797cae42d9863', 'EMPLOYER', 'A5lp?MgBY7Jwne)@d)zcy>zWKgUa/#7*h2rV(<>8Rnbr>8g2uy'),
-(12, 'zuck@gmail.com', 'd6e7c8f89c708dcc844858e0371074a619f9f9bb', 'EMPLOYEE', 'Dc2j)hp&gZI$7XITP3K!yI1RjQ\\Bw%*8>3EB114b1UP3G%y5>v');
+(4, 'pol@gmail.com', '464f2961c6ea64e833467a148afd87bcf91982ab', 'EMPLOYER', 'cE$hL^t2oS&zs&$7NQoNRahuMgOt.cN)!&Nt6&gW7If!txT$Vt'),
+(5, 'gabchicken@gmail.com', '26aa893d5c8d46bdff3c93f51dcb9db8ea242cb6', 'EMPLOYER', 'd9ImbIOAh5Cvh&Wd\\w4Ey61q^9u1do?HC5EUfcAH72!%G(@MpB');
 
 --
 -- Indexes for dumped tables
@@ -344,7 +334,8 @@ ALTER TABLE `tbl_employee_educ`
 -- Indexes for table `tbl_employee_skill`
 --
 ALTER TABLE `tbl_employee_skill`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_employee_skill_employee_id` (`employee_id`);
 
 --
 -- Indexes for table `tbl_employer`
@@ -406,7 +397,7 @@ ALTER TABLE `tbl_applicant`
 -- AUTO_INCREMENT for table `tbl_employee`
 --
 ALTER TABLE `tbl_employee`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `tbl_employee_educ`
@@ -418,19 +409,19 @@ ALTER TABLE `tbl_employee_educ`
 -- AUTO_INCREMENT for table `tbl_employee_skill`
 --
 ALTER TABLE `tbl_employee_skill`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `tbl_employer`
 --
 ALTER TABLE `tbl_employer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tbl_employment`
 --
 ALTER TABLE `tbl_employment`
-  MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `tbl_feedback`
@@ -460,7 +451,7 @@ ALTER TABLE `tbl_training`
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
@@ -477,7 +468,13 @@ ALTER TABLE `tbl_applicant`
 -- Constraints for table `tbl_employee_educ`
 --
 ALTER TABLE `tbl_employee_educ`
-  ADD CONSTRAINT `fk_Employee_ID` FOREIGN KEY (`Employee_id`) REFERENCES `tbl_employee` (`ID`);
+  ADD CONSTRAINT `fk_Employee_ID` FOREIGN KEY (`Employee_id`) REFERENCES `tbl_employee` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tbl_employee_skill`
+--
+ALTER TABLE `tbl_employee_skill`
+  ADD CONSTRAINT `fk_employee_skill_employee_id` FOREIGN KEY (`employee_id`) REFERENCES `tbl_employee` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_employment`

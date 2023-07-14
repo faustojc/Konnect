@@ -3,28 +3,40 @@ const load_employee = () => {
         url: baseUrl + '/employee/get_employee',
         load_on: '#load_employee',
     });
+    // TinyMCE
+    textareaEditor('textarea', 400);
 }
 
 const load_skill = () => {
     $('#load_skill').load(baseUrl + '/employee_profile/get_skill/' + $('#emp_id').val());
+    // TinyMCE
+    textareaEditor('textarea', 400);
 }
 
 const load_education = () => {
     $('#load_educations').load(baseUrl + '/employee_profile/get_educations/' + $('#emp_id').val());
+    // TinyMCE
+    textareaEditor('textarea', 400);
 }
 
 const load_training = () => {
     $('#load_training').load(baseUrl + '/employee_profile/get_training/' + $('#emp_id').val());
+    // TinyMCE
+    textareaEditor('textarea', 400);
 }
 
 const education_edit = () => {
     $(document).gmLoadPage({
         url: baseUrl + '/employee_profile/education_edit/' + $('#emp_id').val(),
     });
+    // TinyMCE
+    textareaEditor('textarea', 400);
 }
 
 const load_employment = () => {
     $('#load_employments').load(baseUrl + '/employee_profile/get_all_employments/' + $('#emp_id').val());
+    // TinyMCE
+    textareaEditor('textarea', 400);
 }
 
 $(document).ready(function () {

@@ -49,20 +49,29 @@ $(document).on('keyup', '#search_employee', function () {
 });
 
 
-$(document).on('click', '#btn_save', function () {
-    $(document).gmPostHandler({
-        url: 'employee_profile/service/employee_profile_service/save',
-        selector: '.form-control',
-        data: {
-            Employee_id: $('#Employee_id').val(),
-            Level: $('#Level').val(),
-            Title: $('#Title').val(),
-            Institution: $('#Institution').val(),
-            Description: $('#Description').val(),
-            Start_date: $('#Start_date').val(),
-            End_date: $('#End_date').val(),
-            Hours: $('#Hours').val()
+$(document).on('click', '#save_education', function () {
+    const data = {
+        Employee_id: document.querySelector('#Employee_id').value,
+        Level: document.querySelector('#Level').value,
+        Title: document.querySelector('#Title').value,
+        Institution: document.querySelector('#Institution').value,
+        Description: document.querySelector('#Description').value,
+        Start_date: document.querySelector('#Start_date').value,
+        End_date: document.querySelector('#End_date').value,
+        Hours: document.querySelector('#Hours').value
+    }
+
+    $.ajax({
+        url: baseUrl + 'employee_profile/service/employee_profile_service/save_education',
+        type: 'POST',
+        data: data,
+        success: function () {
+            load_education();
+            success('SUCCESS', 'Education successfully added');
         },
+        error: function (response) {
+            error('ERROR', 'Education failed to add');
+        }
     });
 });
 $(document).on('click', '#btn_save_training', function () {
@@ -174,14 +183,16 @@ $(document).on('click', '#btn_edit_train', function () {
     });
 });
 
-$(document).on('click', '#btn_update', function () {
+$(document).on('click', '#update_introduction', function () {
+    const intro = tinymce.activeEditor.getContent();
+
     const data = {
         ID: $('#ID').val(),
-        Introduction: $('#Introduction_Text').val()
+        Introduction: intro,
     };
 
     $.ajax({
-        url: baseUrl + 'employee_profile/service/employee_profile_service/update',
+        url: baseUrl + 'employee_profile/service/employee_profile_service/update_introduction',
         type: 'POST',
         data: data,
         success: function (response) {
@@ -381,7 +392,10 @@ $(document).on('click', '#btn_update_skill', function () {
 $(document).on('click', '#delete_skill', function () {
     const id = $('#emp_id').val();
 
-    formAction(baseUrl + 'employee_profile/service/employee_profile_service/delete_skill', 'POST', {skill_id: $(this).data('id'), employee_id: id}, function (data) {
+    formAction(baseUrl + 'employee_profile/service/employee_profile_service/delete_skill', 'POST', {
+        skill_id: $(this).data('id'),
+        employee_id: id
+    }, function (data) {
         load_skill();
         success('SUCCESS', 'Skill successfully deleted');
     });

@@ -216,10 +216,7 @@ main_header(['employee_profile']);
                     </div>
                     <div class="card-body card-widget widget-user-2" style="padding-top:0.5rem;">
                         <div class="widget-user-header" style="padding:0;">
-
-                            <p class="text-justify px-3 py-3" style="font-size:15px; font-weight: 400;">
-                                <?= @$details->Introduction ?>
-                            </p>
+                            <?= @$details->Introduction ?>
                         </div>
                     </div>
                 </div>

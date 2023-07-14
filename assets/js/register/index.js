@@ -126,7 +126,6 @@ const setNextBtn = () => {
 const register = () => {
     document.querySelector('#register').addEventListener('click', function () {
         const validForm = validateForm('#needs-validation');
-        const user_type = document.querySelector('input#user_type').value;
 
         if (validForm) {
             const form = document.querySelector('form');
@@ -135,47 +134,11 @@ const register = () => {
             fetch(baseUrl + 'register', {
                 method: 'POST',
                 body: formData
+            }).then(response => {
+                setTimeout(() => {
+                    window.location.href = baseUrl + 'login';
+                }, 2000);
             })
-                .then(response => response.json())
-                .then(data => {
-                    if (data) {
-                        // Create the modal element
-                        let modal = document.createElement('div');
-                        modal.classList.add('modal', 'fade');
-                        modal.setAttribute('tabindex', '-1');
-                        modal.setAttribute('role', 'dialog');
-                        modal.innerHTML = `
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Success</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">×</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>${data.message}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-
-                        // Append the modal to the body
-                        document.body.appendChild(modal);
-
-                        // Show the modal
-                        $(modal).modal('show');
-
-                        modal.querySelector('.close').addEventListener('click', () => {
-                            window.location.href = data.redirect;
-                        });
-
-                        // Set a timeout to redirect after 3 seconds
-                        setTimeout(() => {
-                            window.location.href = data.redirect;
-                        }, 2000);
-                    }
-                });
         }
     });
 }

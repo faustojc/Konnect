@@ -121,11 +121,11 @@ class Employee_profile_service extends MY_Controller
         echo json_encode($response);
     }
 
-    public function delete()
+    public function delete_education()
     {
         $ID = $this->input->post("ID");
 
-        $response = $this->esModel->delete($ID);
+        $response = $this->esModel->delete('tbl_employee_educ', $ID);
         echo json_encode($response);
     }
 
@@ -152,7 +152,7 @@ class Employee_profile_service extends MY_Controller
             'title' => $this->input->post("title"),
             'training_description' => $this->input->post("training_description"),
             'venue' => $this->input->post("venue"),
-            't_city' => $this->input->post("t_city"),
+            'city' => $this->input->post("city"),
             's_date' => $this->input->post("s_date"),
             'e_date' => $this->input->post("e_date"),
             'hours' => $this->input->post("hours"),

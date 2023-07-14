@@ -1,50 +1,35 @@
 const load_employee = () => {
-    $(document).gmLoadPage({
-        url: baseUrl + '/employee/get_employee',
-        load_on: '#load_employee',
-    });
-    // TinyMCE
-    textareaEditor('textarea', 400);
+    $('#load_employee').load(baseUrl + '/employee/get_employee');
 }
 
 const load_skill = () => {
     $('#load_skill').load(baseUrl + '/employee_profile/get_skill/' + $('#emp_id').val());
-    // TinyMCE
-    textareaEditor('textarea', 400);
 }
 
 const load_education = () => {
     $('#load_educations').load(baseUrl + '/employee_profile/get_educations/' + $('#emp_id').val());
-    // TinyMCE
-    textareaEditor('textarea', 400);
 }
 
 const load_training = () => {
-    $('#load_training').load(baseUrl + '/employee_profile/get_training/' + $('#emp_id').val());
-    // TinyMCE
-    textareaEditor('textarea', 400);
+    $('#load_training').load(baseUrl + '/employee_profile/get_training/' + $('#emp_id').val(), function () {
+        console.log('Loaded successfully');
+        tinymce.remove('textarea');
+        textareaEditor('textarea', 400);
+    });
 }
 
 const education_edit = () => {
     $(document).gmLoadPage({
         url: baseUrl + '/employee_profile/education_edit/' + $('#emp_id').val(),
     });
-    // TinyMCE
-    textareaEditor('textarea', 400);
 }
 
 const load_employment = () => {
     $('#load_employments').load(baseUrl + '/employee_profile/get_all_employments/' + $('#emp_id').val());
-    // TinyMCE
-    textareaEditor('textarea', 400);
 }
 
 $(document).ready(function () {
     load_employee();
-    // load_education();
-    // load_training();
-    // load_employment();
-    // load_skill();
 
     // TinyMCE
     textareaEditor('textarea', 400);
@@ -174,7 +159,7 @@ $(document).on('click', '#btn_edit_train', function () {
         title: form.querySelector('#title').value,
         training_description: training_description,
         venue: form.querySelector('#venue').value,
-        t_city: form.querySelector('#t_city').value,
+        city: form.querySelector('#city').value,
         s_date: form.querySelector('#s_date').value,
         e_date: form.querySelector('#e_date').value,
         hours: form.querySelector('#hours').value
@@ -186,7 +171,7 @@ $(document).on('click', '#btn_edit_train', function () {
         data: data,
         success: function (response) {
             // Handle the success response (optional)
-            success('SUCCESS', 'Introduction successfully updated');
+            success('SUCCESS', 'Training successfully updated');
             load_training();
         },
         error: function (response) {
@@ -200,7 +185,7 @@ $(document).on('click', '#update_introduction', function () {
     const intro = tinymce.activeEditor.getContent();
 
     const data = {
-        ID: $('#ID').val(),
+        ID: $('#emp_id').val(),
         Introduction: intro,
     };
 
@@ -211,7 +196,6 @@ $(document).on('click', '#update_introduction', function () {
         success: function (response) {
             // Handle the success response (optional)
             success('SUCCESS', 'Introduction successfully updated');
-            window.location.reload();
         },
         error: function (response) {
             const data = JSON.parse(response.responseText);
@@ -221,7 +205,7 @@ $(document).on('click', '#update_introduction', function () {
 });
 
 $(document).on('click', '#delete_educ', function () {
-    formAction(baseUrl + 'employee_profile/service/employee_profile_service/delete', 'POST', {ID: $(this).data('id')}, function () {
+    formAction(baseUrl + 'employee_profile/service/employee_profile_service/delete_education', 'POST', {ID: $(this).data('id')}, function () {
         load_education();
         success('SUCCESS', 'Education successfully deleted');
     });

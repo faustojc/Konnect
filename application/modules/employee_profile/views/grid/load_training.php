@@ -61,7 +61,7 @@ if (!empty($train_val)) {
                                     <div class="col-md-6">
                                         <label>City</label>
                                         <div>
-                                            <input type="text" class="form-control" value="<?= @$value->t_city ?>" id="t_city" name="t_city" required>
+                                            <input type="text" class="form-control" value="<?= @$value->city ?>" id="city" name="city" required>
                                         </div>
                                     </div>
                             </section>

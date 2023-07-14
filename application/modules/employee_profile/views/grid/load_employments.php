@@ -1,7 +1,7 @@
 <?php
 $ci = &get_instance();
 if (!empty($employments)) {
-    for ($i = 0; $i < count($employments); $i++) {
+    for ($i = 0; $i < count($employments['employers']); ++$i) {
         $employer = $employments['employers'][$i];
         $employment = $employments['employments'][$i];
 

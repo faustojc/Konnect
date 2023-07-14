@@ -152,7 +152,7 @@ class Employee_profile_service extends MY_Controller
             'title' => $this->input->post("title"),
             'training_description' => $this->input->post("training_description"),
             'venue' => $this->input->post("venue"),
-            't_city' => $this->input->post("t_city"),
+            'city' => $this->input->post("city"),
             's_date' => $this->input->post("s_date"),
             'e_date' => $this->input->post("e_date"),
             'hours' => $this->input->post("hours"),

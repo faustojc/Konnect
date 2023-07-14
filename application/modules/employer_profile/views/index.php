@@ -322,7 +322,6 @@ main_header(['Employer_profile']);
                                     <div class="widget-user-image">
                                         <img class="img-square img-fluid" src="assets/images/Logo/Profile/samplepic.jpg" alt="User Avatar" style="object-fit: cover;min-width: 60px; max-width: 60px; min-height: 60px; max-height: 60px;">
                                     </div>
-                                    <!-- /.widget-user-image -->
                                     <h5 class="widget-user-username mt-0" style="font-size: 18px; font-weight: 500;">Text insert 3</h5>
                                     <h6 class="widget-user-desc mb-0" style="font-weight: normal; font-size: 16px;">Details or info</h6>
                                     <p class="widget-user-desc mb-0 mt-1 text-muted" style="font-weight: normal; font-size: 16px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -368,7 +367,6 @@ main_header(['Employer_profile']);
                     </div>
                 </div>
 
-                <!-- MODAL for HOME ADDRESS -->
                 <div class="modal fade" id="modal_edit_home_address" data-backdrop="static" tabindex="-1" aria-labelledby="modal_home_address" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -548,16 +546,6 @@ main_header(['Employer_profile']);
 <?php
 main_footer();
 ?>
-
-
-<!--<script>-->
-<!--    $(function () {-->
-<!--        $("#tabledashboard").DataTable({-->
-<!--            "responsive": true, "lengthChange": false, "autoWidth": false, "paging": true,-->
-<!--        }).container().appendTo('#tabledashboard_wrapper .col-md-6:eq(0)');-->
-<!---->
-<!--    });-->
-<!--</script>-->
 
 <script>
     $('#business_type').val('<?= $current_employer->business_type ?>');

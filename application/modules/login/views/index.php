@@ -4,7 +4,10 @@
     <div class="row py-5 mt-4 justify-content-center align-items-center">
         <div class="col-md-6 mb-5 mb-md-0">
             <img src="<?= base_url() ?>assets/images/login/connections.png" alt="" class="img-fluid mb-3 d-none d-md-block">
-            <h1 class="text-center">Konnect!</h1>
+            <!-- <h1 class="text-center">Konnect!</h1> -->
+            <div class="d-flex justify-content-center">
+                <img src="<?= base_url() ?>assets/images/Logo/Konnect3.png" style="width:500px;height:auto;" alt="">
+            </div>
             <p class="font-italic text-center text-muted mb-0">Empowering Connections, Empowering Careers!</p>
         </div>
 

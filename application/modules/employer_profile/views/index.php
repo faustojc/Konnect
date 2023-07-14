@@ -500,7 +500,7 @@ main_header(['Employer_profile']);
                     <div class="card-header">
                         <h3 class="card-title fw-500">Employees</h3>
                     </div>
-                    <div id="load_employees_follow_section">
+                    <div id="load_employees_follow_section" style="margin-left: 1rem; margin-right:1rem;">
                         <?= $employees_follow_section_view ?>
                     </div>
                 </div>
@@ -510,7 +510,7 @@ main_header(['Employer_profile']);
                     <div class="card-header">
                         <h3 class="card-title fw-500">Employers</h3>
                     </div>
-                    <div id="load_employers_follow_section">
+                    <div id="load_employers_follow_section" style="margin-left:1rem; margin-right:1rem;">
                         <?= $employers_follow_section_view ?>
                     </div>
                 </div>

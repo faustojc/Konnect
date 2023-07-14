@@ -535,13 +535,11 @@ main_header(['Employer_profile']);
                                 <?= $current_employer->contact_number ?>
                             </h6>
                             <br>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </section>
 

@@ -42,7 +42,7 @@ function validateForm(target) {
 function textareaEditor(selector, height = 350, setupFunction = () => {
 }) {
     tinymce.init({
-        target: selector,
+        selector: selector,
         height: height,
         menubar: false,
         browser_spellcheck: true,

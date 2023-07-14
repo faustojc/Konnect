@@ -48,15 +48,17 @@ class Employee_profile_services_model extends CI_Model
     /**
      * Updates a record in the database
      * @param string $table The table to be updated
+     * @param string $key The primary key of the table
+     * @param string $id The id of the record to be updated
      * @param array $data The data to update a record
      * @return array Returns an array with message and its boolean has_error
      * @throws Exception Throws an exception when there are processing errors
      */
-    public function update(string $table, array $data): array
+    public function update(string $table, string $key, string $id, array $data): array
     {
         try {
             $this->db->trans_start();
-            $this->db->where('ID', $data['ID'])->update($table, $data);
+            $this->db->where($key, $id)->update($table, $data);
             $this->db->trans_complete();
 
             if ($this->db->trans_status()) {
@@ -73,15 +75,16 @@ class Employee_profile_services_model extends CI_Model
 
     /**
      * Delete a record from table by its id
-     * @param string $table
-     * @param string $id
+     * @param string $table The table to delete a record
+     * @param string $key The primary key of the table
+     * @param string $id The id of the record to be deleted
      * @return array
      */
-    public function delete(string $table, string $id): array
+    public function delete(string $table, string $key, string $id): array
     {
         try {
             $this->db->trans_start();
-            $this->db->where('ID', $id)->delete($table);
+            $this->db->where($key, $id)->delete($table);
             $this->db->trans_complete();
 
             if ($this->db->trans_status() === FALSE) {

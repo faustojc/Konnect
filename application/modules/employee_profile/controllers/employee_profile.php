@@ -114,7 +114,7 @@ class Employee_profile extends MY_Controller
     {
         $ID = $this->uri->segment(3);
 
-        $this->data['details'] = $this->eModel->get_skill($ID);
+        $this->data['skills'] = $this->eModel->get_skill($ID);
         $this->data['content'] = 'grid/load_skill';
         $this->load->view('layout', $this->data);
     }

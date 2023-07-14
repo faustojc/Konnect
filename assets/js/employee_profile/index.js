@@ -1,17 +1,13 @@
-const load_employee = () => {
-    $('#load_employee').load(baseUrl + '/employee/get_employee');
-}
-
 const load_skill = () => {
-    $('#load_skill').load(baseUrl + '/employee_profile/get_skill/' + $('#emp_id').val());
+    $('#load_skill').load(baseUrl + 'employee_profile/get_skill/' + $('#emp_id').val());
 }
 
 const load_education = () => {
-    $('#load_educations').load(baseUrl + '/employee_profile/get_educations/' + $('#emp_id').val());
+    $('#load_educations').load(baseUrl + 'employee_profile/get_educations/' + $('#emp_id').val());
 }
 
 const load_training = () => {
-    $('#load_training').load(baseUrl + '/employee_profile/get_training/' + $('#emp_id').val(), function () {
+    $('#load_training').load(baseUrl + 'employee_profile/get_training/' + $('#emp_id').val(), function () {
         console.log('Loaded successfully');
         tinymce.remove('textarea');
         textareaEditor('textarea', 400);
@@ -20,17 +16,15 @@ const load_training = () => {
 
 const education_edit = () => {
     $(document).gmLoadPage({
-        url: baseUrl + '/employee_profile/education_edit/' + $('#emp_id').val(),
+        url: baseUrl + 'employee_profile/education_edit/' + $('#emp_id').val(),
     });
 }
 
 const load_employment = () => {
-    $('#load_employments').load(baseUrl + '/employee_profile/get_all_employments/' + $('#emp_id').val());
+    $('#load_employments').load(baseUrl + 'employee_profile/get_all_employments/' + $('#emp_id').val());
 }
 
 $(document).ready(function () {
-    load_employee();
-
     // TinyMCE
     textareaEditor('textarea', 400);
 });
@@ -324,14 +318,14 @@ $(document).on('click', '#delete_employment', function () {
 });
 
 $(document).on('click', '#btn_skill', function () {
-    const currentElem = $(this).closest('.modal-content').find('form');
-    const id = $('#emp_id').val();
+    const currentElem = this.closest('.modal-content').querySelector('form');
+    const id = document.querySelector('#emp_id').value;
 
     const data = {
         employee_id: id,
-        skill: currentElem.find('#skill').val(),
-        proficiency: currentElem.find('#proficiency').val(),
-        years_exp: currentElem.find('#years_exp').val()
+        skill: currentElem.querySelector('#skill').value,
+        proficiency: currentElem.querySelector('#proficiency').value,
+        years_exp: currentElem.querySelector('#years_exp').value,
     }
 
     $.ajax({
@@ -349,15 +343,15 @@ $(document).on('click', '#btn_skill', function () {
 });
 
 $(document).on('click', '#btn_update_skill', function () {
-    const currentElem = $(this).closest('.modal-content').find('form');
-    const id = $('#emp_id').val();
+    const form = this.closest('.modal-content').querySelector('form');
+    const id = document.querySelector('#emp_id').value;
 
     const data = {
+        skill_id: form.querySelector('#skill_id').value,
         employee_id: id,
-        skill_id: currentElem.find('#skill_id').val(),
-        skill: currentElem.find('#skill').val(),
-        proficiency: currentElem.find('#proficiency').val(),
-        years_exp: currentElem.find('#years_exp').val()
+        skill: form.querySelector('#skill').value,
+        proficiency: form.querySelector('#proficiency').value,
+        years_exp: form.querySelector('#years_exp').value
     };
 
     $.ajax({
@@ -376,12 +370,9 @@ $(document).on('click', '#btn_update_skill', function () {
 });
 
 $(document).on('click', '#delete_skill', function () {
-    const id = $('#emp_id').val();
+    const id = this.getAttribute('data-id');
 
-    formAction(baseUrl + 'employee_profile/service/employee_profile_service/delete_skill', 'POST', {
-        skill_id: $(this).data('id'),
-        employee_id: id
-    }, function (data) {
+    formAction(baseUrl + 'employee_profile/service/employee_profile_service/delete_skill', 'POST', {id: id}, function (data) {
         load_skill();
         success('SUCCESS', 'Skill successfully deleted');
     });

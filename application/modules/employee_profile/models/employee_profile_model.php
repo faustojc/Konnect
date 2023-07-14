@@ -192,10 +192,10 @@ class Employee_profile_model extends CI_Model
 
     public function get_skill($id)
     {
-        return $this->db->select('tbl_employee_skill.*')
-            ->where('tbl_employee_skill.employee_id = ' . $id)
+        return $this->db->select()
             ->from($this->Table->employee_skill)
             ->join('tbl_employee', 'tbl_employee.ID = tbl_employee_skill.employee_id', 'inner')
+            ->where('employee_id', $id)
             ->get()->result();
     }
 

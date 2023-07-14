@@ -64,7 +64,7 @@ class Employee_profile_service extends MY_Controller
             $data['image'] = isset($img) ? $img['file_name'] : 'default.png';
         }
 
-        $response = $this->esModel->update('tbl_employee', $data);
+        $response = $this->esModel->update('tbl_employee', 'ID', $data['ID'], $data);
         echo json_encode($response);
     }
 
@@ -75,7 +75,7 @@ class Employee_profile_service extends MY_Controller
             'Introduction' => $this->input->post("Introduction")
         );
 
-        $response = $this->esModel->update('tbl_employee', $data);
+        $response = $this->esModel->update('tbl_employee', 'ID', $data['ID'], $data);
         echo json_encode($response);
     }
 
@@ -93,7 +93,7 @@ class Employee_profile_service extends MY_Controller
             'hours' => $this->input->post("hours")
         );
 
-        $response = $this->esModel->update('tbl_training', $data);
+        $response = $this->esModel->update('tbl_training', 'ID', $data['ID'], $data);
         echo json_encode($response);
     }
 
@@ -107,7 +107,7 @@ class Employee_profile_service extends MY_Controller
             'City' => $this->input->post("City")
         );
 
-        $response = $this->esModel->update('tbl_employee', $data);
+        $response = $this->esModel->update('tbl_employee', 'ID', $data['ID'], $data);
         echo json_encode($response);
     }
 
@@ -121,7 +121,7 @@ class Employee_profile_service extends MY_Controller
             'Pag_ibig' => $this->input->post("Pag_ibig")
         );
 
-        $response = $this->esModel->update('tbl_employee', $data);
+        $response = $this->esModel->update('tbl_employee', 'ID', $data['ID'], $data);
         echo json_encode($response);
     }
 
@@ -139,7 +139,7 @@ class Employee_profile_service extends MY_Controller
             'show_status' => $this->input->post("Show_status")
         );
 
-        $response = $this->esModel->update('tbl_employment', $data);
+        $response = $this->esModel->update('tbl_employment', 'ID', $data['ID'], $data);
         echo json_encode($response);
     }
 
@@ -147,7 +147,7 @@ class Employee_profile_service extends MY_Controller
     {
         $employment_id = $this->input->post("employment_id");
 
-        $response = $this->esModel->delete('tbl_employment', $employment_id);
+        $response = $this->esModel->delete('tbl_employment', 'ID', $employment_id);
         echo json_encode($response);
     }
 
@@ -155,7 +155,7 @@ class Employee_profile_service extends MY_Controller
     {
         $ID = $this->input->post("ID");
 
-        $response = $this->esModel->delete('tbl_employee_educ', $ID);
+        $response = $this->esModel->delete('tbl_employee_educ', 'ID', $ID);
         echo json_encode($response);
     }
 
@@ -206,7 +206,7 @@ class Employee_profile_service extends MY_Controller
             'Hours' => $this->input->post("Hours")
         );
 
-        $response = $this->esModel->update('tbl_employee_educ', $data);
+        $response = $this->esModel->update('tbl_employee_educ', 'ID', $data['ID'], $data);
         echo json_encode($response);
     }
 
@@ -233,15 +233,15 @@ class Employee_profile_service extends MY_Controller
             'years_exp' => $this->input->post("years_exp")
         );
 
-        $response = $this->esModel->update('tbl_employee_skill', $data);
+        $response = $this->esModel->update('tbl_employee_skill', 'id', $data['id'], $data);
         echo json_encode($response);
     }
 
     public function delete_skill()
     {
-        $id = $this->input->post("skill_id");
+        $id = $this->input->post("id");
 
-        $response = $this->esModel->delete('tbl_employee_skill', $id);
+        $response = $this->esModel->delete('tbl_employee_skill', 'id', $id);
         echo json_encode($response);
     }
 
@@ -249,7 +249,7 @@ class Employee_profile_service extends MY_Controller
     {
         $id = $this->input->post("ID");
 
-        $response = $this->esModel->delete('tbl_training', $id);
+        $response = $this->esModel->delete('tbl_training', 'ID', $id);
         echo json_encode($response);
     }
 }

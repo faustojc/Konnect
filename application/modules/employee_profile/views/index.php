@@ -758,7 +758,7 @@ main_header(['employee_profile']);
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" id="btn_skill">Add</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_skill">Add</button>
                         </div>
                     </div>
                 </div>

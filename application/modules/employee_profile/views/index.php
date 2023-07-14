@@ -120,13 +120,13 @@ main_header(['employee_profile']);
         color: black;
     }
 
-    .training-hover:hover{
-            transform: scale(1.02);
-            background-color: #F1F6F9;
-            transition: .3s transform;
-            box-shadow: 0 2px 5px rgba(0,0,0,.12);
-            
-        }
+    .training-hover:hover {
+        transform: scale(1.02);
+        background-color: #F1F6F9;
+        transition: .3s transform;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, .12);
+
+    }
 
 
     /* Adjustments for smaller screens */
@@ -370,7 +370,6 @@ main_header(['employee_profile']);
                                     <!-- #Modal Education Content -->
                                     <div class="px-2 py-2">
                                         <div class="pb-3">
-                                            <!-- <input type="text" value="<?= @$details->ID ?>" id="Employee_id" hidden> -->
                                         </div>
                                         <div class="row pb-3">
                                             <div class="col-md-6">
@@ -386,13 +385,11 @@ main_header(['employee_profile']);
                                                 </div>
                                             </div>
 
-
                                             <div class="col-md-6">
                                                 <label>Title</label>
                                                 <input type="text" class="form-control" id="Title" placeholder="Enter Title">
                                             </div>
                                         </div>
-
 
                                         <section class="pb-3">
                                             <label>Institution</label>
@@ -407,9 +404,7 @@ main_header(['employee_profile']);
                                                 <div>
                                                     <textarea class="form-control" name="description" id="Description" rows="4" placeholder="Enter Description"></textarea>
                                                 </div>
-
                                             </div>
-
                                         </div>
 
                                         <div class="row pb-3">
@@ -417,34 +412,22 @@ main_header(['employee_profile']);
                                                 <label>Start Date</label>
                                                 <input type="date" class="form-control" id="Start_date" name="start_date">
                                             </div>
-
                                             <div class="col-md-4">
                                                 <label>End Date</label>
                                                 <div>
                                                     <input type="date" class="form-control" id="End_date" name="end_date">
                                                 </div>
-
-
                                             </div>
-
                                             <div class="col-md-4">
                                                 <label>Hours</label>
                                                 <input type="Number" class="form-control" id="Hours" placeholder="Enter Hours">
                                             </div>
-
                                         </div>
-
-
-                                        <!-- <label>Password:</label>
-                                    <input type="password" id="password" name="password"> -->
-
-
                                     </div>
-
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-info" id="btn_save" data-dismiss="modal">Save changes</button>
+                                    <button type="button" class="btn btn-info" id="save_education" data-dismiss="modal">Save changes</button>
                                 </div>
                             </div>
                         </div>
@@ -708,7 +691,7 @@ main_header(['employee_profile']);
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="btn_update">Save</button>
+                        <button type="button" class="btn btn-primary" id="update_introduction">Save</button>
                     </div>
                 </div>
             </div>

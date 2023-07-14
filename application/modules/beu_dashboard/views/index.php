@@ -54,6 +54,18 @@ main_header(['Employer_profile']);
         color: #17a2b8;
     }
 
+    .card {
+        border-radius: 15px;
+    }
+
+    .card-header {
+        border-radius: 15px 15px 0px 0px;
+    }
+
+    .card-footer {
+        border-radius: 0px 0px 15px 15px;
+    }
+
     .card-button-more {
         text-decoration: none;
         margin-top: 10px;
@@ -116,6 +128,14 @@ main_header(['Employer_profile']);
         opacity: 0.7;
     }
 
+    .hovercard:hover {
+        transform: scale(1.01);
+        background-color: #F1F6F9;
+        transition: .3s transform;
+        /* box-shadow: 0  1px 4px rgba(0, 0, 0, .15); */
+    }
+    
+
 </style>
 
 <section class="content">
@@ -127,7 +147,7 @@ main_header(['Employer_profile']);
                     <?= $user_display ?>
                 </div>
 
-                <div class="card card-info">
+                <div class="card card-white">
                     <div class="card-header">
                         <h3 class="card-title fw-500">About Me</h3>
                     </div>
@@ -169,7 +189,83 @@ main_header(['Employer_profile']);
                 <!-- /.card -->
             </div> <!--col-->
 
+            
+
             <div class="col-12 col-md-6 mt-4">
+
+                <div class="card">
+                        <div class="card-body">
+                            <div class="row pb-2">
+                                <div class="col-1">
+                                    <img class="img-circle img-fluid" src="<?= base_url() ?>assets/images/employer/profile_pic/<?= $details->image ?>" alt="User Avatar" style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; min-width: 3rem; max-width: 3rem;min-height: 3rem; max-height: 3rem;">
+                                </div>
+                                <div class="col-11">
+                                    <div class="card shadow-none hovercard" style="border-radius:10px; width:100%; height:100%; background-color: #F4F6F7;">
+                                            <a data-toggle="modal" data-target="#jobpostmodal" style="width:100%; height:100%; text-decoration: none;cursor:pointer; color: #626567;">
+                                                <p class="pt-3"  style=" padding-left: 1rem; margin-bottom: 0px; ">
+                                                    Create new jobpost...
+                                                </p>
+                                            </a>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-1">
+                                    &nbsp;
+                                </div>
+
+                                <div class="col-3">
+                                    <div class="card">
+                                        <div class="card-body">
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="card">
+                                        <div class="card-body">
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="jobpostmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="border-radius:15px;">
+                            <div class="modal-dialog modal-lg modal-dialog-centered" role="document" >
+                                <div class="modal-content border-0" style="border-radius:15px;">
+                                    <div class="border-0">
+                                        
+                                        <h5 class="text-center py-3" id="exampleModalLabel" style="font-weight:650;">Create Jobpost
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span class="pr-3" aria-hidden="true">&times;</span>
+                                            </button>
+                                        </h5>
+                                        
+                                    </div>
+                                    <div class="modal-body border-top">
+
+                                        <div>
+                                        <textarea class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:15px;" name="" id="" cols="30" rows="6"></textarea>
+
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer border-0">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+
                 <div class="card">
                     <div class="card-body">
                         <div class="job-post">
@@ -207,118 +303,23 @@ main_header(['Employer_profile']);
 
 
             <div class="col-12 col-md-3 mt-4">
+                <!-- EMPLOYEES -->
                 <div class="card card-widget widget-user-2">
-                    <!-- Add the bg color to the header using any of the bg-* classes -->
                     <div class="card-header">
-                        <h3 class="card-title fw-500">Information</h3>
+                        <h3 class="card-title fw-500">Employees</h3>
                     </div>
-
-                    <div class="widget-user-header whitebg">
-                        <div class="widget-user-image">
-                            <img class="img-circle img-fluid" src="assets/images/Logo/Profile/default.png" alt="User Avatar" style="object-fit: cover; min-width: 60px; max-width: 60px; min-height: 60px; max-height: 60px;">
-                        </div>
-                        <!-- /.widget-user-image -->
-                        <div class="d-flex justify-content-between">
-                            <h5 class="widget-user-username ml-3" style="font-size: 18px; font-weight: 500;">Jane Doe</h5>
-                            <button type="button" class="btn btn-outline-info pb-0 pt-0 fw-500">
-                                <i class="fa-solid fa-user mr-1"></i> Follow
-                            </button>
-                        </div>
-                        <h6 class="widget-user-desc text-muted" style="font-weight: normal; font-size: 16px;">Lead Developer</h6>
-                    </div>
-
-                    <!-- 2nd and onwards has border on top -->
-                    <div class="widget-user-header whitebg border-top">
-                        <div class="widget-user-image">
-                            <img class="img-circle img-fluid" src="assets/images/Logo/Profile/default.png" alt="User Avatar" style="object-fit: cover; min-width: 60px; max-width: 60px; min-height: 60px; max-height: 60px;">
-                        </div>
-                        <!-- /.widget-user-image -->
-                        <div class="d-flex justify-content-between">
-                            <h5 class="widget-user-username ml-3" style="font-size: 18px; font-weight: 500;">Jane Doe</h5>
-                            <button type="button" class="btn btn-outline-info pb-0 pt-0 fw-500">
-                                <i class="fa-solid fa-user mr-1"></i> Follow
-                            </button>
-                        </div>
-                        <h6 class="widget-user-desc text-muted" style="font-weight: normal; font-size: 16px;">Lead Developer</h6>
-                    </div>
-
-                    <div class="widget-user-header whitebg border-top">
-                        <div class="widget-user-image">
-                            <img class="img-circle img-fluid" src="assets/images/Logo/Profile/default.png" alt="User Avatar" style="object-fit: cover; min-width: 60px; max-width: 60px; min-height: 60px; max-height: 60px;">
-                        </div>
-                        <!-- /.widget-user-image -->
-                        <div class="d-flex justify-content-between">
-                            <h5 class="widget-user-username ml-3" style="font-size: 18px; font-weight: 500;">Jane Doe</h5>
-                            <button type="button" class="btn btn-outline-info pb-0 pt-0 fw-500">
-                                <i class="fa-solid fa-user mr-1"></i> Follow
-                            </button>
-                        </div>
-                        <h6 class="widget-user-desc text-muted" style="font-weight: normal; font-size: 16px;">Lead Developer</h6>
-                    </div>
-
-                    <div class="card-body border-top pt-3 pb-3">
-                        <a href="#" class="hoveropac">
-                            <p class="mb-0 text-center fw-500 text-muted fs-14">See More
-                                <i class="fa-solid fa-arrow-right fs-14 ml-1"></i></p>
-                        </a>
+                    <div id="load_employees_follow_section" style="margin-left: 1rem; margin-right:1rem;">
+                        <!-- <?= $employees_follow_section_view ?> -->
                     </div>
                 </div>
-                <!-- /.widget-user -->
 
+                <!-- EMPLOYERS -->
                 <div class="card card-widget widget-user-2">
-                    <!-- Add the bg color to the header using any of the bg-* classes -->
                     <div class="card-header">
-                        <h3 class="card-title fw-500">Information</h3>
+                        <h3 class="card-title fw-500">Employers</h3>
                     </div>
-
-                    <div class="widget-user-header whitebg">
-                        <div class="widget-user-image">
-                            <img class="img-circle img-fluid" src="assets/images/Logo/Profile/default.png" alt="User Avatar" style="object-fit: cover; min-width: 60px; max-width: 60px; min-height: 60px; max-height: 60px;">
-                        </div>
-                        <!-- /.widget-user-image -->
-                        <div class="d-flex justify-content-between">
-                            <h5 class="widget-user-username ml-3" style="font-size: 18px; font-weight: 500;">Jane Doe</h5>
-                            <button type="button" class="btn btn-outline-info pb-0 pt-0 fw-500">
-                                <i class="fa-solid fa-user mr-1"></i> Follow
-                            </button>
-                        </div>
-                        <h6 class="widget-user-desc text-muted" style="font-weight: normal; font-size: 16px;">Lead Developer</h6>
-                    </div>
-
-                    <!-- 2nd and onwards has border on top -->
-                    <div class="widget-user-header whitebg border-top">
-                        <div class="widget-user-image">
-                            <img class="img-circle img-fluid" src="assets/images/Logo/Profile/default.png" alt="User Avatar" style="object-fit: cover; min-width: 60px; max-width: 60px; min-height: 60px; max-height: 60px;">
-                        </div>
-                        <!-- /.widget-user-image -->
-                        <div class="d-flex justify-content-between">
-                            <h5 class="widget-user-username ml-3" style="font-size: 18px; font-weight: 500;">Jane Doe</h5>
-                            <button type="button" class="btn btn-outline-info pb-0 pt-0 fw-500">
-                                <i class="fa-solid fa-user mr-1"></i> Follow
-                            </button>
-                        </div>
-                        <h6 class="widget-user-desc text-muted" style="font-weight: normal; font-size: 16px;">Lead Developer</h6>
-                    </div>
-
-                    <div class="widget-user-header whitebg border-top">
-                        <div class="widget-user-image">
-                            <img class="img-circle img-fluid" src="assets/images/Logo/Profile/default.png" alt="User Avatar" style="object-fit: cover; min-width: 60px; max-width: 60px; min-height: 60px; max-height: 60px;">
-                        </div>
-                        <!-- /.widget-user-image -->
-                        <div class="d-flex justify-content-between">
-                            <h5 class="widget-user-username ml-3" style="font-size: 18px; font-weight: 500;">Jane Doe</h5>
-                            <button type="button" class="btn btn-outline-info pb-0 pt-0 fw-500">
-                                <i class="fa-solid fa-user mr-1"></i> Follow
-                            </button>
-                        </div>
-                        <h6 class="widget-user-desc text-muted" style="font-weight: normal; font-size: 16px;">Lead Developer</h6>
-                    </div>
-
-                    <div class="card-body border-top pt-3 pb-3">
-                        <a href="#" class="hoveropac">
-                            <p class="mb-0 text-center fw-500 text-muted fs-14">See More
-                                <i class="fa-solid fa-arrow-right fs-14 ml-1"></i></p>
-                        </a>
+                    <div id="load_employers_follow_section" style="margin-left:1rem; margin-right:1rem;">
+                        <!-- <?= $employers_follow_section_view ?> -->
                     </div>
                 </div>
                 <!-- /.widget-user -->

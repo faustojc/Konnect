@@ -1,42 +1,31 @@
 const load_employee = () => {
-    $(document).gmLoadPage({
-        url: baseUrl + '/employee/get_employee',
-        load_on: '#load_employee',
-    });
-    // TinyMCE
-    textareaEditor('textarea', 400);
+    $('#load_employee').load(baseUrl + '/employee/get_employee');
 }
 
 const load_skill = () => {
     $('#load_skill').load(baseUrl + '/employee_profile/get_skill/' + $('#emp_id').val());
-    // TinyMCE
-    textareaEditor('textarea', 400);
 }
 
 const load_education = () => {
     $('#load_educations').load(baseUrl + '/employee_profile/get_educations/' + $('#emp_id').val());
-    // TinyMCE
-    textareaEditor('textarea', 400);
 }
 
 const load_training = () => {
-    $('#load_training').load(baseUrl + '/employee_profile/get_training/' + $('#emp_id').val());
-    // TinyMCE
-    textareaEditor('textarea', 400);
+    $('#load_training').load(baseUrl + '/employee_profile/get_training/' + $('#emp_id').val(), function () {
+        console.log('Loaded successfully');
+        tinymce.remove('textarea');
+        textareaEditor('textarea', 400);
+    });
 }
 
 const education_edit = () => {
     $(document).gmLoadPage({
         url: baseUrl + '/employee_profile/education_edit/' + $('#emp_id').val(),
     });
-    // TinyMCE
-    textareaEditor('textarea', 400);
 }
 
 const load_employment = () => {
     $('#load_employments').load(baseUrl + '/employee_profile/get_all_employments/' + $('#emp_id').val());
-    // TinyMCE
-    textareaEditor('textarea', 400);
 }
 
 $(document).ready(function () {
@@ -174,7 +163,7 @@ $(document).on('click', '#btn_edit_train', function () {
         title: form.querySelector('#title').value,
         training_description: training_description,
         venue: form.querySelector('#venue').value,
-        t_city: form.querySelector('#t_city').value,
+        city: form.querySelector('#city').value,
         s_date: form.querySelector('#s_date').value,
         e_date: form.querySelector('#e_date').value,
         hours: form.querySelector('#hours').value

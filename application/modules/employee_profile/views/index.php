@@ -506,8 +506,6 @@ main_header(['employee_profile']);
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-toggle="modal" data-target="#address_modal" style="opacity:1;  cursor: pointer;">
                                 <i class="fa-solid fa-pen"></i>
-
-
                             </button>
                         </div>
                     </div>
@@ -607,7 +605,6 @@ main_header(['employee_profile']);
                             <h6 style="font-weight: normal;">
                                 <?= ucwords(@$details->Bday) ?>
                             </h6>
-
                         </div>
                     </div>
                 </div>
@@ -769,7 +766,6 @@ main_header(['employee_profile']);
         </div>
     </div>
 </section>
-
 
 <!-- ############ PAGE END-->
 <?php

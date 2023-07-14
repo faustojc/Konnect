@@ -96,7 +96,7 @@ if (!empty($skills)) {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-info" id="btn_update_skill">Save</button>
+                        <button type="button" class="btn btn-info" id="btn_update_skill" data-dismiss="modal">Save</button>
                     </div>
                 </div>
             </div>

@@ -3,7 +3,7 @@
  * @returns {boolean} Returns true if the form is valid, false otherwise
  */
 function validateForm(target) {
-    const form = document.querySelector(target);
+    const form = (target instanceof HTMLFormElement) ? target : document.querySelector(target);
     let isValid = false;
 
     form.addEventListener('submit', function (event) {

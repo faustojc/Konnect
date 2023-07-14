@@ -89,7 +89,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url', 'session', 'auth_template', 'system_template', 'utils', 'message', 'encryption', 'login_template', 'security');
+$autoload['helper'] = array('url', 'session', 'auth_template', 'system_template', 'utils', 'message', 'encryption', 'login_template', 'security', 'components');
 
 /*
 | -------------------------------------------------------------------
@@ -133,3 +133,7 @@ $autoload['language'] = array();
 |	$autoload['model'] = array('first_model' => 'first');
 */
 $autoload['model'] = array();
+
+// Include the components_helper file
+require_once(APPPATH . 'helpers/components_helper.php');
+components();

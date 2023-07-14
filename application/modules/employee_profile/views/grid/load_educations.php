@@ -30,96 +30,73 @@ if (!empty($educ_val)) {
                     <button class="btn btn-tool" data-toggle="modal" data-target="#ModalEducEdit<?= $key ?>">
                         <i class="fa fa-pen"></i></button>
                 </div>
-
             </div>
             &nbsp;
-
         </div>
-        <div class="modal fade" id="ModalEducEdit<?= $key ?>" tabindex="-1" role="dialog" aria-labelledby="ModalEducEdit<?= $key ?>" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="ModalEducEdit">Add Education</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- #Modal Education Content -->
-                        <form id="needs-validation">
-                            <div class="px-2 py-2">
-                                <input type="text" value="<?= @$value->ID ?>" id="ID2" hidden>
-                                <input type="text" value="<?= @$value->Employee_id ?>" id="Employee_id2" hidden>
 
-                                <div class="row pb-3">
-                                    <div class="col-md-6">
-                                        <label for="Level2">Level</label>
-                                        <input type="text" class="form-control dropdown-toggle" id="Level2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" placeholder="Enter Level" value="<?= @$value->Level ?>">
-                                        <div class="dropdown-menu level-content" aria-labelledby="Level2">
-                                            <p class="dropdown-item">ELEMENTARY</p>
-                                            <p class="dropdown-item">JUNIOR HIGH</p>
-                                            <p class="dropdown-item">SENIOR HIGH</p>
-                                            <p class="dropdown-item">COLLEGE</p>
-                                            <p class="dropdown-item">UBRA</p>
-                                        </div>
-                                    </div>
+        <?php
+        $modalId = 'ModalEducEdit' . $key;
+        $content = '<form id="needs-validation">
+                        <div class="px-2 py-2">
+                            <input type="text" value="' . $value->ID . '" id="ID2" hidden>
+                            <input type="text" value="' . $value->Employee_id . '" id="Employee_id2" hidden>
 
-                                    <div class="col-md-6">
-                                        <label>Title</label>
-                                        <input type="text" value="<?= @$value->Title ?>" class="form-control" id="Title2" placeholder="Enter Title">
+                            <div class="row pb-3">
+                                <div class="col-md-6">
+                                    <label for="Level2">Level</label>
+                                    <input type="text" class="form-control dropdown-toggle" id="Level2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" placeholder="Enter Level" value="' . $value->Level . '">
+                                    <div class="dropdown-menu level-content" aria-labelledby="Level2">
+                                        <p class="dropdown-item">ELEMENTARY</p>
+                                        <p class="dropdown-item">JUNIOR HIGH</p>
+                                        <p class="dropdown-item">SENIOR HIGH</p>
+                                        <p class="dropdown-item">COLLEGE</p>
+                                        <p class="dropdown-item">UBRA</p>
                                     </div>
                                 </div>
 
-
-                                <section class="pb-3">
-                                    <label>Institution</label>
-                                    <input type="text" class="form-control" value="<?= @$value->Institution ?>" id="Institution2" placeholder="Enter Institution">
-                                </section>
-
-
-                                <div class="row pb-4">
-                                    <div class="col-md">
-                                        <label>Grade Level</label>
-                                        <!-- <input type="text" class="form-control" id="Description"  placeholder="Enter Description"> -->
-                                        <div>
-                                            <!-- <textarea class="form-control" name="description" id="Description2" rows="4" placeholder="Enter Description"><?= @$value->Description ?></textarea> -->
-                                            <input type="text" class="form-control" value="<?= @$value->Description ?>" id="Description2" placeholder="Enter ...">
-                                        </div>
-
-                                    </div>
-
+                                <div class="col-md-6">
+                                    <label>Title</label>
+                                    <input type="text" value="' . $value->Title . '" class="form-control" id="Title2" placeholder="Enter Title">
                                 </div>
-
-                                <div class="row pb-3">
-                                    <div class="col-md-4">
-                                        <label>Start Date</label>
-                                        <input type="date" class="form-control" id="Start_date2" name="start_date" value="<?= @$value->Start_date ?>">
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <label>End Date</label>
-                                        <div>
-                                            <input type="date" class="form-control" id="End_date2" name="end_date" value="<?= @$value->End_date ?>">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <label>Hours</label>
-                                        <input type="Number" class="form-control" id="Hours2" placeholder="Enter Hours" value="<?= @$value->Hours ?>">
-                                    </div>
-                                </div>
-                                <!-- <label>Password:</label>
-                            <input type="password" id="password" name="password"> -->
                             </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-info" id="btn_edit_educ" data-dismiss="modal">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+                            <section class="pb-3">
+                                <label>Institution</label>
+                                <input type="text" class="form-control" value="' . $value->Institution . '" id="Institution2" placeholder="Enter Institution">
+                            </section>
+
+                            <div class="row pb-4">
+                                <div class="col-md">
+                                    <label>Grade Level</label>
+                                    <div>
+                                        <input type="text" class="form-control" value="' . $value->Description . '" id="Description2" placeholder="Enter ...">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row pb-3">
+                                <div class="col-md-4">
+                                    <label>Start Date</label>
+                                    <input type="date" class="form-control" id="Start_date2" name="start_date" value="' . $value->Start_date . '">
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label>End Date</label>
+                                    <div>
+                                        <input type="date" class="form-control" id="End_date2" name="end_date" value="' . $value->End_date . '">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label>Hours</label>
+                                    <input type="Number" class="form-control" id="Hours2" placeholder="Enter Hours" value="' . $value->Hours . '">
+                                </div>
+                            </div>
+                        </div>
+                    </form>';
+
+        modal($modalId, 'Add Education', $content, 'btn_edit_educ', 'Save Changes');
+        ?>
 
         <?php
     }

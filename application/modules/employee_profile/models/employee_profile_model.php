@@ -1,12 +1,14 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+
 class Employee_profile_model extends CI_Model
 {
     public $Table;
+
     public function __construct()
     {
         parent::__construct();
-        $this->session = (object) get_userdata(USER);
+        $this->session = (object)get_userdata(USER);
 
         // if(is_empty_object($this->session)){
         // 	redirect(base_url().'login/authentication', 'refresh');
@@ -119,37 +121,25 @@ class Employee_profile_model extends CI_Model
     }
 
     //Get all Employments
-    public function get_all_employments()
+    public function get_all_employments($id)
     {
         $result = [];
 
         $employments = $this->db->select()
             ->from($this->Table->employment)
-            ->where('tbl_employment.employee_id', $this->ID)
+            ->where('tbl_employment.employee_id', $id)
             ->get()->result();
 
-        $x = 0;
-        foreach ($employments as $employment) {
-            $result[$x]['employee'] = $this->db->select()
-                ->from('tbl_employee')
-                ->join('tbl_employment', 'tbl_employment.employee_id = tbl_employee.ID', 'inner')
-                ->where('tbl_employment.employee_id', $employment->employee_id)
-                ->get()->row();
+        $employers = $this->db->select()
+            ->from($this->Table->employer)
+            ->join('tbl_employment', 'tbl_employment.employer_id = tbl_employer.ID', 'inner')
+            ->where('tbl_employment.employee_id', $id)
+            ->get()->result();
 
-            $result[$x]['employer'] = $this->db->select()
-                ->from('tbl_employer')
-                ->join('tbl_employment', 'tbl_employment.employer_id = tbl_employer.ID', 'inner')
-                ->where('tbl_employment.employer_id', $employment->employer_id)
-                ->get()->row();
-
-            $result[$x]['employment'] = $employment;
-            //  echo json_encode($result[$x]['employment']);
-            ++$x;
-
-        }
+        $result['employments'] = $employments;
+        $result['employers'] = $employers;
 
         return $result;
-
     }
 
     //Edit Employment
@@ -205,15 +195,13 @@ class Employee_profile_model extends CI_Model
         return $query;
     }
 
-    public function get_skill()
+    public function get_skill($id)
     {
-        $result = $this->db->select('tbl_employee_skill.*')
-            ->where('tbl_employee_skill.employee_id = ' . $this->ID)
+        return $this->db->select('tbl_employee_skill.*')
+            ->where('tbl_employee_skill.employee_id = ' . $id)
             ->from($this->Table->employee_skill)
             ->join('tbl_employee', 'tbl_employee.ID = tbl_employee_skill.employee_id', 'inner')
             ->get()->result();
-
-        return $result;
     }
 
     public function edit_skill()

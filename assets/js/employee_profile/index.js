@@ -29,10 +29,10 @@ const load_employment = () => {
 
 $(document).ready(function () {
     load_employee();
-    load_education();
-    load_training();
-    load_employment();
-    load_skill();
+    // load_education();
+    // load_training();
+    // load_employment();
+    // load_skill();
 
     // TinyMCE
     textareaEditor('textarea', 400);
@@ -154,12 +154,13 @@ $(document).on('click', '#btn_edit_educ', function () {
 
 $(document).on('click', '#btn_edit_train', function () {
     const form = this.closest('.modal-content').querySelector('form');
+    const training_description = tinymce.activeEditor.getContent();
 
     const data = {
         ID: form.querySelector('#ID').value,
         Employee_id: form.querySelector('#Employee_id').value,
         title: form.querySelector('#title').value,
-        training_description: form.querySelector('#training_description').value,
+        training_description: training_description,
         venue: form.querySelector('#venue').value,
         t_city: form.querySelector('#t_city').value,
         s_date: form.querySelector('#s_date').value,

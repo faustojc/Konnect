@@ -1,34 +1,6 @@
 <?php
-// $ci = & get_instance();
-
-if (!empty($details)) {
-
-    foreach ($details as $key => $value) {
-        ?>
-
-
-        <!-- <div class="col-6 py-1">
-            <div class="card card-white">
-                <div class="card-header">
-                    <h3 class="card-title fw-500" style="font-weight:600;">
-                        <?= ucwords(@$value->skill) ?>
-                    </h3>
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-toggle="modal" data-target="#skill<?= $key ?>" data-proficiency="<?= ucwords(@$value->proficiency) ?>"><i class="fa-solid fa-pen" style=""></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="px-3 py-3">
-                    <h6 class="widget-user-desc mb-0" style="font-weight: normal; font-size: 16px;"><b>Proficiency:</b>
-                        <?= ucwords(@$value->proficiency) ?>
-                    </h6>
-                    <p class="widget-user-desc mb-0 mt-0 text-muted" style="font-weight: normal; font-size: 16px;"><b>Years of Experience:</b>
-                        <?= (@$value->years_exp) ?>
-                    </p>
-                </div>
-            </div>
-        </div> -->
-
+if (!empty($skills)) {
+    foreach ($skills as $key => $value) { ?>
         <div class="px-2 py-2">
             <button type="button" class="btn btn-light" data-toggle="modal" data-target="#view_skill<?= $key ?>">
                 <?= ucwords(@$value->skill) ?>
@@ -59,11 +31,13 @@ if (!empty($details)) {
                         </div>
 
                         <div class="px-3 py-3">
-                            <h5 class="widget-user-desc mb-1" style="font-weight: normal; font-size: 16px;"><b>Proficiency:</b>
+                            <h5 class="widget-user-desc mb-1" style="font-weight: normal; font-size: 16px;">
+                                <b>Proficiency:</b>
                                 <?= ucwords(@$value->proficiency) ?>
                             </h5>
 
-                            <h5 class="widget-user-desc mb-0" style="font-weight: normal; font-size: 16px;"><b>Years of Experience:</b>
+                            <h5 class="widget-user-desc mb-0" style="font-weight: normal; font-size: 16px;">
+                                <b>Years of Experience:</b>
                                 <?= (@$value->years_exp) ?>
                             </h5>
                         </div>
@@ -75,8 +49,6 @@ if (!empty($details)) {
                 </div>
             </div>
         </div>
-
-
 
         <!-- Edit Skill Modal -->
         <div class="modal fade" id="skill<?= $key ?>" tabindex="-1" role="dialog" aria-labelledby="skill<?= $key ?>" aria-hidden="true">
@@ -140,6 +112,6 @@ if (!empty($details)) {
         </center>
     </div>
 
-<?php
+    <?php
 }
 ?>

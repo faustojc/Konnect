@@ -1,9 +1,9 @@
 <?php
 $ci = &get_instance();
-if (!empty($details)) {
-    foreach ($details as $key => $value) {
-        $employer = $value['employer'];
-        $employment = $value['employment'];
+if (!empty($employments)) {
+    for ($i = 0; $i < count($employments); $i++) {
+        $employer = $employments['employers'][$i];
+        $employment = $employments['employments'][$i];
 
         ?>
         <div class="card-body card-widget widget-user-2 py-0">
@@ -37,7 +37,7 @@ if (!empty($details)) {
                     <button class="delete_btn btn-tool" id="delete_employment" data-id="<?= @$employment->ID ?>">
                         <i class="fa fa-trash"></i>
                     </button>
-                    <button type="button" class="edit_btn btn-tool edit-employment" data-toggle="modal" data-target="#emp<?= $key ?>">
+                    <button type="button" class="edit_btn btn-tool edit-employment" data-toggle="modal" data-target="#emp<?= $i ?>">
                         <i class="fa-solid fa-pen"></i>
                     </button>
                 </div>
@@ -45,11 +45,11 @@ if (!empty($details)) {
             &nbsp;
 
             <!-- Modal -->
-            <div class="modal fade" id="emp<?= $key ?>" tabindex="-1" role="dialog" aria-labelledby="modal<?= $key ?>" aria-hidden="true">
+            <div class="modal fade" id="emp<?= $i ?>" tabindex="-1" role="dialog" aria-labelledby="modal<?= $i ?>" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="modal<?= $key ?>">Update Employment</h5>
+                            <h5 class="modal-title" id="modal<?= $i ?>">Update Employment</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>

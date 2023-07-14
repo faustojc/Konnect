@@ -8,7 +8,7 @@ class Employee_profile_service extends MY_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->session = (object) get_userdata(USER);
+        $this->session = (object)get_userdata(USER);
 
         // if(is_empty_object($this->session)){
         // 	redirect(base_url().'login/authentication', 'refresh');
@@ -20,123 +20,128 @@ class Employee_profile_service extends MY_Controller
         $this->load->model($model_list);
     }
 
-    public function update()
+    public function update_introduction()
     {
-        // echo json_encode("a00");
-        $this->esModel->ID = $this->input->post("ID");
-        $this->esModel->Introduction = $this->input->post("Introduction");
+        $data = array(
+            'ID' => $this->input->post("ID"),
+            'Introduction' => $this->input->post("Introduction")
+        );
 
-        $response = $this->esModel->update();
+        $response = $this->esModel->update('tbl_employee', $data);
         echo json_encode($response);
     }
 
     public function update_train()
     {
-        // echo json_encode("a00");
-        $this->esModel->ID = $this->input->post("ID");
-        $this->esModel->Employee_id = $this->input->post("Employee_id");
-        $this->esModel->title = $this->input->post("title");
-        $this->esModel->training_description = $this->input->post("training_description");
-        $this->esModel->venue = $this->input->post("venue");
-        $this->esModel->t_city = $this->input->post("t_city");
-        $this->esModel->s_date = $this->input->post("s_date");
-        $this->esModel->e_date = $this->input->post("e_date");
-        $this->esModel->hours = $this->input->post("hours");
+        $data = array(
+            'ID' => $this->input->post("ID"),
+            'Employee_id' => $this->input->post("Employee_id"),
+            'title' => $this->input->post("title"),
+            'training_description' => $this->input->post("training_description"),
+            'venue' => $this->input->post("venue"),
+            'city' => $this->input->post("t_city"),
+            's_date' => $this->input->post("s_date"),
+            'e_date' => $this->input->post("e_date"),
+            'hours' => $this->input->post("hours")
+        );
 
-        $response = $this->esModel->update_train();
+        $response = $this->esModel->update('tbl_training', $data);
         echo json_encode($response);
     }
 
 
     public function update_address()
     {
-        // echo json_encode("a00");
-        $this->esModel->ID = $this->input->post("ID");
-        $this->esModel->Address = $this->input->post("Address");
-        $this->esModel->Barangay = $this->input->post("Barangay");
-        $this->esModel->City = $this->input->post("City");
+        $data = array(
+            'ID' => $this->input->post("ID"),
+            'Address' => $this->input->post("Address"),
+            'Barangay' => $this->input->post("Barangay"),
+            'City' => $this->input->post("City")
+        );
 
-        $response = $this->esModel->update_address();
+        $response = $this->esModel->update('tbl_employee', $data);
         echo json_encode($response);
     }
 
     public function update_id()
     {
+        $data = array(
+            'ID' => $this->input->post("ID"),
+            'SSS' => $this->input->post("SSS"),
+            'Tin' => $this->input->post("Tin"),
+            'Phil_health' => $this->input->post("Phil_health"),
+            'Pag_ibig' => $this->input->post("Pag_ibig")
+        );
 
-        $this->esModel->ID = $this->input->post("ID");
-        $this->esModel->SSS = $this->input->post("SSS");
-        $this->esModel->Tin = $this->input->post("Tin");
-        $this->esModel->Phil_health = $this->input->post("Phil_health");
-        $this->esModel->Pag_ibig = $this->input->post("Pag_ibig");
-
-        $response = $this->esModel->update_id();
-
-        var_dump($response);
-
+        $response = $this->esModel->update('tbl_employee', $data);
         echo json_encode($response);
     }
 
     public function edit_employment()
     {
-        $this->esModel->employment_id = $this->input->post("ID");
-        $this->esModel->employee_id = $this->input->post("employee_id");
-        $this->esModel->employer_id = $this->input->post("employer_id");
-        $this->esModel->position = $this->input->post("position");
-        $this->esModel->start_date = $this->input->post("start_date");
-        $this->esModel->end_date = $this->input->post("end_date");
-        $this->esModel->status = $this->input->post("status");
-        $this->esModel->rating = $this->input->post("rating");
-        $this->esModel->show_status = $this->input->post("show_status");
-        // $this->esModel->job_description = $this->input->post("job_description");
+        $data = array(
+            'ID' => $this->input->post("ID"),
+            'employee_id' => $this->input->post("Employee_id"),
+            'employer_id' => $this->input->post("Employer_id"),
+            'position' => $this->input->post("Position"),
+            'start_date' => $this->input->post("Start_date"),
+            'end_date' => $this->input->post("End_date"),
+            'status' => $this->input->post("Status"),
+            'rating' => $this->input->post("Rating"),
+            'show_status' => $this->input->post("Show_status")
+        );
 
-        $response = $this->esModel->edit_employment();
+        $response = $this->esModel->update('tbl_employment', $data);
         echo json_encode($response);
     }
 
     public function save_employment()
     {
-        $this->esModel->employment_id = $this->input->post("employment_id");
-        $this->esModel->employee_id = $this->input->post("employee_id");
-        $this->esModel->employer_id = $this->input->post("employer_id");
-        $this->esModel->position = $this->input->post("position");
-        $this->esModel->start_date = $this->input->post("start_date");
-        $this->esModel->end_date = $this->input->post("end_date");
-        $this->esModel->status = $this->input->post("status");
-        $this->esModel->rating = $this->input->post("rating");
-        $this->esModel->show_status = $this->input->post("show_status");
+        $data = array(
+            'ID' => $this->input->post("employment_id"),
+            'employee_id' => $this->input->post("employee_id"),
+            'employer_id' => $this->input->post("employer_id"),
+            'position' => $this->input->post("position"),
+            'start_date' => $this->input->post("start_date"),
+            'end_date' => $this->input->post("end_date"),
+            'status' => $this->input->post("status"),
+            'rating' => $this->input->post("rating"),
+            'show_status' => $this->input->post("show_status")
+        );
 
-        $response = $this->esModel->save_employment();
+        $response = $this->esModel->update('tbl_employment', $data);
         echo json_encode($response);
     }
 
     public function delete_employment()
     {
         $employment_id = $this->input->post("employment_id");
-        $response = $this->esModel->delete_employment($employment_id);
 
+        $response = $this->esModel->delete('tbl_employment', $employment_id);
         echo json_encode($response);
     }
 
     public function delete()
     {
         $ID = $this->input->post("ID");
-        $response = $this->esModel->delete($ID);
 
+        $response = $this->esModel->delete($ID);
         echo json_encode($response);
     }
 
-    public function save()
+    public function save_education()
     {
-        $this->esModel->Employee_id = $this->input->post("Employee_id");
-        $this->esModel->Level = $this->input->post("Level");
-        $this->esModel->Title = $this->input->post("Title");
-        $this->esModel->Institution = $this->input->post("Institution");
-        $this->esModel->Description = $this->input->post("Description");
-        $this->esModel->Start_date = $this->input->post("Start_date");
-        $this->esModel->End_date = $this->input->post("End_date");
-        $this->esModel->Hours = $this->input->post("Hours");
+        $data = array(
+            'Employee_id' => $this->input->post("Employee_id"),
+            'Level' => $this->input->post("Level"),
+            'Title' => $this->input->post("Title"),
+            'Institution' => $this->input->post("Institution"),
+            'Description' => $this->input->post("Description"),
+            'End_date' => $this->input->post("End_date"),
+            'Hours' => $this->input->post("Hours")
+        );
 
-        $response = $this->esModel->save();
+        $response = $this->esModel->save('tbl_employee_educ', $data);
         echo json_encode($response);
     }
 
@@ -153,56 +158,60 @@ class Employee_profile_service extends MY_Controller
             'hours' => $this->input->post("hours"),
         );
 
-        $response = $this->esModel->save_training($data);
+        $response = $this->esModel->save('tbl_training', $data);
         echo json_encode($response);
     }
 
     public function edit_educ()
     {
-        $this->esModel->ID = $this->input->post("ID");
-        $this->esModel->Employee_id = $this->input->post("Employee_id");
-        $this->esModel->Level = $this->input->post("Level");
-        $this->esModel->Title = $this->input->post("Title");
-        $this->esModel->Institution = $this->input->post("Institution");
-        $this->esModel->Description = $this->input->post("Description");
-        $this->esModel->Start_date = $this->input->post("Start_date");
-        $this->esModel->End_date = $this->input->post("End_date");
-        $this->esModel->Hours = $this->input->post("Hours");
+        $data = array(
+            'ID' => $this->input->post("ID"),
+            'Employee_id' => $this->input->post("Employee_id"),
+            'Level' => $this->input->post("Level"),
+            'Title' => $this->input->post("Title"),
+            'Institution' => $this->input->post("Institution"),
+            'Description' => $this->input->post("Description"),
+            'Start_date' => $this->input->post("Start_date"),
+            'End_date' => $this->input->post("End_date"),
+            'Hours' => $this->input->post("Hours")
+        );
 
-
-        $response = $this->esModel->edit_educ();
+        $response = $this->esModel->update('tbl_employee_educ', $data);
         echo json_encode($response);
     }
 
     public function save_skill()
     {
-        $this->esModel->employee_id = $this->input->post("employee_id");
-        $this->esModel->skill = $this->input->post("skill");
-        $this->esModel->proficiency = $this->input->post("proficiency");
-        $this->esModel->years_exp = $this->input->post("years_exp");
+        $data = array(
+            'employee_id' => $this->input->post("employee_id"),
+            'skill' => $this->input->post("skill"),
+            'proficiency' => $this->input->post("proficiency"),
+            'years_exp' => $this->input->post("years_exp")
+        );
 
-        $response = $this->esModel->save_skill();
+        $response = $this->esModel->save('tbl_employee_skill', $data);
         echo json_encode($response);
     }
 
     public function edit_skill()
     {
-        $this->esModel->id = $this->input->post("skill_id");
-        $this->esModel->employee_id = $this->input->post("employee_id");
-        $this->esModel->skill = $this->input->post("skill");
-        $this->esModel->proficiency = $this->input->post("proficiency");
-        $this->esModel->years_exp = $this->input->post("years_exp");
+        $data = array(
+            'id' => $this->input->post("skill_id"),
+            'employee_id' => $this->input->post("employee_id"),
+            'skill' => $this->input->post("skill"),
+            'proficiency' => $this->input->post("proficiency"),
+            'years_exp' => $this->input->post("years_exp")
+        );
 
-        $response = $this->esModel->edit_skill();
+        $response = $this->esModel->update('tbl_employee_skill', $data);
         echo json_encode($response);
-        // echo json_encode($this->esModel->id);
     }
+
     public function delete_skill()
     {
         $id = $this->input->post("skill_id");
 
-        $response = $this->esModel->delete_skill($id);
-
+        $response = $this->esModel->delete('tbl_employee_skill', $id);
         echo json_encode($response);
     }
 
@@ -210,32 +219,7 @@ class Employee_profile_service extends MY_Controller
     {
         $id = $this->input->post("ID");
 
-        $response = $this->esModel->delete_training($id);
+        $response = $this->esModel->delete('tbl_training', $id);
         echo json_encode($response);
     }
-
-    // public function edit_skill()
-    // {
-    // 	$info = array(
-    // 		'skill_id' => $this->input->post("id"),
-    // 		'employee_id' => $this->input->post("employee_id")
-
-    // 	);
-
-    // 	$this->esModel->employee_id = $this->input->post("employee_id");
-    // 	$this->esModel->id = $this->input->post("id");
-    // 	$this->esModel->skill = $this->input->post("skill");
-    // 	$this->esModel->proficiency = $this->input->post("proficiency");
-    // 	$this->esModel->years_exp = $this->input->post("years_exp");
-
-    // 	// $this->esModel->job_description = $this->input->post("job_description");
-    // 	// $this->esModel->show_status = $this->input->post("show_status");
-
-    // 	$response = $this->esModel->edit_skill();
-
-
-    // 	echo json_encode($response);
-    // }
-
-
 }

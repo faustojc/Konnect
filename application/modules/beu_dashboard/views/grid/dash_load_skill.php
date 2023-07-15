@@ -1,10 +1,12 @@
 <?php
 if (!empty($skills)) {
     foreach ($skills as $value) { ?>
-        <div class="px-2 py-2">
-            <button type="button" class="btn btn-light">
-                <?= ucwords($value->skill) ?>
-            </button>
+        <div class="px-1 py-1" style="border-radius:10px; font-weight:normal;">
+            <h5>
+                <span class="badge badge-pill badge-secondary">
+                    <?= ucwords($value->skill) ?>
+                </span>
+            </h5>
         </div>
 
         <?php
@@ -18,6 +20,6 @@ if (!empty($skills)) {
         </center>
     </div>
 
-    <?php
+<?php
 }
 ?>

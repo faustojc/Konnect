@@ -12,7 +12,7 @@ function main_header($menubar = [])
     if (!empty($auth)) {
         if ($auth['user_type'] == 'EMPLOYEE') {
             $image_url = base_url() . 'assets/images/employee/profile_pic/' . $userdata->Employee_image;
-            $name = $userdata->Fname . $userdata->Lname;
+            $name = $userdata->Fname . ' ' . $userdata->Mname . ' ' . $userdata->Lname;
             $profile_url = base_url() . 'employee_profile/index/' . $userdata->ID;
         } else {
             $image_url = base_url() . 'assets/images/employer/profile_pic/' . $userdata->image;
@@ -145,7 +145,7 @@ function main_header($menubar = [])
                 <!-- MY PROFILE -->
                 <!-- Messages Dropdown Menu -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link pr-1" data-toggle="dropdown" href="#">
+                    <a class="nav-link pr-1" data-toggle="dropdown" role="button">
                         Profile <i class="fa-solid fa-user"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-left">
@@ -159,7 +159,7 @@ function main_header($menubar = [])
                                          style="object-fit: cover; min-width: 60px; max-width: 60px; min-height: 60px;max-height: 60px;">
                                     <div class="media-body">
                                         <h3 class="dropdown-item-title" style="font-weight: 500;">
-                                            <?= $name ?>
+                                            <?= ucwords($name) ?>
                                         </h3>
                                         <a href="<?= $profile_url ?>" class="text-info">View Profile </a>
                                     </div>

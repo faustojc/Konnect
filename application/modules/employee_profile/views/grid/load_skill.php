@@ -2,7 +2,7 @@
 if (!empty($skills)) {
     foreach ($skills as $key => $value) { ?>
         <div class="px-2 py-2">
-            <button type="button" class="btn btn-light" data-toggle="modal" data-target="#view_skill<?= $key ?>">
+            <button type="button" class="btn btn-light mt-2" style="margin-right:10px;border-radius:10px; width:8rem;" data-toggle="modal" data-target="#view_skill<?= $key ?>">
                 <?= ucwords(@$value->skill) ?>
             </button>
         </div>
@@ -112,6 +112,6 @@ if (!empty($skills)) {
         </center>
     </div>
 
-    <?php
+<?php
 }
 ?>

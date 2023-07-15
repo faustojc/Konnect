@@ -1,34 +1,23 @@
 *******************
-What is CodeIgniter
+   CodeIgniter 3
 *******************
-
-CodeIgniter is an Application Development Framework - a toolkit - for people
-who build web sites using PHP. Its goal is to enable you to develop projects
-much faster than you could if you were writing code from scratch, by providing
-a rich set of libraries for commonly needed tasks, as well as a simple
-interface and logical structure to access these libraries. CodeIgniter lets
-you creatively focus on your project by minimizing the amount of code needed
-for a given task.
-
-************
-What is HMVC
-************
-
-HMVC stands for Hierarchical Model View Controller application design pattern which makes your application modular. It
-give you chance to separate the controller, model and view in to some module so you can maintenance or improve the application easily.
+This project was developed using CodeIgniter 3.
+https://codeigniter.com/userguide3/general/welcome.html
 
 *******************
-Server Requirements
+    Tools Used
 *******************
 
-PHP version 5.6 or newer is recommended.
+PHP version 7.4.33.
+- Codeigniter's original php version 5.3 was now updated to 7.4 to increase the websites efficiency, performance, and security.
+- Numerous improvements in development in updating the php version with new features.
 
-It should work on 5.3.7 as well, but we strongly advise you NOT to run
-such old versions of PHP, because of potential security and performance
-issues, as well as missing features.
+XAMPP 3.3.0
+- A cross-platform software package that includes Apache, MySQL, Php, and Perl for development.
 
-************
-Installation
-************
-- Default CodeIgniter installation: https://codeigniter.com/user_guide/installation/index.html
-- Via Composer : composer create-project alzen8work/ci_hmvc
+AdminLTE Bootstrap 3.2
+- A bootstrap template in creating admin dashboard and control panel theme
+- Uses Bootstrap 4.6
+
+Jquery 3.6.0
+- A JavaScript library that simplifies the manipulation of HTML elements, the handling of events, the creation of animations, and the communication with the server using AJAX.

@@ -17,3 +17,7 @@ const load_employers_follow_section = () => {
     });
 }
 
+const load_skill = () => {
+    $('#dash_load_skill').load(baseUrl + 'beu_dashboard/get_skill/' + $('#id').val());
+}
+

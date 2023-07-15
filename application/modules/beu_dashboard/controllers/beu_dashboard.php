@@ -37,10 +37,11 @@ class beu_dashboard extends MY_Controller
 
         // Enable query caching
         $this->db->cache_on();
-        
+
         $this->data['details'] = $this->userdata;
         $this->data['employees'] = $this->employee_model->get_all_employees(4);
         $this->data['employers'] = $this->employer_model->get_employers(4, $id);
+        $this->data['skills'] = $this->dashboard_model->get_skill($id);
 
         if ($this->user_type == 'EMPLOYER') {
             $this->data['user_display'] = $this->load->view('grid/load_employer', $this->data, true);
@@ -58,11 +59,29 @@ class beu_dashboard extends MY_Controller
             $employees_follow_section_view = $this->load->view('grid/load_employees', $this->data, TRUE);
             $this->cache->save('employees_follow_section_view', $employees_follow_section_view, 600);
         }
+        // if (!$skills_section_view = $this->cache->get('skills_section_view')) {
+        //     // If not, generate the view and cache it for 10 minutes
+        //     $skills_section_view = $this->load->view('grid/dash_load_skill', $this->data, TRUE);
+        //     $this->cache->save('skills_section_view', $skills_section_view, 600);
+        // }
 
+
+        $this->data['skills_section_view'] = $this->load->view('grid/dash_load_skill', $this->data, TRUE);
+        // $this->data['skills_section_view'] = $skills_section_view;
         $this->data['employers_follow_section_view'] = $employers_follow_section_view;
         $this->data['employees_follow_section_view'] = $employees_follow_section_view;
 
+
         $this->data['content'] = 'index';
+        $this->load->view('layout', $this->data);
+    }
+
+    public function get_skill()
+    {
+        $id = $this->uri->segment(3);
+
+        $this->data['skills'] = $this->dashboard_model->get_skill($id);
+        $this->data['content'] = 'grid/dash_load_skill';
         $this->load->view('layout', $this->data);
     }
 }

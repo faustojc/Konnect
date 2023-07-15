@@ -1,6 +1,5 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
 
-    
 });
 
 const load_employees_follow_section = () => {

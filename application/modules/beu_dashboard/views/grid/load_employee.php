@@ -1,5 +1,4 @@
 <?php if (!empty($details)) { ?>
-
     <div class="card card-widget widget-user">
         <div class="widget-user-header text-white" style="background: url('<?= base_url() ?>assets/images/Logo/cover-place.jpg') center center; background-repeat: no-repeat; background-size: cover; border-radius: 15px 15px 0 0;"></div>
         <div class="widget-user-image">
@@ -24,17 +23,21 @@
             <div class="row">
                 <div class="col-12">
                     <div class="description-block mb-0">
-                        <h6 class="widget-user-desc text-left mt-3 mb-3" style="font-weight: normal; font-size:15px;"><i class="fas fa-map-pin"></i> <b style="font-weight: 500;">Address: </b>
+                        <h6 class="widget-user-desc text-left mt-3 mb-3" style="font-weight: normal; font-size:15px;">
+                            <i class="fas fa-map-pin"></i> <b style="font-weight: 500;">Address: </b>
                             <?= ucwords(@$details->City) ?>
                         </h6>
 
-                        <h6 class=" widget-user-desc text-left mt-1 mb-3" style="font-weight: normal;"><i class="fa fa-envelope"></i> <b style="font-weight: 500;">Email: </b>
+                        <h6 class=" widget-user-desc text-left mt-1 mb-3" style="font-weight: normal;">
+                            <i class="fa fa-envelope"></i> <b style="font-weight: 500;">Email: </b>
                             <?= @$details->Email ?>
                         </h6>
-                        <h6 class=" widget-user-desc text-left mt-1 mb-3" style="font-weight: normal;"><i class="fa fa-phone"></i> <b style="font-weight: 500;">Number: </b>
+                        <h6 class=" widget-user-desc text-left mt-1 mb-3" style="font-weight: normal;">
+                            <i class="fa fa-phone"></i> <b style="font-weight: 500;">Number: </b>
                             <?= @$details->Cnum ?>
                         </h6>
-                        <h6 class=" widget-user-desc text-left mt-1 mb-3" style="font-weight: normal;"><i class="fa fa-birthday-cake"></i> <b style="font-weight: 500;">Birthday: </b>
+                        <h6 class=" widget-user-desc text-left mt-1 mb-3" style="font-weight: normal;">
+                            <i class="fa fa-birthday-cake"></i> <b style="font-weight: 500;">Birthday: </b>
                             <?= @$details->Bday ?>
                         </h6>
                     </div>
@@ -48,10 +51,8 @@
                     <div class="description-block mb-0">
                         <h6 class="widget-user-desc text-left mt-3 mb-3" style="font-weight: 500; font-size:15px;"> Skills</h6>
                         <div class="row pt-0 pb-4 px-4 py-3" id="dash_load_skill">
-                            <!-- <?= $skills_section_view ?> -->
+                            <?= $skills_section_view ?>
                         </div>
-
-
                     </div>
                 </div>
             </div>
@@ -61,7 +62,8 @@
             <div class="row">
                 <div class="col-12">
                     <a href="#" class="hoveropac">
-                        <p class="mb-0 text-center fw-500 text-muted fs-14">View Profile <i class="fa-solid fa-arrow-right fs-14 ml-1"></i></p>
+                        <p class="mb-0 text-center fw-500 text-muted fs-14">View Profile
+                            <i class="fa-solid fa-arrow-right fs-14 ml-1"></i></p>
                     </a>
                 </div>
             </div>

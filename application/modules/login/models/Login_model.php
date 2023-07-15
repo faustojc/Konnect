@@ -29,6 +29,7 @@ class Login_model extends CI_Model
             $query = $this->db->select()
                 ->from($this->Table->user)
                 ->where('email', $info['email'])
+                ->where('user_type', $info['user_type'])
                 ->get()->row();
 
             if (empty($query)) {

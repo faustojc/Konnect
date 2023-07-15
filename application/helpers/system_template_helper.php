@@ -133,12 +133,12 @@ function main_header($menubar = [])
             <ul class="navbar-nav ml-auto">
 
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="<?= base_url() ?>employer" class="nav-link">
+                    <a href="<?= base_url() ?>beu_dashboard" class="nav-link">
                         Home <i class="fa-solid fa-house"></i>
                     </a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="<?= base_url() ?>employee" class="nav-link">
+                    <a href="#" class="nav-link">
                         Jobs <i class="fa-solid fa-briefcase"></i>
                     </a>
                 </li>

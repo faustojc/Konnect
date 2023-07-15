@@ -44,19 +44,11 @@ function textareaEditor(selector, height = 350, setupFunction = () => {
     tinymce.init({
         selector: selector,
         height: height,
-        menubar: false,
         browser_spellcheck: true,
         setup: function (editor) {
             setupFunction(editor);
         },
-        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-        toolbar: 'undo redo | blocks fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-        tinycomments_mode: 'embedded',
-        tinycomments_author: 'Author name',
-        mergetags_list: [
-            {value: 'First.Name', title: 'First Name'},
-            {value: 'Email', title: 'Email'},
-        ]
+        plugins: 'advlist anchor autolink charmap code codesample emoticons link lists searchreplace table visualblocks wordcount',
     });
 }
 

@@ -2,15 +2,6 @@
 main_header(['Employer_profile']);
 ?>
 <!-- ############ PAGE START-->
-
-<head>
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-    <script>
-        tinymce.init({
-            selector: '#mytextarea'
-        });
-    </script>
-</head>
 <style>
     /* Remove spinner for number input */
     input[type=number]::-webkit-inner-spin-button,
@@ -198,7 +189,6 @@ main_header(['Employer_profile']);
             </div> <!--col-->
 
 
-
             <div class="col-12 col-md-6 mt-4">
 
                 <div class="card">
@@ -271,9 +261,7 @@ main_header(['Employer_profile']);
 
                                     </div>
                                     <div>
-
                                         <textarea id="mytextarea" class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:15px;" name="" cols="30" rows="10"></textarea>
-
                                     </div>
                                 </div>
                                 <div class="modal-footer border-0">
@@ -365,15 +353,4 @@ main_header(['Employer_profile']);
 main_footer();
 ?>
 
-
-<script>
-    $(function () {
-        $("#tabledashboard").DataTable({
-            "responsive": true, "lengthChange": false, "autoWidth": false, "paging": true,
-        }).container().appendTo('#tabledashboard_wrapper .col-md-6:eq(0)');
-
-    });
-</script>
-
-
-<script src="<?php echo base_url() ?>/assets/js/obo_dashboard/obo_dashbard.js"></script>
+<script src="<?php echo base_url() ?>/assets/js/dashboard/index.js"></script>

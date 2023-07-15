@@ -24,7 +24,7 @@
                 <div class="col-12">
                     <div class="description-block mb-0">
                         <!-- <h6 class="widget-user-desc text-center  mb-1" style="font-weight: 500; font-size: 16px;"> BIO</h6> -->
-                        <h6 class="widget-user-desc text-center mt-1 mb-1" style="font-weight: normal; font-size: 14px;"> Hello I Fausto Boko your CSS President</h6>
+                        <h6 class="widget-user-desc text-center mt-1 mb-1" style="font-weight: normal; font-size: 14px;"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam aliquid corrupti modi fugiat itaque! Maxime explicabo eligendi id impedit atque cumque rerum amet architecto consequuntur inventore unde necessitatibus, quod esse!</h6>
                     </div>
                 </div>
             </div>

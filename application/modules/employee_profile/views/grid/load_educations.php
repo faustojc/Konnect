@@ -15,12 +15,22 @@ if (!empty($educ_val)) {
                     </div>
                     <!-- /.widget-user-image -->
 
-                    <h5 class="widget-user-username mt-0" style="font-size: 18px; font-weight: 650;"><?= (@$value->Institution) ?></h5>
-                    <h6 class="widget-user-desc mb-0" style="font-weight: normal; font-size: 16px;"><?= (@$value->Title) ?></h6>
-                    <p class="widget-user-desc mb-0 mt-0 text-muted" style="font-weight: normal; font-size: 16px;"><?= (@$value->Level) ?></p>
-                    <p class="widget-user-desc mb-0 mt-1 text-muted" style="font-weight: normal; font-size: 16px;"><?= date("Y", strtotime(@$value->Start_date)) ?> - <?= date("Y", strtotime(@$value->End_date)) ?></p>
+                    <h5 class="widget-user-username mt-0" style="font-size: 18px; font-weight: 650;">
+                        <?= (@$value->Institution) ?>
+                    </h5>
+                    <h6 class="widget-user-desc mb-0" style="font-weight: normal; font-size: 16px;">
+                        <?= (@$value->Title) ?>
+                    </h6>
+                    <p class="widget-user-desc mb-0 mt-0 text-muted" style="font-weight: normal; font-size: 16px;">
+                        <?= (@$value->Level) ?>
+                    </p>
+                    <p class="widget-user-desc mb-0 mt-1 text-muted" style="font-weight: normal; font-size: 16px;">
+                        <?= date("Y", strtotime(@$value->Start_date)) ?> -
+                        <?= date("Y", strtotime(@$value->End_date)) ?>
+                    </p>
                     <p class="widget-user-desc mb-0 mt-0 text-justify" style="font-weight: normal; font-size: 16px;">
-                        <span style="font-weight:500;"><?= (@$value->Description) ?>
+                        <span style="font-weight:500;">
+                            <?= (@$value->Description) ?>
                     </p>
                 </div>
 
@@ -103,10 +113,16 @@ if (!empty($educ_val)) {
 } else {
     ?>
 
-    <div>
-        <center><h6 style="color:red">No Data Found.</h6></center>
+    <div class="d-flex flex-column flex-grow-1 px-2 py-2">
+        <div class="d-flex align-items-center mb-1">
+            <h5 class=" ml-1"><i class="fa-solid fa-pen-to-square "></i> Add Education</h5>
+        </div>
+        <div class="d-flex flex-column flex-grow-1">
+            <p class="fs-14">Showcase your academic background to strengthen your professional profile.</p>
+            <button type="button" class="btn btn-light rounded-pill edit-summary" style="border-width: 2px" data-toggle="modal" data-target="#ModalEduc">Add Education</button>
+        </div>
     </div>
 
-    <?php
+<?php
 }
 ?>

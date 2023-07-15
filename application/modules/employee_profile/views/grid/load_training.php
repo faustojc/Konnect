@@ -6,11 +6,23 @@ if (!empty($train_val)) {
         <div class="col-6 px-2">
             <div class="card training-hover">
                 <div class="card-body">
-                    <h5 class="pb-2 " style="font-weight:650;"><?= ucwords(@$value->title) ?></h5>
-                    <h6 class="widget-user-desc mb-2 text-muted">Venue: <?= (@$value->venue) ?> - <?= (@$value->t_city) ?></h6>
-                    <h6 class="widget-user-desc mb-2 text-muted">Date: <?= date("M d,Y", strtotime(@$value->s_date)) ?> - <?= date("M d,Y", strtotime(@$value->e_date)) ?></h6>
-                    <h6 class="widget-user-desc mb-2 text-muted">Duration: <?= (@$value->hours) ?> hours</h6>
-                    <p class="card-text text-justify"><?= (@$value->training_description) ?></p>
+                    <h5 class="pb-2 " style="font-weight:650;">
+                        <?= ucwords(@$value->title) ?>
+                    </h5>
+                    <h6 class="widget-user-desc mb-2 text-muted">Venue:
+                        <?= (@$value->venue) ?> -
+                        <?= (@$value->t_city) ?>
+                    </h6>
+                    <h6 class="widget-user-desc mb-2 text-muted">Date:
+                        <?= date("M d,Y", strtotime(@$value->s_date)) ?> -
+                        <?= date("M d,Y", strtotime(@$value->e_date)) ?>
+                    </h6>
+                    <h6 class="widget-user-desc mb-2 text-muted">Duration:
+                        <?= (@$value->hours) ?> hours
+                    </h6>
+                    <p class="card-text text-justify">
+                        <?= (@$value->training_description) ?>
+                    </p>
                     <div class="d-flex justify-content-end px-3 py-3">
                         <button class="btn btn-tool delete" id="delete_train" data-id="<?= @$value->ID ?>">
                             <i class="fa fa-trash"></i>
@@ -94,6 +106,15 @@ if (!empty($train_val)) {
     }
 } else {
     ?>
-    <h6 class="text-center text-danger font-weight-bold">No Data Found.</h6>
-    <?php
+    <div class="d-flex flex-column flex-grow-1 px-2 py-2">
+        <div class="d-flex align-items-center mb-1">
+            <h5 class=" ml-1"><i class="fa-solid fa-pen-to-square "></i> Add Training</h5>
+        </div>
+        <div class="d-flex flex-column flex-grow-1">
+            <p class="fs-14">Highlight your continuous learning mindset to increase your credibility.</p>
+            <!-- <button type="button" class="btn btn-light rounded-pill edit-summary" style="border-width: 2px" data-toggle="modal" data-target="#ModalTrain">Add Training</button> -->
+        </div>
+    </div>
+
+<?php
 } ?>

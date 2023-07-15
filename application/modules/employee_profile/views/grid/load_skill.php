@@ -106,10 +106,14 @@ if (!empty($skills)) {
 } else {
     ?>
 
-    <div>
-        <center>
-            <h6 style="color:red">No Data Found.</h6>
-        </center>
+    <div class="d-flex flex-column flex-grow-1 px-2 py-2">
+        <div class="d-flex align-items-center mb-1">
+            <h5 class=" ml-1"><i class="fa-solid fa-pen-to-square "></i> Add Skills</h5>
+        </div>
+        <div class="d-flex flex-column flex-grow-1">
+            <p class="fs-14">Showcase your skills to increase visibility to potential employers or clients.</p>
+            <button type="button" class="btn btn-light rounded-pill edit-summary" style="border-width: 2px" data-toggle="modal" data-target="#skill_modal">Add Skill</button>
+        </div>
     </div>
 
 <?php

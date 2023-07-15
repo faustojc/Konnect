@@ -118,12 +118,16 @@ if (!empty($employments)) {
     }
 } else {
     ?>
-    <div>
-        <center>
-            <h6 style="color:red">No Data Found.</h6>
-        </center>
+    <div class="d-flex flex-column flex-grow-1 px-2 py-2">
+        <div class="d-flex align-items-center mb-1">
+            <h5 class=" ml-1"><i class="fa-solid fa-pen-to-square "></i> Add Employment</h5>
+        </div>
+        <div class="d-flex flex-column flex-grow-1">
+            <p class="fs-14">Share your professional experience to establish credibility for potential employers.</p>
+            <!-- <button type="button" class="btn btn-light rounded-pill edit-summary" style="border-width: 2px" data-toggle="modal" data-target="#modalAddEmp">Add Employment</button> -->
+        </div>
     </div>
-    <?php
+<?php
 
 }
 ?>
@@ -151,12 +155,12 @@ if (!empty($employments)) {
         z-index: 400;
     }
 
-    ul.timeline > li {
+    ul.timeline>li {
         margin: 0;
         padding-left: 50px;
     }
 
-    ul.timeline > li:before {
+    ul.timeline>li:before {
         content: ' ';
         background: white;
         display: inline-block;

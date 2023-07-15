@@ -179,16 +179,8 @@ main_header(['employee_profile']);
                                             <?= ucwords(@$details->Fname) . " " . ucwords(@$details->Mname) . " " . ucwords(@$details->Lname) ?>
                                         </h4>
                                         <input type="text" value="<?= @$details->ID ?>" id="emp_id" hidden>
-
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <a href="<?php echo base_url() ?>employee_profile/edit?id=<?= $details->ID ?>" type="button" class="btn btn-outline-info btn-sm btn-block mb-2">Edit Profile</a>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <button type="button" class="btn btn-info btn-sm btn-block mb-2" style="width:150px;">
-                                                    <i class="fa-solid fa-pen-to-square"></i> Add Job Listing
-                                                </button>
-                                            </div>
+                                        <div class="">
+                                            <a href="<?php echo base_url() ?>employee_profile/edit?id=<?= $details->ID ?>" type="button" class="btn btn-outline-info btn-sm btn-block mb-2">Edit Profile</a>
                                         </div>
                                     </div>
 
@@ -214,11 +206,29 @@ main_header(['employee_profile']);
                             </button>
                         </div>
                     </div>
-                    <div class="card-body card-widget widget-user-2" style="padding-top:0.5rem;">
-                        <div class="widget-user-header" style="padding:0;">
-                            <?= @$details->Introduction ?>
-                        </div>
-                    </div>
+
+                    <?php
+                    if (empty($details->Introduction)) {
+                        echo '
+                            <div class="d-flex flex-column flex-grow-1 px-4 py-4">
+                                <div class="d-flex align-items-center mb-1">
+                                    <h5 class=" ml-1"><i class="fa-solid fa-pen-to-square "></i> Introduce your self</h5>
+                                </div>
+                                <div class="d-flex flex-column flex-grow-1">
+                                    <p class="fs-14">Create a compelling first impression to future employers.</p>
+                                    <button type="button" class="btn btn-light rounded-pill edit-summary" style="border-width: 2px" data-toggle="modal" data-target="#Introduction_modal">Add Introduction</button>
+                                </div>
+                            </div>';
+                    } else {
+                        echo '
+                            <div class="card-body card-widget widget-user-2" style="padding-top:0.5rem;">
+                                <div class="widget-user-header px-2 py-2" style="padding:0; ">
+                                    ' . @$details->Introduction . '
+                                </div>
+                            </div>';
+                    }
+                    ?>
+
                 </div>
                 <div class="card card-white">
                     <div class="card-header">
@@ -758,7 +768,7 @@ main_header(['employee_profile']);
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_skill">Add</button>
+                            <button type="button" class="btn btn-info" data-dismiss="modal" id="btn_skill">Add</button>
                         </div>
                     </div>
                 </div>

@@ -2,6 +2,14 @@
 main_header(['Employer_profile']);
 ?>
 <!-- ############ PAGE START-->
+<head>
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: '#mytextarea'
+      });
+</script>
+</head>
 <style>
     /* Remove spinner for number input */
     input[type=number]::-webkit-inner-spin-button,
@@ -196,8 +204,11 @@ main_header(['Employer_profile']);
                 <div class="card">
                         <div class="card-body">
                             <div class="row pb-2">
-                                <div class="col-1">
-                                    <img class="img-circle img-fluid" src="<?= base_url() ?>assets/images/employer/profile_pic/<?= $details->image ?>" alt="User Avatar" style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; min-width: 3rem; max-width: 3rem;min-height: 3rem; max-height: 3rem;">
+                                <div class="col-1 d-flex justify-content-center">
+                                    <div>
+
+                                    </div>
+                                    <img class="img-circle img-fluid " src="<?= base_url() ?>assets/images/employer/profile_pic/<?= $details->image ?>" alt="User Avatar" style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
                                 </div>
                                 <div class="col-11">
                                     <div class="card shadow-none hovercard" style="border-radius:10px; width:100%; height:100%; background-color: #F4F6F7;">
@@ -251,15 +262,23 @@ main_header(['Employer_profile']);
                                         
                                     </div>
                                     <div class="modal-body border-top">
+                                        <div class="pb-3">
+                                            <label for="" style="">Job Name</label>
+                                            <input class="form-control border-0"  style="resize:none;background-color: #F4F6F7; border-radius:15px;" type="text" placeholder="Enter Job Name">
 
+                                            <label for="" style="">Company</label>
+                                            <input class="form-control border-0"  style="resize:none;background-color: #F4F6F7; border-radius:15px;" type="text" placeholder="Enter Company">
+
+                                        </div>
                                         <div>
-                                        <textarea class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:15px;" name="" id="" cols="30" rows="6"></textarea>
+                                        
+                                        <textarea id="mytextarea" class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:15px;" name="" cols="30" rows="10"></textarea>
 
                                         </div>
                                     </div>
                                     <div class="modal-footer border-0">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                                        <button type="button text-dark" class="btn" style="border-radius:10px; width:100%; background-color: #F4F6F7;">Save changes</button>
                                     </div>
                                 </div>
                             </div>
@@ -295,6 +314,19 @@ main_header(['Employer_profile']);
                                         Nam tincidunt, augue eu lacinia varius, mi augue dictum turpis, egestas venenatis dolor elit id risus.
                                     </p>
                                 </div>
+                                <h5 class="pt-2">Requirements</h5>
+                                <div  class="row">
+                                    <div class="col-10">
+                                    <button class="btn btn-light mt-2" style="margin-right:10px;border-radius:10px; width:8rem;"> PHP</button>
+                                    <button class="btn btn-light mt-2" style="margin-right:10px;border-radius:10px; width:8rem;"> Laravel</button>
+                                    <button class="btn btn-light mt-2" style="margin-right:10px;border-radius:10px; width:8rem;"> React</button>
+                                    <button class="btn btn-light mt-2" style="margin-right:10px;border-radius:10px; width:8rem;"> Figma</button>
+                                    <button class="btn btn-light mt-2" style="margin-right:10px;border-radius:10px; width:8rem;"> Codeigniter</button>
+                                    <button class="btn btn-light mt-2" style="margin-right:10px;border-radius:10px; width:8rem;"> SQL</button>
+                                    <button class="btn btn-light mt-2" style="margin-right:10px;border-radius:10px; width:8rem;"> JS</button>
+                                    
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -309,7 +341,7 @@ main_header(['Employer_profile']);
                         <h3 class="card-title fw-500">Employees</h3>
                     </div>
                     <div id="load_employees_follow_section" style="margin-left: 1rem; margin-right:1rem;">
-                        <!-- <?= $employees_follow_section_view ?> -->
+                        <?= $employees_follow_section_view ?>
                     </div>
                 </div>
 
@@ -319,7 +351,7 @@ main_header(['Employer_profile']);
                         <h3 class="card-title fw-500">Employers</h3>
                     </div>
                     <div id="load_employers_follow_section" style="margin-left:1rem; margin-right:1rem;">
-                        <!-- <?= $employers_follow_section_view ?> -->
+                        <?= $employers_follow_section_view ?>
                     </div>
                 </div>
                 <!-- /.widget-user -->

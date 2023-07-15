@@ -32,7 +32,7 @@
 
        
 
-        <div class="card-footer border pt-3 pb-3" style="background-color:#FFF;">
+        <div class="card-footer border-top pt-3 pb-3" style="background-color:#FFF;">
             <!-- <div class="row">
                 <div class="col-12">
                     <a href="#" class="hoveropac">

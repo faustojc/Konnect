@@ -16,6 +16,16 @@ class beu_dashboard_model extends CI_Model
         $this->load->model($model_list);
         $this->Table = json_decode(TABLE);
     }
+
+    public function get_current_employer($employer_id)
+    {
+        return $this->db->select()->from($this->Table->employer)->where('id', $employer_id)->get()->row();
+    }
+
+    public function get_summary($employer_id)
+    {
+        return $this->db->select('summary')->from($this->Table->employer)->where('id', $employer_id)->get()->row();
+    }
    
 
 }

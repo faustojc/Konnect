@@ -26,9 +26,10 @@ class Employee_profile_service extends MY_Controller
         $file['allowed_types'] = 'jpg|png|jpeg';
         $file['max_size'] = '2000';
 
-        $this->load->library('upload', $file);
+        $upload = $this->input->post('Employee_image');
 
-        if (!$this->upload->do_upload('Employee_image')) {
+        $this->load->library('upload', $file);
+        if (empty($upload) && !$this->upload->do_upload('Employee_image')) {
             $response['file_error'] = $this->upload->display_errors();
         } else {
             $img = $this->upload->data();
@@ -53,16 +54,14 @@ class Employee_profile_service extends MY_Controller
             'SSS' => $this->input->post('SSS'),
             'Tin' => $this->input->post('Tin'),
             'Phil_health' => $this->input->post('Phil_health'),
-            'Pag_ibig' => $this->input->post('Pag_ibig'),
-            'Employee_image' => isset($img) ? $img['file_name'] : 'default.png'
+            'Pag_ibig' => $this->input->post('Pag_ibig')
         );
 
-        // Check if employer has image already
-        $image = $this->esModel->getEmployeeImage($data['ID']);
-
-        if (empty($image)) {
-            $data['image'] = isset($img) ? $img['file_name'] : 'default.png';
+        // If there is a new image uploaded, replace the existing image, else use the existing image
+        if (isset($img)) {
+            $data['Employee_image'] = $img['file_name'];
         }
+
 
         $response = $this->esModel->update('tbl_employee', 'ID', $data['ID'], $data);
         echo json_encode($response);

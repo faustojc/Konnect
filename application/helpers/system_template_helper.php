@@ -91,12 +91,12 @@ function main_header($menubar = [])
                 <li class="nav-item d-none d-sm-inline-block">
                     <div class="input-group flex-nowrap d-none d-lg-flex">
                         <div class="input-group-prepend">
-                  <span class="input-group-text bg-gray-light border-0" id="addon-wrapping">
+                  <span class="input-group-text bg-gray-light border-0" id="addon-wrapping" style="border-radius: 10px 0 0 10px;">
                     <i class="fa fa-search"></i>
                   </span>
                         </div>
                         <input type="text" class="form-control border-0 bg-gray-light" placeholder="Search"
-                               aria-label="search" aria-describedby="addon-wrapping">
+                               aria-label="search" aria-describedby="addon-wrapping" style="border-radius: 0 10px 10px 0;">
                     </div>
 
                     <div class="d-block d-lg-none">

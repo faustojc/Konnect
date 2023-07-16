@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 15, 2023 at 03:11 PM
+-- Generation Time: Jul 16, 2023 at 08:01 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -72,7 +72,7 @@ INSERT INTO `tbl_employee` (`ID`, `user_id`, `Date_created`, `Fname`, `Lname`, `
 (1, 0, '2023-06-27 03:45:52', 'John Marti', 'Demonteverde', 'Cusi', '2002-06-05', 'male', 'single', 'Catholic', '09604436812', 'johnmartin@outlook.com', 'Bacolod Cityy', 'Granada', 'Patricia Homes', 'Mobile Dev', '23234', '55555', '44444', '26262', '<p style=\"line-height: 1.4;\">Hello! I\'m JD, a highly motivated and passionate fourth-year Computer Science student with a strong interest in software development. I have a solid foundation in programming languages like <span style=\"text-decoration: underline;\"><strong>Java</strong></span>, <span style=\"text-decoration: underline;\"><strong>Python</strong></span>, and <span style=\"text-decoration: underline;\"><strong>C++</strong></span>, along with expertise in data structures, algorithms, and web development using <span style=\"text-decoration: underline;\"><strong>HTML</strong></span>, <span style=\"text-decoration: underline;\"><strong>CSS</strong></span>, and <span style=\"text-decoration: underline;\"><strong>JavaScript</strong></span>.</p>\n<p>&nbsp;</p>', 'IMG_0313_(1).JPG'),
 (14, 0, '2023-06-27 11:03:31', 'Paul Martin', 'Cuenca', 'Benedicto', '2001-11-24', 'male', 'single', 'Catholic', '09479505192', '@polcuenca', 'Bacolod City', 'Mansilingan', 'adelfa st. victorina heights', 'Web Dev', '1929222222', '757875', '8686', '8686', 'Hello! I\'m Paul, a highly motivated and passionate fourth-year Computer Science student with a strong interest in software development. I have a solid foundation in programming languages like Java, Python, and C++, along with expertise in data structures, algorithms, and web development using HTML, CSS, and JavaScript. I thrive in collaborative environments, possess excellent problem-solving abilities, and actively seek opportunities to learn and grow. Currently seeking internship opportunities, I am eager to apply my skills and contribute to building innovative solutions as a software developer. Let\'s connect and discuss how I can add value to your organization!', '347548042_184571507478516_7611925746711583073_n1.jpg'),
 (27, 0, '2023-06-29 10:55:16', 'Katrina', 'Sheesh', 'God', '2023-06-29', 'male', 'single', 'Catholic', '5555555', '@katrinadiz', 'BACOLOD CITY', 'Villamonte', 'Kats Street', 'GOD', '616216161', '515165151', '15151515', '5151515', '<p>Yes I am Kat have a <strong>kit kat</strong></p>', 'CheatEngine-logo2.png'),
-(32, 6, '0000-00-00 00:00:00', 'left', 'dead', 'for', '2022-08-16', 'male', 'single', 'Chicken', '123456', 'chicken@gmail.com', 'Bacolod City', 'Chicken', 'Charito Heights', '', '', '', '', '', '', 'default.png');
+(32, 6, '0000-00-00 00:00:00', 'left', 'dead', 'for', '2022-08-16', 'male', 'single', 'Chicken', '123456', 'chicken@gmail.com', 'Bacolod City', 'Chicken', 'Charito Heights', 'L4D2', '123', '22222', '331313', '12323131', '', 'Csharp_Logo.png');
 
 -- --------------------------------------------------------
 
@@ -133,9 +133,7 @@ INSERT INTO `tbl_employee_skill` (`id`, `employee_id`, `skill`, `proficiency`, `
 (27, 27, 'C++', 'advance', 5),
 (29, 27, 'C#', 'intermediate', 2),
 (30, 27, 'React', 'beginner', 1),
-(31, 27, 'JavaScript', 'advance', 3),
-(32, 32, 'PHP', 'beginner', 1),
-(33, 32, 'C++', 'intermediate', 2);
+(31, 27, 'JavaScript', 'advance', 3);
 
 -- --------------------------------------------------------
 

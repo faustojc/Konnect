@@ -145,11 +145,11 @@ main_header(['Employer_profile']);
                     <?= $user_display ?>
                 </div>
 
-                <div class="card card-white">
+                <!-- <div class="card card-white">
                     <div class="card-header">
                         <h3 class="card-title fw-500">About Me</h3>
                     </div>
-                    <!-- /.card-header -->
+                    /.card-header
                     <div class="card-body">
                         <strong><i class="fas fa-book mr-1"></i> Education</strong>
                         <p class="text-muted mb-0">
@@ -182,8 +182,8 @@ main_header(['Employer_profile']);
                             </a>
                         </div>
                     </div>
-                    <!-- /.card-body -->
-                </div>
+                    /.card-body
+                </div> -->
                 <!-- /.card -->
                 <!-- /.card -->
             </div> <!--col-->
@@ -195,10 +195,7 @@ main_header(['Employer_profile']);
                     <div class="card-body">
                         <div class="row pb-2">
                             <div class="col-1 d-flex justify-content-center">
-                                <div>
-
-                                </div>
-                                <!-- <img class="img-circle img-fluid " src="<?= base_url() ?>assets/images/employer/profile_pic/<?= $details->image ?>" alt="User Avatar" style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;"> -->
+                                <img class="img-circle img-fluid " src="<?= base_url() ?>assets/images/employer/profile_pic/default.png" alt="User Avatar" style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
                             </div>
                             <div class="col-11">
                                 <div class="card shadow-none hovercard" style="border-radius:10px; width:100%; height:100%; background-color: #F4F6F7;">
@@ -276,24 +273,25 @@ main_header(['Employer_profile']);
                 <div class="card">
                     <div class="card-body">
                         <div class="job-post">
-                            <div class="job-header">
-                                <h4 class="job-title fw-bold">Frontend Developer</h4>
-                                <p class="job-company">ABC Company</p>
-                                <p class="job-location">San Francisco, CA</p>
+                            <div class="row">
+                                <div class="col-1 d-flex justify-content-center">
+                                    <img class="img-circle img-fluid " src="<?= base_url() ?>assets/images/employer/profile_pic/default.png" alt="User Avatar" style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
+                                </div>
+                                <div class="col-11 pt-2 pl-3">
+                                    <div class="row">
+                                        <h5 class="job-title fw-bold">ABC Company</h5>
+                                    </div>
+                                    <div class="row">
+                                        <h6 style="font-size: 12px; font-weight: normal;"> November 9, 2022</h6>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="job-details">
-                                <!-- <ul class="job-info">
-                                    <li>
-                                        <i class="fas fa-calendar"></i>
-                                        <span class="job-info-label">Posted:</span>
-                                        <span class="job-info-value">5 days ago</span>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-clock"></i>
-                                        <span class="job-info-label">Type:</span>
-                                        <span class="job-info-value">Full-time</span>
-                                    </li>
-                                </ul> -->
+
+                            <div class="job-details pt-2">
+                                <div>
+                                    <!-- Job Title -->
+                                    <h6>Frontend Developer <span class="badge badge-success">OPEN</span></h6>
+                                </div>
                                 <div class="job-description">
                                     <p class="fs-14 mb-0 text-muted">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vitae ante tortor. Pellentesque a massa eget sapien sagittis rutrum.
@@ -302,16 +300,15 @@ main_header(['Employer_profile']);
                                         Nam tincidunt, augue eu lacinia varius, mi augue dictum turpis, egestas venenatis dolor elit id risus.
                                     </p>
                                 </div>
-                                <h5 class="pt-2">Requirements</h5>
+                                <h6 class="pt-2">Requirements</h6>
                                 <div class="row">
-                                    <div class="col-10">
-                                        <button class="btn btn-light mt-2" style="margin-right:10px;border-radius:10px; width:8rem;"> PHP</button>
-                                        <button class="btn btn-light mt-2" style="margin-right:10px;border-radius:10px; width:8rem;"> Laravel</button>
-                                        <button class="btn btn-light mt-2" style="margin-right:10px;border-radius:10px; width:8rem;"> React</button>
-                                        <button class="btn btn-light mt-2" style="margin-right:10px;border-radius:10px; width:8rem;"> Figma</button>
-                                        <button class="btn btn-light mt-2" style="margin-right:10px;border-radius:10px; width:8rem;"> Codeigniter</button>
-                                        <button class="btn btn-light mt-2" style="margin-right:10px;border-radius:10px; width:8rem;"> SQL</button>
-                                        <button class="btn btn-light mt-2" style="margin-right:10px;border-radius:10px; width:8rem;"> JS</button>
+                                    <div class="col-12">
+                                        <span class="badge badge-light py-2" style="margin-right:10px;border-radius:10px; width:6rem; font-weight:normal;">PHP</span>
+                                        <span class="badge badge-light py-2" style="margin-right:10px;border-radius:10px; width:6rem; font-weight:normal;">Laravel</span>
+                                        <span class="badge badge-light py-2" style="margin-right:10px;border-radius:10px; width:6rem; font-weight:normal;">HTML</span>
+                                        <span class="badge badge-light py-2" style="margin-right:10px;border-radius:10px; width:6rem; font-weight:normal;">Figma</span>
+                                        <span class="badge badge-light py-2" style="margin-right:10px;border-radius:10px; width:6rem; font-weight:normal;">Java</span>
+                                        <span class="badge badge-light py-2" style="margin-right:10px;border-radius:10px; width:6rem; font-weight:normal;">C++</span>
 
                                     </div>
                                 </div>

@@ -7,16 +7,16 @@ if (!empty($jobpostings)) {
 
         if ($timeDifference < 60) {
             $timeAgo = "Less than a minute ago";
-        } elseif ($timeDifference < 3600) {
+        } else if ($timeDifference < 3600) {
             $minutesAgo = floor($timeDifference / 60);
             $timeAgo = $minutesAgo . " mins ago";
-        } elseif ($timeDifference < 86400) {
+        } else if ($timeDifference < 86400) {
             $hoursAgo = floor($timeDifference / 3600);
             $timeAgo = $hoursAgo . ($hoursAgo == 1 ? " hr ago" : " hrs ago");
-        } elseif ($timeDifference < 604800) {
+        } else if ($timeDifference < 604800) {
             $daysAgo = floor($timeDifference / 86400);
             $timeAgo = $daysAgo . ($daysAgo == 1 ? " day ago" : " days ago");
-        } elseif ($timeDifference < 2592000) {
+        } else if ($timeDifference < 2592000) {
             $weeksAgo = floor($timeDifference / 604800);
             $timeAgo = $weeksAgo . ($weeksAgo == 1 ? " week ago" : " weeks ago");
         } else {

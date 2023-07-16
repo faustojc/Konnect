@@ -144,178 +144,85 @@ main_header(['Employer_profile']);
                 <div id="user">
                     <?= $user_display ?>
                 </div>
-
-                <!-- <div class="card card-white">
-                    <div class="card-header">
-                        <h3 class="card-title fw-500">About Me</h3>
-                    </div>
-                    /.card-header
-                    <div class="card-body">
-                        <strong><i class="fas fa-book mr-1"></i> Education</strong>
-                        <p class="text-muted mb-0">
-                            B.S. in Information Technology from the University of Something Something in Somewhere on Earth
-                        </p>
-                    </div>
-                    <div class="card-body border-top">
-                        <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
-                        <p class="text-muted mb-0">Bacolod City, Philippines</p>
-                    </div>
-                    <div class="card-body border-top">
-                        <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
-                        <p class="text-muted mb-0">
-                            <span class="tag">UI Design</span>
-                            <span class="tag">Coding</span>
-                            <span class="tag">Javascript</span>
-                            <span class="tag">PHP</span>
-                        </p>
-                    </div>
-                    <div class="card-body border-top">
-                        <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
-                        <p class="text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
-                    </div>
-                    <div class="card-body border-top pt-3 pb-3">
-                        <div class="widget-user-header">
-                            <a href="#" class="hoveropac">
-                                <p class="mb-0 text-center fw-500 text-muted fs-14">See More
-                                    <i class="fa-solid fa-arrow-right fs-14 ml-1"></i>
-                                </p>
-                            </a>
-                        </div>
-                    </div>
-                    /.card-body
-                </div> -->
-                <!-- /.card -->
-                <!-- /.card -->
-            </div> <!--col-->
-
+            </div>
 
             <div class="col-12 col-md-6 mt-4">
-
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row pb-2">
-                            <div class="col-1 d-flex justify-content-center">
-                                <img class="img-circle img-fluid " src="<?= base_url() ?>assets/images/employer/profile_pic/default.png" alt="User Avatar" style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
-                            </div>
-                            <div class="col-11">
-                                <div class="card shadow-none hovercard" style="border-radius:10px; width:100%; height:100%; background-color: #F4F6F7;">
-                                    <a data-toggle="modal" data-target="#jobpostmodal" style="width:100%; height:100%; text-decoration: none;cursor:pointer; color: #626567;">
-                                        <p class="pt-3" style=" padding-left: 1rem; margin-bottom: 0px; ">
-                                            Create new jobpost...
-                                        </p>
-                                    </a>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-1">
-                                &nbsp;
-                            </div>
-
-                            <div class="col-3">
-                                <div class="card">
-                                    <div class="card-body">
-
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="card">
-                                    <div class="card-body">
-
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-                    <!-- Modal -->
-                    <div class="modal fade" id="jobpostmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="border-radius:15px;">
-                        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                            <div class="modal-content border-0" style="border-radius:15px;">
-                                <div class="border-0">
-
-                                    <h5 class="text-center py-3" id="exampleModalLabel" style="font-weight:650;">Create Jobpost
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span class="pr-3" aria-hidden="true">&times;</span>
-                                        </button>
-                                    </h5>
-
-                                </div>
-                                <div class="modal-body border-top">
-                                    <div class="pb-3">
-                                        <label for="" style="">Job Name</label>
-                                        <input class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:15px;" type="text" placeholder="Enter Job Name">
-
-                                        <label for="" style="">Company</label>
-                                        <input class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:15px;" type="text" placeholder="Enter Company">
-
-                                    </div>
-                                    <div>
-                                        <textarea id="mytextarea" class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:15px;" name="" cols="30" rows="10"></textarea>
-                                    </div>
-                                </div>
-                                <div class="modal-footer border-0">
-                                    <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-                                    <button type="button text-dark" class="btn" style="border-radius:10px; width:100%; background-color: #F4F6F7;">Save changes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-body">
-                        <div class="job-post">
-                            <div class="row">
+                <!-- POSTS -->
+                <?php if ($user_type == 'EMPLOYER'): ?>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row pb-2">
                                 <div class="col-1 d-flex justify-content-center">
                                     <img class="img-circle img-fluid " src="<?= base_url() ?>assets/images/employer/profile_pic/default.png" alt="User Avatar" style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
                                 </div>
-                                <div class="col-11 pt-2 pl-3">
-                                    <div class="row">
-                                        <h5 class="job-title fw-bold">ABC Company</h5>
-                                    </div>
-                                    <div class="row">
-                                        <h6 style="font-size: 12px; font-weight: normal;"> November 9, 2022</h6>
+                                <div class="col-11">
+                                    <div class="card shadow-none hovercard" style="border-radius:10px; width:100%; height:100%; background-color: #F4F6F7;">
+                                        <a data-toggle="modal" data-target="#jobpostmodal" style="width:100%; height:100%; text-decoration: none;cursor:pointer; color: #626567;">
+                                            <p class="pt-3" style=" padding-left: 1rem; margin-bottom: 0px; ">
+                                                Create new jobpost...
+                                            </p>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="job-details pt-2">
-                                <div>
-                                    <!-- Job Title -->
-                                    <h6>Frontend Developer <span class="badge badge-success">OPEN</span></h6>
+                            <div class="row">
+                                <div class="col-1">
+                                    &nbsp;
                                 </div>
-                                <div class="job-description">
-                                    <p class="fs-14 mb-0 text-muted">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vitae ante tortor. Pellentesque a massa eget sapien sagittis rutrum.
-                                        Donec laoreet in ex aliquet cursus. Sed lacinia, est et varius feugiat, elit tortor gravida tortor, et consectetur diam elit id odio.
-                                        Aliquam urna dolor, posuere ac hendrerit nec, cursus eget ipsum. Sed viverra enim at metus finibus posuere. Pellentesque ac neque erat.
-                                        Nam tincidunt, augue eu lacinia varius, mi augue dictum turpis, egestas venenatis dolor elit id risus.
-                                    </p>
-                                </div>
-                                <h6 class="pt-2">Requirements</h6>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <span class="badge badge-light py-2" style="margin-right:10px;border-radius:10px; width:6rem; font-weight:normal;">PHP</span>
-                                        <span class="badge badge-light py-2" style="margin-right:10px;border-radius:10px; width:6rem; font-weight:normal;">Laravel</span>
-                                        <span class="badge badge-light py-2" style="margin-right:10px;border-radius:10px; width:6rem; font-weight:normal;">HTML</span>
-                                        <span class="badge badge-light py-2" style="margin-right:10px;border-radius:10px; width:6rem; font-weight:normal;">Figma</span>
-                                        <span class="badge badge-light py-2" style="margin-right:10px;border-radius:10px; width:6rem; font-weight:normal;">Java</span>
-                                        <span class="badge badge-light py-2" style="margin-right:10px;border-radius:10px; width:6rem; font-weight:normal;">C++</span>
+                                <div class="col-3">
+                                    <div class="card">
+                                        <div class="card-body">
 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="card">
+                                        <div class="card-body">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="jobpostmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="border-radius:15px;">
+                            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                <div class="modal-content border-0" style="border-radius:15px;">
+                                    <div class="border-0">
+
+                                        <h5 class="text-center py-3" id="exampleModalLabel" style="font-weight:650;">Create Jobpost
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span class="pr-3" aria-hidden="true">&times;</span>
+                                            </button>
+                                        </h5>
+
+                                    </div>
+                                    <div class="modal-body border-top">
+                                        <div class="pb-3">
+                                            <label for="" style="">Job Name</label>
+                                            <input class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:15px;" type="text" placeholder="Enter Job Name">
+
+                                            <label for="" style="">Company</label>
+                                            <input class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:15px;" type="text" placeholder="Enter Company">
+
+                                        </div>
+                                        <div>
+                                            <textarea id="mytextarea" class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:15px;" name="" cols="30" rows="10"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer border-0">
+                                        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                                        <button type="button text-dark" class="btn" style="border-radius:10px; width:100%; background-color: #F4F6F7;">Save changes</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                <?php endif; ?>
+
+                <!-- JOBPOSTS -->
+                <?= $jobpost_section_view ?>
             </div>
 
 

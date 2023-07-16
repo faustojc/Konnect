@@ -39,7 +39,7 @@ class Employer_profile extends MY_Controller
         $this->data['current_employer']->summary = $this->load->view('grid/load_summary', $this->data, TRUE);
         $this->data['employees'] = $this->employee_model->get_all_employees(4);
         $this->data['employers'] = $this->employer_model->get_employers(4, $id);
-        $this->data['jobpostings'] = $this->jobposting_model->get_jobpostings($id, 4);
+        $this->data['jobpostings'] = $this->jobposting_model->get_employer_jobposts($id, 4);
 
         // Disable query caching
         $this->db->cache_off();

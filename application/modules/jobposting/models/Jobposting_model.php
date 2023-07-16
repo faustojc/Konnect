@@ -19,7 +19,22 @@ class Jobposting_model extends CI_Model
         $this->Table = json_decode(TABLE);
     }
 
-    public function get_jobpostings($id, $limit = 0)
+    public function get_all_jobposts($limit = 0)
+    {
+        if ($limit == 0) {
+            return $this->db->select('tbl_jobposting.*, tbl_employer.tradename AS EmployerTradename, tbl_employer.image AS EmployerLogo')
+                ->from($this->Table->jobposting)
+                ->join($this->Table->employer, $this->Table->employer . '.id = ' . $this->Table->jobposting . '.employer_id')
+                ->order_by('date_posted', 'DESC')->get()->result();
+        }
+
+        return $this->db->select('tbl_jobposting.* AS jobpost, tbl_employer.tradename AS EmployerTradename, tbl_employer.image AS EmployerLogo')
+            ->from($this->Table->jobposting)
+            ->join($this->Table->employer, $this->Table->employer . '.id = ' . $this->Table->jobposting . '.employer_id')
+            ->order_by('date_posted', 'DESC')->limit($limit)->get()->result();
+    }
+
+    public function get_employer_jobposts($id, $limit = 0)
     {
         if ($limit == 0) {
             return $this->db->select()->from($this->Table->jobposting)->where('employer_id', $id)->order_by('date_posted', 'DESC')->get()->result();

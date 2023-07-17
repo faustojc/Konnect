@@ -69,6 +69,54 @@ function main_header($menubar = [])
 
         <!-- TinyMCE -->
         <script src="<?= base_url() ?>assets/theme/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+        <style>
+
+            .text-info{
+                color: #0dcaf0;
+            }
+            
+            .btn-info{
+                color: #fff;
+                background-color: #0dcaf0;
+                border-color: #0dcaf0;
+            }
+            .btn-outline-info {
+            color: #0dcaf0;
+            border-color: #0dcaf0;
+            }
+            .btn-outline-info:hover {
+            color: #fff;
+            background-color: #0dcaf0;
+            border-color: #0dcaf0;
+            }
+
+            /* custom css */
+
+            .sec-color{
+                background-color:   #f7f9f9  ;
+            }
+
+            .nav-color{
+                background-color: #0dcaf0;
+            }
+            .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+            color: #fff;
+            background-color: #0dcaf0;
+            }
+            .nav-pills .nav-link:not(.active):hover {
+            color: #0dcaf0;
+            }
+            .nav-pills .nav-link {
+            border-radius: 10px;
+            }
+
+            .br-custom{
+                border-radius: 15px;
+            }
+            .a .text-info{
+                color: #0dcaf0;
+            }
+        </style>
     </head>
 
     <body class="hold-transition  light-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed" style="background-color:#F1F6F9 ;" >
@@ -80,12 +128,14 @@ function main_header($menubar = [])
             <!-- Left navbar links -->
             <ul class="navbar-nav align-items-center">
                 <li class="nav-item d-none d-sm-inline-block pr-3">
+                    <a href="<?= base_url() ?>beu_dashboard">
                     <img class="brand-image" src="<?= base_url() ?>assets/images/Logo/Konnect.png" alt="" style="
                             object-fit: cover;
                             min-width: 100px;
                             max-width: 100px;
                             min-height: 45px;
                             max-height: 45px;">
+                    </a>
                 </li>
 
                 <li class="nav-item d-none d-sm-inline-block">
@@ -138,7 +188,7 @@ function main_header($menubar = [])
                     </a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">
+                    <a href="<?= base_url() ?>jobposting" class="nav-link">
                         Jobs <i class="fa-solid fa-briefcase"></i>
                     </a>
                 </li>

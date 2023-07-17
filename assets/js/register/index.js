@@ -22,6 +22,10 @@ const passwordErrorMessage = document.createElement('p');
 passwordErrorMessage.classList.add('invalid-feedback', 'm-0', 'd-block');
 passwordErrorMessage.textContent = 'Password must be 6 characters long.';
 
+const userTypeErrorMessage = document.createElement('p');
+userTypeErrorMessage.classList.add('invalid-feedback', 'm-0', 'd-block');
+userTypeErrorMessage.textContent = 'Please select on what to register.';
+
 email.addEventListener('input', function () {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     emailIsValid = regex.test(email.value);
@@ -77,13 +81,13 @@ password.addEventListener('input', function () {
 });
 
 nextBtn.addEventListener('click', function () {
-    const user_type = document.querySelector('select#user_type').value;
+    const user_type = document.querySelector('select#user_type');
     const validForm = validateForm('#needs-validation');
 
-    if (validForm && user_type !== '' && emailIsValid && passwordIsValid) {
+    if (validForm && (user_type.value === 'EMPLOYER' || user_type.value === 'EMPLOYEE') && emailIsValid && passwordIsValid) {
         let url = baseUrl + 'register/';
 
-        if (user_type === 'EMPLOYEE') {
+        if (user_type.value === 'EMPLOYEE') {
             url += 'employeeForm';
         } else {
             url += 'employerForm';
@@ -112,6 +116,19 @@ nextBtn.addEventListener('click', function () {
                 register();
             });
     }
+    else {
+        user_type.classList.add('is-invalid');
+        user_type.parentElement.insertBefore(userTypeErrorMessage, user_type.nextElementSibling);
+    }
+});
+
+document.querySelector('select#user_type').addEventListener('change', function () {
+    const user_type = document.querySelector('select#user_type');
+
+    if (user_type.value === 'EMPLOYEE' || user_type.value === 'EMPLOYER') {
+        user_type.classList.remove('is-invalid');
+        user_type.nextElementSibling.remove();
+    }
 });
 
 const setNextBtn = () => {
@@ -134,11 +151,12 @@ const register = () => {
             fetch(baseUrl + 'register', {
                 method: 'POST',
                 body: formData
-            }).then(response => {
-                setTimeout(() => {
-                    window.location.href = baseUrl + 'login';
-                }, 2000);
-            })
+            }).then(response => response.json())
+                .then(data => {
+                    setTimeout(() => {
+                        window.location.href = data.redirect;
+                    }, 500);
+                })
         }
     });
 }

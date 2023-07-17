@@ -56,6 +56,7 @@ main_header(['Employer_profile']);
 
     .card {
         border-radius: 15px;
+        box-shadow: none;
     }
 
     .card-header {
@@ -134,6 +135,14 @@ main_header(['Employer_profile']);
         transition: .3s transform;
         /* box-shadow: 0  1px 4px rgba(0, 0, 0, .15); */
     }
+
+    .hoverbutton:hover {
+        transform: scale(1.05);
+        background-color: #F1F6F9;
+        transition: .3s transform;
+        /* box-shadow: 0  1px 4px rgba(0, 0, 0, .15); */
+    }
+
 </style>
 
 <section class="content">
@@ -153,19 +162,20 @@ main_header(['Employer_profile']);
                         <div class="card-body">
                             <div class="row pb-2">
                                 <div class="col-1 d-flex justify-content-center">
-                                    <img class="img-circle img-fluid " src="<?= base_url() ?>assets/images/employer/profile_pic/default.png" alt="User Avatar" style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
+                                    <img class="img-circle img-fluid " src="<?= base_url() ?>assets/images/employer/profile_pic/default.png" alt="User Avatar"
+                                         style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
                                 </div>
                                 <div class="col-11">
                                     <div class="card shadow-none hovercard" style="border-radius:10px; width:100%; height:100%; background-color: #F4F6F7;">
                                         <a data-toggle="modal" data-target="#jobpostmodal" style="width:100%; height:100%; text-decoration: none;cursor:pointer; color: #626567;">
                                             <p class="pt-3" style=" padding-left: 1rem; margin-bottom: 0px; ">
-                                                Create new jobpost...
+                                                <i class="fa-solid fa-pen-to-square"></i> Create new jobpost...
                                             </p>
                                         </a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-1">
                                     &nbsp;
                                 </div>
@@ -183,7 +193,7 @@ main_header(['Employer_profile']);
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <!-- Modal -->
                         <div class="modal fade" id="jobpostmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="border-radius:15px;">
@@ -191,7 +201,7 @@ main_header(['Employer_profile']);
                                 <div class="modal-content border-0" style="border-radius:15px;">
                                     <div class="border-0">
 
-                                        <h5 class="text-center py-3" id="exampleModalLabel" style="font-weight:650;">Create Jobpost
+                                        <h5 class="text-center py-3" id="exampleModalLabel" style="font-weight:650;"><i class="fa-solid fa-pen-to-square"></i> Create Jobpost
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span class="pr-3" aria-hidden="true">&times;</span>
                                             </button>
@@ -202,13 +212,21 @@ main_header(['Employer_profile']);
                                         <div class="pb-3">
                                             <label for="" style="">Job Name</label>
                                             <input class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:15px;" type="text" placeholder="Enter Job Name">
-
-                                            <!-- <label for="" style="">Company</label>
-                                            <input class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:15px;" type="text" placeholder="Enter Company"> -->
-
                                         </div>
                                         <div>
                                             <textarea id="mytextarea" class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:15px;" name="" cols="30" rows="10"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Requirements</label>
+                                            <select class="select2" multiple="multiple" data-placeholder="Select a State" style="width: 100%;">
+                                                <option>HTML</option>
+                                                <option>SQL</option>
+                                                <option>PHP</option>
+                                                <option>Laravel</option>
+                                                <option>React</option>
+                                                <option>Java</option>
+                                                <option>Javascript</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="modal-footer border-0">
@@ -219,6 +237,7 @@ main_header(['Employer_profile']);
                             </div>
                         </div>
                     </div>
+
                 <?php endif; ?>
 
                 <!-- JOBPOSTS -->
@@ -233,7 +252,7 @@ main_header(['Employer_profile']);
                         <h3 class="card-title fw-500">Employees</h3>
                     </div>
                     <div id="load_employees_follow_section" style="margin-left: 1rem; margin-right:1rem;">
-                        <?= $employees_follow_section_view ?>
+                        <?php load_employees($employees); ?>
                     </div>
                 </div>
 
@@ -243,7 +262,11 @@ main_header(['Employer_profile']);
                         <h3 class="card-title fw-500">Employers</h3>
                     </div>
                     <div id="load_employers_follow_section" style="margin-left:1rem; margin-right:1rem;">
-                        <?= $employers_follow_section_view ?>
+                        <?php if ($user_type == 'EMPLOYEE') : ?>
+                            <?php load_employers($employers, $following); ?>
+                        <?php else : ?>
+                            <?php load_employers($employers); ?>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <!-- /.widget-user -->

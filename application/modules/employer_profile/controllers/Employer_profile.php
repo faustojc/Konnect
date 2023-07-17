@@ -44,26 +44,7 @@ class Employer_profile extends MY_Controller
         // Disable query caching
         $this->db->cache_off();
 
-        // Check if the views are cached
-        if (!$jobpostings_view = $this->cache->get('jobpostings_view')) {
-            // If not, generate the view and cache it for 10 minutes
-            $jobpostings_view = $this->load->view('grid/load_jobpostings', $this->data, TRUE);
-            $this->cache->save('jobpostings_view', $jobpostings_view, 600);
-        }
-        if (!$employers_follow_section_view = $this->cache->get('employers_follow_section_view')) {
-            // If not, generate the view and cache it for 10 minutes
-            $employers_follow_section_view = $this->load->view('grid/load_employers', $this->data, TRUE);
-            $this->cache->save('employers_follow_section_view', $employers_follow_section_view, 600);
-        }
-        if (!$employees_follow_section_view = $this->cache->get('employees_follow_section_view')) {
-            // If not, generate the view and cache it for 10 minutes
-            $employees_follow_section_view = $this->load->view('grid/load_employees', $this->data, TRUE);
-            $this->cache->save('employees_follow_section_view', $employees_follow_section_view, 600);
-        }
-
-        $this->data['jobpostings_view'] = $jobpostings_view;
-        $this->data['employers_follow_section_view'] = $employers_follow_section_view;
-        $this->data['employees_follow_section_view'] = $employees_follow_section_view;
+        $this->data['jobpostings_view'] = $this->load->view('grid/load_jobpostings', $this->data, TRUE);;
 
         $this->data['content'] = 'index';
         $this->load->view('layout', $this->data);

@@ -30,19 +30,27 @@ if (!empty($jobpostings)) {
                 <div class="mb-0">
                     <div class="row" data-toggle="collapse" data-target="#collapse<?= $index ?>" aria-expanded="false" aria-controls="collapse<?= $index ?>" role="button">
                         <div class="col-md-9 d-flex align-items-center justify-content-between">
-                            <span class="font-weight-bold text-dark text-break"><?= ucwords($job->title) ?></span>
-                            <span class="ml-2 badge status "><?= $job->filled ?></span>
+                            <span class="font-weight-bold text-dark text-break">
+                                <?= ucwords($job->title) ?>
+                            </span>
+                            <span class="ml-2 badge status ">
+                                <?= $job->filled ?>
+                            </span>
                         </div>
                         <div class="col-md-3" style="vertical-align: middle">
-                            <p class="m-0"><?= $timeAgo ?> at</p>
-                            <span class="text-muted"><?= $job->date_posted ?></span>
+                            <p class="m-0">
+                                <?= $timeAgo ?> at
+                            </p>
+                            <span class="text-muted">
+                                <?= $job->date_posted ?>
+                            </span>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div id="collapse<?= $index ?>" class="collapse bg-gray-light" aria-labelledby="job<?= $index ?>" data-parent="#load_jobpostings">
-                <div class="card-body">
+                <div class="card-body text-muted">
                     <?= $job->description ?>
                 </div>
             </div>
@@ -58,6 +66,6 @@ if (!empty($jobpostings)) {
             <p class="lead">We can't find the job posted that you are looking for or there are no jobs posted.</p>
         </div>
     </div>
-    <?php
+<?php
 }
 ?>

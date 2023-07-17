@@ -18,7 +18,8 @@ class Employee_profile extends MY_Controller
         $model_list = [
             'employee_profile/employee_profile_model' => 'eModel',
             'employer/Employer_model' => 'employer_model',
-            'employee/Employee_model' => 'employee_model'
+            'employee/Employee_model' => 'employee_model',
+            'follow/Follow_model' => 'follow_model',
         ];
         $this->load->model($model_list);
     }
@@ -45,6 +46,9 @@ class Employee_profile extends MY_Controller
         $this->data['train_val'] = $this->eModel->get_training();
         $this->data['employments'] = $this->eModel->get_all_employments($ID);
         $this->data['skills'] = $this->eModel->get_skill($ID);
+        $this->data['employers'] = $this->employer_model->get_employers(4);
+        $this->data['employees'] = $this->employee_model->get_all_employees(4, $ID);
+        $this->data['following'] = $this->follow_model->get_following($ID);
 
         if (!$educations_section_view = $this->cache->get('educations_section_view')) {
             // If not, generate the view and cache it for 10 minutes
@@ -56,25 +60,11 @@ class Employee_profile extends MY_Controller
             $employments_section_view = $this->load->view('grid/load_employments', $this->data, TRUE);
             $this->cache->save('employments_section_view', $employments_section_view, 600);
         }
-        if (!$employers_follow_section_view = $this->cache->get('employers_follow_section_view')) {
-            // If not, generate the view and cache it for 10 minutes
-            $this->data['employers'] = $this->employer_model->get_employers(4);
-            $employers_follow_section_view = $this->load->view('grid/load_employers', $this->data, TRUE);
-            $this->cache->save('employers_follow_section_view', $employers_follow_section_view, 600);
-        }
-        if (!$employees_follow_section_view = $this->cache->get('employees_follow_section_view')) {
-            // If not, generate the view and cache it for 10 minutes
-            $this->data['employees'] = $this->employee_model->get_all_employees(4, $ID);
-            $employees_follow_section_view = $this->load->view('grid/load_employees', $this->data, TRUE);
-            $this->cache->save('employees_follow_section_view', $employees_follow_section_view, 600);
-        }
 
         $this->data['educations_section_view'] = $educations_section_view;
         $this->data['employments_section_view'] = $employments_section_view;
         $this->data['skills_section_view'] = $this->load->view('grid/load_skill', $this->data, TRUE);
         $this->data['training_section_view'] = $this->load->view('grid/load_training', $this->data, TRUE);
-        $this->data['employers_follow_section_view'] = $employers_follow_section_view;
-        $this->data['employees_follow_section_view'] = $employees_follow_section_view;
 
         $this->data['content'] = 'index';
         $this->load->view('layout', $this->data);

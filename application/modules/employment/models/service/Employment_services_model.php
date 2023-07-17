@@ -22,16 +22,14 @@ class Employment_services_model extends CI_Model
 
     /**
      * Saves a record to the database
-     * @param string $table The table to save the data
      * @param array $data The data to insert a new record to table
      * @return array Returns an array with message and a boolean has_error
-     * @throws Exception Throws an Exception
      */
-    public function save(string $table, array $data): array
+    public function save(array $data): array
     {
         try {
             $this->db->trans_start();
-            $this->db->insert($table, $data);
+            $this->db->insert($this->Table->employment, $data);
             $this->db->trans_complete();
 
             if ($this->db->trans_status() === FALSE) {
@@ -46,41 +44,37 @@ class Employment_services_model extends CI_Model
         }
     }
 
-    public function edit()
+    /**
+     * Updates a record in the database
+     * @param string $id The id of the record to be updated
+     * @param array $data The data to update a record
+     * @return array Returns an array with message and its boolean has_error
+     */
+    public function update(string $id, array $data): array
     {
         try {
-            $data = array(
-                'ID' => $this->ID,
-                'employee_id' => $this->employee_id,
-                'employer_id' => $this->employer_id,
-                'position' => $this->position,
-                'start_date' => $this->start_date,
-                'end_date' => $this->end_date,
-                'status' => $this->status,
-                'rating' => $this->rating,
-                'show_status' => $this->show_status
-            );
-
-            var_dump($data);
-
             $this->db->trans_start();
-            $this->db->where('ID', $data['ID']);
-            $this->db->update($this->Table->employment, $data);
+            $this->db->where('ID', $id)->update($this->Table->employment, $data);
             $this->db->trans_complete();
 
-            if ($this->db->trans_status() === FALSE) {
-                $this->db->trans_rollback();
-                return array('message' => ERROR_PROCESSING, 'has_error' => true);
-            } else {
+            if ($this->db->trans_status()) {
                 $this->db->trans_commit();
-                return array('message' => SAVED_SUCCESSFUL, 'has_error' => false);
+                return array('message' => UPDATE_SUCCESSFUL, 'has_error' => false);
+            } else {
+                $this->db->trans_rollback();
+                throw new Exception(ERROR_PROCESSING, true);
             }
-        } catch (Exception $msg) {
-            return (array('message' => $msg->getMessage(), 'has_error' => true));
+        } catch (Exception $e) {
+            return array('message' => $e->getMessage(), 'has_error' => true);
         }
     }
 
-    public function delete($id)
+    /**
+     * Delete a record from table by its id
+     * @param string $id The id of the record to be deleted
+     * @return array
+     */
+    public function delete(string $id): array
     {
         try {
             $this->db->trans_start();
@@ -89,10 +83,10 @@ class Employment_services_model extends CI_Model
 
             if ($this->db->trans_status() === FALSE) {
                 $this->db->trans_rollback();
-                return array('message' => ERROR_PROCESSING, 'has_error' => true);
+                throw new Exception(ERROR_PROCESSING, true);
             } else {
                 $this->db->trans_commit();
-                return array('message' => SAVED_SUCCESSFUL, 'has_error' => false);
+                return array('message' => DELETED_SUCCESSFUL, 'has_error' => false);
             }
         } catch (Exception $msg) {
             return (array('message' => $msg->getMessage(), 'has_error' => true));

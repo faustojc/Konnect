@@ -1,14 +1,7 @@
 <?php
-if (!empty($employees)) { ?>
-    <style>
-        .card-hover:hover {
-            transform: scale(1.02);
-            background-color: #F1F6F9;
-            transition: .3s transform;
-        }
-    </style>
-    <?php foreach ($employees as $index => $employee) { ?>
-        <div class="card card-hover my-3 sec-color" style="border-radius:15px;  box-shadow: 0px; height:80px; ">
+if (!empty($employees)) {
+    foreach ($employees as $index => $employee) { ?>
+        <div class="card card-hover my-3 sec-color" style="border-radius:15px;  box-shadow: unset; height:80px; ">
             <div class="card-body card-hover border-0 py-2" style="border-radius:15px; ">
                 <div class="widget-user-header  <?php if ($index + 1 > 1)
                     echo 'border-0'; ?>" style="padding:0.2rem;">
@@ -28,14 +21,4 @@ if (!empty($employees)) { ?>
             </div>
         </div>
     <?php }
-} else {
-    ?>
-    <div class="jumbotron">
-        <div class="container">
-            <h1 class="display-4">No Employees Found</h1>
-            <p class="lead">We can't find the employees that you are looking for or there are no employees available.</p>
-        </div>
-    </div>
-    <?php
 }
-?>

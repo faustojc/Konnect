@@ -56,6 +56,7 @@ main_header(['Employer_profile']);
 
     .card {
         border-radius: 15px;
+        box-shadow: none;
         overflow: hidden;
     }
 
@@ -128,6 +129,53 @@ main_header(['Employer_profile']);
     body {
         background-color: #e9ebed;
     }
+
+    /* custom css */
+
+    .sec-color {
+        background-color: #f7f9f9;
+    }
+
+    .nav-color {
+        background-color: #0dcaf0;
+    }
+
+    .nav-pills .nav-link.active,
+    .nav-pills .show > .nav-link {
+        color: #fff;
+        background-color: #0dcaf0;
+    }
+
+    .nav-pills .nav-link:not(.active):hover {
+        color: #0dcaf0;
+    }
+
+    .nav-pills .nav-link {
+        border-radius: 10px;
+    }
+
+    .br-custom {
+        border-radius: 15px;
+    }
+
+    .a .text-info {
+        color: #0dcaf0;
+    }
+
+    .btn-info {
+        color: #fff;
+        background-color: #0dcaf0;
+        border-color: #0dcaf0;
+        box-shadow: none;
+    }
+
+    .btn-info:hover {
+        color: #fff;
+        background-color: #40acc2;
+        border-color: #40acc2;
+    }
+
+
 </style>
 
 <section class="content">
@@ -135,7 +183,8 @@ main_header(['Employer_profile']);
         <div class="row pl-3 pr-3" style="margin-top: 3.5rem;">
             <div class="col-12 col-md-8 pl-2 pr-2 mt-4">
                 <div class="card card-widget widget-user">
-                <div class="widget-user-header text-white" style="background: url('<?= base_url() ?>assets/images/Logo/cover-place.jpg') center center; min-height: 25vh; max-height: 50vh; background-repeat: no-repeat; background-size: cover; border-radius: 15px 15px 0px 0px;">
+                    <div class="widget-user-header text-white"
+                         style="background: url('<?= base_url() ?>assets/images/Logo/cover-place.jpg') center center; min-height: 25vh; max-height: 50vh; background-repeat: no-repeat; background-size: cover; border-radius: 15px 15px 0px 0px;">
                     </div>
                     <div class="widget-user-image" style="left: 0; top: 0; margin-left: 15px; margin-top:100px;">
                         <img class="img-circle img-fluid" src="<?= base_url() ?>assets/images/employer/profile_pic/<?= $current_employer->image ?>" alt="User Avatar" style="
@@ -145,7 +194,7 @@ main_header(['Employer_profile']);
                           min-height: 100px;
                           max-height: 100px;">
                     </div>
-                    <div class="card-footer" style="padding-top: 45px;background-color:#f4faff;">
+                    <div class="card-footer" style="padding-top: 45px;background-color:#FFF;">
                         <div class="row">
                             <div class="col-12">
                                 <div class="description-block">
@@ -154,15 +203,18 @@ main_header(['Employer_profile']);
                                             <h5 class="widget-user-username text-left" style="font-weight: 500;">
                                                 <?= $current_employer->tradename ?>
                                             </h5>
-                                            <p class="text-left mb-1">
+                                            <!-- <p class="text-left mb-1">
                                                 <?php if (empty($current_employer->employer_name)) {
-                                                    echo $current_employer->tradename;
-                                                } else {
-                                                    echo $current_employer->employer_name;
-                                                } ?>
-                                            </p>
+                                                echo $current_employer->tradename;
+                                            } else {
+                                                echo $current_employer->employer_name;
+                                            } ?>
+                                            </p> -->
+                                            <h5 class="widget-user-desc text-left text-dark py-2" style="font-weight: 550; font-size:18px;">
+                                                <?= $current_employer->business_type ?>
+                                            </h5>
                                             <h6 class="widget-user-desc text-left text-muted" style="font-weight: normal; font-size:15px;">
-                                                <?= $current_employer->business_type ?> |
+                                                <?= ucwords(@$current_employer->address) . ", " . ucwords(@$current_employer->city) ?> |
                                                 <a class="text-info" data-toggle="modal" data-target="#contact" style=" cursor: pointer;">Contact details</a>
                                             </h6>
                                         </div>
@@ -180,186 +232,129 @@ main_header(['Employer_profile']);
                                 </div>
                             </div>
 
-                            <!-- Navbar -->
-                            <div class="col-12 mt-4">
-                                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                                    <div class="container">
-                                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                                            <span class="navbar-toggler-icon"></span>
-                                        </button>
-                                        <div class="collapse navbar-collapse" id="navbarNav">
-                                            <ul class="navbar-nav">
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="#">Overview</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="#">Jobs</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </nav>
-                            </div>
-
                         </div>
                     </div>
                 </div>
 
                 <div class="card card-white">
-                    <div class="card-header">
-                        <h3 class="card-title fw-500">Summary</h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool edit-summary" data-toggle="modal" data-target="#summary-modal">
-                                <i class="fa-solid fa-pen" style="color: grey;"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-body card-widget widget-user-2" id="load_summary">
-                        <?= $current_employer->summary ?>
+                    <div class="card-body" style="padding:1rem;">
+                        <ul class="nav nav-pills " id="pills-tab" role="tablist">
+
+                            <li class="nav-item">
+                                <a class="nav-link active" id="pills-overview-tab" data-toggle="pill" href="#pills-overview" role="tab" aria-controls="pills-overview" aria-selected="true">Overview</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-followers-tab" data-toggle="pill" href="#pills-followers" role="tab" aria-controls="pills-followers" aria-selected="false">
+                                    Followers
+                                    <span class="badge badge-info">4</span>
+                                </a>
+                            </li>
+                        </ul>
+
                     </div>
 
-                    <!-- MODAL SUMMARY -->
-                    <div class="modal fade" id="summary-modal" data-keyboard="false" tabindex="-1" aria-labelledby="summary-modal-label" aria-hidden="true">
-                        <div class="modal-dialog modal-xl">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="summary-modal-label">Edit summary</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
+                </div>
+
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade active show" id="pills-overview" role="tabpanel" aria-labelledby="pills-overview-tab">
+                        <div class="card card-white">
+                            <div class="card-header">
+                                <h3 class="card-title fw-500">Summary</h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool edit-summary" data-toggle="modal" data-target="#summary-modal">
+                                        <i class="fa-solid fa-pen" style="color: grey;"></i>
                                     </button>
                                 </div>
-                                <div class="modal-body">
-                                    <div class="p-3">
-                                        <h3 class="font-weight-light mb-3">Edit your summary</h3>
-                                        <p class="text-muted">A summary of your company should be concise, informative, and engaging, highlighting the main reasons why someone would want to work for you.</p>
-                                        <textarea id="summary"></textarea>
-                                        <p class="text-danger float-left summary-warning" hidden>
-                                            <i class="text-danger fa fa-exclamation-circle"></i>
-                                            Character exceeds 2000
-                                        </p>
-                                        <p class="text-muted float-right" id="summary_character_count"></p>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Dismiss</button>
-                                    <button type="button" class="btn btn-outline-primary" id="update_summary">Save Changes</button>
-                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card card-white">
-                    <div class="card-header">
-                        <h3 class="card-title fw-500">Job Posted Lists</h3>
-                        <div class="card-tools">
-                            <a href="<?= base_url() ?>jobposting?id=<?= $current_employer->id ?>" class="btn btn-tool">
-                                <i class="fa-solid fa-pen" style="color: grey;"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- JOB POSTINGS -->
-                    <div class="accordion rounded-0" id="load_jobpostings">
-                        <?= $jobpostings_view ?>
-                    </div>
-                </div>
-
-                <div class="card card-white">
-                    <div class="card-header">
-                        <h3 class="card-title fw-500">Heading</h3>
-
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool">
-                                <i class="fa-solid fa-plus" style="color: white; font-size: 16.5px;"></i>
-                            </button>
-                            <button type="button" class="btn btn-tool">
-                                <i class="fa-solid fa-pen" style="color: grey;"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="card-body card-widget widget-user-2">
-                        <div class="widget-user-header">
-                            <h5 class="mt-0" style="font-size: 18px; font-weight: 500;">
-                                <i class="fa-solid fa-user-gear mr-1"></i> Skill or Capabilities or Something
-                            </h5>
-                            <h6 class="mb-0" style="font-weight: normal; font-size: 16px;">Lorem Ipsum dolor sit amet</h6>
-                        </div>
-                    </div>
-
-                    <div class="card-body card-widget widget-user-2 border-top">
-                        <div class="widget-user-header">
-                            <h5 class="mt-0" style="font-size: 18px; font-weight: 500;">
-                                <i class="fa-solid fa-user-gear mr-1"></i> Skill or Capabilities or Something
-                            </h5>
-                            <h6 class="mb-0" style="font-weight: normal; font-size: 16px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur posuere quam massa, quis facilisis enim mollis eget. Sed sollicitudin tortor vel nibh
-                                sollicitudin sagittis. Fusce tempor arcu at leo venenatis</h6>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card card-white">
-                    <div class="card-header">
-                        <h3 class="card-title fw-500">Heading</h3>
-
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool">
-                                <i class="fa-solid fa-plus" style="color: white; font-size: 16.5px;"></i>
-                            </button>
-                            <button type="button" class="btn btn-tool">
-                                <i class="fa-solid fa-pen" style="color: grey;"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-6 col-md-6">
-                            <div class="card-body card-widget widget-user-2">
-                                <div class="widget-user-header">
-                                    <div class="widget-user-image">
-                                        <img class="img-square img-fluid" src="assets/images/Logo/Profile/samplepic.jpg" alt="User Avatar" style="object-fit: cover;min-width: 60px; max-width: 60px; min-height: 60px; max-height: 60px;">
-                                    </div>
-                                    <h5 class="widget-user-username mt-0" style="font-size: 18px; font-weight: 500;">Text or something</h5>
-                                    <h6 class="widget-user-desc mb-0" style="font-weight: normal; font-size: 16px;">Details</h6>
-                                    <p class="widget-user-desc mb-0 mt-1 text-muted" style="font-weight: normal; font-size: 16px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                </div>
+                            <div class="card-body card-widget widget-user-2" id="load_summary">
+                                <?= $current_employer->summary ?>
                             </div>
 
-                            <div class="card-body card-widget widget-user-2">
-                                <div class="widget-user-header">
-                                    <div class="widget-user-image">
-                                        <img class="img-square img-fluid" src="assets/images/Logo/Profile/samplepic.jpg" alt="User Avatar" style="object-fit: cover; min-width: 60px; max-width: 60px; min-height: 60px;max-height: 60px;">
+                            <!-- MODAL SUMMARY -->
+                            <div class="modal fade" id="summary-modal" data-keyboard="false" tabindex="-1" aria-labelledby="summary-modal-label" aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="summary-modal-label">Edit summary</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="p-3">
+                                                <h3 class="font-weight-light mb-3">Edit your summary</h3>
+                                                <p class="text-muted">A summary of your company should be concise, informative, and engaging, highlighting the main reasons why someone would want to work for you.</p>
+                                                <textarea id="summary"></textarea>
+                                                <p class="text-danger float-left summary-warning" hidden>
+                                                    <i class="text-danger fa fa-exclamation-circle"></i>
+                                                    Character exceeds 2000
+                                                </p>
+                                                <p class="text-muted float-right" id="summary_character_count"></p>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Dismiss</button>
+                                            <button type="button" class="btn btn-outline-primary" id="update_summary">Save Changes</button>
+                                        </div>
                                     </div>
-                                    <h5 class="widget-user-username mt-0" style="font-size: 18px; font-weight: 500;">Text here 2</h5>
-                                    <h6 class="widget-user-desc mb-0" style="font-weight: normal; font-size: 16px;">Details or additional info</h6>
-                                    <p class="widget-user-desc mb-0 mt-1 text-muted" style="font-weight: normal; font-size: 16px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-6 col-md-6">
-                            <div class="card-body card-widget widget-user-2">
-                                <div class="widget-user-header">
-                                    <div class="widget-user-image">
-                                        <img class="img-square img-fluid" src="assets/images/Logo/Profile/samplepic.jpg" alt="User Avatar" style="object-fit: cover;min-width: 60px; max-width: 60px; min-height: 60px; max-height: 60px;">
-                                    </div>
-                                    <h5 class="widget-user-username mt-0" style="font-size: 18px; font-weight: 500;">Text insert 3</h5>
-                                    <h6 class="widget-user-desc mb-0" style="font-weight: normal; font-size: 16px;">Details or info</h6>
-                                    <p class="widget-user-desc mb-0 mt-1 text-muted" style="font-weight: normal; font-size: 16px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <div class="card card-white">
+                            <div class="card-header">
+                                <h3 class="card-title fw-500">Job Posted Lists</h3>
+                                <div class="card-tools">
+                                    <a href="<?= base_url() ?>jobposting?id=<?= $current_employer->id ?>" class="btn btn-tool">
+                                        <i class="fa-solid fa-pen" style="color: grey;"></i>
+                                    </a>
                                 </div>
                             </div>
 
-                            <div class="card-body card-widget widget-user-2">
-                                <div class="widget-user-header">
-                                    <div class="widget-user-image">
-                                        <img class="img-square img-fluid" src="assets/images/Logo/Profile/samplepic.jpg" alt="User Avatar" style="object-fit: cover; min-width: 60px; max-width: 60px; min-height: 60px;max-height: 60px;">
+                            <!-- JOB POSTINGS -->
+                            <div class="accordion rounded-0" id="load_jobpostings">
+                                <?= $jobpostings_view ?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Followers -->
+
+                    <div class="tab-pane fade" id="pills-followers" role="tabpanel" aria-labelledby="pills-followers-tab">
+                        <div class="card card-white">
+                            <div class="card-header">
+                                <h3 class="card-title fw-500">Followers</h3>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6 col-md-6">
+                                    <div class="card-body card-widget widget-user-2">
+                                        <div class="widget-user-header">
+                                            <div class="widget-user-image">
+                                                <img class="img-circle img-fluid" src="<?= base_url() ?>assets/images/employer/profile_pic/default.png ?>" alt="User Avatar"
+                                                     style="object-fit: cover;min-width: 60px; max-width: 60px; min-height: 60px; max-height: 60px;">
+                                            </div>
+                                            <h5 class="widget-user-username mt-0" style="font-size: 18px; font-weight: 500;">Employee 1</h5>
+                                            <h6 class="widget-user-desc mb-0" style="font-weight: normal; font-size: 16px;">Title</h6>
+                                        </div>
                                     </div>
-                                    <h5 class="widget-user-username mt-0" style="font-size: 18px; font-weight: 500;">Text 4</h5>
-                                    <h6 class="widget-user-desc mb-0" style="font-weight: normal; font-size: 16px;">Details or info</h6>
-                                    <p class="widget-user-desc mb-0 mt-1 text-muted" style="font-weight: normal; font-size: 16px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                </div>
+                                <div class="col-6 col-md-6">
+
+                                    <div class="card-body card-widget widget-user-2">
+                                        <div class="widget-user-header">
+                                            <div class="widget-user-image">
+                                                <img class="img-circle img-fluid" src="<?= base_url() ?>assets/images/employer/profile_pic/default.png ?>" alt="User Avatar"
+                                                     style="object-fit: cover;min-width: 60px; max-width: 60px; min-height: 60px; max-height: 60px;">
+                                            </div>
+                                            <h5 class="widget-user-username mt-0" style="font-size: 18px; font-weight: 500;">Employee 2</h5>
+                                            <h6 class="widget-user-desc mb-0" style="font-weight: normal; font-size: 16px;">Title</h6>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -505,7 +500,7 @@ main_header(['Employer_profile']);
                         <h3 class="card-title fw-500">Employees</h3>
                     </div>
                     <div id="load_employees_follow_section" style="margin-left: 1rem; margin-right:1rem;">
-                        <?= $employees_follow_section_view ?>
+                        <?php load_employees($employees) ?>
                     </div>
                 </div>
 
@@ -515,7 +510,7 @@ main_header(['Employer_profile']);
                         <h3 class="card-title fw-500">Employers</h3>
                     </div>
                     <div id="load_employers_follow_section" style="margin-left:1rem; margin-right:1rem;">
-                        <?= $employers_follow_section_view ?>
+                        <?php load_employers($employers); ?>
                     </div>
                 </div>
             </div>

@@ -1,10 +1,13 @@
+
 <?php
 // $ci = & get_instance();
 
 if (!empty($train_val)) {
-    foreach ($train_val as $key => $value) { ?>
-        <div class="col-6 px-2">
-            <div class="card training-hover">
+    foreach ($train_val as $key => $value) { 
+        $carouselClass = ($key === 0) ? 'carousel-item active' : 'carousel-item';  ?>
+    
+        <div class="<?= $carouselClass ?> px-5 " >
+            <div class="card training-hover sec-color">
                 <div class="card-body">
                     <h5 class="pb-2 " style="font-weight:650;">
                         <?= ucwords(@$value->title) ?>
@@ -102,6 +105,7 @@ if (!empty($train_val)) {
                 </div>
             </div>
         </div>
+        
         <?php
     }
 } else {

@@ -1,3 +1,7 @@
+const userTypeErrorMessage = document.createElement('p');
+userTypeErrorMessage.classList.add('invalid-feedback', 'm-0', 'd-block');
+userTypeErrorMessage.textContent = 'Please select on what to login.';
+
 const loadFormLogin = () => {
     document.querySelector('button#login').addEventListener('click', function () {
         const isValid = validateForm('#needs-validation');
@@ -33,21 +37,35 @@ const loadFormLogin = () => {
 
 document.querySelector('button.next-btn').addEventListener('click', function () {
     const formDisplay = document.querySelector('.form-display');
-    const user_type = document.querySelector('select#user_type').value;
+    const user_type = document.querySelector('select#user_type');
 
-    fetch(baseUrl + 'login/getLoginForm')
-        .then(response => response.text())
-        .then(data => {
-            formDisplay.innerHTML = data;
+    if (user_type.value === 'EMPLOYEE' || user_type.value === 'EMPLOYER') {
+        fetch(baseUrl + 'login/getLoginForm')
+            .then(response => response.text())
+            .then(data => {
+                formDisplay.innerHTML = data;
 
-            let input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = 'user_type';
-            input.id = 'user_type';
-            input.value = user_type;
+                let input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'user_type';
+                input.id = 'user_type';
+                input.value = user_type.value;
 
-            document.querySelector('form').appendChild(input);
-            loadFormLogin();
-        });
+                document.querySelector('form').appendChild(input);
+                loadFormLogin();
+            });
+    } else {
+        user_type.classList.add('is-invalid');
+        user_type.parentElement.insertBefore(userTypeErrorMessage, user_type.nextElementSibling);
+    }
+});
+
+document.querySelector('select#user_type').addEventListener('change', function () {
+    const user_type = document.querySelector('select#user_type');
+
+    if (user_type.value === 'EMPLOYEE' || user_type.value === 'EMPLOYER') {
+        user_type.classList.remove('is-invalid');
+        user_type.nextElementSibling.remove();
+    }
 });
 

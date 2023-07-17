@@ -43,7 +43,7 @@ if (!empty($skills)) {
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" id="delete_skill" data-dismiss="modal" data-id="<?= $value->id ?>">Delete</button>
+                        <button type="button" class="btn btn-secondary" id="delete_skill" data-dismiss="modal" data-id="<?= $value->id ?>">Delete</button>
                         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#skill<?= $key ?>" data-proficiency="<?= ucwords(@$value->proficiency) ?>">Edit</button>
                     </div>
                 </div>

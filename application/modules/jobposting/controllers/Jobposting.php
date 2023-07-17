@@ -26,14 +26,14 @@ class Jobposting extends MY_Controller
     {
         $id = $this->input->get('id');
 
-        $this->data['details'] = $this->job_model->get_jobpostings($id);
+        $this->data['details'] = $this->job_model->get_employer_jobposts($id);
         $this->data['content'] = 'index';
         $this->load->view('layout', $this->data);
     }
 
     public function get_jobpostings()
     {
-        $this->data['details'] = $this->job_model->get_jobpostings();
+        $this->data['details'] = $this->job_model->get_all_jobposts();
         $this->data['content'] = 'grid/load_jobposting';
         $this->load->view('layout', $this->data);
     }

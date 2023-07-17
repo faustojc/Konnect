@@ -34,23 +34,25 @@ class Employment_service extends MY_Controller
             'show_status' => $this->input->post("show_status")
         );
 
-        $response = $this->esModel->save('tbl_employment', $data);
+        $response = $this->esModel->save($data);
         echo json_encode($response);
     }
 
     public function edit()
     {
-        $this->esModel->ID = $this->input->post("ID");
-        $this->esModel->employee_id = $this->input->post("employee_id");
-        $this->esModel->employer_id = $this->input->post("employer_id");
-        $this->esModel->position = $this->input->post("position");
-        $this->esModel->start_date = $this->input->post("start_date");
-        $this->esModel->end_date = $this->input->post("end_date");
-        $this->esModel->status = $this->input->post("status");
-        $this->esModel->show_status = $this->input->post("show_status");
-        $this->esModel->rating = $this->input->post("rating");
+        $data = array(
+            'ID' => $this->input->post("ID"),
+            'employee_id' => $this->input->post("employee_id"),
+            'employer_id' => $this->input->post("employer_id"),
+            'position' => $this->input->post("position"),
+            'start_date' => $this->input->post("start_date"),
+            'end_date' => $this->input->post("end_date"),
+            'status' => $this->input->post("status"),
+            'rating' => $this->input->post("rating"),
+            'show_status' => $this->input->post("show_status")
+        );
 
-        $response = $this->esModel->edit();
+        $response = $this->esModel->update($data['ID'], $data);
         echo json_encode($response);
     }
 

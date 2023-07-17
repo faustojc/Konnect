@@ -67,12 +67,25 @@ class Register extends MY_Controller
             $response = $this->register_model->register($user, $info);
 
             if (!$response['has_error']) {
-                $this->data['content'] = 'thankyou';
-                $this->load->view('layout', $this->data);
+                $this->load->driver('session');
+                $this->session->set_flashdata('has_registered', true);
+
+                echo json_encode(['redirect' => base_url() . 'register/thankyou']);
             } else {
                 echo json_encode($response);
             }
         }
+    }
+
+    public function thankyou()
+    {
+        $this->load->driver('session');
+        if (!$this->session->flashdata('has_registered')) {
+            redirect(base_url() . 'login', 'refresh');
+        }
+
+        $this->data['content'] = 'thankyou';
+        $this->load->view('layout', $this->data);
     }
 
     public function employerForm()

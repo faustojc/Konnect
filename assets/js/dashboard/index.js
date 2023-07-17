@@ -1,15 +1,20 @@
 document.addEventListener("DOMContentLoaded", function () {
     textareaEditor('textarea', 400);
 
+
     const jobStatus = document.querySelectorAll('.job-status');
     jobStatus.forEach(value => {
-        if (value.textContent === 'OPEN') {
+        const status = value.textContent.replace(/\s+/g, '').toUpperCase();
+
+        if (status === 'OPEN') {
             value.classList.add('badge-success');
             value.classList.remove('badge-danger');
         } else {
             value.classList.add('badge-danger');
             value.classList.remove('badge-success');
         }
+
+        value.textContent = status;
     });
 
     // See more functionality in .job-description
@@ -19,10 +24,11 @@ document.addEventListener("DOMContentLoaded", function () {
     seeMoreButtons.forEach(button => {
         const target = button.dataset.target;
         const jobDescription = button.previousElementSibling;
+        const maxHeight = parseInt(jobDescription.style.maxHeight);
 
-        if (jobDescription.matches(target) && jobDescription.offsetHeight < 450) {
+        if (jobDescription.matches(target) && jobDescription.offsetHeight < maxHeight) {
             button.style.display = "none";
-        } else if (jobDescription.offsetHeight >= 450) {
+        } else if (jobDescription.offsetHeight >= maxHeight) {
             button.style.display = "block";
         }
     });

@@ -57,6 +57,7 @@ main_header(['employee_profile']);
     /* Edited */
     .card {
         border-radius: 15px;
+        box-shadow: none;
     }
 
     .card-header {
@@ -124,8 +125,40 @@ main_header(['employee_profile']);
         transform: scale(1.02);
         background-color: #F1F6F9;
         transition: .3s transform;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, .12);
+        /* box-shadow: 0 2px 5px rgba(0, 0, 0, .12); */
 
+    }
+
+    /* custom css */
+
+    .sec-color {
+        background-color: #f7f9f9;
+    }
+
+    .nav-color {
+        background-color: #0dcaf0;
+    }
+
+    .nav-pills .nav-link.active,
+    .nav-pills .show>.nav-link {
+        color: #fff;
+        background-color: #0dcaf0;
+    }
+
+    .nav-pills .nav-link:not(.active):hover {
+        color: #0dcaf0;
+    }
+
+    .nav-pills .nav-link {
+        border-radius: 10px;
+    }
+
+    .br-custom {
+        border-radius: 15px;
+    }
+
+    .a .text-info {
+        color: #0dcaf0;
     }
 
 
@@ -153,6 +186,7 @@ main_header(['employee_profile']);
 </style>
 
 <section class="content">
+
     <div class="container">
         <div class="row " style="margin-top: 3.5rem;">
             <div class="col-12 col-md-8 pl-2 pr-2 mt-4">
@@ -175,12 +209,12 @@ main_header(['employee_profile']);
                             <div class="col-12">
                                 <div class="description-block">
                                     <div class="d-flex justify-content-between">
-                                        <h4 class="widget-user-username text-left text-dark" style="font-weight: 600;">
+                                        <h5 class="widget-user-username text-left text-dark" style="font-weight: 600;">
                                             <?= ucwords(@$details->Fname) . " " . ucwords(@$details->Mname) . " " . ucwords(@$details->Lname) ?>
-                                        </h4>
+                                        </h5>
                                         <input type="text" value="<?= @$details->ID ?>" id="emp_id" hidden>
                                         <div class="">
-                                            <a href="<?php echo base_url() ?>employee_profile/edit?id=<?= $details->ID ?>" type="button" class="btn btn-outline-info btn-sm btn-block mb-2">Edit Profile</a>
+                                            <a style="border-radius:10px;" href="<?php echo base_url() ?>employee_profile/edit?id=<?= $details->ID ?>" type="button" class="btn btn-outline-info btn-sm btn-block mb-2">Edit Profile</a>
                                         </div>
                                     </div>
 
@@ -189,27 +223,58 @@ main_header(['employee_profile']);
                                     </h5>
                                     <h6 class="widget-user-desc text-left text-muted" style="font-weight: normal; font-size:15px;">
                                         <?= ucwords(@$details->Address) . ", " . ucwords(@$details->Barangay) . ", " . ucwords(@$details->City) ?> |
-                                        <a class="text-info" data-toggle="modal" data-target="#contact" style=" cursor: pointer;">Contact details</a>
+                                        <a class="" data-toggle="modal" data-target="#contact" style="color:#0dcaf0; cursor: pointer;">Contact details</a>
                                     </h6>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
 
                 <div class="card card-white">
-                    <div class="card-header" style="">
-                        <h3 class="card-title fw-500 text-dark" style="font-weight:600;">About</h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-toggle="modal" data-target="#Introduction_modal" style=" cursor: pointer;">
-                                <i class="fa-solid fa-pen"></i>
-                            </button>
-                        </div>
+                    <div class="card-body" style="padding:1rem;">
+                        <ul class="nav nav-pills " id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="pills-overview-tab" data-toggle="pill" href="#pills-overview" role="tab" aria-controls="pills-overview" aria-selected="true">Overview</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-employment-tab" data-toggle="pill" href="#pills-employment" role="tab" aria-controls="pills-employment" aria-selected="false">Employment</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-training-tab" data-toggle="pill" href="#pills-training" role="tab" aria-controls="pills-training" aria-selected="false">Training</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-following-tab" data-toggle="pill" href="#pills-following" role="tab" aria-controls="pills-following" aria-selected="false">Following</a>
+                            </li>
+                        </ul>
+
                     </div>
 
-                    <?php
-                    if (empty($details->Introduction)) {
-                        echo '
+                </div>
+
+                <!-- start tab -->
+                <div class="tab-content" id="pills-tabContent">
+                    <!-- <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">...</div>
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
+                        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div> -->
+
+
+                    <!-- about -->
+                    <div class="tab-pane fade active show" id="pills-overview" role="tabpanel" aria-labelledby="pills-overview-tab">
+                        <div class="card card-white">
+                            <div class="card-header" style="">
+                                <h3 class="card-title fw-500 text-dark" style="font-weight:600;">About</h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-toggle="modal" data-target="#Introduction_modal" style=" cursor: pointer;">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <?php
+                            if (empty($details->Introduction)) {
+                                echo '
                             <div class="d-flex flex-column flex-grow-1 px-4 py-4">
                                 <div class="d-flex align-items-center mb-1">
                                     <h5 class=" ml-1"><i class="fa-solid fa-pen-to-square "></i> Introduce your self</h5>
@@ -219,293 +284,366 @@ main_header(['employee_profile']);
                                     <button type="button" class="btn btn-light rounded-pill edit-summary" style="border-width: 2px" data-toggle="modal" data-target="#Introduction_modal">Add Introduction</button>
                                 </div>
                             </div>';
-                    } else {
-                        echo '
+                            } else {
+                                echo '
                             <div class="card-body card-widget widget-user-2" style="padding-top:0.5rem;">
                                 <div class="widget-user-header px-2 py-2" style="padding:0; ">
                                     ' . @$details->Introduction . '
                                 </div>
                             </div>';
-                    }
-                    ?>
+                            }
+                            ?>
 
-                </div>
-                <div class="card card-white">
-                    <div class="card-header">
-                        <h3 class="card-title fw-500" style="font-weight:600;">Skills</h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-toggle="modal" data-target="#skill_modal">
-                                <i class="fa-solid fa-plus" style=" font-size: 16.5px;"></i>
-                            </button>
                         </div>
-                    </div>
-                    <div class="row pt-0 pb-4 px-4 py-3" id="load_skill">
-                        <?= $skills_section_view ?>
-                    </div>
-                </div>
 
-                <div class="card card-white">
-                    <div class="card-header">
-                        <h3 class="card-title fw-500" style="font-weight:600;">Employment</h3>
+                        <!-- skills -->
+                        <div class="card card-white">
+                            <div class="card-header">
+                                <h3 class="card-title fw-500" style="font-weight:600;">Skills</h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-toggle="modal" data-target="#skill_modal">
+                                        <i class="fa-solid fa-plus" style=" font-size: 16.5px;"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row pt-0 pb-4 px-4 py-3" id="load_skill">
+                                <?= $skills_section_view ?>
+                            </div>
+                        </div>
 
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-toggle="modal" data-target="#modalAddEmp">
-                                <i class="fa-solid fa-plus" style=" font-size: 16.5px;"></i>
-                            </button>
-                            <!-- Modal -->
-                            <div class="modal fade" id="modalAddEmp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
+                        <!-- education -->
+                        <div class="card card-white">
+                            <div class="card-header">
+                                <h3 class="card-title fw-500" style="font-weight:600;">Education</h3>
+
+                                <div class="card-tools">
+                                    <button type="button" data-toggle="modal" data-target="#ModalEduc" class="btn btn-tool">
+                                        <i class="fa-solid fa-plus" style=" font-size: 16.5px;"></i>
+                                    </button>
+
+                                </div>
+                            </div>
+                            <div class="modal fade" id="ModalEduc" tabindex="-1" role="dialog" aria-labelledby="ModalEduc" aria-hidden="true">
+                                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Add Employment</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">Add Education</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form id="#needs-validation">
-                                                <input type="text" class="form-control" id="employee_id" name="employee_id" value="<?= @$details->ID ?>" hidden readonly>
-                                                <div class="row p-4">
-                                                    <div class="col-md">
-                                                        <label for="employer_id">Select Employer</label>
-                                                        <select class="form-control" id="employer_id" name="employer_id">
-                                                            <?php foreach ($employers as $employer) { ?>
-                                                                <option value="<?php echo $employer->id ?>"><?php echo $employer->employer_name ?></option>
-                                                            <?php } ?>
-                                                        </select>
-                                                    </div>
+                                            <!-- #Modal Education Content -->
+                                            <div class="px-2 py-2">
+                                                <div class="pb-3">
                                                 </div>
-                                                <div class="row p-4">
-                                                    <div class="col-md">
-                                                        <label for="position">Position</label>
-                                                        <input type="text" class="form-control" id="position" name="position" placeholder="Enter Position">
-                                                    </div>
-                                                </div>
-                                                <div class="row p-4">
+                                                <div class="row pb-3">
                                                     <div class="col-md-6">
-                                                        <label for="start_date">Start Date</label>
-                                                        <input type="date" id="start_date" name="start_date" style="width:200px;">
+                                                        <label>Level</label>
+                                                        <input type="text" class="form-control dropdown-toggle" id="Level" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" placeholder="Enter Level" value="">
+                                                        <div class="dropdown-menu level-content" aria-labelledby="Level">
+                                                            <p class="dropdown-item">ELEMENTARY</p>
+                                                            <p class="dropdown-item">JUNIOR HIGH</p>
+                                                            <p class="dropdown-item">SENIOR HIGH</p>
+                                                            <p class="dropdown-item">COLLEGE</p>
+                                                            <p class="dropdown-item">UBAR</p>
+                                                            <p class="dropdown-item">YES</p>
+                                                        </div>
+
                                                     </div>
+
                                                     <div class="col-md-6">
-                                                        <label for="end_date">End Date</label>
-                                                        <input type="date" id="end_date" name="end_date" style="width:200px;">
+                                                        <label>Title</label>
+                                                        <input type="text" class="form-control" id="Title" placeholder="Enter Title">
                                                     </div>
                                                 </div>
 
-                                                <div class="row p-4">
+                                                <section class="pb-3">
+                                                    <label>Institution</label>
+                                                    <input type="text" class="form-control" id="Institution" placeholder="Enter Institution">
+                                                </section>
+
+                                                <div class="row pb-4">
+                                                    <div class="col-md">
+                                                        <label>Description</label>
+                                                        <div>
+                                                            <textarea class="form-control" name="description" id="Description" rows="4" placeholder="Enter Description"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row pb-3">
                                                     <div class="col-md-4">
-                                                        <label for="status">Status</label>
-                                                        <input type="text" class="form-control" id="status" name="status" placeholder="Enter Status">
+                                                        <label>Start Date</label>
+                                                        <input type="date" class="form-control" id="Start_date" name="start_date">
                                                     </div>
-
-                                                    <div class="col-md-6">
-                                                        <label for="rating">Rating</label>
-                                                        <input type="number" class="form-control" id="rating" name="rating" placeholder="Enter Rating">
+                                                    <div class="col-md-4">
+                                                        <label>End Date</label>
+                                                        <div>
+                                                            <input type="date" class="form-control" id="End_date" name="end_date">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label>Hours</label>
+                                                        <input type="Number" class="form-control" id="Hours" placeholder="Enter Hours">
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-info" id="save_education" data-dismiss="modal">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modal Body -->
 
-                                                <div class="row py-2 px-4">
-                                                    <div class="col-md-6">
-                                                        <label for="show_status" class="mb-0 mr-2">
-                                                            <input type="checkbox" id="show_status" name="show_status">
-                                                            Show Status
-                                                        </label>
+                            <div class="py-3 px-3" id="load_educations">
+                                <?= $educations_section_view ?>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="tab-pane fade" id="pills-employment" role="tabpanel" aria-labelledby="pills-employment-tab">
+                        <!-- employment -->
+                        <div class="card card-white">
+                            <div class="card-header">
+                                <h3 class="card-title fw-500" style="font-weight:600;">Employment</h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-toggle="modal" data-target="#modalAddEmp">
+                                        <i class="fa-solid fa-plus" style=" font-size: 16.5px;"></i>
+                                    </button>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="modalAddEmp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Add Employment</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form class="px-2 py-2" id="#needs-validation">
+                                                        <input type="text" class="form-control" id="employee_id" name="employee_id" value="<?= @$details->ID ?>" hidden readonly>
+                                                        <div class="row pb-3">
+                                                            <div class="col-md">
+                                                                <label for="employer_id">Select Employer</label>
+                                                                <select class="form-control" id="employer_id" name="employer_id">
+                                                                    <?php foreach ($employers as $employer) { ?>
+                                                                        <option value="<?php echo $employer->id ?>"><?php echo $employer->employer_name ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row pb-3">
+                                                            <div class="col-md">
+                                                                <label for="position">Position</label>
+                                                                <input type="text" class="form-control" id="position" name="position" placeholder="Enter Position">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md">
+                                                                <label for="statusEmp">Status</label>
+                                                                <input type="text" class="form-control" id="status" name="status" placeholder="Enter Status">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row px-3">
+                                                            <div class="d-flex align-items-center">
+                                                                <p class="text-muted" style="font-weight: normal; font-size: 15px;">
+                                                                    <input type="checkbox" id="show_status" name="show_status">
+                                                                    Show Status
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row pb-3">
+                                                            <div class="col-md">
+                                                                <label for="ratingEmp">Rating</label>
+                                                                <input type="number" class="form-control" id="rating" name="rating" placeholder="Enter Rating">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row pb-2">
+                                                            <div class="col-md-6">
+                                                                <label for="startDate">Start Date</label>
+                                                                <input type="date" id="start_date" name="start_date" style="width:200px;">
+                                                            </div>
+
+                                                            <div class="col-md-6">
+                                                                <label for="endDate">End Date</label>
+                                                                <input type="date" id="end_date" name="end_date" style="width:200px;">
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-info" data-dismiss="modal" id="btn_save_employment">Add Details</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="p-3" id="load_employments">
+                                <?= $employments_section_view ?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="pills-training" role="tabpanel" aria-labelledby="pills-training-tab">
+                        <!-- training -->
+                        <div class="card ">
+                            <div class="card-header">
+                                <h3 class="card-title fw-500" style="font-weight:600;">Training</h3>
+
+                                <div class="card-tools">
+                                    <button type="button" data-toggle="modal" data-target="#ModalTrain" class="btn btn-tool">
+                                        <i class="fa-solid fa-plus" style=" font-size: 16.5px;"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div>
+
+                            </div>
+                            <div class="modal fade" id="ModalTrain" tabindex="-1" role="dialog" aria-labelledby="ModalTrain" aria-hidden="true">
+                                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Add Training</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="px-2 py-2" id="needs-validation">
+                                                <input type="text" id="employee_id" name="employee_id" value="<?= @$details->ID ?>" hidden readonly>
+                                                <div class="row pb-3">
+                                                    <div class="col-md-12">
+                                                        <label for="title">Title</label>
+                                                        <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title" required>
+                                                    </div>
+                                                </div>
+                                                <div class="row pb-4">
+                                                    <div class="col-md">
+                                                        <label for="training_description">Description</label>
+                                                        <div>
+                                                            <textarea class="form-control" name="training_description" id="training_description" rows="4" placeholder="Enter Description" required></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <section class="pb-3">
+                                                    <div class="row pb-3">
+                                                        <div class="col-md-6">
+                                                            <label>Venue</label>
+                                                            <input type="text" class="form-control" id="venue" name="venue" required>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label>City</label>
+                                                            <div>
+                                                                <input type="text" class="form-control" id="city" name="city" required>
+                                                            </div>
+                                                        </div>
+                                                </section>
+                                                <div class="row pb-3">
+                                                    <div class="col-md-4">
+                                                        <label>Start Date</label>
+                                                        <input type="date" class="form-control" id="s_date" name="s_date" required>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label>End Date</label>
+                                                        <div>
+                                                            <input type="date" class="form-control" id="e_date" name="e_date" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label>Hours</label>
+                                                        <input type="Number" class="form-control" id="hours" name="hours" placeholder="Enter Hours" required>
                                                     </div>
                                                 </div>
                                             </form>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_save_employment">Add Details</button>
+                                            <button type="button" class="btn btn-info" id="btn_save_training" data-dismiss="modal">Save changes</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                    </div>
-                    <div class="py-4">
-                        <div id="load_employments">
-                            <?= $employments_section_view ?>
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- #Education -->
-                <div class="card card-white">
-                    <div class="card-header">
-                        <h3 class="card-title fw-500" style="font-weight:600;">Education</h3>
-
-                        <div class="card-tools">
-                            <button type="button" data-toggle="modal" data-target="#ModalEduc" class="btn btn-tool">
-                                <i class="fa-solid fa-plus" style=" font-size: 16.5px;"></i>
-                            </button>
-
-                        </div>
-                    </div>
-                    <div class="modal fade" id="ModalEduc" tabindex="-1" role="dialog" aria-labelledby="ModalEduc" aria-hidden="true">
-                        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Add Education</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+                            <!-- Modal Body -->
+                            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner py-3 px-3" id="load_training">
+                                    <?= $training_section_view ?>
                                 </div>
-                                <div class="modal-body">
-                                    <!-- #Modal Education Content -->
-                                    <div class="px-2 py-2">
-                                        <div class="pb-3">
-                                        </div>
-                                        <div class="row pb-3">
-                                            <div class="col-md-6">
-                                                <label>Level</label>
-                                                <input type="text" class="form-control dropdown-toggle" id="Level" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" placeholder="Enter Level" value="">
-                                                <div class="dropdown-menu level-content" aria-labelledby="Level">
-                                                    <p class="dropdown-item">ELEMENTARY</p>
-                                                    <p class="dropdown-item">JUNIOR HIGH</p>
-                                                    <p class="dropdown-item">SENIOR HIGH</p>
-                                                    <p class="dropdown-item">COLLEGE</p>
-                                                    <p class="dropdown-item">UBAR</p>
-                                                    <p class="dropdown-item">YES</p>
-                                                </div>
-                                            </div>
+                                <!-- <div class="carousel-inner">
+                        <div class="carousel-item active">
+                        <img class="d-block w-100" src="..." alt="First slide">
+                        </div>
+                        <div class="carousel-item">
+                        <img class="d-block w-100" src="..." alt="Second slide">
+                        </div>
+                        <div class="carousel-item">
+                        <img class="d-block w-100" src="..." alt="Third slide">
+                        </div>
+                    </div> -->
+                                <a class="carousel-control-prev " href="#carouselExampleControls" role="button" data-slide="prev" style="width:5%; border-radius: 0 0 0 15px; color: #17202a ;">
+                                    <!-- <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span> -->
+                                    <i class="fa-solid fa-chevron-left pl-3"></i>
 
-                                            <div class="col-md-6">
-                                                <label>Title</label>
-                                                <input type="text" class="form-control" id="Title" placeholder="Enter Title">
-                                            </div>
-                                        </div>
+                                </a>
+                                <a class="carousel-control-next " href="#carouselExampleControls" role="button" data-slide="next" style="width:5%; border-radius: 0 0 15px 0; color: #17202a ;">
+                                    <!-- <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only" >Next</span> -->
+                                    <i class="fa-solid fa-chevron-right pr-3"></i>
+                                </a>
 
-                                        <section class="pb-3">
-                                            <label>Institution</label>
-                                            <input type="text" class="form-control" id="Institution" placeholder="Enter Institution">
-                                        </section>
 
-                                        <div class="row pb-4">
-                                            <div class="col-md">
-                                                <label>Description</label>
-                                                <div>
-                                                    <textarea class="form-control" name="description" id="Description" rows="4" placeholder="Enter Description"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
+                            </div>
 
-                                        <div class="row pb-3">
-                                            <div class="col-md-4">
-                                                <label>Start Date</label>
-                                                <input type="date" class="form-control" id="Start_date" name="start_date">
+                        </div>
+                    </div>
+                    <!-- Followers -->
+
+                    <div class="tab-pane fade" id="pills-following" role="tabpanel" aria-labelledby="pills-following-tab">
+                        <div class="card card-white">
+                            <div class="card-header">
+                                <h3 class="card-title fw-500">Following</h3>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6 col-md-6">
+                                    <div class="card-body card-widget widget-user-2">
+                                        <div class="widget-user-header">
+                                            <div class="widget-user-image">
+                                                <img class="img-circle img-fluid" src="<?= base_url() ?>assets/images/employer/profile_pic/default.png ?>" alt="User Avatar" style="object-fit: cover;min-width: 60px; max-width: 60px; min-height: 60px; max-height: 60px;">
                                             </div>
-                                            <div class="col-md-4">
-                                                <label>End Date</label>
-                                                <div>
-                                                    <input type="date" class="form-control" id="End_date" name="end_date">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label>Hours</label>
-                                                <input type="Number" class="form-control" id="Hours" placeholder="Enter Hours">
-                                            </div>
+                                            <h5 class="widget-user-username mt-0" style="font-size: 18px; font-weight: 500;">Company 1</h5>
+                                            <h6 class="widget-user-desc mb-0" style="font-weight: normal; font-size: 16px;">Title</h6>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-info" id="save_education" data-dismiss="modal">Save changes</button>
+                                <div class="col-6 col-md-6">
+
+                                    <div class="card-body card-widget widget-user-2">
+                                        <div class="widget-user-header">
+                                            <div class="widget-user-image">
+                                                <img class="img-circle img-fluid" src="<?= base_url() ?>assets/images/employer/profile_pic/default.png ?>" alt="User Avatar" style="object-fit: cover;min-width: 60px; max-width: 60px; min-height: 60px; max-height: 60px;">
+                                            </div>
+                                            <h5 class="widget-user-username mt-0" style="font-size: 18px; font-weight: 500;">Company 2</h5>
+                                            <h6 class="widget-user-desc mb-0" style="font-weight: normal; font-size: 16px;">Title</h6>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
+
                         </div>
                     </div>
-                    <!-- Modal Body -->
-
-                    <div class="py-3 px-3" id="load_educations">
-                        <?= $educations_section_view ?>
-                    </div>
-                </div>
-
-                <div class="card  card-white">
-                    <div class="card-header">
-                        <h3 class="card-title fw-500" style="font-weight:600;">Training</h3>
-
-                        <div class="card-tools">
-                            <button type="button" data-toggle="modal" data-target="#ModalTrain" class="btn btn-tool">
-                                <i class="fa-solid fa-plus" style=" font-size: 16.5px;"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div>
-
-                    </div>
-                    <div class="modal fade" id="ModalTrain" tabindex="-1" role="dialog" aria-labelledby="ModalTrain" aria-hidden="true">
-                        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Add Training</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form class="px-2 py-2" id="needs-validation">
-                                        <input type="text" id="employee_id" name="employee_id" value="<?= @$details->ID ?>" hidden readonly>
-                                        <div class="row pb-3">
-                                            <div class="col-md-12">
-                                                <label for="title">Title</label>
-                                                <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title" required>
-                                            </div>
-                                        </div>
-                                        <div class="row pb-4">
-                                            <div class="col-md">
-                                                <label for="training_description">Description</label>
-                                                <div>
-                                                    <textarea class="form-control" name="training_description" id="training_description" rows="4" placeholder="Enter Description" required></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <section class="pb-3">
-                                            <div class="row pb-3">
-                                                <div class="col-md-6">
-                                                    <label>Venue</label>
-                                                    <input type="text" class="form-control" id="venue" name="venue" required>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label>City</label>
-                                                    <div>
-                                                        <input type="text" class="form-control" id="city" name="city" required>
-                                                    </div>
-                                                </div>
-                                        </section>
-                                        <div class="row pb-3">
-                                            <div class="col-md-4">
-                                                <label>Start Date</label>
-                                                <input type="date" class="form-control" id="s_date" name="s_date" required>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label>End Date</label>
-                                                <div>
-                                                    <input type="date" class="form-control" id="e_date" name="e_date" required>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label>Hours</label>
-                                                <input type="Number" class="form-control" id="hours" name="hours" placeholder="Enter Hours" required>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-info" id="btn_save_training" data-dismiss="modal">Save changes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Modal Body -->
-
-                    <div class="row py-3 px-4" id="load_training">
-                        <?= $training_section_view ?>
-                    </div>
+                    <!-- end tab -->
                 </div>
             </div>
 
@@ -566,7 +704,7 @@ main_header(['employee_profile']);
                         <h3 class="card-title fw-500">Employees</h3>
                     </div>
                     <div id="load_employees_follow_section" style="margin-left: 1rem; margin-right:1rem;">
-                        <?= $employees_follow_section_view ?>
+                        <?php load_employees($employees) ?>
                     </div>
                 </div>
 
@@ -576,7 +714,7 @@ main_header(['employee_profile']);
                         <h3 class="card-title fw-500">Employers</h3>
                     </div>
                     <div id="load_employers_follow_section" style="margin-left:1rem; margin-right:1rem;">
-                        <?= $employers_follow_section_view ?>
+                        <?php load_employers($employers) ?>
                     </div>
                 </div>
             </div>

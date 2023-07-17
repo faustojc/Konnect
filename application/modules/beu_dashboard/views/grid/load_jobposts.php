@@ -26,58 +26,81 @@
         }
         ?>
         <div class="card">
-            <div class="card-body">
+            <div class="card-body ">
                 <div class="job-post">
                     <div class="row">
                         <div class="col-1 d-flex justify-content-center">
                             <img class="img-circle img-fluid " src="<?= base_url() ?>assets/images/employer/profile_pic/<?= $jobpost->EmployerLogo ?>" alt="Employer Profile Pic" style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
                         </div>
-                        <div class="col-11 pt-2 pl-3">
+                        <div class="col-10 pt-2 pl-3">
                             <div class="d-flex justify-content-between">
                                 <div class="row">
                                     <div class="col-12">
-                                        <h4>
-                                            <a href="<?= base_url() ?>employer_profile?id=<?= $jobpost->employer_id ?>" class="job-title fw-bold text-decoration-none">
+                                        <h6 class="m-0">
+                                            <a href="<?= base_url() ?>employer_profile?id=<?= $jobpost->employer_id ?>" class="job-title fw-bold text-decoration-none" style="color:#000;">
                                                 <?= ucwords($jobpost->EmployerTradename) ?>
                                             </a>
-                                        </h4>
+                                        </h6>
                                     </div>
                                     <div class="col-12">
-                                        <p class="text-muted" style="font-size: 12px;"><?= $timeAgo ?> in <?= $jobpost->date_posted ?></p>
+                                        <p class="text-muted" style="font-size: 12px;">
+                                            <?= $timeAgo ?> in
+                                            <?= $jobpost->date_posted ?>
+                                        </p>
                                     </div>
                                 </div>
-                                <a href="<?= base_url() ?>jobpost?id=<?= $jobpost->id ?>" class="btn btn-outline-info btn-sm h-50 w-25">View</a>
+                                <!-- <a href="<?= base_url() ?>jobpost?id=<?= $jobpost->id ?>" class="btn btn-outline-info btn-sm h-50 w-25 ">View</a> -->
+                            </div>
+                        </div>
+                        <div class="col-1">
+                            <!-- <button href="" class="btn card-tool text-muted"></button> -->
+                            <div class="btn-group dropleft" style="">
+                                <button type="button" class="btn card-tool text-muted " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                                </button>
+                                <div class="dropdown-menu" style="border-radius:10px; box-shadow: none;">
+                                    <a class="dropdown-item" href="#">Edit</a>
+                                    <a class="dropdown-item" href="#">Delete</a>
+                                    
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="job-details pt-2">
-                        <h5>
+                    <div class="job-details pt-2" style="border:0;">
+                        <h6 class="pb-2" style="font-weight:650;">
                             <?= ucwords($jobpost->title) ?>
-                            <span class="badge job-status"><?= $jobpost->filled ?></span>
-                        </h5>
-                        <hr>
-                        <div class="job-description" style="max-height: 450px; overflow-y: hidden">
-                            <p class="fs-14 mb-0 text-muted">
+                            <span class="badge job-status">
+                                <?= $jobpost->filled ?>
+                            </span>
+                        </h6>
+                        <!-- <hr> -->
+                        <div class="job-description" style="max-height: 150px; overflow-y: hidden">
+                            <div class="" style="font-size:14px">
                                 <?= $jobpost->description ?>
-                            </p>
-                        </div>
-                        <a class="text-center see-more" data-target=".job-description" style="display: block" role="button">See more</a>
-                        <hr>
-                        <h6 class="pt-2">Requirements</h6>
-                        <div class="row">
-                            <div class="col-12">
-                                <span class="badge badge-light py-2" style="margin-right:10px;border-radius:10px; width:6rem; font-weight:normal;">PHP</span>
-                                <span class="badge badge-light py-2" style="margin-right:10px;border-radius:10px; width:6rem; font-weight:normal;">Laravel</span>
-                                <span class="badge badge-light py-2" style="margin-right:10px;border-radius:10px; width:6rem; font-weight:normal;">HTML</span>
-                                <span class="badge badge-light py-2" style="margin-right:10px;border-radius:10px; width:6rem; font-weight:normal;">Figma</span>
-                                <span class="badge badge-light py-2" style="margin-right:10px;border-radius:10px; width:6rem; font-weight:normal;">Java</span>
-                                <span class="badge badge-light py-2" style="margin-right:10px;border-radius:10px; width:6rem; font-weight:normal;">C++</span>
                             </div>
                         </div>
+                        <a class="text-center see-more" data-target=".job-description" style="display: block;" role="button">See more</a>
+                        <hr>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-4 col-sm-12">
+                                <button type="button" class="btn btn-light btn-block" id="apply">APPLY</button>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- <script>
+            var applyButton = document.getElementById("apply");
+
+            applyButton.addEventListener("click", function () {
+                applyButton.textContent = "Pending Application";
+                applyButton.disabled = true; // Optional: disable the button after clicking
+            });
+        </script> -->
+
     <?php }
 } ?>

@@ -35,5 +35,4 @@ class beu_dashboard_model extends CI_Model
             ->where('employee_id', $id)
             ->get()->result();
     }
-
 }

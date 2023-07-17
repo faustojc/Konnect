@@ -47,6 +47,12 @@
                             </button>
                         </div>
                     </form>
+                    <div class="col-12 mt-3">
+                        <p>
+                            Have a Konnect account?
+                            <a href="<?= base_url() ?>login">Sign in here!</a>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

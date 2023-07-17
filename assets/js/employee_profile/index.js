@@ -281,32 +281,16 @@ $(document).on('click', '#btn_save_employment', function () {
 });
 
 $(document).on('click', '#edit_employment', function () {
-    const currentElem = $(this).closest('form');
-    const show_status = currentElem.find('#show_status').is(':checked') ? 1 : 0;
+    const form = this.closest('.modal-content').querySelector('form');
+    const formData = new FormData(form);
+    const url = baseUrl + 'employment/service/Employment_service/edit';
 
-    const data = {
-        ID: currentElem.find('#employmentID').val(),
-        employee_id: currentElem.find('#employeeID').val(),
-        employer_id: currentElem.find('#employerID').val(),
-        position: currentElem.find('#positionEmp').val(),
-        start_date: currentElem.find('#startDate').val(),
-        end_date: currentElem.find('#endDate').val(),
-        status: currentElem.find('#statusEmp').val(),
-        show_status: show_status,
-        rating: currentElem.find('#ratingEmp').val(),
-    };
+    const show_status = form.querySelector('#show_status').checked === true ? 1 : 0;
+    formData.set('show_status', show_status.toString());
 
-    $.ajax({
-        url: baseUrl + 'employment/service/Employment_service/edit',
-        type: 'POST',
-        data: data,
-        success: function (response) {
-            success('SUCCESS', 'Employment successfully updated');
-            load_employment();
-        },
-        error: function (response) {
-            error('ERROR', 'Employment update failed');
-        }
+    formAction(url, 'POST', formData, function () {
+        load_employment();
+        success('SUCCESS', 'Employment successfully updated');
     });
 });
 

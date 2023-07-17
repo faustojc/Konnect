@@ -6,7 +6,7 @@ if (!empty($educ_val)) {
             <div class="row">
                 <div class="col-10  ">
                     <div class="widget-user-image">
-                        <img class="img-circle img-fluid" src="<?= base_url() ?>/assets/images/Logo/Profile/blank.jpg" alt="User Avatar" style="
+                        <img class="img-circle img-fluid" src="<?= base_url() ?>/assets/images/Logo/Profile/school.png" alt="User Avatar" style="
                               object-fit: cover;
                               min-width: 60px;
                               max-width: 60px;
@@ -15,7 +15,7 @@ if (!empty($educ_val)) {
                     </div>
                     <!-- /.widget-user-image -->
 
-                    <h5 class="widget-user-username mt-0" style="font-size: 18px; font-weight: 650;">
+                    <h5 class="widget-user-username mt-0" style="font-size: 18px; font-weight: 600;">
                         <?= (@$value->Institution) ?>
                     </h5>
                     <h6 class="widget-user-desc mb-0" style="font-weight: normal; font-size: 16px;">
@@ -24,14 +24,14 @@ if (!empty($educ_val)) {
                     <p class="widget-user-desc mb-0 mt-0 text-muted" style="font-weight: normal; font-size: 16px;">
                         <?= (@$value->Level) ?>
                     </p>
-                    <p class="widget-user-desc mb-0 mt-1 text-muted" style="font-weight: normal; font-size: 16px;">
+                    <p class="widget-user-desc mb-0 mt-0 text-muted" style="font-weight: normal; font-size: 16px;">
                         <?= date("Y", strtotime(@$value->Start_date)) ?> -
                         <?= date("Y", strtotime(@$value->End_date)) ?>
                     </p>
-                    <p class="widget-user-desc mb-0 mt-0 text-justify" style="font-weight: normal; font-size: 16px;">
+                    <!-- <p class="widget-user-desc mb-0 mt-0 text-justify" style="font-weight: normal; font-size: 16px;">
                         <span style="font-weight:500;">
                             <?= (@$value->Description) ?>
-                    </p>
+                    </p> -->
                 </div>
 
                 <div class="col-2 text-right">

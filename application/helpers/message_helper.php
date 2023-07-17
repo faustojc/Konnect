@@ -88,6 +88,7 @@ $tables = array(
     'training' => 'tbl_training',
     'applicant' => 'tbl_applicant',
     'user' => 'tbl_user',
+    'follow' => 'tbl_follow',
 );
 
 define('TABLE', json_encode($tables));

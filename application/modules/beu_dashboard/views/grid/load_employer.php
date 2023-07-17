@@ -1,6 +1,11 @@
 <?php if (!empty($details)): ?>
-    <div class="card card-widget widget-user">
-        <div class="widget-user-header text-white" style="background: url('<?= base_url() ?>assets/images/Logo/cover-place.jpg') center center; background-repeat: no-repeat; background-size: cover; border-radius: 15px 15px 0 0;"></div>
+    <div class="card card-widget widget-user position-sticky">
+        <div class="widget-user-header text-white" style="background: url('<?= base_url() ?>assets/images/Logo/cover-place.jpg') center center; background-repeat: no-repeat; background-size: cover; border-radius: 15px 15px 0 0;">
+        <div class="text-right">
+        <button class="btn text-white hoverbutton" style="background-color: rgba( 27, 38, 49, 0.5);"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+        </div>
+        
+        </div>
         <div class="widget-user-image">
             <img class="img-circle img-fluid" src="<?= base_url() ?>assets/images/employer/profile_pic/<?= $details->image ?>" alt="User Avatar" style="object-fit: cover; min-width: 90px; max-width: 90px;min-height: 90px; max-height: 90px;">
         </div>
@@ -43,7 +48,7 @@
             </div> -->
 
             <div class="d-flex justify-content-center" >
-                <button type="button" class="btn hovercard" style=" background-color:#F4F6F7;border-radius:10px; width:100%;">View Profile <i class="fa-solid fa-arrow-right fs-14 ml-1"></i></button>
+                <button type="button" class="btn hoverbutton" style=" background-color:#F4F6F7;border-radius:10px; width:100%;">View Profile <i class="fa-solid fa-arrow-right fs-14 ml-1"></i></button>
             </div>
         </div>
     </div>

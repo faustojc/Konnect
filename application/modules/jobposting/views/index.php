@@ -2,7 +2,11 @@
 main_header(['jobposting']);
 ?>
 <!-- ############ PAGE START-->
-
+<style>
+    .btn-info{
+        
+    }
+</style>
 
 <section class="content">
 
@@ -23,9 +27,9 @@ main_header(['jobposting']);
             </div>
         </div>
         <div class="card card-dark">
-            <div class="card-header">
+            <!-- <div class="card-header">
                 <h3 class="card-title">List of Jobs</h3>
-            </div>
+            </div> -->
             <div class="card-body">
                 <div class="row" id="job_list"></div>
             </div>

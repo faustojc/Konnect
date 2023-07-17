@@ -29,7 +29,7 @@ if (!empty($employers)) {
                             <?php if ($followed): ?>
                                 <button type="button" class="btn btn-outline-success btn-sm rounded d-flex align-items-center follow" data-id="<?= $employer->id ?>">
                                     <i class="fa fa-check mr-1"></i>
-                                    Followed
+                                    Following
                                 </button>
                             <?php else: ?>
                                 <button type="button" class="btn btn-outline-info btn-sm rounded d-flex align-items-center follow" data-id="<?= $employer->id ?>">Follow</button>

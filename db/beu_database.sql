@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 16, 2023 at 08:01 PM
+-- Generation Time: Jul 17, 2023 at 02:20 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -239,7 +239,6 @@ CREATE TABLE `tbl_jobposting` (
 INSERT INTO `tbl_jobposting` (`id`, `employer_id`, `title`, `description`, `date_posted`, `filled`) VALUES
 (24, 6, 'final na dis', 'last', '2023-07-04 11:05:49', 'OPEN'),
 (28, 6, 'job posting', 'description', '2023-07-04 14:24:56', 'OPEN'),
-(32, 7, 'Sugar dad', 'apply now', '2023-07-04 15:39:00', 'OPEN'),
 (33, 1, 'Virtual Assistant | WORK-FROM-HOME', 'At Outsourced Doers we recruit smart-working home-based Digital Marketing Virtual Assistants (VAs) and match them with clients (known as Founders) globally.\r\n\r\nThe Digital Marketing Virtual Assistant role is a remote assistant who will handle all the aspects of digital marketing and administrative work for the client.\r\n\r\nSimply put, digital marketing is a term used to describe online advertising. Common formats include email marketing, social media marketing, display advertising, blogs, and other digital formats.', '2023-07-04 15:40:15', 'OPEN'),
 (35, 1, 'Technical Support Engineer I, Document Control - Blended WFH', 'In this role, you will:\r\n\r\nIdentify applicable documents as per the customer’s requirements and specifications.\r\nAttend document review meetings with the Project Administrator, Project Manager, and Document Controller.\r\nManage the documentation approval cycle and final documentation delivery to the customer (gather, prepare, and submit).', '2023-07-04 16:03:35', 'OPEN'),
 (36, 1, 'Assistant Manager, Accounting| Urdaneta', 'Job Description:\r\n\r\nASSISTS IN OPERATIONS AND MANAGEMENT: Provides assistance for the overall operations and management of the accounting department of the assigned business unit\r\n\r\n· IMPLEMENTATION\r\n\r\nEnsures efficient implementation of integral plan for the control of financial transactions\r\n\r\n· REPORTS AND ANALYSIS', '2023-07-07 10:20:58', 'OPEN'),

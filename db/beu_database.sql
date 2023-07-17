@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 17, 2023 at 02:20 PM
+-- Generation Time: Jul 17, 2023 at 02:29 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -69,10 +69,11 @@ CREATE TABLE `tbl_employee` (
 --
 
 INSERT INTO `tbl_employee` (`ID`, `user_id`, `Date_created`, `Fname`, `Lname`, `Mname`, `Bday`, `Gender`, `Cstat`, `Religion`, `Cnum`, `Email`, `City`, `Barangay`, `Address`, `Title`, `SSS`, `Tin`, `Phil_health`, `Pag_ibig`, `Introduction`, `Employee_image`) VALUES
-(1, 0, '2023-06-27 03:45:52', 'John Marti', 'Demonteverde', 'Cusi', '2002-06-05', 'male', 'single', 'Catholic', '09604436812', 'johnmartin@outlook.com', 'Bacolod Cityy', 'Granada', 'Patricia Homes', 'Mobile Dev', '23234', '55555', '44444', '26262', '<p style=\"line-height: 1.4;\">Hello! I\'m JD, a highly motivated and passionate fourth-year Computer Science student with a strong interest in software development. I have a solid foundation in programming languages like <span style=\"text-decoration: underline;\"><strong>Java</strong></span>, <span style=\"text-decoration: underline;\"><strong>Python</strong></span>, and <span style=\"text-decoration: underline;\"><strong>C++</strong></span>, along with expertise in data structures, algorithms, and web development using <span style=\"text-decoration: underline;\"><strong>HTML</strong></span>, <span style=\"text-decoration: underline;\"><strong>CSS</strong></span>, and <span style=\"text-decoration: underline;\"><strong>JavaScript</strong></span>.</p>\n<p>&nbsp;</p>', 'IMG_0313_(1).JPG'),
+(1, 0, '2023-06-27 03:45:52', 'John Marti', 'Demonteverde', 'Cusi', '2002-06-05', 'male', 'single', 'Catholic', '09604436812', 'johnmartin@outlook.com', 'Bacolod Cityy', 'Granada', 'Patricia Homes', 'Mobile Dev', '23234', '55555', '44444', '26262', '<p style=\"line-height: 1.4; text-align: justify;\">Hello! I\'m <strong>JD</strong>, a highly <strong>motivated</strong> and <strong>passionate</strong> fourth-year<strong> Computer Science student </strong>with a strong interest in software development. I have a solid foundation in programming languages like Java, Python, and C++, along with expertise in data structures, algorithms, and web development using HTML, CSS, and JavaScript.</p>', 'IMG_0313_(1).JPG'),
 (14, 0, '2023-06-27 11:03:31', 'Paul Martin', 'Cuenca', 'Benedicto', '2001-11-24', 'male', 'single', 'Catholic', '09479505192', '@polcuenca', 'Bacolod City', 'Mansilingan', 'adelfa st. victorina heights', 'Web Dev', '1929222222', '757875', '8686', '8686', 'Hello! I\'m Paul, a highly motivated and passionate fourth-year Computer Science student with a strong interest in software development. I have a solid foundation in programming languages like Java, Python, and C++, along with expertise in data structures, algorithms, and web development using HTML, CSS, and JavaScript. I thrive in collaborative environments, possess excellent problem-solving abilities, and actively seek opportunities to learn and grow. Currently seeking internship opportunities, I am eager to apply my skills and contribute to building innovative solutions as a software developer. Let\'s connect and discuss how I can add value to your organization!', '347548042_184571507478516_7611925746711583073_n1.jpg'),
 (27, 0, '2023-06-29 10:55:16', 'Katrina', 'Sheesh', 'God', '2023-06-29', 'male', 'single', 'Catholic', '5555555', '@katrinadiz', 'BACOLOD CITY', 'Villamonte', 'Kats Street', 'GOD', '616216161', '515165151', '15151515', '5151515', '<p>Yes I am Kat have a <strong>kit kat</strong></p>', 'CheatEngine-logo2.png'),
-(32, 6, '0000-00-00 00:00:00', 'left', 'dead', 'for', '2022-08-16', 'male', 'single', 'Chicken', '123456', 'chicken@gmail.com', 'Bacolod City', 'Chicken', 'Charito Heights', 'L4D2', '123', '22222', '331313', '12323131', '', 'Csharp_Logo.png');
+(32, 6, '0000-00-00 00:00:00', 'left', 'dead', 'for', '2022-08-16', 'male', 'single', 'Chicken', '123456', 'chicken@gmail.com', 'Bacolod City', 'Chicken', 'Charito Heights', 'L4D2', '123', '22222', '331313', '12323131', '', '263088764_7252129248145876_7634209438953252272_n.jpg'),
+(33, 7, '0000-00-00 00:00:00', 'Kayla', 'Pajanconi', 'Tangub', '1999-10-13', 'female', 'single', 'Roman Catholic', '09222667813', 'kaypajanconi@gmail.com', 'Hinigaran', 'camba-og', 'Dinandan', '', '', '', '', '', '', 'default.png');
 
 -- --------------------------------------------------------
 
@@ -98,9 +99,9 @@ CREATE TABLE `tbl_employee_educ` (
 
 INSERT INTO `tbl_employee_educ` (`ID`, `Employee_id`, `Level`, `Institution`, `Title`, `Description`, `Start_date`, `End_date`, `Hours`) VALUES
 (1, 1, 'ELEMENTARY', 'Colegio San Agustin - Bacolod', 'Student', 'Grade 1 - Grade 12', '2023-07-28', '2023-08-05', 100),
-(25, 14, '4th', 'University of St. La Salle', 'Student', '', '2023-07-10', '2023-07-27', 10),
+(25, 14, 'College', 'University of St. La Salle', 'Computer Science', '', '2023-07-10', '2023-07-27', 10),
 (36, 27, 'COLLEGE', 'Colegio San Agustin - Bacolod', 'Student', '1st - 4rd year', '2023-07-04', '2023-07-06', 100),
-(43, 14, 'qweqwe', 'qweqwe', 'qweqweqwe', '', '2023-07-03', '2023-07-06', 123123),
+(43, 14, 'Senior High School', 'Liceo De La Salle', 'STEM', '', '2023-07-03', '2023-07-06', 123123),
 (58, 1, 'COLLEGE', 'University Of Saint La Salle - Bacolod', 'Student', '1st - 5th year', '2023-07-07', '2023-07-28', 200);
 
 -- --------------------------------------------------------
@@ -127,13 +128,13 @@ INSERT INTO `tbl_employee_skill` (`id`, `employee_id`, `skill`, `proficiency`, `
 (13, 1, 'Java', 'intermediate', 2),
 (15, 14, 'laravel', 'beginner', 3),
 (22, 14, 'C++', 'advance', 1),
-(23, 1, 'C++', 'advance', 99),
-(24, 14, 'PHP', 'intermediate', 2),
+(23, 1, 'C++', 'expert', 99),
 (25, 27, 'PHP', 'advance', 2),
 (27, 27, 'C++', 'advance', 5),
 (29, 27, 'C#', 'intermediate', 2),
 (30, 27, 'React', 'beginner', 1),
-(31, 27, 'JavaScript', 'advance', 3);
+(31, 27, 'JavaScript', 'advance', 3),
+(34, 32, 'PHP', 'beginner', 2);
 
 -- --------------------------------------------------------
 
@@ -200,7 +201,9 @@ INSERT INTO `tbl_employment` (`ID`, `employer_id`, `employee_id`, `position`, `s
 (41, 1, 27, 'CEO', '2009-02-18', '2021-02-02', 'its status', 10, 'a god dizon', '2023-06-30 15:30:55', 1, '0000-00-00'),
 (50, 1, 14, 'WORKER', '2023-02-08', '2023-07-20', 'full time', 3, '', '2023-07-06 11:19:17', 1, NULL),
 (55, 6, 1, 'manager', '2023-05-12', '2023-07-14', 'full time', 5, '', '2023-07-07 14:14:34', 1, NULL),
-(63, 10, 27, 'CHICKEN GOD', '2023-05-24', '2023-07-19', 'THE CHICKEN', 99, '', '2023-07-14 21:21:03', 1, NULL);
+(63, 10, 27, 'CHICKEN GOD', '2023-05-24', '2023-07-19', 'THE CHICKEN', 99, '', '2023-07-14 21:21:03', 1, NULL),
+(64, 10, 14, 'manager', '2023-07-05', '2023-07-08', 'Semi Full Time', 3, '', '2023-07-17 10:10:10', 1, NULL),
+(66, 10, 1, 'manager', '2023-05-11', '2023-07-17', 'Full Time', 2, '', '2023-07-17 13:19:27', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -216,6 +219,26 @@ CREATE TABLE `tbl_feedback` (
   `position` varchar(255) NOT NULL,
   `employee_type` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_follow`
+--
+
+CREATE TABLE `tbl_follow` (
+  `id` int(11) NOT NULL,
+  `employee_id` int(11) NOT NULL,
+  `employer_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_follow`
+--
+
+INSERT INTO `tbl_follow` (`id`, `employee_id`, `employer_id`) VALUES
+(23, 32, 1),
+(24, 32, 6);
 
 -- --------------------------------------------------------
 
@@ -237,14 +260,10 @@ CREATE TABLE `tbl_jobposting` (
 --
 
 INSERT INTO `tbl_jobposting` (`id`, `employer_id`, `title`, `description`, `date_posted`, `filled`) VALUES
-(24, 6, 'final na dis', 'last', '2023-07-04 11:05:49', 'OPEN'),
-(28, 6, 'job posting', 'description', '2023-07-04 14:24:56', 'OPEN'),
 (33, 1, 'Virtual Assistant | WORK-FROM-HOME', 'At Outsourced Doers we recruit smart-working home-based Digital Marketing Virtual Assistants (VAs) and match them with clients (known as Founders) globally.\r\n\r\nThe Digital Marketing Virtual Assistant role is a remote assistant who will handle all the aspects of digital marketing and administrative work for the client.\r\n\r\nSimply put, digital marketing is a term used to describe online advertising. Common formats include email marketing, social media marketing, display advertising, blogs, and other digital formats.', '2023-07-04 15:40:15', 'OPEN'),
 (35, 1, 'Technical Support Engineer I, Document Control - Blended WFH', 'In this role, you will:\r\n\r\nIdentify applicable documents as per the customer’s requirements and specifications.\r\nAttend document review meetings with the Project Administrator, Project Manager, and Document Controller.\r\nManage the documentation approval cycle and final documentation delivery to the customer (gather, prepare, and submit).', '2023-07-04 16:03:35', 'OPEN'),
 (36, 1, 'Assistant Manager, Accounting| Urdaneta', 'Job Description:\r\n\r\nASSISTS IN OPERATIONS AND MANAGEMENT: Provides assistance for the overall operations and management of the accounting department of the assigned business unit\r\n\r\n· IMPLEMENTATION\r\n\r\nEnsures efficient implementation of integral plan for the control of financial transactions\r\n\r\n· REPORTS AND ANALYSIS', '2023-07-07 10:20:58', 'OPEN'),
-(37, 1, 'Copywriter (Hybrid Working)', '<div class=\"z1s6m00 _1hbhsw66e\">\r\n<h4 class=\"z1s6m00 _1hbhsw64y y44q7i0 y44q7il _1d0g9qk4 y44q7iv y44q7i21\">Job Highlights</h4>\r\n</div>\r\n<div class=\"z1s6m00 _1hbhsw66e\">\r\n<ul class=\"z1s6m00 z1s6m03 _5135ge0 _5135ge6\">\r\n<li class=\"z1s6m00 _1hbhsw66u\">\r\n<div class=\"z1s6m00 _1hbhsw65a\">\r\n<div class=\"z1s6m00 _1hbhsw64y y44q7i0 y44q7i1 y44q7i21 _1d0g9qk4 y44q7ia\">\r\n<div class=\"z1s6m00 _1hbhsw65a _1hbhsw6fe _1hbhsw64 of5ilj2\" aria-hidden=\"true\">\r\n<div class=\"z1s6m00 _1hbhsw65u _1mx61b40 _1mx61b42\">&nbsp;</div>\r\n</div>\r\n</div>\r\n<div class=\"z1s6m00 _1hbhsw6r _1hbhsw6p _1hbhsw6a2\"><span class=\"z1s6m00 _1hbhsw64y y44q7i0 y44q7i1 y44q7i21 _1d0g9qk4 y44q7ia\">Award-winning culture and strong commitment to company values</span></div>\r\n</div>\r\n</li>\r\n<li class=\"z1s6m00 _1hbhsw66u\">\r\n<div class=\"z1s6m00 _1hbhsw65a\">\r\n<div class=\"z1s6m00 _1hbhsw64y y44q7i0 y44q7i1 y44q7i21 _1d0g9qk4 y44q7ia\">\r\n<div class=\"z1s6m00 _1hbhsw65a _1hbhsw6fe _1hbhsw64 of5ilj2\" aria-hidden=\"true\">\r\n<div class=\"z1s6m00 _1hbhsw65u _1mx61b40 _1mx61b42\">&nbsp;</div>\r\n</div>\r\n</div>\r\n<div class=\"z1s6m00 _1hbhsw6r _1hbhsw6p _1hbhsw6a2\"><span class=\"z1s6m00 _1hbhsw64y y44q7i0 y44q7i1 y44q7i21 _1d0g9qk4 y44q7ia\">SEEK is listed in the Top 20 Most Innovative Companies by Forbes</span></div>\r\n</div>\r\n</li>\r\n<li class=\"z1s6m00 _1hbhsw66u\">\r\n<div class=\"z1s6m00 _1hbhsw65a\">\r\n<div class=\"z1s6m00 _1hbhsw64y y44q7i0 y44q7i1 y44q7i21 _1d0g9qk4 y44q7ia\">\r\n<div class=\"z1s6m00 _1hbhsw65a _1hbhsw6fe _1hbhsw64 of5ilj2\" aria-hidden=\"true\">\r\n<div class=\"z1s6m00 _1hbhsw65u _1mx61b40 _1mx61b42\">&nbsp;</div>\r\n</div>\r\n</div>\r\n<div class=\"z1s6m00 _1hbhsw6r _1hbhsw6p _1hbhsw6a2\"><span class=\"z1s6m00 _1hbhsw64y y44q7i0 y44q7i1 y44q7i21 _1d0g9qk4 y44q7ia\">Founded in Melbourne, SEEK is now 6,000 people strong</span></div>\r\n</div>\r\n</li>\r\n</ul>\r\n</div>', '2023-07-07 10:31:11', 'OPEN'),
-(40, 1, 'Senior Manager/Associate Vice President (AVP) ', '<div class=\"z1s6m00 _1hbhsw66e\">\r\n<h4 class=\"z1s6m00 _1hbhsw64y y44q7i0 y44q7il _1d0g9qk4 y44q7iv y44q7i21\">Job Description</h4>\r\n</div>\r\n<div class=\"z1s6m00 _1hbhsw66e\">\r\n<div class=\"_1x1c7ng0\" data-automation=\"jobDescription\">\r\n<div class=\"z1s6m00\">\r\n<p>The Trade &amp; Working Capital Operations group processes a variety of products that support international commerce by facilitating the purchase and sale of goods. The Trade &amp; Working Capital unit, at Philippines Corporate Center is responsible for the following set of activities for Asia Pacific, Europe, Middle East &amp; Africa and United States region:</p>\r\n<ul>\r\n<li>Issuance and Advising of Documentary Letters of Credit including&nbsp;Document Checking &amp; Remittances/Payments</li>\r\n</ul>\r\n<br>\r\n<ul>\r\n<li>Settlement/Payments of Import &amp; Export bills under Letters of Credit (LC), Collections &amp; Open Account (OA) including&nbsp;Trade Advances/Loans &amp;&nbsp;Bank to Bank Reimbursements</li>\r\n</ul>\r\n<br>\r\n<ul>\r\n<li>Documentary Collections &amp;&nbsp;Open Account</li>\r\n</ul>\r\n<br>\r\n<ul>\r\n<li>Supply Chain Finance</li>\r\n</ul>\r\n<p><strong>Job Responsibilities:</strong></p>\r\n<p>As Specialty Product Manager II (Associate II) working in Night Shift, your key responsibilities are to:</p>\r\n<ul>\r\n<li>Manage the Commercial Letters of Credit (LC) &amp; Collections Team in the night shift, including being directly responsible for 5+ employees. Conduct daily huddles and meetings to pass on any process related updates. Create an inclusive environment for all employees</li>\r\n</ul>\r\n<br>\r\n<ul>\r\n<li>Drive the goals setup by the Trade &amp; Working Capital Management. Co-ordinate with our ops partners globally to manage the work</li>\r\n</ul>\r\n<br>\r\n<ul>\r\n<li>Processing/Releasing Collections &amp; Letters of Credit (LC) products Import Letters of Credit (LC) Issuance, Export Letters of Credit (LC) Advising/Confirmation &amp; Document Checking of Import Letters of Credit (LC) for our global clients</li>\r\n</ul>\r\n<br>\r\n<ul>\r\n<li>Ensure the transactions are processed as per J.P. Morgan (JPM) policies as well as&nbsp;International Chamber of Commerce (ICC)&nbsp;Rules like&nbsp;Uniform Customs and Practice for Documentary Credits (UCP600)/ISBP(International Standard Banking Practice)/Uniform Rules for Bank-to-Bank Reimbursements (URR).</li>\r\n</ul>\r\n<br>\r\n<ul>\r\n<li>Ensure all transactions assigned to the team are completed with utmost quality as per agreed Service Level Agreement (SLA)</li>\r\n</ul>\r\n<br>\r\n<ul>\r\n<li>Monitor queues and assignment of transaction to the team including pending follow-up</li>\r\n</ul>\r\n<br>\r\n<ul>\r\n<li>Identify any red flags/Office of Foreign Assets Control (OFAC)&nbsp;regulatory issues/Anti-Money Laundering (AML) &amp; Boycott language breach in the transaction and escalate for review</li>\r\n</ul>\r\n<p><strong>Required qualifications, capabilities, and skills:</strong></p>\r\n<ul>\r\n<li>4+ years of experience in managing a team</li>\r\n</ul>\r\n<br>\r\n<ul>\r\n<li>Self-directed, highly motivated. Ability to balance multiple tasks and responsibilities. Strong work ethic and &rdquo;can do&rdquo; attitude.</li>\r\n</ul>\r\n<br>\r\n<ul>\r\n<li>Ability to work independently and in a team environment, meeting tight deadlines. Must have the ability to work efficiently across the organization, cross&ndash;functional teams and multiple stakeholders. Willing to go above &amp; beyond to ensure timely delivery.</li>\r\n</ul>\r\n<br>\r\n<ul>\r\n<li>Well versed with Uniform Rules for Collections (URC), Uniform Customs and Practice for Documentary Credits (UCP), Uniform Rules for Bank-to-Bank Reimbursements under Documentary Credits (URR) &amp; International Standard Banking Practice (ISBP)</li>\r\n</ul>\r\n<br>\r\n<ul>\r\n<li>Subject Matter Expertise in the Letters of Credit (LC) Issuance/Advising/Confirmation &amp; Document checking process</li>\r\n</ul>\r\n<br>\r\n<ul>\r\n<li>Project Management, Queue Monitoring, Work Allocation and Prioritization</li>\r\n</ul>\r\n<br>\r\n<ul>\r\n<li>Understanding of US Regulations &amp;&nbsp;Office of Foreign Assets Control (OFAC) Compliance</li>\r\n</ul>\r\n<p><strong>Preferred qualifications, capabilities and skills:</strong></p>\r\n<ul>\r\n<li>Certificate for Documentary Credit Specialists (CDCS) &amp; Certificate in International Trade and Finance (CITF) certifications will be an added preference</li>\r\n</ul>\r\n</div>\r\n</div>\r\n</div>', '2023-07-07 10:48:04', 'OPEN'),
-(41, 1, 'System Support Analyst I (Service Desk)', '<div class=\"z1s6m00 _1hbhsw66y _1hbhsw673 _1hbhsw674\">\n<div class=\"z1s6m00\" data-automation=\"job-details-job-highlights\">\n<div class=\"z1s6m00 _5135ge0 _5135ge2\">\n<div class=\"z1s6m00 _1hbhsw66e\">\n<h4 class=\"z1s6m00 _1hbhsw64y y44q7i0 y44q7il _1d0g9qk4 y44q7iv y44q7i21\">Job Highlights</h4>\n</div>\n<div class=\"z1s6m00 _1hbhsw66e\">\n<ul class=\"z1s6m00 z1s6m03 _5135ge0 _5135ge6\">\n<li class=\"z1s6m00 _1hbhsw66u\">\n<div class=\"z1s6m00 _1hbhsw65a\">\n<div class=\"z1s6m00 _1hbhsw64y y44q7i0 y44q7i1 y44q7i21 _1d0g9qk4 y44q7ia\">\n<div class=\"z1s6m00 _1hbhsw65a _1hbhsw6fe _1hbhsw64 of5ilj2\" aria-hidden=\"true\">\n<div class=\"z1s6m00 _1hbhsw65u _1mx61b40 _1mx61b42\">&nbsp;</div>\n</div>\n</div>\n<div class=\"z1s6m00 _1hbhsw6r _1hbhsw6p _1hbhsw6a2\"><span class=\"z1s6m00 _1hbhsw64y y44q7i0 y44q7i1 y44q7i21 _1d0g9qk4 y44q7ia\">A competitive salary and benefits</span></div>\n</div>\n</li>\n<li class=\"z1s6m00 _1hbhsw66u\">\n<div class=\"z1s6m00 _1hbhsw65a\">\n<div class=\"z1s6m00 _1hbhsw64y y44q7i0 y44q7i1 y44q7i21 _1d0g9qk4 y44q7ia\">\n<div class=\"z1s6m00 _1hbhsw65a _1hbhsw6fe _1hbhsw64 of5ilj2\" aria-hidden=\"true\">\n<div class=\"z1s6m00 _1hbhsw65u _1mx61b40 _1mx61b42\">&nbsp;</div>\n</div>\n</div>\n<div class=\"z1s6m00 _1hbhsw6r _1hbhsw6p _1hbhsw6a2\"><span class=\"z1s6m00 _1hbhsw64y y44q7i0 y44q7i1 y44q7i21 _1d0g9qk4 y44q7ia\">Great workspaces with dedicated and motivated colleagues</span></div>\n</div>\n</li>\n<li class=\"z1s6m00 _1hbhsw66u\">\n<div class=\"z1s6m00 _1hbhsw65a\">\n<div class=\"z1s6m00 _1hbhsw64y y44q7i0 y44q7i1 y44q7i21 _1d0g9qk4 y44q7ia\">\n<div class=\"z1s6m00 _1hbhsw65a _1hbhsw6fe _1hbhsw64 of5ilj2\" aria-hidden=\"true\">\n<div class=\"z1s6m00 _1hbhsw65u _1mx61b40 _1mx61b42\">&nbsp;</div>\n</div>\n</div>\n<div class=\"z1s6m00 _1hbhsw6r _1hbhsw6p _1hbhsw6a2\"><span class=\"z1s6m00 _1hbhsw64y y44q7i0 y44q7i1 y44q7i21 _1d0g9qk4 y44q7ia\">A variety of career development tools, resources &amp; opportunities</span></div>\n</div>\n</li>\n</ul>\n</div>\n</div>\n</div>\n</div>\n<div class=\"z1s6m00 _1hbhsw66y _1hbhsw673 _1hbhsw674\">\n<div class=\"z1s6m00 _5135ge0 _5135ge2\">\n<div class=\"z1s6m00 _1hbhsw66e\">\n<h4 class=\"z1s6m00 _1hbhsw64y y44q7i0 y44q7il _1d0g9qk4 y44q7iv y44q7i21\">Job Description</h4>\n</div>\n<div class=\"z1s6m00 _1hbhsw66e\">\n<div class=\"_1x1c7ng0\" data-automation=\"jobDescription\">\n<div class=\"z1s6m00\">\n<p>Are you curious, motivated, and forward-thinking? At FIS you&rsquo;ll have the opportunity to work on some of the most challenging and relevant issues in financial services and technology. Our talented people empower us, and we believe in being part of a team that is open, collaborative, entrepreneurial, passionate and above all fun.</p>\n<p><strong><u>WHAT YOU WILL DO:</u></strong></p>\n<ul>\n<li>Drives issue resolution by making critical decisions that may impact multiple clients&rsquo; processing.</li>\n<li>Proactively investigates known and unknown error conditions and follows prescribed error correction procedures when they apply.</li>\n<li>Performs monitoring and operational management functions for associated hardware and software within 24x7 processing environment.</li>\n<li>Maintains peak performance at full capacity for all systems.</li>\n<li>Follows new/improved work procedures where appropriate, tests and implements program and/or systems changes, responds to processing problems and exercises sound judgment to make client impacting processing adjustments.</li>\n<li>Recognizes abnormal processing conditions and makes appropriate response decisions.</li>\n<li>Follows escalation procedures when appropriate to resolve errors in a timely manner.</li>\n<li>Makes use of available documentation to resolve errors and identifies/implements documentation gaps.</li>\n<li>Recognizes and implements/automates process enhancements.</li>\n<li>Monitors and responds accordingly to an array of system and application generated messages.</li>\n<li>Responds in a timely manner to questions and requests from incoming calls and incident tickets.</li>\n<li>Proactively maintains contact with clients and serves as client advocate to internal organizations.</li>\n<li>Analyzes problems/trends with client systems and applications and takes steps to avoid recurrence.</li>\n<li>Works on internal and external projects of various sizes, complexity.</li>\n<li>Contributes to existing and develops new solution approaches to the IT environment.</li>\n<li>Other related duties assigned as needed.</li>\n</ul>\n<p><strong><u>WHAT YOU BRING:</u></strong></p>\n<ul>\n<li><u>At least 3-6 years of experience as Service Desk Technical Support (L1/L2 Support)</u></li>\n<li><u>Mostly Virtual setup but must be willing to report to the office if needed (usually twice a week). Office location is at Ecoplaza Bldg, Magallanes, Makati</u></li>\n<li><u>Must be willing to work on night shift and shift schedules if needed</u></li>\n<li><u>Experience in Active Directory</u></li>\n<li><u>Experience in MS Exchange Server</u></li>\n<li><u>Experience in Server Troubleshooting</u></li>\n<li><u>Experience in Desktop Troubleshooting</u></li>\n<li>College Undergraduates and Non-Bachelor\'s Degree holders are welcome to apply</li>\n<li>Demonstrated knowledge of FIS products and services, financial services industry and mainframe and/or open systems operating systems</li>\n<li>Knowledge of clients objectives/business priorities and FIS role in achieving</li>\n<li>Ability to effectively use production control tools and resources encompassing mainframe, open system processing, processor link/Connex software, ATM&rsquo;s, environments</li>\n<li>Excellent customer service skills that build high levels of customer satisfaction for internal and external customers</li>\n<li>Excellent analytical, decision-making, problem-solving, team and time management skills</li>\n<li>Excellent verbal and written communication skills to technical and non-technical audiences of various levels in the organization, e.g., executive, management, individual contributors</li>\n<li>Willingly shares relevant technical and/or industry knowledge and expertise to other resources</li>\n<li>Ability to persuade and influence others on the best approach to take</li>\n<li>Ability to multi-task, deal with predefined deadlines</li>\n<li>Flexibility, versatility, dependability, positive outlook, strong work ethic</li>\n<li>Resourceful and proactive in gathering information and sharing ideas</li>\n<li>Ability to analyze all system processing delays, failures and errors to determine the appropriate action necessary for resolution</li>\n<li>Ability to use troubleshooting applications and tools for first and second level issues</li>\n<li>Ability to use and reference system related documentation</li>\n</ul>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"z1s6m00 _1hbhsw66y _1hbhsw673 _1hbhsw674\">\n<div class=\"z1s6m00 _5135ge0 _5135ge2\">\n<div class=\"z1s6m00 _1hbhsw66e\">\n<h4 class=\"z1s6m00 _1hbhsw64y y44q7i0 y44q7il _1d0g9qk4 y44q7iv y44q7i21\">Additional Information</h4>\n</div>\n<div class=\"z1s6m00 _1hbhsw66e\">\n<div class=\"z1s6m00 _5135ge0 _5135ge7\">\n<div class=\"z1s6m00 _1hbhsw65a _1hbhsw6gi _5135ge2f\">\n<div class=\"z1s6m00 _1hbhsw6r pmwfa50 pmwfa57\">\n<div class=\"z1s6m00 _1hbhsw6n _1hbhsw66y _1hbhsw6aa\">\n<div class=\"z1s6m00 _5135ge0 _5135ge5\">\n<div class=\"z1s6m00 _1hbhsw66q\"><strong><span class=\"z1s6m00 _1hbhsw64y y44q7i0 y44q7i3 y44q7i21 _1d0g9qk4 y44q7ia\">Career Level&nbsp;</span></strong></div>\n<div class=\"z1s6m00 _1hbhsw66q\"><span class=\"z1s6m00 _1hbhsw64y y44q7i0 y44q7i1 y44q7i21 _1d0g9qk4 y44q7ia\">1-4 Years Experienced Employee</span></div>\n<div class=\"z1s6m00 _1hbhsw66q\">&nbsp;</div>\n</div>\n</div>\n</div>\n<div class=\"z1s6m00 _1hbhsw6r pmwfa50 pmwfa57\">\n<div class=\"z1s6m00 _1hbhsw6n _1hbhsw66y _1hbhsw6aa\">\n<div class=\"z1s6m00 _5135ge0 _5135ge5\">\n<div class=\"z1s6m00 _1hbhsw66q\"><strong><span class=\"z1s6m00 _1hbhsw64y y44q7i0 y44q7i3 y44q7i21 _1d0g9qk4 y44q7ia\">Qualification</span></strong></div>\n<div class=\"z1s6m00 _1hbhsw66q\"><span class=\"z1s6m00 _1hbhsw64y y44q7i0 y44q7i1 y44q7i21 _1d0g9qk4 y44q7ia\">Not Specified</span></div>\n<div class=\"z1s6m00 _1hbhsw66q\">&nbsp;</div>\n</div>\n</div>\n</div>\n<div class=\"z1s6m00 _1hbhsw6r pmwfa50 pmwfa57\">\n<div class=\"z1s6m00 _1hbhsw6n _1hbhsw66y _1hbhsw6aa\">\n<div class=\"z1s6m00 _5135ge0 _5135ge5\">\n<div class=\"z1s6m00 _1hbhsw66q\"><strong><span class=\"z1s6m00 _1hbhsw64y y44q7i0 y44q7i3 y44q7i21 _1d0g9qk4 y44q7ia\">Years of Experience</span></strong></div>\n<div class=\"z1s6m00 _1hbhsw66q\"><span class=\"z1s6m00 _1hbhsw64y y44q7i0 y44q7i1 y44q7i21 _1d0g9qk4 y44q7ia\">3 years</span></div>\n</div>\n</div>\n</div>\n<div class=\"z1s6m00 _1hbhsw6r pmwfa50 pmwfa57\">\n<div class=\"z1s6m00 _1hbhsw6n _1hbhsw66y _1hbhsw6aa\">\n<div class=\"z1s6m00 _5135ge0 _5135ge5\">\n<div class=\"z1s6m00 _1hbhsw66q\"><strong><span class=\"z1s6m00 _1hbhsw64y y44q7i0 y44q7i3 y44q7i21 _1d0g9qk4 y44q7ia\">Job Type</span></strong></div>\n<div class=\"z1s6m00 _1hbhsw66q\"><span class=\"z1s6m00 _1hbhsw64y y44q7i0 y44q7i1 y44q7i21 _1d0g9qk4 y44q7ia\">Full-Time</span></div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>', '2023-07-07 11:17:36', 'OPEN');
+(45, 10, 'UI/UX', '<p>A UI/UX job description typically involves designing and improving user interfaces and experiences by conducting user research, creating wireframes and prototypes, collaborating with cross-functional teams, and ensuring a seamless and visually appealing interaction between users and digital products or services.</p>', '2023-07-17 15:37:31', 'OPEN');
 
 -- --------------------------------------------------------
 
@@ -281,11 +300,15 @@ CREATE TABLE `tbl_training` (
 --
 
 INSERT INTO `tbl_training` (`ID`, `Employee_id`, `title`, `training_description`, `venue`, `city`, `s_date`, `e_date`, `hours`) VALUES
-(1, 1, 'Interactive Workshop on UI/UX Design: Crafting Engaging User Experiences', '<p style=\"line-height: 1.4;\">Hello! I\'m JD, a highly motivated and passionate fourth-year Computer Science student with a strong interest in software development. I have a solid foundation in programming languages like <span style=\"text-decoration: underline;\"><strong>Java</strong></span>, <span style=\"text-decoration: underline;\"><strong>Python</strong></span>, and <span style=\"text-decoration: underline;\"><strong>C++</strong></span>, along with expertise in data structures, algorithms, and web development using <span style=\"text-decoration: underline;\"><strong>HTML</strong></span>, <span style=\"text-decoration: underline;\"><strong>CSS</strong></span>, and <span style=\"text-decoration: underline;\"><strong>JavaScript</strong></span>.</p>', 'SMX Convention', '', '2023-07-06', '2023-07-06', 600),
+(1, 1, 'Interactive Workshop on UI/UX Design: Crafting Engaging User Experiences', '<p style=\"line-height: 1.4; text-align: justify;\">Hello! I\'m JD, a highly motivated and passionate fourth-year Computer Science student with a strong interest in software development. I have a solid foundation in programming languages like <span style=\"text-decoration: underline;\"><strong>Java</strong></span>, <span style=\"text-decoration: underline;\"><strong>Python</strong></span>, and <span style=\"text-decoration: underline;\"><strong>C++</strong></span>, along with expertise in data structures, algorithms, and web development using <span style=\"text-decoration: underline;\"><strong>HTML</strong></span>, <span style=\"text-decoration: underline;\"><strong>CSS</strong></span>, and <span style=\"text-decoration: underline;\"><strong>JavaScript</strong></span>.</p>', 'SMX Convention', '', '2023-07-06', '2023-07-06', 600),
 (4, 14, 'Test', '<p>Hello! I\'m Paul, a highly motivated and passionate fourth-year Computer Science student with a strong interest in software development. I have a solid foundation in programming languages like Java, Python, and C++, along with expertise in data structures, algorithms, and web development using HTML, CSS, and JavaScript. I thrive in collaborative environments, possess excellent problem-solving abilities, and actively seek opportunities to learn and grow. Currently seeking internship opportunities, I am eager to apply my skills and contribute to building innovative solutions as a software developer. Let\'s connect and discuss how I can add value to your organization!</p>', 'Balay ni pol', '', '2023-05-25', '2023-07-13', 12),
 (8, 27, 'Yes I am Kat', '<p style=\"text-align: justify;\"><s><strong>Yes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes&nbsp;</strong></s></p>', 'Kat Function Halll', '', '2023-04-14', '2023-11-29', 2000),
 (9, 27, 'IBM Full Stack Software Developer Professional Certificate', '<p><em><strong>LOREM IPSUM LOREM IPSUM LOREM IPSUM </strong>LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM<strong> IPSUM <span style=\"text-decoration: underline;\">LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM&nbsp;</span></strong></em></p>', 'SA GYM', '', '2023-02-14', '2023-07-12', 200),
-(10, 27, '[L4D2]', '<p style=\"padding-left: 40px;\"><span style=\"text-decoration: underline;\">Le for ded 2</span></p>', 'Online', 'Bacolod City', '2023-04-20', '2023-08-16', 200);
+(10, 27, '[L4D2]', '<p style=\"padding-left: 40px;\"><span style=\"text-decoration: underline;\">Le for ded 2</span></p>', 'Online', 'Bacolod City', '2023-04-20', '2023-08-16', 200),
+(11, 1, 'Mastering UI/UX Design: A Workshop for Designers and Innovators', '<p style=\"text-align: justify;\">Are you ready to take your UI/UX design skills to the next level and create experiences that leave a lasting impact? Join our intensive workshop designed for designers and innovators seeking to refine their UI/UX expertise and create user-centered designs that captivate and engage.</p>', 'SMX', '', '2023-07-18', '2023-07-18', 5),
+(12, 1, 'Front-End Web Development Workshop: Building Modern and Responsive User Interfaces', '<p style=\"text-align: justify;\">In this hands-on training, our experienced instructors will guide you through the essential concepts and tools that form the foundation of front-end development. Whether you\'re a beginner looking to enter the field or an experienced developer seeking to enhance your skills, this workshop offers a dynamic learning experience tailored to all proficiency levels.</p>', 'Colegio San Agustin: Gymnasuim', '', '2023-07-17', '2023-07-27', 5),
+(13, 1, '123123', '<p>123123</p>', '123123', '123123', '2023-07-08', '2023-07-21', 123123123),
+(14, 1, 'Full-Stack Web Development Workshop: Creating Dynamic and Scalable Web Applications', '<p>In this immersive training program, our experienced instructors will guide you through the entire web development stack, covering both front-end and back-end technologies. Whether you\'re a beginner taking your first steps into web development or an experienced developer seeking to expand your skill set, this workshop offers a dynamic learning experience tailored to all proficiency levels.</p>', 'USLS Coliseum', 'Bacolod City', '2023-07-17', '2023-07-18', 101);
 
 -- --------------------------------------------------------
 
@@ -310,7 +333,8 @@ INSERT INTO `tbl_user` (`id`, `email`, `password`, `user_type`, `locker`) VALUES
 (3, 'lopues@gmail.com', '488ba4bc58d39f02c84d51f2d579ebcb6f614b6f', 'EMPLOYER', 'f~oZ!yr7%Q^CEpMV&S#Z8TICz(r$?(GOrQaYM>rjK&Gt64gCUO'),
 (4, 'pol@gmail.com', '464f2961c6ea64e833467a148afd87bcf91982ab', 'EMPLOYER', 'cE$hL^t2oS&zs&$7NQoNRahuMgOt.cN)!&Nt6&gW7If!txT$Vt'),
 (5, 'gabchicken@gmail.com', '26aa893d5c8d46bdff3c93f51dcb9db8ea242cb6', 'EMPLOYER', 'd9ImbIOAh5Cvh&Wd\\w4Ey61q^9u1do?HC5EUfcAH72!%G(@MpB'),
-(6, 'chicken@gmail.com', 'ead99718058240d3017368b1ec8b18bde5ebb4f5', 'EMPLOYEE', 'S(RC0J^1W^U.f6&F~\\A18xJBAK/Ur%Zf1mAAKTP5#N@1(si@o(');
+(6, 'chicken@gmail.com', 'ead99718058240d3017368b1ec8b18bde5ebb4f5', 'EMPLOYEE', 'S(RC0J^1W^U.f6&F~\\A18xJBAK/Ur%Zf1mAAKTP5#N@1(si@o('),
+(7, 'kaypajanconi@gmail.com', '838c8d537322b98e2f84f758dfcb07a5a960d1bd', 'EMPLOYEE', 'Q8pW@DJzfu9hE@C8rbl>?>rdo)s3*YwHxW6~Z@rit\\v@wmED0$');
 
 --
 -- Indexes for dumped tables
@@ -365,6 +389,12 @@ ALTER TABLE `tbl_feedback`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbl_follow`
+--
+ALTER TABLE `tbl_follow`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tbl_jobposting`
 --
 ALTER TABLE `tbl_jobposting`
@@ -404,19 +434,19 @@ ALTER TABLE `tbl_applicant`
 -- AUTO_INCREMENT for table `tbl_employee`
 --
 ALTER TABLE `tbl_employee`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `tbl_employee_educ`
 --
 ALTER TABLE `tbl_employee_educ`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `tbl_employee_skill`
 --
 ALTER TABLE `tbl_employee_skill`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `tbl_employer`
@@ -428,7 +458,7 @@ ALTER TABLE `tbl_employer`
 -- AUTO_INCREMENT for table `tbl_employment`
 --
 ALTER TABLE `tbl_employment`
-  MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `tbl_feedback`
@@ -437,10 +467,16 @@ ALTER TABLE `tbl_feedback`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `tbl_follow`
+--
+ALTER TABLE `tbl_follow`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
 -- AUTO_INCREMENT for table `tbl_jobposting`
 --
 ALTER TABLE `tbl_jobposting`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `tbl_skill`
@@ -452,13 +488,13 @@ ALTER TABLE `tbl_skill`
 -- AUTO_INCREMENT for table `tbl_training`
 --
 ALTER TABLE `tbl_training`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables

@@ -1,38 +1,54 @@
 // Load all employers
 const load_jobpostings = () => {
     $('#job_list').load(baseUrl + '/jobposting/get_jobpostings', function () {
-        const status = document.querySelectorAll('.job-status');
-
-        status.forEach(function (status) {
-            // Change status color
-            if (status.textContent.includes('OPEN')) {
-                status.classList.remove('badge-danger');
-                status.classList.add('badge-success');
-            } else if (status.textContent.includes('CLOSE')) {
-                status.classList.remove('badge-success');
-                status.classList.add('badge-danger');
-            }
-        });
+        status_badge();
     });
 }
 
-$(document).ready(function () {
-    load_jobpostings();
+const status_badge = () => {
+    const status = document.querySelectorAll('.job-status');
+
+    status.forEach(function (status) {
+        // Change status color
+        if (status.textContent.includes('OPEN')) {
+            status.classList.remove('badge-danger');
+            status.classList.add('badge-success');
+        } else if (status.textContent.includes('CLOSE')) {
+            status.classList.remove('badge-success');
+            status.classList.add('badge-danger');
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    status_badge();
 
     // TinyMCE
-    tinymce.init({
-        selector: '#job_description',
-        height: 350,
-        menubar: false,
-        browser_spellcheck: true,
-        plugins: 'advlist visualblocks autolink lists link image wordcount charmap preview anchor bullist numlist searchreplace visualblocks insertdatetime media table code help',
-        toolbar: 'undo redo | visualblocks | ' +
-            'bold italic underline | alignleft aligncenter ' +
-            'alignright alignjustify | bullist numlist outdent indent | ' +
-            'removeformat | help | forecolor backcolor | fontselect fontsizeselect | insertdatetime | wordcount',
-        insertdatetime_element: true,
+    textareaEditor('textarea');
+
+    // Get selected job
+    const joblink = document.querySelectorAll('.job-link');
+
+    joblink.forEach(job => {
+        job.addEventListener('click', function () {
+            const id = this.dataset.id;
+            const param = new URLSearchParams({id: id});
+
+            fetch(baseUrl + 'jobposting/get_selected_job', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: param
+            }).then(response => response.text())
+                .then(data => {
+                    document.querySelector('#job-details').innerHTML = data;
+                    status_badge();
+                });
+        });
     });
 });
+
 
 $(document).on('input', '#search_jobpost', function () {
     $('#job_list').load('jobposting/service/Jobposting_service/search_jobs', {search_text: $('#search_jobpost').val()}, function () {

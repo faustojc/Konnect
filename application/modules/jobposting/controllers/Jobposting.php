@@ -26,8 +26,27 @@ class Jobposting extends MY_Controller
     {
         $id = $this->input->get('id');
 
-        $this->data['details'] = $this->job_model->get_employer_jobposts($id);
+        $this->data['details'] = $this->job_model->get_all_jobposts();
+        $this->data['job_section_view'] = $this->load->view('grid/load_jobposting', $this->data, true);
         $this->data['content'] = 'index';
+        $this->load->view('layout', $this->data);
+    }
+
+    public function get_selected_job()
+    {
+        $id = $this->input->post('id');
+
+        $this->data['job'] = $this->job_model->job_info($id);
+        $this->data['content'] = 'grid/load_selected_job';
+        echo $this->load->view('layout', $this->data, true);
+    }
+
+    public function job_info()
+    {
+        $id = $this->uri->segment(3);
+
+        $this->data['details'] = $this->job_model->job_info($id);
+        $this->data['content'] = 'job_info';
         $this->load->view('layout', $this->data);
     }
 
@@ -43,15 +62,6 @@ class Jobposting extends MY_Controller
         $id = $this->input->get('id');
 
         $this->data['content'] = 'create_job';
-        $this->load->view('layout', $this->data);
-    }
-
-    public function job_info()
-    {
-        $id = $this->uri->segment(3);
-
-        $this->data['details'] = $this->job_model->job_info($id);
-        $this->data['content'] = 'job_info';
         $this->load->view('layout', $this->data);
     }
 }

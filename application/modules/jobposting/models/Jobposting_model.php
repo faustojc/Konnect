@@ -45,6 +45,10 @@ class Jobposting_model extends CI_Model
 
     public function job_info($id)
     {
-        return $this->db->select()->from($this->Table->jobposting)->where('id', $id)->get()->row();
+        return $this->db->select('tbl_jobposting.*, tbl_employer.tradename AS EmployerTradename, tbl_employer.image AS EmployerLogo')
+            ->from($this->Table->jobposting)
+            ->join($this->Table->employer, $this->Table->employer . '.id = ' . $this->Table->jobposting . '.employer_id')
+            ->where('tbl_jobposting.id', $id)
+            ->order_by('date_posted', 'DESC')->get()->row();
     }
 }

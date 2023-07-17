@@ -3,8 +3,8 @@ main_header(['jobposting']);
 ?>
 <!-- ############ PAGE START-->
 <style>
-    .btn-info{
-        
+    .btn-info {
+
     }
 </style>
 
@@ -31,7 +31,9 @@ main_header(['jobposting']);
                 <h3 class="card-title">List of Jobs</h3>
             </div> -->
             <div class="card-body">
-                <div class="row" id="job_list"></div>
+                <div class="row" id="job_list">
+                    <?= $job_section_view ?>
+                </div>
             </div>
         </div>
 </section>
@@ -40,4 +42,4 @@ main_header(['jobposting']);
 <?php
 main_footer();
 ?>
-<script src="<?php echo base_url() ?>/assets/js/jobposting/index.js"></script>
+<script src="<?php echo base_url() ?>assets/js/jobposting/index.js"></script>

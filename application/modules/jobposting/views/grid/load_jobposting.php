@@ -1,12 +1,13 @@
 <style>
-.section-line {
-    border: none;
-    border-bottom: 1px solid #ccc;
-    margin: 10px 0;
-}
-h1{
-    font-size: 25px;
-}
+    .section-line {
+        border: none;
+        border-bottom: 1px solid #ccc;
+        margin: 10px 0;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
 </style>
 
 <div class="col-md-12 row justify-content-center">
@@ -26,7 +27,7 @@ h1{
 <div class="row justify-content-center">
     <div class="col-md-4 pl-1" style="height: auto; ">
         <?php
-        $ci = & get_instance();
+        $ci = &get_instance();
         if (!empty($details)) {
             foreach ($details as $job) {
                 $postDate = strtotime($job->date_posted);
@@ -52,28 +53,22 @@ h1{
                     $formattedTimeDiff = $months . ' month' . ($months > 1 ? 's' : '') . ' ago';
                 }
                 ?>
-                <a href="">
-                <div class="card card-light p-3 mb-3">
-                    <p href="<?php echo base_url() ?>jobposting/job_info/<?= @$job->id ?>" class="card-title font-weight-bold mb-2" style="font-size: 22px;"><?= ucwords(@$job->title) ?></p>
-                    <small class="text-muted">Posted <?= $formattedTimeDiff ?></small>
-                    <!-- <div class="card-tools">
+                <div class="card card-light p-3 mb-3 job-link" role="button" data-id="<?= $job->id ?>">
+                    <h5 class="card-title font-weight-bold text-dark mb-2"><?= ucwords(@$job->title) ?></h5>
+                    <p><?= ucwords($job->EmployerTradename) ?></p>
+                    <small class="text-muted mb-2">Posted <?= $formattedTimeDiff ?></small>
+                    <div class="card-tools">
                         <span class="badge job-status"><?= ucwords($job->filled) ?></span>
-                        <button class="btn btn-outline" type="button" id="delete_job" data-id="<?= $job->id ?>">
-                            <i class="fa fa-x"></i>
-                        </button>
-                    </div> -->
-                    
+                    </div>
                     <div class="card-body pb-3 pl-0">
-                        <div class="card-text mb-0 text-muted description-truncate" style="max-height: 250px; overflow-y: hidden; font-size: 14px">
+                        <div class="card-text mb-0 text-muted " style="max-height: 250px; overflow-y: hidden; font-size: 12px">
                             <?= ucwords(@$job->description) ?>
                         </div>
-                        
                     </div>
-                    <div class="card-footer p-0" style="background-color: transparent;">
-                        <button type="button" class="btn btn-info btn-sm">Apply now</button>
+                    <div class="card-footer bg-transparent p-0">
+                        <button type="button" class="btn btn-outline-info btn-sm">Apply now</button>
                     </div>
                 </div>
-                </a>
                 <?php
             }
         } else {
@@ -88,18 +83,7 @@ h1{
         }
         ?>
     </div>
-    
-    <div class="col-md-5" style="position: sticky; top: 0; height: calc(100vh - 150px); overflow-y: auto; padding-top: 50px;">
-        <div class="card card-light p-3 mb-0">
-            <div id="job-title">
-            <h4 href="<?php echo base_url() ?>jobposting/job_info/<?= @$job->id ?>" class="card-title font-weight-bold mb-2" style="font-size: 22px;"><?= ucwords(@$job->title) ?></h4>
-            </div>  
-            <div class="button" style="background-color: transparent;">
-            <button type="button" class="btn btn-info btn-sm">Apply now</button>
-            </div>  
-            <div class="card-body pl-0" style="max-height: calc(100% - 100px); overflow-y: auto;">
-            <p><?= ucwords(@$job->description) ?></p>
-            </div>
-        </div>
+
+    <div class="col-md-5" id="job-details">
     </div>
 </div>

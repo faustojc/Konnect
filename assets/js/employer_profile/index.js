@@ -27,10 +27,6 @@ const load_summary = () => {
 }
 
 $(document).ready(function () {
-    //load_employees_follow_section();
-    //load_employers_follow_section();
-    //load_jobpostings();
-
     const status = document.querySelectorAll('span.status');
 
     status.forEach(value => {

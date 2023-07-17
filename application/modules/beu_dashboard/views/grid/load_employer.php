@@ -31,8 +31,9 @@
         </div>
 
        
-
-        <div class="card-footer border-top pt-3 pb-3" style="background-color:#FFF;">
+        
+        <div class="card-footer border-0 pt-3 pb-3" style="background-color:#FFF;">
+        <hr>
             <!-- <div class="row">
                 <div class="col-12">
                     <a href="#" class="hoveropac">

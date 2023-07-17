@@ -1,8 +1,6 @@
-.idea/sonarlint
+.idea
 .vs
 .vscode
-assets/images/employee
-assets/images/employer
 
 */config/development
 */logs/log-*.php

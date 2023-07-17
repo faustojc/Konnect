@@ -203,8 +203,8 @@ main_header(['Employer_profile']);
                                             <label for="" style="">Job Name</label>
                                             <input class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:15px;" type="text" placeholder="Enter Job Name">
 
-                                            <label for="" style="">Company</label>
-                                            <input class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:15px;" type="text" placeholder="Enter Company">
+                                            <!-- <label for="" style="">Company</label>
+                                            <input class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:15px;" type="text" placeholder="Enter Company"> -->
 
                                         </div>
                                         <div>
@@ -213,7 +213,7 @@ main_header(['Employer_profile']);
                                     </div>
                                     <div class="modal-footer border-0">
                                         <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-                                        <button type="button text-dark" class="btn" style="border-radius:10px; width:100%; background-color: #F4F6F7;">Save changes</button>
+                                        <button type="button text-dark" class="btn" style="border-radius:10px; width:100%; background-color: #F4F6F7;">Post</button>
                                     </div>
                                 </div>
                             </div>

@@ -245,7 +245,10 @@ main_header(['employee_profile']);
                                 <a class="nav-link" id="pills-training-tab" data-toggle="pill" href="#pills-training" role="tab" aria-controls="pills-training" aria-selected="false">Training</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="pills-following-tab" data-toggle="pill" href="#pills-following" role="tab" aria-controls="pills-following" aria-selected="false">Following</a>
+                                <a class="nav-link" id="pills-following-tab" data-toggle="pill" href="#pills-following" role="tab" aria-controls="pills-following" aria-selected="false">
+                                    Following
+                                    <span class="badge badge-info"><?= count($following) ?></span>
+                                </a>
                             </li>
                         </ul>
 
@@ -609,39 +612,7 @@ main_header(['employee_profile']);
                     <!-- Followers -->
 
                     <div class="tab-pane fade" id="pills-following" role="tabpanel" aria-labelledby="pills-following-tab">
-                        <div class="card card-white">
-                            <div class="card-header">
-                                <h3 class="card-title fw-500">Following</h3>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-6 col-md-6">
-                                    <div class="card-body card-widget widget-user-2">
-                                        <div class="widget-user-header">
-                                            <div class="widget-user-image">
-                                                <img class="img-circle img-fluid" src="<?= base_url() ?>assets/images/employer/profile_pic/default.png ?>" alt="User Avatar" style="object-fit: cover;min-width: 60px; max-width: 60px; min-height: 60px; max-height: 60px;">
-                                            </div>
-                                            <h5 class="widget-user-username mt-0" style="font-size: 18px; font-weight: 500;">Company 1</h5>
-                                            <h6 class="widget-user-desc mb-0" style="font-weight: normal; font-size: 16px;">Title</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6 col-md-6">
-
-                                    <div class="card-body card-widget widget-user-2">
-                                        <div class="widget-user-header">
-                                            <div class="widget-user-image">
-                                                <img class="img-circle img-fluid" src="<?= base_url() ?>assets/images/employer/profile_pic/default.png ?>" alt="User Avatar" style="object-fit: cover;min-width: 60px; max-width: 60px; min-height: 60px; max-height: 60px;">
-                                            </div>
-                                            <h5 class="widget-user-username mt-0" style="font-size: 18px; font-weight: 500;">Company 2</h5>
-                                            <h6 class="widget-user-desc mb-0" style="font-weight: normal; font-size: 16px;">Title</h6>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div>
+                        <?php load_following($following) ?>
                     </div>
                     <!-- end tab -->
                 </div>

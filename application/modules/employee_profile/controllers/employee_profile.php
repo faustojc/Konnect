@@ -41,6 +41,8 @@ class Employee_profile extends MY_Controller
         $ID = $this->uri->segment(3);
         $this->eModel->ID = $ID;
 
+        $this->db->cache_on();
+
         $this->data['details'] = $this->eModel->get_employee($ID);
         $this->data['educ_val'] = $this->eModel->get_educations();
         $this->data['train_val'] = $this->eModel->get_training();
@@ -49,6 +51,8 @@ class Employee_profile extends MY_Controller
         $this->data['employers'] = $this->employer_model->get_employers(4);
         $this->data['employees'] = $this->employee_model->get_all_employees(4, $ID);
         $this->data['following'] = $this->follow_model->get_following($ID);
+
+        $this->db->cache_off();
 
         if (!$educations_section_view = $this->cache->get('educations_section_view')) {
             // If not, generate the view and cache it for 10 minutes

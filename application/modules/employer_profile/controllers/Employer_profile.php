@@ -20,6 +20,7 @@ class Employer_profile extends MY_Controller
             'employee/Employee_model' => 'employee_model',
             'employer/Employer_model' => 'employer_model',
             'jobposting/Jobposting_model' => 'jobposting_model',
+            'follow/Follow_model' => 'follow_model',
         ];
         $this->load->model($model_list);
     }
@@ -40,11 +41,12 @@ class Employer_profile extends MY_Controller
         $this->data['employees'] = $this->employee_model->get_all_employees(4);
         $this->data['employers'] = $this->employer_model->get_employers(4, $id);
         $this->data['jobpostings'] = $this->jobposting_model->get_employer_jobposts($id, 4);
+        $this->data['followers'] = $this->follow_model->get_followers($id);
 
         // Disable query caching
         $this->db->cache_off();
 
-        $this->data['jobpostings_view'] = $this->load->view('grid/load_jobpostings', $this->data, TRUE);;
+        $this->data['jobpostings_view'] = $this->load->view('grid/load_jobpostings', $this->data, TRUE);
 
         $this->data['content'] = 'index';
         $this->load->view('layout', $this->data);

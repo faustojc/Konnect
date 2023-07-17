@@ -76,3 +76,77 @@ if (!function_exists('load_employers')) {
         $CI->load->view('components/load_employers', $data);
     }
 }
+
+if (!function_exists('load_followers')){
+    /**
+     * Load Followers Component
+     *
+     * A component that loads followers.
+     *
+     * USAGE: load_followers($followers);
+     *
+     * @param array $followers The array of followers.
+     */
+    function load_followers(array $followers)
+    {
+        $data = array(
+            'followers' => $followers
+        );
+
+        $CI = &get_instance();
+        $CI->load->view('components/load_followers', $data);
+    }
+}
+
+if (!function_exists('load_following')){
+    /**
+     * Load Following Component
+     *
+     * A component that loads following.
+     *
+     * USAGE: load_following($following);
+     *
+     * @param array $following The array of following.
+     */
+    function load_following(array $following)
+    {
+        $data = array(
+            'following' => $following
+        );
+
+        $CI = &get_instance();
+        $CI->load->view('components/load_followings', $data);
+    }
+}
+
+if (!function_exists('load_jobpostings')) {
+    /**
+     * Load Jobpostings Component
+     *
+     * A component that loads jobpostings.
+     *
+     * USAGE: load_jobpostings($jobpostings);
+     *
+     * @param array $jobpostings The array of jobpostings.
+     * @param array $saved OPTIONAL: The array of saved jobpostings.
+     * @param array $applied OPTIONAL: The array of applied jobpostings.
+     */
+    function load_jobpostings(array $jobpostings, array $saved = array(), array $applied = array())
+    {
+        $user_type = get_userdata('auth')['user_type'];
+        $data = array(
+            'jobpostings' => $jobpostings
+        );
+
+        if (!empty($saved) && $user_type == 'EMPLOYEE') {
+            $data['saved'] = $saved;
+        }
+
+        if (!empty($applied) && $user_type == 'EMPLOYEE') {
+            $data['applied'] = $applied;
+        }
+
+        $CI = &get_instance();
+        $CI->load->view('components/load_jobpostings', $data);
+    }
+}

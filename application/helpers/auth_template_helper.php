@@ -24,11 +24,21 @@ function auth_head()
             const baseUrl = '<?= base_url() ?>';
         </script>
     </head>
-    <body class="fade-in d-flex justify-content-center align-items-center h-100">
+    <body class="fade-in">
+    <nav class="navbar">
+        <div class="container">
+            <a class="navbar-brand text-decoration-none text-dark" href="<?= base_url() ?>">
+                <img src="<?= base_url() ?>assets/images/Logo/Konnect2.png" class="d-inline-block" width="30" height="30" alt="Konnect Logo">
+                Konnekt
+            </a>
+        </div>
+    </nav>
+    <section class="d-flex justify-content-center align-items-center">
 <?php }
 
 function auth_footer()
 { ?>
+    </section>
     <script src="<?= base_url() ?>assets/js/main.js"></script>
     <script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/jquery/jquery.min.js" type="text/javascript"></script>
     <script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js" type="text/javascript"></script>

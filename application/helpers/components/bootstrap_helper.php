@@ -32,6 +32,7 @@ if (!function_exists('modal')) {
 if (!function_exists('load_employees')) {
     /**
      * Load Employees Component
+     *
      * A component that loads employees.
      *
      * USAGE: load_employees($employees);
@@ -52,12 +53,13 @@ if (!function_exists('load_employees')) {
 if (!function_exists('load_employers')) {
     /**
      * Load Employers Component
+     *
      * A component that loads employers.
      *
      * USAGE: load_employers($employers);
      *
      * @param array $employers The array of employers.
-     * @param array $following OPTIONAL: The array of following for employee.
+     * @param array $following OPTIONAL: The array of employee's followed employers.
      */
     function load_employers(array $employers, array $following = array())
     {

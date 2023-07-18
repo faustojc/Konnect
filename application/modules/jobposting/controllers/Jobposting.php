@@ -24,10 +24,6 @@ class Jobposting extends MY_Controller
     /** load main page */
     public function index()
     {
-        $id = $this->input->get('id');
-
-        $this->data['details'] = $this->job_model->get_all_jobposts();
-        $this->data['job_section_view'] = $this->load->view('grid/load_jobposting', $this->data, true);
         $this->data['content'] = 'index';
         $this->load->view('layout', $this->data);
     }

@@ -77,7 +77,7 @@ if (!function_exists('load_employers')) {
     }
 }
 
-if (!function_exists('load_followers')){
+if (!function_exists('load_followers')) {
     /**
      * Load Followers Component
      *
@@ -98,7 +98,7 @@ if (!function_exists('load_followers')){
     }
 }
 
-if (!function_exists('load_following')){
+if (!function_exists('load_following')) {
     /**
      * Load Following Component
      *
@@ -148,5 +148,20 @@ if (!function_exists('load_jobpostings')) {
 
         $CI = &get_instance();
         $CI->load->view('components/load_jobpostings', $data);
+    }
+}
+
+if (!function_exists('loading_joblists')) {
+    /**
+     * Loading Job lists Component
+     *
+     * A component that displays a loading job lists content.
+     *
+     * USAGE: loading_joblists();
+     */
+    function loading_joblists()
+    {
+        $CI = &get_instance();
+        $CI->load->view('components/loading_joblists');
     }
 }

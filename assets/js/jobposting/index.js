@@ -44,14 +44,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // TinyMCE
     textareaEditor('textarea');
-    jobSelectedDisplayEvent(baseUrl + 'jobposting/get_selected_job');
+
+    fetch(baseUrl + 'jobposting/job_feed')
+        .then(response => response.text())
+        .then(data => {
+            const jobList = document.querySelector('#job_list');
+            jobList.innerHTML = data;
+
+            status_badge();
+            jobSelectedDisplayEvent(baseUrl + 'jobposting/get_selected_job');
+        });
 
     const navJobFeed = document.querySelector('#nav-job-feed');
     navJobFeed.addEventListener('click', function () {
+        const jobList = document.querySelector('#job_list');
+
         fetch(baseUrl + 'jobposting/job_feed')
             .then(response => response.text())
             .then(data => {
-                const jobList = document.querySelector('#job_list');
                 jobList.innerHTML = data;
 
                 status_badge();
@@ -61,10 +71,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const navJobPosted = document.querySelector('#nav-job-posted');
     navJobPosted.addEventListener('click', function () {
+        const ownJobList = document.querySelector('#own_job');
+
         fetch(baseUrl + 'jobposting/own_jobpost')
             .then(response => response.text())
             .then(data => {
-                const ownJobList = document.querySelector('#own_job');
                 ownJobList.innerHTML = data;
 
                 status_badge();

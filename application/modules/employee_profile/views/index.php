@@ -140,7 +140,7 @@ main_header(['employee_profile']);
     }
 
     .nav-pills .nav-link.active,
-    .nav-pills .show>.nav-link {
+    .nav-pills .show > .nav-link {
         color: #fff;
         background-color: #0dcaf0;
     }
@@ -191,7 +191,8 @@ main_header(['employee_profile']);
         <div class="row " style="margin-top: 3.5rem;">
             <div class="col-12 col-md-8 pl-2 pr-2 mt-4">
                 <div class="card card-widget widget-user">
-                    <div class="widget-user-header text-white" style="background: url('<?= base_url() ?>assets/images/Logo/cover-place.jpg') center center; min-height: 25vh; max-height: 50vh; background-repeat: no-repeat; background-size: cover; border-radius: 15px 15px 0px 0px;">
+                    <div class="widget-user-header text-white"
+                         style="background: url('<?= base_url() ?>assets/images/Logo/cover-place.jpg') center center; min-height: 25vh; max-height: 50vh; background-repeat: no-repeat; background-size: cover; border-radius: 15px 15px 0px 0px;">
                     </div>
 
                     <div class="card-footer bg-white" style="padding-top: 45px;">
@@ -213,8 +214,10 @@ main_header(['employee_profile']);
                                             <?= ucwords(@$details->Fname) . " " . ucwords(@$details->Mname) . " " . ucwords(@$details->Lname) ?>
                                         </h5>
                                         <input type="text" value="<?= @$details->ID ?>" id="emp_id" hidden>
-                                        <div class="">
-                                            <a style="border-radius:10px;" href="<?php echo base_url() ?>employee_profile/edit?id=<?= $details->ID ?>" type="button" class="btn btn-outline-info btn-sm btn-block mb-2">Edit Profile</a>
+                                        <div>
+                                            <?php if ($has_permission) {
+                                                employee_edit_button($details->ID);
+                                            } ?>
                                         </div>
                                     </div>
 

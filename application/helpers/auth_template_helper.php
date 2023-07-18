@@ -29,7 +29,7 @@ function auth_head()
         <div class="container">
             <a class="navbar-brand text-decoration-none text-dark" href="<?= base_url() ?>">
                 <img src="<?= base_url() ?>assets/images/Logo/Konnect2.png" class="d-inline-block" width="30" height="30" alt="Konnect Logo">
-                Konnekt
+                Konnect
             </a>
         </div>
     </nav>

@@ -3,17 +3,21 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Employee_profile extends MY_Controller
 {
-    protected $session;
-    private $data = [];
+    protected $userdata;
+    protected $auth;
+    protected $has_permission;
+    private array $data = [];
 
     public function __construct()
     {
         parent::__construct();
-        $this->session = (object)get_userdata(USER);
+        $this->userdata = get_userdata(USER);
 
-        // if(is_empty_object($this->session)){
-        // 	redirect(base_url().'login/authentication', 'refresh');
-        // }
+        if (empty($this->userdata)) {
+            redirect(base_url() . 'login');
+        } else {
+            $this->auth = get_userdata(AUTH);
+        }
 
         $model_list = [
             'employee_profile/employee_profile_model' => 'eModel',
@@ -22,25 +26,21 @@ class Employee_profile extends MY_Controller
             'follow/Follow_model' => 'follow_model',
         ];
         $this->load->model($model_list);
-    }
 
+        $ID = $this->uri->segment(3);
+        $currentUser = $this->eModel->get_employee($ID);
+        $this->has_permission = $this->Auth_model->check_permission($this->userdata, $currentUser);
+    }
 
     /** load main page */
     public function index()
     {
-        // if (
-        // 	!check_permission($this->session->User_type, ['admin'])
-        // ) {
-        // 	redirect(base_url() . 'landing_page', 'refresh');
-        // }
-
-        // $this->data['session'] =  $this->session;
-
-        $this->load->driver('cache');
+        $this->data['has_permission'] = $this->has_permission;
 
         $ID = $this->uri->segment(3);
         $this->eModel->ID = $ID;
 
+        $this->load->driver('cache');
         $this->db->cache_on();
 
         $this->data['details'] = $this->eModel->get_employee($ID);

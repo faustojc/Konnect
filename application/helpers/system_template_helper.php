@@ -116,6 +116,8 @@ function main_header($menubar = [])
             .a .text-info{
                 color: #0dcaf0;
             }
+
+            
         </style>
     </head>
 
@@ -123,30 +125,32 @@ function main_header($menubar = [])
     <div class="wrapper">
     <!-- Navbar -->
     <div class="container px-5">
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light"
-             style="margin-left: auto; padding-left:200px;padding-right:200px; height:55px;">
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light px-5"
+             style="margin-left: auto;  height:55px;">
             <!-- Left navbar links -->
             <ul class="navbar-nav align-items-center">
                 <li class="nav-item d-none d-sm-inline-block pr-3">
                     <a href="<?= base_url() ?>beu_dashboard">
                     <img class="brand-image" src="<?= base_url() ?>assets/images/Logo/Konnect.png" alt="" style="
                             object-fit: cover;
-                            min-width: 100px;
+                            /* min-width: 100px;
                             max-width: 100px;
                             min-height: 45px;
-                            max-height: 45px;">
+                            max-height: 45px; */
+                            width:125px;
+                            height:auto;">
                     </a>
                 </li>
-
-                <li class="nav-item d-none d-sm-inline-block">
-                    <div class="input-group flex-nowrap d-none d-lg-flex">
+                <!-- Search -->
+                <li class="nav-item d-none d-sm-inline-block" style="position: absolute; left: 50%; margin-left: -250px">
+                    <div class="input-group flex-nowrap d-none d-lg-flex" style="width:500px;">
                         <div class="input-group-prepend">
                   <span class="input-group-text bg-gray-light border-0" id="addon-wrapping" style="border-radius: 10px 0 0 10px;">
                     <i class="fa fa-search"></i>
                   </span>
                         </div>
                         <input type="text" class="form-control border-0 bg-gray-light" placeholder="Search"
-                               aria-label="search" aria-describedby="addon-wrapping" style="border-radius: 0 10px 10px 0;">
+                               aria-label="search" aria-describedby="addon-wrapping" style="border-radius: 0 10px 10px 0; ">
                     </div>
 
                     <div class="d-block d-lg-none">
@@ -170,6 +174,7 @@ function main_header($menubar = [])
                             </form>
                         </div>
                     </div>
+                    
                 </li>
                 <!-- <li class="nav-item d-none d-sm-inline-block">
               <a href="<?= base_url() ?>employment" class="nav-link">Employment</a>

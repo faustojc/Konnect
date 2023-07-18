@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class beu_dashboard extends MY_Controller
 {
     protected $userdata;
-    private $user_type = '';
+    protected $auth;
     private $data = [];
 
     public function __construct()
@@ -15,7 +15,7 @@ class beu_dashboard extends MY_Controller
         if (empty($this->userdata)) {
             redirect(base_url() . 'login');
         } else {
-            $this->user_type = get_userdata('auth')['user_type'];
+            $this->auth = get_userdata(AUTH);
         }
 
         $model_list = [
@@ -31,14 +31,13 @@ class beu_dashboard extends MY_Controller
     /** load main page */
     public function index()
     {
-        $this->data['user_type'] = $this->user_type;
-        if ($this->user_type == 'EMPLOYER') {
+        $this->data['auth'] = $this->auth;
+
+        if ($this->auth['user_type'] == 'EMPLOYER') {
             $id = $this->userdata->id;
         } else {
             $id = $this->userdata->ID;
         }
-
-        $this->data['user_type'] = $this->user_type;
 
         $this->load->driver('cache');
         // Enable query caching
@@ -50,7 +49,7 @@ class beu_dashboard extends MY_Controller
         $this->data['skills'] = $this->dashboard_model->get_skill($id);
         $this->data['jobpostings'] = $this->jobposting_model->get_all_jobposts();
 
-        if ($this->user_type == 'EMPLOYEE') {
+        if ($this->auth['user_type'] == 'EMPLOYEE') {
             $this->data['following'] = $this->follow_model->get_following($id);
         }
 
@@ -59,7 +58,7 @@ class beu_dashboard extends MY_Controller
         $this->data['skills_section_view'] = $this->load->view('grid/dash_load_skill', $this->data, TRUE);
         $this->data['jobpost_section_view'] = $this->load->view('grid/load_jobposts', $this->data, TRUE);
 
-        if ($this->user_type == 'EMPLOYER') {
+        if ($this->auth['user_type'] == 'EMPLOYER') {
             $this->data['user_display'] = $this->load->view('grid/load_employer', $this->data, true);
         } else {
             $this->data['user_display'] = $this->load->view('grid/load_employee', $this->data, true);

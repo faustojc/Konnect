@@ -43,9 +43,6 @@
                     <h5 class="card-title font-weight-bold text-dark mb-2">
                         <?= ucwords(@$job->title) ?>
                     </h5>
-                    <p>
-                        <?= ucwords($job->EmployerTradename) ?>
-                    </p>
                     <small class="text-muted mb-2">Posted
                         <?= $formattedTimeDiff ?>
                     </small>
@@ -59,9 +56,7 @@
                             <?= ucwords(@$job->description) ?>
                         </div>
                     </div>
-                    <div class="card-footer bg-transparent p-0">
-                        <button type="button" class="btn btn-outline-info btn-sm">Apply now</button>
-                    </div>
+
                 </div>
                 <?php
             }

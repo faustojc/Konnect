@@ -25,6 +25,18 @@
             $timeAgo = $yearsAgo . ($yearsAgo == 1 ? " year ago" : " years ago");
         }
         ?>
+        <style>
+            .badge-light {
+                color: #313131;
+                background-color: #D9D9D9;
+                font-weight: 600;
+                font-size: 13px;
+                padding: 7px;
+                border-radius: 7px;
+            }
+
+            
+        </style>
         <div class="card">
             <div class="card-body ">
                 <div class="job-post">
@@ -56,12 +68,12 @@
                             <!-- <button href="" class="btn card-tool text-muted"></button> -->
                             <div class="btn-group dropleft" style="">
                                 <button type="button" class="btn card-tool text-muted " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </button>
                                 <div class="dropdown-menu" style="border-radius:10px; box-shadow: none;">
                                     <a class="dropdown-item" href="#">Edit</a>
                                     <a class="dropdown-item" href="#">Delete</a>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -76,11 +88,29 @@
                         </h6>
                         <!-- <hr> -->
                         <div class="job-description" style="max-height: 150px; overflow-y: hidden">
+                            <div class="" style="font-weight:300;">
+                                <h5>
+                                    <span class="badge badge-light">
+                                        ₱
+                                        <?= $jobpost->salary ?>
+                                    </span>
+                                    <span class="badge badge-light">
+                                        <?= $jobpost->shift ?>
+                                    </span>
+                                    <span class="badge badge-light">
+                                        <?= $jobpost->job_type ?>
+                                    </span>
+
+                                </h5>
+
+                            </div>
                             <div class="" style="font-size:14px">
                                 <?= $jobpost->description ?>
                             </div>
+
                         </div>
                         <a class="text-center see-more" data-target=".job-description" style="display: block;" role="button">See more</a>
+
                         <hr>
                         <div class="row">
                             <div class="col-lg-12 col-md-4 col-sm-12">

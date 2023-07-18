@@ -14,35 +14,14 @@ main_header(['Employer_profile']);
         -moz-appearance: textfield;
     }
 
-    .table-black {
-        border: 1px solid black;
-    }
-
     .table-black td {
         border-top: 1px solid black;
-    }
-
-    .smallfont {
-        font-size: 68%;
-    }
-
-    .smallfont2 {
-        font-size: 75%;
-    }
-
-    .serif-font {
-        font-family: "Times New Roman", Times, serif;
     }
 
     .list-3 li {
         margin-top: 5px;
         margin-bottom: 5px;
         text-transform: capitalize;
-    }
-
-    .list-3 {
-        text-transform: capitalize;
-        list-style-type: none;
     }
 
     .list-3 a {
@@ -65,79 +44,15 @@ main_header(['Employer_profile']);
     }
 
     .card-footer {
-        border-radius: 0px 0px 15px 15px;
+        border-radius: 0 0 15px 15px;
     }
-
-    .card-button-more {
-        text-decoration: none;
-        margin-top: 10px;
-        background-color: white;
-        border-radius: 25px;
-        text-align: center;
-        padding-left: 8px;
-        width: 100%;
-        font-size: 12px;
-        margin-bottom: 10px;
-    }
-
-    .card-head-custom {
-        line-height: 1.5;
-        font-size: 0.8rem;
-    }
-
-    .card-button-more:hover {
-        opacity: 0.7;
-    }
-
-    .iconslist {
-        padding-right: 10px;
-    }
-
-    .fs-12 {
-        font-size: 12px;
-    }
-
-    .fs-14 {
-        font-size: 14px;
-    }
-
-    .fs-16 {
-        font-size: 16px;
-    }
-
-    .fs-18 {
-        font-size: 18px;
-    }
-
-    .fs-20 {
-        font-size: 20px;
-    }
-
 
     .fw-500 {
         font-weight: 500;
     }
 
-    .whitecolor {
-        color: white;
-    }
-
-    .whitebg {
-        background-color: white;
-    }
-
     body {
         background-color: #e9ebed;
-    }
-
-    /* custom css */
-
-    .sec-color {
-        background-color: #f7f9f9;
-    }
-
-    .nav-color {
-        background-color: #0dcaf0;
     }
 
     .nav-pills .nav-link.active,
@@ -154,14 +69,6 @@ main_header(['Employer_profile']);
         border-radius: 10px;
     }
 
-    .br-custom {
-        border-radius: 15px;
-    }
-
-    .a .text-info {
-        color: #0dcaf0;
-    }
-
     .btn-info {
         color: #fff;
         background-color: #0dcaf0;
@@ -174,8 +81,6 @@ main_header(['Employer_profile']);
         background-color: #40acc2;
         border-color: #40acc2;
     }
-
-
 </style>
 
 <section class="content">
@@ -202,6 +107,7 @@ main_header(['Employer_profile']);
                                         <div class="col-md-6 mb-3 m-md-0">
                                             <h5 class="widget-user-username text-left" style="font-weight: 500;">
                                                 <?= $current_employer->tradename ?>
+                                                
                                             </h5>
                                             <!-- <p class="text-left mb-1">
                                                 <?php if (empty($current_employer->employer_name)) {
@@ -210,23 +116,23 @@ main_header(['Employer_profile']);
                                                 echo $current_employer->employer_name;
                                             } ?>
                                             </p> -->
-                                            <h5 class="widget-user-desc text-left text-dark py-2" style="font-weight: 550; font-size:18px;">
+                                            <h5 class="widget-user-desc text-left text-dark py-2" style="font-weight: 550; font-size:18px; ">
                                                 <?= $current_employer->business_type ?>
                                             </h5>
                                             <h6 class="widget-user-desc text-left text-muted" style="font-weight: normal; font-size:15px;">
                                                 <?= ucwords(@$current_employer->address) . ", " . ucwords(@$current_employer->city) ?> |
                                                 <a class="text-info" data-toggle="modal" data-target="#contact" style=" cursor: pointer;">Contact details</a>
                                             </h6>
+
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="d-flex justify-content-between justify-content-xl-end">
-                                                <a href="<?= base_url() ?>employer_profile/edit_profile/<?= $current_employer->id ?>" class="btn btn-outline-info mr-1 fw-500" style="font-size: 14px;">
-                                                    <i class="fa-solid fa-pen mr-1"></i> Edit Profile
-                                                </a>
-                                                <a href="<?= base_url() ?>jobposting/create_job?id=<?= $current_employer->id ?>" class="btn btn-info fw-500" style="font-size: 14px;">
-                                                    <i class="fa-solid fa-pen-to-square"></i> Create a Job Listing
-                                                </a>
+                                            <div class="d-flex justify-content-end">
+                                                    <button type="button" class="btn btn-info" style=" line-height: 5px; border-radius:10px;">Follow <i class="fa-solid fa-plus"></i></button>
                                             </div>
+                                            <?php if ($has_permission) {
+                                                employer_edit_button($current_employer->id);
+                                            } ?>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -246,8 +152,13 @@ main_header(['Employer_profile']);
                             <li class="nav-item">
                                 <a class="nav-link" id="pills-followers-tab" data-toggle="pill" href="#pills-followers" role="tab" aria-controls="pills-followers" aria-selected="false">
                                     Followers
-                                    <span class="badge badge-info"><?= count($followers) ?></span>
+                                    <span class="badge badge-info">
+                                        <?= count($followers) ?>
+                                    </span>
                                 </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-feedback-tab" data-toggle="pill" href="#pills-feedback" role="tab" aria-controls="pills-feedback" aria-selected="false">Feedback</a>
                             </li>
                         </ul>
 
@@ -319,9 +230,78 @@ main_header(['Employer_profile']);
                     </div>
 
                     <!-- Followers -->
-
                     <div class="tab-pane fade" id="pills-followers" role="tabpanel" aria-labelledby="pills-followers-tab">
                         <?php load_followers($followers); ?>
+                    </div>
+                    <div class="tab-pane fade" id="pills-feedback" role="tabpanel" aria-labelledby="pills-feedback-tab">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="col-1 d-flex justify-content-center align-items-center ml-3">
+                                                <img class="rounded-circle" src="<?= base_url() ?>assets/images/employee/profile_pic/default.png"
+                                                     alt="Employee Profile Pic" style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem;
+                                                width:3.5rem; position:absolute;">
+                                            </div>
+                                            <div class="ml-4">
+                                                <h5 class="card-title">Employee Name</h5>
+                                                <h6 class="card-subtitle mb-2 text-muted">Position Title</h6>
+                                                <h6 class="card-subtitle mb-2 text-muted">Ratings</h6>
+                                            </div>
+                                        </div>
+                                        <div class="rating">
+                                            <!-- Display the star ratings here -->
+                                            <?php
+                                            $rating = 4.5; // Replace with the actual rating value from your data
+                                            for ($i = 1; $i <= 5; $i++) {
+                                                if ($i <= $rating) {
+                                                    echo '<i class="bi bi-star-fill"></i>';
+                                                } else {
+                                                    echo '<i class="bi bi-star"></i>';
+                                                }
+                                            }
+                                            ?>
+                                        </div>
+                                        <p class="card-text mt-3">Feedback content</p>
+                                        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="col-1 d-flex justify-content-center align-items-center ml-3">
+                                                <img class="rounded-circle" src="<?= base_url() ?>assets/images/employee/profile_pic/default.png"
+                                                     alt="Employee Profile Pic" style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem;
+                                                width:3.5rem; position:absolute;">
+                                            </div>
+                                            <div class="ml-4">
+                                                <h5 class="card-title">Employee Name</h5>
+                                                <h6 class="card-subtitle mb-2 text-muted">Position Title</h6>
+                                                <h6 class="card-subtitle mb-2 text-muted">Ratings</h6>
+                                            </div>
+                                        </div>
+                                        <div class="rating">
+                                            <!-- Display the star ratings here -->
+                                            <?php
+                                            $rating = 4.5; // Replace with the actual rating value from your data
+                                            for ($i = 1; $i <= 5; $i++) {
+                                                if ($i <= $rating) {
+                                                    echo '<i class="bi bi-star-fill"></i>';
+                                                } else {
+                                                    echo '<i class="bi bi-star"></i>';
+                                                }
+                                            }
+                                            ?>
+                                        </div>
+                                        <p class="card-text mt-3">Feedback content</p>
+                                        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -330,11 +310,6 @@ main_header(['Employer_profile']);
                 <div class="card card-white">
                     <div class="card-header">
                         <h3 class="card-title fw-500">Home Address</h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-toggle="modal" data-target="#modal_edit_home_address" style="opacity:1; color:white;" id="edit_home_address">
-                                <i class="fa-solid fa-pen" style="color: grey;"></i>
-                            </button>
-                        </div>
                     </div>
                     <div class="card-body" style="padding-top:10px;padding-bottom:10px">
                         <strong>City: </strong>
@@ -386,11 +361,6 @@ main_header(['Employer_profile']);
                 <div class="card card-white">
                     <div class="card-header">
                         <h3 class="card-title fw-500">Business Information</h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-toggle="modal" data-target="#modal_edit_business" style="opacity:1; color:white;" id="edit_information">
-                                <i class="fa-solid fa-pen" style="color: grey;"></i>
-                            </button>
-                        </div>
                     </div>
                     <div class="card-body" style="padding-top:10px;padding-bottom:10px">
                         <strong>Trade Name: </strong>

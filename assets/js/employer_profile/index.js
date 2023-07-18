@@ -1,25 +1,3 @@
-const load_employees_follow_section = () => {
-    $('#load_employees_follow_section').load(baseUrl + 'employer_profile/get_employees_follow_section', function () {
-        $('.loading-employees').remove();
-    });
-}
-
-const load_employers_follow_section = () => {
-    const id = new URLSearchParams(window.location.search).get('id');
-
-    $('#load_employers_follow_section').load(baseUrl + 'employer_profile/get_employers_follow_section?id=' + id, function () {
-        $('.loading-employers').remove();
-    });
-}
-
-const load_jobpostings = () => {
-    const id = new URLSearchParams(window.location.search).get('id');
-
-    $('#load_jobpostings').load(baseUrl + 'employer_profile/get_jobpostings?id=' + id, function () {
-        $('.loading-jobpostings').remove();
-    });
-}
-
 const load_summary = () => {
     const id = new URLSearchParams(window.location.search).get('id');
 

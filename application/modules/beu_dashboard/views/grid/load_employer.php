@@ -1,5 +1,5 @@
 <?php if (!empty($details)): ?>
-    <div class="card card-widget widget-user position-sticky">
+    <div class="card card-widget widget-user position-sticky ">
         <div class="widget-user-header text-white" style="background: url('<?= base_url() ?>assets/images/Logo/cover-place.jpg') center center; background-repeat: no-repeat; background-size: cover; border-radius: 15px 15px 0 0;">
         <div class="text-right">
         <button class="btn text-white hoverbutton" style="background-color: rgba( 27, 38, 49, 0.5);"><i class="fa-solid fa-ellipsis-vertical"></i></button>

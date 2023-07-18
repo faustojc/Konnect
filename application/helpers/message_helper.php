@@ -36,6 +36,7 @@ const DUPLICATE_USERNAME_FOUND = 'Username is already taken, please try again.';
 const DEFAULT_LOGIN_PASSWORD = 'password1234*';
 const CHAR_SET = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$11<>?!@#$%^&*()~\/.';
 const USER = 'user';
+const AUTH = 'auth';
 const SYSTEM_NAME = 'Konnect';
 const SYSTEM_ALT = '';
 const FOOTER_NAME = '';

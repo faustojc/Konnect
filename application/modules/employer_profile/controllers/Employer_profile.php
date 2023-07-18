@@ -3,17 +3,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Employer_profile extends MY_Controller
 {
-    protected $session;
+    protected $userdata;
+    protected $has_permission;
     private $data = [];
 
     public function __construct()
     {
         parent::__construct();
-        $this->session = get_userdata(USER);
+        $this->userdata = get_userdata(USER);
 
-        // if(is_empty_object($this->session)){
-        // 	redirect(base_url().'login/authentication', 'refresh');
-        // }
+        if (empty($this->userdata)) {
+            redirect(base_url() . 'login');
+        }
 
         $model_list = [
             'employer_profile/Employer_profile_model' => 'employer_profile_model',
@@ -23,6 +24,11 @@ class Employer_profile extends MY_Controller
             'follow/Follow_model' => 'follow_model',
         ];
         $this->load->model($model_list);
+
+        // get the id from get request and get the user and check if the user owns the profile
+        $id = $this->input->get('id');
+        $currentUser = $this->employer_profile_model->get_current_employer($id);
+        $this->has_permission = $this->Auth_model->check_permission($this->userdata, $currentUser);
     }
 
     /** load main page */
@@ -30,12 +36,11 @@ class Employer_profile extends MY_Controller
     {
         $id = $this->input->get('id');
 
+        $this->data['has_permission'] = $this->has_permission;
         $this->load->driver('cache');
-
         // Enable query caching
         $this->db->cache_on();
 
-        // Your existing queries
         $this->data['current_employer'] = $this->employer_profile_model->get_current_employer($id);
         $this->data['current_employer']->summary = $this->load->view('grid/load_summary', $this->data, TRUE);
         $this->data['employees'] = $this->employee_model->get_all_employees(4);
@@ -63,26 +68,12 @@ class Employer_profile extends MY_Controller
 
     public function edit_profile()
     {
-        $id = $this->uri->segment(3);
+        if (!$this->has_permission) {
+            redirect(base_url() . 'employer_profile?id=' . $this->userdata->id, 'refresh');
+        }
 
-        $this->data['employer'] = $this->employer_profile_model->get_current_employer($id);
+        $this->data['employer'] = $this->employer_profile_model->get_current_employer($this->userdata->id);
         $this->data['content'] = 'profile';
-        $this->load->view('layout', $this->data);
-    }
-
-    public function get_employees_follow_section()
-    {
-        $this->data['employees'] = $this->employee_model->get_all_employees(4);
-        $this->data['content'] = 'grid/load_employees';
-        $this->load->view('layout', $this->data);
-    }
-
-    public function get_employers_follow_section()
-    {
-        $id = $this->input->get('id');
-
-        $this->data['employers'] = $this->employer_model->get_employers(4, $id);
-        $this->data['content'] = 'grid/load_employers';
         $this->load->view('layout', $this->data);
     }
 

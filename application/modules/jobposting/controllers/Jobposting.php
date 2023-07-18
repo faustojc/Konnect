@@ -3,13 +3,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Jobposting extends MY_Controller
 {
-    protected $session;
+    protected $userdata;
     private $data = [];
 
     public function __construct()
     {
         parent::__construct();
-        $this->session = (object)get_userdata(USER);
+        $this->userdata = get_userdata(USER);
 
         // if(is_empty_object($this->session)){
         // 	redirect(base_url().'login/authentication', 'refresh');
@@ -50,11 +50,13 @@ class Jobposting extends MY_Controller
         $this->load->view('layout', $this->data);
     }
 
-    public function get_jobpostings()
+    public function job_feed()
     {
         $this->data['details'] = $this->job_model->get_all_jobposts();
         $this->data['content'] = 'grid/load_jobposting';
-        $this->load->view('layout', $this->data);
+        $view = $this->load->view('layout', $this->data, true);
+
+        $this->output->set_content_type('text/html')->set_output($view);
     }
 
     public function create_job()
@@ -63,5 +65,23 @@ class Jobposting extends MY_Controller
 
         $this->data['content'] = 'create_job';
         $this->load->view('layout', $this->data);
+    }
+
+    public function own_jobpost()
+    {
+        $this->data['details'] = $this->job_model->get_employer_jobposts($this->userdata->id);
+        $this->data['content'] = 'grid/load_own_jobpost';
+        $view = $this->load->view('layout', $this->data, true);
+
+        $this->output->set_content_type('text/html')->set_output($view);
+    }
+
+    public function get_own_selected_job()
+    {
+        $id = $this->input->post('id');
+
+        $this->data['job'] = $this->job_model->job_info($id);
+        $this->data['content'] = 'grid/load_own_selected_job';
+        echo $this->load->view('layout', $this->data, true);
     }
 }

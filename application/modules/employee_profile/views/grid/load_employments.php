@@ -25,6 +25,14 @@ if (!empty($employments['employers'])) {
                                     <?= ucwords(@$employment->status) ?>
                                 </p>
                             <?php endif; ?>
+                            <div class="star-rating" style="background-image: linear-gradient(
+                                to right,
+                                gold 0%,
+                                gold 100%,
+                                transparent 33.333%,
+                                transparent 100%);
+                            "
+                            ><?= @$employment->rating ?></div>
                         </li>
                     </ul>
                 </div>
@@ -180,5 +188,16 @@ if (!empty($employments['employers'])) {
         width: 20px;
         height: 20px;
         z-index: 400;
+    }
+
+    .star-rating::before {
+    content: "⭐⭐⭐⭐⭐";
+    }
+
+    .star-rating {
+        display: inline-block;
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: rgba(0, 0, 0, 0.1);
     }
 </style>

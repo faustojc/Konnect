@@ -77,7 +77,7 @@ class employer_profile_service extends MY_Controller
     public function update()
     {
         $response = [];
-        $data = null;
+        $img = null;
 
         $file['upload_path'] = './assets/images/employer/profile_pic/';
         $file['allowed_types'] = 'jpg|png|jpeg';
@@ -88,30 +88,13 @@ class employer_profile_service extends MY_Controller
         if (!$this->upload->do_upload('image')) {
             $response['file_error'] = $this->upload->error_msg;
         } else {
-            $data = $this->upload->data();
-            $response['file_success'] = 'File ' . $data['file_name'] . ' uploaded successfully';
+            $img = $this->upload->data();
+            $response['file_success'] = 'File ' . $img['file_name'] . ' uploaded successfully';
         }
 
-        $info = array(
-            'id' => $this->input->post("id"),
-            'employer_name' => $this->input->post('employer_name'),
-            'tradename' => $this->input->post("tradename"),
-            'city' => $this->input->post('city'),
-            'barangay' => $this->input->post('barangay'),
-            'address' => $this->input->post('address'),
-            'business_type' => $this->input->post("business_type"),
-            'contact_number' => $this->input->post("contact_number"),
-            'email' => $this->input->post("email"),
-            'sss' => $this->input->post('sss'),
-            'tin' => $this->input->post('tin'),
-            'image' => isset($data) ? $data['file_name'] : null,
-        );
+        $data = $this->input->post();
 
-        if (!isset($data)) {
-            unset($info['image']);
-        }
-
-        $response[] = $this->employer_profile_service_model->update($info);
+        $response = $this->employer_profile_service_model->update($data);
         echo json_encode($response);
     }
 }

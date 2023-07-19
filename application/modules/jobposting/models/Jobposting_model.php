@@ -3,12 +3,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Jobposting_model extends CI_Model
 {
+    protected $userdata;
     public $Table;
 
     public function __construct()
     {
         parent::__construct();
-        $this->session = (object)get_userdata(USER);
+        $this->userdata = get_userdata(USER);
 
         // if(is_empty_object($this->session)){
         // 	redirect(base_url().'login/authentication', 'refresh');
@@ -22,7 +23,7 @@ class Jobposting_model extends CI_Model
     public function get_all_jobposts($limit = 0)
     {
         if ($limit == 0) {
-            return $this->db->select('tbl_jobposting.*, tbl_employer.tradename AS EmployerTradename, tbl_employer.image AS EmployerLogo')
+            return $this->db->select('tbl_jobposting.*, tbl_employer.id AS EmployerId, tbl_employer.tradename AS EmployerTradename, tbl_employer.image AS EmployerLogo')
                 ->from($this->Table->jobposting)
                 ->join($this->Table->employer, $this->Table->employer . '.id = ' . $this->Table->jobposting . '.employer_id')
                 ->order_by('date_posted', 'DESC')->get()->result();

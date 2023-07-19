@@ -71,53 +71,71 @@ function main_header($menubar = [])
         <script src="<?= base_url() ?>assets/theme/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
         <style>
 
-            .text-info{
+            .text-info {
                 color: #0dcaf0;
             }
-            
-            .btn-info{
+
+            .btn-info {
                 color: #fff;
                 background-color: #0dcaf0;
                 border-color: #0dcaf0;
             }
+
             .btn-outline-info {
-            color: #0dcaf0;
-            border-color: #0dcaf0;
+                color: #0dcaf0;
+                border-color: #0dcaf0;
             }
+
             .btn-outline-info:hover {
-            color: #fff;
-            background-color: #0dcaf0;
-            border-color: #0dcaf0;
+                color: #fff;
+                background-color: #0dcaf0;
+                border-color: #0dcaf0;
             }
 
             /* custom css */
 
-            .sec-color{
-                background-color:   #f7f9f9  ;
+            .sec-color {
+                background-color: #f7f9f9;
             }
 
-            .nav-color{
+            .nav-color {
                 background-color: #0dcaf0;
             }
+
             .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-            color: #fff;
-            background-color: #0dcaf0;
-            }
-            .nav-pills .nav-link:not(.active):hover {
-            color: #0dcaf0;
-            }
-            .nav-pills .nav-link {
-            border-radius: 10px;
+                color: #fff;
+                background-color: #0dcaf0;
             }
 
-            .br-custom{
-                border-radius: 15px;
-            }
-            .a .text-info{
+            .nav-pills .nav-link:not(.active):hover {
                 color: #0dcaf0;
             }
 
+            .nav-pills .nav-link {
+                border-radius: 10px;
+            }
+
+            .br-custom {
+                border-radius: 15px;
+            }
+
+            .a .text-info {
+                color: #0dcaf0;
+            }
+
+            .card-hover:hover {
+                transform: scale(1.05);
+                transition: 0.5s;
+            }
+
+            .formstyle{
+                border-radius:10px;
+                background-color: #F4F6F7;
+                border:0;
+            }
             
+
+
         </style>
     </head>
 
@@ -131,7 +149,7 @@ function main_header($menubar = [])
             <ul class="navbar-nav align-items-center">
                 <li class="nav-item d-none d-sm-inline-block pr-3">
                     <a href="<?= base_url() ?>beu_dashboard">
-                    <img class="brand-image" src="<?= base_url() ?>assets/images/Logo/Konnect.png" alt="" style="
+                        <img class="brand-image" src="<?= base_url() ?>assets/images/Logo/Konnect.png" alt="" style="
                             object-fit: cover;
                             /* min-width: 100px;
                             max-width: 100px;
@@ -174,7 +192,7 @@ function main_header($menubar = [])
                             </form>
                         </div>
                     </div>
-                    
+
                 </li>
                 <!-- <li class="nav-item d-none d-sm-inline-block">
               <a href="<?= base_url() ?>employment" class="nav-link">Employment</a>
@@ -188,22 +206,22 @@ function main_header($menubar = [])
             <ul class="navbar-nav ml-auto">
 
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="<?= base_url() ?>beu_dashboard" class="nav-link">
-                        Home <i class="fa-solid fa-house"></i>
+                    <a href="<?= base_url() ?>beu_dashboard" name="home" class="nav-link">
+                        <i class="fa-solid fa-house"></i>
                     </a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="<?= base_url() ?>jobposting" class="nav-link">
-                        Jobs <i class="fa-solid fa-briefcase"></i>
+                    <a href="<?= base_url() ?>jobposting" name="jobs" class="nav-link">
+                        <i class="fa-solid fa-briefcase"></i>
                     </a>
                 </li>
                 <!-- MY PROFILE -->
                 <!-- Messages Dropdown Menu -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link pr-1" data-toggle="dropdown" role="button">
-                        Profile <i class="fa-solid fa-user"></i>
+                    <a class="nav-link pr-1" data-toggle="dropdown" name="profile" role="button">
+                        <i class="fa-solid fa-user"></i>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-left">
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-left border-0 shadow-sm" style="border-radius:15px;">
                         <div>
                             <!-- Message Start -->
                             <div class="media ml-3 mt-3 mb-3 d-flex justify-content-center align-items-center">
@@ -223,7 +241,7 @@ function main_header($menubar = [])
                             <!-- Message End -->
                         </div>
                         <div class="dropdown-divider"></div>
-                        <a href="<?= base_url() ?>login" class="dropdown-item dropdown-footer">Log out</a>
+                        <a href="<?= base_url() ?>login/logout" class="dropdown-item dropdown-footer">Log out</a>
                     </div>
                 </li>
 

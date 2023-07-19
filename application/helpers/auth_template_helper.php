@@ -25,14 +25,14 @@ function auth_head()
         </script>
     </head>
     <body class="fade-in">
-    <nav class="navbar">
+    <!-- <nav class="navbar">
         <div class="container">
             <a class="navbar-brand text-decoration-none text-dark" href="<?= base_url() ?>">
                 <img src="<?= base_url() ?>assets/images/Logo/Konnect2.png" class="d-inline-block" width="30" height="30" alt="Konnect Logo">
                 Konnect
             </a>
         </div>
-    </nav>
+    </nav> -->
     <section class="d-flex justify-content-center align-items-center">
 <?php }
 

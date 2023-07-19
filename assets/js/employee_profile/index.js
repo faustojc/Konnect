@@ -14,12 +14,6 @@ const load_training = () => {
     });
 }
 
-const education_edit = () => {
-    $(document).gmLoadPage({
-        url: baseUrl + 'employee_profile/education_edit/' + $('#emp_id').val(),
-    });
-}
-
 const load_employment = () => {
     $('#load_employments').load(baseUrl + 'employee_profile/get_all_employments/' + $('#emp_id').val());
 }
@@ -39,22 +33,6 @@ $(document).on('keyup', '#search_employee', function () {
     });
 });
 
-// Update employee profile
-$(document).on('click', '#update_profile', function () {
-    const isValid = validateForm('#needs-validation');
-
-    if (isValid) {
-        const form = document.querySelector('#needs-validation');
-        const formData = new FormData(form);
-
-        formAction(baseUrl + 'employee_profile/service/Employee_profile_service/update_profile', 'POST', formData, function (response) {
-            success('SUCCESS', 'Profile successfully updated');
-            setTimeout(() => {
-                window.location.href = baseUrl + 'employee_profile/index/' + formData.get('ID');
-            }, 500);
-        });
-    }
-});
 
 $(document).on('click', '#save_education', function () {
     const data = {
@@ -381,3 +359,43 @@ $(document).on('click', '.level-content > *', function () {
     const value = this.value();
     $('#Level2').val(value);
 });
+
+$(document).on('click', '#update_profile', function () {
+    const data = {
+        employee_ID: $('#employee_ID').val(),
+        Fname: $('#Fname').val(),
+        Lname: $('#Lname').val(),
+        Mname: $('#Mname').val(),
+        Cnum: $('#Cnum').val(),
+        Address: $('#Address').val(),
+        Title: $('#Title').val(),
+        Gender: $('#Gender').val(),
+        Cstat: $('#Cstat').val(),
+        Religion: $('#Religion').val(),
+        Email: $('#Email').val(),
+        Bday: $('#Bday').val(),
+        City: $('#City').val(),
+        Barangay: $('#Barangay').val(),
+        SSS: $('#SSS').val(),
+        Tin: $('#Tin').val(),
+        Phil_health: $('#Phil_health').val(),
+        Pag_ibig: $('#Pag_ibig').val(),
+        Employee_image: $('#Employee_image')[0].files[0],
+    };
+
+    $.ajax({
+        url: baseUrl + 'employee_profile/service/employee_profile_service/update_profile',
+        type: 'POST',
+        data: data,
+        success: function (response) {
+            // Handle the success response (optional)
+            console.log(response);
+            // window.location.reload();
+        },
+        error: function (response) {
+            // Handle the error response (optional)
+            console.error("Update failed!");
+        }
+    });
+});
+

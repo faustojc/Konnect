@@ -1,10 +1,22 @@
 <?php if (!empty($details)): ?>
-    <div class="card card-widget widget-user position-sticky ">
-        <div class="widget-user-header text-white" style="background: url('<?= base_url() ?>assets/images/Logo/cover-place.jpg') center center; background-repeat: no-repeat; background-size: cover; border-radius: 15px 15px 0 0;">
-        <div class="text-right">
-        <button class="btn text-white hoverbutton" style="background-color: rgba( 27, 38, 49, 0.5);"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-        </div>
-        
+    <style>
+        div.summary > * {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            /* number of lines to show */
+            -webkit-box-orient: vertical;
+        }
+    </style>
+    
+
+    <div class="card card-widget widget-user">
+        <div class="widget-user-header text-white" style="background: url('<?= base_url() ?>assets/images/Logo/cover-place.jpg') no-repeat center center; background-size: cover; border-radius: 15px 15px 0 0;">
+            <div class="text-right">
+                <button class="btn text-white hoverbutton" style="background-color: rgba( 27, 38, 49, 0.5);"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+            </div>
+
         </div>
         <div class="widget-user-image">
             <img class="img-circle img-fluid" src="<?= base_url() ?>assets/images/employer/profile_pic/<?= $details->image ?>" alt="User Avatar" style="object-fit: cover; min-width: 90px; max-width: 90px;min-height: 90px; max-height: 90px;">
@@ -24,32 +36,18 @@
             </div>
         </div>
 
-        <div class="card-footer border-none" style="padding-top:0px; padding-bottom:2rem;background-color:#FFF;">
-            <div class="row">
-                <div class="col-12">
-                    <div class="description-block mb-0">
-                        <!-- <h6 class="widget-user-desc text-center  mb-1" style="font-weight: 500; font-size: 16px;"> BIO</h6> -->
-                        <h6 class="widget-user-desc text-center mt-1 mb-1" style="font-weight: normal; font-size: 14px;"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam aliquid corrupti modi fugiat itaque! Maxime explicabo eligendi id impedit atque cumque rerum amet architecto consequuntur inventore unde necessitatibus, quod esse!</h6>
-                    </div>
-                </div>
+        <div class="card-footer border-none py-2" style="background-color:#FFF;">
+            <div class="widget-user-desc text-center mt-1 mb-1 summary" style="font-size: 14px; max-height: 150px">
+                <?= $details->summary ?>
             </div>
         </div>
-
-       
-        
-        <div class="card-footer border-0 pt-3 pb-3" style="background-color:#FFF;">
-        <hr>
-            <!-- <div class="row">
-                <div class="col-12">
-                    <a href="#" class="hoveropac">
-                        <p class="mb-0 text-center fw-500 text-muted fs-14">View Profile <i class="fa-solid fa-arrow-right fs-14 ml-1"></i></p>
-                    </a>
-                </div>
-            </div> -->
-
-            <div class="d-flex justify-content-center" >
-                <button type="button" class="btn hoverbutton" style=" background-color:#F4F6F7;border-radius:10px; width:100%;">View Profile <i class="fa-solid fa-arrow-right fs-14 ml-1"></i></button>
+        <hr class="m-0">
+        <div class="card-footer border-0 p-3" style="background-color:#FFF;">
+            <div class="d-flex justify-content-center">
+                <a href="<?= base_url() ?>employer_profile?id=<?= $details->id ?>" class="btn hoverbutton" style=" background-color:#F4F6F7;border-radius:10px; width:100%;">View Profile <i class="fa-solid fa-arrow-right fs-14 ml-1"></i></a>
             </div>
         </div>
     </div>
+
+    
 <?php endif; ?>

@@ -2,6 +2,45 @@
 main_header(['Employer_profile']);
 ?>
 <!-- ############ PAGE START-->
+<script>
+        function formatInput() {
+            var input = document.getElementById("salary");
+            var value = input.value;
+            
+            // Check if the input value is not empty
+            if (value !== "") {
+                // Add ".00" at the end if it's not already present
+                if (!value.endsWith(".00")) {
+                    input.value = value + ".00";
+                }
+            }
+        }
+
+        function formatInput2() {
+            var input = document.getElementById("salary");
+            var value = input.value;
+            
+            // Remove existing commas from the value
+            value = value.replace(/,/g, '');
+            
+            // Format the value with commas for every thousand
+            value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            
+            // Update the input value with the formatted value
+            input.value = value;
+        }
+
+        function disableDotZero() {
+            var input = document.getElementById("salary");
+            var value = input.value;
+            
+            // Check if the input value ends with ".00"
+            if (!value.endsWith(".00")) {
+                // Set the selection range to exclude ".00"
+                input.setSelectionRange(0, value.length - 3);
+            }
+        }
+</script>
 <style>
     /* Remove spinner for number input */
     input[type=number]::-webkit-inner-spin-button,
@@ -198,11 +237,23 @@ main_header(['Employer_profile']);
     margin-right: 2px;
     }
 
+    .scrollable-container::-webkit-scrollbar {
+        width: 0.5rem; /* Adjust the width as needed */
+    }
+
+    .scrollable-container::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+
+    .scrollable-container::-webkit-scrollbar-thumb {
+        background-color: #888; /* Customize the scrollbar color */
+        border-radius: 1rem; /* Adjust the border radius as needed */
+    }
     
 
 </style>
 
-<section class="content">
+<section class="content ">
     <div class="container-fluid">
         <div class="row pl-3 pr-3" style="margin-top: 3.5rem;">
             <div class="col-12 col-md-3 mt-4">
@@ -267,10 +318,10 @@ main_header(['Employer_profile']);
                                     </div>
                                     
                                     <div class="modal-body border-0">
-                                        <div class="pb-3">
+                                        <div class="pb-1">
                                         
-                                            <label for="" style="">Job Name</label>
-                                            <input class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:10px;" type="text" placeholder="Enter Job Name">
+                                            <label for="" style="">Job Title</label>
+                                            <input id="title" name="title" class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:10px;" type="text" placeholder="Enter Job Name">
                                         </div>
 
                                         <div class="row pt-2">
@@ -280,16 +331,16 @@ main_header(['Employer_profile']);
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text border-0" style="border-radius:10px 0 0 10px;">₱</span>
                                                         </div>
-                                                    <input type="number" min="0.00" max="10000.00" step="0.01" class="form-control border-0" style="background-color: #F4F6F7; border-radius:0; " placeholder="Input Salary ">
-                                                        <div class="input-group-append">
+                                                    <input id="salary" name="salary" type="text" maxlength="16" id="salary" onclick="disableDotZero()" onblur="formatInput()" oninput="formatInput2()" class="form-control border-0" style="background-color: #F4F6F7; border-radius:0 10px 10px 0; " placeholder="Input Salary ">
+                                                        <!-- <div class="input-group-append">
                                                             <span class="input-group-text border-0" style="border-radius:0 10px 10px 0;">.00</span>
-                                                        </div>
+                                                        </div> -->
                                                 </div>
                                             </div>
                                             <div class="col-2">
                                                 <div class="form-group">
                                                 <label>Job Type</label>
-                                                    <select class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;" name="" id="">
+                                                    <select id="job_type" name="job_type" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;" name="" id="">
                                                     <option>Part-time</option>
                                                     <option>Full-time</option>
                                                     <option>Permanent</option>
@@ -301,7 +352,7 @@ main_header(['Employer_profile']);
                                             <div class="col-2">
                                                 <div class="form-group">
                                                 <label>Shift</label>
-                                                    <select class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;" name="" id="">
+                                                    <select id="shift" name="shift" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;" name="" id="">
                                                     <option>Day</option>
                                                     <option>Night</option>
                                                     <option>Flextime</option>
@@ -315,35 +366,50 @@ main_header(['Employer_profile']);
                                             <input class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:10px;" type="text" placeholder="Enter Job Name">-->
                                             
                                                 <label>Start Date</label>
-                                                <input type="date" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;">
+                                                <input id="start_date" name="start_date" type="date" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;">
                                                 
                                             </div> 
 
                                         </div>
                                         <div class="row">
+                                            <div class="col-10">
+                                                <div class="form-group" style="border:0;">
+                                                    <label>Requirements</label>
+                                                        <select class="select2 " multiple="multiple" data-placeholder="Add Requirements" style="width: 100%; border:0;">
+                                                            <option>HTML</option>
+                                                            <option>SQL</option>
+                                                            <option>PHP</option>
+                                                            <option>Laravel</option>
+                                                            <option>React</option>
+                                                            <option>Java</option>
+                                                            <option>Javascript</option>
+                                                        </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-2">
+                                            <div class="form-group">
+                                                <label>Status</label>
+                                                    <select id="filled" name="filled" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;" name="" id="">
+                                                    <option>Open</option>
+                                                    <option>Closed</option>
+                                                    <!-- <option>Flextime</option> -->
+                                                    
+                                                    </select>
+                                                </div>
+                                            </div>
                                             
                                         </div>
-                                        <div class="form-group" style="border:0;">
-                                            <label>Requirements</label>
-                                            <select class="select2 " multiple="multiple" data-placeholder="Add Requirements" style="width: 100%; border:0;">
-                                                <option>HTML</option>
-                                                <option>SQL</option>
-                                                <option>PHP</option>
-                                                <option>Laravel</option>
-                                                <option>React</option>
-                                                <option>Java</option>
-                                                <option>Javascript</option>
-                                            </select>
-                                        </div>
+                                        
                                         <div>
-                                            <textarea id="mytextarea" class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:15px;" name="" cols="30" rows="10"></textarea>
+                                            <textarea id="description" name="description" class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:15px;" name="" cols="30" rows="10"></textarea>
                                         </div>
                                         
                                         
                                     </div>
                                     <div class="modal-footer border-0">
                                         <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-                                        <button type="button text-dark" class="btn" style="border-radius:10px; width:100%; background-color: #F4F6F7;">Post</button>
+                                        <button id="save" type="button" class="btn text-dark" style="border-radius:10px; width:100%; background-color: #F4F6F7;">Post</button>
                                     </div>
                                 </div>
                             </div>
@@ -358,34 +424,32 @@ main_header(['Employer_profile']);
 
 
             <div class="col-12 col-md-3 mt-4">
-                <div class="sticky-top" style="top:65px;">
-                    <!-- EMPLOYEES -->
-                    <div class="card card-widget widget-user-2">
-                        <div class="card-header">
-                            <h3 class="card-title fw-500">Employees</h3>
-                        </div>
-                        <div id="load_employees_follow_section" style="margin-left: 1rem; margin-right:1rem;">
-                            <?php load_employees($employees); ?>
-                        </div>
-                    </div>
-
-                    <!-- EMPLOYERS -->
-                    <div class="card card-widget widget-user-2">
-                        <div class="card-header">
-                            <h3 class="card-title fw-500">Employers</h3>
-                        </div>
-                        <div id="load_employers_follow_section" style="margin-left:1rem; margin-right:1rem;">
-                            <?php if ($auth['user_type'] == 'EMPLOYEE') : ?>
-                                <?php load_employers($employers, $following); ?>
-                            <?php else : ?>
-                                <?php load_employers($employers); ?>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- /.widget-user -->
+    <div class="sticky-top scrollable-container" style="top:65px; height: calc(100vh - 65px); overflow-y: auto;">
+        <!-- EMPLOYEES -->
+        <div class="card card-widget widget-user-2">
+            <div class="card-header">
+                <h3 class="card-title fw-500">Employees</h3>
             </div>
+            <div id="load_employees_follow_section" style="margin-left: 1rem; margin-right:1rem;">
+                <?php load_employees($employees); ?>
+            </div>
+        </div>
+
+        <!-- EMPLOYERS -->
+        <div class="card card-widget widget-user-2">
+            <div class="card-header">
+                <h3 class="card-title fw-500">Employers</h3>
+            </div>
+            <div id="load_employers_follow_section" style="margin-left:1rem; margin-right:1rem;">
+                <?php if ($auth['user_type'] == 'EMPLOYEE') : ?>
+                    <?php load_employers($employers, $following); ?>
+                <?php else : ?>
+                    <?php load_employers($employers); ?>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>
         </div><!--row-->
     </div><!--container fluid-->
 </section>

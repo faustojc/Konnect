@@ -38,26 +38,26 @@ main_header(['jobposting']);
                 </div>
             </div>
             <nav class=" pt-4">
-                <div class="nav nav-tabs  d-flex justify-content-center" id="nav-tab" role="tablist" style="font-size:25px; font-weight:500;">
-                    <a class="nav-item nav-link active" id="nav-job-feed" data-toggle="tab" href="#job-feed" role="tab" aria-controls="job-feed" aria-selected="true">Job Feed</a>
-                    <a class="nav-item nav-link" id="nav-job-posted" data-toggle="tab" href="#job-posted" role="tab" aria-controls="job-posted" aria-selected="false">Your Job Listing</a>
+                <div class="nav nav-tabs  d-flex justify-content-center" id="nav-tab" role="tablist" style="font-size:20px; font-weight:500;">
+                    <a class="nav-item nav-link active" id="nav-job-feed" data-toggle="tab" href="#job-feed" role="tab" aria-controls="job-feed" aria-selected="true">
+                        Job Feed
+                    </a>
+                    <a class="nav-item nav-link" id="nav-job-posted" data-toggle="tab" href="#job-posted" role="tab" aria-controls="job-posted" aria-selected="false">
+                        Your Job Listing
+                    </a>
                 </div>
             </nav>
 
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="job-feed" role="tabpanel" aria-labelledby="nav-job-feed">
-                    <div class="card-body pt-5">
-                        <div class="row justify-content-center" id="job_list">
-                            <?php loading_joblists(); ?>
-                        </div>
+                    <div class="card-body pt-5" id="job_feed">
+
                     </div>
                 </div>
                 <div class="tab-pane fade" id="job-posted" role="tabpanel" aria-labelledby="nav-job-posted">
                     <div class="row" id="job_list">
-                        <div class="card-body pt-5">
-                            <div class="row justify-content-center" id="own_job">
-                                <?php loading_joblists(); ?>
-                            </div>
+                        <div class="card-body pt-5" id="own_job">
+
                         </div>
                     </div>
                 </div>

@@ -140,7 +140,7 @@ main_header(['employee_profile']);
     }
 
     .nav-pills .nav-link.active,
-    .nav-pills .show > .nav-link {
+    .nav-pills .show>.nav-link {
         color: #fff;
         background-color: #0dcaf0;
     }
@@ -191,8 +191,7 @@ main_header(['employee_profile']);
         <div class="row " style="margin-top: 3.5rem;">
             <div class="col-12 col-md-8 pl-2 pr-2 mt-4">
                 <div class="card card-widget widget-user">
-                    <div class="widget-user-header text-white"
-                         style="background: url('<?= base_url() ?>assets/images/Logo/cover-place.jpg') center center; min-height: 25vh; max-height: 50vh; background-repeat: no-repeat; background-size: cover; border-radius: 15px 15px 0px 0px;">
+                    <div class="widget-user-header text-white" style="background: url('<?= base_url() ?>assets/images/Logo/cover-place.jpg') center center; min-height: 25vh; max-height: 50vh; background-repeat: no-repeat; background-size: cover; border-radius: 15px 15px 0px 0px;">
                     </div>
 
                     <div class="card-footer bg-white" style="padding-top: 45px;">
@@ -250,7 +249,9 @@ main_header(['employee_profile']);
                             <li class="nav-item">
                                 <a class="nav-link" id="pills-following-tab" data-toggle="pill" href="#pills-following" role="tab" aria-controls="pills-following" aria-selected="false">
                                     Following
-                                    <span class="badge badge-info"><?= count($following) ?></span>
+                                    <span class="badge badge-info">
+                                        <?= count($following) ?>
+                                    </span>
                                 </a>
                             </li>
                         </ul>
@@ -580,11 +581,7 @@ main_header(['employee_profile']);
                                 </div>
                             </div>
                             <!-- Modal Body -->
-                            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                                <div class="carousel-inner py-3 px-3" id="load_training">
-                                    <?= $training_section_view ?>
-                                </div>
-                                <!-- <div class="carousel-inner">
+                            <!-- <div class="carousel-inner">
                         <div class="carousel-item active">
                         <img class="d-block w-100" src="..." alt="First slide">
                         </div>
@@ -595,17 +592,14 @@ main_header(['employee_profile']);
                         <img class="d-block w-100" src="..." alt="Third slide">
                         </div>
                     </div> -->
-                                <a class="carousel-control-prev " href="#carouselExampleControls" role="button" data-slide="prev" style="width:5%; border-radius: 0 0 0 15px; color: #17202a ;">
-                                    <!-- <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span> -->
-                                    <i class="fa-solid fa-chevron-left pl-3"></i>
-
-                                </a>
-                                <a class="carousel-control-next " href="#carouselExampleControls" role="button" data-slide="next" style="width:5%; border-radius: 0 0 15px 0; color: #17202a ;">
-                                    <!-- <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <!-- <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="sr-only" >Next</span> -->
-                                    <i class="fa-solid fa-chevron-right pr-3"></i>
-                                </a>
+                            <!-- <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span> -->
+
+                            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                <?= $training_section_view ?>
+
 
 
                             </div>
@@ -631,17 +625,23 @@ main_header(['employee_profile']);
                             </button>
                         </div>
                     </div>
-                    <div class="card-body" style="padding-top:10px;padding-bottom:10px">
+                    <div class="card-body" style="padding-top:10px;padding-bottom:5px; font-size:12px;">
                         <b>STREET:</b>
-                        <?= ucwords(@$details->Address) ?>
+                        <h16 class="text-muted">
+                            <?= ucwords(@$details->Address) ?>
+                        </h16>
                     </div>
-                    <div class="card-body " style="padding-top:10px;padding-bottom:10px">
+                    <div class="card-body " style="padding-top:10px;padding-bottom:5px; font-size:12px;">
                         <b>BARANGAY:</b>
-                        <?= ucwords(@$details->Barangay) ?>
+                        <h16 class="text-muted">
+                            <?= ucwords(@$details->Barangay) ?>
+                        </h16>
                     </div>
-                    <div class="card-body" style="padding-top:10px;padding-bottom:10px">
+                    <div class="card-body" style="padding-top:10px;padding-bottom:5px; font-size:12px;">
                         <b>CITY:</b>
-                        <?= ucwords(@$details->City) ?>
+                        <h16 class="text-muted">
+                            <?= ucwords(@$details->City) ?>
+                        </h16>
                     </div>
                 </div>
 
@@ -654,21 +654,29 @@ main_header(['employee_profile']);
                             </button>
                         </div>
                     </div>
-                    <div class="card-body" style="padding-top:10px;padding-bottom:10px">
+                    <div class="card-body" style="padding-top:10px;padding-bottom:5px; font-size:12px;">
                         <b>SSS:</b>
-                        <?= ucwords(@$details->SSS) ?>
+                        <h16 class="text-muted">
+                            <?= ucwords(@$details->SSS) ?>
+                        </h16>
                     </div>
-                    <div class="card-body" style="padding-top:10px;padding-bottom:10px">
+                    <div class="card-body" style="padding-top:10px;padding-bottom:5px; font-size:12px;">
                         <b>TIN:</b>
-                        <?= ucwords(@$details->Tin) ?>
+                        <h16 class="text-muted">
+                            <?= ucwords(@$details->Tin) ?>
+                        </h16>
                     </div>
-                    <div class="card-body" style="padding-top:10px;padding-bottom:10px">
+                    <div class="card-body" style="padding-top:10px;padding-bottom:5px; font-size:12px;">
                         <b>PHIL HEALTH:</b>
-                        <?= ucwords(@$details->Phil_health) ?>
+                        <h16 class="text-muted">
+                            <?= ucwords(@$details->Phil_health) ?>
+                        </h16>
                     </div>
-                    <div class="card-body" style="padding-top:10px;padding-bottom:10px">
+                    <div class="card-body" style="padding-top:10px;padding-bottom:10px; font-size:12px;">
                         <b>PAG IBIG:</b>
-                        <?= ucwords(@$details->Pag_ibig) ?>
+                        <h16 class="text-muted">
+                            <?= ucwords(@$details->Pag_ibig) ?>
+                        </h16>
                     </div>
                 </div>
 
@@ -750,7 +758,7 @@ main_header(['employee_profile']);
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" id="update_introduction">Save</button>
+                            <button type="button" class="btn btn-info" id="update_introduction">Save</button>
                         </div>
                     </div>
                 </div>
@@ -887,6 +895,7 @@ main_header(['employee_profile']);
             </div>
         </div>
     </div>
+
 </section>
 
 <!-- ############ PAGE END-->

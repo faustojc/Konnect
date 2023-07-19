@@ -17,6 +17,80 @@ main_header(['jobposting']);
                                 <input type="text" class="form-control" name="job_title" id="job_title" placeholder="Enter Title">
                             </div>
                             <div class="col-md-12">
+                                <div class="row pt-2">
+                                    <div class="col-5">
+                                        <label for="" style="">Salary</label>
+                                        <div class="input-group mb-3 ">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text border-0" style="border-radius:10px 0 0 10px;">₱</span>
+                                            </div>
+                                            <input id="salary" name="salary" type="text" maxlength="16" id="salary" onclick="disableDotZero()" onblur="formatInput()" oninput="formatInput2()" class="form-control border-0" style="background-color: #F4F6F7; border-radius:0 10px 10px 0; " placeholder="Input Salary ">
+                                            <!-- <div class="input-group-append">
+                                                            <span class="input-group-text border-0" style="border-radius:0 10px 10px 0;">.00</span>
+                                                        </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="form-group">
+                                            <label>Job Type</label>
+                                            <select id="job_type" name="job_type" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;">
+                                                <option>Part-time</option>
+                                                <option>Full-time</option>
+                                                <option>Permanent</option>
+
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="form-group">
+                                            <label>Shift</label>
+                                            <select id="shift" name="shift" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;">
+                                                <option>Day</option>
+                                                <option>Night</option>
+                                                <option>Flextime</option>
+
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-3">
+                                        <!-- <label for="" style="">Job Name</label>
+                                            <input class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:10px;" type="text" placeholder="Enter Job Name">-->
+                                        <label>Start Date</label>
+                                        <input id="start_date" name="start_date" type="date" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <div class="form-group" style="border:0;">
+                                    <label>Requirements</label>
+                                    <select class="select2 " multiple="multiple" data-placeholder="Add Requirements" style="width: 100%; border:0;">
+                                        <option>HTML</option>
+                                        <option>SQL</option>
+                                        <option>PHP</option>
+                                        <option>Laravel</option>
+                                        <option>React</option>
+                                        <option>Java</option>
+                                        <option>Javascript</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <select id="job_filled" name="job_filled" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;">
+                                        <option>Open</option>
+                                        <option>Closed</option>
+                                        <!-- <option>Flextime</option> -->
+
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-12">
                                 <label for="job_description">Description</label>
                                 <textarea class="w-100" name="job_description" id="job_description" rows="5"></textarea>
                                 <p class="text-danger float-left editor-warning" hidden>
@@ -25,18 +99,13 @@ main_header(['jobposting']);
                                 </p>
                                 <p class="text-muted float-right" id="editor-character-count"></p>
                             </div>
-                            <div class="col-md-6">
-                                <label for="job_filled">Status</label>
-                                <select class="form-control" id="job_filled">
-                                    <option value="OPEN">OPEN</option>
-                                    <option value="CLOSE">CLOSE</option>
-                                </select>
-                            </div>
+
                         </div>
                     </form>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-dark" id="save_job" style="background-color: #17a2b8; color: white;">Create</button>
+                    <button class="btn btn-info" id="save_job" style="background-color: #17a2b8; color: white;">Create</button>
+                    <button class="btn btn-secondary" id="cancel">Cancel</button>
                 </div>
             </div>
         </div>

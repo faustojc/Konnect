@@ -178,17 +178,19 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
         <div class="card shadow-none">
           
           <div class="card-body" style="padding:10px 20px; font-weight:650;">
-          <a href="<?php echo base_url() ?>employee_profile/index/<?= $employee->ID ?>" class="" data-toggle="list"><i class="fa-solid fa-chevron-left"></i> Back to profile</a>
+          <a href="<?php echo base_url() ?>employee_profile/index/<?= $employee->ID ?>" class=""><i class="fa-solid fa-chevron-left"></i> Back to profile</a>
           </div>
 
         </div>
         <div class="card overflow-hidden shadow-none">
           <div class="list-group list-group-flush account-settings-links">
             <a class="list-group-item list-group-item-action active" data-toggle="list" href="#account-general">General</a>
+            <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-email">E-mail</a>
             <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-info">Info</a>
             <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-govt-id">Government ID</a>
             <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-change-password">Change password</a>
             <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-connections">Connections</a>
+            <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-deletion">Deletion</a>
           </div>
 
         </div>
@@ -238,16 +240,22 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
                         <option value="others">Others</option>
                     </select>
                 </div>
-                <div class="form-group">
-                  <label class="form-label">E-mail Address</label>
-                  <input type="email" class="form-control" name="Email" id="Email" value="<?= @$employee->Email ?>" placeholder="Enter Email address">
-                  <div class="alert alert-warning mt-3">
-                    Your email is not confirmed. Please check your inbox.<br>
-                    <a href="javascript:void(0)">Resend confirmation</a>
-                  </div>
-                </div>
               </div>
+            </div>
 
+            <div class="tab-pane fade" id="account-email">
+                <form>
+                    <div class="card-body pb-2">
+                      <div class="form-group">
+                        <label class="form-label">E-mail Address</label>
+                        <input type="email" class="form-control" name="Email" id="Email" value="<?= @$employee->Email ?>" placeholder="Enter Email address">
+                        <div class="alert alert-primary mt-3">
+                          Your email is not confirmed. Please check your inbox.<br>
+                          <a href="javascript:void(0)">Resend confirmation</a>
+                        </div>
+                      </div>
+                    </div>
+                </form>
             </div>
             
             <div class="tab-pane fade" id="account-info">
@@ -338,30 +346,34 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
 
             <div class="tab-pane fade" id="account-connections">
               <div class="card-body">
-                <button type="button" class="btn btn-twitter">Connect to <strong>Twitter</strong></button>
-              </div>
-              <hr class="border-light m-0">
-              <div class="card-body">
                 <h5 class="mb-2">
                   <a href="javascript:void(0)" class="float-right text-muted text-tiny"><i class="ion ion-md-close"></i> Remove</a>
                   <i class="ion ion-logo-google text-google"></i>
                   You are connected to Google:
                 </h5>
-                nmaxwell@mail.com
+                <?= @$employee->Email ?>
               </div>
               <hr class="border-light m-0">
               <div class="card-body">
                 <button type="button" class="btn btn-facebook">Connect to <strong>Facebook</strong></button>
-              </div>
-              <hr class="border-light m-0">
-              <div class="card-body">
                 <button type="button" class="btn btn-instagram">Connect to <strong>Instagram</strong></button>
               </div>
             </div>
 
+            <div class="tab-pane fade" id="account-deletion">
+              <div class="card-body">
+                <h5>Delete your account</h5>
+                <p><strong>Deleting your account is an irreversible action.</strong> This means that all your data, settings, and associated 
+                  information will be permanently removed and cannot be recovered. Please be certain of your decision before 
+                  proceeding with account deletion.</p>
+                  <button type="button" class="btn btn-danger"><strong>Delete account</strong></button>
+              </div>
+            </div>
+
           </div>
+          <hr class="border-light mb-2">
           <div class="text-right m-2">
-                <button type="button" class="btn btn-default">Cancel</button>&nbsp;
+                <a href="<?php echo base_url() ?>employee_profile/index/<?= $employee->ID ?>" class="btn btn-default">Cancel</a>&nbsp;
                 <button type="submit" class="btn btn-info" id="update_profile">Save changes</button>
             </div>
         </div>

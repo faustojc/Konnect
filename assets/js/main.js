@@ -1,3 +1,13 @@
+async function postData(url, data = {}) {
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+    });
+
+    return response.json();
+}
+
 /**
  * @param {any} target Target element to validate
  * @returns {boolean} Returns true if the form is valid, false otherwise
@@ -11,7 +21,7 @@ function validateForm(target) {
         let errors = 0;
 
         for (const input of inputs) {
-            errors = (input.value === '' && (input.required || input.defaultValue === '')) ? errors + 1 : errors;
+            errors = (input.value === '' && input.required) ? errors + 1 : errors;
 
             if (input.value === '') {
                 input.classList.add('is-invalid');

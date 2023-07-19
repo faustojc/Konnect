@@ -8,7 +8,7 @@ class Employee_profile_services_model extends CI_Model
     public function __construct()
     {
         parent::__construct();
-        $this->session = (object)get_userdata(USER);
+        $this->session = (object) get_userdata(USER);
 
         // if(is_empty_object($this->session)){
         // 	redirect(base_url().'login/authentication', 'refresh');
@@ -105,5 +105,51 @@ class Employee_profile_services_model extends CI_Model
             ->from($this->Table->employee)
             ->where('ID', $id)
             ->get()->row();
+    }
+
+    public function update_profile()
+    {
+        try {
+            $data = array(
+                'ID' => $this->employee_ID,
+                'Fname' => $this->Fname,
+                'Mname' => $this->Mname,
+                'Lname' => $this->Lname,
+                'Cnum' => $this->Cnum,
+                'Address' => $this->Address,
+                'Title' => $this->Title,
+                'Gender' => $this->Gender,
+                'Cstat' => $this->Cstat,
+                'Religion' => $this->Religion,
+                'Bday' => $this->Bday,
+                'Email' => $this->Email,
+                'City' => $this->City,
+                'Barangay' => $this->Barangay,
+                'SSS' => $this->SSS,
+                'Tin' => $this->Tin,
+                'Phil_health' => $this->Phil_health,
+                'Pag_ibig' => $this->Pag_ibig
+            );
+
+            if (!empty($this->Employee_image)) {
+                $data['Employee_image'] = $this->Employee_image;
+            }
+
+
+            $this->db->trans_start();
+            $this->db->where('ID', $this->employee_ID);
+            $this->db->update($this->Table->employee, $data);
+            $this->db->trans_complete();
+
+            if ($this->db->trans_status()) {
+                $this->db->trans_commit();
+                return array('message' => SAVED_SUCCESSFUL, 'has_error' => false);
+            } else {
+                $this->db->trans_rollback();
+                throw new Exception(ERROR_PROCESSING, true);
+            }
+        } catch (Exception $e) {
+            return array('message' => $e->getMessage(), 'has_error' => true);
+        }
     }
 }

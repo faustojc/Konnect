@@ -35,14 +35,16 @@
                 border-radius: 7px;
             }
 
-            
+
         </style>
+
         <div class="card">
             <div class="card-body ">
                 <div class="job-post">
                     <div class="row">
                         <div class="col-1 d-flex justify-content-center">
-                            <img class="img-circle img-fluid " src="<?= base_url() ?>assets/images/employer/profile_pic/<?= $jobpost->EmployerLogo ?>" alt="Employer Profile Pic" style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
+                            <img class="img-circle img-fluid " src="<?= base_url() ?>assets/images/employer/profile_pic/<?= $jobpost->EmployerLogo ?>" alt="Employer Profile Pic"
+                                 style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
                         </div>
                         <div class="col-10 pt-2 pl-3">
                             <div class="d-flex justify-content-between">
@@ -65,7 +67,6 @@
                             </div>
                         </div>
                         <div class="col-1">
-                            <!-- <button href="" class="btn card-tool text-muted"></button> -->
                             <div class="btn-group dropleft" style="">
                                 <button type="button" class="btn card-tool text-muted " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
@@ -73,7 +74,6 @@
                                 <div class="dropdown-menu" style="border-radius:10px; box-shadow: none;">
                                     <a class="dropdown-item" href="#">Edit</a>
                                     <a class="dropdown-item" href="#">Delete</a>
-
                                 </div>
                             </div>
                         </div>
@@ -90,17 +90,23 @@
                         <div class="job-description" style="max-height: 150px; overflow-y: hidden">
                             <div class="" style="font-weight:300;">
                                 <h5>
-                                    <span class="badge badge-light">
-                                        ₱
-                                        <?= $jobpost->salary ?>
+                                    <?php if (isset($jobpost->salary) && $jobpost->salary !== '') : ?>
+                                        <span class="badge badge-light">
+                                        ₱ <?= $jobpost->salary ?>
                                     </span>
-                                    <span class="badge badge-light">
+                                    <?php endif; ?>
+
+                                    <?php if (isset($jobpost->shift) && $jobpost->shift !== '') : ?>
+                                        <span class="badge badge-light">
                                         <?= $jobpost->shift ?>
                                     </span>
-                                    <span class="badge badge-light">
+                                    <?php endif; ?>
+
+                                    <?php if (isset($jobpost->job_type) && $jobpost->job_type !== '') : ?>
+                                        <span class="badge badge-light">
                                         <?= $jobpost->job_type ?>
                                     </span>
-
+                                    <?php endif; ?>
                                 </h5>
 
                             </div>
@@ -111,26 +117,18 @@
                         </div>
                         <a class="text-center see-more" data-target=".job-description" style="display: block;" role="button">See more</a>
 
-                        <hr>
-                        <div class="row">
-                            <div class="col-lg-12 col-md-4 col-sm-12">
-                                <button type="button" class="btn btn-light btn-block" id="apply">APPLY</button>
+                        <?php if ($auth['user_type'] != 'EMPLOYER'): ?>
+                            <hr>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-4 col-sm-12">
+                                    <button type="button" class="btn btn-light btn-block apply-button" data-id="<?= $jobpost->id ?>">APPLY</button>
+                                </div>
                             </div>
-                        </div>
+                        <?php endif; ?>
 
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- <script>
-            var applyButton = document.getElementById("apply");
-
-            applyButton.addEventListener("click", function () {
-                applyButton.textContent = "Pending Application";
-                applyButton.disabled = true; // Optional: disable the button after clicking
-            });
-        </script> -->
-
     <?php }
 } ?>

@@ -103,8 +103,9 @@ nextBtn.addEventListener('click', function () {
                 usertypeInput.type = 'hidden';
                 usertypeInput.name = 'user_type';
                 usertypeInput.id = 'user_type';
-                usertypeInput.value = user_type;
+                usertypeInput.value = user_type.value;
 
+                usertypeInput.setAttribute('readonly', 'readonly');
                 email.setAttribute('hidden', 'hidden');
                 email.setAttribute('readonly', 'readonly');
                 password.setAttribute('hidden', 'hidden');
@@ -115,8 +116,7 @@ nextBtn.addEventListener('click', function () {
                 form.appendChild(password);
                 register();
             });
-    }
-    else {
+    } else {
         user_type.classList.add('is-invalid');
         user_type.parentElement.insertBefore(userTypeErrorMessage, user_type.nextElementSibling);
     }

@@ -3,13 +3,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class employer_profile_services_model extends CI_Model
 {
-    public $ID;
+    private $userdata;
     public $Table;
 
     public function __construct()
     {
         parent::__construct();
-        $this->session = (object)get_userdata(USER);
+        $this->userdata = get_userdata(USER);
 
         // if(is_empty_object($this->session)){
         // 	redirect(base_url().'login/authentication', 'refresh');
@@ -20,7 +20,7 @@ class employer_profile_services_model extends CI_Model
         $this->Table = json_decode(TABLE);
     }
 
-    public function save($data)
+    public function save($data): array
     {
         try {
             $this->db->trans_start();
@@ -39,12 +39,16 @@ class employer_profile_services_model extends CI_Model
         }
     }
 
-    public function update($info)
+    public function update($data): array
     {
+        $x = $this->userdata->user_id;
+
         try {
             $this->db->trans_start();
-            $this->db->where('id', $info['id'])->update($this->Table->employer, $info);
+            $this->db->where('id', $this->userdata->id)->update($this->Table->employer, $data);
             $this->db->trans_complete();
+
+            $this->Auth_model->update_auth($this->userdata->user_id, array('email' => $data['email']));
 
             if ($this->db->trans_status() === FALSE) {
                 $this->db->trans_rollback();

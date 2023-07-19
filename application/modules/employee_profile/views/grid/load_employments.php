@@ -28,11 +28,9 @@ if (!empty($employments['employers'])) {
                             <div class="star-rating" style="background-image: linear-gradient(
                                 to right,
                                 gold 0%,
-                                gold 100%,
+                                gold 35%,
                                 transparent 33.333%,
-                                transparent 100%);
-                            "
-                            ><?= @$employment->rating ?></div>
+                                transparent 100%);"><?= @$employment->rating ?></div>
                         </li>
                     </ul>
                 </div>
@@ -97,7 +95,7 @@ if (!empty($employments['employers'])) {
                             <div class="row pb-3">
                                 <div class="col-md">
                                     <label for="ratingEmp">Rating</label>
-                                    <input type="number" class="form-control" id="rating" name="rating" value="<?= @$employment->rating ?>">
+                                    <input type="number" class="form-control" id="rating" name="rating" value="<?= @$employment->rating ?>" min="0" max="5">
                                 </div>
                             </div>
 
@@ -133,7 +131,7 @@ if (!empty($employments['employers'])) {
         </div>
         <div class="d-flex flex-column flex-grow-1">
             <p class="fs-14">Share your professional experience to establish credibility for potential employers.</p>
-            <!-- <button type="button" class="btn btn-light rounded-pill edit-summary" style="border-width: 2px" data-toggle="modal" data-target="#modalAddEmp">Add Employment</button> -->
+            <button type="button" class="btn btn-light rounded-pill edit-summary" style="border-width: 2px" data-toggle="modal" data-target="#modalAddEmp">Add Employment</button>
         </div>
     </div>
 
@@ -168,7 +166,7 @@ if (!empty($employments['employers'])) {
         position: absolute;
         left: 29px;
         width: 2px;
-        height: 143%;
+        height: 134%;
         z-index: 400;
     }
 

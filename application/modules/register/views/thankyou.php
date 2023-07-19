@@ -16,7 +16,11 @@
 
 </style>
 
-<div class="container">
+<body style="background-color:rgb(241, 246, 249);">
+    
+</body>
+
+<div class="container d-flex align-content-center">
     <div class="thank-you-container w-75 mx-auto">
         <img src="<?= base_url() ?>assets/images/Logo/Konnect3.png" class="img-fluid mb-4" alt="Konnect logo">
         <h1 class="mb-5">Thank You for Registering</h1>
@@ -29,8 +33,8 @@
     </div>
 </div>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     setTimeout(function() {window.location.href = "<?= base_url() ?>login"}, 3000);
-</script>
+</script> -->
 
 <?php auth_footer() ?>

@@ -35,4 +35,26 @@ class Auth_model extends CI_Model
 
         return $current->locker == $other->locker;
     }
+
+    /**
+     * @throws Exception
+     */
+    public function update_auth($user_id, $data): array
+    {
+        try {
+            $this->db->trans_start();
+            $this->db->where('id', $user_id)->update($this->Table->user, $data);
+            $this->db->trans_complete();
+
+            if ($this->db->trans_status()) {
+                $this->db->trans_commit();
+                return array('status' => true, 'message' => 'Successfully updated user.');
+            } else {
+                $this->db->trans_rollback();
+                return array('status' => false, 'message' => 'Failed to update user.');
+            }
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage(), $e->getCode());
+        }
+    }
 }

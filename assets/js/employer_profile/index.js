@@ -1,10 +1,15 @@
 const load_summary = () => {
     const id = new URLSearchParams(window.location.search).get('id');
 
-    $('#load_summary').load(baseUrl + 'employer_profile/get_summary?id=' + id);
+    fetch(baseUrl + 'employer_profile/get_summary?id=' + id)
+        .then(response => response.text())
+        .then(data => {
+            document.querySelector('#load_summary').innerHTML = data;
+        });
+
 }
 
-$(document).ready(function () {
+document.addEventListener('DOMContentLoaded', () => {
     const status = document.querySelectorAll('span.status');
 
     status.forEach(value => {
@@ -32,52 +37,47 @@ $(document).ready(function () {
             }
         });
     });
-});
 
-$('.edit-summary').click(function () {
-    const content = document.querySelector('.summary-content').innerHTML;
-    tinymce.get('summary').setContent(content);
+    const edit_summary = document.querySelector('.edit-summary');
 
-    let count = tinymce.get('summary').getContent({format: 'text'}).length;
-    document.getElementById('summary_character_count').innerText = count + '/2000';
-});
+    if (edit_summary) {
+        edit_summary.addEventListener('click', function () {
+            const content = document.querySelector('.summary-content').innerHTML;
+            tinymce.get('summary').setContent(content);
 
-$(document).on('click', '#update_summary', function () {
-    const id = new URLSearchParams(window.location.search).get('id');
-    const summary = tinymce.activeEditor.getContent();
-
-    formAction(baseUrl + 'employer_profile/service/Employer_profile_service/update_summary', 'POST', {
-        id: id,
-        summary: summary
-    }, function () {
-        success('SUCCESS', 'Summary successfully updated');
-        load_summary();
-    });
-});
-
-$(document).on('click', '#update_profile', function () {
-    const isValid = validateForm('#needs-validation');
-
-    if (isValid) {
-        const formData = new FormData();
-
-        formData.append('id', $('#id').val());
-        formData.append('employer_name', $('#employer_name').val());
-        formData.append('contact_number', $('#contact_number').val());
-        formData.append('email', $('#email').val());
-        formData.append('address', $('#address').val());
-        formData.append('barangay', $('#barangay').val());
-        formData.append('city', $('#city').val());
-        formData.append('tradename', $('#tradename').val());
-        formData.append('business_type', $('#business_type').val());
-        formData.append('sss', $('#sss').val());
-        formData.append('tin', $('#tin').val());
-        formData.append('image', $('#image')[0].files[0]);
-
-        formAction(baseUrl + 'employer_profile/service/Employer_profile_service/update', 'POST', formData, function () {
-            success('SUCCESS', 'Profile successfully updated', 3000);
+            let count = tinymce.get('summary').getContent({format: 'text'}).length;
+            document.getElementById('summary_character_count').innerText = count + '/2000';
         });
     }
+
+    const update_summary = document.querySelector('#update_summary');
+
+    if (update_summary) {
+        update_summary.addEventListener('click', function () {
+            const id = new URLSearchParams(window.location.search).get('id');
+            const summary = tinymce.activeEditor.getContent();
+
+            formAction(baseUrl + 'employer_profile/service/Employer_profile_service/update_summary', 'POST', {
+                id: id,
+                summary: summary
+            }, function () {
+                success('SUCCESS', 'Summary successfully updated');
+                load_summary();
+            });
+        });
+    }
+
+    const update_profile = document.querySelector('#update_profile');
+
+    update_profile.addEventListener('click', function () {
+        // Get all form control elements within the div that has .active.show class only
+        const form = update_profile.closest('#form_content').querySelector('div.active.show > form');
+        const isValid = validateForm(form);
+
+        if (isValid) {
+            formAction(baseUrl + 'employer_profile/service/Employer_profile_service/update', 'POST', new FormData(form), () => {
+                success('SUCCESS', 'Profile successfully updated');
+            });
+        }
+    });
 });
-
-

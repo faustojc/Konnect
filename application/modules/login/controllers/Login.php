@@ -11,10 +11,6 @@ class Login extends MY_Controller
         parent::__construct();
         $this->userdata = get_userdata(USER);
 
-        // if(is_empty_object($this->session)){
-        // 	redirect(base_url().'login/authentication', 'refresh');
-        // }
-
         $model_list = [
             'login/Login_model' => 'login_model',
         ];
@@ -24,12 +20,20 @@ class Login extends MY_Controller
     /** load main page */
     public function index()
     {
-        
-        unset_userdata(USER);
-        unset_userdata('auth');
+        if (!empty($this->userdata)) {
+            redirect(base_url() . 'beu_dashboard');
+        }
 
         $this->data['content'] = 'index';
         $this->load->view('layout', $this->data);
+    }
+
+    public function logout()
+    {
+        unset_userdata(USER);
+        unset_userdata(AUTH);
+
+        redirect(base_url() . 'login', 'refresh');
     }
 
     public function authenticate()
@@ -43,13 +47,19 @@ class Login extends MY_Controller
         $response = $this->login_model->authenticate($info);
 
         if (!$response['has_error']) {
-            set_userdata('auth', $info);
+            set_userdata(AUTH, $info);
 
             echo json_encode(['redirect' => base_url() . 'beu_dashboard']);
         } else {
             echo json_encode($response);
         }
 
+    }
+
+    public function getChooseForm()
+    {
+        $this->data['content'] = 'grid/choose';
+        echo $this->load->view('layout', $this->data, true);
     }
 
     public function getLoginForm()

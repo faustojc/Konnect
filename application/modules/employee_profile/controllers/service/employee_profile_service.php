@@ -8,7 +8,7 @@ class Employee_profile_service extends MY_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->session = (object)get_userdata(USER);
+        $this->session = (object) get_userdata(USER);
 
         // if(is_empty_object($this->session)){
         // 	redirect(base_url().'login/authentication', 'refresh');
@@ -22,49 +22,47 @@ class Employee_profile_service extends MY_Controller
 
     public function update_profile()
     {
+        $data = null;
+
         $file['upload_path'] = './assets/images/employee/profile_pic/';
-        $file['allowed_types'] = 'jpg|png|jpeg';
+        $file['allowed_types'] = 'jpg|png|jpeg|JPG';
         $file['max_size'] = '2000';
 
-        $upload = $this->input->post('Employee_image');
-
         $this->load->library('upload', $file);
-        if (empty($upload) && !$this->upload->do_upload('Employee_image')) {
-            $response['file_error'] = $this->upload->display_errors();
+
+        if (!$this->upload->do_upload('Employee_image')) {
+            $response['file_error'] = $this->upload->error_msg;
         } else {
-            $img = $this->upload->data();
-            $response['file_success'] = 'File ' . $img['file_name'] . ' uploaded successfully';
+            $data = $this->upload->data();
+            $response['file_success'] = 'File ' . $data['file_name'] . ' uploaded successfully';
         }
 
-        $data = array(
-            'ID' => $this->input->post('ID'),
-            'Fname' => $this->input->post('Fname'),
-            'Mname' => $this->input->post('Mname'),
-            'Lname' => $this->input->post('Lname'),
-            'Bday' => $this->input->post('Bday'),
-            'Gender' => $this->input->post('Gender'),
-            'Cstat' => $this->input->post('Cstat'),
-            'Religion' => $this->input->post('Religion'),
-            'Cnum' => $this->input->post('Cnum'),
-            'Email' => $this->input->post('Email'),
-            'City' => $this->input->post('City'),
-            'Barangay' => $this->input->post('Barangay'),
-            'Address' => $this->input->post('Address'),
-            'Title' => $this->input->post('Title'),
-            'SSS' => $this->input->post('SSS'),
-            'Tin' => $this->input->post('Tin'),
-            'Phil_health' => $this->input->post('Phil_health'),
-            'Pag_ibig' => $this->input->post('Pag_ibig')
-        );
-
-        // If there is a new image uploaded, replace the existing image, else use the existing image
-        if (isset($img)) {
-            $data['Employee_image'] = $img['file_name'];
+        if (isset($data)) {
+            $this->esModel->Employee_image = $data['file_name'];
         }
 
+        $this->esModel->employee_ID = $this->input->post("employee_ID");
+        $this->esModel->Fname = $this->input->post("Fname");
+        $this->esModel->Mname = $this->input->post("Mname");
+        $this->esModel->Lname = $this->input->post("Lname");
+        $this->esModel->Cnum = $this->input->post("Cnum");
+        $this->esModel->Address = $this->input->post("Address");
+        $this->esModel->Title = $this->input->post("Title");
+        $this->esModel->Gender = $this->input->post("Gender");
+        $this->esModel->Cstat = $this->input->post("Cstat");
+        $this->esModel->Religion = $this->input->post("Religion");
+        $this->esModel->Bday = $this->input->post("Bday");
+        $this->esModel->Email = $this->input->post("Email");
+        $this->esModel->City = $this->input->post("City");
+        $this->esModel->Barangay = $this->input->post("Barangay");
+        $this->esModel->SSS = $this->input->post("SSS");
+        $this->esModel->Tin = $this->input->post("Tin");
+        $this->esModel->Phil_health = $this->input->post("Phil_health");
+        $this->esModel->Pag_ibig = $this->input->post("Pag_ibig");
 
-        $response = $this->esModel->update('tbl_employee', 'ID', $data['ID'], $data);
+        $response = $this->esModel->update_profile();
         echo json_encode($response);
+
     }
 
     public function update_introduction()

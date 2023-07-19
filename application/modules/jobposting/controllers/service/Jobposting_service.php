@@ -9,7 +9,7 @@ class Jobposting_service extends MY_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->session = (object)get_userdata(USER);
+        $this->session = (object) get_userdata(USER);
 
         // if(is_empty_object($this->session)){
         // 	redirect(base_url().'login/authentication', 'refresh');
@@ -26,6 +26,10 @@ class Jobposting_service extends MY_Controller
         $info = array(
             'employer_id' => $this->input->post("employer_id"),
             'title' => $this->input->post("title"),
+            'start_date' => $this->input->post("start_date"),
+            'salary' => $this->input->post("salary"),
+            'shift' => $this->input->post("shift"),
+            'job_type' => $this->input->post("job_type"),
             'description' => $this->input->post("description"),
             'filled' => $this->input->post("filled")
         );

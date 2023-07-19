@@ -1,10 +1,15 @@
 
+<div class="carousel-inner py-3 px-3" >
 <?php
 // $ci = & get_instance();
 
 if (!empty($train_val)) {
     foreach ($train_val as $key => $value) { 
         $carouselClass = ($key === 0) ? 'carousel-item active' : 'carousel-item';  ?>
+
+
+    
+                                    
     
         <div class="<?= $carouselClass ?> px-5 " >
             <div class="card training-hover sec-color">
@@ -105,7 +110,13 @@ if (!empty($train_val)) {
                 </div>
             </div>
         </div>
-        
+        <a class="carousel-control-prev " href="#carouselExampleControls" role="button" data-slide="prev" style="width:5%; border-radius: 0 0 0 15px; color: #17202a ;">
+                                        <i class="fa-solid fa-chevron-left pl-3"></i>
+                                    </a>
+                                    
+                                    <a class="carousel-control-next " href="#carouselExampleControls" role="button" data-slide="next" style="width:5%; border-radius: 0 0 15px 0; color: #17202a ;">
+                                        <i class="fa-solid fa-chevron-right pr-3"></i>
+                                    </a>
         <?php
     }
 } else {
@@ -121,4 +132,5 @@ if (!empty($train_val)) {
     </div>
 
 <?php
-} ?>
+} ?>          
+</div>

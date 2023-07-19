@@ -1,6 +1,15 @@
+const applyBtnFunction = () => {
+    const applyBtn = document.querySelectorAll('.apply-btn');
+
+    applyBtn.forEach(btn => {
+        btn.addEventListener('click', function (event) {
+            
+        });
+    });
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     textareaEditor('textarea', 400);
-
 
     const jobStatus = document.querySelectorAll('.job-status');
     jobStatus.forEach(value => {
@@ -16,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         value.textContent = status;
     });
+
 
     // See more functionality in .job-description
     const seeMoreButtons = document.querySelectorAll(".see-more");
@@ -53,4 +63,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
+
+    applyBtnFunction();
 });

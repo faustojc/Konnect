@@ -52,8 +52,8 @@ class Login_model extends CI_Model
                     ->get()->row();
             }
 
-            set_userdata(USER, $user);
-            set_userdata(AUTH, $query);
+            set_userdata(USER, (object)$user);
+            set_userdata(AUTH, (object)$query);
             return array(
                 'has_error' => false,
                 'message' => 'Login Success',

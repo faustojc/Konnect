@@ -4,6 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Employer_profile extends MY_Controller
 {
     protected $userdata;
+    protected $auth;
     protected $has_permission;
     private $data = [];
 
@@ -15,6 +16,8 @@ class Employer_profile extends MY_Controller
         if (empty($this->userdata)) {
             redirect(base_url() . 'login');
         }
+
+        $this->auth = get_userdata(AUTH);
 
         $model_list = [
             'employer_profile/Employer_profile_model' => 'employer_profile_model',
@@ -36,7 +39,9 @@ class Employer_profile extends MY_Controller
     {
         $id = $this->input->get('id');
 
+        $this->data['auth'] = $this->auth;
         $this->data['has_permission'] = $this->has_permission;
+
         $this->load->driver('cache');
         // Enable query caching
         $this->db->cache_on();
@@ -68,10 +73,6 @@ class Employer_profile extends MY_Controller
 
     public function edit_profile()
     {
-        if (!$this->has_permission) {
-            redirect(base_url() . 'employer_profile?id=' . $this->userdata->id, 'refresh');
-        }
-
         $this->data['employer'] = $this->employer_profile_model->get_current_employer($this->userdata->id);
         $this->data['content'] = 'profile';
         $this->load->view('layout', $this->data);

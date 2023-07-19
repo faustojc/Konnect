@@ -103,36 +103,58 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
     const navJobFeed = document.querySelector('#nav-job-feed');
-    navJobFeed.addEventListener('click', function () {
-        const jobList = document.querySelector('#job_feed');
+    if (navJobFeed) {
+        navJobFeed.addEventListener('click', function () {
+            const jobList = document.querySelector('#job_feed');
 
-        displayLoadingCard('#job_feed');
+            displayLoadingCard('#job_feed');
 
-        fetch(baseUrl + 'jobposting/job_feed')
-            .then(response => response.text())
-            .then(data => {
-                jobList.innerHTML = data;
+            fetch(baseUrl + 'jobposting/job_feed')
+                .then(response => response.text())
+                .then(data => {
+                    jobList.innerHTML = data;
 
-                status_badge();
-                jobSelectedDisplayEvent(baseUrl + 'jobposting/get_selected_job');
-            });
-    });
+                    status_badge();
+                    jobSelectedDisplayEvent(baseUrl + 'jobposting/get_selected_job');
+                });
+        });
+    }
 
     const navJobPosted = document.querySelector('#nav-job-posted');
-    navJobPosted.addEventListener('click', function () {
-        const ownJobList = document.querySelector('#own_job');
+    if (navJobPosted) {
+        navJobPosted.addEventListener('click', function () {
+            const ownJobList = document.querySelector('#job_posted');
 
-        displayLoadingCard('#own_job');
+            displayLoadingCard('#job_posted');
 
-        fetch(baseUrl + 'jobposting/own_jobpost')
-            .then(response => response.text())
-            .then(data => {
-                ownJobList.innerHTML = data;
+            fetch(baseUrl + 'jobposting/own_jobpost')
+                .then(response => response.text())
+                .then(data => {
+                    ownJobList.innerHTML = data;
 
-                status_badge();
-                jobSelectedDisplayEvent(baseUrl + 'jobposting/get_own_selected_job');
-            });
-    });
+                    status_badge();
+                    jobSelectedDisplayEvent(baseUrl + 'jobposting/get_own_selected_job');
+                });
+        });
+    }
+
+    const navAppliedJob = document.querySelector('#nav-application');
+    if (navAppliedJob) {
+        navAppliedJob.addEventListener('click', function () {
+            const appliedJobList = document.querySelector('#job_applied');
+
+            displayLoadingCard('#job_applied');
+
+            fetch(baseUrl + 'jobposting/get_applied_jobs')
+                .then(response => response.text())
+                .then(data => {
+                    appliedJobList.innerHTML = data;
+
+                    status_badge();
+                    jobSelectedDisplayEvent(baseUrl + 'jobposting/get_selected_applied_job');
+                });
+        });
+    }
 });
 
 /**

@@ -38,7 +38,6 @@ class Employee_profile extends MY_Controller
         $this->data['has_permission'] = $this->has_permission;
 
         $ID = $this->uri->segment(3);
-        $this->eModel->ID = $ID;
 
         $this->load->driver('cache');
         $this->db->cache_on();

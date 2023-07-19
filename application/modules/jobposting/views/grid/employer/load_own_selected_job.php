@@ -50,7 +50,6 @@ if ($timeDiff < 60) {
             <h5 style="font-size: 18px;">Applicants:</h5>
         </div>
 
-
         <div class="row">
             <div class="col-12 col-md-6">
                 <div class="row pl-3 pt-2">

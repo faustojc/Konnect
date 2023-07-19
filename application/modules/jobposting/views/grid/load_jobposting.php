@@ -1,10 +1,4 @@
 <style>
-    .section-line {
-        border: none;
-        border-bottom: 1px solid #ccc;
-        margin: 10px 0;
-    }
-
     h1 {
         font-size: 25px;
     }
@@ -87,7 +81,7 @@
                             </h5>
 
                         </div>
-                        
+
                         <div class="card-text mb-0 text-muted " style="max-height: 250px; overflow-y: hidden; font-size: 12px">
                             <?= ucwords(@$job->description) ?>
                         </div>
@@ -100,13 +94,13 @@
             }
         } else {
             ?>
-        <div class="jumbotron">
-            <div class="container">
-                <h1 class="display-4">No Jobs Found</h1>
-                <p class="lead">We can't find the jobs that you are looking for or there are no jobs available.</p>
+            <div class="jumbotron">
+                <div class="container">
+                    <h1 class="display-4">No Jobs Found</h1>
+                    <p class="lead">We can't find the jobs that you are looking for or there are no jobs available.</p>
+                </div>
             </div>
-        </div>
-        <?php
+            <?php
         }
         ?>
     </div>

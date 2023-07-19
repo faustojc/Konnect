@@ -34,8 +34,6 @@
                 padding: 7px;
                 border-radius: 7px;
             }
-
-
         </style>
 
         <div class="card">

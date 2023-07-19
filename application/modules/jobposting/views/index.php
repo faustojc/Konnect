@@ -42,25 +42,31 @@ main_header(['jobposting']);
                     <a class="nav-item nav-link active" id="nav-job-feed" data-toggle="tab" href="#job-feed" role="tab" aria-controls="job-feed" aria-selected="true">
                         Job Feed
                     </a>
-                    <a class="nav-item nav-link" id="nav-job-posted" data-toggle="tab" href="#job-posted" role="tab" aria-controls="job-posted" aria-selected="false">
-                        Your Job Listing
-                    </a>
+                    <?php if ($auth['user_type'] == 'EMPLOYER'): ?>
+                        <a class="nav-item nav-link" id="nav-job-posted" data-toggle="tab" href="#job-posted" role="tab" aria-controls="job-posted" aria-selected="false">
+                            Your Job Listing
+                        </a>
+                    <?php else: ?>
+                        <a class="nav-item nav-link" id="nav-application" data-toggle="tab" href="#application-tab" role="tab" aria-controls="application-tab" aria-selected="false">
+                            Your Applied Jobs
+                        </a>
+                    <?php endif; ?>
                 </div>
             </nav>
 
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="job-feed" role="tabpanel" aria-labelledby="nav-job-feed">
-                    <div class="card-body pt-5" id="job_feed">
-
-                    </div>
+                    <div class="card-body pt-5" id="job_feed"></div>
                 </div>
-                <div class="tab-pane fade" id="job-posted" role="tabpanel" aria-labelledby="nav-job-posted">
-                    <div class="row" id="job_list">
-                        <div class="card-body pt-5" id="own_job">
-
-                        </div>
+                <?php if ($auth['user_type'] == 'EMPLOYER'): ?>
+                    <div class="tab-pane fade" id="job-posted" role="tabpanel" aria-labelledby="nav-job-posted">
+                        <div class="card-body pt-5" id="job_posted"></div>
                     </div>
-                </div>
+                <?php else: ?>
+                    <div class="tab-pane fade" id="application-tab" role="tabpanel" aria-labelledby="nav-application">
+                        <div class="card-body pt-5" id="job_applied"></div>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
 </section>

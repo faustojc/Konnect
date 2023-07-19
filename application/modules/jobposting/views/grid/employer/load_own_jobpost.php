@@ -1,10 +1,4 @@
 <style>
-    .section-line {
-        border: none;
-        border-bottom: 1px solid #ccc;
-        margin: 10px 0;
-    }
-
     h1 {
         font-size: 25px;
     }

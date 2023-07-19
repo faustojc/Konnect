@@ -29,6 +29,31 @@ if (!function_exists('modal')) {
     }
 }
 
+if (!function_exists('showNotification')) {
+    /**
+     * Show Notification Component
+     *
+     * A component that shows a notification.
+     *
+     * USAGE: showNotification($type, $message);
+     *
+     * @param string $type The type of the notification. 'Success', 'Error', 'Warning', 'Info'
+     * @param string $title The title of the notification.
+     * @param string $message The message of the notification.
+     */
+    function showNotification(string $type, string $title, string $message)
+    {
+        $data = array(
+            'type' => $type,
+            'title' => $title,
+            'message' => $message
+        );
+
+        $CI = &get_instance();
+        $CI->load->view('components/show_notification', $data);
+    }
+}
+
 if (!function_exists('load_employees')) {
     /**
      * Load Employees Component

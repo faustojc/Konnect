@@ -13,6 +13,7 @@ class Applicant extends MY_Controller
 
         $model_list = array(
             'jobposting/Jobposting_model',
+            'employee/Employee_model',
         );
 
         $this->load->model($model_list);
@@ -27,17 +28,60 @@ class Applicant extends MY_Controller
 
         // Filter the job_id for potential XSS attacks
         $job_id = $this->security->xss_clean($data['job_id']);
-
         $result = $this->Applicant_model->setApplication($job_id, $this->userdata->ID);
-        $employer = $this->Jobposting_model->get_employer_jobpost($job_id);
+        $targetDetails = $this->Jobposting_model->getEmployerByJobpost($job_id);
 
-        if ($result['apply-status'] == 'PENDING') {
+        if ($result->apply_status == 'PENDING') {
+            // Send a notification to the employer by adding a new notification
             $info = array(
-                ''
+                'user_id' => $targetDetails->user_id,
+                'title' => 'New Applicant in your job post',
+                'message' => 'A new applicant has applied to your job post.',
             );
+
+            $this->Notification_model->add($info);
         }
 
         echo json_encode($result);
     }
 
+    public function accept()
+    {
+        $data = json_decode($this->input->raw_input_stream, true);
+        $result = $this->Applicant_model->setApplicantStatus($data['application_id'], 'ACCEPTED');
+
+        // Get the employee details by getting the user_id
+        $employeeDetails = $this->Applicant_model->getApplicant($data['application_id']);
+
+        // Send a notification to the applicant by adding a new notification
+        $info = array(
+            'user_id' => $employeeDetails->employeeUserID,
+            'title' => 'Application Accepted',
+            'message' => 'Your application has been accepted.',
+        );
+
+        $this->Notification_model->add($info);
+
+        echo json_encode($result);
+    }
+
+    public function reject()
+    {
+        $data = json_decode($this->input->raw_input_stream, true);
+        $result = $this->Applicant_model->setApplicantStatus($data['application_id'], 'REJECTED');
+
+        // Get the employee details by getting the user_id
+        $employeeDetails = $this->Employee_model->getEmployee($data['user_id']);
+
+        // Send a notification to the applicant by adding a new notification
+        $info = array(
+            'user_id' => $employeeDetails->user_id,
+            'title' => 'Application Rejected',
+            'message' => 'Your application has been rejected.',
+        );
+
+        $this->Notification_model->add($info);
+
+        echo json_encode($result);
+    }
 }

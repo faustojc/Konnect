@@ -18,7 +18,7 @@ main_header(['jobposting']);
             <div class="col-md-9">
                 <div class="row align-items-center">
                     <div class="col">
-                        <input class="form-control" type="text" id="search_jobpost" placeholder="Search Job Post" />
+                        <input class="form-control" type="text" id="search_jobpost" placeholder="Search Job Post"/>
                     </div>
                     <div class="col-md-3">
                         <a href="<?= base_url() ?>jobposting/create_job" class="btn btn-outline-dark my-3 float-md-right" type="button">CREATE JOB POST</a>
@@ -75,4 +75,6 @@ main_header(['jobposting']);
 <?php
 main_footer();
 ?>
+
+<script src="<?= base_url() ?>assets/js/applicant/index.js"></script>
 <script src="<?php echo base_url() ?>assets/js/jobposting/index.js"></script>

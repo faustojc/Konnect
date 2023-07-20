@@ -79,6 +79,7 @@ const jobSelectedDisplayEvent = (url) => {
                     jobDetails.innerHTML = data;
 
                     status_badge();
+                    acceptRejectBtnFunction();
                 });
         });
     });

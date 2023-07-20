@@ -2,6 +2,23 @@
     h1 {
         font-size: 25px;
     }
+
+    .circle {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: #f1f1f1;
+        text-align: center;
+        line-height: 30px;
+    }
+
+    .img-circle {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
 </style>
 
 <div class="row justify-content-center job-content">
@@ -35,7 +52,7 @@
                 ?>
                 <div class="card card-light p-3 mb-3 job-link" role="button" data-id="<?= $job->id ?>">
                     <h5 class="card-title font-weight-bold text-dark mb-2">
-                        <?= ucwords(@$job->title) ?>
+                        <?= ucwords($job->title) ?>
                         <span class="badge badge-pill">
 
                         </span>
@@ -53,7 +70,40 @@
                             <?= ucwords(@$job->description) ?>
                         </div>
                     </div>
+                    <div class="card-footer p-1">
+                        <div class="row align-items-center px-2">
+                            Applicant(s):
+                            <?php if (!empty($applicants)):
+                                $max_display = 8;
+                                $counter = 0;
 
+                                foreach ($applicants as $applicant):
+                                    if ($applicant->job_id == $job->id) {
+                                        if ($counter < $max_display && $applicant->status == 'PENDING') {
+                                            $counter++; ?>
+                                            <div class="col-1">
+                                                <a href="<?= base_url() ?>employee_profile/index/<?= $applicant->employee_id ?>">
+                                                    <img src="<?= base_url() ?>assets/images/employee/profile_pic/<?= $applicant->employeeImage ?>" class="img-circle" width="30" height="30" alt="<?= $applicant->employeeName ?>">
+                                                </a>
+                                            </div>
+                                        <?php } else if ($counter == $max_display) {
+                                            echo '<div class="col-1"><div class="circle">' . (count($applicants) - $max_display) . '+</div></div>';
+                                            break;
+                                        }
+                                    }
+                                endforeach;
+                                if ($counter == 0): ?>
+                                    <div class="badge badge-info m-0 p-1 ml-3" role="alert">
+                                        No applicants yet.
+                                    </div>
+                                <?php endif; ?>
+                            <?php else: ?>
+                                <div class="badge badge-info m-0 p-1" role="alert">
+                                    No applicants yet.
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
                 </div>
                 <?php
             }

@@ -2,45 +2,6 @@
 main_header(['Employer_profile']);
 ?>
 <!-- ############ PAGE START-->
-<script>
-    function formatInput() {
-        var input = document.getElementById("salary");
-        var value = input.value;
-
-        // Check if the input value is not empty
-        if (value !== "") {
-            // Add ".00" at the end if it's not already present
-            if (!value.endsWith(".00")) {
-                input.value = value + ".00";
-            }
-        }
-    }
-
-    function formatInput2() {
-        var input = document.getElementById("salary");
-        var value = input.value;
-
-        // Remove existing commas from the value
-        value = value.replace(/,/g, '');
-
-        // Format the value with commas for every thousand
-        value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-        // Update the input value with the formatted value
-        input.value = value;
-    }
-
-    function disableDotZero() {
-        var input = document.getElementById("salary");
-        var value = input.value;
-
-        // Check if the input value ends with ".00"
-        if (!value.endsWith(".00")) {
-            // Set the selection range to exclude ".00"
-            input.setSelectionRange(0, value.length - 3);
-        }
-    }
-</script>
 <style>
     /* Remove spinner for number input */
     input[type=number]::-webkit-inner-spin-button,
@@ -123,41 +84,8 @@ main_header(['Employer_profile']);
         font-size: 0.8rem;
     }
 
-    .iconslist {
-        padding-right: 10px;
-    }
-
-    .fs-12 {
-        font-size: 12px;
-    }
-
-    .fs-14 {
-        font-size: 14px;
-    }
-
-    .fs-16 {
-        font-size: 16px;
-    }
-
-    .fs-18 {
-        font-size: 18px;
-    }
-
-    .fs-20 {
-        font-size: 20px;
-    }
-
-
     .fw-500 {
         font-weight: 500;
-    }
-
-    .whitecolor {
-        color: white;
-    }
-
-    .whitebg {
-        background-color: white;
     }
 
     body {
@@ -313,7 +241,8 @@ main_header(['Employer_profile']);
                                 <div class="modal-content border-0" style="border-radius:15px;">
                                     <div class="border-0">
 
-                                        <h5 class="text-center pt-3 pb-2" id="exampleModalLabel" style="font-weight:650;"><i class="fa-solid fa-pen-to-square"></i> Create Jobpost
+                                        <h5 class="text-center pt-3 pb-2" id="exampleModalLabel" style="font-weight:650;">
+                                            <i class="fa-solid fa-pen-to-square"></i> Create Jobpost
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span class="pr-3" aria-hidden="true">&times;</span>
                                             </button>

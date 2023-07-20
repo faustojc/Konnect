@@ -19,13 +19,13 @@ class Employee_model extends CI_Model
         $this->Table = json_decode(TABLE);
     }
 
-    public function get_employee()
+    public function getEmployee($id)
     {
-        $this->db->select('*');
-        $this->db->from($this->Table->employee);
-
-        $query = $this->db->get()->result();
-        return $query;
+        return $this->db->select()
+            ->from($this->Table->employee)
+            ->where('ID', $id)
+            ->or_where('user_id', $id)
+            ->get()->row();
     }
 
     public function get_all_employees($limit = 0, $id = null)
@@ -41,50 +41,11 @@ class Employee_model extends CI_Model
         return $this->db->select()->from($this->Table->employee)->get()->result();
     }
 
-    public function register()
-    {
-        // $this->db->select('*');
-        // $this->db->from($this->Table->employee);
-        // $this->db->where('ID', $this->ID);
-        $query = $this->db->get()->row();
-        return $query;
-    }
-
-    public function get_specific_employee($email)
-    {
-        return $this->db->select()
-            ->from($this->Table->employee)
-            ->where('Email', $email)
-            ->get()->row();
-    }
-
-    public function get_employees($Employee_id)
-    {
-
-        //  return $this->db->select()->from($this->Table->employee_educ)->where('Employee_id', $Employee_id)->get()->row();
-
-        $employee = $this->db->select()->from($this->Table->employee)->where('ID', $Employee_id)->get()->row();
-
-        $education = $this->db->select('tbl_employee.*, tbl_employee_educ.*')
-            ->from('tbl_employee_educ')
-            ->join($this->Table->employee, 'tbl_employee.ID = tbl_employee_educ.Employee_id', 'inner')
-            ->where('tbl_employee_educ.Employee_id', $Employee_id)
-            ->get()->row();
-
-        $result = array(
-            'employee' => $employee,
-            'education' => $education
-        );
-
-        return $result;
-    }
-
     public function get_educ()
     {
         $this->db->select('*');
         $this->db->from($this->Table->employee_educ);
 
-        $query = $this->db->get()->result();
-        return $query;
+        return $this->db->get()->result();
     }
 }

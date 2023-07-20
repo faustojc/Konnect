@@ -15,18 +15,40 @@ class Applicant_model extends CI_Model
         $this->Table = json_decode(TABLE);
     }
 
-    public function getJobApplicants($jobpost_id)
+    public function getApplicant($id)
     {
         return $this->db->select('tbl_applicant.*, 
-        tbl_jobposting.id AS jobID, 
         CONCAT_WS(" ", tbl_employee.Fname, tbl_employee.Mname, tbl_employee.Lname) AS employeeName, 
-        tbl_employee.id AS employeeID
+        tbl_employee.user_id AS employeeUserID,')
+            ->from($this->Table->applicant)
+            ->join($this->Table->employee, 'tbl_employee.ID = tbl_applicant.employee_id', 'inner')
+            ->where('tbl_applicant.id', $id)
+            ->get()->row();
+    }
+
+    public function getJobApplicants($job_id)
+    {
+        return $this->db->select('tbl_applicant.*, 
+        CONCAT_WS(" ", tbl_employee.Fname, tbl_employee.Mname, tbl_employee.Lname) AS employeeName, 
         tbl_employee.Title AS employeeTitle, 
         tbl_employee.Employee_image AS employeeImage')
             ->from($this->Table->applicant)
-            ->join($this->Table->employee, 'tbl_employee.ID = tbl_applicants.employee_id', 'inner')
-            ->where('job_id', $jobpost_id)
-            ->join($this->Table->jobposting, 'tbl_jobposting.id = tbl_applicants.job_id')
+            ->join($this->Table->employee, 'tbl_employee.ID = tbl_applicant.employee_id', 'inner')
+            ->where('job_id', $job_id)
+            ->get()->result();
+    }
+
+    public function getEmployerApplicants($employer_id)
+    {
+        return $this->db->select('tbl_applicant.*, 
+        CONCAT_WS(" ", tbl_employee.Fname, tbl_employee.Mname, tbl_employee.Lname) AS employeeName, 
+        tbl_employee.Title AS employeeTitle, 
+        tbl_employee.Employee_image AS employeeImage')
+            ->from($this->Table->applicant)
+            ->join($this->Table->jobposting, 'tbl_jobposting.id = tbl_applicant.job_id')
+            ->join($this->Table->employer, 'tbl_employer.id = tbl_jobposting.employer_id')
+            ->join($this->Table->employee, 'tbl_employee.ID = tbl_applicant.employee_id')
+            ->where('tbl_employer.id', $employer_id)
             ->get()->result();
     }
 

@@ -77,7 +77,7 @@ function main_header($menubar = [])
 
             body {
                 font-family: 'Roboto', sans-serif;
-                color:#272732;
+                color: #272732;
             }
 
             .text-info {
@@ -303,7 +303,7 @@ function main_header($menubar = [])
 
 
                 <!-- Notifications Dropdown Menu -->
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown" id="notification">
                     <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="far fa-bell"></i>
                         <span class="badge badge-warning navbar-badge">15</span>
@@ -334,16 +334,9 @@ function main_header($menubar = [])
                         <i class="fas fa-expand-arrows-alt"></i>
                     </a>
                 </li>
-
-                <!-- <li class="nav-item">
-                  <a class="nav-link pl-1" href="#" role="button">
-                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                  </a>
-                </li> -->
             </ul>
         </nav>
     </div>
-    <!-- /.navbar -->
 
     <?php
 }

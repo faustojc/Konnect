@@ -53,7 +53,6 @@ class Login extends MY_Controller
         } else {
             echo json_encode($response);
         }
-
     }
 
     public function getChooseForm()

@@ -1,26 +1,17 @@
-const logout = (eventSource) => {
-    const logoutBtn = document.querySelector('#logout');
+async function notificationListener(callback = () => {}) {
+    const response = await fetch(baseUrl + 'notification/notify');
+    const data = await response.json();
 
-    logoutBtn.addEventListener('click', function () {
-        eventSource.close();
-    });
+    callback(data);
 }
 
-function notificationListener() {
-    const eventSource = new EventSource(baseUrl + 'notification/notifications');
+document.addEventListener('DOMContentLoaded', function () {
+    const eventSource = new EventSource(baseUrl + 'notification/notify');
 
-    console.log('Notification listener started');
-    
     eventSource.addEventListener('notification', (event) => {
         const data = JSON.parse(event.data);
         info(data.title, data.message);
     });
-
-    logout(eventSource);
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-    notificationListener();
 });
 
 /**

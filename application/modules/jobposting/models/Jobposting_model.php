@@ -52,4 +52,13 @@ class Jobposting_model extends CI_Model
             ->where('tbl_jobposting.id', $id)
             ->order_by('date_posted', 'DESC')->get()->row();
     }
+
+    public function getEmployerByJobpost($job_id)
+    {
+        return $this->db->select('tbl_employer.user_id')
+            ->from($this->Table->jobposting)
+            ->join($this->Table->employer, $this->Table->employer . '.id = ' . $this->Table->jobposting . '.employer_id')
+            ->where('tbl_jobposting.id', $job_id)
+            ->get()->row();
+    }
 }

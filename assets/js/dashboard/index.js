@@ -1,21 +1,21 @@
-const applyBtnHover = (btn, status) => {
+const applyBtnHover = (btn, status, doApply = true) => {
     const btnText = btn.textContent.replace(/\s+/g, '').toUpperCase();
 
-    if (status === 'PENDING') {
-        btn.addEventListener('mouseover', function () {
-            btn.textContent = 'Cancel';
-            btn.classList.add('btn-outline-danger');
-        });
-        btn.addEventListener('mouseout', function () {
+    if (doApply) {
+        if (status === 'PENDING') {
+            btn.addEventListener('mouseover', function () {
+                btn.textContent = 'Cancel';
+                btn.classList.add('btn-outline-danger');
+            });
+            btn.addEventListener('mouseout', function () {
+                btn.textContent = status;
+                btn.classList.remove('btn-outline-danger');
+            });
+        } else {
+            btn.removeEventListener('mouseover', () => {});
+            btn.removeEventListener('mouseout', () => {});
             btn.textContent = status;
-            btn.classList.remove('btn-outline-danger');
-        });
-    } else {
-        btn.removeEventListener('mouseover', () => {
-        });
-        btn.removeEventListener('mouseout', () => {
-        });
-        btn.textContent = status;
+        }
     }
 }
 
@@ -40,23 +40,6 @@ document.addEventListener("DOMContentLoaded", function () {
     applyBtnFunction();
 });
 
-$(document).on('click', '#btn_post', function () {
-    $(document).gmPostHandler({
-        url: 'beu_dashboard/service/beu_dashboard_service/btn_post',
-        selector: '.form-control',
-        data: {
-            employer_id: $('#employer_id').val(),
-            title: $('#title').val(),
-            description: $('#description').val(),
-            start_date: $('#start_date').val(),
-            filled: $('#filled').val(),
-            salary: $('#salary').val(),
-            shift: $('#shift').val(),
-            job_type: $('#job_type').val()
-        },
-    });
-});
-// See more functionality in .job-description
 const seeMoreButtons = document.querySelectorAll(".see-more");
 if (seeMoreButtons) {
     // Hide the buttons if the div height is less than or equal to 450px
@@ -94,4 +77,41 @@ if (seeMoreButtons) {
     });
 }
 
+// For jobpost details
+function formatInput() {
+    const input = document.getElementById("salary");
+    const value = input.value;
 
+    // Check if the input value is not empty
+    if (value !== "") {
+        // Add ".00" at the end if it's not already present
+        if (!value.endsWith(".00")) {
+            input.value = value + ".00";
+        }
+    }
+}
+
+function formatInput2() {
+    const input = document.getElementById("salary");
+    let value = input.value;
+
+    // Remove existing commas from the value
+    value = value.replace(/,/g, '');
+
+    // Format the value with commas for every thousand
+    value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    // Update the input value with the formatted value
+    input.value = value;
+}
+
+function disableDotZero() {
+    const input = document.getElementById("salary");
+    const value = input.value;
+
+    // Check if the input value ends with ".00"
+    if (!value.endsWith(".00")) {
+        // Set the selection range to exclude ".00"
+        input.setSelectionRange(0, value.length - 3);
+    }
+}

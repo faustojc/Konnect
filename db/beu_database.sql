@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 20, 2023 at 11:27 AM
+-- Generation Time: Jul 20, 2023 at 06:25 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -39,7 +39,7 @@ CREATE TABLE `tbl_applicant` (
 --
 
 INSERT INTO `tbl_applicant` (`id`, `job_id`, `employee_id`, `status`) VALUES
-(2, 35, 32, 'PENDING'),
+(2, 35, 32, 'ACCEPTED'),
 (4, 45, 32, 'PENDING'),
 (11, 33, 32, 'PENDING');
 
@@ -300,9 +300,18 @@ CREATE TABLE `tbl_notification` (
   `user_id` int(11) NOT NULL,
   `title` text NOT NULL,
   `message` text NOT NULL,
-  `is_displayed` tinyint(1) NOT NULL,
+  `is_displayed` tinyint(1) NOT NULL DEFAULT 0,
+  `is_read` tinyint(1) NOT NULL DEFAULT 0,
   `date_created` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_notification`
+--
+
+INSERT INTO `tbl_notification` (`id`, `user_id`, `title`, `message`, `is_displayed`, `is_read`, `date_created`) VALUES
+(1, 6, 'Application Accepted', 'Your application has been accepted.', 1, 0, '2023-07-20 23:08:49'),
+(2, 6, 'Application Accepted', 'Your application has been accepted.', 1, 0, '2023-07-20 23:46:35');
 
 -- --------------------------------------------------------
 
@@ -531,7 +540,7 @@ ALTER TABLE `tbl_jobposting`
 -- AUTO_INCREMENT for table `tbl_notification`
 --
 ALTER TABLE `tbl_notification`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_skill`

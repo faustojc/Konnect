@@ -3,43 +3,43 @@ main_header(['Employer_profile']);
 ?>
 <!-- ############ PAGE START-->
 <script>
-        function formatInput() {
-            var input = document.getElementById("salary");
-            var value = input.value;
-            
-            // Check if the input value is not empty
-            if (value !== "") {
-                // Add ".00" at the end if it's not already present
-                if (!value.endsWith(".00")) {
-                    input.value = value + ".00";
-                }
-            }
-        }
+    function formatInput() {
+        var input = document.getElementById("salary");
+        var value = input.value;
 
-        function formatInput2() {
-            var input = document.getElementById("salary");
-            var value = input.value;
-            
-            // Remove existing commas from the value
-            value = value.replace(/,/g, '');
-            
-            // Format the value with commas for every thousand
-            value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            
-            // Update the input value with the formatted value
-            input.value = value;
-        }
-
-        function disableDotZero() {
-            var input = document.getElementById("salary");
-            var value = input.value;
-            
-            // Check if the input value ends with ".00"
+        // Check if the input value is not empty
+        if (value !== "") {
+            // Add ".00" at the end if it's not already present
             if (!value.endsWith(".00")) {
-                // Set the selection range to exclude ".00"
-                input.setSelectionRange(0, value.length - 3);
+                input.value = value + ".00";
             }
         }
+    }
+
+    function formatInput2() {
+        var input = document.getElementById("salary");
+        var value = input.value;
+
+        // Remove existing commas from the value
+        value = value.replace(/,/g, '');
+
+        // Format the value with commas for every thousand
+        value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+        // Update the input value with the formatted value
+        input.value = value;
+    }
+
+    function disableDotZero() {
+        var input = document.getElementById("salary");
+        var value = input.value;
+
+        // Check if the input value ends with ".00"
+        if (!value.endsWith(".00")) {
+            // Set the selection range to exclude ".00"
+            input.setSelectionRange(0, value.length - 3);
+        }
+    }
 </script>
 <style>
     /* Remove spinner for number input */
@@ -182,31 +182,34 @@ main_header(['Employer_profile']);
         /* box-shadow: 0  1px 4px rgba(0, 0, 0, .15); */
     }
 
-    .modal-dialog{
-    overflow-y: initial !important
-    }       
-    .modal-body{
+    .modal-dialog {
+        overflow-y: initial !important
+    }
+
+    .modal-body {
         height: 500px;
         overflow-y: auto;
-        scrollbar-width: none;  /* Firefox */
-        -ms-overflow-style: none;  /* IE and Edge */
-        
+        scrollbar-width: none;
+        /* Firefox */
+        -ms-overflow-style: none;
+        /* IE and Edge */
+
     }
 
     .select2-container--default .select2-selection--multiple {
-    background-color: #F4F6F7;
-    border: 0px solid #aaa;
-    border-radius: 10px;
-    cursor: text;
+        background-color: #F4F6F7;
+        border: 0px solid #aaa;
+        border-radius: 10px;
+        cursor: text;
     }
 
     .select2-container--default.select2-container--focus .select2-selection--multiple {
-    border: 0;
-    outline: 0;
+        border: 0;
+        outline: 0;
     }
 
     .select2-container--default .select2-dropdown {
-        border-radius: 15px 15px 15px 15px; 
+        border-radius: 15px 15px 15px 15px;
         border: 0 solid #ced4da;
         border-bottom-color: rgb(206, 212, 218);
         border-bottom-style: solid;
@@ -214,31 +217,33 @@ main_header(['Employer_profile']);
     }
 
     .select2-container--default .select2-selection--multiple .select2-selection__choice {
-    background-color: #0dcaf0;
-    border: 0px solid #aaa;
-    border-radius: 10px;
-    cursor: default;
-    float: left;
-    margin-right: 5px;
-    margin-top: 5px;
-    padding: 4px;
+        background-color: #0dcaf0;
+        border: 0px solid #aaa;
+        border-radius: 10px;
+        cursor: default;
+        float: left;
+        margin-right: 5px;
+        margin-top: 5px;
+        padding: 4px;
     }
 
-    .select2-container--default .select2-results__option--highlighted[aria-selected], .select2-container--default .select2-results__option--highlighted[aria-selected]:hover {
-    background-color: #0dcaf0;
-    color: #fff;
+    .select2-container--default .select2-results__option--highlighted[aria-selected],
+    .select2-container--default .select2-results__option--highlighted[aria-selected]:hover {
+        background-color: #0dcaf0;
+        color: #fff;
     }
 
     .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
-    color: white;
-    cursor: pointer;
-    display: inline-block;
-    font-weight: bold;
-    margin-right: 2px;
+        color: white;
+        cursor: pointer;
+        display: inline-block;
+        font-weight: bold;
+        margin-right: 2px;
     }
 
     .scrollable-container::-webkit-scrollbar {
-        width: 0.5rem; /* Adjust the width as needed */
+        width: 0.5rem;
+        /* Adjust the width as needed */
     }
 
     .scrollable-container::-webkit-scrollbar-track {
@@ -246,11 +251,11 @@ main_header(['Employer_profile']);
     }
 
     .scrollable-container::-webkit-scrollbar-thumb {
-        background-color: #888; /* Customize the scrollbar color */
-        border-radius: 1rem; /* Adjust the border radius as needed */
+        background-color: #888;
+        /* Customize the scrollbar color */
+        border-radius: 1rem;
+        /* Adjust the border radius as needed */
     }
-    
-
 </style>
 
 <section class="content ">
@@ -270,8 +275,7 @@ main_header(['Employer_profile']);
                         <div class="card-body">
                             <div class="row pb-2">
                                 <div class="col-1 d-flex justify-content-center">
-                                    <img class="img-circle img-fluid " src="<?= base_url() ?>assets/images/employer/profile_pic/<?= $details->image ?> " alt="User Avatar"
-                                         style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
+                                    <img class="img-circle img-fluid " src="<?= base_url() ?>assets/images/employer/profile_pic/<?= $details->image ?> " alt="User Avatar" style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
                                 </div>
                                 <div class="col-11">
                                     <div class="card shadow-none hovercard" style="border-radius:10px; width:100%; height:100%; background-color: #F4F6F7;">
@@ -308,108 +312,108 @@ main_header(['Employer_profile']);
                             <div class="modal-dialog modal-lg modal-dialog-centered " role="document" style="width:;">
                                 <div class="modal-content border-0" style="border-radius:15px;">
                                     <div class="border-0">
-                                        
+
                                         <h5 class="text-center pt-3 pb-2" id="exampleModalLabel" style="font-weight:650;"><i class="fa-solid fa-pen-to-square"></i> Create Jobpost
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span class="pr-3" aria-hidden="true">&times;</span>
                                             </button>
                                         </h5>
-                                        
+
                                     </div>
-                                    
+
                                     <div class="modal-body border-0">
                                         <div class="pb-1">
-                                        
+
                                             <label for="" style="">Job Title</label>
                                             <input id="title" name="title" class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:10px;" type="text" placeholder="Enter Job Name">
                                         </div>
 
                                         <div class="row pt-2">
                                             <div class="col-5">
-                                            <label for="" style="">Salary</label>
-                                                <div class="input-group mb-3 " >
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text border-0" style="border-radius:10px 0 0 10px;">₱</span>
-                                                        </div>
+                                                <label for="" style="">Salary</label>
+                                                <div class="input-group mb-3 ">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text border-0" style="border-radius:10px 0 0 10px;">₱</span>
+                                                    </div>
                                                     <input id="salary" name="salary" type="text" maxlength="16" id="salary" onclick="disableDotZero()" onblur="formatInput()" oninput="formatInput2()" class="form-control border-0" style="background-color: #F4F6F7; border-radius:0 10px 10px 0; " placeholder="Input Salary ">
-                                                        <!-- <div class="input-group-append">
-                                                            <span class="input-group-text border-0" style="border-radius:0 10px 10px 0;">.00</span>
-                                                        </div> -->
+                                                    <!-- <div class="input-group-append">
+                                                        <span class="input-group-text border-0" style="border-radius:0 10px 10px 0;">.00</span>
+                                                    </div> -->
                                                 </div>
                                             </div>
                                             <div class="col-2">
                                                 <div class="form-group">
-                                                <label>Job Type</label>
+                                                    <label>Job Type</label>
                                                     <select id="job_type" name="job_type" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;" name="" id="">
-                                                    <option>Part-time</option>
-                                                    <option>Full-time</option>
-                                                    <option>Permanent</option>
-                                                    
+                                                        <option>Part-time</option>
+                                                        <option>Full-time</option>
+                                                        <option>Permanent</option>
+
                                                     </select>
                                                 </div>
-                                            
+
                                             </div>
                                             <div class="col-2">
                                                 <div class="form-group">
-                                                <label>Shift</label>
+                                                    <label>Shift</label>
                                                     <select id="shift" name="shift" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;" name="" id="">
-                                                    <option>Day</option>
-                                                    <option>Night</option>
-                                                    <option>Flextime</option>
-                                                    
+                                                        <option>Day</option>
+                                                        <option>Night</option>
+                                                        <option>Flextime</option>
+
                                                     </select>
                                                 </div>
-                                            
+
                                             </div>
                                             <div class="col-3">
-                                            <!-- <label for="" style="">Job Name</label>
-                                            <input class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:10px;" type="text" placeholder="Enter Job Name">-->
-                                            
+                                                <!-- <label for="" style="">Job Name</label>
+                                                <input class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:10px;" type="text" placeholder="Enter Job Name">-->
+
                                                 <label>Start Date</label>
                                                 <input id="start_date" name="start_date" type="date" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;">
-                                                
-                                            </div> 
+
+                                            </div>
 
                                         </div>
                                         <div class="row">
                                             <div class="col-10">
                                                 <div class="form-group" style="border:0;">
                                                     <label>Requirements</label>
-                                                        <select class="select2 " multiple="multiple" data-placeholder="Add Requirements" style="width: 100%; border:0;">
-                                                            <option>HTML</option>
-                                                            <option>SQL</option>
-                                                            <option>PHP</option>
-                                                            <option>Laravel</option>
-                                                            <option>React</option>
-                                                            <option>Java</option>
-                                                            <option>Javascript</option>
-                                                        </select>
+                                                    <!-- <select class="select2 " multiple="multiple" data-placeholder="Add Requirements" style="width: 100%; border:0;">
+                                                        <option>HTML</option>
+                                                        <option>SQL</option>
+                                                        <option>PHP</option>
+                                                        <option>Laravel</option>
+                                                        <option>React</option>
+                                                        <option>Java</option>
+                                                        <option>Javascript</option>
+                                                    </select> -->
                                                 </div>
                                             </div>
 
                                             <div class="col-2">
-                                            <div class="form-group">
-                                                <label>Status</label>
-                                                    <select id="filled" name="filled" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;" name="" id="">
-                                                    <option>Open</option>
-                                                    <option>Closed</option>
-                                                    <!-- <option>Flextime</option> -->
-                                                    
+                                                <div class="form-group">
+                                                    <label>Status</label>
+                                                    <select id="filled" name="filled" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;">
+                                                        <option>Open</option>
+                                                        <option>Closed</option>
+                                                        <!-- <option>Flextime</option> -->
+
                                                     </select>
                                                 </div>
                                             </div>
-                                            
+
                                         </div>
-                                        
+
                                         <div>
                                             <textarea id="description" name="description" class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:15px;" name="" cols="30" rows="10"></textarea>
                                         </div>
-                                        
-                                        
+
+
                                     </div>
                                     <div class="modal-footer border-0">
                                         <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-                                        <button id="save" type="button" class="btn text-dark" style="border-radius:10px; width:100%; background-color: #F4F6F7;">Post</button>
+                                        <button id="btn_post" type="button" class="btn text-dark" style="border-radius:10px; width:100%; background-color: #F4F6F7;">Post</button>
                                     </div>
                                 </div>
                             </div>
@@ -424,32 +428,32 @@ main_header(['Employer_profile']);
 
 
             <div class="col-12 col-md-3 mt-4">
-    <div class="sticky-top scrollable-container" style="top:65px; height: calc(100vh - 65px); overflow-y: auto;">
-        <!-- EMPLOYEES -->
-        <div class="card card-widget widget-user-2">
-            <div class="card-header">
-                <h3 class="card-title fw-500">Employees</h3>
-            </div>
-            <div id="load_employees_follow_section" style="margin-left: 1rem; margin-right:1rem;">
-                <?php load_employees($employees); ?>
-            </div>
-        </div>
+                <div class="sticky-top scrollable-container" style="top:65px; height: calc(100vh - 65px); overflow-y: auto;">
+                    <!-- EMPLOYEES -->
+                    <div class="card card-widget widget-user-2">
+                        <div class="card-header">
+                            <h3 class="card-title fw-500">Employees</h3>
+                        </div>
+                        <div id="load_employees_follow_section" style="margin-left: 1rem; margin-right:1rem;">
+                            <?php load_employees($employees); ?>
+                        </div>
+                    </div>
 
-        <!-- EMPLOYERS -->
-        <div class="card card-widget widget-user-2">
-            <div class="card-header">
-                <h3 class="card-title fw-500">Employers</h3>
+                    <!-- EMPLOYERS -->
+                    <div class="card card-widget widget-user-2">
+                        <div class="card-header">
+                            <h3 class="card-title fw-500">Employers</h3>
+                        </div>
+                        <div id="load_employers_follow_section" style="margin-left:1rem; margin-right:1rem;">
+                            <?php if ($auth['user_type'] == 'EMPLOYEE'): ?>
+                                <?php load_employers($employers, $following); ?>
+                            <?php else: ?>
+                                <?php load_employers($employers); ?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div id="load_employers_follow_section" style="margin-left:1rem; margin-right:1rem;">
-                <?php if ($auth['user_type'] == 'EMPLOYEE') : ?>
-                    <?php load_employers($employers, $following); ?>
-                <?php else : ?>
-                    <?php load_employers($employers); ?>
-                <?php endif; ?>
-            </div>
-        </div>
-    </div>
-</div>
         </div><!--row-->
     </div><!--container fluid-->
 </section>
@@ -459,6 +463,5 @@ main_header(['Employer_profile']);
 main_footer();
 ?>
 
-<script src="<?php echo base_url() ?>/assets/js/dashboard/index.js">
-
-</script>
+<script src="<?= base_url() ?>assets/js/applicant/index.js"></script>
+<script src="<?= base_url() ?>/assets/js/dashboard/index.js"></script>

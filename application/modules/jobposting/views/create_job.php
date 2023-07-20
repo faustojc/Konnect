@@ -24,7 +24,7 @@ main_header(['jobposting']);
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text border-0" style="border-radius:10px 0 0 10px;">₱</span>
                                             </div>
-                                            <input id="salary" name="salary" type="text" maxlength="16" id="salary" onclick="disableDotZero()" onblur="formatInput()" oninput="formatInput2()" class="form-control border-0" style="background-color: #F4F6F7; border-radius:0 10px 10px 0; " placeholder="Input Salary ">
+                                            <input id="salary" name="salary" type="text" id="salary" onclick="disableDotZero()" onblur="formatInput()" oninput="formatInput2()" class="form-control border-0" style="background-color: #F4F6F7; border-radius:0 10px 10px 0; " placeholder="Input Salary ">
                                             <!-- <div class="input-group-append">
                                                             <span class="input-group-text border-0" style="border-radius:0 10px 10px 0;">.00</span>
                                                         </div> -->

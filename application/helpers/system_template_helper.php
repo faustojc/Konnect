@@ -31,6 +31,10 @@ function main_header($menubar = [])
         <title>
             <?= SYSTEM_MODULE ?>
         </title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
         <link rel="icon" type="image/x-icon" href="<?= base_url() ?>assets/images/Logo/Konnect2.ico">
 
         <!-- Google Font: Source Sans Pro -->
@@ -70,6 +74,11 @@ function main_header($menubar = [])
         <!-- TinyMCE -->
         <script src="<?= base_url() ?>assets/theme/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
         <style>
+
+            body {
+                font-family: 'Roboto', sans-serif;
+                color:#272732;
+            }
 
             .text-info {
                 color: #0dcaf0;
@@ -128,14 +137,11 @@ function main_header($menubar = [])
                 transition: 0.5s;
             }
 
-            .formstyle{
-                border-radius:10px;
+            .formstyle {
+                border-radius: 10px;
                 background-color: #F4F6F7;
-                border:0;
+                border: 0;
             }
-            
-
-
         </style>
     </head>
 
@@ -163,9 +169,9 @@ function main_header($menubar = [])
                 <li class="nav-item d-none d-sm-inline-block" style="position: absolute; left: 50%; margin-left: -250px">
                     <div class="input-group flex-nowrap d-none d-lg-flex" style="width:500px;">
                         <div class="input-group-prepend">
-                  <span class="input-group-text bg-gray-light border-0" id="addon-wrapping" style="border-radius: 10px 0 0 10px;">
-                    <i class="fa fa-search"></i>
-                  </span>
+                            <span class="input-group-text bg-gray-light border-0" id="addon-wrapping" style="border-radius: 10px 0 0 10px;">
+                            <i class="fa fa-search"></i>
+                            </span>
                         </div>
                         <input type="text" class="form-control border-0 bg-gray-light" placeholder="Search"
                                aria-label="search" aria-describedby="addon-wrapping" style="border-radius: 0 10px 10px 0; ">
@@ -194,12 +200,6 @@ function main_header($menubar = [])
                     </div>
 
                 </li>
-                <!-- <li class="nav-item d-none d-sm-inline-block">
-              <a href="<?= base_url() ?>employment" class="nav-link">Employment</a>
-            </li>
-            <li class="nav-item d-none d-sm-inline-block">
-              <a href="<?= base_url() ?>jobposting" class="nav-link">Job Posting</a>
-            </li> -->
             </ul>
 
             <!-- Right navbar links -->
@@ -241,7 +241,7 @@ function main_header($menubar = [])
                             <!-- Message End -->
                         </div>
                         <div class="dropdown-divider"></div>
-                        <a href="<?= base_url() ?>login/logout" class="dropdown-item dropdown-footer">Log out</a>
+                        <a href="<?= base_url() ?>login/logout" class="dropdown-item dropdown-footer" id="logout">Log out</a>
                     </div>
                 </li>
 
@@ -380,31 +380,34 @@ function main_footer()
     <script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/jquery-mapael/maps/usa_states.min.js"></script>
     <!-- ChartJS -->
     <script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/chart.js/Chart.min.js"></script>
-    <!-- Sweetalert -->
-    <script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/sweetalert2/sweetalert2.min.js"></script>
     <!-- Toastr -->
     <script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/toastr/toastr.min.js"></script>
-    <!-- Select2 -->
-    <script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/select2/js/select2.full.min.js"></script>
     <!-- DataTables  & Plugins -->
-    <script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-    <script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-    <script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/jszip/jszip.min.js"></script>
-    <script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/pdfmake/pdfmake.min.js"></script>
-    <script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/pdfmake/vfs_fonts.js"></script>
-    <script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-    <script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-    <script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <!--    <script src="--><?//= base_url()
+    ?><!--assets/theme/adminlte/AdminLTE/plugins/datatables/jquery.dataTables.min.js"></script>-->
+    <!--    <script src="--><?//= base_url()
+    ?><!--assets/theme/adminlte/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>-->
+    <!--    <script src="--><?//= base_url()
+    ?><!--assets/theme/adminlte/AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>-->
+    <!--    <script src="--><?//= base_url()
+    ?><!--assets/theme/adminlte/AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>-->
+    <!--    <script src="--><?//= base_url()
+    ?><!--assets/theme/adminlte/AdminLTE/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>-->
+    <!--    <script src="--><?//= base_url()
+    ?><!--assets/theme/adminlte/AdminLTE/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>-->
+    <!--    <script src="--><?//= base_url()
+    ?><!--assets/theme/adminlte/AdminLTE/plugins/jszip/jszip.min.js"></script>-->
+    <!--    <script src="--><?//= base_url()
+    ?><!--assets/theme/adminlte/AdminLTE/plugins/pdfmake/pdfmake.min.js"></script>-->
+    <!--    <script src="--><?//= base_url()
+    ?><!--assets/theme/adminlte/AdminLTE/plugins/pdfmake/vfs_fonts.js"></script>-->
+    <!--    <script src="--><?//= base_url()
+    ?><!--assets/theme/adminlte/AdminLTE/plugins/datatables-buttons/js/buttons.html5.min.js"></script>-->
+    <!--    <script src="--><?//= base_url()
+    ?><!--assets/theme/adminlte/AdminLTE/plugins/datatables-buttons/js/buttons.print.min.js"></script>-->
+    <!--    <script src="--><?//= base_url()
+    ?><!--assets/theme/adminlte/AdminLTE/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>-->
 
-    <!-- load global js -->
-    <script src="<?= base_url() ?>assets/js/global.js"></script>
-    <!-- <script src="<?= base_url() ?>assets/theme/html-version/scripts/app.js"></script> -->
-    <script src="<?= base_url() ?>assets/js/noPostBack.js"></script>
-    <script src="<?= base_url() ?>assets/js/printThis.js"></script>
     <script>
         //Initialize Select2 Elements
         $('.select2').select2()

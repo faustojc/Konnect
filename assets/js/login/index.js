@@ -34,6 +34,8 @@ const loadFormLogin = () => {
     });
 }
 
+
+
 const backBtn = () => {
     document.querySelector('button#back').addEventListener('click', function () {
         fetch(baseUrl + 'login/getChooseForm',)

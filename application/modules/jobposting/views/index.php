@@ -18,7 +18,7 @@ main_header(['jobposting']);
             <div class="col-md-9">
                 <div class="row align-items-center">
                     <div class="col">
-                        <input class="form-control" type="text" id="search_jobpost" placeholder="Search Job Post"/>
+                        <input class="form-control" type="text" id="search_jobpost" placeholder="Search Job Post" />
                     </div>
                     <div class="col-md-3">
                         <a href="<?= base_url() ?>jobposting/create_job" class="btn btn-outline-dark my-3 float-md-right" type="button">CREATE JOB POST</a>
@@ -29,7 +29,7 @@ main_header(['jobposting']);
         <div class="card card-dark ">
             <div class="form-inline pt-4 pl-5 d-flex justify-content-center">
                 <div class="input-group" data-widget="sidebar-search" style="width:50%; height:50px;">
-                    <input class=" form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search" style="height:100%;">
+                    <input class=" form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search" style="height:100%; border-radius: 15px; ">
                     <div class="input-group-append">
                         <button class="btn btn-sidebar">
                             <i class="fas fa-search fa-fw"></i>

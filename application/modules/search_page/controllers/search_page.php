@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class beu_dashboard extends MY_Controller
+class search_page extends MY_Controller
 {
     protected $userdata;
     protected $auth;
@@ -51,7 +51,6 @@ class beu_dashboard extends MY_Controller
 
         if ($this->auth['user_type'] == 'EMPLOYEE') {
             $this->data['following'] = $this->follow_model->get_following($id);
-            $this->data['applicant'] = $this->Applicant_model->getJobApplied($id);
         }
 
         $this->db->cache_off();

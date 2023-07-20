@@ -187,13 +187,14 @@ main_header(['employer_profile']);
                 </div>
             </div>
             <div class="card overflow-hidden shadow-none">
-                <div class="list-group list-group-flush account-settings-links">
+                <div class="list-group list-group-flush account-settings-links" id="tab">
                     <a class="list-group-item list-group-item-action active" data-toggle="list" href="#account-general">General</a>
                     <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-email">E-mail</a>
                     <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-info">Info</a>
                     <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-govt-id">Government ID</a>
                     <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-change-password">Change password</a>
                     <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-connections">Connections</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-deletion">Account deletion</a>
                 </div>
             </div>
         </div>
@@ -335,11 +336,22 @@ main_header(['employer_profile']);
                             <button type="button" class="btn btn-instagram">Connect to <strong>Instagram</strong></button>
                         </div>
                     </div>
+
+                    <div class="tab-pane fade" id="account-deletion">
+                        <div class="card-body">
+                            <h5>Delete your account</h5>
+                            <p><strong>Deleting your account is an irreversible action.</strong> This means that all your data, settings, and associated 
+                            information will be permanently removed and cannot be recovered. Please be certain of your decision before 
+                            proceeding with account deletion.</p>
+                        </div>
+                    </div>
+
                 </div>
                 <hr class="border-light mb-2">
                 <div class="text-right m-2">
                     <a href="<?php echo base_url() ?>employer_profile?id=<?= $employer->id ?>" class="btn btn-default">Cancel</a>&nbsp;
                     <button type="submit" class="btn btn-info" id="update_profile">Save changes</button>
+                    <button type="button" class="btn btn-danger delete" id="delete" data-id="<?=$employer->id?>" style="display:none;">Confirm deletion</button>
                 </div>
             </div>
         </div>
@@ -369,5 +381,38 @@ main_footer();
             }
         });
     });
+
+    $(document).ready(function() {
+    // Button visibility based on active tab
+    $("#tab").on("shown.bs.tab", function(event) {
+      var activeTabId = $(event.target).attr("href"); // Get the ID of the active tab
+      var hiddenButtonTabs = ["#account-deletion"]; // Add more tab-ids if needed
+
+      if (hiddenButtonTabs.includes(activeTabId)) {
+        $("#update_profile").hide(); // Hide the button for specific tabs
+      } else {
+        $("#update_profile").show(); // Show the button for other tabs
+      }
+    });
+  });
+
+  $(document).ready(function() {
+    // Function to show or hide the button based on the active tab
+    function toggleButtonVisibility(activeTabId) {
+      var hiddenButtonTabs = ["#account-general", "#account-email", "#account-info", "#account-govt-id", "#account-change-password", "#account-connections"]; // Add more tab-ids if needed
+
+      if (hiddenButtonTabs.includes(activeTabId)) {
+        $("#delete").hide(); // Hide the button for specific tabs
+      } else {
+        $("#delete").show(); // Show the button for other tabs
+      }
+    }
+
+    // Button visibility based on active tab when tab changes
+    $("#tab").on("shown.bs.tab", function(event) {
+      var activeTabId = $(event.target).attr("href"); // Get the ID of the active tab
+      toggleButtonVisibility(activeTabId);
+    });
+  });
 </script>
 <script src="<?php echo base_url() ?>/assets/js/employer_profile/index.js"></script>

@@ -56,7 +56,7 @@ main_header(['Employer_profile']);
     }
 
     .nav-pills .nav-link.active,
-    .nav-pills .show>.nav-link {
+    .nav-pills .show > .nav-link {
         color: #fff;
         background-color: #0dcaf0;
     }
@@ -88,7 +88,8 @@ main_header(['Employer_profile']);
         <div class="row pl-3 pr-3" style="margin-top: 3.5rem;">
             <div class="col-12 col-md-8 pl-2 pr-2 mt-4">
                 <div class="card card-widget widget-user">
-                    <div class="widget-user-header text-white" style="background: url('<?= base_url() ?>assets/images/Logo/cover-place.jpg') center center; min-height: 25vh; max-height: 50vh; background-repeat: no-repeat; background-size: cover; border-radius: 15px 15px 0px 0px;">
+                    <div class="widget-user-header text-white"
+                         style="background: url('<?= base_url() ?>assets/images/Logo/cover-place.jpg') center center; min-height: 25vh; max-height: 50vh; background-repeat: no-repeat; background-size: cover; border-radius: 15px 15px 0px 0px;">
                     </div>
                     <div class="widget-user-image" style="left: 0; top: 0; margin-left: 15px; margin-top:100px;">
                         <img class="img-circle img-fluid" src="<?= base_url() ?>assets/images/employer/profile_pic/<?= $current_employer->image ?>" alt="User Avatar" style="
@@ -110,10 +111,10 @@ main_header(['Employer_profile']);
                                             </h5>
                                             <!-- <p class="text-left mb-1">
                                                 <?php if (empty($current_employer->employer_name)) {
-                                                    echo $current_employer->tradename;
-                                                } else {
-                                                    echo $current_employer->employer_name;
-                                                } ?>
+                                                echo $current_employer->tradename;
+                                            } else {
+                                                echo $current_employer->employer_name;
+                                            } ?>
                                             </p> -->
                                             <h5 class="widget-user-desc text-left text-dark py-2" style="font-weight: 550; font-size:18px; ">
                                                 <?= $current_employer->business_type ?>
@@ -238,49 +239,55 @@ main_header(['Employer_profile']);
                     <!-- Feedback Employer side -->
                     <div class="tab-pane fade" id="pills-feedback" role="tabpanel" aria-labelledby="pills-feedback-tab">
                         <?php if (!empty($feedbacks)): ?>
-                            <div class="row">
-                                <?php foreach ($feedbacks as $feedback): ?>
-                                    <div class="col-sm-6">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="col-1 d-flex justify-content-center align-items-center ml-3">
-                                                        <img class="rounded-circle" src="<?= base_url() ?>assets/images/employee/profile_pic/default.png" alt="Employee Profile Pic" style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
-                                                    </div>
-                                                    <div class="ml-4">
-                                                        <h5 class="card-title">
-                                                            <?= $feedback->employee_name ?>
-                                                        </h5>
-                                                        <h6 class="card-subtitle mb-2 text-muted">
-                                                            <?= $feedback->position_title ?>
-                                                        </h6>
-                                                        <h6 class="card-subtitle mb-2 text-muted">Ratings</h6>
+                            <div class="card"> <!-- Parent card for "Feedbacks received by the company" -->
+                                <div class="card-body">
+                                    <h4>Feedbacks received by the company:</h4>
+                                    <div class="row">
+                                        <?php foreach ($feedbacks as $feedback): ?>
+                                            <div class="col-sm-6">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="col-1 d-flex justify-content-center align-items-center ml-3">
+                                                                <img class="rounded-circle" src="<?= base_url() ?>assets/images/employee/profile_pic/default.png" alt="Employee Profile Pic"
+                                                                     style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
+                                                            </div>
+                                                            <div class="ml-4">
+                                                                <h5 class="card-title">
+                                                                    <?= $feedback->employee_name ?>
+                                                                </h5>
+                                                                <h6 class="card-subtitle mb-2 text-muted">
+                                                                    <?= $feedback->position_title ?>
+                                                                </h6>
+                                                                <h6 class="card-subtitle mb-2 text-muted">Ratings</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="rating">
+                                                            <!-- Display the star ratings here -->
+                                                            <?php
+                                                            $rating = $feedback->rating; // Replace with the actual rating value from your data
+                                                            for ($i = 1; $i <= 5; $i++) {
+                                                                if ($i <= $rating) {
+                                                                    echo '<i class="bi bi-star-fill"></i>';
+                                                                } else {
+                                                                    echo '<i class="bi bi-star"></i>';
+                                                                }
+                                                            }
+                                                            ?>
+                                                        </div>
+                                                        <p class="card-text mt-3">
+                                                            <?= $feedback->content ?>
+                                                        </p>
+                                                        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
                                                     </div>
                                                 </div>
-                                                <div class="rating">
-                                                    <!-- Display the star ratings here -->
-                                                    <?php
-                                                    $rating = $feedback->rating; // Replace with the actual rating value from your data
-                                                    for ($i = 1; $i <= 5; $i++) {
-                                                        if ($i <= $rating) {
-                                                            echo '<i class="bi bi-star-fill"></i>';
-                                                        } else {
-                                                            echo '<i class="bi bi-star"></i>';
-                                                        }
-                                                    }
-                                                    ?>
-                                                </div>
-                                                <p class="card-text mt-3">
-                                                    <?= $feedback->content ?>
-                                                </p>
-                                                <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
                                             </div>
-                                        </div>
+                                        <?php endforeach; ?>
                                     </div>
-                                <?php endforeach; ?>
+                                </div>
                             </div>
                         <?php else: ?>
-                            <div class="card">
+                            <div class="card"> <!-- Parent card for "You haven't received a feedback yet." -->
                                 <div class="card-body">
                                     <p class="card-text">You haven't received a feedback yet.</p>
                                 </div>
@@ -292,50 +299,55 @@ main_header(['Employer_profile']);
                     <!-- feedback employee side -->
                     <div class="tab-pane fade" id="pills-feedback" role="tabpanel" aria-labelledby="pills-feedback-tab">
                         <?php if (!empty($feedbacks)): ?>
-                            <h4>Feedbacks received by the company:</h4>
-                            <div class="row">
-                                <?php foreach ($feedbacks as $feedback): ?>
-                                    <div class="col-sm-6">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="col-1 d-flex justify-content-center align-items-center ml-3">
-                                                        <img class="rounded-circle" src="<?= base_url() ?>assets/images/employee/profile_pic/default.png" alt="Employee Profile Pic" style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
-                                                    </div>
-                                                    <div class="ml-4">
-                                                        <h5 class="card-title">
-                                                            <?= $feedback->employee_name ?>
-                                                        </h5>
-                                                        <h6 class="card-subtitle mb-2 text-muted">
-                                                            <?= $feedback->position_title ?>
-                                                        </h6>
-                                                        <h6 class="card-subtitle mb-2 text-muted">Ratings</h6>
+                            <div class="card"> <!-- Parent card for "Feedbacks received by the company" -->
+                                <div class="card-body">
+                                    <h4>Feedbacks received by the company:</h4>
+                                    <div class="row">
+                                        <?php foreach ($feedbacks as $feedback): ?>
+                                            <div class="col-sm-6">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="col-1 d-flex justify-content-center align-items-center ml-3">
+                                                                <img class="rounded-circle" src="<?= base_url() ?>assets/images/employee/profile_pic/default.png" alt="Employee Profile Pic"
+                                                                     style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
+                                                            </div>
+                                                            <div class="ml-4">
+                                                                <h5 class="card-title">
+                                                                    <?= $feedback->employee_name ?>
+                                                                </h5>
+                                                                <h6 class="card-subtitle mb-2 text-muted">
+                                                                    <?= $feedback->position_title ?>
+                                                                </h6>
+                                                                <h6 class="card-subtitle mb-2 text-muted">Ratings</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="rating">
+                                                            <!-- Display the star ratings here -->
+                                                            <?php
+                                                            $rating = $feedback->rating; // Replace with the actual rating value from your data
+                                                            for ($i = 1; $i <= 5; $i++) {
+                                                                if ($i <= $rating) {
+                                                                    echo '<i class="bi bi-star-fill"></i>';
+                                                                } else {
+                                                                    echo '<i class="bi bi-star"></i>';
+                                                                }
+                                                            }
+                                                            ?>
+                                                        </div>
+                                                        <p class="card-text mt-3">
+                                                            <?= $feedback->content ?>
+                                                        </p>
+                                                        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
                                                     </div>
                                                 </div>
-                                                <div class="rating">
-                                                    <!-- Display the star ratings here -->
-                                                    <?php
-                                                    $rating = $feedback->rating; // Replace with the actual rating value from your data
-                                                    for ($i = 1; $i <= 5; $i++) {
-                                                        if ($i <= $rating) {
-                                                            echo '<i class="bi bi-star-fill"></i>';
-                                                        } else {
-                                                            echo '<i class="bi bi-star"></i>';
-                                                        }
-                                                    }
-                                                    ?>
-                                                </div>
-                                                <p class="card-text mt-3">
-                                                    <?= $feedback->content ?>
-                                                </p>
-                                                <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
                                             </div>
-                                        </div>
+                                        <?php endforeach; ?>
                                     </div>
-                                <?php endforeach; ?>
+                                </div>
                             </div>
                         <?php else: ?>
-                            <div class="card">
+                            <div class="card"> <!-- Parent card for "The company has not received a feedback yet." -->
                                 <div class="card-body">
                                     <p class="card-text">The company has not received a feedback yet.</p>
                                 </div>
@@ -343,49 +355,53 @@ main_header(['Employer_profile']);
                         <?php endif; ?>
 
                         <?php if ($hasReceivedEmployeeFeedback): ?>
-                            <!-- Feedbacks received by the employee -->
-                            <h4>Feedback received:</h4>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="d-flex align-items-center">
-                                                <div class="col-1 d-flex justify-content-center align-items-center ml-3">
-                                                    <img class="rounded-circle" src="<?= base_url() ?>assets/images/employee/profile_pic/default.png" alt="Employee Profile Pic" style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
-                                                </div>
-                                                <div class="ml-4">
-                                                    <h5 class="card-title">
-                                                        <?= $employerFeedback->tradename ?>
-                                                    </h5>
-                                                    <h6 class="card-subtitle mb-2 text-muted">
-                                                        <?= $employerFeedback->position_title ?>
-                                                    </h6>
-                                                    <h6 class="card-subtitle mb-2 text-muted">Ratings</h6>
+                            <div class="card"> <!-- Parent card for "Feedbacks received by the employee" -->
+                                <div class="card-body">
+                                    <h4>Feedback received:</h4>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="col-1 d-flex justify-content-center align-items-center ml-3">
+                                                            <img class="rounded-circle" src="<?= base_url() ?>assets/images/employee/profile_pic/default.png" alt="Employee Profile Pic"
+                                                                 style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
+                                                        </div>
+                                                        <div class="ml-4">
+                                                            <h5 class="card-title">
+                                                                <?= $employerFeedback->tradename ?>
+                                                            </h5>
+                                                            <h6 class="card-subtitle mb-2 text-muted">
+                                                                <?= $employerFeedback->position_title ?>
+                                                            </h6>
+                                                            <h6 class="card-subtitle mb-2 text-muted">Ratings</h6>
+                                                        </div>
+                                                    </div>
+                                                    <div class="rating">
+                                                        <!-- Display the star ratings here -->
+                                                        <?php
+                                                        $rating = $employerFeedback->rating; // Replace with the actual rating value from your data
+                                                        for ($i = 1; $i <= 5; $i++) {
+                                                            if ($i <= $rating) {
+                                                                echo '<i class="bi bi-star-fill"></i>';
+                                                            } else {
+                                                                echo '<i class="bi bi-star"></i>';
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </div>
+                                                    <p class="card-text mt-3">
+                                                        <?= $employerFeedback->content ?>
+                                                    </p>
+                                                    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
                                                 </div>
                                             </div>
-                                            <div class="rating">
-                                                <!-- Display the star ratings here -->
-                                                <?php
-                                                $rating = $employerFeedback->rating; // Replace with the actual rating value from your data
-                                                for ($i = 1; $i <= 5; $i++) {
-                                                    if ($i <= $rating) {
-                                                        echo '<i class="bi bi-star-fill"></i>';
-                                                    } else {
-                                                        echo '<i class="bi bi-star"></i>';
-                                                    }
-                                                }
-                                                ?>
-                                            </div>
-                                            <p class="card-text mt-3">
-                                                <?= $employerFeedback->content ?>
-                                            </p>
-                                            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         <?php else: ?>
-                            <div class="card">
+                            <div class="card"> <!-- Parent card for "You haven't received any feedback from your employer(s)." -->
                                 <div class="card-body">
                                     <p class="card-text">You haven't received any feedback from your employer(s).</p>
                                 </div>
@@ -612,7 +628,8 @@ main_header(['Employer_profile']);
                                 <div class="input-group-prepend">
                                     <span class="input-group-text border-0" style="border-radius:10px 0 0 10px;">₱</span>
                                 </div>
-                                <input id="salary" name="salary" type="text" maxlength="16" id="salary" onclick="disableDotZero()" onblur="formatInput()" oninput="formatInput2()" class="form-control border-0" style="background-color: #F4F6F7; border-radius:0 10px 10px 0; " placeholder="Input Salary ">
+                                <input id="salary" name="salary" type="text" id="salary" onclick="disableDotZero()" onblur="formatInput()" oninput="formatInput2()" class="form-control border-0"
+                                       style="background-color: #F4F6F7; border-radius:0 10px 10px 0; " placeholder="Input Salary ">
                                 <!-- <div class="input-group-append">
                                                             <span class="input-group-text border-0" style="border-radius:0 10px 10px 0;">.00</span>
                                                         </div> -->
@@ -695,8 +712,6 @@ main_header(['Employer_profile']);
             </div>
         </div>
     </div>
-
-
 </section>
 
 <!-- ############ PAGE END-->
@@ -704,4 +719,4 @@ main_header(['Employer_profile']);
 main_footer();
 ?>
 
-<script src="<?php echo base_url() ?>assets/js/employer_profile/index.js"></script>
+<script src="<?= base_url() ?>assets/js/employer_profile/index.js"></script>

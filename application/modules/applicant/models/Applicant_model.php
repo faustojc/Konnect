@@ -20,17 +20,13 @@ class Applicant_model extends CI_Model
         return $this->db->select('tbl_applicant.*, 
         tbl_jobposting.id AS jobID, 
         CONCAT_WS(" ", tbl_employee.Fname, tbl_employee.Mname, tbl_employee.Lname) AS employeeName, 
+        tbl_employee.id AS employeeID
         tbl_employee.Title AS employeeTitle, 
-        tbl_employee.Employee_image AS employeeImage, 
-        tbl_employee.id AS employeeID, 
-        tbl_employer.tradename AS employerName, 
-        tbl_employer.business_type AS employerType, 
-        tbl_employer.image AS employerLogo,')
+        tbl_employee.Employee_image AS employeeImage')
             ->from($this->Table->applicant)
             ->join($this->Table->employee, 'tbl_employee.ID = tbl_applicants.employee_id', 'inner')
             ->where('job_id', $jobpost_id)
             ->join($this->Table->jobposting, 'tbl_jobposting.id = tbl_applicants.job_id')
-            ->join($this->Table->employer, 'tbl_employer.id = tbl_jobposting.employer_id')
             ->get()->result();
     }
 
@@ -55,7 +51,7 @@ class Applicant_model extends CI_Model
             ->get()->result();
     }
 
-    public function getSelectedAppliedJob($employee_id)
+    public function getSelectedAppliedJob($id)
     {
         return $this->db->select('tbl_applicant.*,
         tbl_jobposting.id AS jobID,
@@ -70,10 +66,18 @@ class Applicant_model extends CI_Model
         tbl_employer.business_type AS employerType,
         tbl_employer.image AS employerLogo')
             ->from($this->Table->applicant)
+            ->where('tbl_applicant.id', $id)
             ->join($this->Table->jobposting, 'tbl_jobposting.id = tbl_applicant.job_id')
             ->join($this->Table->employer, 'tbl_employer.id = tbl_jobposting.employer_id')
-            ->where('employee_id', $employee_id)
             ->get()->row();
+    }
+
+    public function getJobApplied($employee_id)
+    {
+        return $this->db->select()
+            ->from($this->Table->applicant)
+            ->where('employee_id', $employee_id)
+            ->get()->result();
     }
 
     /**

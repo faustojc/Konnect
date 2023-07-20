@@ -52,6 +52,10 @@ class Employer_profile extends MY_Controller
         $this->data['employers'] = $this->employer_model->get_employers(4, $id);
         $this->data['jobpostings'] = $this->jobposting_model->get_employer_jobposts($id, 4);
         $this->data['followers'] = $this->follow_model->get_followers($id);
+        
+        if ($this->auth['user_type'] == 'EMPLOYEE') {
+            $this->data['following'] = $this->follow_model->get_following($this->userdata->ID);
+        }
 
         // Disable query caching
         $this->db->cache_off();

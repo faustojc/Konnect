@@ -72,6 +72,15 @@ class Jobposting extends MY_Controller
     public function own_jobpost()
     {
         $this->data['details'] = $this->job_model->get_employer_jobposts($this->userdata->id);
+
+        $this->load->driver('cache');
+
+        $this->db->cache_on();
+        foreach ($this->data['details'] as $job) {
+            $this->data['applicants'] = $this->Applicant_model->getApplicants($job->id);
+        }
+        $this->db->cache_off();
+
         $this->data['content'] = 'grid/employer/load_own_jobpost';
         $view = $this->load->view('layout', $this->data, true);
 
@@ -100,7 +109,9 @@ class Jobposting extends MY_Controller
 
     public function get_selected_applied_job()
     {
-        $this->data['applied_job'] = $this->Applicant_model->getSelectedAppliedJob($this->userdata->ID);
+        $id = $this->input->post('id');
+
+        $this->data['applied_job'] = $this->Applicant_model->getSelectedAppliedJob($id);
         $this->data['content'] = 'grid/employee/load_selected_applied_job';
         $view = $this->load->view('layout', $this->data, true);
 

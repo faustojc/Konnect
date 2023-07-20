@@ -36,6 +36,9 @@
                 <div class="card card-light p-3 mb-3 job-link" role="button" data-id="<?= $job->id ?>">
                     <h5 class="card-title font-weight-bold text-dark mb-2">
                         <?= ucwords(@$job->title) ?>
+                        <span class="badge badge-pill">
+
+                        </span>
                     </h5>
                     <small class="text-muted mb-2">Posted
                         <?= $formattedTimeDiff ?>
@@ -46,7 +49,7 @@
                         </span>
                     </div>
                     <div class="card-body pb-3 pl-0">
-                        <div class="card-text mb-0 text-muted " style="max-height: 250px; overflow-y: hidden; font-size: 12px">
+                        <div class="card-text mb-0 text-muted" style="max-height: 250px; overflow-y: hidden; font-size: 12px">
                             <?= ucwords(@$job->description) ?>
                         </div>
                     </div>

@@ -132,7 +132,7 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('Auth_model', 'applicant/Applicant_model');
+$autoload['model'] = array('Auth_model', 'applicant/Applicant_model', 'notification/Notification_model');
 
 // Include the components_helper file
 require_once(APPPATH . 'helpers/components_helper.php');

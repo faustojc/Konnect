@@ -7,20 +7,16 @@ class Follow extends MY_Controller
     {
         parent::__construct();
 
-        $model_list = [
-            'follow/Follow_model' => 'follow_model',
-        ];
-
-        $this->load->model($model_list);
+        $this->load->model('follow/Follow_model');
     }
 
     public function get_following($id)
     {
-        return $this->follow_model->get_following($id);
+        return $this->Follow_model->get_following($id);
     }
 
     public function get_followers($id)
     {
-        return $this->follow_model->get_followers($id);
+        return $this->Follow_model->get_followers($id);
     }
 }

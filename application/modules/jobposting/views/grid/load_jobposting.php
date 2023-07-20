@@ -42,14 +42,14 @@
                     $formattedTimeDiff = $months . ' month' . ($months > 1 ? 's' : '') . ' ago';
                 }
                 ?>
-                <div class="card card-light p-3 mb-3 job-link" role="button" data-id="<?= $job->id ?>">
+                <div class="card card-light p-3 mb-2 job-link" role="button" data-id="<?= $job->id ?>">
                     <h5 class="card-title font-weight-bold text-dark mb-0">
                         <?= ucwords(@$job->title) ?>
                     </h5>
-                    <p>
+                    <h5 class="pt-2" style="font-weight:normal; font-size:14px;">
                         <?= ucwords($job->EmployerTradename) ?>
-                    </p>
-                    <small class="text-muted">Posted
+                    </h5>
+                    <small class="text-muted mb-">Posted
                         <?= $formattedTimeDiff ?>
                     </small>
                     <div class="card-tools">
@@ -57,6 +57,7 @@
                             <?= ucwords($job->filled) ?>
                         </span>
                     </div>
+
                     <div class="card-body pb-3 pl-0">
                         <div class="" style="font-weight:300;">
                             <h5>
@@ -94,13 +95,13 @@
             }
         } else {
             ?>
-            <div class="jumbotron">
-                <div class="container">
-                    <h1 class="display-4">No Jobs Found</h1>
-                    <p class="lead">We can't find the jobs that you are looking for or there are no jobs available.</p>
-                </div>
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-4">No Jobs Found</h1>
+                <p class="lead">We can't find the jobs that you are looking for or there are no jobs available.</p>
             </div>
-            <?php
+        </div>
+        <?php
         }
         ?>
     </div>

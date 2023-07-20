@@ -8,13 +8,7 @@ class Follow_model extends CI_Model
     public function __construct()
     {
         parent::__construct();
-
-        // if(is_empty_object($this->session)){
-        // 	redirect(base_url().'login/authentication', 'refresh');
-        // }
-
-        $model_list = [];
-        $this->load->model($model_list);
+        
         $this->Table = json_decode(TABLE);
     }
 

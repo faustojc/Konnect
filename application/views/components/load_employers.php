@@ -1,5 +1,5 @@
 <?php
-$user_type = get_userdata('auth')['user_type'];
+$userdata = get_userdata(USER);
 
 if (!empty($employers)) {
     foreach ($employers as $index => $employer) {
@@ -7,7 +7,7 @@ if (!empty($employers)) {
 
         if ($user_type == 'EMPLOYEE' && !empty($following)) {
             foreach ($following as $follow) {
-                if ($follow->employer_id == $employer->id && $follow->employee_id == $details->ID) {
+                if ($follow->employer_id == $employer->id && $follow->employee_id == $userdata->ID) {
                     $followed = true;
                     break;
                 }

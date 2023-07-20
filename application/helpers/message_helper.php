@@ -57,6 +57,7 @@ $tables = array(
     'applicant' => 'tbl_applicant',
     'user' => 'tbl_user',
     'follow' => 'tbl_follow',
+    'notification' => 'tbl_notification',
 );
 
 define('TABLE', json_encode($tables));

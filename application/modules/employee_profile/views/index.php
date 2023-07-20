@@ -140,7 +140,7 @@ main_header(['employee_profile']);
     }
 
     .nav-pills .nav-link.active,
-    .nav-pills .show>.nav-link {
+    .nav-pills .show > .nav-link {
         color: #fff;
         background-color: #0dcaf0;
     }
@@ -191,7 +191,8 @@ main_header(['employee_profile']);
         <div class="row " style="margin-top: 3.5rem;">
             <div class="col-12 col-md-8 pl-2 pr-2 mt-4">
                 <div class="card card-widget widget-user">
-                    <div class="widget-user-header text-white" style="background: url('<?= base_url() ?>assets/images/Logo/cover-place.jpg') center center; min-height: 25vh; max-height: 50vh; background-repeat: no-repeat; background-size: cover; border-radius: 15px 15px 0px 0px;">
+                    <div class="widget-user-header text-white"
+                         style="background: url('<?= base_url() ?>assets/images/Logo/cover-place.jpg') center center; min-height: 25vh; max-height: 50vh; background-repeat: no-repeat; background-size: cover; border-radius: 15px 15px 0px 0px;">
                     </div>
 
                     <div class="card-footer bg-white" style="padding-top: 45px;">
@@ -601,7 +602,6 @@ main_header(['employee_profile']);
                                 <?= $training_section_view ?>
 
 
-
                             </div>
 
                         </div>
@@ -696,7 +696,7 @@ main_header(['employee_profile']);
                         <h3 class="card-title fw-500">Employers</h3>
                     </div>
                     <div id="load_employers_follow_section" style="margin-left:1rem; margin-right:1rem;">
-                        <?php load_employers($employers) ?>
+                        <?php load_employers($employers, $current_following) ?>
                     </div>
                 </div>
             </div>

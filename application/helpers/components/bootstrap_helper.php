@@ -88,9 +88,10 @@ if (!function_exists('load_employers')) {
      */
     function load_employers(array $employers, array $following = array())
     {
-        $user_type = get_userdata('auth')['user_type'];
+        $user_type = get_userdata(AUTH)['user_type'];
         $data = array(
-            'employers' => $employers
+            'employers' => $employers,
+            'user_type' => $user_type,
         );
 
         if (!empty($following) && $user_type == 'EMPLOYEE') {
@@ -158,16 +159,16 @@ if (!function_exists('load_jobpostings')) {
      */
     function load_jobpostings(array $jobpostings, array $saved = array(), array $applied = array())
     {
-        $user_type = get_userdata('auth')['user_type'];
+        $auth = get_userdata(AUTH);
         $data = array(
             'jobpostings' => $jobpostings
         );
 
-        if (!empty($saved) && $user_type == 'EMPLOYEE') {
+        if (!empty($saved) && $auth['user_type'] == 'EMPLOYER') {
             $data['saved'] = $saved;
         }
 
-        if (!empty($applied) && $user_type == 'EMPLOYEE') {
+        if (!empty($applied) && $auth['user_type'] == 'EMPLOYEE') {
             $data['applied'] = $applied;
         }
 
@@ -176,17 +177,25 @@ if (!function_exists('load_jobpostings')) {
     }
 }
 
-if (!function_exists('loading_joblists')) {
+if (!function_exists('apply_button')) {
     /**
-     * Loading Job lists Component
+     * Apply Button Component
      *
-     * A component that displays a loading job lists content.
+     * A component that creates an apply button.
      *
-     * USAGE: loading_joblists();
+     * USAGE: apply_button($jobpost);
+     *
+     * @param int $job_id The id of current job post
+     * @param string $status The status of applied job post
      */
-    function loading_joblists()
+    function apply_button(int $job_id, string $status)
     {
+        $data = array(
+            'job_id' => $job_id,
+            'status' => $status,
+        );
+
         $CI = &get_instance();
-        $CI->load->view('components/loading_joblists');
+        $CI->load->view('components/employee/dashboard/apply_button', $data);
     }
 }

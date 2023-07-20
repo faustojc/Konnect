@@ -49,7 +49,14 @@ class Employee_profile extends MY_Controller
         $this->data['skills'] = $this->eModel->get_skill($ID);
         $this->data['employers'] = $this->employer_model->get_employers(4);
         $this->data['employees'] = $this->employee_model->get_all_employees(4, $ID);
-        $this->data['following'] = $this->follow_model->get_following($ID);
+
+        if ($this->has_permission) {
+            $this->data['following'] = $this->follow_model->get_following($this->userdata->ID);
+        } else {
+            $this->data['following'] = $this->follow_model->get_following($ID);
+        }
+
+        $this->data['current_following'] = $this->follow_model->get_following($this->userdata->ID);
 
         $this->db->cache_off();
 

@@ -1,49 +1,22 @@
-const applyBtnFunction = () => {
-    const applyBtn = document.querySelectorAll('.apply-button');
+const applyBtnHover = (btn, status) => {
+    const btnText = btn.textContent.replace(/\s+/g, '').toUpperCase();
 
-    applyBtn.forEach(btn => {
-        btn.addEventListener('click', function (event) {
-            const job_id = btn.dataset.id;
-            const url = baseUrl + 'applicant/apply';
-
-            fetch(url, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({job_id: job_id})
-            }).then(response => response.json())
-                .then(data => {
-                    if (data.status === 'success') {
-                        btn.textContent = data.apply_status;
-
-                        if (data.apply_status === 'PENDING') {
-                            btn.addEventListener('mouseover', function () {
-                                btn.textContent = 'Cancel';
-                                btn.classList.add('btn-outline-danger');
-                            });
-                            btn.addEventListener('mouseout', function () {
-                                btn.textContent = data.apply_status;
-                                btn.classList.remove('btn-outline-danger');
-                            });
-                        } else {
-                            btn.removeEventListener('mouseover', () => {
-                            });
-                            btn.removeEventListener('mouseout', () => {
-                            });
-                            btn.textContent = data.apply_status;
-                        }
-
-                        if (data.apply_status === 'PENDING') {
-                            success('Application sent successfully!', 'You will be notified once the employer accepts your application.');
-                        } else {
-                            success('Application cancelled!', 'You cancelled your application to this job.');
-                        }
-                    }
-                })
-                .catch(error => {
-                    error('Error!', 'Something went wrong. Please try again later.');
-                });
+    if (status === 'PENDING') {
+        btn.addEventListener('mouseover', function () {
+            btn.textContent = 'Cancel';
+            btn.classList.add('btn-outline-danger');
         });
-    });
+        btn.addEventListener('mouseout', function () {
+            btn.textContent = status;
+            btn.classList.remove('btn-outline-danger');
+        });
+    } else {
+        btn.removeEventListener('mouseover', () => {
+        });
+        btn.removeEventListener('mouseout', () => {
+        });
+        btn.textContent = status;
+    }
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -64,10 +37,28 @@ document.addEventListener("DOMContentLoaded", function () {
         value.textContent = status;
     });
 
+    applyBtnFunction();
+});
 
-    // See more functionality in .job-description
-    const seeMoreButtons = document.querySelectorAll(".see-more");
-
+$(document).on('click', '#btn_post', function () {
+    $(document).gmPostHandler({
+        url: 'beu_dashboard/service/beu_dashboard_service/btn_post',
+        selector: '.form-control',
+        data: {
+            employer_id: $('#employer_id').val(),
+            title: $('#title').val(),
+            description: $('#description').val(),
+            start_date: $('#start_date').val(),
+            filled: $('#filled').val(),
+            salary: $('#salary').val(),
+            shift: $('#shift').val(),
+            job_type: $('#job_type').val()
+        },
+    });
+});
+// See more functionality in .job-description
+const seeMoreButtons = document.querySelectorAll(".see-more");
+if (seeMoreButtons) {
     // Hide the buttons if the div height is less than or equal to 450px
     seeMoreButtons.forEach(button => {
         const target = button.dataset.target;
@@ -101,6 +92,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
+}
 
-    applyBtnFunction();
-});
+

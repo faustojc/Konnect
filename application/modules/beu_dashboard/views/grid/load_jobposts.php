@@ -115,14 +115,21 @@
                         </div>
                         <a class="text-center see-more" data-target=".job-description" style="display: block;" role="button">See more</a>
 
-                        <?php if ($auth['user_type'] != 'EMPLOYER'): ?>
-                            <hr>
-                            <div class="row">
-                                <div class="col-lg-12 col-md-4 col-sm-12">
-                                    <button type="button" class="btn btn-light btn-block apply-button" data-id="<?= $jobpost->id ?>">APPLY</button>
-                                </div>
-                            </div>
-                        <?php endif; ?>
+                        <?php if ($auth['user_type'] != 'EMPLOYER') {
+                            $hasApplied = false;
+
+                            foreach ($applicant as $applied) {
+                                if ($applied->job_id == $jobpost->id) {
+                                    apply_button($applied->job_id, $applied->status);
+                                    $hasApplied = true;
+                                    break;
+                                }
+                            }
+
+                            if (!$hasApplied) {
+                                apply_button($jobpost->id, 'APPLY');
+                            }
+                        } ?>
 
                     </div>
                 </div>

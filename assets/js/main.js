@@ -1,12 +1,27 @@
-async function postData(url, data = {}) {
-    const response = await fetch(url, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(data)
+const logout = (eventSource) => {
+    const logoutBtn = document.querySelector('#logout');
+
+    logoutBtn.addEventListener('click', function () {
+        eventSource.close();
+    });
+}
+
+function notificationListener() {
+    const eventSource = new EventSource(baseUrl + 'notification/notifications');
+
+    console.log('Notification listener started');
+    
+    eventSource.addEventListener('notification', (event) => {
+        const data = JSON.parse(event.data);
+        info(data.title, data.message);
     });
 
-    return response.json();
+    logout(eventSource);
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    notificationListener();
+});
 
 /**
  * @param {any} target Target element to validate
@@ -125,6 +140,9 @@ function formAction(url, request_type, data, callback) {
     }
 }
 
+function info(title, message, delay) {
+    createToast(title, message, delay, 'bg-light', 'fa fa-info');
+}
 
 function success(title, message, delay) {
     createToast(title, message, delay, 'bg-success', 'fa fa-check');
@@ -134,17 +152,31 @@ function error(title, message, delay) {
     createToast(title, message, delay, 'bg-danger', 'fa fa-times');
 }
 
-function createToast(title, message, delay = 4000, class_names, icon) {
-    $(document).Toasts('create', {
-        title: title,
-        body: message,
-        position: 'bottomRight',
-        class: 'my-2 p-2 ' + class_names,
-        icon: icon,
-        fixed: true,
-        autohide: true,
-        autoremove: true,
-        delay: delay,
-        fade: true
-    });
+function createToast(title = '', message, delay = 5000, class_names, icon) {
+    if (title === '') {
+        $(document).Toasts('create', {
+            body: message,
+            position: 'bottomRight',
+            class: 'm-2 p-2 ' + class_names,
+            icon: icon,
+            fixed: true,
+            autohide: true,
+            autoremove: true,
+            delay: delay,
+            fade: true
+        });
+    } else {
+        $(document).Toasts('create', {
+            title: title,
+            body: message,
+            position: 'bottomRight',
+            class: 'm-2 p-2 ' + class_names,
+            icon: icon,
+            fixed: true,
+            autohide: true,
+            autoremove: true,
+            delay: delay,
+            fade: true
+        });
+    }
 }

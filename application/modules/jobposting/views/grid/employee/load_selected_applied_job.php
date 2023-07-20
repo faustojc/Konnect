@@ -24,24 +24,29 @@ if ($timeDiff < 60) {
 
 <div class="card card-light mb-0 sticky-top" style="top: 60px; max-height: calc(100vh - 70px);">
     <div class="card-header d-flex flex-column p-3">
-        <a href="<?php echo base_url() ?>jobposting/job_info/<?= $applied_job->jobID ?>" class="text-dark">
-            <h4 class="card-title font-weight-bold mb-2" style="font-size: 18px;">
-                <?= ucwords($applied_job->jobTitle) ?>
-            </h4>
-        </a>
+
+        <h4 class="card-title font-weight-bold mb-2" style="font-size: 18px;">
+            <?= ucwords($applied_job->jobTitle) ?>
+        </h4>
+
         <h6 class="mb-1">
             <?= ucwords($applied_job->employerName) ?>
         </h6>
         <small class="text-muted mb-2">Posted
             <?= $formattedTimeDiff ?>
         </small>
-        <div class="card-tools mb-4">
+        <div class="card-tools mb-2">
             <span class="badge job-status">
                 <?= ucwords($applied_job->jobStatus) ?>
             </span>
         </div>
 
-        <button type="button" class="btn btn-outline-info w-25"><?= $applied_job->status ?></button>
+        <h6>Status:
+            <span class="badge badge-secondary">
+                <?= $applied_job->status ?>
+            </span>
+        </h6>
+
     </div>
 
     <div class="pl-3 pt-3" style="font-weight:300;">

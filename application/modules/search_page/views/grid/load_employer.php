@@ -1,6 +1,6 @@
 <?php if (!empty($details)): ?>
     <style>
-        div.summary>* {
+        div.summary > * {
             overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
@@ -9,7 +9,7 @@
             -webkit-box-orient: vertical;
         }
     </style>
-
+    
 
     <div class="card card-widget widget-user">
         <div class="widget-user-header text-white" style="background: url('<?= base_url() ?>assets/images/Logo/cover-place.jpg') no-repeat center center; background-size: cover; border-radius: 15px 15px 0 0;">
@@ -28,40 +28,19 @@
                         <h4 class="widget-user-username text-center" style="font-weight: 500; font-size: 20px;">
                             <?= $details->tradename ?>
                         </h4>
-                        <h6 class="widget-user-desc text-center text-muted mt-1" style="font-weight: normal; font-size: 15px;">
-                            <?= $details->business_type ?>
-                        </h6>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card-footer border-top pt-2" style="padding-top: 35px; background-color:#FFF;">
-            <div class="row">
-                <div class="col-12">
-                    <div class="description-block mb-0">
-                        <h6 class="widget-user-desc text-left mt-3 mb-3" style="font-weight: normal; font-size:15px;">
-                            <i class="fas fa-map-pin"></i> <b style="font-weight: 500;">Address: </b>
-                            <?= ucwords(@$details->city) ?>
-                        </h6>
-
-                        <h6 class=" widget-user-desc text-left mt-1 mb-3" style="font-weight: normal;">
-                            <i class="fa fa-envelope"></i> <b style="font-weight: 500;">Email: </b>
-                            <?= @$details->email ?>
-                        </h6>
-                        <h6 class=" widget-user-desc text-left mt-1 mb-3" style="font-weight: normal;">
-                            <i class="fa fa-phone"></i> <b style="font-weight: 500;">Number: </b>
-                            <?= @$details->contact_number ?>
+                        <h6 class="widget-user-desc text-center text-muted mt-1" style="font-weight: normal; font-size: 14px;">
+                            <?= $details->employer_name ?>
                         </h6>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- <div class="card-footer border-none py-2" style="background-color:#FFF;">
+        <div class="card-footer border-none py-2" style="background-color:#FFF;">
             <div class="widget-user-desc text-center mt-1 mb-1 summary" style="font-size: 14px; max-height: 150px">
                 <?= $details->summary ?>
             </div>
-        </div> -->
+        </div>
         <hr class="m-0">
         <div class="card-footer border-0 p-3" style="background-color:#FFF;">
             <div class="d-flex justify-content-center">
@@ -70,5 +49,5 @@
         </div>
     </div>
 
-
+    
 <?php endif; ?>

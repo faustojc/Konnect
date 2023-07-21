@@ -40,6 +40,12 @@ main_header(['Employer_profile']);
                 input.setSelectionRange(0, value.length - 3);
             }
         }
+
+        $(document).ready(function() {
+            $("#filterToggle").click(function() {
+                $(this).find("i.fa-caret-left").toggleClass("fa-caret-down");
+            });
+        });
 </script>
 <style>
     /* Remove spinner for number input */
@@ -249,6 +255,31 @@ main_header(['Employer_profile']);
         background-color: #888; /* Customize the scrollbar color */
         border-radius: 1rem; /* Adjust the border radius as needed */
     }
+
+    .grow { transition: all .2s ease-in-out; }
+    .grow:hover { transform: scale(1.05); }
+
+    .outline-gray {
+    color: #6c757d;
+    border-color: #6c757d;
+    border-radius: 15px;
+    display: inline-block;
+    font-weight: 400;
+    /* color: #212529; */
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    /* user-select: none; */
+    background-color: transparent;
+    border: 1px solid;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    /* line-height: 1.5; */
+    /* border-radius: 0.25rem; */
+    /* transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out; */
+    }
     
 
 </style>
@@ -259,18 +290,97 @@ main_header(['Employer_profile']);
             <div class="col-12 col-md-3 mt-4">
                 <div class="card">
                     <div class="card-body">
-                        <h4 style="font-weight:600;">Search Results</h4>
-                        <hr>
-                        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                        <h6 style="font-weight:400;">Filters <i class="fa-solid fa-caret-left"></i></h6>
+                    <div class="row">
+                        <div class="col-12">
+                            <a class="btn border-0 shadow-none" style="background:; width: 100%; " data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" id="toggleButton">
+                                <h6 style="font-weight: 400; text-align: left; display: flex; justify-content: space-between; align-items: center;">
+                                    <span>Filters</span>
+                                    <i class="fa-solid fa-caret-left" id="caretIcon"></i>
+                                    
+                                </h6>
+                            </a>
+                        </div>
+                    </div>
 
-                        </a>
+                        
                         
                         <div class="collapse" id="collapseExample">
-                            <div class="card card-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                            <div class="card card-body p-0">
+                                <div class="px-3">
+                                    <hr class="mt-0">
+
+                                    <label for="" class="text-muted" style="font-weight:400;">Job type</label>
+                                    <div class="form-check pt-1" style="font-size:14px;">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault" style="font-weight:300;">
+                                                Full time
+                                            </label>
+                                    </div>
+                                    <div class="form-check pt-1" style="font-size:14px;">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault" style="font-weight:300;">
+                                                Part time
+                                            </label>
+                                    </div>
+                                    <div class="form-check pt-1" style="font-size:14px;">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault" style="font-weight:300;">
+                                                Internship
+                                            </label>
+                                    </div>
+                                    <div class="form-check pt-1" style="font-size:14px;">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault" style="font-weight:300;">
+                                                Permanent
+                                            </label>
+                                    </div>
+                                    <div class="form-check pt-1" style="font-size:14px;">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault" style="font-weight:300;">
+                                                Shift work
+                                            </label>
+                                    </div>
+                                    <!-- <div class="form-check pt-1" style="font-size:14px;">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault" style="font-weight:300;">
+                                                Distant work
+                                            </label>
+                                    </div> -->
+
+                                    <hr class="">
+
+                                    <label for="" class="text-muted" style="font-weight:400;">Working Schedule</label>
+                                    <div class="form-check pt-1" style="font-size:14px;">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault" style="font-weight:300;">
+                                                Day shift
+                                            </label>
+                                    </div>
+                                    <div class="form-check pt-1" style="font-size:14px;">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault" style="font-weight:300;">
+                                                Night shift
+                                            </label>
+                                    </div>
+                                    <div class="form-check pt-1" style="font-size:14px;">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault" style="font-weight:300;">
+                                                Flex time
+                                            </label>
+                                    </div>
+                                    
+                                    
+                                </div>
+                                <div class="pt-3 d-flex justify-content-end pr-2">
+                                <button class="btn btn-outline-info" style="border-radius:80px;">
+                                    <span>Filter</span> <i class="fa-solid fa-filter"></i>
+                                </button>
+                                </div>
+                                
+
                             </div>
                         </div>
+                        
                     </div>
 
                 </div>
@@ -280,11 +390,10 @@ main_header(['Employer_profile']);
 
             <div class="col-12 col-md-9 mt-4">
                 <!-- POSTS -->
+                
                 <div class="row">
-                    
+            
                     <?= $jobpost_section_view ?>
-
-                    
 
                 </div>
                     
@@ -308,4 +417,13 @@ main_footer();
 
 <script src="<?php echo base_url() ?>/assets/js/dashboard/index.js">
 
+</script>
+
+<script>
+    $(document).ready(function() {
+        $("#toggleButton").click(function() {
+            // Toggle the class of the caret icon
+            $("#caretIcon").toggleClass("fa-caret-left fa-caret-down");
+        });
+    });
 </script>

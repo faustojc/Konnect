@@ -41,14 +41,14 @@ class employer_profile_services_model extends CI_Model
 
     public function update($data): array
     {
-        $x = $this->userdata->user_id;
-
         try {
             $this->db->trans_start();
             $this->db->where('id', $this->userdata->id)->update($this->Table->employer, $data);
             $this->db->trans_complete();
 
-            $this->Auth_model->update_auth($this->userdata->user_id, array('email' => $data['email']));
+            if (!empty($data['email'])) {
+                $this->Auth_model->update_auth($this->userdata->user_id, array('email' => $data['email']));
+            }
 
             if ($this->db->trans_status() === FALSE) {
                 $this->db->trans_rollback();

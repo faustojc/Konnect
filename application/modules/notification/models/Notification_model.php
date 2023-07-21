@@ -43,13 +43,14 @@ class Notification_model extends CI_Model
 
     public function getNewNotifications($user_id)
     {
-        return $this->db->select()
+        $query = $this->db->select()
             ->from($this->Table->notification)
             ->where('user_id', $user_id)
             ->where('is_displayed', 0)
             ->get()->result();
-    }
 
+        return $query;
+    }
 
     /**
      * @throws Exception

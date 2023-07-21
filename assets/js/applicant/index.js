@@ -13,21 +13,28 @@ const applyBtnFunction = () => {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({job_id: job_id})
-            }).then(response => response.json())
+            }).then(response => response.text())
                 .then(data => {
-                    if (data.status === 'success') {
-                        btn.textContent = data.apply_status;
+                    let status = btn.textContent.replace(/\s+/g, '').toUpperCase();
 
-                        applyBtnHover(btn, data.apply_status);
+                    if (status === 'APPLY') {
+                        status = 'PENDING';
+                    } else if (status === 'CANCEL' || status === 'PENDING') {
+                        status = 'APPLY';
+                    }
 
-                        if (data.apply_status === 'PENDING') {
-                            success('Application sent successfully!', 'You will be notified once the employer accepts your application.');
-                        } else {
-                            success('Application cancelled!', 'You cancelled your application to this job.');
-                        }
+                    btn.textContent = status;
+
+                    applyBtnHover(btn, status);
+
+                    if (status === 'PENDING') {
+                        success('Application sent successfully!', 'You will be notified once the employer accepts your application.');
+                    } else {
+                        success('Application cancelled!', 'You cancelled your application to this job.');
                     }
                 })
                 .catch(e => {
+                    console.log(e);
                     error('Error!', 'Something went wrong. Please try again later.');
                 });
         });
@@ -48,19 +55,17 @@ const acceptRejectBtnFunction = () => {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({application_id: application_id})
-                }).then(response => response.json())
+                }).then(response => response.text())
                     .then(data => {
-                        if (data.status === 'success') {
-                            btn.textContent = 'ACCEPTED';
-                            btn.classList.remove('btn-info');
-                            btn.classList.add('btn-outline-success');
-                            btn.disabled = true;
+                        btn.textContent = 'ACCEPTED';
+                        btn.classList.remove('btn-info');
+                        btn.classList.add('btn-outline-success');
+                        btn.disabled = true;
 
-                            const rejectBtn = document.querySelector(`.btn-reject[data-id="${application_id}"]`);
-                            rejectBtn.disabled = true;
+                        const rejectBtn = document.querySelector(`.btn-reject[data-id="${application_id}"]`);
+                        rejectBtn.disabled = true;
 
-                            success('Application accepted!', 'You can now contact the applicant.');
-                        }
+                        success('Application accepted!', 'You can now contact the applicant.');
                     })
                     .catch(e => {
                         error('Error!', 'Something went wrong. Please try again later.');
@@ -79,17 +84,15 @@ const acceptRejectBtnFunction = () => {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({application_id: application_id})
-                }).then(response => response.json())
+                }).then(response => response.text())
                     .then(data => {
-                        if (data.status === 'success') {
-                            btn.textContent = 'REJECTED';
-                            btn.classList.remove('btn-secondary');
-                            btn.classList.add('btn-outline-danger');
-                            btn.disabled = true;
+                        btn.textContent = 'REJECTED';
+                        btn.classList.remove('btn-secondary');
+                        btn.classList.add('btn-outline-danger');
+                        btn.disabled = true;
 
-                            const acceptBtn = document.querySelector(`.btn-accept[data-id="${application_id}"]`);
-                            acceptBtn.disabled = true;
-                        }
+                        const acceptBtn = document.querySelector(`.btn-accept[data-id="${application_id}"]`);
+                        acceptBtn.disabled = true;
                     })
                     .catch(e => {
                         error('Error!', 'Something went wrong. Please try again later.');

@@ -20,7 +20,7 @@ class Jobposting_services_model extends CI_Model
         $this->Table = json_decode(TABLE);
     }
 
-    public function save($info)
+    public function save($info): array
     {
         try {
             $this->db->trans_start();

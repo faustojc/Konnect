@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     eventSource.addEventListener('notification', (event) => {
         const data = JSON.parse(event.data);
-        info(data.title, data.message);
+        info(data.title, data.message, 6000);
     });
 });
 
@@ -74,13 +74,21 @@ function textareaEditor(selector, height = 350, setupFunction = () => {
  * @param {object} data Data to be sent
  * @param {function} callback An optional callback function that executes only if the request is successful
  */
-function formAction(url, request_type, data, callback) {
+function formAction(url, request_type, data, callback = () => {}) {
     if (data instanceof FormData) {
         fetch(url, {
             method: request_type,
             body: data
         })
-            .then(response => response.json())
+            .then(response => {
+                const contentType = response.headers.get('Content-Type');
+
+                if (contentType && contentType.includes('application/json')) {
+                    return response.json();
+                } else {
+                    return response.text();
+                }
+            })
             .then(response => successFunc(response))
             .catch(response => errorFunc(response));
     } else if (typeof data === 'string') {
@@ -110,12 +118,11 @@ function formAction(url, request_type, data, callback) {
     }
 
     const successFunc = (response) => {
-        try {
+        if (typeof response === 'string') {
+            callback(response);
+        } else {
             const data = JSON.parse(response);
             callback(data);
-        } catch (e) {
-            console.log(response);
-            callback();
         }
     }
 

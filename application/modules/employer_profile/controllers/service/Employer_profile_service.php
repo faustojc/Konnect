@@ -76,7 +76,6 @@ class employer_profile_service extends MY_Controller
 
     public function update()
     {
-        $response = [];
         $img = null;
 
         $file['upload_path'] = './assets/images/employer/profile_pic/';
@@ -93,6 +92,10 @@ class employer_profile_service extends MY_Controller
         }
 
         $data = $this->input->post();
+
+        if (isset($img)) {
+            $data['image'] = $img['file_name'];
+        }
 
         $response = $this->employer_profile_service_model->update($data);
         echo json_encode($response);

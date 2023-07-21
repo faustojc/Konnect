@@ -18,10 +18,26 @@ const load_employment = () => {
     $('#load_employments').load(baseUrl + 'employee_profile/get_all_employments/' + $('#emp_id').val());
 }
 
-$(document).ready(function () {
+document.addEventListener('DOMContentLoaded', function () {
     // TinyMCE
     textareaEditor('textarea', 400);
+
+    const update_profile = document.querySelector('#update_profile');
+
+    if (update_profile) {
+        update_profile.addEventListener('click', function () {
+            const form = update_profile.closest('#form_content').querySelector('.active.show form');
+            const isValid = validateForm(form);
+
+            if (isValid) {
+                formAction(baseUrl + 'employee_profile/service/employee_profile_service/update_profile', 'POST', new FormData(form), function (response) {
+                    success('SUCCESS', 'Profile successfully updated');
+                });
+            }
+        });
+    }
 });
+
 
 $(document).on('keyup', '#search_employee', function () {
     $(document).gmLoadPage({

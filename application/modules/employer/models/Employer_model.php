@@ -41,4 +41,9 @@ class Employer_model extends CI_Model
     {
         return $this->db->select()->from($this->Table->employer)->where($column_name, $value)->get()->row();
     }
+
+    public function getEmployerOnly($select, $id)
+    {
+        return $this->db->select($select)->from($this->Table->employer)->where('id', $id)->get()->row();
+    }
 }

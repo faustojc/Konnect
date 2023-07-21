@@ -31,7 +31,7 @@ class Applicant extends MY_Controller
         $result = $this->Applicant_model->setApplication($job_id, $this->userdata->ID);
         $targetDetails = $this->Jobposting_model->getEmployerByJobpost($job_id);
 
-        if ($result->apply_status == 'PENDING') {
+        if ($result['apply_status'] == 'PENDING') {
             // Send a notification to the employer by adding a new notification
             $info = array(
                 'user_id' => $targetDetails->user_id,
@@ -39,49 +39,54 @@ class Applicant extends MY_Controller
                 'message' => 'A new applicant has applied to your job post.',
             );
 
-            $this->Notification_model->add($info);
+        } else {
+            $info = array(
+                'user_id' => $targetDetails->user_id,
+                'title' => 'Application Cancelled',
+                'message' => 'The applicant has cancelled his/her application.',
+            );
+
         }
 
-        echo json_encode($result);
+        $this->Notification_model->add($info);
+        //$this->senderhandler->sendNotification($info['title'], $info['message'], $result);
     }
 
     public function accept()
     {
         $data = json_decode($this->input->raw_input_stream, true);
-        $result = $this->Applicant_model->setApplicantStatus($data['application_id'], 'ACCEPTED');
+        $this->Applicant_model->setApplicantStatus($data['application_id'], 'ACCEPTED');
 
         // Get the employee details by getting the user_id
         $employeeDetails = $this->Applicant_model->getApplicant($data['application_id']);
+        $employer = $this->Applicant_model->getEmployerByApplicant($data['application_id']);
 
         // Send a notification to the applicant by adding a new notification
         $info = array(
             'user_id' => $employeeDetails->employeeUserID,
             'title' => 'Application Accepted',
-            'message' => 'Your application has been accepted.',
+            'message' => $employer->employerName . ' has accepted your application.',
         );
 
         $this->Notification_model->add($info);
-
-        echo json_encode($result);
     }
 
     public function reject()
     {
         $data = json_decode($this->input->raw_input_stream, true);
-        $result = $this->Applicant_model->setApplicantStatus($data['application_id'], 'REJECTED');
+        $this->Applicant_model->setApplicantStatus($data['application_id'], 'REJECTED');
 
         // Get the employee details by getting the user_id
-        $employeeDetails = $this->Employee_model->getEmployee($data['user_id']);
+        $employeeDetails = $this->Applicant_model->getApplicant($data['application_id']);
+        $employer = $this->Applicant_model->getEmployerByApplicant($data['application_id']);
 
         // Send a notification to the applicant by adding a new notification
         $info = array(
-            'user_id' => $employeeDetails->user_id,
+            'user_id' => $employeeDetails->employeeUserID,
             'title' => 'Application Rejected',
-            'message' => 'Your application has been rejected.',
+            'message' => $employer->employerName . ' has rejected your application.',
         );
 
         $this->Notification_model->add($info);
-
-        echo json_encode($result);
     }
 }

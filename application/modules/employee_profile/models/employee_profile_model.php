@@ -3,16 +3,22 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Employee_profile_model extends CI_Model
 {
+    private $userdata;
+    private $auth;
+    private $id;
     public $Table;
 
     public function __construct()
     {
         parent::__construct();
-        $this->session = (object)get_userdata(USER);
+        $this->userdata = get_userdata(USER);
+        $this->auth = get_userdata(AUTH);
 
-        // if(is_empty_object($this->session)){
-        // 	redirect(base_url().'login/authentication', 'refresh');
-        // }
+        if ($this->auth['user_type'] == 'EMPLOYEE') {
+            $this->id = $this->userdata->ID;
+        } else {
+            $this->id = $this->userdata->id;
+        }
 
         $model_list = [];
         $this->load->model($model_list);
@@ -35,7 +41,7 @@ class Employee_profile_model extends CI_Model
         );
         $this->db->from($this->Table->employee_educ . ' ed');
         $this->db->join($this->Table->employee . ' e', 'e.ID = ed.Employee_id', 'left');
-        $this->db->where('ed.ID', $this->ID);
+        $this->db->where('ed.ID', $this->id);
         $query = $this->db->get()->row();
         return $query;
     }
@@ -47,7 +53,7 @@ class Employee_profile_model extends CI_Model
         $result = $this->db->select('tbl_employee_educ.*, tbl_employee.Fname, tbl_employee.Mname, tbl_employee.Lname')
             ->from($this->Table->employee_educ)
             ->join('tbl_employee', 'tbl_employee.ID = tbl_employee_educ.Employee_id', 'inner')
-            ->where('tbl_employee_educ.Employee_id', $this->ID)
+            ->where('tbl_employee_educ.Employee_id', $this->id)
             ->get()->result();
 
         return $result;
@@ -77,7 +83,7 @@ class Employee_profile_model extends CI_Model
         );
         $this->db->from($this->Table->training . ' tr');
         $this->db->join($this->Table->employee . ' t', 't.ID = tr.Employee_id', 'left');
-        $this->db->where('tr.ID', $this->ID);
+        $this->db->where('tr.ID', $this->id);
         $query = $this->db->get()->row();
         return $query;
     }
@@ -89,7 +95,7 @@ class Employee_profile_model extends CI_Model
         $result = $this->db->select('tbl_training.*, tbl_employee.Fname, tbl_employee.Mname, tbl_employee.Lname')
             ->from($this->Table->training)
             ->join('tbl_employee', 'tbl_employee.ID = tbl_training.Employee_id', 'inner')
-            ->where('tbl_training.Employee_id', $this->ID)
+            ->where('tbl_training.Employee_id', $this->id)
             ->get()->result();
 
         return $result;
@@ -108,7 +114,7 @@ class Employee_profile_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from($this->Table->employment);
-        $this->db->where('ID', $this->ID);
+        $this->db->where('ID', $this->id);
 
         $query = $this->db->get()->row();
 
@@ -142,7 +148,7 @@ class Employee_profile_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from($this->Table->employment);
-        $this->db->where('ID', $this->ID);
+        $this->db->where('ID', $this->id);
 
         $query = $this->db->get()->row();
 
@@ -185,7 +191,7 @@ class Employee_profile_model extends CI_Model
         );
         $this->db->from($this->Table->employee_skill . ' sk');
         $this->db->join($this->Table->employee . ' e', 'e.ID = sk.employee_id', 'left');
-        $this->db->where('sk.ID', $this->ID);
+        $this->db->where('sk.ID', $this->userdata->ID);
         $query = $this->db->get()->row();
         return $query;
     }
@@ -206,7 +212,7 @@ class Employee_profile_model extends CI_Model
         );
         $this->db->from($this->Table->employee_skill . ' sk');
         $this->db->join($this->Table->employee . ' e', 'e.ID = sk.employee_id', 'left');
-        $this->db->where('sk.ID', $this->ID);
+        $this->db->where('sk.ID', $this->userdata->ID);
         $query = $this->db->get()->row();
         return $query;
     }

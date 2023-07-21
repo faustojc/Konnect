@@ -1,7 +1,57 @@
 <?php 
+$totalJobPostings = count($jobpostings);
+?>          
+                <style>
+    /* Add a custom class for the container to create a flex column layout */
+    .search-results-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    /* Add a margin to the total job postings to separate it from the "Search Results" text */
+    .total-job-postings {
+        margin-left: 10px;
+    }
+
+    
+
+</style>
+
+<div class="col-12">
+<div class="card ">
+    <div class="card-body">
+        <div class="search-results-container">
+            <div class="row">
+                <div class="col-12 d-flex align-items-center">
+                    <h4 class="m-0 pr-1" style="font-weight:600; line-height:auto;">Search Results</h4>
+                    
+                    <div class="total-job-postings">
+                        <h4 class="outline-gray m-0" style="font-weight:300; line-height:auto;"><?= $totalJobPostings ?></h4>
+                        
+                        <!-- <span>Sort by: </span>
+                        <select name="" id="">
+                            <option value="">Last Updated</option>
+                            <option value="">Alphabetical</option>
+
+                        </select>
+                        <i class="fa-solid fa-sliders" style="font-size:12px;"></i> -->
+                    </div>
+                </div>
+
+            
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<?php 
 
 
 $backgroundColors = array(' #FDCEDF ', ' #ebdef0 ', ' #d6eaf8 ', ' #d1f2eb ', ' #fcf3cf ',' #fadbd8 ','#D2E9E9');
+
 
 
 if (!empty($jobpostings)) {
@@ -70,23 +120,40 @@ if (!empty($jobpostings)) {
             .job-card-<?= $jobpost->id ?> {
                 background-color: <?= $randomBackgroundColor ?>;
             }
+
+            html {
+            font-size: 16px; /* You can adjust this value to control the base font size */
+            }
+
+            @media (max-width: 767.98px) {
+                html {
+                    font-size: 14px;
+                }
+            }
+
+            @media (max-width: 575.98px) {
+                html {
+                    font-size: 12px;
+                }
+            }
+
            
         </style>
         
-        <div class="col-4" >
-        <div class="card" style="height:300px;">
-            <div class="card-body py-2 px-2">
-                <div class="container job-post job-card-<?= $jobpost->id ?>" style="border-radius:15px; height:200px;">
-                    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="card grow" style="height: 300px;">
+                <div class="card-body py-2 px-2">
+                    <div class="container job-post job-card-<?= $jobpost->id ?>" style="border-radius:15px; height:200px;">
+                        <div class="row">
                         
                             <!-- <img class="img-circle img-fluid " src="<?= base_url() ?>assets/images/employer/profile_pic/<?= $jobpost->EmployerLogo ?>" alt="Employer Profile Pic"
                                  style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;"> -->
                         
-                        <div class="col-6 pt-2 ">
-                            <div class="d-flex justify-content-between py-1 px-2">
+                            <div class="col-6 pt-2">
+                                <div class="d-flex justify-content-between py-1 px-2">
                                         <div class="card " style="border-radius:80px;">
                                             <div class="card-body py-1 px-2" style="">
-                                                <p class="py-1" style="font-size: 12px; margin:0; font-weight: 400;">
+                                                <p class="py-1" style="font-size: 12px; margin:0; font-weight: 500;">
                                                 <?= date('d M, Y', strtotime($jobpost->date_posted)) ?>
 
                                                 </p>
@@ -96,45 +163,34 @@ if (!empty($jobpostings)) {
                                 
                                 <!-- <a href="<?= base_url() ?>jobpost?id=<?= $jobpost->id ?>" class="btn btn-outline-info btn-sm h-50 w-25 ">View</a> -->
                             </div>
-                                <h6 class="m-0 px-2">
+                                <h6 class="m-0 px-2" style="font-size: 0.75rem; /* Adjust the value as needed */">
                                     <a href="<?= base_url() ?>employer_profile?id=<?= $jobpost->employer_id ?>" class="job-title fw-bold text-decoration-none" style="color:#000; font-size: 12px; font-weight:300;">
                                         <?= ucwords($jobpost->EmployerTradename) ?>
                                     </a>
                                 </h6>
                         </div>
                         <div class="col-6 pt-2">
-
-                            <div class="d-flex justify-content-end py-1 px-2">
-                                <div class="card m-0 " style="height:34px; background-color:#6c757d; color:white; border-radius:80px;">
-                                    <div class="card-body center py-1 px-2" style="padding:0;text-align:center; ">
-                                    
-                                    <!-- <div class="">
-                                        <i class="fa-solid fa-circle"></i> 
-                                    </div> -->
+                        <div class="d-flex justify-content-end py-1 px-2">
+                            <div class="card m-0 " style="height:34px; background-color:#6c757d; color:white; border-radius:80px;">
+                                <div class="card-body center py-1 px-2" style="padding:0;text-align:center;">
                                     <div class="d-flex align-content-center px-2">
-                                    
-                                        
-                                    <div class="d-flex" style="align-content:center;">
-                                    <?php 
-                                    $circleColor = (strtolower($jobpost->filled) === "open") ? " #7bff79 " : " #ff7979 ";
-                                    ?>
-                                        <h8 class=" py-2 pr-1" style="color: <?= $circleColor ?>; font-size:12px;">●</h8> <h8 class="py-2" style="font-size:12px;font-weight:650;"><?= $jobpost->filled ?></h8> 
-                                    </div>
-                                    </div>
-                                    
-                                    
-                                    <!-- <span class="badge job-status"> </span> -->
-
-
+                                        <div class="d-flex" style="align-content:center;">
+                                            <?php 
+                                            $circleColor = (strtolower($jobpost->filled) === "open") ? " #7bff79 " : " #ff7979 ";
+                                            ?>
+                                            <h8 class=" py-2 pr-1" style="color: <?= $circleColor ?>; font-size: 0.75rem; /* Adjust the value as needed */">●</h8>
+                                            <h8 class="py-2" style="font-size: 0.75rem; font-weight: 650;"><?= $jobpost->filled ?></h8>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
 
-                    <div class="job-details pt-1" style="border:0;">
-                        <h5 class="pb-2 px-2" style="font-weight:500;">
+                    </div>
+
+                    <div class="job-details pt-1" style="border: 0;">
+                        <h5 class="pb-2 px-2" style="font-weight: 0.9375rem; /* Adjust the value as needed */">
                             <?= ucwords($jobpost->title) ?>
                             
                         </h5>
@@ -142,7 +198,7 @@ if (!empty($jobpostings)) {
                         <!-- <hr> -->
                         <div class="">
                         <div class="job-description px-2" style="max-height: 150px; overflow-y: hidden">
-                            <div class="" style="font-weight:300;">
+                            <div class="" style="font-weight: 0.9375rem; /* Adjust the value as needed */">
                                 
                                     <!-- <?php if (isset($jobpost->salary) && $jobpost->salary !== '') : ?>
                                     <div class="btn btn-outline-secondary" style="font-size:12px; border-radius:15px;">
@@ -173,36 +229,57 @@ if (!empty($jobpostings)) {
                         
                         <!-- <a class="text-center see-more" data-target=".job-description" style="display: block;" role="button">See more</a> -->
 
-                        <?php if ($auth['user_type'] != 'EMPLOYER'): ?>
+                        <!-- <?php if ($auth['user_type'] != 'EMPLOYER'): ?>
                             <hr>
                             <div class="row">
                                 <div class="col-lg-12 col-md-4 col-sm-12">
                                     <button type="button" class="btn btn-light btn-block apply-button" data-id="<?= $jobpost->id ?>">APPLY</button>
                                 </div>
                             </div>
-                        <?php endif; ?>
+                        <?php endif; ?> -->
 
                     </div>
                 </div>
                 <div class="row">
-                        <div class="col-6 ">
-                            <h6 class="pt-3 m-0 px-2" style="font-weight:600;">
-                                ₱ <?= $jobpost->salary ?>/month
-                            </h6>
-                            <p class="text-muted px-2" style="font-size:10px;">
-                                Bacolod City, Negros Occidental
-                            </p>
+                    <div class="col-12 col-md-6">
+                        <h6 class="pt-3 m-0 px-2" style="font-weight: 0.9375rem; /* Adjust the value as needed */">
+                            ₱ <?= $jobpost->salary ?>/month
+                        </h6>
+                        <p class="text-muted px-2" style="font-size: 0.625rem; /* Adjust the value as needed */">
+                            Bacolod City, Negros Occidental
+                        </p>
+                    </div>
+                    <div class="col-12 col-md-6 d-flex justify-content-md-end justify-content-center align-self-center">
+                        <div class="px-2">
+                            <button class="btn btn-info" style="border-radius: 0.9375rem; /* Adjust the value as needed */" data-toggle="modal" data-target="#exampleModalCenter">Details</button>
                         </div>
-                        <div class="col-6">
-
-                        </div>
-
+                    </div>
                 </div>
-                
                                     
             </div>
         </div>
+    </div>
+    
+    <!-- modal -->
+    <div class="modal fade px-0" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+            </div>
         </div>
+    </div>
     <?php 
     // Store the used color for this card and remove it from the array
         $usedColors[] = $randomBackgroundColor;

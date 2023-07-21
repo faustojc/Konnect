@@ -1,21 +1,19 @@
-const applyBtnHover = (btn, status, doApply = true) => {
+const applyBtnHover = (btn, status) => {
     const btnText = btn.textContent.replace(/\s+/g, '').toUpperCase();
 
-    if (doApply) {
-        if (status === 'PENDING') {
-            btn.addEventListener('mouseover', function () {
-                btn.textContent = 'Cancel';
-                btn.classList.add('btn-outline-danger');
-            });
-            btn.addEventListener('mouseout', function () {
-                btn.textContent = status;
-                btn.classList.remove('btn-outline-danger');
-            });
-        } else {
-            btn.removeEventListener('mouseover', () => {});
-            btn.removeEventListener('mouseout', () => {});
+    if (status === 'PENDING') {
+        btn.addEventListener('mouseover', function () {
+            btn.textContent = 'Cancel';
+            btn.classList.add('btn-outline-danger');
+        });
+        btn.addEventListener('mouseout', function () {
             btn.textContent = status;
-        }
+            btn.classList.remove('btn-outline-danger');
+        });
+    } else {
+        btn.removeEventListener('mouseover', () => {});
+        btn.removeEventListener('mouseout', () => {});
+        btn.textContent = status;
     }
 }
 
@@ -38,6 +36,29 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     applyBtnFunction();
+
+    const postJobBtn = document.querySelector('#btn_post');
+    if (postJobBtn) {
+        postJobBtn.addEventListener('click', () => {
+            const form = postJobBtn.closest('.modal-content').querySelector('form');
+            const description = tinymce.activeEditor.getContent();
+            const isValid = validateForm(form);
+
+            const formData = new FormData(form);
+            formData.set('description', description);
+
+            if (isValid && description !== '') {
+                formAction(baseUrl + 'jobposting/service/Jobposting_service/postJob', 'POST', formData, (data) => {
+                    success('SUCCESS!', 'Job posted successfully!');
+
+                    if (typeof data === 'string') {
+                        const jobPostSection = document.querySelector('#jobpost_section');
+                        jobPostSection.insertAdjacentElement('afterbegin', data);
+                    }
+                });
+            }
+        });
+    }
 });
 
 const seeMoreButtons = document.querySelectorAll(".see-more");
@@ -115,3 +136,19 @@ function disableDotZero() {
         input.setSelectionRange(0, value.length - 3);
     }
 }
+
+document.getElementById("skills_req").addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        const input = event.target;
+        const currentCursorPosition = input.selectionStart;
+        const inputValue = input.value;
+        const newValue =
+            inputValue.slice(0, currentCursorPosition) +
+            ", " +
+            inputValue.slice(currentCursorPosition);
+
+        input.value = newValue;
+        input.selectionStart = input.selectionEnd = currentCursorPosition + 2;
+    }
+});

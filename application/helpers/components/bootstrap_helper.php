@@ -145,7 +145,7 @@ if (!function_exists('load_following')) {
     }
 }
 
-if (!function_exists('load_jobpostings')) {
+if (!function_exists('load_jobpost')) {
     /**
      * Load Jobpostings Component
      *
@@ -153,27 +153,17 @@ if (!function_exists('load_jobpostings')) {
      *
      * USAGE: load_jobpostings($jobpostings);
      *
-     * @param array $jobpostings The array of jobpostings.
-     * @param array $saved OPTIONAL: The array of saved jobpostings.
-     * @param array $applied OPTIONAL: The array of applied jobpostings.
+     * @param array $jobpost The data of jobpost.
      */
-    function load_jobpostings(array $jobpostings, array $saved = array(), array $applied = array())
+    function load_jobpost(array $jobpost)
     {
-        $auth = get_userdata(AUTH);
         $data = array(
-            'jobpostings' => $jobpostings
+            '$jobpost' => $jobpost
         );
 
-        if (!empty($saved) && $auth['user_type'] == 'EMPLOYER') {
-            $data['saved'] = $saved;
-        }
-
-        if (!empty($applied) && $auth['user_type'] == 'EMPLOYEE') {
-            $data['applied'] = $applied;
-        }
-
         $CI = &get_instance();
-        $CI->load->view('components/load_jobpostings', $data);
+
+        $CI->load->view('components/load_jobpost', $data);
     }
 }
 

@@ -30,7 +30,7 @@ class Notification extends MY_Controller
         header('Cache-Control: no-cache');
 
         // Check for new notifications
-        $notifications = $this->Notification_model->getNotifications($this->userdata->user_id);
+        $notifications = $this->Notification_model->getNewNotifications($this->userdata->user_id);
 
         // Filter the notifications that have not been displayed yet
         $new_notifications = array_filter($notifications, function ($notification) {
@@ -43,14 +43,13 @@ class Notification extends MY_Controller
             echo 'data: ' . json_encode($notification) . "\n\n";
 
             $this->Notification_model->update($notification->id, array('is_displayed' => 1));
-            usleep(400);
+            usleep(500000);
         }
 
         // Flush the output buffer
         ob_flush();
         flush();
     }
-
 
     public function sendNotification()
     {

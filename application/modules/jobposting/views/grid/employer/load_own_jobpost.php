@@ -19,6 +19,10 @@
         object-fit: cover;
     }
 
+    .badge-secondary {
+        color: #313131;
+        background-color: #D9D9D9;
+    }
 </style>
 
 <div class="row justify-content-center job-content">
@@ -70,9 +74,10 @@
                             <?= ucwords(@$job->description) ?>
                         </div>
                     </div>
+
                     <div class="card-footer p-1">
                         <div class="row align-items-center px-2">
-                            Applicant(s):
+                            <h6 class="pt-2" style="font-size:13px;">Applicant(s):</h6>
                             <?php if (!empty($applicants)):
                                 $max_display = 8;
                                 $counter = 0;
@@ -93,15 +98,15 @@
                                     }
                                 endforeach;
                                 if ($counter == 0): ?>
-                                    <div class="badge badge-info m-0 p-1 ml-3" role="alert">
-                                        No applicants yet.
-                                    </div>
-                                <?php endif; ?>
-                            <?php else: ?>
-                                <div class="badge badge-info m-0 p-1" role="alert">
-                                    No applicants yet.
-                                </div>
-                            <?php endif; ?>
+                            <div class="badge badge-secondary m-0 p-1 ml-2" role="alert">
+                                No applications yet
+                            </div>
+                        <?php endif; ?>
+                        <?php else: ?>
+                            <div class="badge badge-secondary m-0 p-1" role="alert">
+                                No applications yet
+                            </div>
+                        <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -109,13 +114,13 @@
             }
         } else {
             ?>
-            <div class="jumbotron">
-                <div class="container">
-                    <h1 class="display-4">No Jobs Found</h1>
-                    <p class="lead">We can't find the jobs that you are looking for or there are no jobs available.</p>
-                </div>
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-4">No Jobs Found</h1>
+                <p class="lead">We can't find the jobs that you are looking for or there are no jobs available.</p>
             </div>
-            <?php
+        </div>
+        <?php
         }
         ?>
     </div>

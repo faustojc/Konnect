@@ -56,7 +56,7 @@ class Employee_profile extends MY_Controller
             $this->data['following'] = $this->follow_model->get_following($ID);
         }
 
-        $this->data['current_following'] = $this->follow_model->get_following($this->userdata->ID);
+        $this->data['current_following'] = $this->follow_model->get_following($ID);
 
         $this->db->cache_off();
 

@@ -52,6 +52,16 @@ class Applicant_model extends CI_Model
             ->get()->result();
     }
 
+    public function getEmployerByApplicant($applicant_id)
+    {
+        return $this->db->select('tbl_employer.tradename AS employerName,')
+            ->from($this->Table->applicant)
+            ->join($this->Table->jobposting, 'tbl_jobposting.id = tbl_applicant.job_id')
+            ->join($this->Table->employer, 'tbl_employer.id = tbl_jobposting.employer_id')
+            ->where('tbl_applicant.id', $applicant_id)
+            ->get()->row();
+    }
+
     public function getAppliedJobs($employee_id)
     {
         return $this->db->select('tbl_applicant.*,

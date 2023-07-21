@@ -412,6 +412,67 @@ main_header(['employee_profile']);
                             </div>
                         </div>
 
+                        <!-- feedback -->
+                        <div class="card card-white">
+                            <div class="card-header">
+                                <h3 class="card-title fw-500" style="font-weight:600;">Feedback</h3>
+
+                                <div class="card-tools">
+                                    <button type="button" data-toggle="modal" data-target="#ModalFeedback" class="btn btn-tool">
+                                        <i class="fa-solid fa-plus" style=" font-size: 16.5px;"></i>
+                                    </button>
+
+                                </div>
+                            </div>
+
+                            <div class="modal fade" id="ModalFeedback" tabindex="-1" role="dialog" aria-labelledby="ModalFeedback" aria-hidden="true">
+                                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="feedbackModalLabel">Add Feedback</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body" >
+                                            <!-- Feedback form Content -->
+                                            <div class="container">
+                                                <form>
+
+                                                <!-- Feedback Rating -->
+                                                <div class="form-group">
+                                                    <label>Rating (1 - Lowest, 5 - Highest)</label>
+                                                    <select class="form-control" id="rating" name="rating" required>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                    </select>
+                                                </div>
+
+                                                <!-- Feedback Comment -->
+                                                <div class="form-group">
+                                                    <label for="comment">Your Feedback</label>
+                                                    <textarea class="form-control" id="comment" name="comment" rows="4" required></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-info" id="save_education" data-dismiss="modal">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modal Body -->
+
+                            <div class="py-3 px-3" id="load_educations">
+                                <?= $educations_section_view ?>
+                            </div>
+                        </div>
+                        <!-- feedback -->
+
                     </div>
 
                     <div class="tab-pane fade" id="pills-employment" role="tabpanel" aria-labelledby="pills-employment-tab">

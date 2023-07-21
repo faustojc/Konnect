@@ -24,8 +24,8 @@ if ($timeDiff < 60) {
 
 <div class="card card-light mb-0 sticky-top" style="top: 60px; max-height: calc(100vh - 70px);">
     <div class="card-header d-flex flex-column p-3">
-
-        <h4 class="card-title font-weight-bold mb-2" style="font-size: 18px;">
+    
+        <h4 class="card-title font-weight-bold mb-2" style="font-size: 18px; max-width: 90%;">
             <?= ucwords($applied_job->jobTitle) ?>
         </h4>
 

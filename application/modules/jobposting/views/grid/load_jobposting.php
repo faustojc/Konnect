@@ -58,7 +58,7 @@
                         </span>
                     </div>
 
-                    <div class="card-body pb-3 pl-0">
+                    <div class="card-body pb-1 pl-0">
                         <div class="" style="font-weight:300;">
                             <h5>
                                 <?php if (isset($job->salary) && $job->salary !== ''): ?>
@@ -86,9 +86,6 @@
                         <div class="card-text mb-0 text-muted " style="max-height: 250px; overflow-y: hidden; font-size: 12px">
                             <?= ucwords(@$job->description) ?>
                         </div>
-                    </div>
-                    <div class="card-footer bg-transparent p-0">
-                        <button type="button" class="btn btn-outline-info btn-sm">Apply now</button>
                     </div>
                 </div>
                 <?php

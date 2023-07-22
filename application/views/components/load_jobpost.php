@@ -93,7 +93,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text border-0" style="border-radius:10px 0 0 10px;">₱</span>
                                             </div>
-                                            <input id="salary" name="salary" value="<?= $jobpost->salary ?>" type="text" maxlength="16" id="salary" onclick="disableDotZero()" onblur="formatInput()" oninput="formatInput2()"
+                                            <input id="salary" name="salary" value="<?= $jobpost->salary ?>" type="text" onclick="disableDotZero()" onblur="formatInput()" oninput="formatInput2()"
                                                    class="form-control border-0"
                                                    style="background-color: #F4F6F7; border-radius:0 10px 10px 0; " placeholder="Input Salary ">
                                         </div>
@@ -101,7 +101,7 @@
                                     <div class="col-2">
                                         <div class="form-group">
                                             <label>Job Type</label>
-                                            <select id="job_type" name="job_type" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;" name="" id="">
+                                            <select id="job_type" name="job_type" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;">
                                                 <option>Full time</option>
                                                 <option>Part time</option>
                                                 <option>Internship</option>
@@ -114,7 +114,7 @@
                                     <div class="col-2">
                                         <div class="form-group">
                                             <label>Schedule</label>
-                                            <select id="shift" name="shift" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;" name="" id="">
+                                            <select id="shift" name="shift" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;">
                                                 <option>Day</option>
                                                 <option>Night</option>
                                                 <option>Flextime</option>
@@ -148,7 +148,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <textarea id="description" name="description" class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:15px;" name="" cols="30" rows="10"></textarea>
+                                    <textarea id="description" name="description" class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:15px;" cols="30" rows="10"></textarea>
                                 </div>
                             </div>
                             <div class="modal-footer border-0">

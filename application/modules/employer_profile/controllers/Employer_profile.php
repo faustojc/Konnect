@@ -5,7 +5,7 @@ class Employer_profile extends MY_Controller
 {
     protected $userdata;
     protected $auth;
-    protected $has_permission;
+    protected $isAccount;
     private $data = [];
 
     public function __construct()
@@ -31,7 +31,7 @@ class Employer_profile extends MY_Controller
         // get the id from get request and get the user and check if the user owns the profile
         $id = $this->input->get('id');
         $currentUser = $this->employer_profile_model->get_current_employer($id);
-        $this->has_permission = $this->Auth_model->check_permission($this->userdata, $currentUser);
+        $this->isAccount = $this->Auth_model->check_permission($this->userdata, $currentUser);
     }
 
     /** load main page */
@@ -40,7 +40,7 @@ class Employer_profile extends MY_Controller
         $id = $this->input->get('id');
 
         $this->data['auth'] = $this->auth;
-        $this->data['has_permission'] = $this->has_permission;
+        $this->data['has_permission'] = $this->isAccount;
 
         $this->load->driver('cache');
         // Enable query caching
@@ -52,7 +52,7 @@ class Employer_profile extends MY_Controller
         $this->data['employers'] = $this->employer_model->get_employers(4, $id);
         $this->data['jobpostings'] = $this->jobposting_model->get_employer_jobposts($id, 4);
         $this->data['followers'] = $this->follow_model->get_followers($id);
-        
+
         if ($this->auth['user_type'] == 'EMPLOYEE') {
             $this->data['following'] = $this->follow_model->get_following($this->userdata->ID);
         }

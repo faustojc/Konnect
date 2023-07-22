@@ -38,8 +38,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    const edit_summary = document.querySelector('.edit-summary');
+    textareaEditor('#feedback', 400, function (editor) {
+        editor.on('input', function () {
+            let count = editor.getContent({format: 'text'}).length;
+            document.getElementById('feedback_char_count').innerText = count + '/2000';
 
+            const feedbackBtn = document.querySelector('#btn_feedback');
+            const feedbackWarning = document.querySelector('#feedback_warning');
+
+            if (count > 2000) {
+                feedbackWarning.removeAttribute('hidden');
+                feedbackBtn.setAttribute('disabled', 'disabled');
+            } else {
+                feedbackWarning.setAttribute('hidden', 'hidden');
+                feedbackBtn.removeAttribute('disabled');
+            }
+        });
+    });
+
+    const edit_summary = document.querySelector('.edit-summary');
     if (edit_summary) {
         edit_summary.addEventListener('click', function () {
             const content = document.querySelector('.summary-content').innerHTML;

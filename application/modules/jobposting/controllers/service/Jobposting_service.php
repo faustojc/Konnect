@@ -29,11 +29,11 @@ class Jobposting_service extends MY_Controller
         $response = $this->job_service_model->save($data);
         $employer_image = $this->employer_model->getEmployerOnly('image', $this->userdata->id);
 
-        $data['jobpost'] = $data;
-        $data['EmployerLogo'] = $employer_image->image;
+        $info['jobpost'] = $data;
+        $info['jobpost']['EmployerLogo'] = $employer_image->image;
 
         if (!$response['has_error']) {
-            echo $this->load->view('components/load_jobpost', $data, true);
+            echo $this->load->view('components/load_jobpost', $info, true);
         } else {
             echo json_encode($response);
         }

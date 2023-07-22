@@ -49,7 +49,6 @@ class Applicant extends MY_Controller
         }
 
         $this->Notification_model->add($info);
-        //$this->senderhandler->sendNotification($info['title'], $info['message'], $result);
     }
 
     public function accept()

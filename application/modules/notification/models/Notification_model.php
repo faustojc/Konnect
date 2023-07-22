@@ -43,15 +43,28 @@ class Notification_model extends CI_Model
 
     public function getNewNotifications($user_id)
     {
-        $query = $this->db->select()
+        return $this->db->select()
             ->from($this->Table->notification)
             ->where('user_id', $user_id)
             ->where('is_displayed', 0)
             ->get()->result();
-
-        return $query;
     }
 
+    public function updateBatch($id, array $data)
+    {
+        $this->db->where_in('id', $id)->update($this->Table->notification, $data);
+    }
+
+    public function deleteOldNotifications()
+    {
+        // Set the threshold for how old notifications should be before they are deleted
+        $threshold = strtotime('-30 days');
+
+        // Delete all notifications that are older than the threshold
+        $this->db->where('date_created <', $threshold);
+        $this->db->delete('notifications');
+    }
+    
     /**
      * @throws Exception
      */

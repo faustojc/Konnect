@@ -30,33 +30,28 @@ class Notification extends MY_Controller
         header('Cache-Control: no-cache');
 
         // Check for new notifications
-        $notifications = $this->Notification_model->getNewNotifications($this->userdata->user_id);
-
-        // Filter the notifications that have not been displayed yet
-        $new_notifications = array_filter($notifications, function ($notification) {
-            return !$notification->is_displayed && $this->userdata->user_id == $notification->user_id;
-        });
+        $newNotifications = $this->Notification_model->getNewNotifications($this->userdata->user_id);
 
         // Mark the new notifications as displayed
-        foreach ($new_notifications as $notification) {
-            echo "event: notification\n";
-            echo 'data: ' . json_encode($notification) . "\n\n";
+        if (!empty($newNotifications)) {
+            $ids = array_map(function ($notification) {
+                return $notification->id;
+            }, $newNotifications);
+            $this->Notification_model->updateBatch($ids, array('is_displayed' => 1));
 
-            $this->Notification_model->update($notification->id, array('is_displayed' => 1));
-            usleep(500000);
+            foreach ($newNotifications as $notification) {
+                echo "event: notification\n";
+                echo 'data: ' . json_encode($notification) . "\n\n";
+
+                usleep(300000);
+            }
+        } else {
+            echo json_encode(array());
         }
 
         // Flush the output buffer
         ob_flush();
         flush();
-    }
-
-    public function sendNotification()
-    {
-        $data = json_decode($this->input->raw_input_stream, true);
-
-        $result = $this->Notification_model->add($data);
-        echo json_encode($result);
     }
 
     public function viewNotifications()

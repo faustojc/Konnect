@@ -19,7 +19,7 @@ class Login_model extends CI_Model
         $this->Table = json_decode(TABLE);
     }
 
-    public function authenticate($info)
+    public function authenticate($info): array
     {
         try {
             if (empty($info['email']) || empty($info['password'])) {

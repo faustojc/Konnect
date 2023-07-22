@@ -1,8 +1,7 @@
-<div class="row">
-    <div class="col-12">
-        <form id="needs-validation">
+<form id="needs-validation">
+    <div class="row">
+        <div class="col-12">
             <div class="row">
-
                 <!-- Email -->
                 <div class="input-group col-lg-12 mb-4">
                     <div class="pb-3">
@@ -29,9 +28,9 @@
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
+        <div class="col-12">
+            <button type="submit" id="login" class="btn btn-outline-info w-100" style="border-radius:15px ;">Login</button>
+        </div>
     </div>
-    <div class="col-12">
-        <button type="button" id="login" class="btn btn-outline-info w-100" style="border-radius:15px ;">Login</button>
-    </div>
-</div>
+</form>

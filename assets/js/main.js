@@ -1,19 +1,3 @@
-async function notificationListener(callback = () => {}) {
-    const response = await fetch(baseUrl + 'notification/notify');
-    const data = await response.json();
-
-    callback(data);
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-    const eventSource = new EventSource(baseUrl + 'notification/notify');
-
-    eventSource.addEventListener('notification', (event) => {
-        const data = JSON.parse(event.data);
-        info(data.title, data.message, 6000);
-    });
-});
-
 /**
  * @param {any} target Target element to validate
  * @returns {boolean} Returns true if the form is valid, false otherwise

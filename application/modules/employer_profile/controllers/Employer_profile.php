@@ -47,7 +47,6 @@ class Employer_profile extends MY_Controller
         $this->db->cache_on();
 
         $this->data['current_employer'] = $this->employer_profile_model->get_current_employer($id);
-        $this->data['current_employer']->summary = $this->load->view('grid/load_summary', $this->data, TRUE);
         $this->data['employees'] = $this->employee_model->get_all_employees(4);
         $this->data['employers'] = $this->employer_model->get_employers(4, $id);
         $this->data['jobpostings'] = $this->jobposting_model->get_employer_jobposts($id, 4);
@@ -60,6 +59,7 @@ class Employer_profile extends MY_Controller
         // Disable query caching
         $this->db->cache_off();
 
+        $this->data['current_employer']->summary = $this->load->view('grid/load_summary', $this->data, TRUE);
         $this->data['jobpostings_view'] = $this->load->view('grid/load_jobpostings', $this->data, TRUE);
 
         $this->data['content'] = 'index';

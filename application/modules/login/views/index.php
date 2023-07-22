@@ -8,7 +8,6 @@
         <div class="col-md-6 mb-5 mb-md-0 ">
             <div class="d-flex justify-content-center">
                 <img src="<?= base_url() ?>assets/images/login/login2.png" alt="" class="img-fluid mb-3 d-none d-md-block" style="width:610px;">
-
             </div>
         </div>
 

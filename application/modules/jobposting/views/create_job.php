@@ -24,15 +24,12 @@ main_header(['jobposting']);
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text border-0" style="border-radius:10px 0 0 10px;">₱</span>
                                             </div>
-                                            <input id="salary" name="salary" type="text" id="salary" onclick="disableDotZero()" onblur="formatInput()" oninput="formatInput2()" class="form-control border-0" style="background-color: #F4F6F7; border-radius:0 10px 10px 0; " placeholder="Input Salary ">
-                                            <!-- <div class="input-group-append">
-                                                            <span class="input-group-text border-0" style="border-radius:0 10px 10px 0;">.00</span>
-                                                        </div> -->
+                                            <input id="salary" name="salary" type="text" onclick="disableDotZero()" onblur="formatInput()" oninput="formatInput2()" class="form-control border-0" style="background-color: #F4F6F7; border-radius:0 10px 10px 0; " placeholder="Input Salary ">
                                         </div>
                                     </div>
                                     <div class="col-2">
                                         <div class="form-group">
-                                            <label>Job Type</label>
+                                            <label for="job_type">Job Type</label>
                                             <select id="job_type" name="job_type" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;">
                                                 <option>Part-time</option>
                                                 <option>Full-time</option>
@@ -44,7 +41,7 @@ main_header(['jobposting']);
                                     </div>
                                     <div class="col-2">
                                         <div class="form-group">
-                                            <label>Shift</label>
+                                            <label for="shift">Shift</label>
                                             <select id="shift" name="shift" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;">
                                                 <option>Day</option>
                                                 <option>Night</option>
@@ -55,17 +52,15 @@ main_header(['jobposting']);
 
                                     </div>
                                     <div class="col-3">
-                                        <!-- <label for="" style="">Job Name</label>
-                                            <input class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:10px;" type="text" placeholder="Enter Job Name">-->
-                                        <label>Start Date</label>
+                                        <label for="start_date">Start Date</label>
                                         <input id="start_date" name="start_date" type="date" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-10">
                                 <div class="form-group" style="border:0;">
-                                    <label>Requirements</label>
-                                    <select class="select2 " multiple="multiple" data-placeholder="Add Requirements" style="width: 100%; border:0;">
+                                    <label for="">Requirements</label>
+                                    <select class="select2" multiple="multiple" data-placeholder="Add Requirements" style="width: 100%; border:0;">
                                         <option>HTML</option>
                                         <option>SQL</option>
                                         <option>PHP</option>
@@ -83,7 +78,6 @@ main_header(['jobposting']);
                                     <select id="job_filled" name="job_filled" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;">
                                         <option>Open</option>
                                         <option>Closed</option>
-                                        <!-- <option>Flextime</option> -->
 
                                     </select>
                                 </div>

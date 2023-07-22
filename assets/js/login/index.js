@@ -3,10 +3,18 @@ userTypeErrorMessage.classList.add('invalid-feedback', 'm-0', 'd-block');
 userTypeErrorMessage.textContent = 'Please select on what to login.';
 
 const loadFormLogin = () => {
-    document.querySelector('button#login').addEventListener('click', function () {
+    const loginBtn = document.querySelector('button#login');
+    loginBtn.addEventListener('click', function () {
         const isValid = validateForm('#needs-validation');
 
         if (isValid) {
+            const spinner = document.createElement('span');
+            spinner.classList.add('spinner-border', 'spinner-border-sm', 'mx-2');
+            spinner.setAttribute('role', 'status');
+            spinner.setAttribute('aria-hidden', 'true');
+
+            loginBtn.append(spinner);
+
             const formData = new FormData();
 
             formData.append('email', document.querySelector('input#email').value);
@@ -22,18 +30,26 @@ const loadFormLogin = () => {
                     if (data.redirect) {
                         window.location.href = data.redirect;
                     } else if (data.status !== 'success') {
+                        loginBtn.querySelector('span.spinner-border').remove();
+
                         let errorContainer = document.createElement('div');
+
                         errorContainer.classList.add('alert', 'alert-danger');
                         errorContainer.setAttribute('role', 'alert');
                         errorContainer.innerHTML = data.message;
 
-                        document.querySelector('form#needs-validation').prepend(errorContainer);
+                        const form = document.querySelector('form#needs-validation');
+
+                        if (form.querySelector('div.alert.alert-danger') != null) {
+                            form.querySelector('div.alert.alert-danger').remove();
+                        }
+
+                        form.insertAdjacentElement('afterbegin', errorContainer);
                     }
                 });
         }
     });
 }
-
 
 
 const backBtn = () => {
@@ -51,8 +67,9 @@ const backBtn = () => {
 const selectUserType = () => {
     document.querySelector('select#user_type').addEventListener('change', function () {
         const user_type = document.querySelector('select#user_type');
+        const invalidFeedback = document.querySelector('p.invalid-feedback');
 
-        if (user_type.value === 'EMPLOYEE' || user_type.value === 'EMPLOYER') {
+        if ((user_type.value === 'EMPLOYEE' || user_type.value === 'EMPLOYER') && invalidFeedback) {
             user_type.classList.remove('is-invalid');
             user_type.nextElementSibling.remove();
         }

@@ -86,15 +86,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const update_profile = document.querySelector('#update_profile');
 
-    update_profile.addEventListener('click', function () {
-        // Get all form control elements within the div that has .active.show class only
-        const form = update_profile.closest('#form_content').querySelector('div.active.show > form');
-        const isValid = validateForm(form);
+    if (update_profile) {
+        update_profile.addEventListener('click', function () {
+            const form = update_profile.closest('#form_content').querySelector('div.active.show > form');
+            const isValid = validateForm(form);
 
-        if (isValid) {
-            formAction(baseUrl + 'employer_profile/service/Employer_profile_service/update', 'POST', new FormData(form), () => {
-                success('SUCCESS', 'Profile successfully updated');
-            });
-        }
-    });
+            if (isValid) {
+                formAction(baseUrl + 'employer_profile/service/Employer_profile_service/update', 'POST', new FormData(form), () => {
+                    success('SUCCESS', 'Profile successfully updated');
+                });
+            }
+        });
+    }
 });

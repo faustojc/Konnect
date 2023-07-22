@@ -48,8 +48,14 @@ document.addEventListener("DOMContentLoaded", function () {
             formData.set('description', description);
 
             if (isValid && description !== '') {
+                const spinner = document.createElement('span');
+
+                spinner.classList.add('spinner-border', 'spinner-border-sm', 'mx-2');
+                postJobBtn.append(spinner);
+
                 formAction(baseUrl + 'jobposting/service/Jobposting_service/postJob', 'POST', formData, (data) => {
                     success('SUCCESS!', 'Job posted successfully!');
+                    postJobBtn.querySelector('span.spinner-border').remove();
 
                     if (typeof data === 'string') {
                         const jobPostSection = document.querySelector('#jobpost_section');

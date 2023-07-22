@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 20, 2023 at 06:25 PM
+-- Generation Time: Jul 22, 2023 at 12:14 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -39,9 +39,12 @@ CREATE TABLE `tbl_applicant` (
 --
 
 INSERT INTO `tbl_applicant` (`id`, `job_id`, `employee_id`, `status`) VALUES
-(2, 35, 32, 'ACCEPTED'),
-(4, 45, 32, 'PENDING'),
-(11, 33, 32, 'PENDING');
+(12, 36, 36, 'ACCEPTED'),
+(17, 35, 36, 'REJECTED'),
+(50, 48, 32, 'REJECTED'),
+(51, 36, 32, 'REJECTED'),
+(52, 35, 32, 'ACCEPTED'),
+(53, 33, 32, 'ACCEPTED');
 
 -- --------------------------------------------------------
 
@@ -79,15 +82,9 @@ CREATE TABLE `tbl_employee` (
 --
 
 INSERT INTO `tbl_employee` (`ID`, `user_id`, `Date_created`, `Fname`, `Lname`, `Mname`, `Bday`, `Gender`, `Cstat`, `Religion`, `Cnum`, `Email`, `City`, `Barangay`, `Address`, `Title`, `SSS`, `Tin`, `Phil_health`, `Pag_ibig`, `Introduction`, `Employee_image`) VALUES
-(1, 0, '2023-06-27 03:45:52', 'John Marti', 'Demonteverde', 'Cusi', '2002-06-05', 'male', 'single', 'Catholic', '09604436812', 'johnmartin@outlook.com', 'Bacolod Cityy', 'Granada', 'Patricia Homes', 'Mobile Dev', '23234', '55555', '44444', '26262', '<p style=\"line-height: 1.4; text-align: justify;\">Hello! I\'m <strong>JD</strong>, a highly <strong>motivated</strong> and <strong>passionate</strong> fourth-year<strong> Computer Science student </strong>with a strong interest in software development. I have a solid foundation in programming languages like Java, Python, and C++, along with expertise in data structures, algorithms, and web development using HTML, CSS, and JavaScript.</p>', 'IMG_0313_(1).JPG'),
-(14, 0, '2023-06-27 11:03:31', 'Paul Martin', 'Cuenca', 'Benedicto', '2001-11-24', 'male', 'single', 'Catholic', '09479505192', '@polcuenca', 'Bacolod City', 'Mansilingan', 'adelfa st. victorina heights', 'Web Dev', '1929222222', '757875', '8686', '8686', 'Hello! I\'m Paul, a highly motivated and passionate fourth-year Computer Science student with a strong interest in software development. I have a solid foundation in programming languages like Java, Python, and C++, along with expertise in data structures, algorithms, and web development using HTML, CSS, and JavaScript. I thrive in collaborative environments, possess excellent problem-solving abilities, and actively seek opportunities to learn and grow. Currently seeking internship opportunities, I am eager to apply my skills and contribute to building innovative solutions as a software developer. Let\'s connect and discuss how I can add value to your organization!', '347548042_184571507478516_7611925746711583073_n1.jpg'),
-(27, 0, '2023-06-29 10:55:16', 'Katrina', 'Sheesh', 'God', '2023-06-29', 'male', 'single', 'Catholic', '5555555', '@katrinadiz', 'BACOLOD CITY', 'Villamonte', 'Kats Street', 'GOD', '616216161', '515165151', '15151515', '5151515', '<p>Yes I am Kat have a <strong>kit kat</strong></p>', 'CheatEngine-logo2.png'),
-(32, 6, '0000-00-00 00:00:00', 'left', 'dead', 'for', '2022-08-16', 'male', 'single', 'Chicken', '123456', 'chicken@gmail.com', 'Bacolod City', 'Chicken', 'Charito Heights', 'L4D2', '1233', '22222', '331313', '12323131', '<p>hahahaha</p>', '263088764_7252129248145876_7634209438953252272_n.jpg'),
+(32, 6, '0000-00-00 00:00:00', 'LEFT', 'DEADZZ', 'FOUR', '2022-08-16', 'male', 'single', 'Chicken Joyism', '5655656', 'chicken@gmail.com', 'Bacolod City', 'Chicken', 'Charito Heights', 'L4D2', '1233', '22222', '331313', '12323131', '<p>hahahaha</p>', 'le_four_ded_2.jpg'),
 (33, 7, '0000-00-00 00:00:00', 'Kayla', 'Pajanconi', 'Tangub', '1999-10-13', 'female', 'single', 'Roman Catholic', '09222667813', 'kaypajanconi@gmail.com', 'Hinigaran', 'camba-og', 'Dinandan', '', '', '', '', '', '', 'default.png'),
-(36, 20, '2023-07-19 13:15:15', 'Martin', 'Cuenca', 'Benedicto', '2001-11-24', 'male', 'single', 'Catholic', '0947950555', 'polcuenca242@gmail.com', 'BACOLOD CITY', 'Mansilingan', 'adelfa st. victorina heights', '', '19292', '', '', '', '', 'default.png'),
-(37, 21, '2023-07-19 15:23:46', 'Jideeh', 'Hehe', 'Cusi', '2002-03-28', 'male', 'single', 'Catholic', '09604436812', 'ayeemarty@outlook.com', 'Bacolod', 'Granada', 'Patricia Homes', '', '', '', '', '', '', 'default.png'),
-(38, 22, '2023-07-19 15:27:03', 'Jideeh', 'Hehe', 'Cusi', '2002-03-28', 'male', 'single', 'Catholic', '09604436812', 'ayeemarty@outlook.com', 'Bacolod', 'Granada', 'Patricia Homes', '', '', '', '', '', '', 'default.png'),
-(39, 23, '2023-07-19 15:45:42', 'Jideeh', 'Hehe', 'Cusi', '2002-03-28', 'male', 'single', '', '09604436812', 'ayeemarty@outlook.com', 'Bacolod', 'Granada', 'Patricia Homes', '', '', '', '', '', '', 'default.png');
+(36, 20, '2023-07-19 13:15:15', 'Martinnn', 'Cuenca', 'Benedicto', '2001-11-24', 'male', 'single', 'Catholic', '0947950555', 'polcuenca242@gmail.com', 'BACOLOD CITY', 'Mansilingan', 'adelfa st. victorina heights', '', '19292', '020', '2626', '626', '', 'default.png');
 
 -- --------------------------------------------------------
 
@@ -106,17 +103,6 @@ CREATE TABLE `tbl_employee_educ` (
   `End_date` date NOT NULL,
   `Hours` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Dumping data for table `tbl_employee_educ`
---
-
-INSERT INTO `tbl_employee_educ` (`ID`, `Employee_id`, `Level`, `Institution`, `Title`, `Description`, `Start_date`, `End_date`, `Hours`) VALUES
-(1, 1, 'ELEMENTARY', 'Colegio San Agustin - Bacolod', 'Student', 'Grade 1 - Grade 12', '2023-07-28', '2023-08-05', 100),
-(25, 14, 'College', 'University of St. La Salle', 'Computer Science', '', '2023-07-10', '2023-07-27', 10),
-(36, 27, 'COLLEGE', 'Colegio San Agustin - Bacolod', 'Student', '1st - 4rd year', '2023-07-04', '2023-07-06', 100),
-(43, 14, 'Senior High School', 'Liceo De La Salle', 'STEM', '', '2023-07-03', '2023-07-06', 123123),
-(58, 1, 'COLLEGE', 'University Of Saint La Salle - Bacolod', 'Student', '1st - 5th year', '2023-07-07', '2023-07-28', 200);
 
 -- --------------------------------------------------------
 
@@ -137,20 +123,11 @@ CREATE TABLE `tbl_employee_skill` (
 --
 
 INSERT INTO `tbl_employee_skill` (`id`, `employee_id`, `skill`, `proficiency`, `years_exp`) VALUES
-(4, 1, 'PHP', 'intermediate', 1),
-(12, 1, 'Photoshop', 'expert', 5),
-(13, 1, 'Java', 'intermediate', 2),
-(15, 14, 'laravel', 'beginner', 3),
-(22, 14, 'C++', 'advance', 1),
-(23, 1, 'C++', 'expert', 99),
-(25, 27, 'PHP', 'advance', 2),
-(27, 27, 'C++', 'advance', 5),
-(29, 27, 'C#', 'intermediate', 2),
-(30, 27, 'React', 'beginner', 1),
-(31, 27, 'JavaScript', 'advance', 3),
 (34, 32, 'PHP', 'beginner', 2),
 (36, 32, 'C++', 'beginner', 2),
-(37, 32, 'laravel', 'beginner', 2);
+(37, 32, 'laravel', 'beginner', 2),
+(38, 32, 'JS', 'beginner', 2),
+(39, 36, 'PHP', 'beginner', 2);
 
 -- --------------------------------------------------------
 
@@ -181,10 +158,10 @@ CREATE TABLE `tbl_employer` (
 --
 
 INSERT INTO `tbl_employer` (`id`, `user_id`, `employer_name`, `email`, `summary`, `tradename`, `city`, `barangay`, `address`, `business_type`, `contact_number`, `sss`, `tin`, `image`, `date_created`) VALUES
-(1, 3, 'LOPUES EAST', 'lopues@gmail.com', '<p>In the year 1992, Lopue\'s Department Store incorporated underwent changes in its corporate structure and establishes three (3) new independent corporations. From mere branch, Lopue\'s San Sebastian had stood independently to rebuild its own image and identity as it has under the stewardship of Mr. Leonito D. Lopue. <br><br>Despite the store reorganization, it has maintained its structure as one of the top taxpayers of Bacolod City. Starting with annual sales of 35 million, the store had steadily increased its share in the market to i85 million and now relishes a sales volume of 220 million. as befits a pioneer organization has stood the test of time as it has maintained its image as \"<strong>Your complete Department store and supermarket for high quality products and services.</strong>\"</p>', 'lopues eastttt', 'bacolod', 'villamonte', 'Sa lopues east ngayunn', 'Retail', '123456', '123456789', 2147483647, 'lopues.jpg', '2023-06-27 09:47:55'),
+(1, 3, 'LOPUES EAST', 'lopues@gmail.com', '<p>In the year 1992, Lopue\'s Department Store incorporated underwent changes in its corporate structure and establishes three (3) new independent corporations. From mere branch, Lopue\'s San Sebastian had stood independently to rebuild its own image and identity as it has under the stewardship of Mr. Leonito D. Lopue. <br><br>Despite the store reorganization, it has maintained its structure as one of the top taxpayers of Bacolod City. Starting with annual sales of 35 million, the store had steadily increased its share in the market to i85 million and now relishes a sales volume of 220 million. as befits a pioneer organization has stood the test of time as it has maintained its image as \"<strong>Your complete Department store and supermarket for high quality products and services.</strong>\"</p>', 'lopues east', 'bacolod', 'villamonte', 'Sa lopues east ngayunn', 'Retail', '123456', '123456789', 2147483647, 'lopues.jpg', '2023-06-27 09:47:55'),
 (6, 2, 'Business Inn', 'businessinn@gmail.com', '<p><span style=\"font-family: \'arial black\', sans-serif;\">Table of truth</span></p>\n<table style=\"border-collapse: collapse; width: 99.9807%;\" border=\"1\"><colgroup><col style=\"width: 25.0241%;\"><col style=\"width: 25.0241%;\"><col style=\"width: 25.0241%;\"><col style=\"width: 25.0241%;\"></colgroup>\n<tbody>\n<tr>\n<td style=\"text-align: center;\">&nbsp;</td>\n<td style=\"text-align: center;\">gwapo</td>\n<td style=\"text-align: center;\">mas gwapo</td>\n<td style=\"text-align: center;\">pinaka gwapo</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">bok</td>\n<td style=\"text-align: center;\">x</td>\n<td style=\"text-align: center;\">&nbsp;</td>\n<td style=\"text-align: center;\">x</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">pol</td>\n<td style=\"text-align: center;\">x</td>\n<td style=\"text-align: center;\">x</td>\n<td style=\"text-align: center;\">&nbsp;</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">jide</td>\n<td style=\"text-align: center;\">&nbsp;</td>\n<td style=\"text-align: center;\">x</td>\n<td style=\"text-align: center;\">x</td>\n</tr>\n</tbody>\n</table>', 'Business Inn Hotel', 'Bacolod', 'Granadaaa', 'Charito Heights', 'Hospitality and Tourism', '0908', '22222', 90855, 'to-infinity-and-beyond-chad4.jpg', '2023-06-27 16:23:54'),
 (7, 4, 'Pol B. Cuenca', 'pol@gmail.com', '<p>TELUS International designs, builds and delivers next-generation digital solutions to enhance the customer experience (CX) for global and disruptive brands. The company&rsquo;s services support the full lifecycle of its clients&rsquo; digital transformation journeys and enable them to more quickly embrace next-generation digital technologies to deliver better business outcomes. TELUS International&rsquo;s integrated solutions and capabilities span digital strategy, innovation, consulting and design, digital transformation and IT lifecycle solutions, data annotation and intelligent automation, and omnichannel CX solutions that include content moderation, trust and safety solutions, and other managed solutions. Fueling all stages of company growth, TELUS International partners with brands across high growth industry verticals, including tech and games, communications and media, eCommerce and fintech, healthcare, and travel and hospitality.</p>\n<p><strong>Industry</strong><br><span style=\"color: rgb(126, 140, 141);\">IT Services and IT Consulting</span><br><br><strong>Company size</strong><br><span style=\"color: rgb(126, 140, 141);\">10,001+ employees</span><br><span style=\"color: rgb(126, 140, 141);\">29,162 on LinkedIn&nbsp;</span><br><br><strong>Headquarters</strong><br><span style=\"color: rgb(126, 140, 141);\">Vancouver, British Columbia</span></p>', 'Lopues North-West', 'Bacolod', 'Brgy Balay', 'Balay', 'Education', '13579', '9999', 8888, 'giga_chad_steven.jpg', '2023-06-29 10:57:41'),
-(10, 5, 'Chicken', 'gabchicken@gmail.com', '', 'CHICKEN NI GAB ', 'City of Gab\'s Chicken', 'Brgy Gab', 'Balay ni gab', 'Information Technology', '123', '', 0, 'default.png', '2023-07-13 19:46:33'),
+(10, 5, 'Chicken joyism', 'gabchicken@gmail.com', '', 'CHICKEN NI GAB LOPEZ', 'City of Gab\'s Chicken', 'Brgy Gab', 'Balay ni gab', 'Information Technology', '123', '', 0, 'chicken.png', '2023-07-13 19:46:33'),
 (11, 10, 'test doe', 'test@gmail.com', '', 'TEST', 'Zuckland', 'Granada', 'Meta', 'Food and Beverages', '123123', '', 0, 'default.png', '2023-07-18 10:35:12'),
 (12, 24, 'John Doe', 'watsons@gmail.com', '', 'Watsons', 'Bacolod', 'Barangay 12', 'GF SM City Bacolod North Wing Poblacion Reclamation Area', 'Retail', '09123456789', '', 0, 'default.png', '2023-07-20 09:21:01');
 
@@ -214,14 +191,6 @@ CREATE TABLE `tbl_employment` (
 --
 
 INSERT INTO `tbl_employment` (`ID`, `employer_id`, `employee_id`, `position`, `start_date`, `end_date`, `status`, `rating`, `job_description`, `date_created`, `show_status`, `verified`) VALUES
-(37, 1, 1, 'assistant manager', '2023-03-09', '2023-06-17', 'part time', 5, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur posuere quam massa, quis facilisis enim mollis eget. Sed sollicitudin tortor vel nibh sollicitudin sagittis. Fusce tempor arcu at leo venenatis', '2023-06-30 00:00:00', 0, '0000-00-00'),
-(39, 6, 14, 'member', '2022-09-08', '2023-06-30', 'not hired', 2, 'hehehe', '2023-06-30 00:00:00', 1, '0000-00-00'),
-(41, 1, 27, 'CEO', '2009-02-18', '2021-02-02', 'its status', 10, 'a god dizon', '2023-06-30 15:30:55', 1, '0000-00-00'),
-(50, 1, 14, 'WORKER', '2023-02-08', '2023-07-20', 'full time', 3, '', '2023-07-06 11:19:17', 1, NULL),
-(55, 6, 1, 'manager', '2023-05-12', '2023-07-14', 'full time', 5, '', '2023-07-07 14:14:34', 1, NULL),
-(63, 10, 27, 'CHICKEN GOD', '2023-05-24', '2023-07-19', 'THE CHICKEN', 99, '', '2023-07-14 21:21:03', 1, NULL),
-(64, 10, 14, 'manok', '2023-07-05', '2023-07-08', 'Semi Full Time', 3, '', '2023-07-17 10:10:10', 1, NULL),
-(68, 10, 1, 'manok', '2023-06-12', '2023-07-18', 'Full Time', 3, '', '2023-07-18 09:31:49', 1, NULL),
 (71, 10, 32, 'manok', '2023-06-29', '2023-07-20', 'Full Time', 4, '', '2023-07-20 13:52:25', 1, NULL);
 
 -- --------------------------------------------------------
@@ -258,7 +227,9 @@ CREATE TABLE `tbl_follow` (
 INSERT INTO `tbl_follow` (`id`, `employee_id`, `employer_id`) VALUES
 (26, 32, 6),
 (27, 32, 1),
-(28, 32, 7);
+(28, 32, 7),
+(30, 36, 1),
+(31, 36, 6);
 
 -- --------------------------------------------------------
 
@@ -276,18 +247,21 @@ CREATE TABLE `tbl_jobposting` (
   `filled` varchar(255) DEFAULT NULL,
   `salary` varchar(255) NOT NULL,
   `shift` varchar(255) NOT NULL,
-  `job_type` varchar(255) NOT NULL
+  `job_type` varchar(255) NOT NULL,
+  `skills_req` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `tbl_jobposting`
 --
 
-INSERT INTO `tbl_jobposting` (`id`, `employer_id`, `title`, `description`, `date_posted`, `start_date`, `filled`, `salary`, `shift`, `job_type`) VALUES
-(33, 1, 'Virtual Assistant | WORK-FROM-HOME', 'At Outsourced Doers we recruit smart-working home-based Digital Marketing Virtual Assistants (VAs) and match them with clients (known as Founders) globally.\n\nThe Digital Marketing Virtual Assistant role is a remote assistant who will handle all the aspects of digital marketing and administrative work for the client.\n\nSimply put, digital marketing is a term used to describe online advertising. Common formats include email marketing, social media marketing, display advertising, blogs, and other digital formats.', '2023-07-04 15:40:15', NULL, 'OPEN', '10,000.00', 'Day-Shift', 'Permanent'),
-(35, 1, 'Technical Support Engineer I, Document Control - Blended WFH', 'In this role, you will:\r\n\r\nIdentify applicable documents as per the customer’s requirements and specifications.\r\nAttend document review meetings with the Project Administrator, Project Manager, and Document Controller.\r\nManage the documentation approval cycle and final documentation delivery to the customer (gather, prepare, and submit).', '2023-07-04 16:03:35', NULL, 'OPEN', '', '', ''),
-(36, 1, 'Assistant Manager, Accounting| Urdaneta', 'Job Description:\r\n\r\nASSISTS IN OPERATIONS AND MANAGEMENT: Provides assistance for the overall operations and management of the accounting department of the assigned business unit\r\n\r\n· IMPLEMENTATION\r\n\r\nEnsures efficient implementation of integral plan for the control of financial transactions\r\n\r\n· REPORTS AND ANALYSIS', '2023-07-07 10:20:58', NULL, 'CLOSED', '', '', ''),
-(45, 10, 'UI/UX', '<p>A UI/UX job description typically involves designing and improving user interfaces and experiences by conducting user research, creating wireframes and prototypes, collaborating with cross-functional teams, and ensuring a seamless and visually appealing interaction between users and digital products or services.</p>', '2023-07-17 15:37:31', NULL, 'OPEN', '15,000.00', 'Day-Shift', 'Part-Time');
+INSERT INTO `tbl_jobposting` (`id`, `employer_id`, `title`, `description`, `date_posted`, `start_date`, `filled`, `salary`, `shift`, `job_type`, `skills_req`) VALUES
+(33, 1, 'Virtual Assistant | WORK-FROM-HOME', 'At Outsourced Doers we recruit smart-working home-based Digital Marketing Virtual Assistants (VAs) and match them with clients (known as Founders) globally.\n\nThe Digital Marketing Virtual Assistant role is a remote assistant who will handle all the aspects of digital marketing and administrative work for the client.\n\nSimply put, digital marketing is a term used to describe online advertising. Common formats include email marketing, social media marketing, display advertising, blogs, and other digital formats.', '2023-07-04 15:40:15', NULL, 'OPEN', '10,000.00', 'Day-Shift', 'Permanent', ''),
+(35, 1, 'Technical Support Engineer I, Document Control - Blended WFH', 'In this role, you will:\r\n\r\nIdentify applicable documents as per the customer’s requirements and specifications.\r\nAttend document review meetings with the Project Administrator, Project Manager, and Document Controller.\r\nManage the documentation approval cycle and final documentation delivery to the customer (gather, prepare, and submit).', '2023-07-04 16:03:35', NULL, 'OPEN', '', '', '', ''),
+(36, 1, 'Assistant Manager, Accounting| Urdaneta', 'Job Description:\r\n\r\nASSISTS IN OPERATIONS AND MANAGEMENT: Provides assistance for the overall operations and management of the accounting department of the assigned business unit\r\n\r\n· IMPLEMENTATION\r\n\r\nEnsures efficient implementation of integral plan for the control of financial transactions\r\n\r\n· REPORTS AND ANALYSIS', '2023-07-07 10:20:58', NULL, 'CLOSED', '', '', '', ''),
+(45, 10, 'UI/UX', '<p>A UI/UX job description typically involves designing and improving user interfaces and experiences by conducting user research, creating wireframes and prototypes, collaborating with cross-functional teams, and ensuring a seamless and visually appealing interaction between users and digital products or services.</p>', '2023-07-17 15:37:31', NULL, 'OPEN', '15,000.00', 'Day-Shift', 'Part-Time', ''),
+(48, 1, 'UI/UX Developer', '<p>A UI/UX job description typically involves designing and improving user interfaces and experiences by conducting user research, creating wireframes and prototypes, collaborating with cross-functional teams, and ensuring a seamless and visually appealing interaction between users and digital products or services.</p>', '2023-07-17 15:37:31', NULL, 'OPEN', '20,000.00', 'Night-Shift', 'Permanent', ''),
+(50, 10, 'Software Developer (Permanent WFH)', '<p>As our operations expand in the Philippines, we are looking to hire highly motivated candidates who can grow with the company. As a Software Developer, you will be trained to be able to participate in the whole software development lifecycle: From inception and business analysis, development, testing, deployment and production support.</p>\r\n<p>We observe a 5-day (Monday to Friday) 40-hour work week with a remote friendly, flexible and asynchronous working schedule (core hours are between 3pm PHT and 8pm PHT.) Philippine holidays are observed with exceptions that depend on project circumstances.</p>\r\n<p>We build, operate and maintain B2B and B2C software solutions for Fortune 500 companies that are being used by their customers in at least 50 countries worldwide.</p>\r\n<p>You must have&nbsp;<strong>recent professional full-stack web application development experience</strong>&nbsp;using any popular application development framework to qualify.</p>\r\n<p>Recent graduates of a Bachelor Degree in Computer Science or Information Technology from a CHED-recognized Center of Excellence (CoE) or Center of Development (CoD) institution who belong to the top 15% of their graduating class are welcome to apply.</p>\r\n<p>Successful applicants will join an intensive tech stack and engineering practices training program that will last from 4 to 6 weeks.</p>\r\n<p><strong>Must-have Requirements</strong></p>\r\n<ul>\r\n<li>Recent professional full-stack application development experience using any of the following frameworks:&nbsp;<strong>ASP.NET</strong>, Laravel, Spring Boot, Express, Django, Ruby on Rails</li>\r\n<li>Adept at using any of the following database management systems:&nbsp;<strong>SQL Server</strong>,&nbsp;<strong>PostgreSQL</strong>, Oracle, MySQL/MariaDB, Sqlite, MongoDB, Firebase, Redis</li>\r\n<li>Confident in implementing responsive web pages with standards HTML5 and CSS3</li>\r\n<li>Able to converse fluently in English and Filipino in a professional setting</li>\r\n</ul>\r\n<p><strong>Preferred Qualifications</strong></p>\r\n<ul>\r\n<li>Experience in the&nbsp;<strong>Microsoft ASP.NET tech stack</strong>&nbsp;(Webforms, MVC, WebAPI) is an advantage.</li>\r\n<li>Working knowledge of any popular Javascript frontend framework (<strong>Svelte,&nbsp;</strong>Vue, NextJS, React)</li>\r\n<li>Have an eye for aesthetics, able to participate in user interface and experience design initiatives.</li>\r\n<li>Familiar working with any of the popular cloud computing services (Microsoft Azure, Amazon AWS, Google GCP)</li>\r\n<li>You have projects that are actively used in production</li>\r\n</ul>\r\n<p><strong>What&rsquo;s in it for you:</strong></p>\r\n<ul>\r\n<li>Government-mandated benefits (SSS, Philhealth, Pag-Ibig) on day 1</li>\r\n<li>Premium healthcare insurance coverage for you and one dependent (with Maxicare) upon regularization</li>\r\n<li>Up to 24 days paid leave credits annually</li>\r\n<li>Opportunity for technical growth with professional training and continuing education subsidy</li>\r\n<li>Work with a young, vibrant, results-oriented team in a flat and supportive engineering centric organization.</li>\r\n</ul>\r\n<p><strong>What it takes to be part of the team:</strong></p>\r\n<ul>\r\n<li>You must have an active wired Internet connection subscription (DSL, Fiber or Cable) with a reputable ISP that has nationwide coverage prior to being hired.</li>\r\n<li>Excellent command of the English language (listening comprehension, speaking, reading and writing) in a professional setting is absolutely required.</li>\r\n<li>Can confidently work with foreign colleagues abroad</li>\r\n</ul>', '2023-07-21 16:29:16', '2023-07-11', 'OPEN', '46,000 - PHP 72.00', 'Day', 'Permanent', 'C++,  Java');
 
 -- --------------------------------------------------------
 
@@ -300,8 +274,7 @@ CREATE TABLE `tbl_notification` (
   `user_id` int(11) NOT NULL,
   `title` text NOT NULL,
   `message` text NOT NULL,
-  `is_displayed` tinyint(1) NOT NULL DEFAULT 0,
-  `is_read` tinyint(1) NOT NULL DEFAULT 0,
+  `is_displayed` tinyint(1) NOT NULL,
   `date_created` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -309,9 +282,10 @@ CREATE TABLE `tbl_notification` (
 -- Dumping data for table `tbl_notification`
 --
 
-INSERT INTO `tbl_notification` (`id`, `user_id`, `title`, `message`, `is_displayed`, `is_read`, `date_created`) VALUES
-(1, 6, 'Application Accepted', 'Your application has been accepted.', 1, 0, '2023-07-20 23:08:49'),
-(2, 6, 'Application Accepted', 'Your application has been accepted.', 1, 0, '2023-07-20 23:46:35');
+INSERT INTO `tbl_notification` (`id`, `user_id`, `title`, `message`, `is_displayed`, `date_created`) VALUES
+(41, 5, 'Application Cancelled', 'The applicant has cancelled his/her application.', 1, '2023-07-21 12:13:32'),
+(49, 5, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 1, '2023-07-21 12:23:07'),
+(54, 5, 'Application Cancelled', 'The applicant has cancelled his/her application.', 1, '2023-07-21 12:30:19');
 
 -- --------------------------------------------------------
 
@@ -343,21 +317,6 @@ CREATE TABLE `tbl_training` (
   `hours` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
---
--- Dumping data for table `tbl_training`
---
-
-INSERT INTO `tbl_training` (`ID`, `Employee_id`, `title`, `training_description`, `venue`, `city`, `s_date`, `e_date`, `hours`) VALUES
-(1, 1, 'Interactive Workshop on UI/UX Design: Crafting Engaging User Experiences', '<p style=\"line-height: 1.4; text-align: justify;\">Hello! I\'m JD, a highly motivated and passionate fourth-year Computer Science student with a strong interest in software development. I have a solid foundation in programming languages like <span style=\"text-decoration: underline;\"><strong>Java</strong></span>, <span style=\"text-decoration: underline;\"><strong>Python</strong></span>, and <span style=\"text-decoration: underline;\"><strong>C++</strong></span>, along with expertise in data structures, algorithms, and web development using <span style=\"text-decoration: underline;\"><strong>HTML</strong></span>, <span style=\"text-decoration: underline;\"><strong>CSS</strong></span>, and <span style=\"text-decoration: underline;\"><strong>JavaScript</strong></span>.</p>', 'SMX Convention', '', '2023-07-06', '2023-07-06', 600),
-(4, 14, 'Test', '<p>Hello! I\'m Paul, a highly motivated and passionate fourth-year Computer Science student with a strong interest in software development. I have a solid foundation in programming languages like Java, Python, and C++, along with expertise in data structures, algorithms, and web development using HTML, CSS, and JavaScript. I thrive in collaborative environments, possess excellent problem-solving abilities, and actively seek opportunities to learn and grow. Currently seeking internship opportunities, I am eager to apply my skills and contribute to building innovative solutions as a software developer. Let\'s connect and discuss how I can add value to your organization!</p>', 'Balay ni pol', '', '2023-05-25', '2023-07-13', 12),
-(8, 27, 'Yes I am Kat', '<p style=\"text-align: justify;\"><s><strong>Yes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes I am KatYes&nbsp;</strong></s></p>', 'Kat Function Halll', '', '2023-04-14', '2023-11-29', 2000),
-(9, 27, 'IBM Full Stack Software Developer Professional Certificate', '<p><em><strong>LOREM IPSUM LOREM IPSUM LOREM IPSUM </strong>LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM<strong> IPSUM <span style=\"text-decoration: underline;\">LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM&nbsp;</span></strong></em></p>', 'SA GYM', '', '2023-02-14', '2023-07-12', 200),
-(10, 27, '[L4D2]', '<p style=\"padding-left: 40px;\"><span style=\"text-decoration: underline;\">Le for ded 2</span></p>', 'Online', 'Bacolod City', '2023-04-20', '2023-08-16', 200),
-(11, 1, 'Mastering UI/UX Design: A Workshop for Designers and Innovators', '<p style=\"text-align: justify;\">Are you ready to take your UI/UX design skills to the next level and create experiences that leave a lasting impact? Join our intensive workshop designed for designers and innovators seeking to refine their UI/UX expertise and create user-centered designs that captivate and engage.</p>', 'SMX', '', '2023-07-18', '2023-07-18', 5),
-(12, 1, 'Front-End Web Development Workshop: Building Modern and Responsive User Interfaces', '<p style=\"text-align: justify;\">In this hands-on training, our experienced instructors will guide you through the essential concepts and tools that form the foundation of front-end development. Whether you\'re a beginner looking to enter the field or an experienced developer seeking to enhance your skills, this workshop offers a dynamic learning experience tailored to all proficiency levels.</p>', 'Colegio San Agustin: Gymnasuim', '', '2023-07-17', '2023-07-27', 5),
-(13, 1, '123123', '<p>123123</p>', '123123', '123123', '2023-07-08', '2023-07-21', 123123123),
-(14, 1, 'Full-Stack Web Development Workshop: Creating Dynamic and Scalable Web Applications', '<p>In this immersive training program, our experienced instructors will guide you through the entire web development stack, covering both front-end and back-end technologies. Whether you\'re a beginner taking your first steps into web development or an experienced developer seeking to expand your skill set, this workshop offers a dynamic learning experience tailored to all proficiency levels.</p>', 'USLS Coliseum', 'Bacolod City', '2023-07-17', '2023-07-18', 101);
-
 -- --------------------------------------------------------
 
 --
@@ -377,7 +336,7 @@ CREATE TABLE `tbl_user` (
 --
 
 INSERT INTO `tbl_user` (`id`, `email`, `password`, `user_type`, `locker`) VALUES
-(2, '', '95d04a4f3e63f77b08a01dd95694292320e952aa', 'EMPLOYER', 'u@$~jgJJD4U1w^smk1G.w(Y&2C8RXOFCD0NUTvIQ1AsY9V<~hD'),
+(2, 'bi@gmail.com', '95d04a4f3e63f77b08a01dd95694292320e952aa', 'EMPLOYER', 'u@$~jgJJD4U1w^smk1G.w(Y&2C8RXOFCD0NUTvIQ1AsY9V<~hD'),
 (3, 'lopues@gmail.com', '488ba4bc58d39f02c84d51f2d579ebcb6f614b6f', 'EMPLOYER', 'f~oZ!yr7%Q^CEpMV&S#Z8TICz(r$?(GOrQaYM>rjK&Gt64gCUO'),
 (4, 'pol@gmail.com', '464f2961c6ea64e833467a148afd87bcf91982ab', 'EMPLOYER', 'cE$hL^t2oS&zs&$7NQoNRahuMgOt.cN)!&Nt6&gW7If!txT$Vt'),
 (5, 'gabchicken@gmail.com', '26aa893d5c8d46bdff3c93f51dcb9db8ea242cb6', 'EMPLOYER', 'd9ImbIOAh5Cvh&Wd\\w4Ey61q^9u1do?HC5EUfcAH72!%G(@MpB'),
@@ -486,7 +445,7 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT for table `tbl_applicant`
 --
 ALTER TABLE `tbl_applicant`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `tbl_employee`
@@ -498,13 +457,13 @@ ALTER TABLE `tbl_employee`
 -- AUTO_INCREMENT for table `tbl_employee_educ`
 --
 ALTER TABLE `tbl_employee_educ`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `tbl_employee_skill`
 --
 ALTER TABLE `tbl_employee_skill`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `tbl_employer`
@@ -528,19 +487,19 @@ ALTER TABLE `tbl_feedback`
 -- AUTO_INCREMENT for table `tbl_follow`
 --
 ALTER TABLE `tbl_follow`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `tbl_jobposting`
 --
 ALTER TABLE `tbl_jobposting`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `tbl_notification`
 --
 ALTER TABLE `tbl_notification`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT for table `tbl_skill`
@@ -606,7 +565,7 @@ ALTER TABLE `tbl_notification`
 -- Constraints for table `tbl_training`
 --
 ALTER TABLE `tbl_training`
-  ADD CONSTRAINT `fk_training_employee_id` FOREIGN KEY (`Employee_id`) REFERENCES `tbl_employee` (`ID`);
+  ADD CONSTRAINT `fk_training_employee_id` FOREIGN KEY (`Employee_id`) REFERENCES `tbl_employee` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

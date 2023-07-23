@@ -54,11 +54,15 @@ class Notification extends MY_Controller
         flush();
     }
 
-    public function viewNotifications()
+    public function displayNotifications()
     {
-        $data['notifications'] = $this->Notification_model->getNotifications($this->userdata->user_id);
-        $view = $this->load->view('notif_nav', $data, true);
+        $result = $this->Notification_model->getNotifications($this->userdata->user_id);
 
-        $this->output->set_content_type('text/html')->set_output($view);
+        $data = [
+            'notifications' => $result['notifications'],
+            'user_type' => $result['user_type'],
+        ];
+
+        $this->load->view('components/display_notifications', $data);
     }
 }

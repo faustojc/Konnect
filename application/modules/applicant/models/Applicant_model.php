@@ -35,6 +35,7 @@ class Applicant_model extends CI_Model
             ->from($this->Table->applicant)
             ->join($this->Table->employee, 'tbl_employee.ID = tbl_applicant.employee_id', 'inner')
             ->where('job_id', $job_id)
+            ->order_by('tbl_applicant.date_created', 'DESC')
             ->get()->result();
     }
 
@@ -49,6 +50,7 @@ class Applicant_model extends CI_Model
             ->join($this->Table->employer, 'tbl_employer.id = tbl_jobposting.employer_id')
             ->join($this->Table->employee, 'tbl_employee.ID = tbl_applicant.employee_id')
             ->where('tbl_employer.id', $employer_id)
+            ->order_by('tbl_applicant.date_created', 'DESC')
             ->get()->result();
     }
 
@@ -80,6 +82,7 @@ class Applicant_model extends CI_Model
             ->join($this->Table->jobposting, 'tbl_jobposting.id = tbl_applicant.job_id')
             ->join($this->Table->employer, 'tbl_employer.id = tbl_jobposting.employer_id')
             ->where('employee_id', $employee_id)
+            ->order_by('tbl_applicant.date_created', 'DESC')
             ->get()->result();
     }
 
@@ -109,6 +112,7 @@ class Applicant_model extends CI_Model
         return $this->db->select()
             ->from($this->Table->applicant)
             ->where('employee_id', $employee_id)
+            ->order_by('date_created', 'DESC')
             ->get()->result();
     }
 

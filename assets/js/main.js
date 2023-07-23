@@ -123,7 +123,7 @@ function formAction(url, request_type, data, callback = () => {}) {
 }
 
 function info(title, message, delay) {
-    createToast(title, message, delay, 'bg-light', 'fa fa-info');
+    createToast(title, message, delay, 'bg-info', 'fa fa-info');
 }
 
 function success(title, message, delay) {

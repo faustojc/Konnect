@@ -4,12 +4,21 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Applicant extends MY_Controller
 {
     private $userdata;
+    private $auth;
+    private $id;
 
     public function __construct()
     {
         parent::__construct();
 
         $this->userdata = get_userdata(USER);
+        $this->auth = get_userdata(AUTH);
+
+        if ($this->auth['user_type'] == 'EMPLOYER') {
+            $id = $this->userdata->id;
+        } else {
+            $id = $this->userdata->ID;
+        }
 
         $model_list = array(
             'jobposting/Jobposting_model',
@@ -35,13 +44,15 @@ class Applicant extends MY_Controller
             // Send a notification to the employer by adding a new notification
             $info = array(
                 'user_id' => $targetDetails->user_id,
+                'from_user_id' => $this->id,
                 'title' => 'New Applicant in your job post',
                 'message' => 'A new applicant has applied to your job post.',
-                'link' => 'get_own_selected_job?job=' . $job_id,
+                'link' => base_url() . 'jobposting?id=' . $job_id,
             );
         } else {
             $info = array(
                 'user_id' => $targetDetails->user_id,
+                'from_user_id' => $this->id,
                 'title' => 'Application Cancelled',
                 'message' => 'The applicant has cancelled his/her application.',
             );
@@ -62,6 +73,7 @@ class Applicant extends MY_Controller
         // Send a notification to the applicant by adding a new notification
         $info = array(
             'user_id' => $employeeDetails->employeeUserID,
+            'from_user_id' => $this->id,
             'title' => 'Application Accepted',
             'message' => $employer->employerName . ' has accepted your application.',
             'link' => base_url() . 'jobposting?id=' . $data['job_id'],
@@ -82,6 +94,7 @@ class Applicant extends MY_Controller
         // Send a notification to the applicant by adding a new notification
         $info = array(
             'user_id' => $employeeDetails->employeeUserID,
+            'from_user_id' => $this->id,
             'title' => 'Application Rejected',
             'message' => $employer->employerName . ' has rejected your application.',
             'link' => base_url() . 'jobposting?id=' . $data['job_id'],

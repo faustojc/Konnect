@@ -14,22 +14,21 @@ class Notification_model extends CI_Model
 
     public function getNotifications($user_id = null)
     {
-        $result = null;
         $user_type = $this->db->select('user_type')->from($this->Table->user)->where('id', $user_id)->get()->row()->user_type;
 
         if ($user_id) {
             if ($user_type == 'EMPLOYER') {
-                $result = $this->db->select('tbl_notification.*, tbl_employer.id as targetID, tbl_employer.tradename AS userName')
+                $result = $this->db->select('tbl_notification.*, tbl_employee.ID as userId, CONCAT_WS(" ", tbl_employee.Fname, tbl_employee.Mname, tbl_employee.Lname) AS userName, tbl_employee.Employee_image AS userImage')
                     ->from($this->Table->notification)
                     ->where('tbl_notification.user_id', $user_id)
-                    ->join($this->Table->employer, 'tbl_employer.user_id = tbl_notification.user_id')
+                    ->join($this->Table->employee, 'tbl_employee.user_id = tbl_notification.from_user_id')
                     ->order_by('date_created', 'DESC')
                     ->get()->result();
             } else {
-                $result = $this->db->select('tbl_notification.*, tbl_employee.ID as targetID, CONCAT_WS(" ", tbl_employee.Fname, tbl_employee.Mname, tbl_employee.Lname) AS userName')
+                $result = $this->db->select('tbl_notification.*, tbl_employer.id as userId, tbl_employer.tradename AS userName, tbl_employer.image AS userImage')
                     ->from($this->Table->notification)
                     ->where('tbl_notification.user_id', $user_id)
-                    ->join($this->Table->employee, 'tbl_employee.user_id = tbl_notification.user_id')
+                    ->join($this->Table->employer, 'tbl_employer.user_id = tbl_notification.from_user_id')
                     ->order_by('date_created', 'DESC')
                     ->get()->result();
             }
@@ -38,7 +37,7 @@ class Notification_model extends CI_Model
                 ->get($this->Table->notification)->result();
         }
 
-        return $result;
+        return array('notifications' => $result, 'user_type' => $user_type);
     }
 
     public function getNewNotifications($user_id)
@@ -64,7 +63,7 @@ class Notification_model extends CI_Model
         $this->db->where('date_created <', $threshold);
         $this->db->delete('notifications');
     }
-    
+
     /**
      * @throws Exception
      */

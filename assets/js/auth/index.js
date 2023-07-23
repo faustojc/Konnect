@@ -12,6 +12,16 @@ async function pollNotifications() {
 
 document.addEventListener('DOMContentLoaded', function () {
     pollNotifications().then(response => {
-        setInterval(pollNotifications, 3000);
+        setInterval(pollNotifications, 4500);
     });
+
+    // Display all notifications
+    const notifications = document.querySelector('#notifications');
+    if (notifications) {
+        fetch(baseUrl + 'notification/displayNotifications')
+            .then(response => response.text())
+            .then(data => {
+                notifications.innerHTML = data;
+            });
+    }
 });

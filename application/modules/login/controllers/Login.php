@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Login extends MY_Controller
 {
     protected $userdata;
-    private $data = [];
+    private array $data = [];
 
     public function __construct()
     {
@@ -58,12 +58,12 @@ class Login extends MY_Controller
     public function getChooseForm()
     {
         $this->data['content'] = 'grid/choose';
-        echo $this->load->view('layout', $this->data, true);
+        $this->load->view('layout', $this->data);
     }
 
     public function getLoginForm()
     {
         $this->data['content'] = 'grid/login';
-        echo $this->load->view('layout', $this->data, true);
+        $this->load->view('layout', $this->data);
     }
 }

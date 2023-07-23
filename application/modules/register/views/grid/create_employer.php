@@ -2,7 +2,7 @@
     <div class="row pb-3">
         <div class="col-md-12">
             <label for="tradename">Trade Name</label>
-            <input type="text" class="form-control border-0" name="tradename" id="tradename" style=" font-size:14px; border-radius:15px; background-color: #F4F6F7;" >
+            <input type="text" class="form-control border-0" name="tradename" id="tradename" style=" font-size:14px; border-radius:15px; background-color: #F4F6F7;">
         </div>
 
         <div class="col-md-6">

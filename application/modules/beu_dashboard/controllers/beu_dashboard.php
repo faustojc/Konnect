@@ -59,8 +59,8 @@ class beu_dashboard extends MY_Controller
         if ($this->auth['user_type'] == 'EMPLOYER') {
             $this->data['user_display'] = $this->load->view('grid/load_employer', $this->data, true);
         } else {
-            $this->data['user_display'] = $this->load->view('grid/load_employee', $this->data, true);
             $this->data['skills_section_view'] = $this->load->view('grid/dash_load_skill', $this->data, TRUE);
+            $this->data['user_display'] = $this->load->view('grid/load_employee', $this->data, true);
         }
 
         $this->data['content'] = 'index';

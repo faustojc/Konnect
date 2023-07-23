@@ -27,9 +27,9 @@ class Employee_profile extends MY_Controller
         ];
         $this->load->model($model_list);
 
-        $ID = $this->uri->segment(3);
-        $currentUser = $this->eModel->get_employee($ID);
-        $this->has_permission = $this->Auth_model->check_permission($this->userdata, $currentUser);
+        $ID = $this->input->get('id');
+        $otherUser = $this->eModel->get_employee($ID);
+        $this->has_permission = $this->Auth_model->check_permission($this->userdata, $otherUser);
     }
 
     /** load main page */
@@ -56,7 +56,7 @@ class Employee_profile extends MY_Controller
             $this->data['following'] = $this->follow_model->get_following($ID);
         }
 
-        $this->data['current_following'] = $this->follow_model->get_following($ID);
+        $this->data['current_following'] = $this->follow_model->get_following($this->userdata->ID);
 
         $this->db->cache_off();
 

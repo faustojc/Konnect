@@ -110,19 +110,21 @@ if (!empty($educ_val)) {
 
         <?php
     }
-} else {
-    ?>
+} else { ?>
 
     <div class="d-flex flex-column flex-grow-1 px-2 py-2">
-        <div class="d-flex align-items-center mb-1">
-            <h5 class=" ml-1"><i class="fa-solid fa-pen-to-square "></i> Add Education</h5>
-        </div>
-        <div class="d-flex flex-column flex-grow-1">
-            <p class="fs-14">Showcase your academic background to strengthen your professional profile.</p>
-            <button type="button" class="btn btn-light rounded-pill edit-summary" style="border-width: 2px" data-toggle="modal" data-target="#ModalEduc">Add Education</button>
-        </div>
+        <?php if ($has_permission): ?>
+            <div class="d-flex align-items-center mb-1">
+                <h5 class=" ml-1"><i class="fa-solid fa-pen-to-square "></i> Add Education</h5>
+            </div>
+            <div class="d-flex flex-column flex-grow-1">
+                <p class="fs-14">Showcase your academic background to strengthen your professional profile.</p>
+                <button type="button" class="btn btn-light rounded-pill edit-summary" style="border-width: 2px" data-toggle="modal" data-target="#ModalEduc">Add Education</button>
+            </div>
+        <?php else: ?>
+            <div>
+                This user has not added any education yet.
+            </div>
+        <?php endif; ?>
     </div>
-
-<?php
-}
-?>
+<?php } ?>

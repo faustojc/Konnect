@@ -1,6 +1,66 @@
-<?php
-$ci = &get_instance();
-if (!empty($employments['employers'])) {
+<style>
+    a {
+        color: black;
+    }
+
+    .edit_btn,
+    .delete_btn {
+        padding-top: 2px;
+        border: none;
+    }
+
+    a:hover {
+        color: #435861;
+    }
+
+    ul.timeline {
+        list-style-type: none;
+        position: relative;
+        margin: 0;
+    }
+
+    ul.timeline:before {
+        content: ' ';
+        background: #ececec;
+        display: inline-block;
+        position: absolute;
+        left: 29px;
+        width: 2px;
+        height: 134%;
+        z-index: 400;
+    }
+
+    ul.timeline > li {
+        margin: 0;
+        padding-left: 50px;
+    }
+
+    ul.timeline > li:before {
+        content: ' ';
+        background: white;
+        display: inline-block;
+        position: absolute;
+        border-radius: 50%;
+        border: 3px solid #0dcaf0;
+        left: 20px;
+        width: 20px;
+        height: 20px;
+        z-index: 400;
+    }
+
+    .star-rating::before {
+        content: "⭐⭐⭐⭐⭐";
+    }
+
+    .star-rating {
+        display: inline-block;
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+<?php if (!empty($employments['employers'])) {
     for ($i = 0; $i < count($employments['employers']); ++$i) {
         $employer = $employments['employers'][$i];
         $employment = $employments['employments'][$i];
@@ -122,80 +182,21 @@ if (!empty($employments['employers'])) {
 
         <?php
     }
-} else {
-    ?>
-
+} else { ?>
     <div class="d-flex flex-column flex-grow-1 px-2 py-2">
-        <div class="d-flex align-items-center mb-1">
-            <h5 class=" ml-1"><i class="fa-solid fa-pen-to-square "></i> Add Employment</h5>
-        </div>
-        <div class="d-flex flex-column flex-grow-1">
-            <p class="fs-14">Share your professional experience to establish credibility for potential employers.</p>
-            <button type="button" class="btn btn-light rounded-pill edit-summary" style="border-width: 2px" data-toggle="modal" data-target="#modalAddEmp">Add Employment</button>
-        </div>
+        <?php if ($has_permission): ?>
+            <div class="d-flex align-items-center mb-1">
+                <h5 class=" ml-1"><i class="fa-solid fa-pen-to-square "></i> Add Employment</h5>
+            </div>
+            <div class="d-flex flex-column flex-grow-1">
+                <p class="fs-14">Share your professional experience to establish credibility for potential employers.</p>
+                <button type="button" class="btn btn-light rounded-pill edit-summary" style="border-width: 2px" data-toggle="modal" data-target="#modalAddEmp">Add Employment</button>
+            </div>
+        <?php else: ?>
+            <div>
+                This user has no employment history.
+            </div>
+        <?php endif; ?>
     </div>
+<?php } ?>
 
-    <?php
-} ?>
-
-<style>
-    a {
-        color: black;
-    }
-
-    .edit_btn,
-    .delete_btn {
-        padding-top: 2px;
-        border: none;
-    }
-
-    a:hover {
-        color: #435861;
-    }
-
-    ul.timeline {
-        list-style-type: none;
-        position: relative;
-        margin: 0;
-    }
-
-    ul.timeline:before {
-        content: ' ';
-        background: #ececec;
-        display: inline-block;
-        position: absolute;
-        left: 29px;
-        width: 2px;
-        height: 134%;
-        z-index: 400;
-    }
-
-    ul.timeline > li {
-        margin: 0;
-        padding-left: 50px;
-    }
-
-    ul.timeline > li:before {
-        content: ' ';
-        background: white;
-        display: inline-block;
-        position: absolute;
-        border-radius: 50%;
-        border: 3px solid #0dcaf0;
-        left: 20px;
-        width: 20px;
-        height: 20px;
-        z-index: 400;
-    }
-
-    .star-rating::before {
-    content: "⭐⭐⭐⭐⭐";
-    }
-
-    .star-rating {
-        display: inline-block;
-        background-clip: text;
-        -webkit-background-clip: text;
-        color: rgba(0, 0, 0, 0.1);
-    }
-</style>

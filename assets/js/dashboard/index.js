@@ -96,7 +96,7 @@ if (seeMoreButtons) {
                     jobDescription.style.overflowY = "visible";
                 } else {
                     button.textContent = "See more";
-                    jobDescription.style.maxHeight = "450px";
+                    jobDescription.style.maxHeight = "300px";
                     jobDescription.style.overflowY = "hidden";
                 }
             }

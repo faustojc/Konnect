@@ -48,13 +48,14 @@ const acceptRejectBtnFunction = () => {
     if (acceptBtn) {
         acceptBtn.forEach(btn => {
             btn.addEventListener('click', function (event) {
-                const application_id = btn.dataset.id;
+                const application_id = btn.getAttribute('data-id');
+                const job_id = btn.getAttribute('data-job-id');
                 const url = baseUrl + 'applicant/accept';
 
                 fetch(url, {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({application_id: application_id})
+                    body: JSON.stringify({application_id: application_id, job_id: job_id})
                 }).then(response => response.text())
                     .then(data => {
                         btn.textContent = 'ACCEPTED';
@@ -77,13 +78,14 @@ const acceptRejectBtnFunction = () => {
     if (rejectBtn) {
         rejectBtn.forEach(btn => {
             btn.addEventListener('click', function (event) {
-                const application_id = btn.dataset.id;
+                const application_id = btn.getAttribute('data-id');
+                const job_id = btn.getAttribute('data-job-id');
                 const url = baseUrl + 'applicant/reject';
 
                 fetch(url, {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({application_id: application_id})
+                    body: JSON.stringify({application_id: application_id, job_id: job_id})
                 }).then(response => response.text())
                     .then(data => {
                         btn.textContent = 'REJECTED';

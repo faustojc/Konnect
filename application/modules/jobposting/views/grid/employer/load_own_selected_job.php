@@ -102,8 +102,8 @@ if ($timeDiff < 60) {
                 </div>
                 <div style="transform: scale(0.8);" class="col-12 col-md-6 pt-3 pt-md-0 d-flex align-items-center">
                     <div class="d-flex justify-content-start">
-                        <button type="button" class="btn btn-info mr-2 text-dark btn-accept" data-id="<?= $applicant->id ?>">Accept</button>
-                        <button type="button" class="btn btn-secondary btn-reject" data-id="<?= $applicant->id ?>">Reject</button>
+                        <button type="button" class="btn btn-info mr-2 text-dark btn-accept" data-id="<?= $applicant->id ?>" data-job-id="<?= $applicant->job_id ?>">Accept</button>
+                        <button type="button" class="btn btn-secondary btn-reject" data-id="<?= $applicant->id ?>" data-job-id="<?= $applicant->job_id ?>">Reject</button>
                     </div>
                 </div>
             <?php } endforeach; ?>
@@ -126,5 +126,4 @@ if ($timeDiff < 60) {
             </div>
         <?php endif; ?>
     </div>
-</div>
 </div>

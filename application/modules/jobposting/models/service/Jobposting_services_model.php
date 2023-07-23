@@ -27,19 +27,21 @@ class Jobposting_services_model extends CI_Model
             $this->db->insert($this->Table->jobposting, $info);
             $this->db->trans_complete();
 
+            $new_id = $this->db->insert_id();
+
             if ($this->db->trans_status() === FALSE) {
                 $this->db->trans_rollback();
-                return array('message' => ERROR_PROCESSING, 'has_error' => true);
+                return array('message' => ERROR_PROCESSING, 'has_error' => true, 'id' => $new_id);
             } else {
                 $this->db->trans_commit();
                 return array('message' => SAVED_SUCCESSFUL, 'has_error' => false);
             }
         } catch (Exception $msg) {
-            return (array('message' => $msg->getMessage(), 'has_error' => true));
+            return array('message' => $msg->getMessage(), 'has_error' => true);
         }
     }
 
-    public function update($info)
+    public function update($info): array
     {
         try {
             $this->db->trans_start();

@@ -244,7 +244,7 @@ main_header(['Employer_profile']);
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text border-0" style="border-radius:10px 0 0 10px;">₱</span>
                                                         </div>
-                                                        <input id="salary" name="salary" type="text" onclick="disableDotZero()" onblur="formatInput()" oninput="formatInput2()" class="form-control border-0"
+                                                        <input id="salary" name="salary" type="text" onclick="disableDotZero()" oninput="formatInput2()" class="form-control border-0"
                                                                style="background-color: #F4F6F7; border-radius:0 10px 10px 0; " placeholder="Input Salary ">
                                                     </div>
                                                 </div>
@@ -312,7 +312,7 @@ main_header(['Employer_profile']);
 
                 <!-- JOBPOSTS -->
                 <div id="jobpost_section">
-                    <?= $jobpost_section_view ?>
+                    <?php jobpost_all_display($jobpostings); ?>
                 </div>
             </div>
 

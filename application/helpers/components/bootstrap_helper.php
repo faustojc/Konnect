@@ -29,28 +29,72 @@ if (!function_exists('modal')) {
     }
 }
 
-if (!function_exists('showNotification')) {
+if (!function_exists('jobpost_all_display')) {
     /**
-     * Show Notification Component
+     * Jobpostings Display Component
      *
-     * A component that shows a notification.
+     * A component that displays all the jobposts.
      *
-     * USAGE: showNotification($type, $message);
+     * USAGE: jobpost_display($data);
      *
-     * @param string $type The type of the notification. 'Success', 'Error', 'Warning', 'Info'
-     * @param string $title The title of the notification.
-     * @param string $message The message of the notification.
+     * @param array $data The array of jobposts.
      */
-    function showNotification(string $type, string $title, string $message)
+    function jobpost_all_display(array $data)
     {
+        $jobpostings = $data;
+
         $data = array(
-            'type' => $type,
-            'title' => $title,
-            'message' => $message
+            'jobpostings' => $jobpostings
         );
 
         $CI = &get_instance();
-        $CI->load->view('components/show_notification', $data);
+        $CI->load->view('components/jobpost_all_display', $data);
+    }
+}
+
+if (!function_exists('jobpost_update_modal')) {
+    /**
+     * Modal for Jobpost Editing Component
+     *
+     * A component that creates a modal for jobpost editing.
+     *
+     * USAGE: jobpost_update_modal($data, $modalId);
+     *
+     * @param stdClass $data The data of jobpost must contain the same keys as the database table.
+     * @param string $modalId The id of the modal.
+     */
+    function jobpost_update_modal(stdClass $data, string $modalId)
+    {
+        $jobpost = $data;
+
+        $data = array(
+            'jobpost' => $jobpost,
+            'modalId' => $modalId,
+        );
+
+        $CI = &get_instance();
+        $CI->load->view('components/jobpost_update_modal', $data);
+    }
+}
+
+if (!function_exists('displayNotifications')) {
+    /**
+     * Display Notifications Component
+     *
+     * A component that displays all notifications.
+     *
+     * USAGE: displayNotifications($notifications);
+     *
+     * @param array $notifications The array of data of notifications.
+     */
+    function displayNotifications(array $notifications)
+    {
+        $data = array(
+            'notifications' => $notifications,
+        );
+
+        $CI = &get_instance();
+        $CI->load->view('components/display_notifications', $data);
     }
 }
 
@@ -145,33 +189,11 @@ if (!function_exists('load_following')) {
     }
 }
 
-if (!function_exists('load_jobpost')) {
-    /**
-     * Load Jobpostings Component
-     *
-     * A component that loads jobpostings.
-     *
-     * USAGE: load_jobpostings($jobpostings);
-     *
-     * @param array $jobpost The data of jobpost.
-     */
-    function load_jobpost(array $jobpost)
-    {
-        $data = array(
-            '$jobpost' => $jobpost
-        );
-
-        $CI = &get_instance();
-
-        $CI->load->view('components/load_jobpost', $data);
-    }
-}
-
 if (!function_exists('apply_button')) {
     /**
-     * Apply Button Component
+     * Apply Button Component for Employee
      *
-     * A component that creates an apply button.
+     * A component that creates an apply button for employee.
      *
      * USAGE: apply_button($jobpost);
      *

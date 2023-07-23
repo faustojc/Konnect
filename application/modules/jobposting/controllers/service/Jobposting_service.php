@@ -27,13 +27,20 @@ class Jobposting_service extends MY_Controller
         $data['employer_id'] = $this->userdata->id;
 
         $response = $this->job_service_model->save($data);
-        $employer_image = $this->employer_model->getEmployerOnly('image', $this->userdata->id);
+        $employer_image = $this->employer_model->getEmployerOnly('image, tradename', $this->userdata->id);
 
-        $info['jobpost'] = $data;
-        $info['jobpost']['EmployerLogo'] = $employer_image->image;
+        $data['EmployerLogo'] = $employer_image->image;
+        $data['EmployerTradename'] = $employer_image->tradename;
+        $data['id'] = $response['id'];
+
+        $jobpost = array(
+            'jobpost' => (object)$data,
+        );
 
         if (!$response['has_error']) {
-            echo $this->load->view('components/load_jobpost', $info, true);
+            $view = $this->load->view('components/load_jobpost', $jobpost, true);
+
+            $this->output->set_content_type('text/html')->set_output($view);
         } else {
             echo json_encode($response);
         }

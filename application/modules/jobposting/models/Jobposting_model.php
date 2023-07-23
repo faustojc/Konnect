@@ -55,7 +55,7 @@ class Jobposting_model extends CI_Model
 
     public function getEmployerByJobpost($job_id)
     {
-        return $this->db->select('tbl_employer.user_id')
+        return $this->db->select('tbl_employer.id, tbl_employer.user_id')
             ->from($this->Table->jobposting)
             ->join($this->Table->employer, $this->Table->employer . '.id = ' . $this->Table->jobposting . '.employer_id')
             ->where('tbl_jobposting.id', $job_id)

@@ -41,9 +41,11 @@ document.head.appendChild(style);
 // ####### END OF STYLES #######
 
 const status_badge = () => {
-    const status = document.querySelectorAll('.job-status');
+    const statuses = document.querySelectorAll('.job-status');
 
-    status.forEach(function (status) {
+    statuses.forEach(function (status) {
+        status.textContent = status.textContent.replace(/\s+/g, '').toUpperCase();
+
         // Change status color
         if (status.textContent.includes('OPEN')) {
             status.classList.remove('badge-danger');
@@ -62,19 +64,13 @@ const jobSelectedDisplayEvent = (url) => {
     joblink.forEach(job => {
         job.addEventListener('click', function () {
             const id = this.dataset.id;
-            const param = new URLSearchParams({id: id});
 
             const jobDetails = job.closest('.job-content').querySelector('.job-details');
 
             displaySingleLoadingCard(jobDetails);
 
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: param
-            }).then(response => response.text())
+            fetch(url + '?id=' + id)
+                .then(response => response.text())
                 .then(data => {
                     jobDetails.innerHTML = data;
 
@@ -85,23 +81,12 @@ const jobSelectedDisplayEvent = (url) => {
     });
 }
 
+
 document.addEventListener('DOMContentLoaded', function () {
     status_badge();
 
     // TinyMCE
     textareaEditor('textarea');
-
-    displayLoadingCard('#job_feed');
-
-    fetch(baseUrl + 'jobposting/job_feed')
-        .then(response => response.text())
-        .then(data => {
-            const jobList = document.querySelector('#job_feed');
-            jobList.innerHTML = data;
-
-            status_badge();
-            jobSelectedDisplayEvent(baseUrl + 'jobposting/get_selected_job');
-        });
 
     const navJobFeed = document.querySelector('#nav-job-feed');
     if (navJobFeed) {
@@ -121,6 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // For employers where they can view their own job posts
     const navJobPosted = document.querySelector('#nav-job-posted');
     if (navJobPosted) {
         navJobPosted.addEventListener('click', function () {
@@ -139,6 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // For employees where they can view their applied jobs
     const navAppliedJob = document.querySelector('#nav-application');
     if (navAppliedJob) {
         navAppliedJob.addEventListener('click', function () {
@@ -155,6 +142,76 @@ document.addEventListener('DOMContentLoaded', function () {
                     jobSelectedDisplayEvent(baseUrl + 'jobposting/get_selected_applied_job');
                 });
         });
+    }
+
+    displayLoadingCard('#job_feed');
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+
+    // If there is a job ID in link, display the job details
+    if (id) {
+        //displaySingleLoadingCard(jobDetails);
+
+        fetch(baseUrl + 'jobposting/job_info?id=' + id)
+            .then(response => response.json())
+            .then(data => {
+                const jobNavLinks = document.querySelectorAll('.nav-job .nav-link');
+                jobNavLinks.forEach(jobNav => {
+                    jobNav.classList.remove('active');
+                    jobNav.setAttribute('aria-selected', 'false');
+                });
+
+                const tabPanes = document.querySelectorAll('.tab-pane');
+                tabPanes.forEach(tabPane => {
+                    tabPane.classList.remove('show', 'active');
+                });
+
+                let jobContent;
+
+                if (data.user_type.toUpperCase() === 'EMPLOYER') {
+                    const navJobPosted = document.querySelector('#nav-job-posted');
+                    navJobPosted.classList.toggle('active');
+                    navJobPosted.setAttribute('aria-selected', 'true');
+
+                    const jobTabPosted = document.querySelector('#posted-tab');
+                    jobTabPosted.classList.add('show', 'active');
+
+                    const jobPosted = document.querySelector('#job_posted');
+                    jobPosted.innerHTML = data.jobs;
+
+                    jobContent = jobPosted;
+                    jobSelectedDisplayEvent(baseUrl + 'jobposting/get_own_selected_job');
+                } else {
+                    const navApplication = document.querySelector('#nav-application');
+                    navApplication.classList.toggle('active');
+                    navApplication.setAttribute('aria-selected', 'true');
+
+                    const jobTabApplied = document.querySelector('#job_applied');
+                    jobTabApplied.classList.add('show', 'active');
+
+                    const ownJobApplied = document.querySelector('#job_applied');
+                    ownJobApplied.innerHTML = data.jobs;
+
+                    jobContent = ownJobApplied;
+                    jobSelectedDisplayEvent(baseUrl + 'jobposting/get_selected_applied_job');
+                }
+
+                const jobDetails = jobContent.querySelector('.job-content .job-details')
+                jobDetails.innerHTML = data.selected;
+
+                status_badge();
+                acceptRejectBtnFunction();
+            });
+    } else {
+        fetch(baseUrl + 'jobposting/job_feed')
+            .then(response => response.text())
+            .then(data => {
+                const jobList = document.querySelector('#job_feed');
+                jobList.innerHTML = data;
+
+                status_badge();
+                jobSelectedDisplayEvent(baseUrl + 'jobposting/get_selected_job');
+            });
     }
 });
 

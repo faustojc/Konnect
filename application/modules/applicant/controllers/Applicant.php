@@ -37,15 +37,14 @@ class Applicant extends MY_Controller
                 'user_id' => $targetDetails->user_id,
                 'title' => 'New Applicant in your job post',
                 'message' => 'A new applicant has applied to your job post.',
+                'link' => 'get_own_selected_job?job=' . $job_id,
             );
-
         } else {
             $info = array(
                 'user_id' => $targetDetails->user_id,
                 'title' => 'Application Cancelled',
                 'message' => 'The applicant has cancelled his/her application.',
             );
-
         }
 
         $this->Notification_model->add($info);
@@ -65,6 +64,7 @@ class Applicant extends MY_Controller
             'user_id' => $employeeDetails->employeeUserID,
             'title' => 'Application Accepted',
             'message' => $employer->employerName . ' has accepted your application.',
+            'link' => base_url() . 'jobposting?id=' . $data['job_id'],
         );
 
         $this->Notification_model->add($info);
@@ -84,6 +84,7 @@ class Applicant extends MY_Controller
             'user_id' => $employeeDetails->employeeUserID,
             'title' => 'Application Rejected',
             'message' => $employer->employerName . ' has rejected your application.',
+            'link' => base_url() . 'jobposting?id=' . $data['job_id'],
         );
 
         $this->Notification_model->add($info);

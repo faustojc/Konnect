@@ -38,12 +38,12 @@ main_header(['jobposting']);
                 </div>
             </div>
             <nav class=" pt-4">
-                <div class="nav nav-tabs  d-flex justify-content-center" id="nav-tab" role="tablist" style="font-size:20px; font-weight:500;">
-                    <a class="nav-item nav-link active" id="nav-job-feed" data-toggle="tab" href="#job-feed" role="tab" aria-controls="job-feed" aria-selected="true">
+                <div class="nav nav-tabs d-flex justify-content-center nav-job" id="nav-tab" role="tablist" style="font-size:20px; font-weight:500;">
+                    <a class="nav-item nav-link active" id="nav-job-feed" data-toggle="tab" href="#feed-tab" role="tab" aria-controls="job-feed" aria-selected="true">
                         Job Feed
                     </a>
                     <?php if ($auth['user_type'] == 'EMPLOYER'): ?>
-                        <a class="nav-item nav-link" id="nav-job-posted" data-toggle="tab" href="#job-posted" role="tab" aria-controls="job-posted" aria-selected="false">
+                        <a class="nav-item nav-link" id="nav-job-posted" data-toggle="tab" href="#posted-tab" role="tab" aria-controls="job-posted" aria-selected="false">
                             Your Job Listing
                         </a>
                     <?php else: ?>
@@ -55,11 +55,11 @@ main_header(['jobposting']);
             </nav>
 
             <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="job-feed" role="tabpanel" aria-labelledby="nav-job-feed">
+                <div class="tab-pane fade show active" id="feed-tab" role="tabpanel" aria-labelledby="nav-job-feed">
                     <div class="card-body pt-5" id="job_feed"></div>
                 </div>
                 <?php if ($auth['user_type'] == 'EMPLOYER'): ?>
-                    <div class="tab-pane fade" id="job-posted" role="tabpanel" aria-labelledby="nav-job-posted">
+                    <div class="tab-pane fade" id="posted-tab" role="tabpanel" aria-labelledby="nav-job-posted">
                         <div class="card-body pt-5" id="job_posted"></div>
                     </div>
                 <?php else: ?>

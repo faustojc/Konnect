@@ -76,7 +76,7 @@ class Applicant extends MY_Controller
             'from_user_id' => $this->userdata->user_id,
             'title' => 'Application Accepted',
             'message' => $employer->employerName . ' has accepted your application.',
-            'link' => base_url() . 'jobposting?id=' . $data['job_id'],
+            'link' => 'jobposting?id=' . $data['job_id'],
         );
 
         $this->Notification_model->add($info);
@@ -97,7 +97,7 @@ class Applicant extends MY_Controller
             'from_user_id' => $this->userdata->user_id,
             'title' => 'Application Rejected',
             'message' => $employer->employerName . ' has rejected your application.',
-            'link' => base_url() . 'jobposting?id=' . $data['job_id'],
+            'link' => 'jobposting?id=' . $data['job_id'],
         );
 
         $this->Notification_model->add($info);

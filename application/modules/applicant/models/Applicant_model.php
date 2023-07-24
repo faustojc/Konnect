@@ -107,6 +107,11 @@ class Applicant_model extends CI_Model
             ->get()->row();
     }
 
+    public function getApplicantByJob($job_id, $employee_id, $select = '*')
+    {
+        return $this->db->select($select)->get_where($this->Table->applicant, array('job_id' => $job_id, 'employee_id' => $employee_id))->row();
+    }
+
     public function getJobApplied($employee_id)
     {
         return $this->db->select()

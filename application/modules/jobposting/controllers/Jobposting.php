@@ -52,7 +52,9 @@ class Jobposting extends MY_Controller
                 $this->data['applied_jobs'] = $this->Applicant_model->getAppliedJobs($this->userdata->ID);
                 $view['jobs'] = $this->load->view('grid/employee/load_applied_jobs', $this->data, true);
 
-                $this->data['applied_job'] = $this->Applicant_model->getSelectedAppliedJob($id);
+                $applicant_id = $this->Applicant_model->getApplicantByJob($id, $this->userdata->ID, 'id')->id;
+
+                $this->data['applied_job'] = $this->Applicant_model->getSelectedAppliedJob($applicant_id);
                 $view['selected'] = $this->load->view('grid/employee/load_selected_applied_job', $this->data, true);
             }
 

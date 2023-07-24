@@ -28,14 +28,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     // Display all notifications
-    const notifications = document.querySelector('#notifications');
-    if (notifications) {
-        fetch(baseUrl + 'notification/displayNotifications')
-            .then(response => response.text())
-            .then(data => {
-                notifications.innerHTML = data;
-            });
-    }
+    // const notifications = document.querySelector('#notifications');
+    // if (notifications) {
+    //     fetch(baseUrl + 'notification/displayNotifications')
+    //         .then(response => response.text())
+    //         .then(data => {
+    //             notifications.innerHTML = data;
+    //         });
+    // }
 
     const feedbackBtn = document.querySelector('#btn_feedback');
     if (feedbackBtn) {

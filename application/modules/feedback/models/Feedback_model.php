@@ -13,7 +13,7 @@ class Feedback_model extends CI_Model
     public function getAllUsersFeedback($user_id)
     {
         // get all feedbacks for the user that is either an employee or employer
-        $result = $this->db->select('tbl_feedback.*, 
+        return $this->db->select('tbl_feedback.*, 
         CONCAT_WS(" ", tbl_employee.Fname, tbl_employee.Mname, tbl_employee.Lname) AS userName,
         tbl_employee.title as userTitle,
         tbl_employee.Employee_image as userImage,
@@ -27,8 +27,6 @@ class Feedback_model extends CI_Model
             ->where('tbl_feedback.user_id', $user_id)
             ->order_by('tbl_feedback.date_created', 'DESC')
             ->get()->result();
-
-        return $result;
     }
 
     /**

@@ -47,6 +47,8 @@ class Notification extends MY_Controller
             }, $newNotifications);
             $this->Notification_model->updateBatch($ids, array('is_displayed' => 1));
 
+            // Update the notification display from DisplayHandler
+            $this->DisplayHandler->updateNotification();
         } else {
             echo json_encode(array());
         }
@@ -61,8 +63,7 @@ class Notification extends MY_Controller
         $result = $this->Notification_model->getNotifications($this->userdata->user_id);
 
         $data = [
-            'notifications' => $result['notifications'],
-            'user_type' => $result['user_type'],
+            'notifications' => $result,
         ];
 
         $this->load->view('components/display_notifications', $data);

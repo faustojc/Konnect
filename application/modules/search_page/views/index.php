@@ -3,49 +3,49 @@ main_header(['Employer_profile']);
 ?>
 <!-- ############ PAGE START-->
 <script>
-        function formatInput() {
-            var input = document.getElementById("salary");
-            var value = input.value;
-            
-            // Check if the input value is not empty
-            if (value !== "") {
-                // Add ".00" at the end if it's not already present
-                if (!value.endsWith(".00")) {
-                    input.value = value + ".00";
-                }
-            }
-        }
+    function formatInput() {
+        const input = document.getElementById("salary");
+        const value = input.value;
 
-        function formatInput2() {
-            var input = document.getElementById("salary");
-            var value = input.value;
-            
-            // Remove existing commas from the value
-            value = value.replace(/,/g, '');
-            
-            // Format the value with commas for every thousand
-            value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            
-            // Update the input value with the formatted value
-            input.value = value;
-        }
-
-        function disableDotZero() {
-            var input = document.getElementById("salary");
-            var value = input.value;
-            
-            // Check if the input value ends with ".00"
+        // Check if the input value is not empty
+        if (value !== "") {
+            // Add ".00" at the end if it's not already present
             if (!value.endsWith(".00")) {
-                // Set the selection range to exclude ".00"
-                input.setSelectionRange(0, value.length - 3);
+                input.value = value + ".00";
             }
         }
+    }
 
-        $(document).ready(function() {
-            $("#filterToggle").click(function() {
-                $(this).find("i.fa-caret-left").toggleClass("fa-caret-down");
-            });
+    function formatInput2() {
+        const input = document.getElementById("salary");
+        let value = input.value;
+
+        // Remove existing commas from the value
+        value = value.replace(/,/g, '');
+
+        // Format the value with commas for every thousand
+        value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+        // Update the input value with the formatted value
+        input.value = value;
+    }
+
+    function disableDotZero() {
+        const input = document.getElementById("salary");
+        const value = input.value;
+
+        // Check if the input value ends with ".00"
+        if (!value.endsWith(".00")) {
+            // Set the selection range to exclude ".00"
+            input.setSelectionRange(0, value.length - 3);
+        }
+    }
+
+    $(document).ready(function () {
+        $("#filterToggle").click(function () {
+            $(this).find("i.fa-caret-left").toggleClass("fa-caret-down");
         });
+    });
 </script>
 <style>
     /* Remove spinner for number input */
@@ -59,35 +59,14 @@ main_header(['Employer_profile']);
         -moz-appearance: textfield;
     }
 
-    .table-black {
-        border: 1px solid black;
-    }
-
     .table-black td {
         border-top: 1px solid black;
-    }
-
-    .smallfont {
-        font-size: 68%;
-    }
-
-    .smallfont2 {
-        font-size: 75%;
-    }
-
-    .serif-font {
-        font-family: "Times New Roman", Times, serif;
     }
 
     .list-3 li {
         margin-top: 5px;
         margin-bottom: 5px;
         text-transform: capitalize;
-    }
-
-    .list-3 {
-        text-transform: capitalize;
-        list-style-type: none;
     }
 
     .list-3 a {
@@ -124,48 +103,6 @@ main_header(['Employer_profile']);
         margin-bottom: 10px;
     }
 
-    .card-head-custom {
-        line-height: 1.5;
-        font-size: 0.8rem;
-    }
-
-    .iconslist {
-        padding-right: 10px;
-    }
-
-    .fs-12 {
-        font-size: 12px;
-    }
-
-    .fs-14 {
-        font-size: 14px;
-    }
-
-    .fs-16 {
-        font-size: 16px;
-    }
-
-    .fs-18 {
-        font-size: 18px;
-    }
-
-    .fs-20 {
-        font-size: 20px;
-    }
-
-
-    .fw-500 {
-        font-weight: 500;
-    }
-
-    .whitecolor {
-        color: white;
-    }
-
-    .whitebg {
-        background-color: white;
-    }
-
     body {
         background-color: #e9ebed;
     }
@@ -188,59 +125,53 @@ main_header(['Employer_profile']);
         /* box-shadow: 0  1px 4px rgba(0, 0, 0, .15); */
     }
 
-    .modal-dialog{
-    overflow-y: initial !important
-    }       
-    .modal-body{
+    .modal-body {
         height: 500px;
         overflow-y: auto;
-        scrollbar-width: none;  /* Firefox */
-        -ms-overflow-style: none;  /* IE and Edge */
-        
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
     }
 
     .select2-container--default .select2-selection--multiple {
-    background-color: #F4F6F7;
-    border: 0px solid #aaa;
-    border-radius: 10px;
-    cursor: text;
+        background-color: #F4F6F7;
+        border: 0px solid #aaa;
+        border-radius: 10px;
+        cursor: text;
     }
 
     .select2-container--default.select2-container--focus .select2-selection--multiple {
-    border: 0;
-    outline: 0;
+        border: 0;
+        outline: 0;
     }
 
     .select2-container--default .select2-dropdown {
-        border-radius: 15px 15px 15px 15px; 
+        border-radius: 15px 15px 15px 15px;
         border: 0 solid #ced4da;
-        border-bottom-color: rgb(206, 212, 218);
-        border-bottom-style: solid;
-        border-bottom-width: 0px;
+        border-bottom: 0 rgb(206, 212, 218);
     }
 
     .select2-container--default .select2-selection--multiple .select2-selection__choice {
-    background-color: #0dcaf0;
-    border: 0px solid #aaa;
-    border-radius: 10px;
-    cursor: default;
-    float: left;
-    margin-right: 5px;
-    margin-top: 5px;
-    padding: 4px;
+        background-color: #0dcaf0;
+        border: 0 solid #aaa;
+        border-radius: 10px;
+        cursor: default;
+        float: left;
+        margin-right: 5px;
+        margin-top: 5px;
+        padding: 4px;
     }
 
     .select2-container--default .select2-results__option--highlighted[aria-selected], .select2-container--default .select2-results__option--highlighted[aria-selected]:hover {
-    background-color: #0dcaf0;
-    color: #fff;
+        background-color: #0dcaf0;
+        color: #fff;
     }
 
     .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
-    color: white;
-    cursor: pointer;
-    display: inline-block;
-    font-weight: bold;
-    margin-right: 2px;
+        color: white;
+        cursor: pointer;
+        display: inline-block;
+        font-weight: bold;
+        margin-right: 2px;
     }
 
     .scrollable-container::-webkit-scrollbar {
@@ -256,32 +187,34 @@ main_header(['Employer_profile']);
         border-radius: 1rem; /* Adjust the border radius as needed */
     }
 
-    .grow { transition: all .2s ease-in-out; }
-    .grow:hover { transform: scale(1.05); }
+    .grow {
+        transition: all .2s ease-in-out;
+    }
+
+    .grow:hover {
+        transform: scale(1.05);
+    }
 
     .outline-gray {
-    color: #6c757d;
-    border-color: #6c757d;
-    border-radius: 15px;
-    display: inline-block;
-    font-weight: 400;
-    /* color: #212529; */
-    text-align: center;
-    vertical-align: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    /* user-select: none; */
-    background-color: transparent;
-    border: 1px solid;
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    /* line-height: 1.5; */
-    /* border-radius: 0.25rem; */
-    /* transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out; */
+        color: #6c757d;
+        border-radius: 15px;
+        display: inline-block;
+        font-weight: 400;
+        /* color: #212529; */
+        text-align: center;
+        vertical-align: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        /* user-select: none; */
+        background-color: transparent;
+        border: 1px solid #6c757d;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        /* line-height: 1.5; */
+        /* border-radius: 0.25rem; */
+        transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
     }
-    
-
 </style>
 
 <section class="content ">
@@ -290,20 +223,18 @@ main_header(['Employer_profile']);
             <div class="col-12 col-md-3 mt-4">
                 <div class="card sticky-top" style="top:70px;">
                     <div class="card-body">
-                    <div class="row">
-                        <div class="col-12">
-                            <a class="btn border-0 shadow-none" style="background:; width: 100%; " data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" id="toggleButton">
-                                <h6 style="font-weight: 400; text-align: left; display: flex; justify-content: space-between; align-items: center;">
-                                    <span>Filters</span>
-                                    <i class="fa-solid fa-caret-left" id="caretIcon"></i>
-                                    
-                                </h6>
-                            </a>
+                        <div class="row">
+                            <div class="col-12">
+                                <a class="btn border-0 shadow-none" style="background:; width: 100%; " data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" id="toggleButton">
+                                    <h6 style="font-weight: 400; text-align: left; display: flex; justify-content: space-between; align-items: center;">
+                                        <span>Filters</span>
+                                        <i class="fa-solid fa-caret-left" id="caretIcon"></i>
+                                    </h6>
+                                </a>
+                            </div>
                         </div>
-                    </div>
 
-                        
-                        
+
                         <div class="collapse" id="collapseExample">
                             <div class="card card-body p-0">
                                 <div class="px-3">
@@ -312,33 +243,33 @@ main_header(['Employer_profile']);
                                     <label for="" class="text-muted" style="font-weight:400;">Job type</label>
                                     <div class="form-check pt-1" style="font-size:14px;">
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault" style="font-weight:300;">
-                                                Full time
-                                            </label>
+                                        <label class="form-check-label" for="flexCheckDefault" style="font-weight:300;">
+                                            Full time
+                                        </label>
                                     </div>
                                     <div class="form-check pt-1" style="font-size:14px;">
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault" style="font-weight:300;">
-                                                Part time
-                                            </label>
+                                        <label class="form-check-label" for="flexCheckDefault" style="font-weight:300;">
+                                            Part time
+                                        </label>
                                     </div>
                                     <div class="form-check pt-1" style="font-size:14px;">
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault" style="font-weight:300;">
-                                                Internship
-                                            </label>
+                                        <label class="form-check-label" for="flexCheckDefault" style="font-weight:300;">
+                                            Internship
+                                        </label>
                                     </div>
                                     <div class="form-check pt-1" style="font-size:14px;">
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault" style="font-weight:300;">
-                                                Permanent
-                                            </label>
+                                        <label class="form-check-label" for="flexCheckDefault" style="font-weight:300;">
+                                            Permanent
+                                        </label>
                                     </div>
                                     <div class="form-check pt-1" style="font-size:14px;">
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault" style="font-weight:300;">
-                                                Shift work
-                                            </label>
+                                        <label class="form-check-label" for="flexCheckDefault" style="font-weight:300;">
+                                            Shift work
+                                        </label>
                                     </div>
                                     <!-- <div class="form-check pt-1" style="font-size:14px;">
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -352,62 +283,49 @@ main_header(['Employer_profile']);
                                     <label for="" class="text-muted" style="font-weight:400;">Working Schedule</label>
                                     <div class="form-check pt-1" style="font-size:14px;">
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault" style="font-weight:300;">
-                                                Day shift
-                                            </label>
+                                        <label class="form-check-label" for="flexCheckDefault" style="font-weight:300;">
+                                            Day shift
+                                        </label>
                                     </div>
                                     <div class="form-check pt-1" style="font-size:14px;">
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault" style="font-weight:300;">
-                                                Night shift
-                                            </label>
+                                        <label class="form-check-label" for="flexCheckDefault" style="font-weight:300;">
+                                            Night shift
+                                        </label>
                                     </div>
                                     <div class="form-check pt-1" style="font-size:14px;">
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault" style="font-weight:300;">
-                                                Flex time
-                                            </label>
+                                        <label class="form-check-label" for="flexCheckDefault" style="font-weight:300;">
+                                            Flex time
+                                        </label>
                                     </div>
-                                    
-                                    
+
+
                                 </div>
                                 <div class="pt-3 d-flex justify-content-end pr-2">
-                                <button class="btn btn-outline-info" style="border-radius:80px;">
-                                    <span>Filter</span> <i class="fa-solid fa-filter"></i>
-                                </button>
+                                    <button class="btn btn-outline-info" style="border-radius:80px;">
+                                        <span>Filter</span> <i class="fa-solid fa-filter"></i>
+                                    </button>
                                 </div>
-                                
 
                             </div>
                         </div>
-                        
                     </div>
-
                 </div>
-                
-                
-            </div>
 
+
+            </div>
             <div class="col-12 col-md-9 mt-4">
                 <!-- POSTS -->
-                
+
                 <div class="row">
-            
                     <?= $jobpost_section_view ?>
-
                 </div>
-                    
-
-
                 <!-- JOBPOSTS -->
             </div>
-
-
-            <!-- <div class="col-12 col-md-3 mt-4">
-    
-</div> -->
-        </div><!--row-->
-    </div><!--container fluid-->
+            <!-- <div class="col-12 col-md-3 mt-4"></div> -->
+        </div>
+    </div>
 </section>
 
 <!-- ############ PAGE END-->
@@ -420,8 +338,8 @@ main_footer();
 </script>
 
 <script>
-    $(document).ready(function() {
-        $("#toggleButton").click(function() {
+    $(document).ready(function () {
+        $("#toggleButton").click(function () {
             // Toggle the class of the caret icon
             $("#caretIcon").toggleClass("fa-caret-left fa-caret-down");
         });

@@ -29,7 +29,7 @@ class Jobposting_model extends CI_Model
                 ->order_by('date_posted', 'DESC')->get()->result();
         }
 
-        return $this->db->select('tbl_jobposting.* AS jobpost, tbl_employer.tradename AS EmployerTradename, tbl_employer.image AS EmployerLogo')
+        return $this->db->select('tbl_jobposting.*, tbl_employer.tradename AS EmployerTradename, tbl_employer.image AS EmployerLogo')
             ->from($this->Table->jobposting)
             ->join($this->Table->employer, $this->Table->employer . '.id = ' . $this->Table->jobposting . '.employer_id')
             ->order_by('date_posted', 'DESC')->limit($limit)->get()->result();

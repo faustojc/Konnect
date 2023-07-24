@@ -64,13 +64,12 @@
                 $timeAgo = $days . "day";
             }
             ?>
-            <div class="dropdown-item d-flex align-items-center p-3" style="max-height: 100px; overflow-y: hidden">
-                <a href="<?= $notification->link ?>" class="d-flex text-decoration-none text-dark">
+            <div class="dropdown-item p-2 <?= ($notification->is_read == 0) ? 'bg-gray-light' : ''; ?>" style="max-height: 100px; overflow-y: hidden">
+                <a href="<?= base_url() . $notification->link ?>" class="d-flex align-items-center text-decoration-none text-dark">
                     <img class="img-fluid rounded-circle mr-2"
                          src="<?= $image ?>"
                          alt="<?= $notification->userName ?>"
-                         width="30"
-                         height="30"
+                         style="width: 70px; height: 50px; object-fit: cover;"
                     >
                     <div>
                         <p class="mb-0 d-block text-truncate"><?= $notification->message ?></p>

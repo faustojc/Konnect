@@ -288,7 +288,7 @@ main_header(['Employer_profile']);
     <div class="container-fluid">
         <div class="row pl-3 pr-3" style="margin-top: 3.5rem;">
             <div class="col-12 col-md-3 mt-4">
-                <div class="card">
+                <div class="card sticky-top" style="top:70px;">
                     <div class="card-body">
                     <div class="row">
                         <div class="col-12">

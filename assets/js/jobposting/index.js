@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     navApplication.classList.toggle('active');
                     navApplication.setAttribute('aria-selected', 'true');
 
-                    const jobTabApplied = document.querySelector('#job_applied');
+                    const jobTabApplied = document.querySelector('#application-tab');
                     jobTabApplied.classList.add('show', 'active');
 
                     const ownJobApplied = document.querySelector('#job_applied');

@@ -304,18 +304,27 @@ main_header(['employer_profile']);
                         <form>
                             <div class="card-body pb-2">
                                 <div class="form-group">
-                                    <label class="form-label">Current password</label>
-                                    <input type="password" id="current_password" class="form-control" required>
+                                    <label for="current_password" class="form-label">
+                                        Current password
+                                        <input name="current_password" type="password" class="form-control">
+                                    </label>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="form-label">New password</label>
-                                    <input type="password" id="new_password" name="new_password" class="form-control" required>
+                                    <label class="form-label">
+                                        New password
+                                        <input name="password" type="password" class="form-control" placeholder="at least 8 characters">
+                                    </label>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="form-label">Repeat new password</label>
-                                    <input type="password" id="repeat_password" class="form-control" required>
+                                <div class="form-group mb-0">
+                                    <label class="form-label">
+                                        Repeat new password
+                                        <input name="repeat_password" type="password" class="form-control" placeholder="at least 8 characters">
+                                    </label>
+                                </div>
+                                <div>
+                                    <a class="text-primary" href="">Forgot password?</a>
                                 </div>
                             </div>
                         </form>

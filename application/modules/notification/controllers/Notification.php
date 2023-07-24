@@ -34,17 +34,19 @@ class Notification extends MY_Controller
 
         // Mark the new notifications as displayed
         if (!empty($newNotifications)) {
-            $ids = array_map(function ($notification) {
-                return $notification->id;
-            }, $newNotifications);
-            $this->Notification_model->updateBatch($ids, array('is_displayed' => 1));
-
             foreach ($newNotifications as $notification) {
+
                 echo "event: notification\n";
                 echo 'data: ' . json_encode($notification) . "\n\n";
 
                 usleep(300000);
             }
+
+            $ids = array_map(function ($notification) {
+                return $notification->id;
+            }, $newNotifications);
+            $this->Notification_model->updateBatch($ids, array('is_displayed' => 1));
+
         } else {
             echo json_encode(array());
         }

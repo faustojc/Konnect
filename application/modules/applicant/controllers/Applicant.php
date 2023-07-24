@@ -44,7 +44,7 @@ class Applicant extends MY_Controller
             // Send a notification to the employer by adding a new notification
             $info = array(
                 'user_id' => $targetDetails->user_id,
-                'from_user_id' => $this->id,
+                'from_user_id' => $this->userdata->user_id,
                 'title' => 'New Applicant in your job post',
                 'message' => 'A new applicant has applied to your job post.',
                 'link' => base_url() . 'jobposting?id=' . $job_id,
@@ -52,7 +52,7 @@ class Applicant extends MY_Controller
         } else {
             $info = array(
                 'user_id' => $targetDetails->user_id,
-                'from_user_id' => $this->id,
+                'from_user_id' => $this->userdata->user_id,
                 'title' => 'Application Cancelled',
                 'message' => 'The applicant has cancelled his/her application.',
             );
@@ -73,7 +73,7 @@ class Applicant extends MY_Controller
         // Send a notification to the applicant by adding a new notification
         $info = array(
             'user_id' => $employeeDetails->employeeUserID,
-            'from_user_id' => $this->id,
+            'from_user_id' => $this->userdata->user_id,
             'title' => 'Application Accepted',
             'message' => $employer->employerName . ' has accepted your application.',
             'link' => base_url() . 'jobposting?id=' . $data['job_id'],
@@ -94,7 +94,7 @@ class Applicant extends MY_Controller
         // Send a notification to the applicant by adding a new notification
         $info = array(
             'user_id' => $employeeDetails->employeeUserID,
-            'from_user_id' => $this->id,
+            'from_user_id' => $this->userdata->user_id,
             'title' => 'Application Rejected',
             'message' => $employer->employerName . ' has rejected your application.',
             'link' => base_url() . 'jobposting?id=' . $data['job_id'],

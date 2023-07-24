@@ -6,7 +6,9 @@ class Employee_profile extends MY_Controller
     protected $userdata;
     protected $auth;
     protected $has_permission;
+    protected $current_user;
     private array $data = [];
+    private $curr_id;
 
     public function __construct()
     {
@@ -19,6 +21,12 @@ class Employee_profile extends MY_Controller
             $this->auth = get_userdata(AUTH);
         }
 
+        if ($this->auth['user_type'] == 'EMPLOYEE') {
+            $this->curr_id = $this->userdata->ID;
+        } else {
+            $this->curr_id = $this->userdata->id;
+        }
+
         $model_list = [
             'employee_profile/employee_profile_model' => 'eModel',
             'employer/Employer_model' => 'employer_model',
@@ -28,16 +36,18 @@ class Employee_profile extends MY_Controller
         $this->load->model($model_list);
 
         $ID = $this->input->get('id');
-        $otherUser = $this->eModel->get_employee($ID);
-        $this->has_permission = $this->Auth_model->check_permission($this->userdata, $otherUser);
+        $this->current_user = $this->eModel->get_employee($ID);
+        $this->has_permission = $this->Auth_model->check_permission($this->userdata, $this->current_user);
     }
 
     /** load main page */
     public function index()
     {
         $this->data['has_permission'] = $this->has_permission;
+        $this->data['auth'] = $this->auth;
+        $this->data['user_id'] = $this->current_user->user_id;
 
-        $ID = $this->uri->segment(3);
+        $ID = $this->input->get('id');
 
         $this->load->driver('cache');
         $this->db->cache_on();
@@ -49,6 +59,7 @@ class Employee_profile extends MY_Controller
         $this->data['skills'] = $this->eModel->get_skill($ID);
         $this->data['employers'] = $this->employer_model->get_employers(4);
         $this->data['employees'] = $this->employee_model->get_all_employees(4, $ID);
+        $this->data['feedbacks'] = $this->Feedback_model->getAllUsersFeedback($this->current_user->user_id);
 
         if ($this->has_permission) {
             $this->data['following'] = $this->follow_model->get_following($this->userdata->ID);
@@ -56,7 +67,7 @@ class Employee_profile extends MY_Controller
             $this->data['following'] = $this->follow_model->get_following($ID);
         }
 
-        $this->data['current_following'] = $this->follow_model->get_following($this->userdata->ID);
+        $this->data['current_following'] = $this->follow_model->get_following($this->curr_id);
 
         $this->db->cache_off();
 
@@ -124,6 +135,10 @@ class Employee_profile extends MY_Controller
     public function edit()
     {
         $ID = $this->input->get('id');
+
+        if (!$this->has_permission) {
+            redirect('employee_profile?id=' . $ID);
+        }
 
         $this->data['employee'] = $this->eModel->get_employee($ID);
         $this->data['content'] = 'edit';

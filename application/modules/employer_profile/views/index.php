@@ -56,7 +56,7 @@ main_header(['Employer_profile']);
     }
 
     .nav-pills .nav-link.active,
-    .nav-pills .show > .nav-link {
+    .nav-pills .show>.nav-link {
         color: #fff;
         background-color: #0dcaf0;
     }
@@ -81,6 +81,16 @@ main_header(['Employer_profile']);
         background-color: #40acc2;
         border-color: #40acc2;
     }
+
+    @media (max-width: 576px) {
+        .nav-pills .nav-item {
+            flex: 0 0 33.33%;
+        }
+
+        .nav-pills .nav-item {
+            width: 100%;
+        }
+    }
 </style>
 
 <section class="content">
@@ -88,8 +98,7 @@ main_header(['Employer_profile']);
         <div class="row pl-3 pr-3" style="margin-top: 3.5rem;">
             <div class="col-12 col-md-8 pl-2 pr-2 mt-4">
                 <div class="card card-widget widget-user">
-                    <div class="widget-user-header text-white"
-                         style="background: url('<?= base_url() ?>assets/images/Logo/cover-place.jpg') center center; min-height: 25vh; max-height: 50vh; background-repeat: no-repeat; background-size: cover; border-radius: 15px 15px 0px 0px;">
+                    <div class="widget-user-header text-white" style="background: url('<?= base_url() ?>assets/images/Logo/cover-place.jpg') center center; min-height: 25vh; max-height: 50vh; background-repeat: no-repeat; background-size: cover; border-radius: 15px 15px 0px 0px;">
                     </div>
                     <div class="widget-user-image" style="left: 0; top: 0; margin-left: 15px; margin-top:100px;">
                         <img class="img-circle img-fluid" src="<?= base_url() ?>assets/images/employer/profile_pic/<?= $current_employer->image ?>" alt="User Avatar" style="
@@ -105,24 +114,25 @@ main_header(['Employer_profile']);
                                 <div class="description-block">
                                     <div class="row">
                                         <div class="col-md-6 mb-3 m-md-0">
-                                            <h5 class="widget-user-username text-left" style="font-weight: 500;">
+                                            <h5 class="widget-user-username text-left" style="font-weight: 500;  width: 500px;">
                                                 <?= $current_employer->tradename ?>
 
                                             </h5>
                                             <!-- <p class="text-left mb-1">
                                                 <?php if (empty($current_employer->employer_name)) {
-                                                echo $current_employer->tradename;
-                                            } else {
-                                                echo $current_employer->employer_name;
-                                            } ?>
+                                                    echo $current_employer->tradename;
+                                                } else {
+                                                    echo $current_employer->employer_name;
+                                                } ?>
                                             </p> -->
                                             <h5 class="widget-user-desc text-left text-dark py-2" style="font-weight: 550; font-size:18px; ">
                                                 <?= $current_employer->business_type ?>
                                             </h5>
-                                            <h6 class="widget-user-desc text-left text-muted" style="font-weight: normal; font-size:15px;">
+                                            <h6 class="widget-user-desc text-left text-muted" style="font-weight: normal; font-size: 15px; width: 500px;">
                                                 <?= ucwords(@$current_employer->address) . ", " . ucwords(@$current_employer->city) ?> |
-                                                <a class="text-info" data-toggle="modal" data-target="#contact" style=" cursor: pointer;">Contact details</a>
+                                                <a class="text-info" data-toggle="modal" data-target="#contact" style="cursor: pointer;">Contact details</a>
                                             </h6>
+
 
                                         </div>
                                         <div class="col-md-6">
@@ -145,7 +155,7 @@ main_header(['Employer_profile']);
 
                 <div class="card card-white">
                     <div class="card-body" style="padding:1rem;">
-                        <ul class="nav nav-pills " id="pills-tab" role="tablist">
+                        <ul class="nav nav-pills flex-wrap" id="pills-tab" role="tablist">
 
                             <li class="nav-item">
                                 <a class="nav-link active" id="pills-overview-tab" data-toggle="pill" href="#pills-overview" role="tab" aria-controls="pills-overview" aria-selected="true">Overview</a>
@@ -153,13 +163,15 @@ main_header(['Employer_profile']);
                             <li class="nav-item">
                                 <a class="nav-link" id="pills-followers-tab" data-toggle="pill" href="#pills-followers" role="tab" aria-controls="pills-followers" aria-selected="false">
                                     Followers
-                                    <span class="badge badge-info">
+                                    <span class="badge badge-info d-none d-sm-inline-block">
                                         <?= count($followers) ?>
                                     </span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="pills-feedback-tab" data-toggle="pill" href="#pills-feedback" role="tab" aria-controls="pills-feedback" aria-selected="false">Feedback</a>
+                                <a class="nav-link" id="pills-feedback-tab" data-toggle="pill" href="#pills-feedback" role="tab" aria-controls="pills-feedback" aria-selected="false">
+                                    Feedback
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -231,6 +243,11 @@ main_header(['Employer_profile']);
                     <!-- Followers -->
                     <div class="tab-pane fade" id="pills-followers" role="tabpanel" aria-labelledby="pills-followers-tab">
                         <?php load_followers($followers); ?>
+                    </div>
+
+                    <!-- Feedback -->
+                    <div class="tab-pane fade" id="pills-feedback" role="tabpanel" aria-labelledby="pills-feedback-tab">
+                        <?php load_feedback($feedbacks, $has_permission); ?>
                     </div>
                 </div>
             </div>
@@ -360,7 +377,7 @@ main_header(['Employer_profile']);
                 </div>
 
                 <!-- EMPLOYEES -->
-                <div class="card card-widget widget-user-2">
+                <div class="card card-widget widget-user-2 d-none d-md-block">
                     <div class="card-header">
                         <h3 class="card-title fw-500">Employees</h3>
                     </div>
@@ -370,7 +387,7 @@ main_header(['Employer_profile']);
                 </div>
 
                 <!-- EMPLOYERS -->
-                <div class="card card-widget widget-user-2">
+                <div class="card card-widget widget-user-2 d-none d-md-block">
                     <div class="card-header">
                         <h3 class="card-title fw-500">Employers</h3>
                     </div>
@@ -436,97 +453,77 @@ main_header(['Employer_profile']);
                     </h5>
 
                 </div>
-
                 <div class="modal-body border-0">
-                    <div class="pb-1">
+                    <form>
+                        <div class="pb-1">
+                            <label for="title" style="">Job Title</label>
+                            <input id="title" name="title" class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:10px;" type="text" placeholder="Enter Job Name">
+                        </div>
 
-                        <label for="" style="">Job Title</label>
-                        <input id="title" name="title" class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:10px;" type="text" placeholder="Enter Job Name">
-                    </div>
-
-                    <div class="row pt-2">
-                        <div class="col-5">
-                            <label for="" style="">Salary</label>
-                            <div class="input-group mb-3 ">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text border-0" style="border-radius:10px 0 0 10px;">₱</span>
+                        <div class="row pt-2">
+                            <div class="col-6">
+                                <label for="salary" style="">Salary</label>
+                                <div class="input-group mb-3 ">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text border-0" style="border-radius:10px 0 0 10px;">₱</span>
+                                    </div>
+                                    <input id="salary" name="salary" type="text" onclick="disableDotZero()" oninput="formatInput2()" class="form-control border-0" style="background-color: #F4F6F7; border-radius:0 10px 10px 0; " placeholder="Input Salary ">
                                 </div>
-                                <input id="salary" name="salary" type="text" id="salary" onclick="disableDotZero()" onblur="formatInput()" oninput="formatInput2()" class="form-control border-0"
-                                       style="background-color: #F4F6F7; border-radius:0 10px 10px 0; " placeholder="Input Salary ">
-                                <!-- <div class="input-group-append">
-                                                            <span class="input-group-text border-0" style="border-radius:0 10px 10px 0;">.00</span>
-                                                        </div> -->
                             </div>
-                        </div>
-                        <div class="col-2">
-                            <div class="form-group">
-                                <label>Job Type</label>
-                                <select id="job_type" name="job_type" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;" name="" id="">
-                                    <option>Part-time</option>
-                                    <option>Full-time</option>
-                                    <option>Permanent</option>
-
-                                </select>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="job_type">Job Type</label>
+                                    <select id="job_type" name="job_type" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;">
+                                        <option>Full time</option>
+                                        <option>Part time</option>
+                                        <option>Internship</option>
+                                        <option>Permanent</option>
+                                        <option>Shift work</option>
+                                    </select>
+                                </div>
                             </div>
 
                         </div>
-                        <div class="col-2">
-                            <div class="form-group">
-                                <label>Shift</label>
-                                <select id="shift" name="shift" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;" name="" id="">
-                                    <option>Day</option>
-                                    <option>Night</option>
-                                    <option>Flextime</option>
-
-                                </select>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="shift">Schedule</label>
+                                    <select id="shift" name="shift" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;">
+                                        <option>Day</option>
+                                        <option>Night</option>
+                                        <option>Flextime</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <label for="start_date">Start Date</label>
+                                <input id="start_date" name="start_date" type="date" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;">
                             </div>
 
-                        </div>
-                        <div class="col-3">
-                            <!-- <label for="" style="">Job Name</label>
-                                            <input class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:10px;" type="text" placeholder="Enter Job Name">-->
 
-                            <label>Start Date</label>
-                            <input id="start_date" name="start_date" type="date" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;">
-
-                        </div>
-
-                    </div>
-                    <div class="row">
-                        <div class="col-10">
-                            <div class="form-group" style="border:0;">
-                                <label>Requirements</label>
-                                <select class="select2 " multiple="multiple" data-placeholder="Add Requirements" style="width: 100%; border:0;">
-                                    <option>HTML</option>
-                                    <option>SQL</option>
-                                    <option>PHP</option>
-                                    <option>Laravel</option>
-                                    <option>React</option>
-                                    <option>Java</option>
-                                    <option>Javascript</option>
-                                </select>
+                            <div class=" col-4">
+                                <div class="form-group">
+                                    <label for="filled">Status</label>
+                                    <select id="filled" name="filled" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;">
+                                        <option>Open</option>
+                                        <option>Closed</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="col-2">
-                            <div class="form-group">
-                                <label>Status</label>
-                                <select id="filled" name="filled" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;" name="" id="">
-                                    <option>Open</option>
-                                    <option>Closed</option>
-                                    <!-- <option>Flextime</option> -->
-
-                                </select>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group" style="border: 0;">
+                                    <label for="skills_req">Skills Requirements</label>
+                                    <label class="text-muted" style="font-size: 13px;">(click enter to separate skills)</label>
+                                    <input id="skills_req" name="skills_req" class="form-control border-0" style="resize: none; background-color: #F4F6F7; border-radius: 10px;" type="text" placeholder="Skill#1, Skill#2">
+                                </div>
                             </div>
                         </div>
-
-                    </div>
-
-                    <div>
-                        <textarea id="description" name="description" class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:15px;" name="" cols="30" rows="10"></textarea>
-                    </div>
-
-
+                        <div>
+                            <textarea id="description" name="description" class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:15px;" cols="30" rows="10"></textarea>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer border-0">
                     <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->

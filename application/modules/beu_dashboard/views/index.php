@@ -204,8 +204,7 @@ main_header(['Employer_profile']);
                         <div class="card-body">
                             <div class="row pb-2">
                                 <div class="col-1 d-flex justify-content-center">
-                                    <img class="img-circle img-fluid " src="<?= base_url() ?>assets/images/employer/profile_pic/<?= $details->image ?> " alt="User Avatar"
-                                         style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
+                                    <img class="img-circle img-fluid " src="<?= base_url() ?>assets/images/employer/profile_pic/<?= $details->image ?> " alt="User Avatar" style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
                                 </div>
                                 <div class="col-11">
                                     <div class="card shadow-none hovercard" style="border-radius:10px; width:100%; height:100%; background-color: #F4F6F7;">
@@ -238,17 +237,16 @@ main_header(['Employer_profile']);
                                             </div>
 
                                             <div class="row pt-2">
-                                                <div class="col-5">
+                                                <div class="col-6">
                                                     <label for="salary" style="">Salary</label>
                                                     <div class="input-group mb-3 ">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text border-0" style="border-radius:10px 0 0 10px;">₱</span>
                                                         </div>
-                                                        <input id="salary" name="salary" type="text" onclick="disableDotZero()" oninput="formatInput2()" class="form-control border-0"
-                                                               style="background-color: #F4F6F7; border-radius:0 10px 10px 0; " placeholder="Input Salary ">
+                                                        <input id="salary" name="salary" type="text" onclick="disableDotZero()" oninput="formatInput2()" class="form-control border-0" style="background-color: #F4F6F7; border-radius:0 10px 10px 0; " placeholder="Input Salary ">
                                                     </div>
                                                 </div>
-                                                <div class="col-2">
+                                                <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="job_type">Job Type</label>
                                                         <select id="job_type" name="job_type" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;">
@@ -260,7 +258,10 @@ main_header(['Employer_profile']);
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-2">
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-4">
                                                     <div class="form-group">
                                                         <label for="shift">Schedule</label>
                                                         <select id="shift" name="shift" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;">
@@ -270,28 +271,28 @@ main_header(['Employer_profile']);
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-3">
+                                                <div class="col-4">
                                                     <label for="start_date">Start Date</label>
                                                     <input id="start_date" name="start_date" type="date" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;">
                                                 </div>
 
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-10">
-                                                    <div class="form-group" style="border: 0;">
-                                                        <label for="skills_req">Skills Requirements</label>
-                                                        <label class="text-muted" style="font-size: 13px;">(click enter to separate skills)</label>
-                                                        <input id="skills_req" name="skills_req" class="form-control border-0" style="resize: none; background-color: #F4F6F7; border-radius: 10px;" type="text" placeholder="Skill#1, Skill#2">
-                                                    </div>
-                                                </div>
 
-                                                <div class=" col-2">
+                                                <div class=" col-4">
                                                     <div class="form-group">
                                                         <label for="filled">Status</label>
                                                         <select id="filled" name="filled" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;">
                                                             <option>Open</option>
                                                             <option>Closed</option>
                                                         </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="form-group" style="border: 0;">
+                                                        <label for="skills_req">Skills Requirements</label>
+                                                        <label class="text-muted" style="font-size: 13px;">(click enter to separate skills)</label>
+                                                        <input id="skills_req" name="skills_req" class="form-control border-0" style="resize: none; background-color: #F4F6F7; border-radius: 10px;" type="text" placeholder="Skill#1, Skill#2">
                                                     </div>
                                                 </div>
                                             </div>
@@ -318,23 +319,32 @@ main_header(['Employer_profile']);
 
 
             <div class="col-12 col-md-3 mt-4">
-                <div class="sticky-top scrollable-container" style="top:65px; height: calc(100vh - 65px); overflow-y: auto;">
+                <div class="sticky-top scrollable-container" style="top: 65px; height: calc(100vh - 65px); overflow-y: auto;">
+
                     <!-- EMPLOYEES -->
-                    <div class="card card-widget widget-user-2">
+                    <div class="d-md-none"> <!-- Hide on medium-sized screens and above -->
+                        <!-- You can optionally add a button or link to toggle the employees section -->
+                    </div>
+
+                    <div class="card card-widget widget-user-2 d-none d-md-block"> <!-- Show on medium-sized screens and above -->
                         <div class="card-header">
                             <h3 class="card-title fw-500">Employees</h3>
                         </div>
-                        <div id="load_employees_follow_section" style="margin-left: 1rem; margin-right:1rem;">
+                        <div class="py-2" id="load_employees_follow_section " style="margin-left: 1rem; margin-right: 1rem;">
                             <?php load_employees($employees); ?>
                         </div>
                     </div>
 
                     <!-- EMPLOYERS -->
-                    <div class="card card-widget widget-user-2">
+                    <div class="d-md-none"> <!-- Hide on medium-sized screens and above -->
+                        <!-- You can optionally add a button or link to toggle the employers section -->
+                    </div>
+
+                    <div class="card card-widget widget-user-2 d-none d-md-block"> <!-- Show on medium-sized screens and above -->
                         <div class="card-header">
                             <h3 class="card-title fw-500">Employers</h3>
                         </div>
-                        <div id="load_employers_follow_section" style="margin-left:1rem; margin-right:1rem;">
+                        <div class="py-2" id="load_employers_follow_section" style="margin-left: 1rem; margin-right: 1rem;">
                             <?php if ($auth['user_type'] == 'EMPLOYEE'): ?>
                                 <?php load_employers($employers, $following); ?>
                             <?php else: ?>
@@ -344,6 +354,8 @@ main_header(['Employer_profile']);
                     </div>
                 </div>
             </div>
+
+
         </div><!--row-->
     </div><!--container fluid-->
 </section>

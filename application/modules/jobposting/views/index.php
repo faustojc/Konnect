@@ -8,26 +8,10 @@ main_header(['jobposting']);
     }
 </style>
 
-<section class="content">
-
-    <div class="container-fluid">
-        <div class="row align-items-center">
-            <div class="col-md-3">
-                <h3 class="m-0 my-3">Job Posting</h3>
-            </div>
-            <div class="col-md-9">
-                <div class="row align-items-center">
-                    <div class="col">
-                        <input class="form-control" type="text" id="search_jobpost" placeholder="Search Job Post"/>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="<?= base_url() ?>jobposting/create_job" class="btn btn-outline-dark my-3 float-md-right" type="button">CREATE JOB POST</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card card-dark ">
-            <div class="form-inline pt-4 pl-5 d-flex justify-content-center">
+<section class="m" style="margin-top:70px;">
+    <div class="container-fluid" style="padding-left:5%;padding-right:5%;">
+        <div class="card ">
+            <div class="form-inline pt-4 pl-5 mt-1 d-flex justify-content-center">
                 <div class="input-group" data-widget="sidebar-search" style="width:50%; height:50px;">
                     <input class=" form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search" style="height:100%; border-radius: 15px; ">
                     <div class="input-group-append">
@@ -69,6 +53,7 @@ main_header(['jobposting']);
                 <?php endif; ?>
             </div>
         </div>
+    </div>
 </section>
 
 <!-- ############ PAGE END-->

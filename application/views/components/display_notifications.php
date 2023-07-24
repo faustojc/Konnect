@@ -7,6 +7,18 @@
             ++$count;
         }
     }
+
+    function imageExists($url): bool
+    {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_NOBODY, true);
+        curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        return $httpCode == 200;
+    }
+
     ?>
 
     <a class="nav-link" data-toggle="dropdown" href="#">
@@ -26,6 +38,12 @@
 
         <?php foreach ($notifications as $notification) {
             $timeAgo = '';
+
+            $image = base_url() . 'assets/images/employee/profile_pic/' . $notification->userImage;
+
+            if (!imageExists($image)) {
+                $image = base_url() . 'assets/images/employer/profile_pic/' . $notification->userImage;
+            }
 
             $currentTime = new DateTime();
             $diff = null;
@@ -47,15 +65,18 @@
             }
             ?>
             <div class="dropdown-item d-flex align-items-center p-3" style="max-height: 100px; overflow-y: hidden">
-                <img class="img-fluid rounded-circle mr-2"
-                     src="<?= base_url() ?>assets/images/<?= $user_type == 'EMPLOYER' ? 'employer' : 'employee' ?>/profile_pic/<?= $notification->userImage ?>"
-                     alt="<?= $notification->userName ?>"
-                     width="30"
-                >
-                <div>
-                    <p class="mb-0 d-block text-truncate"><?= $notification->message ?></p>
-                    <small class="text-muted"><?= $timeAgo ?></small>
-                </div>
+                <a href="<?= $notification->link ?>" class="d-flex text-decoration-none text-dark">
+                    <img class="img-fluid rounded-circle mr-2"
+                         src="<?= $image ?>"
+                         alt="<?= $notification->userName ?>"
+                         width="30"
+                         height="30"
+                    >
+                    <div>
+                        <p class="mb-0 d-block text-truncate"><?= $notification->message ?></p>
+                        <small class="text-muted"><?= $timeAgo ?></small>
+                    </div>
+                </a>
             </div>
             <div class="dropdown-divider"></div>
         <?php } ?>

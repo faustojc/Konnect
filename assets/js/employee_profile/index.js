@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+
 $(document).on('keyup', '#search_employee', function () {
     $(document).gmLoadPage({
         url: 'employee/service/Employee_service/search_employee',

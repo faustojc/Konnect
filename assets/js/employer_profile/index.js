@@ -38,24 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    textareaEditor('#feedback', 400, function (editor) {
-        editor.on('input', function () {
-            let count = editor.getContent({format: 'text'}).length;
-            document.getElementById('feedback_char_count').innerText = count + '/2000';
-
-            const feedbackBtn = document.querySelector('#btn_feedback');
-            const feedbackWarning = document.querySelector('#feedback_warning');
-
-            if (count > 2000) {
-                feedbackWarning.removeAttribute('hidden');
-                feedbackBtn.setAttribute('disabled', 'disabled');
-            } else {
-                feedbackWarning.setAttribute('hidden', 'hidden');
-                feedbackBtn.removeAttribute('disabled');
-            }
-        });
-    });
-
     const edit_summary = document.querySelector('.edit-summary');
     if (edit_summary) {
         edit_summary.addEventListener('click', function () {
@@ -97,5 +79,60 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
         });
+    }
+});
+
+// For jobpost details
+function formatInput() {
+    const input = document.getElementById("salary");
+    const value = input.value;
+
+    // Check if the input value is not empty
+    if (value !== "") {
+        // Add ".00" at the end if it's not already present
+        if (!value.endsWith(".00")) {
+            input.value = value + ".00";
+        }
+    }
+}
+
+function formatInput2() {
+    const input = document.getElementById("salary");
+    let value = input.value;
+
+    // Remove existing commas from the value
+    value = value.replace(/,/g, '');
+
+    // Format the value with commas for every thousand
+    value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    // Update the input value with the formatted value
+    input.value = value;
+}
+
+function disableDotZero() {
+    const input = document.getElementById("salary");
+    const value = input.value;
+
+    // Check if the input value ends with ".00"
+    if (!value.endsWith(".00")) {
+        // Set the selection range to exclude ".00"
+        input.setSelectionRange(0, value.length - 3);
+    }
+}
+
+document.getElementById("skills_req").addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        const input = event.target;
+        const currentCursorPosition = input.selectionStart;
+        const inputValue = input.value;
+        const newValue =
+            inputValue.slice(0, currentCursorPosition) +
+            ", " +
+            inputValue.slice(currentCursorPosition);
+
+        input.value = newValue;
+        input.selectionStart = input.selectionEnd = currentCursorPosition + 2;
     }
 });

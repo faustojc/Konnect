@@ -77,7 +77,7 @@
         background: transparent !important;
     }
 
-    .account-settings-multiselect ~ .select2-container {
+    .account-settings-multiselect~.select2-container {
         width: 100% !important;
     }
 
@@ -185,7 +185,7 @@
         <div class="col-md-3 pt-0">
             <div class="card shadow-none">
                 <div class="card-body" style="padding:10px 20px; font-weight:650;">
-                    <a href="<?php echo base_url() ?>employee_profile/index/<?= $employee->ID ?>" class=""><i class="fa-solid fa-chevron-left"></i> Back to profile</a>
+                    <a href="<?php echo base_url() ?>employee_profile?id=<?= $employee->ID ?>" class=""><i class="fa-solid fa-chevron-left"></i> Back to profile</a>
                 </div>
             </div>
             <div class="card overflow-hidden shadow-none">
@@ -340,15 +340,18 @@
                                 <div class="form-group">
                                     <label class="form-label">
                                         New password
-                                        <input name="password" type="password" class="form-control">
+                                        <input name="password" type="password" class="form-control" placeholder="at least 8 characters">
                                     </label>
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group mb-0">
                                     <label class="form-label">
                                         Repeat new password
-                                        <input name="repeat_password" type="password" class="form-control">
+                                        <input name="repeat_password" type="password" class="form-control" placeholder="at least 8 characters">
                                     </label>
+                                </div>
+                                <div>
+                                    <a class="text-primary" href="">Forgot password?</a>
                                 </div>
                             </div>
                         </form>
@@ -434,9 +437,9 @@ main_footer();
             const hiddenButtonTabs = ["#account-general", "#account-email", "#account-info", "#account-govt-id", "#account-change-password", "#account-connections"]; // Add more tab-ids if needed
 
             if (hiddenButtonTabs.includes(activeTabId)) {
-                $("#delete").hide(); // Hide the button for specific tabs
+                $("#delete_profile").hide(); // Hide the button for specific tabs
             } else {
-                $("#delete").show(); // Show the button for other tabs
+                $("#delete_profile").show(); // Show the button for other tabs
             }
         }
 

@@ -211,3 +211,26 @@ if (!function_exists('apply_button')) {
         $CI->load->view('components/employee/dashboard/apply_button', $data);
     }
 }
+
+if (!function_exists('load_feedback')) {
+    /**
+     * Load Feedback Component
+     *
+     * A component that loads all the user's feedback.
+     *
+     * USAGE: load_feedback($feedback, $isAccount);
+     *
+     * @param array $feedback The array of feedback.
+     * @param bool $isAccount The boolean value if the user is the account owner.
+     */
+    function load_feedback(array $feedback, bool $isAccount)
+    {
+        $data = array(
+            'feedback' => $feedback,
+            'has_permission' => $isAccount,
+        );
+
+        $CI = &get_instance();
+        $CI->load->view('components/load_feedback', $data);
+    }
+}

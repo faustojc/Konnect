@@ -61,7 +61,7 @@
         <div class="card-footer border-top pt-3 pb-3" style="padding-top: 35px; background-color:#FFF;">
             <div class="row">
                 <div class="col-12">
-                    <a href="employee_profile\index\<?= @$details->ID ?>" class="hoveropac">
+                    <a href="<?= base_url() ?>employee_profile?id=<?= @$details->ID ?>" class="hoveropac">
                         <p class="mb-0 text-center fw-500 text-muted fs-14">View Profile
                             <i class="fa-solid fa-arrow-right fs-14 ml-1"></i>
                         </p>

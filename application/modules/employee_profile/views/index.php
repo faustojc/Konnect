@@ -118,6 +118,15 @@ main_header(['employee_profile']);
         border-radius: 10px;
     }
 
+    .dropdown-item.active {
+            background-color: #0dcaf0;
+            color: #fff;
+        }
+
+    .dropdown-menu {
+            border-radius: 15px;
+        }
+
     /* Adjustments for smaller screens */
     @media (max-width: 768px) {
         .widget-user-image {
@@ -140,6 +149,13 @@ main_header(['employee_profile']);
         }
     }
 </style>
+
+<head>
+    <title>Rating Form with Vue.js and Bootstrap Vue</title>
+    <!-- Include Vue.js and Bootstrap Vue CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-vue@2.21.2/dist/bootstrap-vue.css">
+</head>
 
 <section class="content">
 
@@ -200,10 +216,21 @@ main_header(['employee_profile']);
                             <li class="nav-item">
                                 <a class="nav-link" id="pills-employment-tab" data-toggle="pill" href="#pills-employment" role="tab" aria-controls="pills-employment" aria-selected="false">Employment</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item dropdown d-sm-none">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    More
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" data-toggle="pill" href="#pills-training">Training</a>
+                                    <a class="dropdown-item" data-toggle="pill" href="#pills-following">Following</a>
+                                    <a class="dropdown-item" data-toggle="pill" href="#pills-feedback">Feedback</a>
+                                    <a class="dropdown-item" data-toggle="pill" href="#pills-info">More Info</a>
+                                </div>
+                            </li>
+                            <li class="nav-item d-none d-sm-block">
                                 <a class="nav-link" id="pills-training-tab" data-toggle="pill" href="#pills-training" role="tab" aria-controls="pills-training" aria-selected="false">Training</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item d-none d-sm-block">
                                 <a class="nav-link" id="pills-following-tab" data-toggle="pill" href="#pills-following" role="tab" aria-controls="pills-following" aria-selected="false">
                                     Following
                                     <span class="badge badge-info">
@@ -211,19 +238,15 @@ main_header(['employee_profile']);
                                     </span>
                                 </a>
                             </li>
+                            <li class="nav-item d-none d-sm-block">
+                                <a class="nav-link" id="pills-feedback-tab" data-toggle="pill" href="#pills-feedback" role="tab" aria-controls="pills-feedback" aria-selected="false">Feedback</a>
+                            </li>
                         </ul>
-
                     </div>
-
                 </div>
 
                 <!-- start tab -->
                 <div class="tab-content" id="pills-tabContent">
-                    <!-- <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">...</div>
-                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
-                        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div> -->
-
-
                     <!-- about -->
                     <div class="tab-pane fade active show" id="pills-overview" role="tabpanel" aria-labelledby="pills-overview-tab">
                         <div class="card card-white">
@@ -379,66 +402,6 @@ main_header(['employee_profile']);
                                 <?= $educations_section_view ?>
                             </div>
                         </div>
-
-                        <!-- feedback -->
-                        <div class="card card-white">
-                            <div class="card-header">
-                                <h3 class="card-title fw-500" style="font-weight:600;">Feedback</h3>
-                                <div class="card-tools">
-                                    <button type="button" data-toggle="modal" data-target="#ModalFeedback" class="btn btn-tool">
-                                        <i class="fa-solid fa-plus" style=" font-size: 16.5px;"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div class="modal fade" id="ModalFeedback" tabindex="-1" role="dialog" aria-labelledby="ModalFeedback" aria-hidden="true">
-                                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="feedbackModalLabel">Add Feedback</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <!-- Feedback form Content -->
-                                            <div class="container">
-                                                <form>
-
-                                                    <!-- Feedback Rating -->
-                                                    <div class="form-group">
-                                                        <label>Rating (1 - Lowest, 5 - Highest)</label>
-                                                        <select class="form-control" id="rating" name="rating" required>
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">3</option>
-                                                            <option value="4">4</option>
-                                                            <option value="5">5</option>
-                                                        </select>
-                                                    </div>
-
-                                                    <!-- Feedback Comment -->
-                                                    <div class="form-group">
-                                                        <label for="comment">Your Feedback</label>
-                                                        <textarea class="form-control" id="comment" name="comment" rows="4" required></textarea>
-                                                    </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-info" id="save_education" data-dismiss="modal">Save changes</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Modal Body -->
-
-                            <div class="py-3 px-3" id="laod_feedback">
-
-                            </div>
-                        </div>
-                        <!-- feedback -->
-
                     </div>
 
                     <div class="tab-pane fade" id="pills-employment" role="tabpanel" aria-labelledby="pills-employment-tab">
@@ -641,6 +604,10 @@ main_header(['employee_profile']);
                     <div class="tab-pane fade" id="pills-following" role="tabpanel" aria-labelledby="pills-following-tab">
                         <?php load_following($following) ?>
                     </div>
+
+                    <div class="tab-pane fade" id="pills-feedback" role="tabpanel" aria-labelledby="pills-feedback-tab">
+                        <?php load_feedback($feedbacks, $has_permission) ?>
+                    </div>
                     <!-- end tab -->
                 </div>
             </div>
@@ -715,7 +682,7 @@ main_header(['employee_profile']);
                 </div>
 
                 <!-- EMPLOYEES -->
-                <div class="card card-widget widget-user-2">
+                <div class="card card-widget widget-user-2 d-none d-md-block">
                     <div class="card-header">
                         <h3 class="card-title fw-500">Employees</h3>
                     </div>
@@ -725,7 +692,7 @@ main_header(['employee_profile']);
                 </div>
 
                 <!-- EMPLOYERS -->
-                <div class="card card-widget widget-user-2">
+                <div class="card card-widget widget-user-2 d-none d-md-block">
                     <div class="card-header">
                         <h3 class="card-title fw-500">Employers</h3>
                     </div>

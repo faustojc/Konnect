@@ -73,8 +73,8 @@ function formAction(url, request_type, data, callback = () => {}) {
                     return response.text();
                 }
             })
-            .then(response => successFunc(response))
-            .catch(response => errorFunc(response));
+            .then(data => successFunc(data))
+            .catch(data => errorFunc(data));
     } else if (typeof data === 'string') {
         fetch(url, {
             method: request_type,
@@ -84,8 +84,8 @@ function formAction(url, request_type, data, callback = () => {}) {
             body: data
         })
             .then(response => response.json())
-            .then(response => successFunc(response))
-            .catch(response => errorFunc(response));
+            .then(data => successFunc(data))
+            .catch(data => errorFunc(data));
     } else {
         const params = new URLSearchParams(data);
 
@@ -97,8 +97,8 @@ function formAction(url, request_type, data, callback = () => {}) {
             body: params
         })
             .then(response => response.json())
-            .then(response => successFunc(response))
-            .catch(response => errorFunc(response));
+            .then(data => successFunc(data))
+            .catch(data => errorFunc(data));
     }
 
     const successFunc = (response) => {

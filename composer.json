@@ -6,7 +6,8 @@
   "license": "MIT",
   "require": {
     "php": ">=7.4.33",
-    "ext-json": "*"
+    "ext-json": "*",
+    "ext-curl": "*"
   },
   "suggest": {
     "paragonie/random_compat": "Provides better randomness in PHP 5.x"

@@ -1,30 +1,30 @@
 <?php
 function main_header($menubar = [])
 {
-defined('BASEPATH') or exit('No direct script access allowed');
+    defined('BASEPATH') or exit('No direct script access allowed');
 
-$userdata = get_userdata(USER);
-$auth = get_userdata('auth');
+    $userdata = get_userdata(USER);
+    $auth = get_userdata('auth');
 
-$image_url = '';
-$name = '';
-$profile_url = '';
+    $image_url = '';
+    $name = '';
+    $profile_url = '';
 
-if (!empty($auth)) {
-    if ($auth['user_type'] == 'EMPLOYEE') {
-        $image_url = base_url() . 'assets/images/employee/profile_pic/' . $userdata->Employee_image;
-        $name = $userdata->Fname . ' ' . $userdata->Mname . ' ' . $userdata->Lname;
-        $profile_url = base_url() . 'employee_profile/index/' . $userdata->ID;
-    } else {
-        $image_url = base_url() . 'assets/images/employer/profile_pic/' . $userdata->image;
-        $name = $userdata->tradename;
-        $profile_url = base_url() . 'employer_profile?id=' . $userdata->id;
+    if (!empty($auth)) {
+        if ($auth['user_type'] == 'EMPLOYEE') {
+            $image_url = base_url() . 'assets/images/employee/profile_pic/' . $userdata->Employee_image;
+            $name = $userdata->Fname . ' ' . $userdata->Mname . ' ' . $userdata->Lname;
+            $profile_url = base_url() . 'employee_profile?id=' . $userdata->ID;
+        } else {
+            $image_url = base_url() . 'assets/images/employer/profile_pic/' . $userdata->image;
+            $name = $userdata->tradename;
+            $profile_url = base_url() . 'employer_profile?id=' . $userdata->id;
+        }
     }
-}
 
-?>
+    ?>
     <!DOCTYPE html>
-<html lang="en">
+    <html lang="en">
 
     <head>
         <meta charset="utf-8">
@@ -41,8 +41,8 @@ if (!empty($auth)) {
         <!-- Google Font: Source Sans Pro -->
         <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> -->
         <!-- Font Awesome Icons -->
-        <link rel="stylesheet"
-              href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/fontawesome-free/css/all.min.css">
+        <link rel="stylesheet" href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/fontawesome-free/css/all.min.css">
+
 
         <!-- YOB ADDED 5-17 -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
@@ -50,32 +50,24 @@ if (!empty($auth)) {
         <!-- custom css -->
         <link rel="stylesheet" href="<?= base_url() ?>assets/css/custom.css">
         <!-- overlayScrollbars -->
-        <link rel="stylesheet"
-              href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+        <link rel="stylesheet" href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
         <!-- Theme style -->
         <link rel="stylesheet" href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/dist/css/adminlte.min.css">
         <!-- SweetAlert -->
-        <link rel="stylesheet"
-              href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+        <link rel="stylesheet" href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
         <!-- Toastr -->
         <link rel="stylesheet" href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/toastr/toastr.min.css">
         <!-- Select2 -->
-        <link rel="stylesheet"
-              href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/select2/css/select2.min.css">
-        <link rel="stylesheet"
-              href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+        <link rel="stylesheet" href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/select2/css/select2.min.css">
+        <link rel="stylesheet" href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
         <!-- DataTables -->
-        <link rel="stylesheet"
-              href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-        <link rel="stylesheet"
-              href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-        <link rel="stylesheet"
-              href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+        <link rel="stylesheet" href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+        <link rel="stylesheet" href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+        <link rel="stylesheet" href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 
         <!-- TinyMCE -->
         <script src="<?= base_url() ?>assets/theme/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
         <style>
-
             body {
                 font-family: 'Roboto', sans-serif;
                 color: #272732;
@@ -112,7 +104,8 @@ if (!empty($auth)) {
                 background-color: #0dcaf0;
             }
 
-            .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+            .nav-pills .nav-link.active,
+            .nav-pills .show>.nav-link {
                 color: #fff;
                 background-color: #0dcaf0;
             }
@@ -150,8 +143,7 @@ if (!empty($auth)) {
         <div class="wrapper">
             <!-- Navbar -->
             <div class="container px-5">
-                <nav class="main-header navbar navbar-expand navbar-white navbar-light px-5"
-                     style="margin-left: auto;  height:55px;">
+                <nav class="main-header navbar navbar-expand navbar-white navbar-light px-5" style="margin-left: auto;  height:55px;">
                     <!-- Left navbar links -->
                     <ul class="navbar-nav align-items-center">
                         <li class="nav-item d-none d-sm-inline-block pr-3">
@@ -168,39 +160,36 @@ if (!empty($auth)) {
                         </li>
                         <!-- Search -->
                         <li class="nav-item d-none d-sm-inline-block" style="position: absolute; left: 50%; margin-left: -250px">
-                            <div class="input-group flex-nowrap d-none d-lg-flex" style="width:500px;">
-                                <div class="input-group-prepend">
-                            <span class="input-group-text bg-gray-light border-0" id="addon-wrapping" style="border-radius: 10px 0 0 10px;">
-                            <i class="fa fa-search"></i>
-                            </span>
-                                </div>
-                                <input type="text" class="form-control border-0 bg-gray-light" placeholder="Search"
-                                       aria-label="search" aria-describedby="addon-wrapping" style="border-radius: 0 10px 10px 0; ">
-                            </div>
+    <div class="input-group flex-nowrap d-none d-lg-flex" style="width:500px;">
+        <div class="input-group-prepend">
+            <span class="input-group-text bg-gray-light border-0" id="addon-wrapping" style="border-radius: 10px 0 0 10px;">
+                <i class="fa fa-search"></i>
+            </span>
+        </div>
+        <input id="searchInput" type="text" class="form-control border-0 bg-gray-light" placeholder="Search" aria-label="search" aria-describedby="addon-wrapping" style="border-radius: 0 10px 10px 0; ">
+    </div>
 
-                            <div class="d-block d-lg-none">
-                                <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                                    <i class="fas fa-search"></i>
-                                </a>
-                                <div class="navbar-search-block">
-                                    <form class="form-inline">
-                                        <div class="input-group input-group-sm">
-                                            <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                                                   aria-label="Search">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-navbar" type="submit">
-                                                    <i class="fas fa-search"></i>
-                                                </button>
-                                                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                                    <i class="fas fa-times"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-
-                        </li>
+    <div class="d-block d-lg-none">
+        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+            <i class="fas fa-search"></i>
+        </a>
+        <div class="navbar-search-block">
+            <form class="form-inline">
+                <div class="input-group input-group-sm">
+                    <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search" id="mobileSearchInput">
+                    <div class="input-group-append">
+                        <button class="btn btn-navbar" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</li>
                     </ul>
 
                     <!-- Right navbar links -->
@@ -226,9 +215,7 @@ if (!empty($auth)) {
                                 <div>
                                     <div class="media ml-3 mt-3 mb-3 d-flex justify-content-center align-items-center">
                                         <?php if (!empty($userdata)): ?>
-                                            <img class="img-circle img-fluid mr-3" src="<?= $image_url ?>"
-                                                 alt="User Avatar"
-                                                 style="object-fit: cover; min-width: 60px; max-width: 60px; min-height: 60px;max-height: 60px;">
+                                            <img class="img-circle img-fluid mr-3" src="<?= $image_url ?>" alt="User Avatar" style="object-fit: cover; min-width: 60px; max-width: 60px; min-height: 60px;max-height: 60px;">
                                             <div class="media-body">
                                                 <h3 class="dropdown-item-title" style="font-weight: 500;">
                                                     <?= ucwords($name) ?>
@@ -260,15 +247,45 @@ if (!empty($auth)) {
             </div>
 
             <?php
-            }
+}
 
-            function main_footer()
-            {
-            $ci = &get_instance();
-            ?>
+function main_footer()
+{
+    $ci = &get_instance();
+    ?>
 
         </div>
 
+        <script>
+    // Function to handle the search on Enter key press
+    function handleSearch() {
+        const searchInput = document.getElementById('searchInput');
+        const mobileSearchInput = document.getElementById('mobileSearchInput');
+        const searchTerm = searchInput.value || mobileSearchInput.value;
+
+        // Check if the search term is not empty
+        if (searchTerm.trim() !== '') {
+            // Replace 'your-specific-page-url' with the actual URL you want to redirect to
+            window.location.href = '<?= base_url() ?>search_page?search=' + encodeURIComponent(searchTerm);
+        }
+    }
+
+    // Attach the event listener for the search input field
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+            handleSearch();
+        }
+    });
+
+    // Attach the event listener for the mobile search input field
+    const mobileSearchInput = document.getElementById('mobileSearchInput');
+    mobileSearchInput.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+            handleSearch();
+        }
+    });
+</script>
         <!-- REQUIRED SCRIPTS -->
         <script>
             var baseUrl = '<?php echo base_url(); ?>';
@@ -296,34 +313,49 @@ if (!empty($auth)) {
         <script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/chart.js/Chart.min.js"></script>
         <!-- Toastr -->
         <script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/toastr/toastr.min.js"></script>
+        <!-- Include Bootstrap Vue JS -->
+
+
         <!-- DataTables  & Plugins -->
-        <!--    <script src="--><? //= base_url()
-        ?><!--assets/theme/adminlte/AdminLTE/plugins/datatables/jquery.dataTables.min.js"></script>-->
-        <!--    <script src="--><? //= base_url()
-        ?><!--assets/theme/adminlte/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>-->
-        <!--    <script src="--><? //= base_url()
-        ?><!--assets/theme/adminlte/AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>-->
-        <!--    <script src="--><? //= base_url()
-        ?><!--assets/theme/adminlte/AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>-->
-        <!--    <script src="--><? //= base_url()
-        ?><!--assets/theme/adminlte/AdminLTE/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>-->
-        <!--    <script src="--><? //= base_url()
-        ?><!--assets/theme/adminlte/AdminLTE/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>-->
-        <!--    <script src="--><? //= base_url()
-        ?><!--assets/theme/adminlte/AdminLTE/plugins/jszip/jszip.min.js"></script>-->
-        <!--    <script src="--><? //= base_url()
-        ?><!--assets/theme/adminlte/AdminLTE/plugins/pdfmake/pdfmake.min.js"></script>-->
-        <!--    <script src="--><? //= base_url()
-        ?><!--assets/theme/adminlte/AdminLTE/plugins/pdfmake/vfs_fonts.js"></script>-->
-        <!--    <script src="--><? //= base_url()
-        ?><!--assets/theme/adminlte/AdminLTE/plugins/datatables-buttons/js/buttons.html5.min.js"></script>-->
-        <!--    <script src="--><? //= base_url()
-        ?><!--assets/theme/adminlte/AdminLTE/plugins/datatables-buttons/js/buttons.print.min.js"></script>-->
-        <!--    <script src="--><? //= base_url()
-        ?><!--assets/theme/adminlte/AdminLTE/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>-->
+        <!--    <script src="-->
+        <? //= base_url()
+            ?><!--assets/theme/adminlte/AdminLTE/plugins/datatables/jquery.dataTables.min.js"></script>-->
+        <!--    <script src="-->
+        <? //= base_url()
+            ?><!--assets/theme/adminlte/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>-->
+        <!--    <script src="-->
+        <? //= base_url()
+            ?><!--assets/theme/adminlte/AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>-->
+        <!--    <script src="-->
+        <? //= base_url()
+            ?><!--assets/theme/adminlte/AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>-->
+        <!--    <script src="-->
+        <? //= base_url()
+            ?><!--assets/theme/adminlte/AdminLTE/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>-->
+        <!--    <script src="-->
+        <? //= base_url()
+            ?><!--assets/theme/adminlte/AdminLTE/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>-->
+        <!--    <script src="-->
+        <? //= base_url()
+            ?><!--assets/theme/adminlte/AdminLTE/plugins/jszip/jszip.min.js"></script>-->
+        <!--    <script src="-->
+        <? //= base_url()
+            ?><!--assets/theme/adminlte/AdminLTE/plugins/pdfmake/pdfmake.min.js"></script>-->
+        <!--    <script src="-->
+        <? //= base_url()
+            ?><!--assets/theme/adminlte/AdminLTE/plugins/pdfmake/vfs_fonts.js"></script>-->
+        <!--    <script src="-->
+        <? //= base_url()
+            ?><!--assets/theme/adminlte/AdminLTE/plugins/datatables-buttons/js/buttons.html5.min.js"></script>-->
+        <!--    <script src="-->
+        <? //= base_url()
+            ?><!--assets/theme/adminlte/AdminLTE/plugins/datatables-buttons/js/buttons.print.min.js"></script>-->
+        <!--    <script src="-->
+        <? //= base_url()
+            ?><!--assets/theme/adminlte/AdminLTE/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>-->
 
     </body>
-</html>
-<?php
-} ?>
 
+    </html>
+    <?php
+} ?>

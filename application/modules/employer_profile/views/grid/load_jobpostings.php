@@ -49,7 +49,7 @@ if (!empty($jobpostings)) {
                 </div>
             </div>
 
-            <div id="collapse<?= $index ?>" class="collapse bg-gray-light" aria-labelledby="job<?= $index ?>" data-parent="#load_jobpostings">
+            <div id="collapse<?= $index ?>" class="collapse" style="background-color: #fbfbfb;" aria-labelledby="job<?= $index ?>" data-parent="#load_jobpostings">
                 <div class="card-body text-muted">
                     <?= $job->description ?>
                 </div>

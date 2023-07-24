@@ -40,7 +40,7 @@ class Jobposting extends MY_Controller
             // check if the user is an employer, load the employer's jobpost and the selected jobpost views
             if ($this->auth['user_type'] == 'EMPLOYER') {
                 $employer_id = $this->job_model->getEmployerByJobpost($id)->id;
-                
+
                 $this->data['details'] = $this->job_model->get_employer_jobposts($employer_id);
                 $view['jobs'] = $this->load->view('grid/employer/load_own_jobpost', $this->data, true);
 
@@ -49,7 +49,7 @@ class Jobposting extends MY_Controller
                 $view['selected'] = $this->load->view('grid/employer/load_own_selected_job', $this->data, true);
             } else {
                 // check if the user is an employee, load the employee's applied jobs and the selected applied job views
-                $this->data['applied_jobs'] = $this->Applicant_model->getAppliedJobs($id);
+                $this->data['applied_jobs'] = $this->Applicant_model->getAppliedJobs($this->userdata->ID);
                 $view['jobs'] = $this->load->view('grid/employee/load_applied_jobs', $this->data, true);
 
                 $this->data['applied_job'] = $this->Applicant_model->getSelectedAppliedJob($id);

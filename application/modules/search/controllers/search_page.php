@@ -5,7 +5,7 @@ class search_page extends MY_Controller
 {
     protected $userdata;
     protected $auth;
-    private $data = [];
+    private array $data = [];
 
     public function __construct()
     {
@@ -48,21 +48,12 @@ class search_page extends MY_Controller
         $this->data['employers'] = $this->employer_model->get_employers(4, $id);
         $this->data['skills'] = $this->dashboard_model->get_skill($id);
         $this->data['jobpostings'] = $this->jobposting_model->get_all_jobposts();
-        
+
         $this->db->cache_off();
 
         $this->data['jobpost_section_view'] = $this->load->view('grid/load_jobposts', $this->data, TRUE);
 
         $this->data['content'] = 'index';
-        $this->load->view('layout', $this->data);
-    }
-
-    public function get_skill()
-    {
-        $id = $this->uri->segment(3);
-
-        $this->data['skills'] = $this->dashboard_model->get_skill($id);
-        $this->data['content'] = 'grid/dash_load_skill';
         $this->load->view('layout', $this->data);
     }
 }

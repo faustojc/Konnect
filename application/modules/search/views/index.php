@@ -1,5 +1,5 @@
 <?php
-main_header(['Employer_profile']);
+main_header(['Search']);
 ?>
 <!-- ############ PAGE START-->
 <style>
@@ -180,7 +180,7 @@ main_header(['Employer_profile']);
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12">
-                                <a class="btn border-0 shadow-none" style="background:; width: 100%; " data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" id="toggleButton">
+                                <a class="btn border-0 shadow-none" style="background:; width: 100%; " data-toggle="collapse" href="#collapseFilter" role="button" aria-expanded="false" aria-controls="collapseFilter" id="toggleButton">
                                     <h6 style="font-weight: 400; text-align: left; display: flex; justify-content: space-between; align-items: center;">
                                         <span>Filters</span>
                                         <i class="fa-solid fa-caret-left" id="caretIcon"></i>
@@ -189,96 +189,78 @@ main_header(['Employer_profile']);
                             </div>
                         </div>
 
-
-                        <div class="collapse" id="collapseExample">
+                        <div class="collapse" id="collapseFilter">
                             <div class="card card-body p-0">
                                 <div class="px-3">
                                     <hr class="mt-0">
 
                                     <label for="" class="text-muted" style="font-weight:400;">Job type</label>
                                     <div class="form-check pt-1" style="font-size:14px;">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault" style="font-weight:300;">
+                                        <input class="form-check-input" type="checkbox" value="" id="full_time" name="full_time">
+                                        <label class="form-check-label" for="full_time" style="font-weight:300;">
                                             Full time
                                         </label>
                                     </div>
                                     <div class="form-check pt-1" style="font-size:14px;">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault" style="font-weight:300;">
+                                        <input class="form-check-input" type="checkbox" value="" id="part_time" name="part_time">
+                                        <label class="form-check-label" for="part_time" style="font-weight:300;">
                                             Part time
                                         </label>
                                     </div>
                                     <div class="form-check pt-1" style="font-size:14px;">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault" style="font-weight:300;">
+                                        <input class="form-check-input" type="checkbox" value="" id="internship" name="internship">
+                                        <label class="form-check-label" for="internship" style="font-weight:300;">
                                             Internship
                                         </label>
                                     </div>
                                     <div class="form-check pt-1" style="font-size:14px;">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault" style="font-weight:300;">
+                                        <input class="form-check-input" type="checkbox" value="" id="permanent" name="permanent">
+                                        <label class="form-check-label" for="permanent" style="font-weight:300;">
                                             Permanent
                                         </label>
                                     </div>
                                     <div class="form-check pt-1" style="font-size:14px;">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault" style="font-weight:300;">
+                                        <input class="form-check-input" type="checkbox" value="" id="shift_work" name="shift_work">
+                                        <label class="form-check-label" for="shift_work" style="font-weight:300;">
                                             Shift work
                                         </label>
                                     </div>
-                                    <!-- <div class="form-check pt-1" style="font-size:14px;">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault" style="font-weight:300;">
-                                                Distant work
-                                            </label>
-                                    </div> -->
-
-                                    <hr class="">
-
+                                    <hr>
                                     <label for="" class="text-muted" style="font-weight:400;">Working Schedule</label>
                                     <div class="form-check pt-1" style="font-size:14px;">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault" style="font-weight:300;">
+                                        <input class="form-check-input" type="checkbox" value="" id="day_shift" name="day_shift">
+                                        <label class="form-check-label" for="day_shift" style="font-weight:300;">
                                             Day shift
                                         </label>
                                     </div>
                                     <div class="form-check pt-1" style="font-size:14px;">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault" style="font-weight:300;">
+                                        <input class="form-check-input" type="checkbox" value="" id="night_shift" name="night_shift">
+                                        <label class="form-check-label" for="night_shift" style="font-weight:300;">
                                             Night shift
                                         </label>
                                     </div>
                                     <div class="form-check pt-1" style="font-size:14px;">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault" style="font-weight:300;">
+                                        <input class="form-check-input" type="checkbox" value="" id="flex_time" name="flex_time">
+                                        <label class="form-check-label" for="flex_time" style="font-weight:300;">
                                             Flex time
                                         </label>
                                     </div>
-
-
                                 </div>
                                 <div class="pt-3 d-flex justify-content-end pr-2">
-                                    <button class="btn btn-outline-info" style="border-radius:80px;">
+                                    <button class="btn btn-outline-info" style="border-radius:80px;" type="button" name="filter">
                                         <span>Filter</span> <i class="fa-solid fa-filter"></i>
                                     </button>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
-
-
             </div>
             <div class="col-12 col-md-9 mt-4">
-                <!-- POSTS -->
-
-                <div class="row">
-                    <?= $jobpost_section_view ?>
+                <div class="row" id="search_result_content">
+                    <?= $search_view_results ?>
                 </div>
-                <!-- JOBPOSTS -->
             </div>
-            <!-- <div class="col-12 col-md-3 mt-4"></div> -->
         </div>
     </div>
 </section>
@@ -288,5 +270,4 @@ main_header(['Employer_profile']);
 main_footer();
 ?>
 
-<script src="assets/js/applicant/index.js"></script>
-<script src="<?php echo base_url() ?>/assets/js/search_page/index.js"></script>
+<script src="<?= base_url() ?>assets/js/applicant/index.js"></script>

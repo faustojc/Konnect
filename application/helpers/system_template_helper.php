@@ -249,37 +249,6 @@ function main_footer()
 { ?>
 
     </div>
-
-    <script>
-        // Function to handle the search on Enter key press
-        function handleSearch() {
-            const searchInput = document.getElementById('searchInput');
-            const mobileSearchInput = document.getElementById('mobileSearchInput');
-            const searchTerm = searchInput.value || mobileSearchInput.value;
-
-            // Check if the search term is not empty
-            if (searchTerm.trim() !== '') {
-                // Replace 'your-specific-page-url' with the actual URL you want to redirect to
-                window.location.href = '<?= base_url() ?>search_page?search=' + encodeURIComponent(searchTerm);
-            }
-        }
-
-        // Attach the event listener for the search input field
-        const searchInput = document.getElementById('searchInput');
-        searchInput.addEventListener('keydown', function (event) {
-            if (event.key === 'Enter') {
-                handleSearch();
-            }
-        });
-
-        // Attach the event listener for the mobile search input field
-        const mobileSearchInput = document.getElementById('mobileSearchInput');
-        mobileSearchInput.addEventListener('keydown', function (event) {
-            if (event.key === 'Enter') {
-                handleSearch();
-            }
-        });
-    </script>
     <!-- REQUIRED SCRIPTS -->
     <script>
         const baseUrl = '<?php echo base_url(); ?>';
@@ -287,6 +256,8 @@ function main_footer()
     <!-- User Defined SCRIPTS -->
     <script src="<?= base_url() ?>/assets/js/main.js" defer></script>
     <script src="<?= base_url() ?>assets/js/auth/index.js" defer></script>
+
+    <script src="<?= base_url() ?>assets/js/search/index.js"></script>
 
     <!-- jQuery -->
     <script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/jquery/jquery.min.js"></script>

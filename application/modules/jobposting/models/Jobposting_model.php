@@ -71,7 +71,16 @@ class Jobposting_model extends CI_Model
     {
         return $this->db->select($select)
             ->join('tbl_employer', 'tbl_employer.id = tbl_jobposting.employer_id')
-            ->where_in('id', $ids)
+            ->where_in('tbl_jobposting.id', $ids)
+            ->order_by('date_posted', 'DESC')
+            ->get($this->Table->jobposting)->result();
+    }
+
+    public function getJobLike($field, $keyword, $select = '*')
+    {
+        return $this->db->select($select)
+            ->join('tbl_employer', 'tbl_employer.id = tbl_jobposting.employer_id')
+            ->like($field, $keyword)
             ->get($this->Table->jobposting)->result();
     }
 }

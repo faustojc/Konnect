@@ -54,4 +54,9 @@ class Employer_model extends CI_Model
             ->like($field, $value)
             ->get($this->Table->employer)->result();
     }
+
+    public function getEmployersWhereIn(string $column, array $values, string $select = '*')
+    {
+        return $this->db->select($select)->from($this->Table->employer)->where_in($column, $values)->get()->result();
+    }
 }

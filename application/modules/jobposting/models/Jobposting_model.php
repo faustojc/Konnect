@@ -66,4 +66,12 @@ class Jobposting_model extends CI_Model
     {
         return $this->db->select($select)->get_where($this->Table->jobposting, ['id' => $id])->row();
     }
+
+    public function getJobWhereIn($ids, $select = '*')
+    {
+        return $this->db->select($select)
+            ->join('tbl_employer', 'tbl_employer.id = tbl_jobposting.employer_id')
+            ->where_in('id', $ids)
+            ->get($this->Table->jobposting)->result();
+    }
 }

@@ -22,7 +22,7 @@ class Employer_model extends CI_Model
     public function get_employers($limit = 0, $id = null)
     {
         if ($limit == 0 && $id != null) {
-            return $this->db->select()->from($this->Table->employer)->where('id !=', $id)->get()->result();
+            return $this->db->get_where($this->Table->employer, ['id !=' => $id])->result();
         } else if ($limit != 0 && $id != null) {
             return $this->db->select()->from($this->Table->employer)->where('id !=', $id)->limit($limit)->get()->result();
         } else if ($limit != 0 && $id == null) {
@@ -45,5 +45,13 @@ class Employer_model extends CI_Model
     public function getEmployerOnly($select, $id)
     {
         return $this->db->select($select)->from($this->Table->employer)->where('id', $id)->get()->row();
+    }
+
+    public function getOtherEmployerLike($id, $field, $value, $select = '*')
+    {
+        return $this->db->select($select)
+            ->where('id !=', $id)
+            ->like($field, $value)
+            ->get($this->Table->employer)->result();
     }
 }

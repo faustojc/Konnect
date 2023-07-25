@@ -43,7 +43,7 @@ class Search extends CI_Controller
             );
 
             // Search for relevant job posts
-            $results = $this->search_job_posts($query, $criteria);
+            $results = $this->searchRelevantJobposts($query, $criteria);
 
             $data['results'] = $results;
             $this->load->view('grid/employee_search_result', $data);
@@ -55,17 +55,20 @@ class Search extends CI_Controller
             );
 
             // Search for relevant employees
-            $results = $this->search_employees_and_employers($query, $criteria);
+            $results = $this->searchEmployeesEmployers($query, $criteria);
 
             $data['results'] = $results;
             $this->load->view('grid/employer_search_result', $data);
         }
     }
 
-    private function search_job_posts($query, $criteria): array
+    private function searchRelevantJobposts($query, $criteria): array
     {
         // Get all job posts
         $job_posts = $this->jobposting_model->get_all_job_posts();
+
+        // Get following employers
+        $followed_employers = $this->follow_model->get_following($this->userdata->ID);
 
         // Initialize an array to store the relevance scores
         $scores = array();
@@ -75,14 +78,33 @@ class Search extends CI_Controller
             // Initialize the relevance score to 0
             $score = 0;
 
+            if (!empty($followed_employers)) {
+                foreach ($followed_employers as $employer) {
+                    // Check if the job post is from a followed employer
+                    if ($job->employer_id == $employer->id) {
+                        $score += 12;
+                    }
+
+                    // Check if the employee has same city as followed employer
+                    if (strtolower($job->city) == strtolower($employer->city)) {
+                        ++$score;
+                    }
+                }
+            }
+
             // Check if the job title matches the query
             if (stripos($job->title, $query) !== false) {
-                $score += 5;
+                $score += 8;
             }
 
             // Check if the job skills match the employee's skills
-            if (in_array(strtolower($job->skills_req), array_map('strtolower', $criteria['skills']))) {
-                ++$score;
+            if (!empty($job->skills_req)) {
+                $skills_req = explode(',', $job->skills_req);
+                foreach ($skills_req as $skill) {
+                    if (in_array(strtolower($skill), array_map('strtolower', $criteria['skills']))) {
+                        $score += 4;
+                    }
+                }
             }
 
             // Store the relevance score for this job post
@@ -96,7 +118,7 @@ class Search extends CI_Controller
         return $this->jobposting_model->getAllJobpostsByIds($scores);
     }
 
-    private function search_employees_and_employers($query, $criteria): array
+    private function searchEmployeesEmployers($query, $criteria): array
     {
         // Get all employees
         // Apply the scoring system to each employee using the search input only as criteria
@@ -110,6 +132,12 @@ class Search extends CI_Controller
 
         // Display the results in the search results view with sorted employees and employers
 
-        return array();
+        $other_employers = array();
+
+        foreach ($criteria as $key => $value) {
+            $other_employers[$key] = $this->employer_model->getOtherEmployerLike($this->userdata->id, $value, $query, 'id, tradename, business_type, city, image');
+        }
+
+        return array_unique($other_employers, SORT_REGULAR);
     }
 }

@@ -45,19 +45,19 @@ $totalJobPostings = count($jobpostings);
         font-size: 16px; /* You can adjust this value to control the base font size */
     }
 
-    @media (max-width: 767.98px) {
+    @media (max-width: 767px) {
         html {
             font-size: 14px;
         }
     }
 
-    @media (max-width: 575.98px) {
+    @media (max-width: 575px) {
         html {
             font-size: 12px;
         }
     }
 
-    @media (max-width: 575.98px) {
+    @media (max-width: 575px) {
         .card-body {
             padding: 1rem; /* Adjust the padding as needed for smaller screens */
         }
@@ -71,7 +71,7 @@ $totalJobPostings = count($jobpostings);
         }
     }
 
-    @media (max-width: 575.98px) {
+    @media (max-width: 575px) {
         .job-status-container {
             flex-direction: column;
             align-items: center;
@@ -116,7 +116,7 @@ $usedColors = array();
 if (!empty($jobpostings)) {
     $totalColors = count($backgroundColors); // Get the total number of available colors in the array
 
-    foreach ($jobpostings as $jobpost) {
+    foreach ($jobpostings as $key => $jobpost) {
         $timeDifference = time() - strtotime($jobpost->date_posted);
         $timeAgo = "";
         // $usedColors = array(); // Array to keep track of colors used for each card
@@ -156,53 +156,30 @@ if (!empty($jobpostings)) {
 
         <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="card grow text-wrap">
-                <div class="card-body pt-2 mx-3 my-3 px-2 job-post job-card-<?= $jobpost->id ?> pb-2" style="border-radius:15px;">
-
+                <div class="card-body pt-2 mx-3 my-3 px-2 job-post job-card-<?= $jobpost->id ?> pb-2" style="border-radius:15px; background-color: <?= $randomBackgroundColor ?>">
                     <div class="row px-2 pb-4 pt-2">
-
-                        <!-- <img class="img-circle img-fluid " src="<?= base_url() ?>assets/images/employer/profile_pic/<?= $jobpost->EmployerLogo ?>" alt="Employer Profile Pic"
-                                 style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;"> -->
-
                         <div class="col-8 pt-2">
                             <div class="d-flex justify-content-between py-1 px-2">
                                 <div class="card " style="border-radius:80px;">
                                     <div class="card-body py-1 px-2" style="">
                                         <p class="py-1" style="font-size: 12px; margin:0; font-weight: 500;">
                                             <?= date('d M, Y', strtotime($jobpost->date_posted)) ?>
-
                                         </p>
                                     </div>
-
                                 </div>
-
-                                <!-- <a href="<?= base_url() ?>jobpost?id=<?= $jobpost->id ?>" class="btn btn-outline-info btn-sm h-50 w-25 ">View</a> -->
                             </div>
-
                             <h6 class="m-0 px-2 pt-3" style="font-size: 0.75rem; /* Adjust the value as needed */">
                                 <a href="<?= base_url() ?>employer_profile?id=<?= $jobpost->employer_id ?>" class="job-title fw-bold text-decoration-none" style="color:#000; font-size: 12px; font-weight:300;">
                                     <?= ucwords($jobpost->EmployerTradename) ?>
                                 </a>
-
                             </h6>
-
-
                             <div class="job-details pt-1" style="border: 0;">
-                                <h5 class="pb-2 pt-1 px-2" style="font-weight: 0.9375rem; /* Adjust the value as needed */">
+                                <h5 class="pb-2 pt-1 px-2" style="font-weight: bold;">
                                     <?= ucwords($jobpost->title) ?>
-
                                 </h5>
 
-                                <!-- <hr> -->
-
                                 <div class="job-description px-2" style="max-height: 150px; overflow-y: hidden">
-                                    <div class="" style="font-weight: 0.9375rem; /* Adjust the value as needed */">
-
-                                        <!-- <?php if (isset($jobpost->salary) && $jobpost->salary !== '') : ?>
-                                    <div class="btn btn-outline-secondary" style="font-size:12px; border-radius:15px;">
-                                        ₱ <?= $jobpost->salary ?>
-                                    </div>
-                                    <?php endif; ?> -->
-
+                                    <div class="" style="font-weight: bold;">
                                         <?php if (isset($jobpost->shift) && $jobpost->shift !== '') : ?>
                                             <div class="btn btn-outline-secondary" style="font-size:12px; border-radius:15px;">
                                                 <?= $jobpost->shift ?>
@@ -214,17 +191,8 @@ if (!empty($jobpostings)) {
                                                 <?= $jobpost->job_type ?>
                                             </div>
                                         <?php endif; ?>
-
-
                                     </div>
-                                    <!-- <div class="" style="font-size:14px">
-                                 <?= $jobpost->description ?> 
-                            </div> -->
-
                                 </div>
-
-
-                                <!-- <a class="text-center see-more" data-target=".job-description" style="display: block;" role="button">See more</a> -->
 
                                 <!-- <?php if ($auth['user_type'] != 'EMPLOYER'): ?>
                             <hr>
@@ -236,7 +204,6 @@ if (!empty($jobpostings)) {
                         <?php endif; ?> -->
 
                             </div>
-
                         </div>
                         <div class="col-4 pt-2">
                             <div class="d-flex justify-content-end py-1 px-2 job-status-container">
@@ -244,9 +211,7 @@ if (!empty($jobpostings)) {
                                     <div class="card-body center py-1 px-2" style="padding:0;text-align:center;">
                                         <div class="d-flex align-content-center px-2">
                                             <div class="d-flex" style="align-content:center;">
-                                                <?php
-                                                $circleColor = (strtolower($jobpost->filled) === "open") ? " #7bff79 " : " #ff7979 ";
-                                                ?>
+                                                <?php $circleColor = (strtolower($jobpost->filled) === "open") ? " #7bff79 " : " #ff7979 "; ?>
                                                 <h8 class=" py-2 pr-1" style="color: <?= $circleColor ?>; font-size: 0.75rem;">●</h8>
                                                 <h8 class="py-2" style="font-size: 0.75rem; font-weight: 650;"><?= $jobpost->filled ?></h8>
                                             </div>
@@ -261,13 +226,11 @@ if (!empty($jobpostings)) {
                             </div>
                         </div>
                     </div>
-
-
                 </div>
 
                 <div class="row px-2 pb-4 pt-2">
                     <div class="col-12 col-md-6">
-                        <h6 class=" m-0 px-2" style="font-weight: 0.9375rem; /* Adjust the value as needed */">
+                        <h6 class=" m-0 px-2" style="font-weight: bold;">
                             ₱ <?= $jobpost->salary ?>
                         </h6>
                         <p class="text-muted px-2 m-0" style="font-size: 0.625rem; /* Adjust the value as needed */">
@@ -276,7 +239,7 @@ if (!empty($jobpostings)) {
                     </div>
                     <div class="col-12 col-md-6 d-flex justify-content-md-end justify-content-center align-self-center">
                         <div class="px-2">
-                            <button class="btn btn-info" style="border-radius: 0.9375rem; /* Adjust the value as needed */" data-toggle="modal" data-target="#exampleModalCenter">Details</button>
+                            <button class="btn btn-info" style="border-radius: 0.9375rem; /* Adjust the value as needed */" data-toggle="modal" data-target="#modal<?= $key ?>">Details</button>
                         </div>
                     </div>
                 </div>
@@ -284,19 +247,18 @@ if (!empty($jobpostings)) {
         </div>
 
         <!-- modal -->
-        <div class="modal fade px-0 border-0" id="exampleModalCenter" style="border-radius:15px;" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="">
+        <div class="modal fade px-0 border-0" id="modal<?= $key ?>" tabindex="-1" role="dialog" aria-labelledby="modalTitle<?= $key ?>" aria-hidden="true" style="border-radius:15px;">
             <div class="modal-dialog modal-dialog-centered" style="border-radius:15px;" role="document">
                 <div class="modal-content border-0 shadow-none" style="border-radius:15px;">
                     <div class="modal-header border-0">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                        <h5 class="modal-title" id="modalTitle<?= $key ?>"><?= ucwords($jobpost->title) ?></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <div class="">
-                            <?= ucwords($jobpost->title) ?>
-
+                            <?= $jobpost->description ?>
                         </div>
                     </div>
                     <div class="modal-footer border-0">

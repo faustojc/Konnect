@@ -2,51 +2,6 @@
 main_header(['Employer_profile']);
 ?>
 <!-- ############ PAGE START-->
-<script>
-    function formatInput() {
-        const input = document.getElementById("salary");
-        const value = input.value;
-
-        // Check if the input value is not empty
-        if (value !== "") {
-            // Add ".00" at the end if it's not already present
-            if (!value.endsWith(".00")) {
-                input.value = value + ".00";
-            }
-        }
-    }
-
-    function formatInput2() {
-        const input = document.getElementById("salary");
-        let value = input.value;
-
-        // Remove existing commas from the value
-        value = value.replace(/,/g, '');
-
-        // Format the value with commas for every thousand
-        value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-        // Update the input value with the formatted value
-        input.value = value;
-    }
-
-    function disableDotZero() {
-        const input = document.getElementById("salary");
-        const value = input.value;
-
-        // Check if the input value ends with ".00"
-        if (!value.endsWith(".00")) {
-            // Set the selection range to exclude ".00"
-            input.setSelectionRange(0, value.length - 3);
-        }
-    }
-
-    $(document).ready(function () {
-        $("#filterToggle").click(function () {
-            $(this).find("i.fa-caret-left").toggleClass("fa-caret-down");
-        });
-    });
-</script>
 <style>
     /* Remove spinner for number input */
     input[type=number]::-webkit-inner-spin-button,
@@ -333,15 +288,5 @@ main_header(['Employer_profile']);
 main_footer();
 ?>
 
-<script src="<?php echo base_url() ?>/assets/js/dashboard/index.js">
-
-</script>
-
-<script>
-    $(document).ready(function () {
-        $("#toggleButton").click(function () {
-            // Toggle the class of the caret icon
-            $("#caretIcon").toggleClass("fa-caret-left fa-caret-down");
-        });
-    });
-</script>
+<script src="assets/js/applicant/index.js"></script>
+<script src="<?php echo base_url() ?>/assets/js/search_page/index.js"></script>

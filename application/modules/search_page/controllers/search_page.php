@@ -48,21 +48,10 @@ class search_page extends MY_Controller
         $this->data['employers'] = $this->employer_model->get_employers(4, $id);
         $this->data['skills'] = $this->dashboard_model->get_skill($id);
         $this->data['jobpostings'] = $this->jobposting_model->get_all_jobposts();
-
-        if ($this->auth['user_type'] == 'EMPLOYEE') {
-            $this->data['following'] = $this->follow_model->get_following($id);
-        }
-
+        
         $this->db->cache_off();
 
-        $this->data['skills_section_view'] = $this->load->view('grid/dash_load_skill', $this->data, TRUE);
         $this->data['jobpost_section_view'] = $this->load->view('grid/load_jobposts', $this->data, TRUE);
-
-        if ($this->auth['user_type'] == 'EMPLOYER') {
-            $this->data['user_display'] = $this->load->view('grid/load_employer', $this->data, true);
-        } else {
-            $this->data['user_display'] = $this->load->view('grid/load_employee', $this->data, true);
-        }
 
         $this->data['content'] = 'index';
         $this->load->view('layout', $this->data);

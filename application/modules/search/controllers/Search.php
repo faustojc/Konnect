@@ -23,7 +23,6 @@ class Search extends MY_Controller
             'employer/Employer_model' => 'employer_model',
             'jobposting/Jobposting_model' => 'jobposting_model',
             'follow/Follow_model' => 'follow_model',
-            'employeeskills/EmployeeSkills_model' => 'employee_skill_model',
         ];
 
         $this->load->model($model_list);
@@ -36,7 +35,7 @@ class Search extends MY_Controller
 
         if ($this->auth['user_type'] == 'EMPLOYEE') {
             // Get the employee's search criteria
-            $skills = $this->employee_skill_model->getEmployeeSkills($this->userdata->ID, 'skill');
+            $skills = $this->EmployeeSkills_model->getEmployeeSkills($this->userdata->ID, 'skill');
 
             $skills = array_map(function ($skill) {
                 return get_object_vars($skill)['skill'];

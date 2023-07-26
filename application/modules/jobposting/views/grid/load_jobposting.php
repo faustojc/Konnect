@@ -19,6 +19,25 @@
         $ci = &get_instance();
         if (!empty($details)) {
             foreach ($details as $job) {
+                $hasApplied = false;
+
+                if (strtoupper($job->filled) == 'CLOSED') {
+                    continue;
+                }
+
+                if ($auth['user_type'] == 'EMPLOYEE' && !empty($applicant)) {
+                    foreach ($applicant as $applied) {
+                        if ($applied->job_id == $job->id && strtoupper($applied->status) != 'PENDING') {
+                            $hasApplied = true;
+                            break;
+                        }
+                    }
+                }
+
+                if ($hasApplied) {
+                    continue;
+                }
+
                 $postDate = strtotime($job->date_posted);
                 $currentTime = time();
                 $timeDiff = $currentTime - $postDate;
@@ -92,13 +111,13 @@
             }
         } else {
             ?>
-        <div class="jumbotron">
-            <div class="container">
-                <h1 class="display-4">No Jobs Found</h1>
-                <p class="lead">We can't find the jobs that you are looking for or there are no jobs available.</p>
+            <div class="jumbotron">
+                <div class="container">
+                    <h1 class="display-4">No Jobs Found</h1>
+                    <p class="lead">We can't find the jobs that you are looking for or there are no jobs available.</p>
+                </div>
             </div>
-        </div>
-        <?php
+            <?php
         }
         ?>
     </div>

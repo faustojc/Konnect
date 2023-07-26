@@ -11,6 +11,25 @@
 
 <?php if (!empty($jobpostings)) {
     foreach ($jobpostings as $jobpost) {
+        $hasApplied = false;
+
+        if (strtoupper($jobpost->filled) == 'CLOSED') {
+            continue;
+        }
+
+        if ($auth['user_type'] == 'EMPLOYEE' && !empty($applicant)) {
+            foreach ($applicant as $applied) {
+                if ($applied->job_id == $jobpost->id && strtoupper($applied->status) != 'PENDING') {
+                    $hasApplied = true;
+                    break;
+                }
+            }
+        }
+
+        if ($hasApplied) {
+            continue;
+        }
+
         $timeDifference = time() - strtotime($jobpost->date_posted);
         $timeAgo = "";
 
@@ -115,7 +134,7 @@
                         </div>
                         <a class="text-center see-more" data-target=".job-description" style="display: block;" role="button">See more</a>
 
-                        <?php if ($auth['user_type'] != 'EMPLOYER') {
+                        <?php if ($auth['user_type'] == 'EMPLOYEE') {
                             $hasApplied = false;
 
                             foreach ($applicant as $applied) {

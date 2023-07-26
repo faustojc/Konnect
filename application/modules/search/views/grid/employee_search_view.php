@@ -101,6 +101,10 @@
     $totalColors = count($backgroundColors); // Get the total number of available colors in the array
 
     foreach ($results as $key => $job) {
+        if (strtoupper($job->filled) == 'CLOSE') {
+            continue;
+        }
+
         $timeDifference = time() - strtotime($job->date_posted);
         $timeAgo = "";
 

@@ -1,14 +1,11 @@
 <?php
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class EmployeeSkills_model extends CI_Model
 {
-    private $Table;
-
     public function __construct()
     {
         parent::__construct();
-
-        $this->Table = json_decode(TABLE);
     }
 
     public function getEmployeeSkills($id, string $select = '*')

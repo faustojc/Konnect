@@ -83,4 +83,9 @@ class Jobposting_model extends CI_Model
             ->like($field, $keyword)
             ->get($this->Table->jobposting)->result();
     }
+
+    public function getJobpostSelect($id, $select = '*')
+    {
+        return $this->db->select($select)->get_where($this->Table->jobposting, ['id' => $id])->row();
+    }
 }

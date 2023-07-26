@@ -74,6 +74,13 @@ class Jobposting extends MY_Controller
     public function job_feed()
     {
         $this->data['details'] = $this->job_model->get_all_jobposts();
+        $this->data['auth'] = $this->auth;
+
+        if ($this->auth['user_type'] == 'EMPLOYEE') {
+            $sortHandler = new SortHandler();
+            $this->data['details'] = $sortHandler->sortEmployeeRelevantJobposts($this->data['details']);
+        }
+
         $this->data['content'] = 'grid/load_jobposting';
         $view = $this->load->view('layout', $this->data, true);
 

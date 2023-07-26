@@ -11,6 +11,10 @@
 
 <?php if (!empty($jobpostings)) {
     foreach ($jobpostings as $jobpost) {
+        if (strtoupper($jobpost->filled) == 'CLOSE') {
+            continue;
+        }
+
         $timeDifference = time() - strtotime($jobpost->date_posted);
         $timeAgo = "";
 

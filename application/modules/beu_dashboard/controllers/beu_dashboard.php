@@ -52,6 +52,9 @@ class beu_dashboard extends MY_Controller
         if ($this->auth['user_type'] == 'EMPLOYEE') {
             $this->data['following'] = $this->follow_model->get_following($id);
             $this->data['applicant'] = $this->Applicant_model->getJobApplied($id);
+
+            $sortHandler = new SortHandler();
+            $this->data['jobpostings'] = $sortHandler->sortEmployeeRelevantJobposts($this->data['jobpostings']);
         }
 
         $this->db->cache_off();

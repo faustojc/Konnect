@@ -57,8 +57,8 @@ class Search extends MY_Controller
         } else {
             // Get the employer's search criteria
             $criteria = array(
-                'tradename' => $this->userdata->tradename,
-                'business_type' => $this->userdata->business_type
+                'business_type' => $this->userdata->business_type,
+                'location' => $this->userdata->address . ' ' . $this->userdata->barangay . ' ' . $this->userdata->city
             );
 
             // Search for relevant employees
@@ -150,12 +150,14 @@ class Search extends MY_Controller
         $job_ids = array_keys($scores);
 
         // Get the sorted job posts with their scores in one call
-        return array_map(function ($job_id) use ($scores, &$job_posts) {
+        return array_map(function ($job_id) use ($scores, $job_posts) {
             foreach ($job_posts as $job_post) {
                 if ($job_post->id == $job_id) {
                     return (object)array_merge((array)$job_post, ['score' => $scores[$job_id]]);
                 }
             }
+
+            return $job_posts;
         }, $job_ids);
     }
 
@@ -168,18 +170,48 @@ class Search extends MY_Controller
         // Get the sorted employees
 
         // Get all the employers
+        $other_employers = $this->employer_model->getOtherEmployerLike($this->userdata->ID, 'tradename', $query, 'id, tradename, business_type, address, barangay, city');
+
         // Apply the scoring system to other employers using the defined criteria
+        $scores = array();
+
         // Sort the employers by their relevance scores in descending order
-        // Get the sorted employers
+        if (!empty($other_employers)) {
+            foreach ($other_employers as $other) {
+                $score = 0;
 
-        // Display the results in the search results view with sorted employees and employers
+                // Check if the employer's business type matches the current employer
+                if (stripos($other->business_type, $criteria['business_type']) !== false) {
+                    $score += 8;
+                }
 
-        $other_employers = array();
+                $other_address = strtolower($other->address . ' ' . $other->barangay . ' ' . $other->city);
+                // Check if the employer's location matches the query
+                if (stripos($other_address, $criteria['location']) !== false) {
+                    $score += 2;
+                }
 
-        foreach ($criteria as $key => $value) {
-            $other_employers[$key] = $this->employer_model->getOtherEmployerLike($this->userdata->id, $value, $query, 'id, tradename, business_type, city, image');
+                // Store the relevance score for this employer
+                $scores[$other->id] = $score;
+            }
         }
 
-        return array_unique($other_employers, SORT_REGULAR);
+        // Sort the other employers
+        arsort($scores);
+
+        // Get the other employer's ids
+        $other_ids = array_keys($scores);
+
+        // Get the sorted other employers with their scores in one call
+        // Display the results in the search results view with sorted employees and employers
+        return array_map(function ($other_id) use ($scores, $other_employers) {
+            foreach ($other_employers as $other) {
+                if ($other->id == $other_id) {
+                    return (object)array_merge((array)$other, ['score' => $scores[$other_id]]);
+                }
+            }
+
+            return $other_employers;
+        }, $other_ids);
     }
 }

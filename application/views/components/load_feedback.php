@@ -11,13 +11,17 @@
         cursor: pointer;
         font-size: 2rem;
     }
+
+    .rounded-pill {
+        border-radius: 50rem !important;
+    }
 </style>
 
 
 <!-- feedback -->
 <div class="card card-white">
     <div class="card-header">
-        <h3 class="card-title fw-500" style="font-weight:600;">Feedback</h3>
+        <h3 class="card-title fw-500" style="font-weight:600; py-2">All Ratings and Reviews</h3>
 
         <?php if (!$has_permission): ?>
             <div class="card-tools">
@@ -122,36 +126,24 @@
 
     <?php endif; ?>
 
-</div>
-<!-- feedback -->
 
-<?php if (!empty($feedbacks)): ?>
-    <div class="card"> <!-- Parent card for "Feedbacks received by the company" -->
-        <div class="card-body">
+    <!-- feedback -->
 
-            <div class="row">
+    <?php if (!empty($feedbacks)): ?>
+        <div class="card pt-2"> <!-- Parent card for "Feedbacks received by the company" -->
+
+
+            <div class="row px-2">
                 <?php foreach ($feedbacks as $feedback): ?>
                     <div class="col-sm-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center">
-                                    <div class="col-1 d-flex justify-content-center align-items-center ml-3">
-                                        <img class="rounded-circle" src="<?= base_url() ?>assets/images/employee/profile_pic/default.png" alt="Employee Profile Pic" style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
-                                    </div>
-                                    <div class="row">
-                                        <div class="ml-3 mt-4">
+                        <div class="bg-white rounded  px-3 restaurant-detailed-ratings-and-reviews">
 
-                                            <h5 class="card-title" style="font-size:14px; font-weight: 500;">
-                                                <?= $feedback->userName ?>
-                                            </h5>
-                                            <h6 class="card-subtitle mb-2 text-muted" style="font-size:13px; font-weight: 400;">
-                                                <?= $feedback->userTitle ?>
-                                            </h6>
-                                            <h6 class="card-subtitle mb-2" style="font-size:13px; font-weight: 400;">Ratings:</h6>
-
-                                            <div class="row ">
-                                                <div class="rating pt-0">
-                                                    <!-- Display the star ratings here -->
+                            <div class="reviews-members pt-2 pb-2">
+                                <div class="media">
+                                    <a href="#"><img class="mr-5 rounded-pill" src="<?= base_url() ?>assets/images/employee/profile_pic/default.png" alt="Employee Profile Pic" alt="Employee Profile Pic" style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
+                                        <div class="media-body m-2">
+                                            <div class="reviews-members-header ml-5">
+                                                <div class="float-right" style="color:#FFC107;">
                                                     <?php for ($i = 1; $i <= 5; $i++) {
                                                         if ($i <= $feedback->rating) {
                                                             echo '<i class="fa-solid fa-star" ></i>';
@@ -160,26 +152,35 @@
                                                         }
                                                     } ?>
                                                 </div>
+                                                <h6 class="mb-1 ml-3"><a class="text-black" href="#">
+                                                        <?= $feedback->userName ?>
+                                                    </a></h6>
+                                                <p class="text-gray ml-3">
+                                                    <?= date('D, d F Y', strtotime($feedback->date_created)) ?>
+                                                </p>
                                             </div>
-
-
+                                            <div class="reviews-members-body" style="text-align: justify;">
+                                                <p>
+                                                    <?= $feedback->message ?>
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
-
                                 </div>
-
-                                <p class="card-text mt-3">
-                                    <?= $feedback->message ?>
-
-                                </p>
-                                <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
                             </div>
+                            <hr>
                         </div>
+
                     </div>
+
+
                 <?php endforeach; ?>
+
             </div>
         </div>
     </div>
+
+
+
 <?php else: ?>
     <?php if ($has_permission): ?>
         <div class="card"> <!-- Parent card for "You haven't received a feedback yet." -->

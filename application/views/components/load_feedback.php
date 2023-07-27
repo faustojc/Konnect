@@ -1,3 +1,16 @@
+<?php
+$user_type = $auth['user_type'];
+$has_given_feedback = false;
+
+foreach ($feedbacks as $feedback) {
+    if ($feedback->from_user_id == $user_id) {
+        $has_given_feedback = true;
+        break;
+    }
+}
+
+?>
+
 <style>
     .rating {
         text-align: center;
@@ -23,7 +36,7 @@
     <div class="card-header">
         <h3 class="card-title fw-500" style="font-weight:600; py-2">All Ratings and Reviews</h3>
 
-        <?php if (!$has_permission): ?>
+        <?php if (!$has_permission && !$has_given_feedback && $user_type == 'EMPLOYEE'): ?>
             <div class="card-tools">
                 <button type="button" data-toggle="modal" data-target="#ModalFeedback" class="btn btn-tool">
                     <i class="fa-solid fa-plus" style="font-size: 16px;" id="add_feedback"></i>
@@ -33,7 +46,7 @@
 
     </div>
 
-    <?php if (!$has_permission): ?>
+    <?php if (!$has_permission && !$has_given_feedback && $user_type == 'EMPLOYEE'): ?>
         <div class="modal fade" id="ModalFeedback" tabindex="-1" role="dialog" aria-labelledby="ModalFeedback" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">

@@ -12,14 +12,25 @@ class Feedback_model extends CI_Model
 
     public function getAllUsersFeedback($user_id)
     {
-        // get all feedbacks for the user that is either an employee or employer
         return $this->db->select('tbl_feedback.*, 
-        CONCAT_WS(" ", tbl_employee.Fname, tbl_employee.Mname, tbl_employee.Lname) AS userName,
-        tbl_employee.title as userTitle,
-        tbl_employee.Employee_image as userImage,
-        tbl_employer.tradename as userName,
-        tbl_employer.business_type as userTitle,
-        tbl_employer.image as userImage')
+        CONCAT_WS(" ", tbl_employee.Fname, tbl_employee.Mname, tbl_employee.Lname) AS employeeName,
+        tbl_employee.title as employeeTitle,
+        tbl_employee.Employee_image as employeeImage,
+        tbl_employer.tradename as employerName,
+        tbl_employer.business_type as employerTitle,
+        tbl_employer.image as employerImage,
+        (CASE
+            WHEN tbl_employee.Fname IS NOT NULL THEN CONCAT_WS(" ", tbl_employee.Fname, tbl_employee.Mname, tbl_employee.Lname)
+            WHEN tbl_employer.tradename IS NOT NULL THEN tbl_employer.tradename
+        END) AS userName,
+        (CASE
+            WHEN tbl_employee.title IS NOT NULL THEN tbl_employee.title
+            WHEN tbl_employer.business_type IS NOT NULL THEN tbl_employer.business_type
+        END) AS userTitle,
+        (CASE
+            WHEN tbl_employee.Employee_image IS NOT NULL THEN tbl_employee.Employee_image
+            WHEN tbl_employer.image IS NOT NULL THEN tbl_employer.image
+        END) AS userImage')
             ->from($this->Table->feedback)
             ->join($this->Table->user, 'tbl_user.id = tbl_feedback.user_id')
             ->join($this->Table->employee, 'tbl_employee.user_id = tbl_feedback.from_user_id', 'left')
@@ -27,6 +38,7 @@ class Feedback_model extends CI_Model
             ->where('tbl_feedback.user_id', $user_id)
             ->order_by('tbl_feedback.date_created', 'DESC')
             ->get()->result();
+
     }
 
     /**

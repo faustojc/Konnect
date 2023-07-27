@@ -48,9 +48,11 @@ class Search extends MY_Controller
             );
 
             // Search for relevant job posts
-            $results = $this->searchRelevantJobposts($query, $criteria);
+            $jobposts = $this->searchRelevantJobposts($query, $criteria);
+            $employees = $this->searchRelevantEmployees($query, $criteria);
 
-            $data['results'] = $results;
+
+            $data['results'] = $jobposts;
             $data['search_view_results'] = $this->load->view('grid/employee_search_view', $data, true);
 
         } else {
@@ -61,9 +63,9 @@ class Search extends MY_Controller
             );
 
             // Search for relevant employees
-            $results = $this->searchEmployeesEmployers($query, $criteria);
+            $jobposts = $this->searchRelevantEmployers($query, $criteria);
 
-            $data['results'] = $results;
+            $data['results'] = $jobposts;
             $data['search_view_results'] = $this->load->view('grid/employer_search_view', $data, true);
         }
 
@@ -160,8 +162,80 @@ class Search extends MY_Controller
         }, $job_ids);
     }
 
+    private function searchRelevantEmployees($query, $criteria): array
+    {
+        $employees_skills = array(); // Only if the current user is employee
 
-    private function searchEmployeesEmployers($query, $criteria): array
+        // Get all employees
+        if ($this->auth['user_type'] == 'EMPLOYEE') {
+            $employees = $this->employee_model->getEmployeeLike(['Fname' => $query, 'Lname' => $query, 'Title' => $query], $this->userdata->ID, 'ID, Fname, Lname, Title, City');
+            $employees_skills = $this->EmployeeSkills_model->getOtherEmployeeSkills($this->userdata->ID, 'skill');
+        } else {
+            $employees = $this->employee_model->getEmployeeLike(['Fname' => $query, 'Lname' => $query, 'Title' => $query], null, 'ID, Fname, Lname, Title, City');
+        }
+
+        // Initialize an array to store the relevance scores
+        $scores = array();
+
+        // Calculate the relevance score for each employee
+        foreach ($employees as $employee) {
+            // Initialize the relevance score to 0
+            $score = 0;
+
+            // Check if the employee's name matches the query
+            if (stripos($employee->Fname, $query) !== false) {
+                $score += 8;
+            } else if (stripos($employee->Lname, $query) !== false) {
+                $score += 8;
+            }
+
+            // Check if the employee's title matches the employer's business type
+            if ($this->auth['user_type'] == 'EMPLOYEE' && stripos($employee->Title, $criteria['title']) !== false) {
+                $score += 4;
+            }
+
+            // Check if the employee's location matches the employer's location
+            if (stripos($employee->City, $criteria['location']) !== false) {
+                $score += 2;
+            }
+
+            // Check if other employee's skills match the current employee's skills
+            if ($this->auth['user_type'] == 'EMPLOYEE') {
+                $other_employee_skills = array_map(function ($employee_skill) {
+                    return get_object_vars($employee_skill)['skill'];
+                }, $employees_skills);
+                $employee_skills = array_map('trim', explode(',', $criteria['skills']));
+
+                foreach ($other_employee_skills as $skill) {
+                    if (in_array(strtolower($skill), array_map('strtolower', $employee_skills))) {
+                        $score += 2;
+                    }
+                }
+            }
+
+            // Store the relevance score for this employee
+            $scores[$employee->ID] = $score;
+        }
+
+        // Sort the employees by their relevance scores in descending order
+        arsort($scores);
+
+        // Get the sorted employee ids
+        $employee_ids = array_keys($scores);
+
+        // Get the sorted employees with their scores in one call
+        return array_map(function ($employee_id) use ($scores, $employees) {
+            foreach ($employees as $employee) {
+                if ($employee->ID == $employee_id) {
+                    return (object)array_merge((array)$employee, ['score' => $scores[$employee_id]]);
+                }
+            }
+
+            return $employees;
+        }, $employee_ids);
+    }
+
+    private function searchRelevantEmployers($query, $criteria): array
     {
         // Get all employees
         // Apply the scoring system to each employee using the search input only as criteria

@@ -12,4 +12,9 @@ class EmployeeSkills_model extends CI_Model
     {
         return $this->db->select($select)->get_where('tbl_employee_skill', ['employee_id' => $id])->result();
     }
+
+    public function getOtherEmployeeSkills($id, string $select = '*')
+    {
+        return $this->db->select($select)->get_where('tbl_employee_skill', ['employee_id !=' => $id])->result();
+    }
 }

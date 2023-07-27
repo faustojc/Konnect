@@ -48,4 +48,22 @@ class Employee_model extends CI_Model
 
         return $this->db->get()->result();
     }
+
+    public function getEmployeeLike(array $arr, $id = null, $select = '*')
+    {
+        $this->db->select($select)->from($this->Table->employee);
+        if ($id != null) {
+            $this->db->where('ID !=', $id);
+        }
+
+        $this->db->group_start();
+
+        foreach ($arr as $field => $value) {
+            $this->db->or_like($field, $value);
+        }
+
+        $this->db->group_end();
+        return $this->db->get()->result();
+    }
+
 }

@@ -1,11 +1,11 @@
-const applyBtnFunction = () => {
+function applyBtnFunction() {
     const applyBtn = document.querySelectorAll('.apply-button');
 
     if (applyBtn) {
         applyBtn.forEach(btn => {
             applyBtnHover(btn, btn.textContent);
 
-            btn.addEventListener('click', function (event) {
+            btn.addEventListener('click', function () {
                 const job_id = btn.dataset.id;
                 const url = baseUrl + 'applicant/apply';
 
@@ -17,21 +17,16 @@ const applyBtnFunction = () => {
                     .then(data => {
                         let status = btn.textContent.replace(/\s+/g, '').toUpperCase();
 
-                        if (status === 'APPLY') {
+                        if (status.includes('APPLY')) {
                             status = 'PENDING';
-                        } else if (status === 'CANCEL' || status === 'PENDING') {
+                            success('Application sent successfully!', 'You will be notified once the employer accepts your application.');
+                        } else if (status.includes('CANCEL') || status.includes('PENDING')) {
                             status = 'APPLY';
+                            success('Application cancelled!', 'You cancelled your application to this job.');
                         }
 
                         btn.textContent = status;
-
                         applyBtnHover(btn, status);
-
-                        if (status === 'PENDING') {
-                            success('Application sent successfully!', 'You will be notified once the employer accepts your application.');
-                        } else {
-                            success('Application cancelled!', 'You cancelled your application to this job.');
-                        }
                     })
                     .catch(e => {
                         console.log(e);
@@ -42,7 +37,7 @@ const applyBtnFunction = () => {
     }
 }
 
-const acceptRejectBtnFunction = () => {
+function acceptRejectBtnFunction() {
     const acceptBtn = document.querySelectorAll('.btn-accept');
     const rejectBtn = document.querySelectorAll('.btn-reject');
 
@@ -102,5 +97,22 @@ const acceptRejectBtnFunction = () => {
                     });
             });
         });
+    }
+}
+
+const applyBtnHover = (btn, status) => {
+    if (status.includes('PENDING')) {
+        btn.addEventListener('mouseover', function () {
+            btn.textContent = 'Cancel';
+            btn.classList.add('btn-outline-danger');
+        });
+        btn.addEventListener('mouseout', function () {
+            btn.textContent = status;
+            btn.classList.remove('btn-outline-danger');
+        });
+    } else {
+        btn.removeEventListener('mouseover', () => {});
+        btn.removeEventListener('mouseout', () => {});
+        btn.textContent = status;
     }
 }

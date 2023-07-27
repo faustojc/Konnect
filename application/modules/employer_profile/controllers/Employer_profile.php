@@ -42,7 +42,7 @@ class Employer_profile extends MY_Controller
 
         $this->data['auth'] = $this->auth;
         $this->data['has_permission'] = $this->isAccount;
-        $this->data['user_id'] = $this->userdata->user_id;
+        $this->data['user_id'] = $this->employer_profile_model->get_current_employer($id)->user_id;
 
         $this->load->driver('cache');
         // Enable query caching

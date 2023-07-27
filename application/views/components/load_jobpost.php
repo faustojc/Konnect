@@ -29,8 +29,7 @@
             <div class="job-post">
                 <div class="row">
                     <div class="col-1 d-flex justify-content-center">
-                        <img class="img-circle img-fluid " src="<?= base_url() ?>assets/images/employer/profile_pic/<?= $jobpost->EmployerLogo ?>" alt="Employer Profile Pic"
-                             style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
+                        <img class="img-circle img-fluid " src="<?= base_url() ?>assets/images/employer/profile_pic/<?= $jobpost->EmployerLogo ?>" alt="Employer Profile Pic" style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
                     </div>
                     <div class="col-10 pt-2 pl-3">
                         <div class="d-flex justify-content-between">
@@ -65,30 +64,31 @@
 
                 <?php jobpost_update_modal($jobpost, 'modal' . $jobpost->id); ?>
 
-                <div class="job-details pt-2" style="border:0;">
-                    <h6 class="pb-2" style="font-weight:650;">
+                <div class="job-details pt-2" style="border:0; color:white;">
+                    <h6 class="pb-2" style="font-weight:650; ">
                         <?= ucwords($jobpost->title) ?>
                         <span class="badge job-status">
-                                <?= $jobpost->filled ?>
-                            </span>
+                            <?= $jobpost->filled ?>
+                        </span>
                     </h6>
                     <!-- <hr> -->
                     <div class="job-description" style="max-height: 150px; overflow-y: hidden">
                         <div class="" style="font-weight:300;">
                             <h5>
-                                <?php if (isset($jobpost->salary) && $jobpost->salary !== '') : ?>
+                                <?php if (isset($jobpost->salary) && $jobpost->salary !== ''): ?>
                                     <span class="badge badge-light">
-                                        ₱ <?= $jobpost->salary ?>
+                                        ₱
+                                        <?= $jobpost->salary ?>
                                     </span>
                                 <?php endif; ?>
 
-                                <?php if (isset($jobpost->shift) && $jobpost->shift !== '') : ?>
+                                <?php if (isset($jobpost->shift) && $jobpost->shift !== ''): ?>
                                     <span class="badge badge-light">
                                         <?= $jobpost->shift ?>
                                     </span>
                                 <?php endif; ?>
 
-                                <?php if (isset($jobpost->job_type) && $jobpost->job_type !== '') : ?>
+                                <?php if (isset($jobpost->job_type) && $jobpost->job_type !== ''): ?>
                                     <span class="badge badge-light">
                                         <?= $jobpost->job_type ?>
                                     </span>

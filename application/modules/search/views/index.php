@@ -1,6 +1,7 @@
 <?php
 main_header(['Search']);
 ?>
+
 <!-- ############ PAGE START-->
 <style>
     /* Remove spinner for number input */
@@ -176,91 +177,112 @@ main_header(['Search']);
     <div class="container-fluid">
         <div class="row pl-3 pr-3" style="margin-top: 3.5rem;">
             <div class="col-12 col-md-3 mt-4">
-                <div class="card sticky-top" style="top:70px;">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-12">
-                                <a class="btn border-0 shadow-none" style="background:; width: 100%; " data-toggle="collapse" href="#collapseFilter" role="button" aria-expanded="false" aria-controls="collapseFilter" id="toggleButton">
-                                    <h6 style="font-weight: 400; text-align: left; display: flex; justify-content: space-between; align-items: center;">
-                                        <span>Filters</span>
-                                        <i class="fa-solid fa-caret-left" id="caretIcon"></i>
-                                    </h6>
-                                </a>
-                            </div>
-                        </div>
+                <div class="container sticky-top" style="top:80px;">
 
-                        <div class="collapse" id="collapseFilter">
-                            <div class="card card-body p-0">
-                                <div class="px-3">
-                                    <hr class="mt-0">
-
-                                    <label for="" class="text-muted" style="font-weight:400;">Job type</label>
-                                    <div class="form-check pt-1" style="font-size:14px;">
-                                        <input class="form-check-input" type="checkbox" value="" id="full_time" name="full_time">
-                                        <label class="form-check-label" for="full_time" style="font-weight:300;">
-                                            Full time
-                                        </label>
-                                    </div>
-                                    <div class="form-check pt-1" style="font-size:14px;">
-                                        <input class="form-check-input" type="checkbox" value="" id="part_time" name="part_time">
-                                        <label class="form-check-label" for="part_time" style="font-weight:300;">
-                                            Part time
-                                        </label>
-                                    </div>
-                                    <div class="form-check pt-1" style="font-size:14px;">
-                                        <input class="form-check-input" type="checkbox" value="" id="internship" name="internship">
-                                        <label class="form-check-label" for="internship" style="font-weight:300;">
-                                            Internship
-                                        </label>
-                                    </div>
-                                    <div class="form-check pt-1" style="font-size:14px;">
-                                        <input class="form-check-input" type="checkbox" value="" id="permanent" name="permanent">
-                                        <label class="form-check-label" for="permanent" style="font-weight:300;">
-                                            Permanent
-                                        </label>
-                                    </div>
-                                    <div class="form-check pt-1" style="font-size:14px;">
-                                        <input class="form-check-input" type="checkbox" value="" id="shift_work" name="shift_work">
-                                        <label class="form-check-label" for="shift_work" style="font-weight:300;">
-                                            Shift work
-                                        </label>
-                                    </div>
-                                    <hr>
-                                    <label for="" class="text-muted" style="font-weight:400;">Working Schedule</label>
-                                    <div class="form-check pt-1" style="font-size:14px;">
-                                        <input class="form-check-input" type="checkbox" value="" id="day_shift" name="day_shift">
-                                        <label class="form-check-label" for="day_shift" style="font-weight:300;">
-                                            Day shift
-                                        </label>
-                                    </div>
-                                    <div class="form-check pt-1" style="font-size:14px;">
-                                        <input class="form-check-input" type="checkbox" value="" id="night_shift" name="night_shift">
-                                        <label class="form-check-label" for="night_shift" style="font-weight:300;">
-                                            Night shift
-                                        </label>
-                                    </div>
-                                    <div class="form-check pt-1" style="font-size:14px;">
-                                        <input class="form-check-input" type="checkbox" value="" id="flex_time" name="flex_time">
-                                        <label class="form-check-label" for="flex_time" style="font-weight:300;">
-                                            Flex time
-                                        </label>
-                                    </div>
+                
+                    <div class="card ">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <a class="btn border-0 shadow-none" style="background:; width: 100%; " data-toggle="collapse" href="#collapseFilter" role="button" aria-expanded="false" aria-controls="collapseFilter" id="toggleButton">
+                                        <h6 style="font-weight: 400; text-align: left; display: flex; justify-content: space-between; align-items: center;">
+                                            <span>Filters</span>
+                                            <i class="fa-solid fa-caret-left" id="caretIcon"></i>
+                                        </h6>
+                                    </a>
                                 </div>
-                                <div class="pt-3 d-flex justify-content-end pr-2">
-                                    <button class="btn btn-outline-info" style="border-radius:80px;" type="button" name="filter">
-                                        <span>Filter</span> <i class="fa-solid fa-filter"></i>
-                                    </button>
+                            </div>
+
+                            <div class="collapse" id="collapseFilter">
+                                <div class="card card-body p-0">
+                                    <div class="px-3">
+                                        <hr class="mt-0">
+
+                                        <label for="" class="text-muted" style="font-weight:400;">Job type</label>
+                                        <div class="form-check pt-1" style="font-size:14px;">
+                                            <input class="form-check-input" type="checkbox" value="" id="full_time" name="full_time">
+                                            <label class="form-check-label" for="full_time" style="font-weight:300;">
+                                                Full time
+                                            </label>
+                                        </div>
+                                        <div class="form-check pt-1" style="font-size:14px;">
+                                            <input class="form-check-input" type="checkbox" value="" id="part_time" name="part_time">
+                                            <label class="form-check-label" for="part_time" style="font-weight:300;">
+                                                Part time
+                                            </label>
+                                        </div>
+                                        <div class="form-check pt-1" style="font-size:14px;">
+                                            <input class="form-check-input" type="checkbox" value="" id="internship" name="internship">
+                                            <label class="form-check-label" for="internship" style="font-weight:300;">
+                                                Internship
+                                            </label>
+                                        </div>
+                                        <div class="form-check pt-1" style="font-size:14px;">
+                                            <input class="form-check-input" type="checkbox" value="" id="permanent" name="permanent">
+                                            <label class="form-check-label" for="permanent" style="font-weight:300;">
+                                                Permanent
+                                            </label>
+                                        </div>
+                                        <div class="form-check pt-1" style="font-size:14px;">
+                                            <input class="form-check-input" type="checkbox" value="" id="shift_work" name="shift_work">
+                                            <label class="form-check-label" for="shift_work" style="font-weight:300;">
+                                                Shift work
+                                            </label>
+                                        </div>
+                                        <hr>
+                                        <label for="" class="text-muted" style="font-weight:400;">Working Schedule</label>
+                                        <div class="form-check pt-1" style="font-size:14px;">
+                                            <input class="form-check-input" type="checkbox" value="" id="day_shift" name="day_shift">
+                                            <label class="form-check-label" for="day_shift" style="font-weight:300;">
+                                                Day shift
+                                            </label>
+                                        </div>
+                                        <div class="form-check pt-1" style="font-size:14px;">
+                                            <input class="form-check-input" type="checkbox" value="" id="night_shift" name="night_shift">
+                                            <label class="form-check-label" for="night_shift" style="font-weight:300;">
+                                                Night shift
+                                            </label>
+                                        </div>
+                                        <div class="form-check pt-1" style="font-size:14px;">
+                                            <input class="form-check-input" type="checkbox" value="" id="flex_time" name="flex_time">
+                                            <label class="form-check-label" for="flex_time" style="font-weight:300;">
+                                                Flex time
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="pt-3 d-flex justify-content-end pr-2">
+                                        <button class="btn btn-outline-info" style="border-radius:80px;" type="button" name="filter">
+                                            <span>Filter</span> <i class="fa-solid fa-filter"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+
+                    
+                    <div class="card" style="">
+                        <div class="card-body" >
+                            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                <a class="nav-link" id="v-pills-all-tab" data-toggle="pill" href="#v-pills-all" role="tab" aria-controls="v-pills-all" aria-selected="false">All</a>
+                                <a class="nav-link" id="v-pills-posts-tab" data-toggle="pill" href="#v-pills-posts" role="tab" aria-controls="v-pills-posts" aria-selected="false">Job Posts</a>
+                                <a class="nav-link" id="v-pills-employer-tab" data-toggle="pill" href="#v-pills-employer" role="tab" aria-controls="v-pills-employer" aria-selected="false">Employer</a>
+                                <a class="nav-link" id="v-pills-employee-tab" data-toggle="pill" href="#v-pills-employee" role="tab" aria-controls="v-pills-employee" aria-selected="false">Employee</a>
+                            </div>
+                        </div>
+                    </div>
+                        
+                </div>    
             </div>
+            
             <div class="col-12 col-md-9 mt-4">
-                <div class="row" id="search_result_content">
-                    <?= $search_view_results ?>
-                </div>
+                    <div id="search_result_content">
+                        <?= $search_view_results ?>
+                    </div>
+                
             </div>
+            
+            
         </div>
     </div>
 </section>

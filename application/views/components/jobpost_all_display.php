@@ -59,30 +59,34 @@
             <div class="card-body ">
                 <div class="job-post">
                     <div class="row">
-                        <div class="col-1 d-flex justify-content-center">
-                            <img class="img-circle img-fluid " src="<?= base_url() ?>assets/images/employer/profile_pic/<?= $jobpost->EmployerLogo ?>" alt="Employer Profile Pic"
-                                 style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
-                        </div>
-                        <div class="col-10 pt-2 pl-3">
+                        <!-- <div class="col-1 d-flex justify-content-center">
+                            
+                        </div> -->
+                        <div class="col-11 pt-0 pl-3">
                             <div class="d-flex justify-content-between">
                                 <div class="row">
-                                    <div class="col-12">
-                                        <h6 class="m-0">
-                                            <a href="<?= base_url() ?>employer_profile?id=<?= $jobpost->employer_id ?>" class="job-title fw-bold text-decoration-none" style="color:#000;">
-                                                <?= ucwords($jobpost->EmployerTradename) ?>
-                                            </a>
-                                        </h6>
-                                    </div>
-                                    <div class="col-12">
-                                        <p class="text-muted" style="font-size: 12px;">
-                                            <?= $timeAgo ?>
-                                        </p>
+                                    <div class="col-12 d-flex align-items-center pl-0">
+                                        <div class="pr-2">
+                                            <img class="img-circle img-fluid" src="<?= base_url() ?>assets/images/employer/profile_pic/<?= $jobpost->EmployerLogo ?>" alt="Employer Profile Pic"
+                                                 style="border: 0.2rem solid #F4F6F7; object-fit: cover; height: 3.5rem; width: 3.5rem;">
+                                        </div>
+                                        <div class="ms-3 pt-3">
+                                            <h6 class="m-0">
+                                                <a href="<?= base_url() ?>employer_profile?id=<?= $jobpost->employer_id ?>" class="job-title fw-bold text-decoration-none" style="color: #000;">
+                                                    <?= ucwords($jobpost->EmployerTradename) ?>
+                                                </a>
+                                            </h6>
+                                            <p class="text-muted" style="font-size: 12px;">
+                                                <?= $timeAgo ?>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                         <div class="col-1">
-                            <div class="btn-group dropleft" style="">
+                            <div class="btn-group dropleft pt-3" style="">
                                 <button type="button" class="btn card-tool text-muted " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </button>
@@ -134,7 +138,7 @@
                         </div>
                         <a class="text-center see-more" data-target=".job-description" style="display: block;" role="button">See more</a>
 
-                        <?php if ($auth['user_type'] == 'EMPLOYEE') {
+                        <?php if ($auth['user_type'] == 'EMPLOYEE' && !empty($applicant)) {
                             $hasApplied = false;
 
                             foreach ($applicant as $applied) {

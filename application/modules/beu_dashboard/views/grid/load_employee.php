@@ -19,7 +19,8 @@
             </div>
         </div>
 
-        <div class="card-footer border-top pt-2" style="padding-top: 35px; background-color:#FFF;">
+        <div class="card-footer pt-2" style="padding-top: 35px; background-color:#FFF;">
+        <hr class="m-0">
             <div class="row">
                 <div class="col-12">
                     <div class="description-block mb-0">
@@ -45,7 +46,8 @@
             </div>
         </div>
 
-        <div class="card-footer border-top pt-2" style="padding-top: 35px; background-color:#FFF;">
+        <div class="card-footer pt-2" style="padding-top: 35px; background-color:#FFF;">
+        <hr class="m-0">
             <div class="row">
                 <div class="col-12">
                     <div class="description-block mb-0">
@@ -58,7 +60,8 @@
             </div>
         </div>
 
-        <div class="card-footer border-top pt-3 pb-3" style="padding-top: 35px; background-color:#FFF;">
+        <div class="card-footer pt-3 pb-3" style="padding-top: 35px; background-color:#FFF;">
+        <hr class="m-0 pt-3">
             <div class="row">
                 <div class="col-12">
                     <a href="<?= base_url() ?>employee_profile?id=<?= @$details->ID ?>" class="hoveropac">

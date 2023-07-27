@@ -3,7 +3,7 @@
         text-align: center;
     }
 
-    .rating>span {
+    .rating > span {
         display: inline-block;
         position: relative;
         width: 1.1em;
@@ -55,7 +55,7 @@
                                         <div class="rating" data-value="0" data-max="5" data-precision="1">
                                             <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                                         </div>
-                                        <input name="rating" class="d-inline-block border-0 w-auto m-0" id="ratingValue" value="0" />
+                                        <input name="rating" class="d-inline-block bg-transparent border-0 w-auto m-0" id="ratingValue" value="0" readonly/>
                                     </div>
                                 </div>
                                 <!-- Feedback Comment -->
@@ -123,27 +123,30 @@
                 }
             });
         </script>
-
     <?php endif; ?>
 
-
     <!-- feedback -->
-
     <?php if (!empty($feedbacks)): ?>
-        <div class="card pt-2"> <!-- Parent card for "Feedbacks received by the company" -->
-
-
+        <div class="card pt-2">
             <div class="row px-2">
-                <?php foreach ($feedbacks as $feedback): ?>
+                <?php foreach ($feedbacks as $feedback):
+                    $image = base_url() . 'assets/images/employee/profile_pic/' . $feedback->userImage;
+
+                    if (!imageExists($image)) {
+                        $image = base_url() . 'assets/images/employer/profile_pic/' . $feedback->userImage;
+                    }
+
+                    ?>
                     <div class="col-sm-12">
                         <div class="bg-white rounded  px-3 restaurant-detailed-ratings-and-reviews">
-
                             <div class="reviews-members pt-2 pb-2">
                                 <div class="media">
-                                    <a href="#"><img class="mr-5 rounded-pill" src="<?= base_url() ?>assets/images/employee/profile_pic/default.png" alt="Employee Profile Pic" alt="Employee Profile Pic" style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
+                                    <a href="#"><img class="mr-5 rounded-pill" src="<?= $image ?>" alt="<?= $feedback->userName ?>"
+                                                     style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
                                         <div class="media-body m-2">
                                             <div class="reviews-members-header ml-5">
                                                 <div class="float-right" style="color:#FFC107;">
+
                                                     <?php for ($i = 1; $i <= 5; $i++) {
                                                         if ($i <= $feedback->rating) {
                                                             echo '<i class="fa-solid fa-star" ></i>';
@@ -151,48 +154,43 @@
                                                             echo '<i class="fa-regular fa-star"></i>';
                                                         }
                                                     } ?>
+
                                                 </div>
-                                                <h6 class="mb-1 ml-3"><a class="text-black" href="#">
+                                                <h6 class="mb-1 ml-3">
+                                                    <a class="text-black" href="#">
                                                         <?= $feedback->userName ?>
-                                                    </a></h6>
+                                                    </a>
+                                                </h6>
                                                 <p class="text-gray ml-3">
                                                     <?= date('D, d F Y', strtotime($feedback->date_created)) ?>
                                                 </p>
                                             </div>
                                             <div class="reviews-members-body" style="text-align: justify;">
-                                                <p>
-                                                    <?= $feedback->message ?>
-                                                </p>
+                                                <p><?= $feedback->message ?></p>
                                             </div>
                                         </div>
+                                    </a>
                                 </div>
                             </div>
-                            <hr>
                         </div>
-
                     </div>
-
-
                 <?php endforeach; ?>
-
             </div>
         </div>
-    </div>
 
-
-
-<?php else: ?>
-    <?php if ($has_permission): ?>
-        <div class="card"> <!-- Parent card for "You haven't received a feedback yet." -->
-            <div class="card-body">
-                <p class="card-text">You haven't received a feedback yet.</p>
-            </div>
-        </div>
     <?php else: ?>
-        <div class="card"> <!-- Parent card for "You haven't received a feedback yet." -->
-            <div class="card-body">
-                <p class="card-text">The user haven't received a feedback yet.</p>
+        <?php if ($has_permission): ?>
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text">You haven't received a feedback yet.</p>
+                </div>
             </div>
-        </div>
+        <?php else: ?>
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text">The user haven't received a feedback yet.</p>
+                </div>
+            </div>
+        <?php endif; ?>
     <?php endif; ?>
-<?php endif; ?>
+</div>

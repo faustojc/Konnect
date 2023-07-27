@@ -1,3 +1,20 @@
+function setJobStatus() {
+    const jobStatus = document.querySelectorAll('.job-status');
+    jobStatus.forEach(value => {
+        const status = value.textContent.replace(/\s+/g, '').toUpperCase();
+
+        if (status === 'OPEN') {
+            value.classList.add('text-success');
+            value.classList.remove('bg-danger');
+        } else {
+            value.classList.add('text-danger');
+            value.classList.remove('bg-success');
+        }
+
+        value.textContent = status;
+    });
+}
+
 /**
  * @param {any} target Target element to validate
  * @returns {boolean} Returns true if the form is valid, false otherwise

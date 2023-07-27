@@ -26,6 +26,10 @@ const userTypeErrorMessage = document.createElement('p');
 userTypeErrorMessage.classList.add('invalid-feedback', 'm-0', 'd-block');
 userTypeErrorMessage.textContent = 'Please select on what to register.';
 
+const confirmPasswordErrorMessage = document.createElement('p');
+confirmPasswordErrorMessage.classList.add('invalid-feedback', 'm-0', 'd-block');
+confirmPasswordErrorMessage.textContent = 'Password does not match.';
+
 email.addEventListener('input', function () {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     emailIsValid = regex.test(email.value);
@@ -132,7 +136,7 @@ document.querySelector('select#user_type').addEventListener('change', function (
 });
 
 const setNextBtn = () => {
-    if (!emailIsValid || !passwordIsValid) {
+    if (!emailIsValid || !passwordIsValid || !confirmPasswordIsValid) {
         nextBtn.setAttribute('disabled', 'disabled');
     } else {
         nextBtn.removeAttribute('disabled');
@@ -160,3 +164,23 @@ const register = () => {
         }
     });
 }
+
+const passwordConfirmInput = document.getElementById("password_confirm");
+
+function validatePassword() {
+    if (this.value == password.value) {
+        passwordConfirmInput.classList.remove('is-invalid');
+        confirmPasswordErrorMessage.remove();
+    } else {
+        passwordConfirmInput.classList.add('is-invalid');
+        
+        const confirmPassInput = document.querySelector('div.confirm-password-input');
+        confirmPassInput.parentElement.insertBefore(confirmPasswordErrorMessage, confirmPassInput.nextElementSibling);
+    }
+
+    confirmPasswordIsValid = this.value == passwordConfirmInput.value;
+    setNextBtn();
+}
+
+// Automatically validate on input change
+passwordConfirmInput.addEventListener("input", validatePassword);

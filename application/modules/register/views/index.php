@@ -3,6 +3,7 @@
 <style>
 
 </style>
+
 <body style="background-color:rgb(241, 246, 249);">
 
 </body>
@@ -25,19 +26,28 @@
                             <form id="needs-validation">
                                 <div class="input-group mb-4">
                                     <div class="input-group-prepend email-input">
-                                <span class="input-group-text px-4 border-0" style="border-radius:15px 0 0 15px; background-color: #F4F6F7;">
-                                    <i class="fa fa-user text-muted"></i>
-                                </span>
+                                        <span class="input-group-text px-4 border-0" style="border-radius:15px 0 0 15px; background-color: #F4F6F7;">
+                                            <i class="fa fa-user text-muted"></i>
+                                        </span>
                                         <input id="email" type="email" name="email" placeholder="Enter valid email" class="form-control border-0" style="border-radius:0 15px 15px 0; background-color: #F4F6F7;">
                                     </div>
                                 </div>
 
                                 <div class="input-group mb-4">
                                     <div class="input-group-prepend password-input">
-                                <span class="input-group-text px-4 border-0" style="border-radius:15px 0 0 15px; background-color: #F4F6F7;">
-                                    <i class="fa fa-lock text-muted"></i>
-                                </span>
+                                        <span class="input-group-text px-4 border-0" style="border-radius:15px 0 0 15px; background-color: #F4F6F7;">
+                                            <i class="fa fa-lock text-muted"></i>
+                                        </span>
                                         <input id="password" type="password" name="password" placeholder="At least 6 characters long" class="form-control border-0" style="border-radius:0 15px 15px 0; background-color: #F4F6F7;">
+                                    </div>
+                                </div>
+
+                                <div class="input-group mb-4">
+                                    <div class="input-group-prepend confirm-password-input">
+                                        <span class="input-group-text px-4 border-0" style="border-radius:15px 0 0 15px; background-color: #F4F6F7;">
+                                            <i class="fa fa-lock text-muted"></i>
+                                        </span>
+                                        <input id="password_confirm" type="password" placeholder="Confirm password" class="form-control border-0" style="border-radius:0 15px 15px 0; background-color: #F4F6F7;">
                                     </div>
                                 </div>
 

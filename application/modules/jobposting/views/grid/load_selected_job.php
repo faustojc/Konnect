@@ -40,10 +40,27 @@ if ($timeDiff < 60) {
             <span class="badge job-status">
                 <?= ucwords($job->filled) ?>
             </span>
-
         </div>
 
-        <button type="button" class="btn btn-outline-info w-25">Apply now</button>
+        <?php
+        $auth = get_userdata(AUTH);
+
+        if ($auth['user_type'] == 'EMPLOYEE' && !empty($applicant)) {
+            $hasApplied = false;
+
+            foreach ($applicant as $applied) {
+                if ($applied->job_id == $job->id && strtoupper($applied->status) != 'PENDING') {
+                    $hasApplied = true;
+                    apply_button($job->id, strtoupper($applied->status));
+                    break;
+                }
+            }
+
+            if (!$hasApplied) {
+                apply_button($job->id, 'APPLY NOW');
+            }
+        } ?>
+
     </div>
 
     <div class="pl-3 pt-3" style="font-weight:300;">

@@ -27,7 +27,7 @@
 
                 if ($auth['user_type'] == 'EMPLOYEE' && !empty($applicant)) {
                     foreach ($applicant as $applied) {
-                        if ($applied->job_id == $job->id && strtoupper($applied->status) != 'PENDING') {
+                        if ($applied->job_id == $job->id) {
                             $hasApplied = true;
                             break;
                         }

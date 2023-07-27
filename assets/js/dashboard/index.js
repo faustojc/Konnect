@@ -1,40 +1,6 @@
-const applyBtnHover = (btn, status) => {
-    const btnText = btn.textContent.replace(/\s+/g, '').toUpperCase();
-
-    if (status === 'PENDING') {
-        btn.addEventListener('mouseover', function () {
-            btn.textContent = 'Cancel';
-            btn.classList.add('btn-outline-danger');
-        });
-        btn.addEventListener('mouseout', function () {
-            btn.textContent = status;
-            btn.classList.remove('btn-outline-danger');
-        });
-    } else {
-        btn.removeEventListener('mouseover', () => {});
-        btn.removeEventListener('mouseout', () => {});
-        btn.textContent = status;
-    }
-}
-
 document.addEventListener("DOMContentLoaded", function () {
     textareaEditor('textarea', 400);
-
-    const jobStatus = document.querySelectorAll('.job-status');
-    jobStatus.forEach(value => {
-        const status = value.textContent.replace(/\s+/g, '').toUpperCase();
-
-        if (status === 'OPEN') {
-            value.classList.add('badge-success');
-            value.classList.remove('badge-danger');
-        } else {
-            value.classList.add('badge-danger');
-            value.classList.remove('badge-success');
-        }
-
-        value.textContent = status;
-    });
-
+    setJobStatus();
     applyBtnFunction();
 
     const postJobBtn = document.querySelector('#btn_post');
@@ -149,12 +115,9 @@ document.getElementById("skills_req").addEventListener("keydown", function (even
         const input = event.target;
         const currentCursorPosition = input.selectionStart;
         const inputValue = input.value;
-        const newValue =
-            inputValue.slice(0, currentCursorPosition) +
+        input.value = inputValue.slice(0, currentCursorPosition) +
             ", " +
             inputValue.slice(currentCursorPosition);
-
-        input.value = newValue;
         input.selectionStart = input.selectionEnd = currentCursorPosition + 2;
     }
 });

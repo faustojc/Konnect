@@ -75,12 +75,12 @@ const jobSelectedDisplayEvent = (url) => {
                     jobDetails.innerHTML = data;
 
                     status_badge();
+                    applyBtnFunction();
                     acceptRejectBtnFunction();
                 });
         });
     });
 }
-
 
 document.addEventListener('DOMContentLoaded', function () {
     status_badge();

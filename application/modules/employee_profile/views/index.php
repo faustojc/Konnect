@@ -2,6 +2,7 @@
 main_header(['employee_profile']);
 ?>
 <!-- ############ PAGE START-->
+
 <style>
     /* Remove spinner for number input */
     input[type=number]::-webkit-inner-spin-button,
@@ -338,15 +339,54 @@ main_header(['employee_profile']);
                                                     <div class="row pb-3">
                                                         <div class="col-md-6">
                                                             <label>Level</label>
-                                                            <input type="text" class="form-control dropdown-toggle" id="Level" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" placeholder="Enter Level" value="">
+                                                            <select class="form-control select2" style="width: 100%;">
+                                                                <option selected="selected">ELEMENTARY</option>
+                                                                <option>JUNIOR HIGH</option>
+                                                                <option>SENIOR HIGH</option>
+                                                                <option>COLLEGE</option>
+                                                                <option>VOCATIONAL SCHOOL</option>
+                                                                <option>TECHNICAL SCHOOL</option>
+                                                                <option>UNIVERSITY</option>
+                                                                <option>GRADUATE SCHOOL</option>
+                                                                <option>CERTIFICATE PROGRAM</option>
+                                                                <option>DIPLOMA PROGRAM</option>
+                                                                <option>APPRENTICESHIP</option>
+                                                                <option>ONLINE LEARNING</option>
+                                                                <option>CONTINUING EDUCATION</option>
+                                                                <option>EXECUTIVE EDUCATION</option>
+                                                                <option>PROFESSIONAL DEVELOPMENT</option>
+                                                                <option>SELF-TAUGHT</option>
+                                                                <option>LANGUAGE SCHOOL</option>
+                                                                <option>ART SCHOOL</option>
+                                                                <option>BUSINESS SCHOOL</option>
+                                                                <option>MEDICAL SCHOOL</option>
+                                                                <option>LAW SCHOOL</option>
+                                                                <option>ENGINEERING SCHOOL</option>
+                                                                <option>DESIGN SCHOOL</option>
+                                                                <option>CULINARY SCHOOL</option>
+                                                                <option>PERFORMING ARTS SCHOOL</option>
+                                                                <option>MILITARY TRAINING</option>
+                                                                <option>RELIGIOUS EDUCATION</option>
+                                                                <option>REMOTE LEARNING</option>
+                                                                <option>WORKPLACE TRAINING</option>
+                                                                <option>SPECIAL EDUCATION</option>
+                                                                <option>EXTRACURRICULAR</option>
+                                                                <option>TUTORIALS</option>
+                                                                <option>INTERNSHIP</option>
+                                                                <option>HOMESCHOOLING</option>
+                                                                <option>RESEARCH PROGRAM</option>
+                                                                <option>SKILL DEVELOPMENT PROGRAM</option>
+                                                                <option>LECTURE SERIES</option>
+
+                                                            </select>
+                                                            <!-- <input type="text" class="form-control dropdown-toggle" id="Level" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" placeholder="Enter Level" value="">
                                                             <div class="dropdown-menu level-content" aria-labelledby="Level">
-                                                                <p class="dropdown-item">ELEMENTARY</p>
-                                                                <p class="dropdown-item">JUNIOR HIGH</p>
-                                                                <p class="dropdown-item">SENIOR HIGH</p>
-                                                                <p class="dropdown-item">COLLEGE</p>
-                                                                <p class="dropdown-item">UBAR</p>
-                                                                <p class="dropdown-item">YES</p>
-                                                            </div>
+                                                            <p class="dropdown-item">ELEMENTARY</p>
+                                                            <p class="dropdown-item">JUNIOR HIGH</p>
+                                                            <p class="dropdown-item">SENIOR HIGH</p>
+                                                            <p class="dropdown-item">COLLEGE</p>
+                                                        
+                                                            </div> -->
 
                                                         </div>
 

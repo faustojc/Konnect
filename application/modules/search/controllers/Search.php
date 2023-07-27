@@ -169,7 +169,7 @@ class Search extends MY_Controller
         // Get the sorted employees
 
         // Get all the employers
-        $other_employers = $this->employer_model->getOtherEmployerLike($this->userdata->ID, 'tradename', $query, 'id, tradename, business_type, address, barangay, city');
+        $other_employers = $this->employer_model->getOtherEmployerLike($this->userdata->id, 'tradename', $query, 'id, tradename, business_type, address, barangay, city');
 
         // Apply the scoring system to other employers using the defined criteria
         $scores = array();

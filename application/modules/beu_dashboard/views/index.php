@@ -203,10 +203,11 @@ main_header(['Employer_profile']);
                     <div class="card">
                         <div class="card-body">
                             <div class="row pb-2">
-                                <div class="col-1 d-flex justify-content-center">
-                                    <img class="img-circle img-fluid " src="<?= base_url() ?>assets/images/employer/profile_pic/<?= $details->image ?> " alt="User Avatar" style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
-                                </div>
+                                <!-- <div class="col-1 d-flex justify-content-center">
+                                </div> -->
                                 <div class="col-11">
+                                <img class="img-circle img-fluid " src="<?= base_url() ?>assets/images/employer/profile_pic/<?= $details->image ?> " alt="User Avatar" style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
+
                                     <div class="card shadow-none hovercard" style="border-radius:10px; width:100%; height:100%; background-color: #F4F6F7;">
                                         <a data-toggle="modal" data-target="#jobpostmodal" style="width:100%; height:100%; text-decoration: none;cursor:pointer; color: #626567;">
                                             <p class="pt-3" style=" padding-left: 1rem; margin-bottom: 0px; ">
@@ -243,18 +244,24 @@ main_header(['Employer_profile']);
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text border-0" style="border-radius:10px 0 0 10px;">₱</span>
                                                         </div>
-                                                        <input id="salary" name="salary" type="text" onclick="disableDotZero()" oninput="formatInput2()" class="form-control border-0" style="background-color: #F4F6F7; border-radius:0 10px 10px 0; " placeholder="Input Salary ">
+                                                        <input id="salary" name="salary" type="text" onclick="disableDotZero()" oninput="formatInput2()" class="form-control border-0" style="background-color: #F4F6F7; border-radius:0 10px 10px 0; " placeholder="Input Salary (optional) ">
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="job_type">Job Type</label>
                                                         <select id="job_type" name="job_type" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;">
-                                                            <option>Full time</option>
-                                                            <option>Part time</option>
-                                                            <option>Internship</option>
-                                                            <option>Permanent</option>
-                                                            <option>Shift work</option>
+                                                        <option>Full time</option>
+                                                        <option>Part time</option>
+                                                        <option>Internship</option>
+                                                        <option>Permanent</option>
+                                                        <option>Shift work</option>
+                                                        <option>Contract</option>
+                                                        <option>Temporary</option>
+                                                        <option>Freelance</option>
+                                                        <option>Remote</option>
+                                                        <option>Volunteer</option>
+                                                        <option>Seasonal</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -265,9 +272,15 @@ main_header(['Employer_profile']);
                                                     <div class="form-group">
                                                         <label for="shift">Schedule</label>
                                                         <select id="shift" name="shift" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;">
-                                                            <option>Day</option>
-                                                            <option>Night</option>
-                                                            <option>Flextime</option>
+                                                        <option>Day shift</option>
+                                                        <option>Night shift</option>
+                                                        <option>Flextime</option>
+                                                        <option>Weekend shift</option>
+                                                        <option>Split shift</option>
+                                                        <option>Rotating shift</option>
+                                                        <option>On-call</option>
+                                                        <option>Remote work</option>
+                                                        <option>Part-time</option>
                                                         </select>
                                                     </div>
                                                 </div>

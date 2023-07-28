@@ -1,6 +1,6 @@
 <?php
-function main_header($menubar = [])
-{
+    function main_header($menubar = [])
+    {
     defined('BASEPATH') or exit('No direct script access allowed');
 
     $displayHandler = new DisplayHandler();
@@ -24,124 +24,123 @@ function main_header($menubar = [])
         }
     }
 
-    ?>
+?>
     <!DOCTYPE html>
-    <html lang="en">
+<html lang="en">
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>
-            <?= SYSTEM_MODULE ?>
-        </title>
-        
-
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-        <link rel="icon" type="image/x-icon" href="<?= base_url() ?>assets/images/Logo/Konnect2.ico">
-
-        <!-- Google Font: Source Sans Pro -->
-        <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> -->
-        <!-- Font Awesome Icons -->
-        <link rel="stylesheet" href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/fontawesome-free/css/all.min.css">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        <?= SYSTEM_MODULE ?>
+    </title>
 
 
-        <!-- YOB ADDED 5-17 -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-        <!-- END -->
-        <!-- custom css -->
-        <link rel="stylesheet" href="<?= base_url() ?>assets/css/custom.css">
-        <!-- overlayScrollbars -->
-        <link rel="stylesheet" href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-        <!-- Theme style -->
-        <link rel="stylesheet" href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/dist/css/adminlte.min.css">
-        <!-- Toastr -->
-        <link rel="stylesheet" href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/toastr/toastr.min.css">
-        <!-- Select2 -->
-        <link rel="stylesheet" href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/select2/css/select2.min.css">
-        <link rel="stylesheet" href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
-        <!-- DataTables -->
-        <link rel="stylesheet" href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-        <link rel="stylesheet" href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-        <link rel="stylesheet" href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="<?= base_url() ?>assets/images/Logo/Konnect2.ico">
 
-        <!-- TinyMCE -->
-        <script src="<?= base_url() ?>assets/theme/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
-        <style>
-            body {
-                font-family: 'Roboto', sans-serif;
-                color: #272732;
-            }
+    <!-- Google Font: Source Sans Pro -->
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> -->
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/fontawesome-free/css/all.min.css">
 
-            .text-info {
-                color: #0dcaf0;
-            }
+    <!-- YOB ADDED 5-17 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <!-- END -->
+    <!-- custom css -->
+    <link rel="stylesheet" href="<?= base_url() ?>assets/css/custom.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/dist/css/adminlte.min.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/toastr/toastr.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 
-            .btn-info {
-                color: #fff;
-                background-color: #0dcaf0;
-                border-color: #0dcaf0;
-            }
+    <!-- TinyMCE -->
+    <script src="<?= base_url() ?>assets/theme/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #272732;
+        }
 
-            .btn-outline-info {
-                color: #0dcaf0;
-                border-color: #0dcaf0;
-            }
+        .text-info {
+            color: #0dcaf0;
+        }
 
-            .btn-outline-info:hover {
-                color: #fff;
-                background-color: #0dcaf0;
-                border-color: #0dcaf0;
-            }
+        .btn-info {
+            color: #fff;
+            background-color: #0dcaf0;
+            border-color: #0dcaf0;
+        }
 
-            /* custom css */
+        .btn-outline-info {
+            color: #0dcaf0;
+            border-color: #0dcaf0;
+        }
 
-            .sec-color {
-                background-color: #f7f9f9;
-            }
+        .btn-outline-info:hover {
+            color: #fff;
+            background-color: #0dcaf0;
+            border-color: #0dcaf0;
+        }
 
-            .nav-color {
-                background-color: #0dcaf0;
-            }
+        /* custom css */
 
-            .nav-pills .nav-link.active,
-            .nav-pills .show > .nav-link {
-                color: #fff;
-                background-color: #0dcaf0;
-            }
+        .sec-color {
+            background-color: #f7f9f9;
+        }
 
-            .nav-pills .nav-link:not(.active):hover {
-                color: #0dcaf0;
-            }
+        .nav-color {
+            background-color: #0dcaf0;
+        }
 
-            .nav-pills .nav-link {
-                border-radius: 10px;
-            }
+        .nav-pills .nav-link.active,
+        .nav-pills .show > .nav-link {
+            color: #fff;
+            background-color: #0dcaf0;
+        }
 
-            .br-custom {
-                border-radius: 15px;
-            }
+        .nav-pills .nav-link:not(.active):hover {
+            color: #0dcaf0;
+        }
 
-            .a .text-info {
-                color: #0dcaf0;
-            }
+        .nav-pills .nav-link {
+            border-radius: 10px;
+        }
 
-            .card-hover:hover {
-                transform: scale(1.05);
-                transition: 0.5s;
-            }
+        .br-custom {
+            border-radius: 15px;
+        }
 
-            .formstyle {
-                border-radius: 10px;
-                background-color: #F4F6F7;
-                border: 0;
-            }
-        </style>
-    </head>
+        .a .text-info {
+            color: #0dcaf0;
+        }
 
-    <body class="hold-transition  light-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed" style="background-color:#F1F6F9 ;">
-    <div class="wrapper">
+        .card-hover:hover {
+            transform: scale(1.05);
+            transition: 0.5s;
+        }
+
+        .formstyle {
+            border-radius: 10px;
+            background-color: #F4F6F7;
+            border: 0;
+        }
+    </style>
+</head>
+
+<body class="hold-transition  light-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed" style="background-color:#F1F6F9 ;">
+<div class="wrapper">
     <!-- Navbar -->
     <div class="container px-5">
         <nav class="main-header navbar navbar-expand navbar-white navbar-light px-5" style="margin-left: auto;  height:55px;">
@@ -227,7 +226,8 @@ function main_header($menubar = [])
                             </div>
                         </div>
                         <div class="dropdown-divider"></div>
-                        <a href="<?= base_url() ?>login/logout" class="dropdown-item dropdown-footer" id="logout">Log out</a>
+                        <a href="<?= base_url() ?>login/logout" class="dropdown-item dropdown-footer" id="logout">Log
+                            out</a>
                     </div>
                 </li>
 
@@ -244,36 +244,31 @@ function main_header($menubar = [])
         </nav>
     </div>
 
-<?php }
+    <?php } function main_footer() { ?>
 
-function main_footer()
-{ ?>
+</div>
+<!-- REQUIRED SCRIPTS -->
+<script>
+    const baseUrl = '<?php echo base_url(); ?>';
+</script>
+<!-- User Defined SCRIPTS -->
+<script src="<?= base_url() ?>assets/js/main.js" defer></script>
+<script src="<?= base_url() ?>assets/js/auth/index.js"></script>
 
-    </div>
-    <!-- REQUIRED SCRIPTS -->
-    <script>
-        const baseUrl = '<?php echo base_url(); ?>';
-    </script>
-    <!-- User Defined SCRIPTS -->
-    <script src="<?= base_url() ?>/assets/js/main.js" defer></script>
-    <script src="<?= base_url() ?>assets/js/auth/index.js" defer></script>
+<script src="<?= base_url() ?>assets/js/search/index.js"></script>
 
-    <script src="<?= base_url() ?>assets/js/search/index.js"></script>
+<!-- jQuery -->
+<script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/dist/js/adminlte.js"></script>
 
-    <!-- jQuery -->
-    <script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- overlayScrollbars -->
-    <script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/dist/js/adminlte.js"></script>
+<!-- Toastr -->
+<script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/toastr/toastr.min.js"></script>
 
-    <!-- Toastr -->
-    <script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/toastr/toastr.min.js"></script>
-
-
-    </body>
-
-    </html>
+</body>
+</html>
 <?php } ?>

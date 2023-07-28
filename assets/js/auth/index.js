@@ -1,3 +1,7 @@
+/**
+ * This script will execute only if the user authenticates and is authorized to access the page
+ */
+
 async function pollNotifications() {
     const response = await fetch(baseUrl + 'notification/notify');
     const data = await response.json();
@@ -12,7 +16,6 @@ async function pollNotifications() {
 
 document.addEventListener('DOMContentLoaded', function () {
     const eventSource = new EventSource(baseUrl + 'notification/notify');
-    let notificationDelay = 0;
 
     eventSource.addEventListener('notification', (event) => {
         const data = JSON.parse(event.data);
@@ -20,10 +23,8 @@ document.addEventListener('DOMContentLoaded', function () {
         // Display notification with a delay
         setTimeout(() => {
             info(data.title, data.message, 6000);
-        }, notificationDelay);
+        }, 5000);
 
-        // Increase the delay for the next notification
-        notificationDelay += 500;
     });
 
     const feedbackBtn = document.querySelector('#btn_feedback');
@@ -75,3 +76,56 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+function setJobStatus() {
+    const jobStatus = document.querySelectorAll('.job-status');
+    jobStatus.forEach(value => {
+        const status = value.textContent.replace(/\s+/g, '').toUpperCase();
+
+        if (status === 'OPEN') {
+            value.classList.add('badge-success');
+            value.classList.remove('badge-danger');
+        } else {
+            value.classList.add('badge-danger');
+            value.classList.remove('badge-success');
+        }
+
+        value.textContent = status;
+    });
+}
+
+function seeMoreBtnFunction() {
+    const seeMoreButtons = document.querySelectorAll(".see-more");
+    if (seeMoreButtons) {
+        // Hide the buttons if the div height is less than or equal to 450px
+        seeMoreButtons.forEach(button => {
+            const target = button.dataset.target;
+            const jobDescription = button.previousElementSibling;
+            const maxHeight = parseInt(jobDescription.style.maxHeight);
+
+            if (jobDescription.matches(target) && jobDescription.offsetHeight < maxHeight) {
+                button.style.display = "none";
+            } else if (jobDescription.offsetHeight >= maxHeight) {
+                button.style.display = "block";
+            }
+
+            button.addEventListener("click", function (event) {
+                const button = event.target;
+                const target = button.dataset.target;
+                const jobDescription = button.previousElementSibling;
+
+                if (jobDescription.matches(target)) {
+                    if (button.textContent === "See more") {
+                        button.textContent = "See less";
+                        jobDescription.style.maxHeight = "none";
+                        jobDescription.style.overflowY = "visible";
+                    } else {
+                        button.textContent = "See more";
+                        jobDescription.style.maxHeight = '150px';
+                        jobDescription.style.overflowY = "hidden";
+                    }
+                }
+            });
+        });
+    }
+}

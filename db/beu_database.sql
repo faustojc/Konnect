@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 26, 2023 at 04:49 PM
+-- Generation Time: Jul 28, 2023 at 03:13 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -41,7 +41,29 @@ CREATE TABLE `tbl_applicant` (
 
 INSERT INTO `tbl_applicant` (`id`, `job_id`, `employee_id`, `status`, `date_created`) VALUES
 (59, 54, 32, 'ACCEPTED', '2023-07-24'),
-(63, 53, 32, 'ACCEPTED', '2023-07-24');
+(63, 53, 32, 'ACCEPTED', '2023-07-24'),
+(72, 52, 32, 'ACCEPTED', '2023-07-27'),
+(75, 52, 32, 'PENDING', '2023-07-27'),
+(76, 51, 32, 'PENDING', '2023-07-27'),
+(77, 56, 32, 'PENDING', '2023-07-27'),
+(78, 48, 32, 'PENDING', '2023-07-27');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_employed`
+--
+
+CREATE TABLE `tbl_employed` (
+  `id` int(11) NOT NULL,
+  `job_id` int(11) NOT NULL,
+  `employer_id` int(11) NOT NULL,
+  `employee_id` int(11) NOT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT 1,
+  `is_verified` tinyint(1) NOT NULL DEFAULT 0,
+  `date_started` date NOT NULL DEFAULT current_timestamp(),
+  `date_ended` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -81,7 +103,10 @@ CREATE TABLE `tbl_employee` (
 INSERT INTO `tbl_employee` (`ID`, `user_id`, `Date_created`, `Fname`, `Lname`, `Mname`, `Bday`, `Gender`, `Cstat`, `Religion`, `Cnum`, `Email`, `City`, `Barangay`, `Address`, `Title`, `SSS`, `Tin`, `Phil_health`, `Pag_ibig`, `Introduction`, `Employee_image`) VALUES
 (32, 6, '0000-00-00 00:00:00', 'LEFT', 'DEADZZ', 'FOUR', '2022-08-16', 'male', 'single', 'Chicken Joyism', '5655656', 'chicken@gmail.com', 'Bacolod City', 'Chicken', 'Charito Heights', 'L4D2', '1233', '22222', '331313', '12323131', '<p>hahahaha</p>', 'le_four_ded_2.jpg'),
 (33, 7, '0000-00-00 00:00:00', 'Kayla', 'Pajanconi', 'Tangub', '1999-10-13', 'female', 'single', 'Roman Catholic', '09222667813', 'kaypajanconi@gmail.com', 'Hinigaran', 'camba-og', 'Dinandan', '', '', '', '', '', '', 'default.png'),
-(36, 20, '2023-07-19 13:15:15', 'Martin', 'Cuenca', 'Benedicto', '2001-11-24', 'male', 'single', 'Catholic', '0947950555', 'polcuenca242@gmail.com', 'BACOLOD CITY', 'Mansilingan', 'adelfa st. victorina heights', '', '19292', '020', '2626', '626', '', '347548042_184571507478516_7611925746711583073_n2.jpg');
+(36, 20, '2023-07-19 13:15:15', 'Martin', 'Cuenca', 'Benedicto', '2001-11-24', 'male', 'single', 'Catholic', '0947950555', 'polcuenca242@gmail.com', 'BACOLOD CITY', 'Mansilingan', 'adelfa st. victorina heights', '', '19292', '020', '2626', '626', '', '347548042_184571507478516_7611925746711583073_n2.jpg'),
+(40, 25, '2023-07-27 09:50:15', 'Katrina', 'Dizon', 'G.', '2001-03-27', 'female', 'single', 'Catholic', '5555', 'katrina@gmail.com', 'BACOLOD CITY', 'Villamonte', 'kat\'s street', '', '', '', '', '', '', 'default.png'),
+(41, 26, '2023-07-27 10:20:19', 'John Martis', 'mART', 'Bo', '2023-07-05', 'male', 'single', 'dgfdgfdgfdgd', '123444', 'doe@gmail.com', 'dfgdgdgd', 'dgfdgfd', 'dfgdgfdf', '', '', '', '', '', '<p>gwapo ko</p>', 'default.png'),
+(42, 27, '2023-07-27 10:36:16', 'Fausto JC', 'Boko', 'S.', '2023-07-13', 'male', 'single', 'sferferferf', '0908', 'test@gmail.com', 'Bacolod', 'dsff', 'Charito Heights', '', '', '', '', '', '', 'default.png');
 
 -- --------------------------------------------------------
 
@@ -124,7 +149,10 @@ INSERT INTO `tbl_employee_skill` (`id`, `employee_id`, `skill`, `proficiency`, `
 (36, 32, 'C++', 'beginner', 2),
 (37, 32, 'laravel', 'beginner', 2),
 (38, 32, 'JS', 'beginner', 2),
-(39, 36, 'PHP', 'beginner', 2);
+(39, 36, 'PHP', 'beginner', 2),
+(40, 41, 'PHP', 'beginner', 123),
+(41, 41, 'Javascript', 'beginner', 123),
+(42, 32, 'C#', 'beginner', 1);
 
 -- --------------------------------------------------------
 
@@ -205,8 +233,13 @@ INSERT INTO `tbl_feedback` (`id`, `user_id`, `from_user_id`, `message`, `rating`
 (2, 6, 3, '<p><strong>GOOD JOB!</strong></p>', 4, '2023-07-24'),
 (3, 6, 3, '<p>boko</p>', 5, '2023-07-24'),
 (4, 6, 3, '<p>bhtbggb</p>', 4, '2023-07-24'),
-(5, 7, 6, '<p style=\"text-align: center;\"><em><strong>BASKOG</strong></em></p>\n<p style=\"text-align: center;\"><span style=\"text-decoration: underline;\"><em><strong>KA</strong></em></span></p>', 4, '2023-07-24'),
-(6, 6, 6, '<p style=\"text-align: center;\"><em><strong>HAHAHA</strong></em></p>', 5, '2023-07-24');
+(9, 25, 25, '<p>h</p>', 4, '2023-07-27'),
+(10, 25, 25, '<p>df</p>', 5, '2023-07-27'),
+(12, 6, 3, '<p>bokokoooo</p>', 2, '2023-07-27'),
+(13, 6, 3, '<p>ggrgrgrg</p>', 1, '2023-07-27'),
+(14, 24, 6, '<p>AKING SINTA</p>', 1, '2023-07-27'),
+(15, 3, 6, '<p>hatdog</p>', 2, '2023-07-27'),
+(16, 2, 6, '<p>hahhaasdasd</p>', 1, '2023-07-27');
 
 -- --------------------------------------------------------
 
@@ -229,7 +262,8 @@ INSERT INTO `tbl_follow` (`id`, `employee_id`, `employer_id`) VALUES
 (27, 32, 1),
 (28, 32, 7),
 (30, 36, 1),
-(31, 36, 6);
+(31, 36, 6),
+(33, 41, 1);
 
 -- --------------------------------------------------------
 
@@ -291,7 +325,32 @@ CREATE TABLE `tbl_notification` (
 
 INSERT INTO `tbl_notification` (`id`, `user_id`, `from_user_id`, `title`, `message`, `link`, `is_displayed`, `is_read`, `date_created`) VALUES
 (85, 6, 3, 'Application Accepted', 'lopues east has accepted your application.', 'jobposting?id=54', 1, 0, '2023-07-24 15:25:11'),
-(86, 6, 3, 'Application Accepted', 'lopues east has accepted your application.', 'jobposting?id=53', 1, 0, '2023-07-24 15:26:03');
+(86, 6, 3, 'Application Accepted', 'lopues east has accepted your application.', 'jobposting?id=53', 1, 0, '2023-07-24 15:26:03'),
+(87, 2, 26, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'http://localhost:8080/Konnect/jobposting?id=56', 1, 0, '2023-07-27 10:25:33'),
+(88, 2, 26, 'Application Cancelled', 'The applicant has cancelled his/her application.', NULL, 1, 0, '2023-07-27 10:25:34'),
+(89, 2, 26, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'http://localhost:8080/Konnect/jobposting?id=56', 1, 0, '2023-07-27 10:25:51'),
+(90, 2, 26, 'Application Cancelled', 'The applicant has cancelled his/her application.', NULL, 1, 0, '2023-07-27 10:25:51'),
+(91, 3, 26, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'http://localhost:8080/Konnect/jobposting?id=53', 1, 0, '2023-07-27 10:26:01'),
+(92, 3, 26, 'Application Cancelled', 'The applicant has cancelled his/her application.', NULL, 1, 0, '2023-07-27 10:26:02'),
+(93, 3, 6, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'http://localhost:8080/Konnect/jobposting?id=52', 1, 0, '2023-07-27 11:27:00'),
+(94, 3, 6, 'Application Cancelled', 'The applicant has cancelled his/her application.', NULL, 1, 0, '2023-07-27 11:27:01'),
+(95, 3, 6, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'http://localhost:8080/Konnect/jobposting?id=52', 1, 0, '2023-07-27 11:34:44'),
+(96, 3, 6, 'Application Cancelled', 'The applicant has cancelled his/her application.', NULL, 1, 0, '2023-07-27 11:35:39'),
+(97, 3, 6, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'http://localhost:8080/Konnect/jobposting?id=51', 1, 0, '2023-07-27 11:36:59'),
+(98, 2, 25, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'http://192.168.1.9:8080/Konnect/jobposting?id=56', 1, 0, '2023-07-27 11:37:43'),
+(99, 2, 25, 'Application Cancelled', 'The applicant has cancelled his/her application.', NULL, 1, 0, '2023-07-27 11:37:43'),
+(100, 3, 6, 'Application Cancelled', 'The applicant has cancelled his/her application.', NULL, 1, 0, '2023-07-27 11:38:38'),
+(101, 2, 6, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'http://localhost:8080/Konnect/jobposting?id=56', 1, 0, '2023-07-27 11:40:32'),
+(102, 2, 6, 'Application Cancelled', 'The applicant has cancelled his/her application.', NULL, 1, 0, '2023-07-27 11:41:14'),
+(103, 3, 6, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'http://localhost:8080/Konnect/jobposting?id=52', 1, 0, '2023-07-27 11:58:26'),
+(104, 6, 3, 'Application Accepted', 'Lopues ni Gonrad has accepted your application.', 'jobposting?id=52', 1, 0, '2023-07-27 12:00:22'),
+(105, 3, 6, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'http://localhost:8080/Konnect/jobposting?id=52', 1, 0, '2023-07-27 13:57:27'),
+(106, 3, 6, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'http://localhost:8080/Konnect/jobposting?id=51', 1, 0, '2023-07-27 14:12:55'),
+(107, 3, 6, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'http://localhost:8080/Konnect/jobposting?id=52', 1, 0, '2023-07-27 14:16:11'),
+(108, 3, 6, 'Application Cancelled', 'The applicant has cancelled his/her application.', NULL, 1, 0, '2023-07-27 14:41:34'),
+(109, 3, 6, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'http://localhost:8080/Konnect/jobposting?id=51', 1, 0, '2023-07-27 14:46:00'),
+(110, 2, 6, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'http://localhost:8080/Konnect/jobposting?id=56', 1, 0, '2023-07-27 14:47:55'),
+(111, 3, 6, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'http://localhost:8080/Konnect/jobposting?id=48', 1, 0, '2023-07-27 15:26:06');
 
 -- --------------------------------------------------------
 
@@ -323,6 +382,14 @@ CREATE TABLE `tbl_training` (
   `hours` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+--
+-- Dumping data for table `tbl_training`
+--
+
+INSERT INTO `tbl_training` (`ID`, `Employee_id`, `title`, `training_description`, `venue`, `city`, `s_date`, `e_date`, `hours`) VALUES
+(15, 32, 'sdasdas', '<p>asdasdasdas</p>', 'asdasd', 'asasdasdasdasd', '2023-07-20', '2023-07-27', 123123),
+(16, 32, 'dqasdas', '<p>asdasdasdasd</p>', '2131231', 'dadasdsa', '2023-07-20', '2023-07-29', 123123);
+
 -- --------------------------------------------------------
 
 --
@@ -350,7 +417,10 @@ INSERT INTO `tbl_user` (`id`, `email`, `password`, `user_type`, `locker`) VALUES
 (7, 'kaypajanconi@gmail.com', '838c8d537322b98e2f84f758dfcb07a5a960d1bd', 'EMPLOYEE', 'Q8pW@DJzfu9hE@C8rbl>?>rdo)s3*YwHxW6~Z@rit\\v@wmED0$'),
 (20, 'polcuenca242@gmail.com', '835de90f3a845fbc4fa8142d2712ce4da4b8ec17', 'EMPLOYEE', 'lT>)c2V(HY>eoCCBitd#y@FmeXeyvYy)2Xp@\\P0$?C/eNm#v)V'),
 (23, 'ayeemarty@outlook.com', 'a19a93a06fbe9f2e65c105470bb6f6dcc9c8aeab', 'EMPLOYEE', 'ERWS2@~j1eS5&gO19!H#%h04F>wD>7G\\9p?Z~g4FUH.~Dj$L7~'),
-(24, 'watsons@gmail.com', 'd9abaa4ec106938b7f2ebdf26f24455f4b270477', 'EMPLOYER', 'qfbLy!3)b7~X@($0TXBemGcbs$Sog$8^R1hiT@2DmwN9qJsSnB');
+(24, 'watsons@gmail.com', 'd9abaa4ec106938b7f2ebdf26f24455f4b270477', 'EMPLOYER', 'qfbLy!3)b7~X@($0TXBemGcbs$Sog$8^R1hiT@2DmwN9qJsSnB'),
+(25, 'katrina@gmail.com', '6c33f9ac86beaa164a915929d89fe42406e63fd2', 'EMPLOYEE', 'wBxN?K!?1P#ryQ(#41OT/&\\JE1ZKSN315?BhfjnG1TB7z7GY.K'),
+(26, 'doe@gmail.com', '2326f71d5942bd4efa5d2cafbaa57e8071c42c75', 'EMPLOYEE', '11ue!uwwgV9^>14&bN/<Vz3s90(1Wp\\#p910asxYlbzc*^f!m9'),
+(27, 'test@gmail.com', '39f5693f9e10015320360641b0b96a3ed82f506a', 'EMPLOYEE', 'j5EuCVi/$kuru4i%&6Ua>T9q3>EpIoKTIFhvXd$PtqRF%AdpRL');
 
 --
 -- Indexes for dumped tables
@@ -363,6 +433,15 @@ ALTER TABLE `tbl_applicant`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_applicant_employee_id` (`employee_id`),
   ADD KEY `fk_applicant_jobposting_id` (`job_id`);
+
+--
+-- Indexes for table `tbl_employed`
+--
+ALTER TABLE `tbl_employed`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_employed_job_id` (`job_id`),
+  ADD KEY `fk_employed_employer_id` (`employer_id`),
+  ADD KEY `fk_employed_employee_id` (`employee_id`);
 
 --
 -- Indexes for table `tbl_employee`
@@ -455,13 +534,19 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT for table `tbl_applicant`
 --
 ALTER TABLE `tbl_applicant`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+
+--
+-- AUTO_INCREMENT for table `tbl_employed`
+--
+ALTER TABLE `tbl_employed`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_employee`
 --
 ALTER TABLE `tbl_employee`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `tbl_employee_educ`
@@ -473,7 +558,7 @@ ALTER TABLE `tbl_employee_educ`
 -- AUTO_INCREMENT for table `tbl_employee_skill`
 --
 ALTER TABLE `tbl_employee_skill`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `tbl_employer`
@@ -491,13 +576,13 @@ ALTER TABLE `tbl_employment`
 -- AUTO_INCREMENT for table `tbl_feedback`
 --
 ALTER TABLE `tbl_feedback`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `tbl_follow`
 --
 ALTER TABLE `tbl_follow`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `tbl_jobposting`
@@ -509,7 +594,7 @@ ALTER TABLE `tbl_jobposting`
 -- AUTO_INCREMENT for table `tbl_notification`
 --
 ALTER TABLE `tbl_notification`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- AUTO_INCREMENT for table `tbl_skill`
@@ -521,13 +606,13 @@ ALTER TABLE `tbl_skill`
 -- AUTO_INCREMENT for table `tbl_training`
 --
 ALTER TABLE `tbl_training`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- Constraints for dumped tables
@@ -539,6 +624,14 @@ ALTER TABLE `tbl_user`
 ALTER TABLE `tbl_applicant`
   ADD CONSTRAINT `fk_applicant_employee_id` FOREIGN KEY (`employee_id`) REFERENCES `tbl_employee` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_applicant_jobposting_id` FOREIGN KEY (`job_id`) REFERENCES `tbl_jobposting` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tbl_employed`
+--
+ALTER TABLE `tbl_employed`
+  ADD CONSTRAINT `fk_employed_employee_id` FOREIGN KEY (`employee_id`) REFERENCES `tbl_employee` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_employed_employer_id` FOREIGN KEY (`employer_id`) REFERENCES `tbl_employer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_employed_job_id` FOREIGN KEY (`job_id`) REFERENCES `tbl_jobposting` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_employee_educ`

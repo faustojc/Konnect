@@ -5,23 +5,32 @@ class Notification_model extends CI_Model
 {
     private $Table;
 
+    /**
+     * @throws JsonException
+     */
     public function __construct()
     {
         parent::__construct();
 
-        $this->Table = json_decode(TABLE);
+        $this->Table = json_decode(TABLE, FALSE, 512, JSON_THROW_ON_ERROR);
     }
 
-    public function getNotifications($user_id = null)
+    public function getNotifications($user_id = NULL)
     {
         if ($user_id) {
             $result = $this->db->select('tbl_notification.*, 
-            tbl_employee.user_id as userId, 
-            CONCAT_WS(" ", tbl_employee.Fname, tbl_employee.Mname, tbl_employee.Lname) AS userName, 
-            tbl_employee.Employee_image AS userImage,
-            tbl_employer.user_id as userId,
-            tbl_employer.tradename AS userName,
-            tbl_employer.image AS userImage')
+            (CASE
+                WHEN tbl_employee.user_id IS NOT NULL THEN tbl_employee.user_id
+                WHEN tbl_employer.user_id IS NOT NULL THEN tbl_employer.user_id
+            END) AS user_id,
+            (CASE
+                WHEN tbl_employee.Fname IS NOT NULL THEN CONCAT_WS(" ", tbl_employee.Fname, tbl_employee.Mname, tbl_employee.Lname)
+                WHEN tbl_employer.tradename IS NOT NULL THEN tbl_employer.tradename
+            END) AS userName,
+            (CASE
+                WHEN tbl_employee.Employee_image IS NOT NULL THEN tbl_employee.Employee_image
+                WHEN tbl_employer.image IS NOT NULL THEN tbl_employer.image
+            END) AS userImage')
                 ->from($this->Table->notification)
                 ->where('tbl_notification.user_id', $user_id)
                 ->join($this->Table->employee, 'tbl_employee.user_id = tbl_notification.from_user_id', 'left')
@@ -46,12 +55,12 @@ class Notification_model extends CI_Model
             ->get()->result();
     }
 
-    public function updateBatch($id, array $data)
+    public function updateBatch($id, array $data): void
     {
         $this->db->where_in('id', $id)->update($this->Table->notification, $data);
     }
 
-    public function deleteOldNotifications()
+    public function deleteOldNotifications(): void
     {
         // Set the threshold for how old notifications should be before they are deleted
         $threshold = strtotime('-30 days');
@@ -73,13 +82,13 @@ class Notification_model extends CI_Model
 
             if ($this->db->trans_status()) {
                 $this->db->trans_commit();
-                return array('status' => 'success', 'message' => 'Notification added successfully.');
-            } else {
-                $this->db->trans_rollback();
-                return array('status' => 'error', 'message' => 'Failed to add a new notification.');
+                return ['status' => 'success', 'message' => 'Notification added successfully.'];
             }
+
+            $this->db->trans_rollback();
+            return ['status' => 'error', 'message' => 'Failed to add a new notification.'];
         } catch (Exception $e) {
-            throw new Exception($e->getMessage(), $e->getCode());
+            throw new RuntimeException($e->getMessage(), $e->getCode());
         }
     }
 
@@ -95,13 +104,13 @@ class Notification_model extends CI_Model
 
             if ($this->db->trans_status()) {
                 $this->db->trans_commit();
-                return array('status' => 'success', 'message' => 'Notification updated successfully.');
-            } else {
-                $this->db->trans_rollback();
-                return array('status' => 'error', 'message' => 'Failed to update the notification.');
+                return ['status' => 'success', 'message' => 'Notification updated successfully.'];
             }
+
+            $this->db->trans_rollback();
+            return ['status' => 'error', 'message' => 'Failed to update the notification.'];
         } catch (Exception $e) {
-            throw new Exception($e->getMessage(), $e->getCode());
+            throw new RuntimeException($e->getMessage(), $e->getCode());
         }
     }
 }

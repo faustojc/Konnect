@@ -6,18 +6,14 @@ class Jobposting_services_model extends CI_Model
     public $ID;
     public $Table;
 
+    /**
+     * @throws JsonException
+     */
     public function __construct()
     {
         parent::__construct();
-        $this->session = (object)get_userdata(USER);
 
-        // if(is_empty_object($this->session)){
-        // 	redirect(base_url().'login/authentication', 'refresh');
-        // }
-
-        $model_list = [];
-        $this->load->model($model_list);
-        $this->Table = json_decode(TABLE);
+        $this->Table = json_decode(TABLE, FALSE, 512, JSON_THROW_ON_ERROR);
     }
 
     public function save($info): array
@@ -31,13 +27,13 @@ class Jobposting_services_model extends CI_Model
 
             if ($this->db->trans_status() === FALSE) {
                 $this->db->trans_rollback();
-                return array('message' => ERROR_PROCESSING, 'has_error' => true, 'id' => $new_id);
-            } else {
-                $this->db->trans_commit();
-                return array('message' => SAVED_SUCCESSFUL, 'has_error' => false);
+                return ['message' => ERROR_PROCESSING, 'has_error' => TRUE, 'id' => $new_id];
             }
+
+            $this->db->trans_commit();
+            return ['message' => SAVED_SUCCESSFUL, 'has_error' => FALSE];
         } catch (Exception $msg) {
-            return array('message' => $msg->getMessage(), 'has_error' => true);
+            return ['message' => $msg->getMessage(), 'has_error' => TRUE];
         }
     }
 
@@ -50,18 +46,18 @@ class Jobposting_services_model extends CI_Model
 
             if ($this->db->trans_status() === FALSE) {
                 $this->db->trans_rollback();
-                return array('message' => ERROR_PROCESSING, 'has_error' => true);
-            } else {
-                $this->db->trans_commit();
-                return array('message' => SAVED_SUCCESSFUL, 'has_error' => false);
+                return ['message' => ERROR_PROCESSING, 'has_error' => TRUE];
             }
 
+            $this->db->trans_commit();
+            return ['message' => SAVED_SUCCESSFUL, 'has_error' => FALSE];
+
         } catch (Exception $msg) {
-            return (array('message' => $msg->getMessage(), 'has_error' => true));
+            return (['message' => $msg->getMessage(), 'has_error' => TRUE]);
         }
     }
 
-    public function delete($id)
+    public function delete($id): array
     {
         try {
             $this->db->trans_start();
@@ -70,13 +66,13 @@ class Jobposting_services_model extends CI_Model
 
             if ($this->db->trans_status() === FALSE) {
                 $this->db->trans_rollback();
-                throw new Exception(ERROR_PROCESSING, true);
-            } else {
-                $this->db->trans_commit();
-                return array('message' => SAVED_SUCCESSFUL, 'has_error' => false);
+                throw new Exception(ERROR_PROCESSING, TRUE);
             }
+
+            $this->db->trans_commit();
+            return ['message' => SAVED_SUCCESSFUL, 'has_error' => FALSE];
         } catch (Exception $msg) {
-            return (array('message' => $msg->getMessage(), 'has_error' => true));
+            return (['message' => $msg->getMessage(), 'has_error' => TRUE]);
         }
     }
 
@@ -90,7 +86,7 @@ class Jobposting_services_model extends CI_Model
 
             return $query;
         } catch (Exception $msg) {
-            return (array('message' => $msg->getMessage(), 'has_error' => true));
+            return (['message' => $msg->getMessage(), 'has_error' => TRUE]);
         }
     }
 }

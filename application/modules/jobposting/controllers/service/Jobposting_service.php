@@ -21,32 +21,35 @@ class Jobposting_service extends MY_Controller
         $this->load->model($model_list);
     }
 
-    public function postJob()
+    /**
+     * @throws JsonException
+     */
+    public function postJob(): void
     {
         $data = $this->input->post();
         $data['employer_id'] = $this->userdata->id;
 
         $response = $this->job_service_model->save($data);
-        $employer_image = $this->employer_model->getEmployerOnly('image, tradename', $this->userdata->id);
+        $employer = $this->employer_model->getEmployerOnly('image, tradename', $this->userdata->id);
 
-        $data['EmployerLogo'] = $employer_image->image;
-        $data['EmployerTradename'] = $employer_image->tradename;
-        $data['id'] = $response['id'];
+        $data['EmployerLogo'] = $employer->image;
+        $data['EmployerTradename'] = $employer->tradename;
+        $data['id'] = $this->db->insert_id();
 
-        $jobpost = array(
-            'jobpost' => (object)$data,
-        );
+        $jobpost = [
+            'jobpost' => $data,
+        ];
 
         if (!$response['has_error']) {
-            $view = $this->load->view('components/load_jobpost', $jobpost, true);
+            $view = $this->load->view('components/load_jobpost', $jobpost, TRUE);
 
             $this->output->set_content_type('text/html')->set_output($view);
         } else {
-            echo json_encode($response);
+            echo json_encode($response, JSON_THROW_ON_ERROR);
         }
     }
 
-    public function save()
+    public function save(): void
     {
         $info = $this->input->post();
 
@@ -54,15 +57,15 @@ class Jobposting_service extends MY_Controller
         echo json_encode($response);
     }
 
-    public function update()
+    public function update(): void
     {
-        $info = array(
+        $info = [
             'id' => $this->input->post("id"),
             'employer_id' => $this->input->post("employer_id"),
             'title' => $this->input->post("title"),
             'description' => $this->input->post("description"),
-            'filled' => $this->input->post("filled")
-        );
+            'filled' => $this->input->post("filled"),
+        ];
 
         $response = $this->job_service_model->update($info);
         echo json_encode($response);

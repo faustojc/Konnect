@@ -1,20 +1,3 @@
-function setJobStatus() {
-    const jobStatus = document.querySelectorAll('.job-status');
-    jobStatus.forEach(value => {
-        const status = value.textContent.replace(/\s+/g, '').toUpperCase();
-
-        if (status === 'OPEN') {
-            value.classList.add('text-success');
-            value.classList.remove('bg-danger');
-        } else {
-            value.classList.add('text-danger');
-            value.classList.remove('bg-success');
-        }
-
-        value.textContent = status;
-    });
-}
-
 /**
  * @param {any} target Target element to validate
  * @returns {boolean} Returns true if the form is valid, false otherwise
@@ -28,7 +11,7 @@ function validateForm(target) {
         let errors = 0;
 
         for (const input of inputs) {
-            errors = (input.value === '' && input.required) ? errors + 1 : errors;
+            errors = (input.value === '' || input.required) ? errors + 1 : errors;
 
             if (input.value === '') {
                 input.classList.add('is-invalid');
@@ -176,42 +159,6 @@ function createToast(title = '', message, delay = 5000, class_names, icon) {
             autoremove: true,
             delay: delay,
             fade: true
-        });
-    }
-}
-
-const seeMoreBtnFunction = () => {
-    const seeMoreButtons = document.querySelectorAll(".see-more");
-    if (seeMoreButtons) {
-        // Hide the buttons if the div height is less than or equal to 450px
-        seeMoreButtons.forEach(button => {
-            const target = button.dataset.target;
-            const jobDescription = button.previousElementSibling;
-            const maxHeight = parseInt(jobDescription.style.maxHeight);
-
-            if (jobDescription.matches(target) && jobDescription.offsetHeight < maxHeight) {
-                button.style.display = "none";
-            } else if (jobDescription.offsetHeight >= maxHeight) {
-                button.style.display = "block";
-            }
-
-            button.addEventListener("click", function (event) {
-                const button = event.target;
-                const target = button.dataset.target;
-                const jobDescription = button.previousElementSibling;
-
-                if (jobDescription.matches(target)) {
-                    if (button.textContent === "See more") {
-                        button.textContent = "See less";
-                        jobDescription.style.maxHeight = "none";
-                        jobDescription.style.overflowY = "visible";
-                    } else {
-                        button.textContent = "See more";
-                        jobDescription.style.maxHeight = maxHeight;
-                        jobDescription.style.overflowY = "hidden";
-                    }
-                }
-            });
         });
     }
 }

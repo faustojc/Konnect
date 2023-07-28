@@ -178,8 +178,6 @@ main_header(['Search']);
         <div class="row pl-3 pr-3" style="margin-top: 3.5rem;">
             <div class="col-12 col-md-3 mt-4">
                 <div class="container sticky-top" style="top:80px;">
-
-                
                     <div class="card ">
                         <div class="card-body">
                             <div class="row">
@@ -260,29 +258,26 @@ main_header(['Search']);
                         </div>
                     </div>
 
-                    
+
                     <div class="card" style="">
-                        <div class="card-body" >
+                        <div class="card-body">
                             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                <a class="nav-link" id="v-pills-all-tab" data-toggle="pill" href="#v-pills-all" role="tab" aria-controls="v-pills-all" aria-selected="false">All</a>
+                                <a class="nav-link active" id="v-pills-all-tab" data-toggle="pill" href="#v-pills-all" role="tab" aria-controls="v-pills-all" aria-selected="true">All</a>
                                 <a class="nav-link" id="v-pills-posts-tab" data-toggle="pill" href="#v-pills-posts" role="tab" aria-controls="v-pills-posts" aria-selected="false">Job Posts</a>
                                 <a class="nav-link" id="v-pills-employer-tab" data-toggle="pill" href="#v-pills-employer" role="tab" aria-controls="v-pills-employer" aria-selected="false">Employer</a>
                                 <a class="nav-link" id="v-pills-employee-tab" data-toggle="pill" href="#v-pills-employee" role="tab" aria-controls="v-pills-employee" aria-selected="false">Employee</a>
                             </div>
                         </div>
                     </div>
-                        
-                </div>    
+
+                </div>
             </div>
-            
+
             <div class="col-12 col-md-9 mt-4">
-                    <div id="search_result_content">
-                        <?= $search_view_results ?>
-                    </div>
-                
+                <div id="search_result_content">
+                    <?= $main_search_view ?>
+                </div>
             </div>
-            
-            
         </div>
     </div>
 </section>

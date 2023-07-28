@@ -25,11 +25,13 @@ class beu_dashboard extends MY_Controller
             'jobposting/Jobposting_model' => 'jobposting_model',
             'follow/Follow_model' => 'follow_model',
         ];
+
         $this->load->model($model_list);
+        $this->load->driver('cache');
     }
 
     /** load main page */
-    public function index()
+    public function index(): void
     {
         $this->data['auth'] = $this->auth;
 
@@ -39,7 +41,6 @@ class beu_dashboard extends MY_Controller
             $id = $this->userdata->ID;
         }
 
-        $this->load->driver('cache');
         // Enable query caching
         $this->db->cache_on();
 
@@ -59,23 +60,16 @@ class beu_dashboard extends MY_Controller
 
         $this->db->cache_off();
 
+        $this->output->cache(5);
+
         if ($this->auth['user_type'] == 'EMPLOYER') {
-            $this->data['user_display'] = $this->load->view('grid/load_employer', $this->data, true);
+            $this->data['user_display'] = $this->load->view('grid/load_employer', $this->data, TRUE);
         } else {
             $this->data['skills_section_view'] = $this->load->view('grid/dash_load_skill', $this->data, TRUE);
-            $this->data['user_display'] = $this->load->view('grid/load_employee', $this->data, true);
+            $this->data['user_display'] = $this->load->view('grid/load_employee', $this->data, TRUE);
         }
 
         $this->data['content'] = 'index';
-        $this->load->view('layout', $this->data);
-    }
-
-    public function get_skill()
-    {
-        $id = $this->uri->segment(3);
-
-        $this->data['skills'] = $this->dashboard_model->get_skill($id);
-        $this->data['content'] = 'grid/dash_load_skill';
         $this->load->view('layout', $this->data);
     }
 }

@@ -28,13 +28,13 @@ class Employee_model extends CI_Model
             ->get()->row();
     }
 
-    public function get_all_employees($limit = 0, $id = null)
+    public function get_all_employees($limit = 0, $id = NULL)
     {
-        if ($limit == 0 && $id != null) {
+        if ($limit == 0 && $id != NULL) {
             return $this->db->select()->from($this->Table->employee)->where('ID !=', $id)->get()->result();
-        } else if ($limit != 0 && $id != null) {
+        } else if ($limit != 0 && $id != NULL) {
             return $this->db->select()->from($this->Table->employee)->where('ID !=', $id)->limit($limit)->get()->result();
-        } else if ($limit != 0 && $id == null) {
+        } else if ($limit != 0 && $id == NULL) {
             return $this->db->select()->from($this->Table->employee)->limit($limit)->get()->result();
         }
 
@@ -49,21 +49,31 @@ class Employee_model extends CI_Model
         return $this->db->get()->result();
     }
 
-    public function getEmployeeLike(array $arr, $id = null, $select = '*')
+    public function getEmployeeLike(array $arr, $id = NULL, $select = '*')
     {
+        $fields = array_keys($arr);
+
         $this->db->select($select)->from($this->Table->employee);
-        if ($id != null) {
+        if ($id != NULL) {
             $this->db->where('ID !=', $id);
         }
 
-        $this->db->group_start();
+        if (count($arr) == 1) {
+            $this->db->like($fields[0], $arr[0]);
+        } else {
+            $this->db->group_start();
 
-        foreach ($arr as $field => $value) {
-            $this->db->or_like($field, $value);
+            for ($x = 0, $xMax = count($arr); $x < $xMax; $x++) {
+                if ($x == 0) {
+                    $this->db->like($fields[$x], $arr[$x]);
+                } else {
+                    $this->db->or_like($fields[$x], $arr[$x]);
+                }
+            }
+
+            $this->db->group_end();
         }
 
-        $this->db->group_end();
         return $this->db->get()->result();
     }
-
 }

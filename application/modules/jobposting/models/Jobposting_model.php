@@ -76,7 +76,7 @@ class Jobposting_model extends CI_Model
             ->get($this->Table->jobposting)->result();
     }
 
-    public function getJobLike($field, $keyword, $select = '*')
+    public function getJobsLike($field, $keyword, $select = '*')
     {
         return $this->db->select($select)
             ->join('tbl_employer', 'tbl_employer.id = tbl_jobposting.employer_id')

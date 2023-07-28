@@ -19,13 +19,13 @@ class Employer_model extends CI_Model
         $this->Table = json_decode(TABLE);
     }
 
-    public function get_employers($limit = 0, $id = null)
+    public function get_employers($limit = 0, $id = NULL)
     {
-        if ($limit == 0 && $id != null) {
+        if ($limit == 0 && $id != NULL) {
             return $this->db->get_where($this->Table->employer, ['id !=' => $id])->result();
-        } else if ($limit != 0 && $id != null) {
+        } else if ($limit != 0 && $id != NULL) {
             return $this->db->select()->from($this->Table->employer)->where('id !=', $id)->limit($limit)->get()->result();
-        } else if ($limit != 0 && $id == null) {
+        } else if ($limit != 0 && $id == NULL) {
             return $this->db->select()->from($this->Table->employer)->limit($limit)->get()->result();
         }
 
@@ -47,12 +47,28 @@ class Employer_model extends CI_Model
         return $this->db->select($select)->from($this->Table->employer)->where('id', $id)->get()->row();
     }
 
-    public function getOtherEmployerLike($id, $field, $value, $select = '*')
+    public function getEmployersLike(array $arr, $id = NULL, $select = '*')
     {
-        return $this->db->select($select)
-            ->where('id !=', $id)
-            ->like($field, $value)
-            ->get($this->Table->employer)->result();
+        $fields = array_keys($arr);
+
+        $this->db->select($select)->from($this->Table->employer);
+        if ($id != NULL) {
+            $this->db->where('id !=', $id);
+        } else {
+            $this->db->group_start();
+
+            for ($x = 0, $xMax = count($arr); $x < $xMax; $x++) {
+                if ($x == 0) {
+                    $this->db->like($fields[$x], $arr[$x]);
+                } else {
+                    $this->db->or_like($fields[$x], $arr[$x]);
+                }
+            }
+
+            $this->db->group_end();
+        }
+
+        return $this->db->get()->result();
     }
 
     public function getEmployersWhereIn(string $column, array $values, string $select = '*')

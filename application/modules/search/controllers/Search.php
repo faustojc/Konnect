@@ -26,6 +26,7 @@ class Search extends MY_Controller
         ];
 
         $this->load->model($model_list);
+        $this->load->driver('cache');
     }
 
     public function index()
@@ -41,38 +42,41 @@ class Search extends MY_Controller
                 return get_object_vars($skill)['skill'];
             }, $skills);
 
-            $criteria = array(
+            $criteria = [
                 'skills' => $skills,
                 'title' => $this->userdata->Title,
-                'city' => $this->userdata->City
-            );
-
-            // Search for relevant job posts
-            $jobposts = $this->searchRelevantJobposts($query, $criteria);
-            $employees = $this->searchRelevantEmployees($query, $criteria);
-
-
-            $data['results'] = $jobposts;
-            $data['search_view_results'] = $this->load->view('grid/employee_search_view', $data, true);
-
+                'city' => $this->userdata->City,
+            ];
         } else {
             // Get the employer's search criteria
-            $criteria = array(
+            $criteria = [
                 'business_type' => $this->userdata->business_type,
-                'location' => $this->userdata->address . ' ' . $this->userdata->barangay . ' ' . $this->userdata->city
-            );
-
-            // Search for relevant employees
-            $jobposts = $this->searchRelevantEmployers($query, $criteria);
-
-            $data['results'] = $jobposts;
-            $data['search_view_results'] = $this->load->view('grid/employer_search_view', $data, true);
+                'location' => $this->userdata->address . ' ' . $this->userdata->barangay . ' ' . $this->userdata->city,
+            ];
         }
+
+        // Search for relevant job posts, employees and employers
+        $data['jobposts'] = $this->searchRelevantJobposts($query, $criteria);
+        $data['employees'] = $this->searchRelevantEmployees($query, $criteria);
+        $data['employers'] = $this->searchRelevantEmployers($query, $criteria);
+
+        $data['results']['total_jobposts'] = count($data['jobposts']);
+        $data['results']['total_employees'] = count($data['employees']);
+        $data['results']['total_employers'] = count($data['employers']);
+        $data['results']['total_overall'] = count($data['jobposts']) + count($data['employees']) + count($data['employers']);
+
+        $this->output->cache(5);
+
+        $data['searched_jobposts'] = $this->load->view('grid/search_results/searched_jobposts', $data, TRUE);
+        $data['searched_employees'] = $this->load->view('grid/search_results/searched_employees', $data, TRUE);
+        $data['searched_employers'] = $this->load->view('grid/search_results/searched_employers', $data, TRUE);
+
+        $data['main_search_view'] = $this->load->view('grid/main_search_view', $data, TRUE);
 
         // Check if this is an AJAX request
         if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
             // Load only the search results view
-            echo $data['search_view_results'];
+            echo $data['main_search_view'];
         } else {
             // Load the full search page
             $this->load->view('index', $data);
@@ -82,19 +86,26 @@ class Search extends MY_Controller
     private function searchRelevantJobposts($query, $criteria): array
     {
         // Get all job posts that contain the query in their title
-        $job_posts = $this->jobposting_model->getJobLike('title', $query, 'tbl_jobposting.*, tbl_employer.id AS employer_id, tbl_employer.tradename AS employer_name, tbl_employer.image AS employer_logo');
+        $this->db->cache_on();
+        $job_posts = $this->jobposting_model->getJobsLike('title', $query, 'tbl_jobposting.*, tbl_employer.id AS employer_id, tbl_employer.tradename AS employer_name, tbl_employer.image AS employer_logo');
+        $this->db->cache_off();
 
         // Get following employers
-        $followed_employers = $this->follow_model->get_following($this->userdata->ID);
+        if ($this->auth['user_type'] == 'EMPLOYEE') {
+            $followed_employers = $this->follow_model->get_following($this->userdata->ID);
+        }
         // Initialize an array to store the relevance scores
-        $scores = array();
+        $scores = [];
 
         // Get all followed employers in one call
         if (!empty($followed_employers)) {
             $employer_ids = array_map(function ($employer) {
                 return $employer->employer_id;
             }, $followed_employers);
+
+            $this->db->cache_on();
             $employers = $this->employer_model->getEmployersWhereIn('id', $employer_ids, 'id, address, barangay, city');
+            $this->db->cache_off();
         }
 
         // Calculate the relevance score for each job post
@@ -112,19 +123,19 @@ class Search extends MY_Controller
                     }
 
                     // Check if the job has same location as followed employer
-                    if (stripos($job->location, $employer_location) !== false) {
+                    if (stripos($job->location, $employer_location) !== FALSE) {
                         ++$score;
                     }
                 }
             }
 
             // Check if the job title matches the query
-            if (stripos($job->title, $query) !== false) {
+            if (stripos($job->title, $query) !== FALSE) {
                 $score += 8;
             }
 
             // Check if the employee's title matches the job title
-            if (stripos($job->title, $this->userdata->Title) !== false) {
+            if (stripos($job->title, $this->userdata->Title) !== FALSE) {
                 $score += 4;
             }
 
@@ -151,7 +162,7 @@ class Search extends MY_Controller
         $job_ids = array_keys($scores);
 
         // Get the sorted job posts with their scores in one call
-        return array_map(function ($job_id) use ($scores, $job_posts) {
+        return array_map(static function ($job_id) use ($scores, $job_posts) {
             foreach ($job_posts as $job_post) {
                 if ($job_post->id == $job_id) {
                     return (object)array_merge((array)$job_post, ['score' => $scores[$job_id]]);
@@ -164,18 +175,20 @@ class Search extends MY_Controller
 
     private function searchRelevantEmployees($query, $criteria): array
     {
-        $employees_skills = array(); // Only if the current user is employee
+        $employees_skills = []; // Only if the current user is employee
 
         // Get all employees
+        $this->db->cache_on();
         if ($this->auth['user_type'] == 'EMPLOYEE') {
-            $employees = $this->employee_model->getEmployeeLike(['Fname' => $query, 'Lname' => $query, 'Title' => $query], $this->userdata->ID, 'ID, Fname, Lname, Title, City');
+            $employees = $this->employee_model->getEmployeeLike(['Fname' => $query, 'Lname' => $query, 'Title' => $query], $this->userdata->ID, 'ID, Fname, Mname ,Lname, Title, City');
             $employees_skills = $this->EmployeeSkills_model->getOtherEmployeeSkills($this->userdata->ID, 'skill');
         } else {
-            $employees = $this->employee_model->getEmployeeLike(['Fname' => $query, 'Lname' => $query, 'Title' => $query], null, 'ID, Fname, Lname, Title, City');
+            $employees = $this->employee_model->getEmployeeLike(['Fname' => $query, 'Lname' => $query, 'Title' => $query], NULL, 'ID, Fname, Mname, Lname, Title, City');
         }
+        $this->db->cache_off();
 
         // Initialize an array to store the relevance scores
-        $scores = array();
+        $scores = [];
 
         // Calculate the relevance score for each employee
         foreach ($employees as $employee) {
@@ -183,19 +196,19 @@ class Search extends MY_Controller
             $score = 0;
 
             // Check if the employee's name matches the query
-            if (stripos($employee->Fname, $query) !== false) {
+            if (stripos($employee->Fname, $query) !== FALSE) {
                 $score += 8;
-            } else if (stripos($employee->Lname, $query) !== false) {
+            } else if (stripos($employee->Lname, $query) !== FALSE) {
                 $score += 8;
             }
 
             // Check if the employee's title matches the employer's business type
-            if ($this->auth['user_type'] == 'EMPLOYEE' && stripos($employee->Title, $criteria['title']) !== false) {
+            if ($this->auth['user_type'] == 'EMPLOYEE' && stripos($employee->Title, $criteria['title']) !== FALSE) {
                 $score += 4;
             }
 
             // Check if the employee's location matches the employer's location
-            if (stripos($employee->City, $criteria['location']) !== false) {
+            if (stripos($employee->City, $criteria['location']) !== FALSE) {
                 $score += 2;
             }
 
@@ -224,7 +237,7 @@ class Search extends MY_Controller
         $employee_ids = array_keys($scores);
 
         // Get the sorted employees with their scores in one call
-        return array_map(function ($employee_id) use ($scores, $employees) {
+        return array_map(static function ($employee_id) use ($scores, $employees) {
             foreach ($employees as $employee) {
                 if ($employee->ID == $employee_id) {
                     return (object)array_merge((array)$employee, ['score' => $scores[$employee_id]]);
@@ -237,30 +250,38 @@ class Search extends MY_Controller
 
     private function searchRelevantEmployers($query, $criteria): array
     {
-        // Get all employees
-        // Apply the scoring system to each employee using the search input only as criteria
-        // Sort the employees by their relevance scores in descending order
-        // Get the sorted employees
-
         // Get all the employers
-        $other_employers = $this->employer_model->getOtherEmployerLike($this->userdata->id, 'tradename', $query, 'id, tradename, business_type, address, barangay, city');
+        $this->db->cache_on();
+        if ($this->auth['user_type'] == 'EMPLOYER') {
+            $other_employers = $this->employer_model->getEmployersLike(['tradename' => $query, 'business_type' => $query], $this->userdata->id, 'id, tradename, business_type, address, barangay, city');
+        } else {
+            $other_employers = $this->employer_model->getEmployersLike(['tradename' => $query, 'business_type' => $query], NULL, 'id, tradename, business_type, address, barangay, city');
+        }
+        $this->db->cache_off();
 
         // Apply the scoring system to other employers using the defined criteria
-        $scores = array();
+        $scores = [];
 
         // Sort the employers by their relevance scores in descending order
         if (!empty($other_employers)) {
             foreach ($other_employers as $other) {
                 $score = 0;
 
-                // Check if the employer's business type matches the current employer
-                if (stripos($other->business_type, $criteria['business_type']) !== false) {
+                $other_name = strtolower($other->tradename);
+                if (stripos($other_name, $query) !== FALSE) {
+                    $score += 12;
+                }
+
+                // Check if the employer's business type matches the current employer. EMPLOYER ONLY
+                if ($this->auth['user_type'] == 'EMPLOYER' && stripos($other->business_type, $criteria['business_type']) !== FALSE) {
                     $score += 8;
                 }
 
                 $other_address = strtolower($other->address . ' ' . $other->barangay . ' ' . $other->city);
                 // Check if the employer's location matches the query
-                if (stripos($other_address, $criteria['location']) !== false) {
+                if ($this->auth['user_type'] == 'EMPLOYER' && stripos($other_address, $criteria['location']) !== FALSE) {
+                    $score += 2;
+                } else if (stripos($other->city, $criteria['city']) !== FALSE) {
                     $score += 2;
                 }
 
@@ -277,10 +298,10 @@ class Search extends MY_Controller
 
         // Get the sorted other employers with their scores in one call
         // Display the results in the search results view with sorted employees and employers
-        return array_map(function ($other_id) use ($scores, $other_employers) {
+        return array_map(static function ($employer_id) use ($scores, $other_employers) {
             foreach ($other_employers as $other) {
-                if ($other->id == $other_id) {
-                    return (object)array_merge((array)$other, ['score' => $scores[$other_id]]);
+                if ($other->id == $employer_id) {
+                    return (object)array_merge((array)$other, ['score' => $scores[$employer_id]]);
                 }
             }
 

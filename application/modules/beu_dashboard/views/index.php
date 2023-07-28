@@ -14,35 +14,15 @@ main_header(['Employer_profile']);
         -moz-appearance: textfield;
     }
 
-    .table-black {
-        border: 1px solid black;
-    }
-
     .table-black td {
         border-top: 1px solid black;
     }
 
-    .smallfont {
-        font-size: 68%;
-    }
-
-    .smallfont2 {
-        font-size: 75%;
-    }
-
-    .serif-font {
-        font-family: "Times New Roman", Times, serif;
-    }
 
     .list-3 li {
         margin-top: 5px;
         margin-bottom: 5px;
         text-transform: capitalize;
-    }
-
-    .list-3 {
-        text-transform: capitalize;
-        list-style-type: none;
     }
 
     .list-3 a {
@@ -206,7 +186,7 @@ main_header(['Employer_profile']);
                                 <!-- <div class="col-1 d-flex justify-content-center">
                                 </div> -->
                                 <div class="col-11">
-                                <img class="img-circle img-fluid " src="<?= base_url() ?>assets/images/employer/profile_pic/<?= $details->image ?> " alt="User Avatar" style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
+                                    <img class="img-circle img-fluid " src="<?= base_url() ?>assets/images/employer/profile_pic/<?= $details->image ?> " alt="User Avatar" style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
 
                                     <div class="card shadow-none hovercard" style="border-radius:10px; width:100%; height:100%; background-color: #F4F6F7;">
                                         <a data-toggle="modal" data-target="#jobpostmodal" style="width:100%; height:100%; text-decoration: none;cursor:pointer; color: #626567;">
@@ -251,17 +231,17 @@ main_header(['Employer_profile']);
                                                     <div class="form-group">
                                                         <label for="job_type">Job Type</label>
                                                         <select id="job_type" name="job_type" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;">
-                                                        <option>Full time</option>
-                                                        <option>Part time</option>
-                                                        <option>Internship</option>
-                                                        <option>Permanent</option>
-                                                        <option>Shift work</option>
-                                                        <option>Contract</option>
-                                                        <option>Temporary</option>
-                                                        <option>Freelance</option>
-                                                        <option>Remote</option>
-                                                        <option>Volunteer</option>
-                                                        <option>Seasonal</option>
+                                                            <option>Full time</option>
+                                                            <option>Part time</option>
+                                                            <option>Internship</option>
+                                                            <option>Permanent</option>
+                                                            <option>Shift work</option>
+                                                            <option>Contract</option>
+                                                            <option>Temporary</option>
+                                                            <option>Freelance</option>
+                                                            <option>Remote</option>
+                                                            <option>Volunteer</option>
+                                                            <option>Seasonal</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -272,15 +252,15 @@ main_header(['Employer_profile']);
                                                     <div class="form-group">
                                                         <label for="shift">Schedule</label>
                                                         <select id="shift" name="shift" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;">
-                                                        <option>Day shift</option>
-                                                        <option>Night shift</option>
-                                                        <option>Flextime</option>
-                                                        <option>Weekend shift</option>
-                                                        <option>Split shift</option>
-                                                        <option>Rotating shift</option>
-                                                        <option>On-call</option>
-                                                        <option>Remote work</option>
-                                                        <option>Part-time</option>
+                                                            <option>Day shift</option>
+                                                            <option>Night shift</option>
+                                                            <option>Flextime</option>
+                                                            <option>Weekend shift</option>
+                                                            <option>Split shift</option>
+                                                            <option>Rotating shift</option>
+                                                            <option>On-call</option>
+                                                            <option>Remote work</option>
+                                                            <option>Part-time</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -304,7 +284,8 @@ main_header(['Employer_profile']);
                                                 <div class="col-12">
                                                     <div class="form-group" style="border: 0;">
                                                         <label for="skills_req">Skills Requirements</label>
-                                                        <label class="text-muted" style="font-size: 13px;">(click enter to separate skills)</label>
+                                                        <label class="text-muted" style="font-size: 13px;">(click enter
+                                                            to separate skills)</label>
                                                         <input id="skills_req" name="skills_req" class="form-control border-0" style="resize: none; background-color: #F4F6F7; border-radius: 10px;" type="text" placeholder="Skill#1, Skill#2">
                                                     </div>
                                                 </div>
@@ -315,7 +296,9 @@ main_header(['Employer_profile']);
                                         </form>
                                     </div>
                                     <div class="modal-footer border-0">
-                                        <button id="btn_post" type="button" class="btn text-dark" style="border-radius:10px; width:100%; background-color: #F4F6F7;">Post</button>
+                                        <button id="btn_post" type="button" class="btn text-dark" style="border-radius:10px; width:100%; background-color: #F4F6F7;">
+                                            Post
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -339,7 +322,8 @@ main_header(['Employer_profile']);
                         <!-- You can optionally add a button or link to toggle the employees section -->
                     </div>
 
-                    <div class="card card-widget widget-user-2 d-none d-md-block"> <!-- Show on medium-sized screens and above -->
+                    <div class="card card-widget widget-user-2 d-none d-md-block">
+                        <!-- Show on medium-sized screens and above -->
                         <div class="card-header">
                             <h3 class="card-title fw-500">Employees</h3>
                         </div>
@@ -353,7 +337,8 @@ main_header(['Employer_profile']);
                         <!-- You can optionally add a button or link to toggle the employers section -->
                     </div>
 
-                    <div class="card card-widget widget-user-2 d-none d-md-block"> <!-- Show on medium-sized screens and above -->
+                    <div class="card card-widget widget-user-2 d-none d-md-block">
+                        <!-- Show on medium-sized screens and above -->
                         <div class="card-header">
                             <h3 class="card-title fw-500">Employers</h3>
                         </div>
@@ -379,4 +364,4 @@ main_footer();
 ?>
 
 <script src="<?= base_url() ?>assets/js/applicant/index.js"></script>
-<script src="<?= base_url() ?>/assets/js/dashboard/index.js"></script>
+<script src="<?= base_url() ?>assets/js/dashboard/index.js"></script>

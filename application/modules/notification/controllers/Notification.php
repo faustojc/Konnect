@@ -14,16 +14,16 @@ class Notification extends MY_Controller
             redirect(base_url() . 'login');
         }
 
-        $model_list = array(
+        $model_list = [
             'jobposting/Jobposting_model',
             'employee/Employee_model',
             'employer/Employer_model',
-        );
+        ];
 
         $this->load->model($model_list);
     }
 
-    public function notify()
+    public function notify(): void
     {
         // Set the appropriate headers for SSE
         header('Content-Type: text/event-stream');
@@ -45,12 +45,12 @@ class Notification extends MY_Controller
             $ids = array_map(function ($notification) {
                 return $notification->id;
             }, $newNotifications);
-            $this->Notification_model->updateBatch($ids, array('is_displayed' => 1));
+            $this->Notification_model->updateBatch($ids, ['is_displayed' => 1]);
 
             // Update the notification display from DisplayHandler
             $this->DisplayHandler->updateNotification();
         } else {
-            echo json_encode(array());
+            echo json_encode([]);
         }
 
         // Flush the output buffer

@@ -5,7 +5,6 @@ class Applicant extends MY_Controller
 {
     private $userdata;
     private $auth;
-    private $id;
 
     public function __construct()
     {
@@ -20,17 +19,20 @@ class Applicant extends MY_Controller
             $id = $this->userdata->ID;
         }
 
-        $model_list = array(
+        $model_list = [
             'jobposting/Jobposting_model',
             'employee/Employee_model',
-        );
+        ];
 
         $this->load->model($model_list);
     }
 
-    public function apply()
+    /**
+     * @throws JsonException
+     */
+    public function apply(): void
     {
-        $data = json_decode($this->input->raw_input_stream, true);
+        $data = json_decode($this->input->raw_input_stream, TRUE, 512, JSON_THROW_ON_ERROR);
 
         // Load the security library
         $this->load->library('security');
@@ -42,64 +44,82 @@ class Applicant extends MY_Controller
 
         if ($result['apply_status'] == 'PENDING') {
             // Send a notification to the employer by adding a new notification
-            $info = array(
+            $notif_data = [
                 'user_id' => $targetDetails->user_id,
                 'from_user_id' => $this->userdata->user_id,
                 'title' => 'New Applicant in your job post',
                 'message' => 'A new applicant has applied to your job post.',
-                'link' => base_url() . 'jobposting?id=' . $job_id,
-            );
+                'link' => 'jobposting?id=' . $job_id,
+            ];
         } else {
-            $info = array(
+            $notif_data = [
                 'user_id' => $targetDetails->user_id,
                 'from_user_id' => $this->userdata->user_id,
                 'title' => 'Application Cancelled',
                 'message' => 'The applicant has cancelled his/her application.',
-            );
+            ];
         }
 
-        $this->Notification_model->add($info);
+        $this->Notification_model->add($notif_data);
     }
 
-    public function accept()
+    /**
+     * @throws JsonException
+     */
+    public function accept(): void
     {
-        $data = json_decode($this->input->raw_input_stream, true);
+        $data = json_decode($this->input->raw_input_stream, TRUE, 512, JSON_THROW_ON_ERROR);
         $this->Applicant_model->setApplicantStatus($data['application_id'], 'ACCEPTED');
 
         // Get the employee details by getting the user_id
-        $employeeDetails = $this->Applicant_model->getApplicant($data['application_id']);
-        $employer = $this->Applicant_model->getEmployerByApplicant($data['application_id']);
+        $applicant = $this->Applicant_model->getApplicant($data['application_id']);
 
         // Send a notification to the applicant by adding a new notification
-        $info = array(
-            'user_id' => $employeeDetails->employeeUserID,
+        $notif_data = [
+            'user_id' => $applicant->employeeUserID,
             'from_user_id' => $this->userdata->user_id,
             'title' => 'Application Accepted',
-            'message' => $employer->employerName . ' has accepted your application.',
+            'message' => ucwords($this->userdata->tradename) . ' has accepted your application.',
             'link' => 'jobposting?id=' . $data['job_id'],
-        );
+        ];
 
-        $this->Notification_model->add($info);
+        $employment_data = [
+            'employer_id' => $this->userdata->id,
+            'employee_id' => $applicant->employeeUserID,
+        ];
+        // I forgot the process of employment
+
+        // TODO: also add newly employed to employer
+        $employed_data = [
+            'job_id' => $data['job_id'],
+            'employer_id' => $this->userdata->id,
+            'employee_id' => $applicant->employee_id,
+        ];
+        $this->Employed_model->add($employed_data);
+
+        $this->Notification_model->add($notif_data);
     }
 
-    public function reject()
+    /**
+     * @throws JsonException
+     */
+    public function reject(): void
     {
-        $data = json_decode($this->input->raw_input_stream, true);
+        $data = json_decode($this->input->raw_input_stream, TRUE, 512, JSON_THROW_ON_ERROR);
         $this->Applicant_model->setApplicantStatus($data['application_id'], 'REJECTED');
 
         // Get the employee details by getting the user_id
-        $employeeDetails = $this->Applicant_model->getApplicant($data['application_id']);
-        $employer = $this->Applicant_model->getEmployerByApplicant($data['application_id']);
+        $applicant = $this->Applicant_model->getApplicant($data['application_id']);
 
         // Send a notification to the applicant by adding a new notification
-        $info = array(
-            'user_id' => $employeeDetails->employeeUserID,
+        $notif_data = [
+            'user_id' => $applicant->employee_id,
             'from_user_id' => $this->userdata->user_id,
             'title' => 'Application Rejected',
-            'message' => $employer->employerName . ' has rejected your application.',
+            'message' => ucwords($this->userdata->tradename) . ' has rejected your application.',
             'link' => 'jobposting?id=' . $data['job_id'],
-        );
+        ];
 
-        $this->Notification_model->add($info);
+        $this->Notification_model->add($notif_data);
     }
 }

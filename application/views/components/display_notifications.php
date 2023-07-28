@@ -8,17 +8,6 @@
         }
     }
 
-    function imageExists($url): bool
-    {
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_NOBODY, true);
-        curl_exec($ch);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
-
-        return $httpCode == 200;
-    }
-
     ?>
 
     <a class="nav-link" data-toggle="dropdown" href="#">
@@ -46,7 +35,7 @@
             }
 
             $currentTime = new DateTime();
-            $diff = null;
+            $diff = NULL;
             try {
                 $diff = $currentTime->diff(new DateTime($notification->date_created));
             } catch (Exception $e) {

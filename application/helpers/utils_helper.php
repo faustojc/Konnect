@@ -1,4 +1,17 @@
-<?php 
+<?php
+if (!function_exists('image_exist')) {
+    function imageExists($url): bool
+    {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_NOBODY, TRUE);
+        curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        return $httpCode == 200;
+    }
+}
+
 function select_active($value1, $value2)
 {
     return ($value1 == $value2) ? "selected='selected'" : "";
@@ -6,23 +19,20 @@ function select_active($value1, $value2)
 
 function disable_field($id)
 {
-    if ($id > 0)
-    {
+    if ($id > 0) {
         return "readonly='readonly'";
     }
 }
 
 function user_module($user_modules, $module_ID)
 {
-    foreach($user_modules as $item)
-    {
-        if($item->PersonnelType_ID == $module_ID)
-        {
+    foreach ($user_modules as $item) {
+        if ($item->PersonnelType_ID == $module_ID) {
             // if ($item->$permission == 1)
             // {
-                return "hidden";
+            return "hidden";
             // }
-        } 
+        }
     }
 }
 
@@ -30,8 +40,7 @@ function format_date($date)
 {
     $date = explode("-", $date);
     $month = $date[1];
-    switch($date[1])
-    {
+    switch ($date[1]) {
         case "01":
             $month = "January";
             break;
@@ -70,10 +79,11 @@ function format_date($date)
             break;
     }
 
-    return $month." ".$date[2].", ".$date[0];
+    return $month . " " . $date[2] . ", " . $date[0];
 }
 
-function is_empty_object($obj){
+function is_empty_object($obj)
+{
     return $obj == new stdClass();
 }
 
@@ -83,69 +93,72 @@ function socket_url()
     return $ci->config->item('socket_url');
 }
 
-function generate_random_integer(){
+function generate_random_integer()
+{
     return bin2hex(random_bytes(4));
 }
 
-function sidebar($sidebar=null, $realSidebar=null){
+function sidebar($sidebar = NULL, $realSidebar = NULL)
+{
     //--NOTE--
     // Array values are key sensitive.
     $countSidebar = count($sidebar);
     $countrealSidebar = count($realSidebar);
-    $flag = true;
+    $flag = TRUE;
     $counter = 0;
-    $result = [];   
-    
-    if(empty($sidebar) || empty($realSidebar)){
-        return false;
+    $result = [];
+
+    if (empty($sidebar) || empty($realSidebar)) {
+        return FALSE;
     }
-    if($countrealSidebar==1 && @$sidebar[0] == @$realSidebar[0]){
-        return true;
+    if ($countrealSidebar == 1 && @$sidebar[0] == @$realSidebar[0]) {
+        return TRUE;
     }
-    if($countrealSidebar==2 && @$sidebar[1] == @$realSidebar[1]){
-        return true;
+    if ($countrealSidebar == 2 && @$sidebar[1] == @$realSidebar[1]) {
+        return TRUE;
     }
 
-    do{
-        if ( ! isset($sidebar[$counter]) || ! isset($realSidebar[$counter]) ) {
-            $sidebar[$counter] = null;
-            $realSidebar[$counter] = null;
-         }
-        if($sidebar[$counter] == $realSidebar[$counter]){
-            array_push($result, true);
-        }else{
-            array_push($result, false);
+    do {
+        if (!isset($sidebar[$counter]) || !isset($realSidebar[$counter])) {
+            $sidebar[$counter] = NULL;
+            $realSidebar[$counter] = NULL;
+        }
+        if ($sidebar[$counter] == $realSidebar[$counter]) {
+            array_push($result, TRUE);
+        } else {
+            array_push($result, FALSE);
         }
         $counter++;
-        if($counter == $countSidebar){
-            $flag = false;
+        if ($counter == $countSidebar) {
+            $flag = FALSE;
         }
-    }while($flag);
+    } while ($flag);
 
-    return count(array_keys($result, true)) == count($result);
+    return count(array_keys($result, TRUE)) == count($result);
 }
 
-/** user logs */ 
-function user_logs($dataValue){    
-        
+/** user logs */
+function user_logs($dataValue)
+{
+
     $CI =& get_instance();
     $secret_key = $CI->config->item('encryption_key');
-    $table = 'ctc_user_logs';           
+    $table = 'ctc_user_logs';
 
-    $non_encrypt_data = array(
-        'origin_id' => $dataValue['originID'], 
+    $non_encrypt_data = [
+        'origin_id' => $dataValue['originID'],
         'receiver_id' => $dataValue['receiverID'],
-        'field_value' =>  str_replace('"', "'", serialize($dataValue['field_value'])),
-        'date_created' => date('Y-m-d H:i:s')
-    );
+        'field_value' => str_replace('"', "'", serialize($dataValue['field_value'])),
+        'date_created' => date('Y-m-d H:i:s'),
+    ];
 
-    $encrypt_data = array(
+    $encrypt_data = [
         'table_origin' => $dataValue['tableOrigin'],
         'origin_name' => $dataValue['originName'],
         'table_receiver' => $dataValue['tableReceiver'],
         'receiver_name' => $dataValue['receiverName'],
-        'description' => $dataValue['description']       
-    );    
+        'description' => $dataValue['description'],
+    ];
 
-    insert_encryted_data($table, $encrypt_data, $non_encrypt_data);   
+    insert_encryted_data($table, $encrypt_data, $non_encrypt_data);
 }

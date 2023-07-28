@@ -29,7 +29,7 @@ class Search extends MY_Controller
         $this->load->driver('cache');
     }
 
-    public function index()
+    public function index(): void
     {
         // Get the search query from the user input
         $query = $this->input->get('query');
@@ -38,7 +38,7 @@ class Search extends MY_Controller
             // Get the employee's search criteria
             $skills = $this->EmployeeSkills_model->getEmployeeSkills($this->userdata->ID, 'skill');
 
-            $skills = array_map(function ($skill) {
+            $skills = array_map(static function ($skill) {
                 return get_object_vars($skill)['skill'];
             }, $skills);
 
@@ -99,7 +99,7 @@ class Search extends MY_Controller
 
         // Get all followed employers in one call
         if (!empty($followed_employers)) {
-            $employer_ids = array_map(function ($employer) {
+            $employer_ids = array_map(static function ($employer) {
                 return $employer->employer_id;
             }, $followed_employers);
 
@@ -207,14 +207,14 @@ class Search extends MY_Controller
                 $score += 4;
             }
 
-            // Check if the employee's location matches the employer's location
-            if (stripos($employee->City, $criteria['location']) !== FALSE) {
+            // Check if the employee's City matches the employer's location
+            if (stripos($criteria['location'], $employee->City) !== FALSE) {
                 $score += 2;
             }
 
             // Check if other employee's skills match the current employee's skills
             if ($this->auth['user_type'] == 'EMPLOYEE') {
-                $other_employee_skills = array_map(function ($employee_skill) {
+                $other_employee_skills = array_map(static function ($employee_skill) {
                     return get_object_vars($employee_skill)['skill'];
                 }, $employees_skills);
                 $employee_skills = array_map('trim', explode(',', $criteria['skills']));
@@ -274,6 +274,8 @@ class Search extends MY_Controller
 
                 // Check if the employer's business type matches the current employer. EMPLOYER ONLY
                 if ($this->auth['user_type'] == 'EMPLOYER' && stripos($other->business_type, $criteria['business_type']) !== FALSE) {
+                    $score += 8;
+                } else if (stripos($other->business_type, $query) !== FALSE) {
                     $score += 8;
                 }
 

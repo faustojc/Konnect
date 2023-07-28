@@ -24,7 +24,7 @@ class Applicant_model extends CI_Model
             ->join($this->Table->employee, 'tbl_employee.ID = tbl_applicant.employee_id', 'inner')
             ->where('tbl_applicant.id', $id)
             ->or_where('tbl_applicant.employee_id', $id)
-            ->get()->result();
+            ->get()->row();
     }
 
     public function getJobApplicants($job_id)

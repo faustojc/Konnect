@@ -1,5 +1,3 @@
-seeMoreBtnFunction();
-
 document.addEventListener("DOMContentLoaded", function () {
     textareaEditor('textarea', 400);
     setJobStatus();
@@ -34,6 +32,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+
+seeMoreBtnFunction();
 
 // For jobpost details
 function formatInput() {

@@ -22,7 +22,7 @@ class Employment_model extends CI_Model
         tbl_employer.tradename AS employer_name')
             ->where('tbl_employee.id', $employee_id)
             ->join('tbl_employee', 'tbl_employee.ID = tbl_employment.employee_id')
-            ->join('tbl_employer', 'tbl_employer.id = tbl_jobposting.employer_id')
+            ->join('tbl_employer', 'tbl_employer.id = tbl_employment.employer_id')
             ->get($this->Table->employment)->result();
     }
 

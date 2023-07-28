@@ -30,23 +30,23 @@
         z-index: 400;
     }
 
-    ul.timeline > li {
-        margin: 0;
-        padding-left: 50px;
-    }
+    /*ul.timeline > li {*/
+    /*    margin: 0;*/
+    /*    padding-left: 50px;*/
+    /*}*/
 
-    ul.timeline > li:before {
-        content: ' ';
-        background: white;
-        display: inline-block;
-        position: absolute;
-        border-radius: 50%;
-        border: 3px solid #0dcaf0;
-        left: 20px;
-        width: 20px;
-        height: 20px;
-        z-index: 400;
-    }
+    /*ul.timeline > li:before {*/
+    /*    content: ' ';*/
+    /*    background: white;*/
+    /*    display: inline-block;*/
+    /*    position: absolute;*/
+    /*    border-radius: 50%;*/
+    /*    border: 3px solid #0dcaf0;*/
+    /*    left: 20px;*/
+    /*    width: 20px;*/
+    /*    height: 20px;*/
+    /*    z-index: 400;*/
+    /*}*/
 
     .star-rating::before {
         content: "⭐⭐⭐⭐⭐";
@@ -63,14 +63,19 @@
 <?php if (!empty($employments)): ?>
     <div class="timeline">
         <?php foreach ($employments as $key => $employment): ?>
-            <div class="time-label">
-                <span class="bg-green">23 Aug. 2019</span>
-            </div>
+            <?php if (date('M j, Y') != date('M j, Y', strtotime($employment->start_date))): ?>
+                <div class="time-label">
+                    <span class="bg-green"><?= date('M j, Y', strtotime($employment->start_date)) ?></span>
+                </div>
+            <?php endif; ?>
+
             <div>
-                <i class="fas fa-envelope bg-blue"></i>
+                <i class="fas fa-briefcase bg-orange"></i>
                 <div class="timeline-item">
                     <span class="time"><i class="fas fa-clock"></i> 12:05</span>
-                    <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
+                    <h3 class="timeline-header">
+                        <a href="#">Support Team</a> sent you an email
+                    </h3>
                     <div class="timeline-body">
                         Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
                         weebly ning heekya handango imeem plugg dopplr jibjab, movity
@@ -79,13 +84,15 @@
                     </div>
                     <!-- Placement of additional controls. Optional -->
                     <div class="timeline-footer">
-                        <a class="btn btn-primary btn-sm">Read more</a>
-                        <a class="btn btn-danger btn-sm">Delete</a>
+                        <button class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#emp<?= $key ?>">
+                            Read more
+                        </button>
+                        <button class="btn btn-danger btn-sm" type="button">Delete</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Modal -->
+            <!-- Modal
             <div class="modal fade" id="emp<?= $key ?>" tabindex="-1" role="dialog" aria-labelledby="modalEmp<?= $key ?>" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -158,16 +165,16 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         <?php endforeach; ?>
         <!-- The last icon means the story is complete -->
         <div>
             <i class="fas fa-clock bg-gray"></i>
         </div>
     </div>
-
-    <div class="d-flex flex-column flex-grow-1 px-2 py-2">
-        <?php if ($has_permission): ?>
+<?php else: ?>
+    <?php if ($has_permission): ?>
+        <div class="d-flex flex-column flex-grow-1 px-2 py-2">
             <div class="d-flex align-items-center mb-1">
                 <h5 class=" ml-1"><i class="fa-solid fa-pen-to-square "></i> Add Employment</h5>
             </div>
@@ -180,10 +187,10 @@
                     Add Employment
                 </button>
             </div>
-        <?php else: ?>
-            <div>
-                This user has no employment history.
-            </div>
-        <?php endif; ?>
-    </div>
+        </div>
+    <?php else: ?>
+        <div>
+            This user has no employment history.
+        </div>
+    <?php endif; ?>
 <?php endif; ?>

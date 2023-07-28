@@ -120,13 +120,13 @@ main_header(['employee_profile']);
     }
 
     .dropdown-item.active {
-            background-color: #0dcaf0;
-            color: #fff;
-        }
+        background-color: #0dcaf0;
+        color: #fff;
+    }
 
     .dropdown-menu {
-            border-radius: 15px;
-        }
+        border-radius: 15px;
+    }
 
     /* Adjustments for smaller screens */
     @media (max-width: 768px) {
@@ -198,8 +198,10 @@ main_header(['employee_profile']);
                                         <?= ucwords(@$details->Title) ?>
                                     </h5>
                                     <h6 class="widget-user-desc text-left text-muted" style="font-weight: normal; font-size:15px;">
-                                        <?= ucwords(@$details->Address) . ", " . ucwords(@$details->Barangay) . ", " . ucwords(@$details->City) ?> |
-                                        <a class="" data-toggle="modal" data-target="#contact" style="color:#0dcaf0; cursor: pointer;">Contact details</a>
+                                        <?= ucwords(@$details->Address) . ", " . ucwords(@$details->Barangay) . ", " . ucwords(@$details->City) ?>
+                                        |
+                                        <a class="" data-toggle="modal" data-target="#contact" style="color:#0dcaf0; cursor: pointer;">Contact
+                                            details</a>
                                     </h6>
                                 </div>
                             </div>
@@ -246,9 +248,8 @@ main_header(['employee_profile']);
                     </div>
                 </div>
 
-                <!-- start tab -->
+                <!-- Start tab -->
                 <div class="tab-content" id="pills-tabContent">
-                    <!-- about -->
                     <div class="tab-pane fade active show" id="pills-overview" role="tabpanel" aria-labelledby="pills-overview-tab">
                         <div class="card card-white">
                             <div class="card-header" style="">
@@ -271,8 +272,11 @@ main_header(['employee_profile']);
                                             </h5>
                                         </div>
                                         <div class="d-flex flex-column flex-grow-1">
-                                            <p class="fs-14">Create a compelling first impression to future employers.</p>
-                                            <button type="button" class="btn btn-light rounded-pill edit-summary" style="border-width: 2px" data-toggle="modal" data-target="#Introduction_modal">Add Introduction</button>
+                                            <p class="fs-14">Create a compelling first impression to future
+                                                employers.</p>
+                                            <button type="button" class="btn btn-light rounded-pill edit-summary" style="border-width: 2px" data-toggle="modal" data-target="#Introduction_modal">
+                                                Add Introduction
+                                            </button>
                                         </div>
                                     </div>
                                 <?php else: ?>
@@ -429,8 +433,12 @@ main_header(['employee_profile']);
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-info" id="save_education" data-dismiss="modal">Save changes</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                    Close
+                                                </button>
+                                                <button type="button" class="btn btn-info" id="save_education" data-dismiss="modal">
+                                                    Save changes
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -443,7 +451,6 @@ main_header(['employee_profile']);
                             </div>
                         </div>
                     </div>
-
                     <div class="tab-pane fade" id="pills-employment" role="tabpanel" aria-labelledby="pills-employment-tab">
                         <!-- employment -->
                         <div class="card card-white">
@@ -461,7 +468,8 @@ main_header(['employee_profile']);
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Add Employment</h5>
+                                                        <h5 class="modal-title" id="exampleModalLabel">Add
+                                                            Employment</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
@@ -519,8 +527,12 @@ main_header(['employee_profile']);
                                                         </form>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-info" data-dismiss="modal" id="btn_save_employment">Add Details</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                            Close
+                                                        </button>
+                                                        <button type="button" class="btn btn-info" data-dismiss="modal" id="btn_save_employment">
+                                                            Add Details
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -534,7 +546,6 @@ main_header(['employee_profile']);
                             </div>
                         </div>
                     </div>
-
                     <div class="tab-pane fade" id="pills-training" role="tabpanel" aria-labelledby="pills-training-tab">
                         <!-- training -->
                         <div class="card ">
@@ -609,47 +620,31 @@ main_header(['employee_profile']);
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-info" id="btn_save_training" data-dismiss="modal">Save changes</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                    Close
+                                                </button>
+                                                <button type="button" class="btn btn-info" id="btn_save_training" data-dismiss="modal">
+                                                    Save changes
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             <?php endif; ?>
 
-                            <!-- Modal Body -->
-                            <!-- <div class="carousel-inner">
-                        <div class="carousel-item active">
-                        <img class="d-block w-100" src="..." alt="First slide">
-                        </div>
-                        <div class="carousel-item">
-                        <img class="d-block w-100" src="..." alt="Second slide">
-                        </div>
-                        <div class="carousel-item">
-                        <img class="d-block w-100" src="..." alt="Third slide">
-                        </div>
-                    </div> -->
-                            <!-- <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only" >Next</span> -->
-                            <!-- <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span> -->
-
                             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                                 <?= $training_section_view ?>
                             </div>
                         </div>
                     </div>
-                    <!-- Followers -->
-
                     <div class="tab-pane fade" id="pills-following" role="tabpanel" aria-labelledby="pills-following-tab">
                         <?php load_following($following) ?>
                     </div>
-
                     <div class="tab-pane fade" id="pills-feedback" role="tabpanel" aria-labelledby="pills-feedback-tab">
                         <?php load_feedback($feedbacks, $has_permission) ?>
                     </div>
-                    <!-- end tab -->
                 </div>
+                <!-- End tab -->
             </div>
 
             <div class="col-12 col-md-4 pl-2 pr-2 mt-4">
@@ -890,7 +885,9 @@ main_header(['employee_profile']);
                             <div class="modal-footer">
                                 <form>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" id="update_id" formaction="employee_profile/views/index">Save</button>
+                                    <button type="button" class="btn btn-primary" id="update_id" formaction="employee_profile/views/index">
+                                        Save
+                                    </button>
                                 </form>
                             </div>
                         </div>
@@ -930,7 +927,8 @@ main_header(['employee_profile']);
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-info" data-dismiss="modal" id="btn_skill">Add</button>
+                                <button type="button" class="btn btn-info" data-dismiss="modal" id="btn_skill">Add
+                                </button>
                             </div>
                         </div>
                     </div>

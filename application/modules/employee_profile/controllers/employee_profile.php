@@ -55,7 +55,7 @@ class Employee_profile extends MY_Controller
         $this->data['details'] = $this->eModel->get_employee($ID);
         $this->data['educ_val'] = $this->eModel->get_educations();
         $this->data['train_val'] = $this->eModel->get_training();
-        $this->data['employments'] = $this->eModel->get_all_employments($ID);
+        $this->data['employments'] = $this->Employment_model->getEmployeesEmployment($ID);
         $this->data['skills'] = $this->eModel->get_skill($ID);
         $this->data['employers'] = $this->employer_model->get_employers(4);
         $this->data['employees'] = $this->employee_model->get_all_employees(4, $ID);

@@ -13,12 +13,6 @@ class Feedback_model extends CI_Model
     public function getAllUsersFeedback($user_id)
     {
         return $this->db->select('tbl_feedback.*, 
-        CONCAT_WS(" ", tbl_employee.Fname, tbl_employee.Mname, tbl_employee.Lname) AS employeeName,
-        tbl_employee.title as employeeTitle,
-        tbl_employee.Employee_image as employeeImage,
-        tbl_employer.tradename as employerName,
-        tbl_employer.business_type as employerTitle,
-        tbl_employer.image as employerImage,
         (CASE
             WHEN tbl_employee.Fname IS NOT NULL THEN CONCAT_WS(" ", tbl_employee.Fname, tbl_employee.Mname, tbl_employee.Lname)
             WHEN tbl_employer.tradename IS NOT NULL THEN tbl_employer.tradename
@@ -53,10 +47,10 @@ class Feedback_model extends CI_Model
 
             if ($this->db->trans_status()) {
                 $this->db->trans_commit();
-                return array('has_error' => false, 'message' => 'Feedback added successfully.');
+                return ['has_error' => FALSE, 'message' => 'Feedback added successfully.'];
             } else {
                 $this->db->trans_rollback();
-                return array('has_error' => true, 'message' => 'Failed to add a new feedback.');
+                return ['has_error' => TRUE, 'message' => 'Failed to add a new feedback.'];
             }
         } catch (Exception $e) {
             throw new Exception($e->getMessage(), $e->getCode());

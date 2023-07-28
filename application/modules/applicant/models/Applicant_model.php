@@ -110,7 +110,7 @@ class Applicant_model extends CI_Model
 
     public function getApplicantByJob($job_id, $employee_id, $select = '*')
     {
-        return $this->db->select($select)->get_where($this->Table->applicant, array('job_id' => $job_id, 'employee_id' => $employee_id))->row();
+        return $this->db->select($select)->get_where($this->Table->applicant, ['job_id' => $job_id, 'employee_id' => $employee_id])->row();
     }
 
     public function getJobApplied($employee_id)
@@ -129,16 +129,16 @@ class Applicant_model extends CI_Model
     {
         try {
             $this->db->trans_start();
-            $this->db->where('id', $applicant_id)->update($this->Table->applicant, array('status' => $status));
+            $this->db->where('id', $applicant_id)->update($this->Table->applicant, ['status' => $status]);
             $this->db->trans_complete();
 
             if ($this->db->trans_status()) {
                 $this->db->trans_commit();
-                return array('status' => 'success', 'message' => 'Applicant status updated successfully.');
-            } else {
-                $this->db->trans_rollback();
-                return array('status' => 'error', 'message' => 'Applicant status update failed.');
+                return ['status' => 'success', 'message' => 'Applicant status updated successfully.'];
             }
+
+            $this->db->trans_rollback();
+            return ['status' => 'error', 'message' => 'Applicant status update failed.'];
         } catch (Exception $e) {
             throw new Exception($e->getMessage(), $e->getCode());
         }
@@ -182,11 +182,11 @@ class Applicant_model extends CI_Model
 
             if ($this->db->trans_status()) {
                 $this->db->trans_commit();
-                return array('status' => 'success', 'message' => $message, 'apply_status' => $apply_status);
-            } else {
-                $this->db->trans_rollback();
-                return array('status' => 'error', 'message' => 'Application failed.');
+                return ['status' => 'success', 'message' => $message, 'apply_status' => $apply_status];
             }
+
+            $this->db->trans_rollback();
+            return ['status' => 'error', 'message' => 'Application failed.'];
         } catch (Exception $e) {
             throw new Exception($e->getMessage(), $e->getCode());
         }

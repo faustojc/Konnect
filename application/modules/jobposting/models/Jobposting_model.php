@@ -35,13 +35,21 @@ class Jobposting_model extends CI_Model
             ->order_by('date_posted', 'DESC')->limit($limit)->get()->result();
     }
 
-    public function get_employer_jobposts($id, $limit = 0)
+    public function get_employer_jobposts($id, $limit = 0, $select = 'tbl_jobposting.*, tbl_employer.id AS EmployerId, tbl_employer.tradename AS EmployerTradename, tbl_employer.image AS EmployerLogo')
     {
         if ($limit == 0) {
-            return $this->db->select()->from($this->Table->jobposting)->where('employer_id', $id)->order_by('date_posted', 'DESC')->get()->result();
-        } else {
-            return $this->db->select()->from($this->Table->jobposting)->where('employer_id', $id)->order_by('date_posted', 'DESC')->limit($limit)->get()->result();
+            return $this->db->select($select)->from($this->Table->jobposting)
+                ->join('tbl_employer', 'tbl_employer.id = tbl_jobposting.employer_id')
+                ->where('tbl_jobposting.employer_id', $id)
+                ->order_by('date_posted', 'DESC')
+                ->get()->result();
         }
+
+        return $this->db->select($select)->from($this->Table->jobposting)
+            ->join('tbl_employer', 'tbl_employer.id = tbl_jobposting.employer_id')
+            ->where('tbl_jobposting.employer_id', $id)
+            ->order_by('date_posted', 'DESC')
+            ->limit($limit)->get()->result();
     }
 
     public function job_info($id)

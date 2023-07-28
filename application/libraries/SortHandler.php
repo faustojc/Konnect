@@ -15,7 +15,7 @@ class SortHandler
     public function sortEmployeeRelevantJobposts($jobposts): array
     {
         $employee_skills = $this->CI->EmployeeSkills_model->getEmployeeSkills($this->userdata->ID, 'skill');
-        $employee_skills = array_map(function ($skill) {
+        $employee_skills = array_map(static function ($skill) {
             return get_object_vars($skill)['skill'];
         }, $employee_skills);
 
@@ -34,7 +34,7 @@ class SortHandler
             }
 
             // Check if the job title matches the employee's title
-            $job->relevant_title = stripos($job->title, $this->userdata->Title) !== false;
+            $job->relevant_title = stripos($job->title, $this->userdata->Title) !== FALSE;
 
             // Check if the job location matches the employee's location
             $job_location_words = array_map('strtolower', explode(' ', str_replace(',', ' ', $job->location)));
@@ -46,7 +46,7 @@ class SortHandler
             return $job;
         }, $jobposts);
 
-        usort($relevantJobposts, function ($a, $b) {
+        usort($relevantJobposts, static function ($a, $b) {
             // Sort by number of matching skills first
             if ($a->relevant_skills_count != $b->relevant_skills_count) {
                 return $b->relevant_skills_count - $a->relevant_skills_count;
@@ -69,9 +69,9 @@ class SortHandler
         $employer_business_type = $this->userdata->business_type;
         $employer_location = $this->userdata->address . ' ' . $this->userdata->barangay . ' ' . $this->userdata->city;
 
-        $relevantEmployers = array_map(function ($employer) use ($employer_business_type, $employer_location) {
+        $relevantEmployers = array_map(static function ($employer) use ($employer_business_type, $employer_location) {
             // Check if the employer's business type matches the employee's business type
-            $employer->relevant_business_type = stripos($employer->business_type, $employer_business_type) !== false;
+            $employer->relevant_business_type = stripos($employer->business_type, $employer_business_type) !== FALSE;
 
             $other_location = $employer->address . ' ' . $employer->barangay . ' ' . $employer->city;
 
@@ -85,7 +85,7 @@ class SortHandler
             return $employer;
         }, $employers);
 
-        usort($relevantEmployers, function ($a, $b) {
+        usort($relevantEmployers, static function ($a, $b) {
             // Sort by matching business type first
             if ($a->relevant_business_type != $b->relevant_business_type) {
                 return $b->relevant_business_type - $a->relevant_business_type;

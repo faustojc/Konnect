@@ -28,8 +28,12 @@ class Login extends MY_Controller
         $this->load->view('layout', $this->data);
     }
 
-    public function logout()
+    public function logout(): void
     {
+
+        $this->load->driver('cache');
+        $this->db->cache_delete_all();
+
         unset_userdata(USER);
         unset_userdata(AUTH);
 
@@ -38,11 +42,11 @@ class Login extends MY_Controller
 
     public function authenticate()
     {
-        $info = array(
+        $info = [
             'email' => $this->input->post("email"),
             'password' => $this->input->post("password"),
             'user_type' => $this->input->post("user_type"),
-        );
+        ];
 
         $response = $this->login_model->authenticate($info);
 

@@ -36,7 +36,7 @@ class Employer_profile extends MY_Controller
     }
 
     /** load main page */
-    public function index()
+    public function index(): void
     {
         $id = $this->input->get('id');
 
@@ -51,7 +51,7 @@ class Employer_profile extends MY_Controller
         $this->data['current_employer'] = $this->employer_profile_model->get_current_employer($id);
         $this->data['employees'] = $this->employee_model->get_all_employees(4);
         $this->data['employers'] = $this->employer_model->get_employers(4, $id);
-        $this->data['jobpostings'] = $this->jobposting_model->get_employer_jobposts($id, 4);
+        $this->data['jobpostings'] = $this->jobposting_model->get_employer_jobposts($id, 0, 'tbl_jobposting.*, tbl_employer.id AS employer_id, tbl_employer.tradename AS EmployerTradename, tbl_employer.image AS EmployerLogo');
         $this->data['followers'] = $this->follow_model->get_followers($id);
         $this->data['feedbacks'] = $this->Feedback_model->getAllUsersFeedback($this->current_user->user_id);
 
@@ -64,6 +64,8 @@ class Employer_profile extends MY_Controller
 
         $this->data['current_employer']->summary = $this->load->view('grid/load_summary', $this->data, TRUE);
         $this->data['jobpostings_view'] = $this->load->view('grid/load_jobpostings', $this->data, TRUE);
+        $this->data['employeelist_view'] = $this->load->view('grid/load_employeelist', $this->data, TRUE);
+
         $this->data['content'] = 'index';
         $this->load->view('layout', $this->data);
     }

@@ -19,17 +19,21 @@ class Employer_model extends CI_Model
         $this->Table = json_decode(TABLE);
     }
 
-    public function get_employers($limit = 0, $id = NULL)
+    public function get_employers($limit = 0, $id = NULL, $select = '*')
     {
         if ($limit == 0 && $id != NULL) {
-            return $this->db->get_where($this->Table->employer, ['id !=' => $id])->result();
-        } else if ($limit != 0 && $id != NULL) {
-            return $this->db->select()->from($this->Table->employer)->where('id !=', $id)->limit($limit)->get()->result();
-        } else if ($limit != 0 && $id == NULL) {
-            return $this->db->select()->from($this->Table->employer)->limit($limit)->get()->result();
+            return $this->db->select($select)->get_where($this->Table->employer, ['id !=' => $id])->result();
         }
 
-        return $this->db->select()->from($this->Table->employer)->get()->result();
+        if ($limit != 0 && $id != NULL) {
+            return $this->db->select($select)->from($this->Table->employer)->where('id !=', $id)->limit($limit)->get()->result();
+        }
+
+        if ($limit != 0 && $id == NULL) {
+            return $this->db->select($select)->from($this->Table->employer)->limit($limit)->get()->result();
+        }
+
+        return $this->db->select($select)->from($this->Table->employer)->get()->result();
     }
 
     public function get_employer($employer_id)
@@ -49,20 +53,23 @@ class Employer_model extends CI_Model
 
     public function getEmployersLike(array $arr, $id = NULL, $select = '*')
     {
-        $fields = array_keys($arr);
-
         $this->db->select($select)->from($this->Table->employer);
         if ($id != NULL) {
-            $this->db->where('id !=', $id);
-        } else {
+            $this->db->where('ID !=', $id);
+        }
+
+        if (!empty($arr)) {
+            $count = 0;
             $this->db->group_start();
 
-            for ($x = 0, $xMax = count($arr); $x < $xMax; $x++) {
-                if ($x == 0) {
-                    $this->db->like($fields[$x], $arr[$x]);
+            foreach ($arr as $key => $value) {
+                if ($count == 0) {
+                    $this->db->like($key, $value);
                 } else {
-                    $this->db->or_like($fields[$x], $arr[$x]);
+                    $this->db->or_like($key, $value);
                 }
+
+                ++$count;
             }
 
             $this->db->group_end();

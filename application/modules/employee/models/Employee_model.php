@@ -28,17 +28,21 @@ class Employee_model extends CI_Model
             ->get()->row();
     }
 
-    public function get_all_employees($limit = 0, $id = NULL)
+    public function get_all_employees($limit = 0, $id = NULL, $select = '*')
     {
         if ($limit == 0 && $id != NULL) {
-            return $this->db->select()->from($this->Table->employee)->where('ID !=', $id)->get()->result();
-        } else if ($limit != 0 && $id != NULL) {
-            return $this->db->select()->from($this->Table->employee)->where('ID !=', $id)->limit($limit)->get()->result();
-        } else if ($limit != 0 && $id == NULL) {
-            return $this->db->select()->from($this->Table->employee)->limit($limit)->get()->result();
+            return $this->db->select($select)->from($this->Table->employee)->where('ID !=', $id)->get()->result();
         }
 
-        return $this->db->select()->from($this->Table->employee)->get()->result();
+        if ($limit != 0 && $id != NULL) {
+            return $this->db->select($select)->from($this->Table->employee)->where('ID !=', $id)->limit($limit)->get()->result();
+        }
+
+        if ($limit != 0 && $id == NULL) {
+            return $this->db->select($select)->from($this->Table->employee)->limit($limit)->get()->result();
+        }
+
+        return $this->db->select($select)->from($this->Table->employee)->get()->result();
     }
 
     public function get_educ()
@@ -49,26 +53,25 @@ class Employee_model extends CI_Model
         return $this->db->get()->result();
     }
 
-    public function getEmployeeLike(array $arr, $id = NULL, $select = '*')
+    public function getEmployeesLike(array $arr, $id = NULL, $select = '*')
     {
-        $fields = array_keys($arr);
-
         $this->db->select($select)->from($this->Table->employee);
         if ($id != NULL) {
             $this->db->where('ID !=', $id);
         }
 
-        if (count($arr) == 1) {
-            $this->db->like($fields[0], $arr[0]);
-        } else {
+        if (!empty($arr)) {
+            $count = 0;
             $this->db->group_start();
 
-            for ($x = 0, $xMax = count($arr); $x < $xMax; $x++) {
-                if ($x == 0) {
-                    $this->db->like($fields[$x], $arr[$x]);
+            foreach ($arr as $key => $value) {
+                if ($count == 0) {
+                    $this->db->like($key, $value);
                 } else {
-                    $this->db->or_like($fields[$x], $arr[$x]);
+                    $this->db->or_like($key, $value);
                 }
+
+                ++$count;
             }
 
             $this->db->group_end();
@@ -76,4 +79,5 @@ class Employee_model extends CI_Model
 
         return $this->db->get()->result();
     }
+
 }

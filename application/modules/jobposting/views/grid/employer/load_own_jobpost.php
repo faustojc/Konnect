@@ -29,24 +29,24 @@
     <div class="col-md-4 pl-1" style="height: auto; ">
         <?php
         $ci = &get_instance();
-        if (!empty($details)) {
-            foreach ($details as $job) {
+        if (!empty($own_jobposts)) {
+            foreach ($own_jobposts as $job) {
                 $postDate = strtotime($job->date_posted);
                 $currentTime = time();
                 $timeDiff = $currentTime - $postDate;
 
                 if ($timeDiff < 60) {
                     $formattedTimeDiff = 'less than a minute ago';
-                } elseif ($timeDiff < 3600) {
+                } else if ($timeDiff < 3600) {
                     $minutes = floor($timeDiff / 60);
                     $formattedTimeDiff = $minutes . ' minute' . ($minutes > 1 ? 's' : '') . ' ago';
-                } elseif ($timeDiff < 86400) {
+                } else if ($timeDiff < 86400) {
                     $hours = floor($timeDiff / 3600);
                     $formattedTimeDiff = $hours . ' hour' . ($hours > 1 ? 's' : '') . ' ago';
-                } elseif ($timeDiff < 604800) {
+                } else if ($timeDiff < 604800) {
                     $days = floor($timeDiff / 86400);
                     $formattedTimeDiff = $days . ' day' . ($days > 1 ? 's' : '') . ' ago';
-                } elseif ($timeDiff < 2592000) {
+                } else if ($timeDiff < 2592000) {
                     $weeks = floor($timeDiff / 604800);
                     $formattedTimeDiff = $weeks . ' week' . ($weeks > 1 ? 's' : '') . ' ago';
                 } else {
@@ -98,15 +98,15 @@
                                     }
                                 endforeach;
                                 if ($counter == 0): ?>
-                            <div class="badge badge-secondary m-0 p-1 ml-2" role="alert">
-                                No applications yet
-                            </div>
-                        <?php endif; ?>
-                        <?php else: ?>
-                            <div class="badge badge-secondary m-0 p-1" role="alert">
-                                No applications yet
-                            </div>
-                        <?php endif; ?>
+                                    <div class="badge badge-secondary m-0 p-1 ml-2" role="alert">
+                                        No applications yet
+                                    </div>
+                                <?php endif; ?>
+                            <?php else: ?>
+                                <div class="badge badge-secondary m-0 p-1" role="alert">
+                                    No applications yet
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -114,15 +114,13 @@
             }
         } else {
             ?>
-        <div class="jumbotron">
-            <div class="container">
-                <h1 class="display-4">No Jobs Found</h1>
-                <p class="lead">We can't find the jobs that you are looking for or there are no jobs available.</p>
+            <div class="jumbotron">
+                <div class="container">
+                    <h1 class="display-4">No Jobs Found</h1>
+                    <p class="lead">We can't find the jobs that you are looking for or there are no jobs available.</p>
+                </div>
             </div>
-        </div>
-        <?php
-        }
-        ?>
+        <?php } ?>
     </div>
 
     <div class="col-md-5 job-details"></div>

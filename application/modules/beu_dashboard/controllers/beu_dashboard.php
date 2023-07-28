@@ -60,7 +60,6 @@ class beu_dashboard extends MY_Controller
 
         $this->db->cache_off();
 
-        $this->output->cache(5);
 
         if ($this->auth['user_type'] == 'EMPLOYER') {
             $this->data['user_display'] = $this->load->view('grid/load_employer', $this->data, TRUE);

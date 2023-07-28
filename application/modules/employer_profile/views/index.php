@@ -56,7 +56,7 @@ main_header(['Employer_profile']);
     }
 
     .nav-pills .nav-link.active,
-    .nav-pills .show>.nav-link {
+    .nav-pills .show > .nav-link {
         color: #fff;
         background-color: #0dcaf0;
     }
@@ -120,10 +120,10 @@ main_header(['Employer_profile']);
                                             </h5>
                                             <!-- <p class="text-left mb-1">
                                                 <?php if (empty($current_employer->employer_name)) {
-                                                    echo $current_employer->tradename;
-                                                } else {
-                                                    echo $current_employer->employer_name;
-                                                } ?>
+                                                echo $current_employer->tradename;
+                                            } else {
+                                                echo $current_employer->employer_name;
+                                            } ?>
                                             </p> -->
                                             <h5 class="widget-user-desc text-left text-dark py-2" style="font-weight: 550; font-size:18px; ">
                                                 <?= $current_employer->business_type ?>
@@ -141,7 +141,8 @@ main_header(['Employer_profile']);
                                                 <?php employer_edit_button($current_employer->id); ?>
                                             <?php elseif ($auth['user_type'] != 'EMPLOYER'): ?>
                                                 <div class="d-flex justify-content-end">
-                                                    <button type="button" class="btn btn-info" style=" line-height: 5px; border-radius:10px;">Follow <i class="fa-solid fa-plus"></i></button>
+                                                    <button type="button" class="btn btn-info" style=" line-height: 5px; border-radius:10px;">Follow
+                                                        <i class="fa-solid fa-plus"></i></button>
                                                 </div>
                                             <?php endif; ?>
 
@@ -161,6 +162,9 @@ main_header(['Employer_profile']);
                                 <a class="nav-link active" id="pills-overview-tab" data-toggle="pill" href="#pills-overview" role="tab" aria-controls="pills-overview" aria-selected="true">Overview</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" id="pills-jobpost-tab" data-toggle="pill" href="#pills-jobpost" role="tab" aria-controls="pills-jobpost" aria-selected="true">Jobpost</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" id="pills-followers-tab" data-toggle="pill" href="#pills-followers" role="tab" aria-controls="pills-followers" aria-selected="false">
                                     Followers
                                     <span class="badge badge-info d-none d-sm-inline-block">
@@ -172,6 +176,9 @@ main_header(['Employer_profile']);
                                 <a class="nav-link" id="pills-feedback-tab" data-toggle="pill" href="#pills-feedback" role="tab" aria-controls="pills-feedback" aria-selected="false">
                                     Feedback
                                 </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-employeelist-tab" data-toggle="pill" href="#pills-employeelist" role="tab" aria-controls="pills-employeelist" aria-selected="true">Employee List</a>
                             </li>
                         </ul>
                     </div>
@@ -223,20 +230,18 @@ main_header(['Employer_profile']);
                             </div>
                         </div>
 
+
+                    </div>
+
+                    <!-- JOB POSTINGS -->
+                    <div class="tab-pane" id="pills-jobpost" role="tabpanel" aria-labelledby="pills-jobpost-tab">
                         <div class="card card-white">
                             <div class="card-header">
-                                <h3 class="card-title fw-500">Job Posted Lists</h3>
-                                <div class="card-tools">
-                                    <a href="<?= base_url() ?>jobposting?id=<?= $current_employer->id ?>" class="btn btn-tool">
-                                        <i class="fa-solid fa-pen" style="color: grey;"></i>
-                                    </a>
-                                </div>
+                                <h3 class="card-title fw-500">Job Lists</h3>
                             </div>
 
-                            <!-- JOB POSTINGS -->
-                            <div class="accordion rounded-0" id="load_jobpostings">
-                                <?= $jobpostings_view ?>
-                            </div>
+                            <?php jobpost_all_display($jobpostings) ?>
+
                         </div>
                     </div>
 
@@ -248,6 +253,10 @@ main_header(['Employer_profile']);
                     <!-- Feedback -->
                     <div class="tab-pane fade" id="pills-feedback" role="tabpanel" aria-labelledby="pills-feedback-tab">
                         <?php load_feedback($feedbacks, $has_permission); ?>
+                    </div>
+
+                    <div class="tab-pane fade" id="pills-employeelist" role="tabpanel" aria-labelledby="pills-employeelist-tab">
+                        <?= $employeelist_view ?>
                     </div>
                 </div>
             </div>
@@ -446,7 +455,8 @@ main_header(['Employer_profile']);
             <div class="modal-content border-0" style="border-radius:15px;">
                 <div class="border-0">
 
-                    <h5 class="text-center pt-3 pb-2" id="exampleModalLabel" style="font-weight:650;"><i class="fa-solid fa-pen-to-square"></i> Create Jobpost
+                    <h5 class="text-center pt-3 pb-2" id="exampleModalLabel" style="font-weight:650;">
+                        <i class="fa-solid fa-pen-to-square"></i> Create Jobpost
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span class="pr-3" aria-hidden="true">&times;</span>
                         </button>

@@ -179,3 +179,39 @@ function createToast(title = '', message, delay = 5000, class_names, icon) {
         });
     }
 }
+
+const seeMoreBtnFunction = () => {
+    const seeMoreButtons = document.querySelectorAll(".see-more");
+    if (seeMoreButtons) {
+        // Hide the buttons if the div height is less than or equal to 450px
+        seeMoreButtons.forEach(button => {
+            const target = button.dataset.target;
+            const jobDescription = button.previousElementSibling;
+            const maxHeight = parseInt(jobDescription.style.maxHeight);
+
+            if (jobDescription.matches(target) && jobDescription.offsetHeight < maxHeight) {
+                button.style.display = "none";
+            } else if (jobDescription.offsetHeight >= maxHeight) {
+                button.style.display = "block";
+            }
+
+            button.addEventListener("click", function (event) {
+                const button = event.target;
+                const target = button.dataset.target;
+                const jobDescription = button.previousElementSibling;
+
+                if (jobDescription.matches(target)) {
+                    if (button.textContent === "See more") {
+                        button.textContent = "See less";
+                        jobDescription.style.maxHeight = "none";
+                        jobDescription.style.overflowY = "visible";
+                    } else {
+                        button.textContent = "See more";
+                        jobDescription.style.maxHeight = maxHeight;
+                        jobDescription.style.overflowY = "hidden";
+                    }
+                }
+            });
+        });
+    }
+}

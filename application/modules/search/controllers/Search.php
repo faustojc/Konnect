@@ -65,8 +65,6 @@ class Search extends MY_Controller
         $data['results']['total_employers'] = count($data['employers']);
         $data['results']['total_overall'] = count($data['jobposts']) + count($data['employees']) + count($data['employers']);
 
-        $this->output->cache(5);
-
         $data['searched_jobposts'] = $this->load->view('grid/search_results/searched_jobposts', $data, TRUE);
         $data['searched_employees'] = $this->load->view('grid/search_results/searched_employees', $data, TRUE);
         $data['searched_employers'] = $this->load->view('grid/search_results/searched_employers', $data, TRUE);
@@ -135,12 +133,12 @@ class Search extends MY_Controller
             }
 
             // Check if the employee's title matches the job title
-            if (stripos($job->title, $this->userdata->Title) !== FALSE) {
+            if ($this->auth['user_type'] == 'EMPLOYEE' && stripos($job->title, $this->userdata->Title) !== FALSE) {
                 $score += 4;
             }
 
             // Check if the job skills match the employee's skills
-            if (!empty($job->skills_req)) {
+            if ($this->auth['user_type'] == 'EMPLOYEE' && !empty($job->skills_req)) {
                 $skills_req = array_map('trim', explode(',', $job->skills_req));
                 $skills_criteria = array_map('trim', $criteria['skills']);
 
@@ -178,14 +176,14 @@ class Search extends MY_Controller
         $employees_skills = []; // Only if the current user is employee
 
         // Get all employees
-        $this->db->cache_on();
+        //$this->db->cache_on();
         if ($this->auth['user_type'] == 'EMPLOYEE') {
-            $employees = $this->employee_model->getEmployeeLike(['Fname' => $query, 'Lname' => $query, 'Title' => $query], $this->userdata->ID, 'ID, Fname, Mname ,Lname, Title, City');
+            $employees = $this->employee_model->get_all_employees(['Fname' => $query, 'Mname' => $query, 'Lname' => $query], $this->userdata->ID, 'ID, Fname, Mname ,Lname, Title, City');
             $employees_skills = $this->EmployeeSkills_model->getOtherEmployeeSkills($this->userdata->ID, 'skill');
         } else {
-            $employees = $this->employee_model->getEmployeeLike(['Fname' => $query, 'Lname' => $query, 'Title' => $query], NULL, 'ID, Fname, Mname, Lname, Title, City');
+            $employees = $this->employee_model->getEmployeesLike(['Fname' => $query, 'Mname' => $query, 'Lname' => $query], NULL, 'ID, Fname, Mname, Lname, Title, City');
         }
-        $this->db->cache_off();
+        //$this->db->cache_off();
 
         // Initialize an array to store the relevance scores
         $scores = [];
@@ -208,7 +206,9 @@ class Search extends MY_Controller
             }
 
             // Check if the employee's City matches the employer's location
-            if (stripos($criteria['location'], $employee->City) !== FALSE) {
+            if ($this->auth['user_type'] == 'EMPLOYEE' && stripos($criteria['city'], $employee->City) !== FALSE) {
+                $score += 2;
+            } else if ($this->auth['user_type'] == 'EMPLOYER' && stripos($criteria['location'], $employee->City) !== FALSE) {
                 $score += 2;
             }
 
@@ -217,7 +217,7 @@ class Search extends MY_Controller
                 $other_employee_skills = array_map(static function ($employee_skill) {
                     return get_object_vars($employee_skill)['skill'];
                 }, $employees_skills);
-                $employee_skills = array_map('trim', explode(',', $criteria['skills']));
+                $employee_skills = array_map('trim', $criteria['skills']);
 
                 foreach ($other_employee_skills as $skill) {
                     if (in_array(strtolower($skill), array_map('strtolower', $employee_skills))) {
@@ -251,13 +251,13 @@ class Search extends MY_Controller
     private function searchRelevantEmployers($query, $criteria): array
     {
         // Get all the employers
-        $this->db->cache_on();
+        //$this->db->cache_on();
         if ($this->auth['user_type'] == 'EMPLOYER') {
             $other_employers = $this->employer_model->getEmployersLike(['tradename' => $query, 'business_type' => $query], $this->userdata->id, 'id, tradename, business_type, address, barangay, city');
         } else {
             $other_employers = $this->employer_model->getEmployersLike(['tradename' => $query, 'business_type' => $query], NULL, 'id, tradename, business_type, address, barangay, city');
         }
-        $this->db->cache_off();
+        //$this->db->cache_off();
 
         // Apply the scoring system to other employers using the defined criteria
         $scores = [];
@@ -283,7 +283,7 @@ class Search extends MY_Controller
                 // Check if the employer's location matches the query
                 if ($this->auth['user_type'] == 'EMPLOYER' && stripos($other_address, $criteria['location']) !== FALSE) {
                     $score += 2;
-                } else if (stripos($other->city, $criteria['city']) !== FALSE) {
+                } else if ($this->auth['user_type'] == 'EMPLOYEE' && stripos($other->city, (string)$criteria['city']) !== FALSE) {
                     $score += 2;
                 }
 

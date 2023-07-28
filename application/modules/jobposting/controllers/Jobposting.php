@@ -42,20 +42,20 @@ class Jobposting extends MY_Controller
                 $employer_id = $this->job_model->getEmployerByJobpost($id)->id;
 
                 $this->data['details'] = $this->job_model->get_employer_jobposts($employer_id);
-                $view['jobs'] = $this->load->view('grid/employer/load_own_jobpost', $this->data, true);
+                $view['jobs'] = $this->load->view('grid/employer/load_own_jobpost', $this->data, TRUE);
 
                 $this->data['job'] = $this->job_model->job_info($id);
                 $this->data['applicants'] = $this->Applicant_model->getJobApplicants($id);
-                $view['selected'] = $this->load->view('grid/employer/load_own_selected_job', $this->data, true);
+                $view['selected'] = $this->load->view('grid/employer/load_own_selected_job', $this->data, TRUE);
             } else {
                 // check if the user is an employee, load the employee's applied jobs and the selected applied job views
                 $this->data['applied_jobs'] = $this->Applicant_model->getAppliedJobs($this->userdata->ID);
-                $view['jobs'] = $this->load->view('grid/employee/load_applied_jobs', $this->data, true);
+                $view['jobs'] = $this->load->view('grid/employee/load_applied_jobs', $this->data, TRUE);
 
                 $applicant_id = $this->Applicant_model->getApplicantByJob($id, $this->userdata->ID, 'id')->id;
 
                 $this->data['applied_job'] = $this->Applicant_model->getSelectedAppliedJob($applicant_id);
-                $view['selected'] = $this->load->view('grid/employee/load_selected_applied_job', $this->data, true);
+                $view['selected'] = $this->load->view('grid/employee/load_selected_applied_job', $this->data, TRUE);
             }
 
             $view['user_type'] = $this->auth['user_type'];
@@ -83,7 +83,7 @@ class Jobposting extends MY_Controller
         }
 
         $this->data['content'] = 'grid/load_jobposting';
-        $view = $this->load->view('layout', $this->data, true);
+        $view = $this->load->view('layout', $this->data, TRUE);
 
         $this->output->set_content_type('text/html')->set_output($view);
     }
@@ -99,18 +99,18 @@ class Jobposting extends MY_Controller
         }
 
         $this->data['content'] = 'grid/load_selected_job';
-        $view = $this->load->view('layout', $this->data, true);
+        $view = $this->load->view('layout', $this->data, TRUE);
 
         $this->output->set_content_type('text/html')->set_output($view);
     }
 
     public function own_jobpost()
     {
-        $this->data['details'] = $this->job_model->get_employer_jobposts($this->userdata->id);
+        $this->data['own_jobposts'] = $this->job_model->get_employer_jobposts($this->userdata->id);
         $this->data['applicants'] = $this->Applicant_model->getEmployerApplicants($this->userdata->id);
 
         $this->data['content'] = 'grid/employer/load_own_jobpost';
-        $view = $this->load->view('layout', $this->data, true);
+        $view = $this->load->view('layout', $this->data, TRUE);
 
         $this->output->set_content_type('text/html')->set_output($view);
     }
@@ -123,7 +123,7 @@ class Jobposting extends MY_Controller
         $this->data['applicants'] = $this->Applicant_model->getJobApplicants($id);
 
         $this->data['content'] = 'grid/employer/load_own_selected_job';
-        $view = $this->load->view('layout', $this->data, true);
+        $view = $this->load->view('layout', $this->data, TRUE);
 
         $this->output->set_content_type('text/html')->set_output($view);
     }
@@ -132,7 +132,7 @@ class Jobposting extends MY_Controller
     {
         $this->data['applied_jobs'] = $this->Applicant_model->getAppliedJobs($this->userdata->ID);
         $this->data['content'] = 'grid/employee/load_applied_jobs';
-        $view = $this->load->view('layout', $this->data, true);
+        $view = $this->load->view('layout', $this->data, TRUE);
 
         $this->output->set_content_type('text/html')->set_output($view);
     }
@@ -143,7 +143,7 @@ class Jobposting extends MY_Controller
 
         $this->data['applied_job'] = $this->Applicant_model->getSelectedAppliedJob($id);
         $this->data['content'] = 'grid/employee/load_selected_applied_job';
-        $view = $this->load->view('layout', $this->data, true);
+        $view = $this->load->view('layout', $this->data, TRUE);
 
         $this->output->set_content_type('text/html')->set_output($view);
     }

@@ -44,8 +44,9 @@ const FOOTER_YEAR = '';
 const SYSTEM_MODULE = 'Konnect';
 const MB = 1048576;
 
-$tables = array(
+$tables = [
     'employee' => 'tbl_employee',
+    'employed' => 'tbl_employed',
     'employee_educ' => 'tbl_employee_educ',
     'employee_skill' => 'tbl_employee_skill',
     'employer' => 'tbl_employer',
@@ -58,6 +59,6 @@ $tables = array(
     'user' => 'tbl_user',
     'follow' => 'tbl_follow',
     'notification' => 'tbl_notification',
-);
+];
 
 define('TABLE', json_encode($tables));

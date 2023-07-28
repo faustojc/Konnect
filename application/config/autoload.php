@@ -39,7 +39,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |  $autoload['packages'] = array(APPPATH.'third_party', '/usr/local/shared');
 |
 */
-$autoload['packages'] = array();
+$autoload['packages'] = [];
 
 /*
 | -------------------------------------------------------------------
@@ -58,7 +58,7 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('DisplayHandler', 'SortHandler', 'database', 'session');
+$autoload['libraries'] = ['DisplayHandler', 'SortHandler', 'database', 'session'];
 
 /*
 | -------------------------------------------------------------------
@@ -79,7 +79,7 @@ $autoload['libraries'] = array('DisplayHandler', 'SortHandler', 'database', 'ses
 |	$autoload['drivers'] = array('cache' => 'cch');
 |
 */
-$autoload['drivers'] = array();
+$autoload['drivers'] = [];
 
 /*
 | -------------------------------------------------------------------
@@ -89,7 +89,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url', 'session', 'auth_template', 'system_template', 'utils', 'message', 'encryption', 'login_template', 'security', 'components');
+$autoload['helper'] = ['url', 'session', 'auth_template', 'system_template', 'utils', 'message', 'encryption', 'login_template', 'security', 'components'];
 
 /*
 | -------------------------------------------------------------------
@@ -103,7 +103,7 @@ $autoload['helper'] = array('url', 'session', 'auth_template', 'system_template'
 | config files.  Otherwise, leave it blank.
 |
 */
-$autoload['config'] = array('');
+$autoload['config'] = [''];
 
 /*
 | -------------------------------------------------------------------
@@ -117,7 +117,7 @@ $autoload['config'] = array('');
 | "codeigniter_lang.php" would be referenced as array('codeigniter');
 |
 */
-$autoload['language'] = array();
+$autoload['language'] = [];
 
 /*
 | -------------------------------------------------------------------
@@ -132,7 +132,7 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('Auth_model', 'EmployeeSkills_model', 'feedback/Feedback_model', 'applicant/Applicant_model', 'notification/Notification_model');
+$autoload['model'] = ['Auth_model', 'EmployeeSkills_model', 'Employed_model', 'Employment_model', 'feedback/Feedback_model', 'applicant/Applicant_model', 'notification/Notification_model'];
 
 // Include the components_helper file
 require_once(APPPATH . 'helpers/components_helper.php');

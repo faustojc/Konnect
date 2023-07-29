@@ -19,18 +19,6 @@ main_header(['employee_profile']);
         border-top: 1px solid black;
     }
 
-    .smallfont {
-        font-size: 68%;
-    }
-
-    .smallfont2 {
-        font-size: 75%;
-    }
-
-    .serif-font {
-        font-family: "Times New Roman", Times, serif;
-    }
-
     .list-3 li {
         margin-top: 5px;
         margin-bottom: 5px;

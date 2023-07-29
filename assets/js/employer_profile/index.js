@@ -91,3 +91,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+const search_input = document.querySelector('#search_employed');
+if (search_input) {
+    search_input.addEventListener('input', () => {
+        let filter = search_input.value.toUpperCase();
+        const table_rows = document.querySelector('#employed_table').querySelectorAll('tbody tr');
+
+        table_rows.forEach(table_row => {
+            const cells = table_row.querySelectorAll('td');
+            let textValue = '';
+
+            cells.forEach(cell => {
+                textValue += cell.textContent || cell.innerHTML;
+            });
+
+            textValue = textValue.trim().toUpperCase();
+
+            if (textValue.indexOf(filter) > -1) {
+                table_row.style.display = "";
+            } else {
+                table_row.style.display = "none";
+            }
+        })
+    });
+}

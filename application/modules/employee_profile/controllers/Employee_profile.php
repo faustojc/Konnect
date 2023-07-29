@@ -41,7 +41,7 @@ class Employee_profile extends MY_Controller
     }
 
     /** load main page */
-    public function index()
+    public function index(): void
     {
         $this->data['has_permission'] = $this->has_permission;
         $this->data['auth'] = $this->auth;
@@ -71,19 +71,8 @@ class Employee_profile extends MY_Controller
 
         $this->db->cache_off();
 
-        if (!$educations_section_view = $this->cache->get('educations_section_view')) {
-            // If not, generate the view and cache it for 10 minutes
-            $educations_section_view = $this->load->view('grid/load_educations', $this->data, TRUE);
-            $this->cache->save('educations_section_view', $educations_section_view, 600);
-        }
-        if (!$employments_section_view = $this->cache->get('employments_section_view')) {
-            // If not, generate the view and cache it for 10 minutes
-            $employments_section_view = $this->load->view('grid/load_employments', $this->data, TRUE);
-            $this->cache->save('employments_section_view', $employments_section_view, 600);
-        }
-
-        $this->data['educations_section_view'] = $educations_section_view;
-        $this->data['employments_section_view'] = $employments_section_view;
+        $this->data['educations_section_view'] = $this->load->view('grid/load_educations', $this->data, TRUE);
+        $this->data['employments_section_view'] = $this->load->view('grid/load_employments', $this->data, TRUE);
         $this->data['skills_section_view'] = $this->load->view('grid/load_skill', $this->data, TRUE);
         $this->data['training_section_view'] = $this->load->view('grid/load_training', $this->data, TRUE);
 
@@ -93,8 +82,7 @@ class Employee_profile extends MY_Controller
 
     public function get_educations()
     {
-        $ID = $this->uri->segment(3);
-        $this->eModel->ID = $ID;
+        $ID = $this->input->get('id');
 
         $this->data['educ_val'] = $this->eModel->get_educations();
         $this->data['content'] = 'grid/load_educations';
@@ -105,7 +93,6 @@ class Employee_profile extends MY_Controller
     {
         $ID = $this->uri->segment(3);
         $this->eModel->ID = $ID;
-
 
         $this->data['train_val'] = $this->eModel->get_training();
         $this->data['content'] = 'grid/load_training';
@@ -163,9 +150,6 @@ class Employee_profile extends MY_Controller
         $this->data['content'] = 'edit_skill';
         $this->load->view('layout', $this->data);
     }
-    // /Employee Education Section
-
-    // Training
 
     public function add_employee_educ()
     {

@@ -16,7 +16,7 @@
             <span class="badge badge-warning navbar-badge"><?= $count ?></span>
         <?php endif; ?>
     </a>
-    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right h-100">
         <span class="dropdown-item dropdown-header">
             <?php if ($count != 0): ?>
                 <?= $count ?> Unread Notification<?= $count > 1 ? 's' : '' ?>

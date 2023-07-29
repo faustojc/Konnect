@@ -326,80 +326,32 @@ main_header(['Employer_profile']);
                     </div>
                 </div>
 
-                <div class="card card-white">
-                    <div class="card-header">
-                        <h3 class="card-title fw-500">Business Information</h3>
-                    </div>
-                    <div class="card-body" style="padding-top:10px;padding-bottom:10px">
-                        <strong>Trade Name: </strong>
-                        <?= $current_employer->tradename ?>
-                    </div>
-                    <div class="card-body" style="padding-top:10px;padding-bottom:10px">
-                        <strong>Business Type: </strong>
-                        <?= $current_employer->business_type ?>
-                    </div>
-                    <div class="card-body" style="padding-top:10px;padding-bottom:10px">
-                        <strong>SSS Number: </strong>
-                        <?= $current_employer->sss ?>
-                    </div>
-                    <div class="card-body" style="padding-top:10px;padding-bottom:10px">
-                        <strong>TIN Number: </strong>
-                        <?= $current_employer->tin ?>
-                    </div>
-                </div>
-
-                <!-- MODAL for BUSINESS INFO -->
-                <div class="modal fade" id="modal_edit_business" data-backdrop="static" tabindex="-1" aria-labelledby="modal_business" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="modal_business">Edit Business Info</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="pb-3">
-                                    <label for="tradename">Trade Name</label>
-                                    <input type="text" class="form-control" id="tradename" value="<?= $current_employer->tradename ?>" placeholder="Enter Trade Name" required>
-                                </div>
-                                <div class="row pb-3">
-                                    <div class="col-md-6">
-                                        <label for="business_type">Business Type</label>
-                                        <select class="custom-select" name="business_type" id="business_type" value="<?= $current_employer->business_type ?>" aria-selected="<?= $current_employer->business_type ?>">
-                                            <option value="Retail">Retail</option>
-                                            <option value="Food and Beverages">Food and Beverages</option>
-                                            <option value="Information Technology">Information Technology</option>
-                                            <option value="Finance and Banking">Finance and Banking</option>
-                                            <option value="Healthcare">Healthcare</option>
-                                            <option value="Education">Education</option>
-                                            <option value="Manufacturing and Engineering">Manufacturing and
-                                                Engineering
-                                            </option>
-                                            <option value="Hospitality and Tourism">Hospitality and Tourism</option>
-                                            <option value="Media and Entertainment">Media and Entertainment</option>
-                                            <option value="Energy and Utilities">Energy and Utilities</option>
-                                            <option value="Transportation and Logistics">Transportation and Logistics
-                                            </option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="sss">SSS Number</label>
-                                        <input type="number" class="form-control" id="sss" value="<?= $current_employer->sss ?>" placeholder="Enter SSS Number" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="tin">TIN Number</label>
-                                        <input type="number" class="form-control" id="sss" value="<?= $current_employer->tin ?>" placeholder="Enter TIN Number" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
+                <?php if ($has_permission): ?>
+                    <div class="card card-white">
+                        <div class="card-header">
+                            <h3 class="card-title fw-500">
+                                Business Information
+                                <i class="fas fa-lock ml-1" data-toggle="tooltip" data-placement="auto" title="Only you can view this info"></i>
+                            </h3>
+                        </div>
+                        <div class="card-body" style="padding-top:10px;padding-bottom:10px">
+                            <strong>Trade Name: </strong>
+                            <?= $current_employer->tradename ?>
+                        </div>
+                        <div class="card-body" style="padding-top:10px;padding-bottom:10px">
+                            <strong>Business Type: </strong>
+                            <?= $current_employer->business_type ?>
+                        </div>
+                        <div class="card-body" style="padding-top:10px;padding-bottom:10px">
+                            <strong>SSS Number: </strong>
+                            <?= $current_employer->sss ?>
+                        </div>
+                        <div class="card-body" style="padding-top:10px;padding-bottom:10px">
+                            <strong>TIN Number: </strong>
+                            <?= $current_employer->tin ?>
                         </div>
                     </div>
-                </div>
+                <?php endif; ?>
 
                 <!-- EMPLOYEES -->
                 <div class="card card-widget widget-user-2 d-none d-md-block">

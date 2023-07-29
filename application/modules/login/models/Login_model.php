@@ -5,25 +5,21 @@ class Login_model extends CI_Model
 {
     public $Table;
 
+    /**
+     * @throws JsonException
+     */
     public function __construct()
     {
         parent::__construct();
-        $this->session = (object)get_userdata(USER);
 
-        // if(is_empty_object($this->session)){
-        // 	redirect(base_url().'login/authentication', 'refresh');
-        // }
-
-        $model_list = [];
-        $this->load->model($model_list);
-        $this->Table = json_decode(TABLE);
+        $this->Table = json_decode(TABLE, FALSE, 512, JSON_THROW_ON_ERROR);
     }
 
     public function authenticate($info): array
     {
         try {
             if (empty($info['email']) || empty($info['password'])) {
-                return array('message' => REQUIRED_FIELD, 'has_error' => true);
+                return ['message' => REQUIRED_FIELD, 'has_error' => TRUE];
             }
 
             $query = $this->db->select('id, email, user_type, password, locker')
@@ -33,11 +29,11 @@ class Login_model extends CI_Model
                 ->get()->row();
 
             if (empty($query)) {
-                return array('message' => NO_ACCOUNT, 'has_error' => true);
+                return ['message' => NO_ACCOUNT, 'has_error' => TRUE];
             }
 
             if ($query->password !== sha1(password_generator($info['password'], $query->locker))) {
-                return array('message' => NOT_MATCH, 'has_error' => true);
+                return ['message' => NOT_MATCH, 'has_error' => TRUE];
             }
 
             if ($info['user_type'] == 'EMPLOYER') {
@@ -54,13 +50,13 @@ class Login_model extends CI_Model
 
             set_userdata(USER, $user);
             set_userdata(AUTH, $query);
-            return array(
-                'has_error' => false,
+            return [
+                'has_error' => FALSE,
                 'message' => 'Login Success',
-            );
+            ];
 
         } catch (Exception $ex) {
-            return array('error_message' => $ex->getMessage(), 'has_error' => true);
+            return ['error_message' => $ex->getMessage(), 'has_error' => TRUE];
         }
     }
 }

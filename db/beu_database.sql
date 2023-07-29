@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 28, 2023 at 03:13 PM
+-- Generation Time: Jul 29, 2023 at 08:34 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -43,8 +43,7 @@ INSERT INTO `tbl_applicant` (`id`, `job_id`, `employee_id`, `status`, `date_crea
 (59, 54, 32, 'ACCEPTED', '2023-07-24'),
 (63, 53, 32, 'ACCEPTED', '2023-07-24'),
 (72, 52, 32, 'ACCEPTED', '2023-07-27'),
-(75, 52, 32, 'PENDING', '2023-07-27'),
-(76, 51, 32, 'PENDING', '2023-07-27'),
+(76, 51, 32, 'ACCEPTED', '2023-07-27'),
 (77, 56, 32, 'PENDING', '2023-07-27'),
 (78, 48, 32, 'PENDING', '2023-07-27');
 
@@ -62,8 +61,18 @@ CREATE TABLE `tbl_employed` (
   `is_active` tinyint(1) NOT NULL DEFAULT 1,
   `is_verified` tinyint(1) NOT NULL DEFAULT 0,
   `date_started` date NOT NULL DEFAULT current_timestamp(),
-  `date_ended` date NOT NULL
+  `date_ended` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_employed`
+--
+
+INSERT INTO `tbl_employed` (`id`, `job_id`, `employer_id`, `employee_id`, `is_active`, `is_verified`, `date_started`, `date_ended`) VALUES
+(3, 54, 1, 32, 1, 0, '2023-07-28', NULL),
+(4, 53, 1, 32, 1, 0, '2023-07-28', NULL),
+(5, 52, 1, 32, 1, 0, '2023-07-28', NULL),
+(6, 51, 1, 32, 1, 0, '2023-07-28', NULL);
 
 -- --------------------------------------------------------
 
@@ -183,7 +192,7 @@ CREATE TABLE `tbl_employer` (
 --
 
 INSERT INTO `tbl_employer` (`id`, `user_id`, `employer_name`, `email`, `summary`, `tradename`, `city`, `barangay`, `address`, `business_type`, `contact_number`, `sss`, `tin`, `image`, `date_created`) VALUES
-(1, 3, 'LOPUES EAST', 'lopues@gmail.com', '<p>In the year 1992, Lopue\'s Department Store incorporated underwent changes in its corporate structure and establishes three (3) new independent corporations. From mere branch, Lopue\'s San Sebastian had stood independently to rebuild its own image and identity as it has under the stewardship of Mr. Leonito D. Lopue. <br><br>Despite the store reorganization, it has maintained its structure as one of the top taxpayers of Bacolod City. Starting with annual sales of 35 million, the store had steadily increased its share in the market to i85 million and now relishes a sales volume of 220 million. as befits a pioneer organization has stood the test of time as it has maintained its image as \"<strong>Your complete Department store and supermarket for high quality products and services.</strong>\"</p>', 'Lopues ni Gonrad', 'Bacolod city', 'villamonte', 'Sa lopues east ngayunn', 'Retail', '123456', '123456789', 2147483647, 'Screenshot_2023-03-08_101524.png', '2023-06-27 09:47:55'),
+(1, 3, 'LOPUES EAST', 'lopues@gmail.com', '<p>In the year 1992, Lopue\'s Department Store incorporated underwent changes in its corporate structure and establishes three (3) new independent corporations. From mere branch, Lopue\'s San Sebastian had stood independently to rebuild its own image and identity as it has under the stewardship of <span style=\"text-decoration: underline;\">Mr. Leonito D. Lopue</span>. XD<br><br>Despite the store reorganization, it has maintained its structure as one of the top taxpayers of Bacolod City. Starting with annual sales of 35 million, the store had steadily increased its share in the market to i85 million and now relishes a sales volume of 220 million. as befits a pioneer organization has stood the test of time as it has maintained its image as \"<strong>Your complete Department store and supermarket for high quality products and services.</strong>\"</p>', 'Lopues ni Gonrad', 'Bacolod city', 'villamonte', 'Sa lopues east ngayunn', 'Retail', '123456', '123456789', 2147483647, 'Screenshot_2023-03-08_101524.png', '2023-06-27 09:47:55'),
 (6, 2, 'Business Inn', 'businessinn@gmail.com', '<p><span style=\"font-family: \'arial black\', sans-serif;\">Table of truth</span></p>\n<table style=\"border-collapse: collapse; width: 99.9807%;\" border=\"1\"><colgroup><col style=\"width: 25.0241%;\"><col style=\"width: 25.0241%;\"><col style=\"width: 25.0241%;\"><col style=\"width: 25.0241%;\"></colgroup>\n<tbody>\n<tr>\n<td style=\"text-align: center;\">&nbsp;</td>\n<td style=\"text-align: center;\">gwapo</td>\n<td style=\"text-align: center;\">mas gwapo</td>\n<td style=\"text-align: center;\">pinaka gwapo</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">bok</td>\n<td style=\"text-align: center;\">x</td>\n<td style=\"text-align: center;\">&nbsp;</td>\n<td style=\"text-align: center;\">x</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">pol</td>\n<td style=\"text-align: center;\">x</td>\n<td style=\"text-align: center;\">x</td>\n<td style=\"text-align: center;\">&nbsp;</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">jide</td>\n<td style=\"text-align: center;\">&nbsp;</td>\n<td style=\"text-align: center;\">x</td>\n<td style=\"text-align: center;\">x</td>\n</tr>\n</tbody>\n</table>', 'Business Inn Hotel', 'Bacolod city', 'Granadaaa', 'Charito Heights', 'Hospitality and Tourism', '0908', '22222', 90855, 'Screenshot_20221206_074006.png', '2023-06-27 16:23:54'),
 (7, 4, 'Chowking Bing Chilling', 'pol@gmail.com', '<p>TELUS International designs, builds and delivers next-generation digital solutions to enhance the customer experience (CX) for global and disruptive brands. The company&rsquo;s services support the full lifecycle of its clients&rsquo; digital transformation journeys and enable them to more quickly embrace next-generation digital technologies to deliver better business outcomes. TELUS International&rsquo;s integrated solutions and capabilities span digital strategy, innovation, consulting and design, digital transformation and IT lifecycle solutions, data annotation and intelligent automation, and omnichannel CX solutions that include content moderation, trust and safety solutions, and other managed solutions. Fueling all stages of company growth, TELUS International partners with brands across high growth industry verticals, including tech and games, communications and media, eCommerce and fintech, healthcare, and travel and hospitality.</p>\n<p><strong>Industry</strong><br><span style=\"color: rgb(126, 140, 141);\">IT Services and IT Consulting</span><br><br><strong>Company size</strong><br><span style=\"color: rgb(126, 140, 141);\">10,001+ employees</span><br><span style=\"color: rgb(126, 140, 141);\">29,162 on LinkedIn&nbsp;</span><br><br><strong>Headquarters</strong><br><span style=\"color: rgb(126, 140, 141);\">Vancouver, British Columbia</span></p>', 'Chowking Bing Chilling', 'Bacolod city', 'Brgy Balay', 'Balay', 'Education', '13579', '9999', 8888, 'chowking.png', '2023-06-29 10:57:41'),
 (12, 24, 'AKKKKKIIIINNGGGG SINNTAAAAA', 'watsons@gmail.com', '', 'AKKKKKIIIINNGGGG SINNTAAAAA', 'Bacolod city', 'Barangay 12', 'GF SM City Bacolod North Wing Poblacion Reclamation Area', 'Retail', '09123456789', '', 0, 'gelo.png', '2023-07-20 09:21:01');
@@ -195,19 +204,25 @@ INSERT INTO `tbl_employer` (`id`, `user_id`, `employer_name`, `email`, `summary`
 --
 
 CREATE TABLE `tbl_employment` (
-  `ID` int(255) NOT NULL,
+  `id` int(255) NOT NULL,
   `employer_id` int(11) NOT NULL,
   `employee_id` int(11) NOT NULL,
   `position` varchar(255) NOT NULL,
   `start_date` date NOT NULL DEFAULT current_timestamp(),
-  `end_date` date NOT NULL,
+  `end_date` date DEFAULT NULL,
   `status` varchar(255) NOT NULL,
-  `rating` int(5) NOT NULL,
   `job_description` varchar(255) NOT NULL,
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
   `show_status` tinyint(1) NOT NULL,
   `verified` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `tbl_employment`
+--
+
+INSERT INTO `tbl_employment` (`id`, `employer_id`, `employee_id`, `position`, `start_date`, `end_date`, `status`, `job_description`, `date_created`, `show_status`, `verified`) VALUES
+(72, 1, 32, 'Full Stack Developer', '2023-07-29', NULL, 'Full-time', 'asdasda', '2023-07-29 01:09:53', 1, '2023-07-26');
 
 -- --------------------------------------------------------
 
@@ -233,8 +248,6 @@ INSERT INTO `tbl_feedback` (`id`, `user_id`, `from_user_id`, `message`, `rating`
 (2, 6, 3, '<p><strong>GOOD JOB!</strong></p>', 4, '2023-07-24'),
 (3, 6, 3, '<p>boko</p>', 5, '2023-07-24'),
 (4, 6, 3, '<p>bhtbggb</p>', 4, '2023-07-24'),
-(9, 25, 25, '<p>h</p>', 4, '2023-07-27'),
-(10, 25, 25, '<p>df</p>', 5, '2023-07-27'),
 (12, 6, 3, '<p>bokokoooo</p>', 2, '2023-07-27'),
 (13, 6, 3, '<p>ggrgrgrg</p>', 1, '2023-07-27'),
 (14, 24, 6, '<p>AKING SINTA</p>', 1, '2023-07-27'),
@@ -299,7 +312,8 @@ INSERT INTO `tbl_jobposting` (`id`, `employer_id`, `title`, `description`, `loca
 (52, 1, 'Senior Full Stack Developer', '<p>We specialize in solutions for online video content management and video streaming for web, mobile, and connectedTV / smartTV platforms.</p>\r\n<p>Your expertise in application development, database management, troubleshooting, and security measures will be used to implement UI designs, construct APIs, connect the two, and set up server infrastructure. You will also assist with adding improvements to our products, maintaining code repositories and managing technical documentation.</p>\r\n<p>------------------------------------------------------------------------------------------------------------</p>\r\n<p><strong>Job Details:</strong></p>\r\n<ul>\r\n<li>Job Location: Cebu City Office</li>\r\n<li>Monday - Friday, 9 AM - 6 PM Central Standard Time in the USA with 1 hour break</li>\r\n<li>Salary based on qualifications, PHP 50,000 - PHP 100,000 per month</li>\r\n<li>Full-time job</li>\r\n<li>Paid onboarding provided</li>\r\n</ul>\r\n<p><strong>Job Requirements and Qualifications:</strong></p>\r\n<ul>\r\n<li>At least 5 years experience in frontend web application development with Javascript frameworks such as Angular or React</li>\r\n<li>At least 5 years experience with back-end programming using Python, especially some experience with Django</li>\r\n<li>At least 3 years of Database design and management experience, including proficiency of both SQL and NoSQL databases, especially PostgreSQL</li>\r\n<li>Experience managing git repositories and CI/CD workflows with tools like Jenkins</li>\r\n<li>DevOps knowledge in linux (ubuntu), nginx, and cloud services like Oracle Cloud/AWS</li>\r\n<li>Ability to identify, troubleshoot, and debug application issues to ensure smooth functionality</li>\r\n<li>Knowledge of Agile / Scrum development methodology and workflows</li>\r\n<li>Experience with documentation (System and API structures) using tools like Postman and Swagger etc.</li>\r\n<li>Ability to preform code testing and analysis</li>\r\n<li>Team player is a must, as team collaboration is necessary for all of our positions</li>\r\n<li>College Degree in IT related field of study such as Computer Science or equivalent.</li>\r\n</ul>\r\n<p>Job Type: Full-time</p>\r\n<p>Pay: Php50,000.00 - Php100,000.00 per month</p>\r\n<p>Benefits:</p>\r\n<ul>\r\n<li>Paid training</li>\r\n<li>Pay raise</li>\r\n</ul>\r\n<p>Schedule:</p>\r\n<ul>\r\n<li>8 hour shift</li>\r\n</ul>\r\n<p>Supplemental pay types:</p>\r\n<ul>\r\n<li>13th month salary</li>\r\n</ul>', 'Bacolod City', '2023-07-22 21:29:19', '0000-00-00', 'Open', 'PHP 50,000 - PHP 100,000 a month', 'Day', 'Full time', 'Java, PHP, HTML/CSS, JS'),
 (53, 1, 'Web developer (Pasig)', '<p><strong>Responsibilities</strong></p>\r\n<ul>\r\n<li>Cloud-based Web application development using open-source technologies (PHP Laravel or Golang) on AWS.</li>\r\n<li>Play a vital role in the team.</li>\r\n<li>Coordinate with the Singapore HQ team for day-to-day tasks.</li>\r\n<li>Responsible for estimating, planning, managing all tasks, and reporting progress.</li>\r\n<li>Cross-browser compatibility testing.</li>\r\n<li>Run &amp; operate existing production and staging environments, including troubleshooting and impact analysis.</li>\r\n<li>Ad-hoc maintenance support.</li>\r\n<li>Assist in the documentation.</li>\r\n</ul>\r\n<p><strong>Requirements</strong></p>\r\n<ul>\r\n<li>At least&nbsp;<strong>three years</strong>&nbsp;of web development experience in PHP or Go, JavaScript, React JS, PostgreSQL.</li>\r\n<li>Those with more than&nbsp;<strong>five years</strong>&nbsp;experience will be considered as senior position.</li>\r\n<li>Good understanding of API-first approach and FE &amp; BE segregation.</li>\r\n<li>Good understanding of cyber security and OWASP top 10.</li>\r\n<li>Good communicator &amp; self-motivated.</li>\r\n<li>Strong analytical skills.</li>\r\n<li>Problem solver.</li>\r\n<li>A team player.</li>\r\n<li>Able to work independently.</li>\r\n<li>A can-do attitude.</li>\r\n<li>Resourcefulness.</li>\r\n<li>Detail-oriented.</li>\r\n<li>Good time management and responsible.</li>\r\n<li>Willing to learn.</li>\r\n<li>Able to handle stress.</li>\r\n</ul>\r\n<p><strong>Key required skills</strong></p>\r\n<ul>\r\n<li>PHP Laravel or Golang</li>\r\n<li>Frontend (React JS, vanilla JavaScript).</li>\r\n<li>RDBMS SQL (PostgreSQL, MySQL).</li>\r\n<li>AWS services.</li>\r\n</ul>\r\n<p><strong>Good to have skills</strong></p>\r\n<ul>\r\n<li>Linux server administration.</li>\r\n<li>NoSQL (MongoDB, DynamoDB, Redis).</li>\r\n<li>Time series database (QuestDB, Influxdb).</li>\r\n<li>Analytic and visualization tools (Grafana).</li>\r\n<li>Mobile app development experience using Flutter or React Native.</li>\r\n</ul>\r\n<p>Job Types: Full-time, Permanent</p>\r\n<p>Salary: Php50,000.00 - Php100,000.00 per month</p>\r\n<p>Schedule:</p>\r\n<ul>\r\n<li>Day shift</li>\r\n</ul>\r\n<p>Supplemental pay types:</p>\r\n<ul>\r\n<li>13th month salary</li>\r\n</ul>\r\n<p>Ability to commute/relocate:</p>\r\n<ul>\r\n<li>Ortigas Pasig: Reliably commute or planning to relocate before starting work (Required)</li>\r\n</ul>\r\n<p>Application Question(s):</p>\r\n<ul>\r\n<li>When can you start the job?</li>\r\n<li>What is your current salary and expected salary?</li>\r\n<li>Will you willing to take a technical assessment to demonstrate your technical skills?</li>\r\n</ul>\r\n<p>Experience:</p>\r\n<ul>\r\n<li>AWS: 3 years (Preferred)</li>\r\n<li>React JS: 2 years (Preferred)</li>\r\n<li>PostgreSQL: 2 years (Preferred)</li>\r\n<li>PHP Laravel: 5 years (Preferred)</li>\r\n</ul>', 'Bacolod City', '2023-07-22 21:37:20', '2023-10-25', 'Open', 'PHP 50,000 - PHP 100,000 a month', 'Day', 'Permanent', 'PHP, React, Laravel'),
 (54, 1, 'Remote Software Developer', '<p>Location: Philippines (remote)</p>\r\n<p>Company Overview:</p>\r\n<p>We are a dynamic and rapidly expanding organization in the e-learning industry, dedicated to providing innovative educational solutions. As part of our growth strategy, we are seeking a skilled Software Developer to join our talented team in the Philippines. This is an exciting opportunity to play a vital role in leading the rebuilding of our current e-learning system, addressing existing bugs, and contributing to its successful relaunch in the market.</p>\r\n<p>Responsibilities:</p>\r\n<p>1. System Rebuilding: Take charge of the rebuilding process for our current e-learning system, leveraging your expertise in software development to enhance its functionality, scalability, and user experience.</p>\r\n<p>2. Bug Fixing: Identify and troubleshoot software issues and bugs within the e-learning system, utilizing problem-solving skills to rectify issues promptly and ensure a smooth user experience.</p>\r\n<p>3. Collaborative Development: Collaborate with cross-functional teams, including designers, product managers, and quality assurance professionals, to ensure the successful implementation of new features and improvements.</p>\r\n<p>4. Technology Stack: Utilize your proficiency in various programming languages and technologies to code, test, and debug software modules, following best practices and coding standards.</p>\r\n<p>5. Performance Optimization: Identify opportunities to optimize the performance and efficiency of the e-learning system, conducting code reviews and implementing improvements to enhance speed, stability, and scalability.</p>\r\n<p>6. Documentation and Reporting: Maintain comprehensive documentation of system changes, feature enhancements, and bug fixes, ensuring clear and concise information for future reference and knowledge transfer.</p>\r\n<p>7. Market Relaunch Support: Collaborate closely with the marketing and business development teams to support the successful relaunch of the e-learning system, providing technical expertise and contributing to the marketing strategy.</p>\r\n<p>8. Agile Development: Participate in agile development processes, including sprint planning, daily stand-ups, and retrospectives, fostering a collaborative and iterative work environment.</p>\r\n<p>Qualifications:</p>\r\n<p>- Bachelor\'s degree in Computer Science, Software Engineering, or a related field.</p>\r\n<p>- Proven experience as a Software Developer, preferably working on large-scale web applications or e-learning systems.</p>\r\n<p>- Strong proficiency in programming languages such as Java, Python, or JavaScript, and related frameworks and libraries.</p>\r\n<p>- Solid understanding of software development principles, methodologies, and best practices.</p>\r\n<p>- Experience with front-end development technologies (HTML, CSS, JavaScript, etc.) and modern web development frameworks (React, Angular, Vue.js, etc.).</p>\r\n<p>- Familiarity with database systems (SQL, NoSQL) and experience in database design and optimization.</p>\r\n<p>- Knowledge of version control systems (Git, SVN) and collaborative development workflows.</p>\r\n<p>- Excellent problem-solving skills with a detail-oriented and analytical mindset.</p>\r\n<p>- Strong communication and teamwork abilities to collaborate effectively with multidisciplinary teams.</p>\r\n<p>- Proven ability to meet project deadlines and deliver high-quality software solutions.</p>\r\n<p>- Experience working in an Agile/Scrum environment is a plus.</p>\r\n<p>Join our team today and make a significant impact on the future of e-learning! Please submit your resume and portfolio showcasing your previous work to be considered for this exciting opportunity.</p>\r\n<p>Job Type: Full-time</p>\r\n<p>Salary: Php1,200,000.00 per year</p>', 'Bacolod City', '2023-07-22 21:46:46', '2023-07-31', 'Open', 'PHP 1,200,000 a year', 'Day', 'Full time', 'Agile/Scrum, Git, SVN, SQL, NoSQL, HTML, CSS, JavaScript, etc.'),
-(56, 6, 'Senior Software Engineer', '<p>We are seeking a highly skilled and motivated Senior Software Engineer to join our dynamic and innovative team. As a Senior Software Engineer, you will play a key role in designing, developing, and maintaining cutting-edge software solutions that drive our company\'s success. Your expertise will contribute to the development of complex systems and applications, and you will have the opportunity to work on exciting projects that have a significant impact on our customers and industry.</p>', 'Bacolod City', '2023-07-24 15:51:15', '2023-07-24', 'Open', '100,000 a month', 'Day', 'Full time', 'Java, SQL, PHP');
+(56, 6, 'Senior Software Engineer', '<p>We are seeking a highly skilled and motivated Senior Software Engineer to join our dynamic and innovative team. As a Senior Software Engineer, you will play a key role in designing, developing, and maintaining cutting-edge software solutions that drive our company\'s success. Your expertise will contribute to the development of complex systems and applications, and you will have the opportunity to work on exciting projects that have a significant impact on our customers and industry.</p>', 'Bacolod City', '2023-07-24 15:51:15', '2023-07-24', 'Open', '100,000 a month', 'Day', 'Full time', 'Java, SQL, PHP'),
+(58, 1, 'REACT Frontend Developer- WORK FROM HOME', '<p><strong>Job Role:</strong></p>\r\n<p>We are looking for a Front End React developer to join our fast growing team. We are looking for an exceptional problem solver who can deliver a top class code base.</p>\r\n<p><strong>Technical Requirements:</strong></p>\r\n<ul>\r\n<li>Excellent ability to code in ReactJS and React Native</li>\r\n<li>3 to 5+ years of relevant work experience as a software engineer, software developer, frontend developer, or full stack developer</li>\r\n<li>Formal computer science or software engineer qualification is preferred but not required.</li>\r\n<li>Experience debugging using popular JavaScript-based tools like Chrome Developer Console</li>\r\n<li>Experience working with MongoDB</li>\r\n</ul>\r\n<p>Key Actions</p>\r\n<ul>\r\n<li>An ability to effectively deliver high quality code and continue to raise the bar at a high performing company</li>\r\n<li>Complete technical verification of design and architecture</li>\r\n<li>Perform code reviews</li>\r\n<li>Work with the team to solve technical difficulties and ascertain the best deployment approach when needed</li>\r\n</ul>\r\n<p>About you</p>\r\n<ul>\r\n<li>A desire and the ability to build something great.</li>\r\n<li>An ability to effectively execute designated sprint schedules.</li>\r\n<li>The willingness to learn and adapt your methodologies, and the ability to share your learnings with the team.</li>\r\n<li>A team player who can communicate appropriately for the role.</li>\r\n</ul>\r\n<p>Job Type: Full-time</p>\r\n<p>Salary: Php100,000.00 - Php150,000.00 per month</p>\r\n<p>Benefits:</p>\r\n<ul>\r\n<li>Work from home</li>\r\n</ul>\r\n<p>Schedule:</p>\r\n<ul>\r\n<li>8 hour shift</li>\r\n</ul>\r\n<p>Experience:</p>\r\n<ul>\r\n<li>React: 4 years (Preferred)</li>\r\n</ul>', '', '2023-07-28 22:32:00', '2023-07-31', 'Open', '', 'Rotating shift', 'Full time', 'HTML, CSS, Bootstrap, React, Javascript');
 
 -- --------------------------------------------------------
 
@@ -326,31 +340,15 @@ CREATE TABLE `tbl_notification` (
 INSERT INTO `tbl_notification` (`id`, `user_id`, `from_user_id`, `title`, `message`, `link`, `is_displayed`, `is_read`, `date_created`) VALUES
 (85, 6, 3, 'Application Accepted', 'lopues east has accepted your application.', 'jobposting?id=54', 1, 0, '2023-07-24 15:25:11'),
 (86, 6, 3, 'Application Accepted', 'lopues east has accepted your application.', 'jobposting?id=53', 1, 0, '2023-07-24 15:26:03'),
-(87, 2, 26, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'http://localhost:8080/Konnect/jobposting?id=56', 1, 0, '2023-07-27 10:25:33'),
+(87, 2, 26, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'jobposting?id=56', 1, 0, '2023-07-27 10:25:33'),
 (88, 2, 26, 'Application Cancelled', 'The applicant has cancelled his/her application.', NULL, 1, 0, '2023-07-27 10:25:34'),
-(89, 2, 26, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'http://localhost:8080/Konnect/jobposting?id=56', 1, 0, '2023-07-27 10:25:51'),
+(89, 2, 26, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'jobposting?id=56', 1, 0, '2023-07-27 10:25:51'),
 (90, 2, 26, 'Application Cancelled', 'The applicant has cancelled his/her application.', NULL, 1, 0, '2023-07-27 10:25:51'),
-(91, 3, 26, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'http://localhost:8080/Konnect/jobposting?id=53', 1, 0, '2023-07-27 10:26:01'),
-(92, 3, 26, 'Application Cancelled', 'The applicant has cancelled his/her application.', NULL, 1, 0, '2023-07-27 10:26:02'),
-(93, 3, 6, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'http://localhost:8080/Konnect/jobposting?id=52', 1, 0, '2023-07-27 11:27:00'),
-(94, 3, 6, 'Application Cancelled', 'The applicant has cancelled his/her application.', NULL, 1, 0, '2023-07-27 11:27:01'),
-(95, 3, 6, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'http://localhost:8080/Konnect/jobposting?id=52', 1, 0, '2023-07-27 11:34:44'),
-(96, 3, 6, 'Application Cancelled', 'The applicant has cancelled his/her application.', NULL, 1, 0, '2023-07-27 11:35:39'),
-(97, 3, 6, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'http://localhost:8080/Konnect/jobposting?id=51', 1, 0, '2023-07-27 11:36:59'),
-(98, 2, 25, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'http://192.168.1.9:8080/Konnect/jobposting?id=56', 1, 0, '2023-07-27 11:37:43'),
-(99, 2, 25, 'Application Cancelled', 'The applicant has cancelled his/her application.', NULL, 1, 0, '2023-07-27 11:37:43'),
-(100, 3, 6, 'Application Cancelled', 'The applicant has cancelled his/her application.', NULL, 1, 0, '2023-07-27 11:38:38'),
-(101, 2, 6, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'http://localhost:8080/Konnect/jobposting?id=56', 1, 0, '2023-07-27 11:40:32'),
-(102, 2, 6, 'Application Cancelled', 'The applicant has cancelled his/her application.', NULL, 1, 0, '2023-07-27 11:41:14'),
-(103, 3, 6, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'http://localhost:8080/Konnect/jobposting?id=52', 1, 0, '2023-07-27 11:58:26'),
 (104, 6, 3, 'Application Accepted', 'Lopues ni Gonrad has accepted your application.', 'jobposting?id=52', 1, 0, '2023-07-27 12:00:22'),
-(105, 3, 6, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'http://localhost:8080/Konnect/jobposting?id=52', 1, 0, '2023-07-27 13:57:27'),
-(106, 3, 6, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'http://localhost:8080/Konnect/jobposting?id=51', 1, 0, '2023-07-27 14:12:55'),
-(107, 3, 6, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'http://localhost:8080/Konnect/jobposting?id=52', 1, 0, '2023-07-27 14:16:11'),
-(108, 3, 6, 'Application Cancelled', 'The applicant has cancelled his/her application.', NULL, 1, 0, '2023-07-27 14:41:34'),
-(109, 3, 6, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'http://localhost:8080/Konnect/jobposting?id=51', 1, 0, '2023-07-27 14:46:00'),
-(110, 2, 6, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'http://localhost:8080/Konnect/jobposting?id=56', 1, 0, '2023-07-27 14:47:55'),
-(111, 3, 6, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'http://localhost:8080/Konnect/jobposting?id=48', 1, 0, '2023-07-27 15:26:06');
+(112, 6, 3, 'Application Accepted', 'Lopues Ni Gonrad has accepted your application.', 'jobposting?id=54', 1, 0, '2023-07-28 23:39:19'),
+(113, 6, 3, 'Application Accepted', 'Lopues Ni Gonrad has accepted your application.', 'jobposting?id=53', 1, 0, '2023-07-28 23:48:44'),
+(114, 6, 3, 'Application Accepted', 'Lopues Ni Gonrad has accepted your application.', 'jobposting?id=52', 1, 0, '2023-07-28 23:49:01'),
+(115, 6, 3, 'Application Accepted', 'Lopues Ni Gonrad has accepted your application.', 'jobposting?id=51', 1, 0, '2023-07-28 23:49:17');
 
 -- --------------------------------------------------------
 
@@ -473,7 +471,7 @@ ALTER TABLE `tbl_employer`
 -- Indexes for table `tbl_employment`
 --
 ALTER TABLE `tbl_employment`
-  ADD PRIMARY KEY (`ID`),
+  ADD PRIMARY KEY (`id`),
   ADD KEY `employee_id` (`employee_id`) USING BTREE,
   ADD KEY `fk_employment_employer_id` (`employer_id`);
 
@@ -540,7 +538,7 @@ ALTER TABLE `tbl_applicant`
 -- AUTO_INCREMENT for table `tbl_employed`
 --
 ALTER TABLE `tbl_employed`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_employee`
@@ -570,7 +568,7 @@ ALTER TABLE `tbl_employer`
 -- AUTO_INCREMENT for table `tbl_employment`
 --
 ALTER TABLE `tbl_employment`
-  MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `tbl_feedback`
@@ -588,13 +586,13 @@ ALTER TABLE `tbl_follow`
 -- AUTO_INCREMENT for table `tbl_jobposting`
 --
 ALTER TABLE `tbl_jobposting`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `tbl_notification`
 --
 ALTER TABLE `tbl_notification`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
 
 --
 -- AUTO_INCREMENT for table `tbl_skill`

@@ -33,6 +33,9 @@ class Login extends MY_Controller
 
         $this->load->driver('cache');
         $this->db->cache_delete_all();
+        
+        $this->load->driver('session');
+        $this->session->sess_destroy();
 
         unset_userdata(USER);
         unset_userdata(AUTH);

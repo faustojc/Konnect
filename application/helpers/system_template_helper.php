@@ -1,28 +1,28 @@
 <?php
-    function main_header($menubar = [])
-    {
-    defined('BASEPATH') or exit('No direct script access allowed');
+function main_header($menubar = [])
+{
+defined('BASEPATH') or exit('No direct script access allowed');
 
-    $displayHandler = new DisplayHandler();
+$displayHandler = new DisplayHandler();
 
-    $userdata = get_userdata(USER);
-    $auth = get_userdata('auth');
+$userdata = get_userdata(USER);
+$auth = get_userdata('auth');
 
-    $image_url = '';
-    $name = '';
-    $profile_url = '';
+$image_url = '';
+$name = '';
+$profile_url = '';
 
-    if (!empty($auth)) {
-        if ($auth['user_type'] == 'EMPLOYEE') {
-            $image_url = base_url() . 'assets/images/employee/profile_pic/' . $userdata->Employee_image;
-            $name = $userdata->Fname . ' ' . $userdata->Mname . ' ' . $userdata->Lname;
-            $profile_url = base_url() . 'employee_profile?id=' . $userdata->ID;
-        } else {
-            $image_url = base_url() . 'assets/images/employer/profile_pic/' . $userdata->image;
-            $name = $userdata->tradename;
-            $profile_url = base_url() . 'employer_profile?id=' . $userdata->id;
-        }
+if (!empty($auth)) {
+    if ($auth['user_type'] == 'EMPLOYEE') {
+        $image_url = base_url() . 'assets/images/employee/profile_pic/' . $userdata->Employee_image;
+        $name = $userdata->Fname . ' ' . $userdata->Mname . ' ' . $userdata->Lname;
+        $profile_url = base_url() . 'employee_profile?id=' . $userdata->ID;
+    } else {
+        $image_url = base_url() . 'assets/images/employer/profile_pic/' . $userdata->image;
+        $name = $userdata->tradename;
+        $profile_url = base_url() . 'employer_profile?id=' . $userdata->id;
     }
+}
 
 ?>
     <!DOCTYPE html>
@@ -162,9 +162,9 @@
                 <li class="nav-item d-none d-sm-inline-block" style="position: absolute; left: 50%; margin-left: -250px">
                     <div class="input-group flex-nowrap d-none d-lg-flex" style="width:500px;">
                         <div class="input-group-prepend">
-            <span class="input-group-text bg-gray-light border-0" id="addon-wrapping" style="border-radius: 10px 0 0 10px;">
-                <i class="fa fa-search"></i>
-            </span>
+                            <span class="input-group-text bg-gray-light border-0" id="addon-wrapping" style="border-radius: 10px 0 0 10px;">
+                                <i class="fa fa-search"></i>
+                            </span>
                         </div>
                         <input id="searchInput" type="text" class="form-control border-0 bg-gray-light" placeholder="Search" aria-label="search" aria-describedby="addon-wrapping" style="border-radius: 0 10px 10px 0; ">
                     </div>
@@ -194,21 +194,20 @@
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="<?= base_url() ?>beu_dashboard" name="home" class="nav-link">
+                    <a href="<?= base_url() ?>beu_dashboard" class="nav-link">
                         <i class="fa-solid fa-house"></i>
                     </a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="<?= base_url() ?>jobposting" name="jobs" class="nav-link">
+                    <a href="<?= base_url() ?>jobposting" class="nav-link">
                         <i class="fa-solid fa-briefcase"></i>
                     </a>
                 </li>
                 <!-- MY PROFILE -->
                 <!-- Messages Dropdown Menu -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" name="profile" role="button">
+                    <a class="nav-link" data-toggle="dropdown" role="button">
                         <i class="fa-solid fa-user"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-left border-0 shadow-sm" style="border-radius:15px;">
@@ -226,8 +225,9 @@
                             </div>
                         </div>
                         <div class="dropdown-divider"></div>
-                        <a href="<?= base_url() ?>login/logout" class="dropdown-item dropdown-footer" id="logout">Log
-                            out</a>
+                        <a href="<?= base_url() ?>login/logout" class="dropdown-item dropdown-footer" id="logout">
+                            Log out
+                        </a>
                     </div>
                 </li>
 
@@ -264,7 +264,7 @@
 <!-- overlayScrollbars -->
 <script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
-<script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/dist/js/adminlte.js"></script>
+<script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/dist/js/adminlte.min.js"></script>
 
 <!-- Toastr -->
 <script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/toastr/toastr.min.js"></script>

@@ -18,7 +18,7 @@ class Login extends MY_Controller
     }
 
     /** load main page */
-    public function index()
+    public function index(): void
     {
         if (!empty($this->userdata)) {
             redirect(base_url() . 'beu_dashboard');
@@ -40,7 +40,10 @@ class Login extends MY_Controller
         redirect(base_url() . 'login', 'refresh');
     }
 
-    public function authenticate()
+    /**
+     * @throws JsonException
+     */
+    public function authenticate(): void
     {
         $info = [
             'email' => $this->input->post("email"),
@@ -53,19 +56,19 @@ class Login extends MY_Controller
         if (!$response['has_error']) {
             set_userdata(AUTH, $info);
 
-            echo json_encode(['redirect' => base_url() . 'beu_dashboard']);
+            echo json_encode(['redirect' => base_url() . 'beu_dashboard'], JSON_THROW_ON_ERROR);
         } else {
-            echo json_encode($response);
+            echo json_encode($response, JSON_THROW_ON_ERROR);
         }
     }
 
-    public function getChooseForm()
+    public function getChooseForm(): void
     {
         $this->data['content'] = 'grid/choose';
         $this->load->view('layout', $this->data);
     }
 
-    public function getLoginForm()
+    public function getLoginForm(): void
     {
         $this->data['content'] = 'grid/login';
         $this->load->view('layout', $this->data);

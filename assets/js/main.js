@@ -104,6 +104,8 @@ function formAction(url, request_type, data, callback = () => {}) {
     const successFunc = (response) => {
         if (typeof response === 'string') {
             callback(response);
+        } else if (typeof response === 'object') {
+            callback(data);
         } else {
             const data = JSON.parse(response);
             callback(data);
@@ -112,8 +114,14 @@ function formAction(url, request_type, data, callback = () => {}) {
 
     const errorFunc = (response) => {
         try {
-            const data = JSON.parse(response);
-            error('ERROR', data.message, 3000);
+            if (typeof response === 'string') {
+                error('ERROR', response, 3000);
+            } else if (typeof response === 'object') {
+                error('ERROR', response.message, 3000);
+            } else {
+                const data = JSON.parse(response);
+                error('ERROR', data.message, 3000);
+            }
         } catch (e) {
             error('ERROR', 'Something went wrong', 3000);
         } finally {

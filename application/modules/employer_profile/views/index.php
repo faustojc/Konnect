@@ -129,8 +129,10 @@ main_header(['Employer_profile']);
                                                 <?= $current_employer->business_type ?>
                                             </h5>
                                             <h6 class="widget-user-desc text-left text-muted" style="font-weight: normal; font-size: 15px; width: 500px;">
-                                                <?= ucwords(@$current_employer->address) . ", " . ucwords(@$current_employer->city) ?> |
-                                                <a class="text-info" data-toggle="modal" data-target="#contact" style="cursor: pointer;">Contact details</a>
+                                                <?= ucwords(@$current_employer->address) . ", " . ucwords(@$current_employer->city) ?>
+                                                |
+                                                <a class="text-info" data-toggle="modal" data-target="#contact" style="cursor: pointer;">Contact
+                                                    details</a>
                                             </h6>
 
 
@@ -141,7 +143,8 @@ main_header(['Employer_profile']);
                                                 <?php employer_edit_button($current_employer->id); ?>
                                             <?php elseif ($auth['user_type'] != 'EMPLOYER'): ?>
                                                 <div class="d-flex justify-content-end">
-                                                    <button type="button" class="btn btn-info" style=" line-height: 5px; border-radius:10px;">Follow
+                                                    <button type="button" class="btn btn-info" style=" line-height: 5px; border-radius:10px;">
+                                                        Follow
                                                         <i class="fa-solid fa-plus"></i></button>
                                                 </div>
                                             <?php endif; ?>
@@ -177,9 +180,13 @@ main_header(['Employer_profile']);
                                     Feedback
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="pills-employeelist-tab" data-toggle="pill" href="#pills-employeelist" role="tab" aria-controls="pills-employeelist" aria-selected="true">Employee List</a>
-                            </li>
+                            <?php if ($has_permission): ?>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="pills-employeelist-tab" data-toggle="pill" href="#pills-employeelist" role="tab" aria-controls="pills-employeelist" aria-selected="true">
+                                        Employee List <i class="fas fa-lock ml-2"></i>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
                         </ul>
                     </div>
                 </div>
@@ -212,7 +219,9 @@ main_header(['Employer_profile']);
                                         <div class="modal-body">
                                             <div class="p-3">
                                                 <h3 class="font-weight-light mb-3">Edit your summary</h3>
-                                                <p class="text-muted">A summary of your company should be concise, informative, and engaging, highlighting the main reasons why someone would want to work for you.</p>
+                                                <p class="text-muted">A summary of your company should be concise,
+                                                    informative, and engaging, highlighting the main reasons why someone
+                                                    would want to work for you.</p>
                                                 <textarea id="summary"></textarea>
                                                 <p class="text-danger float-left summary-warning" hidden>
                                                     <i class="text-danger fa fa-exclamation-circle"></i>
@@ -222,15 +231,17 @@ main_header(['Employer_profile']);
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Dismiss</button>
-                                            <button type="button" class="btn btn-outline-primary" id="update_summary">Save Changes</button>
+                                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+                                                Dismiss
+                                            </button>
+                                            <button type="button" class="btn btn-outline-primary" id="update_summary">
+                                                Save Changes
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
 
                     <!-- JOB POSTINGS -->
@@ -255,9 +266,11 @@ main_header(['Employer_profile']);
                         <?php load_feedback($feedbacks, $has_permission); ?>
                     </div>
 
-                    <div class="tab-pane fade" id="pills-employeelist" role="tabpanel" aria-labelledby="pills-employeelist-tab">
-                        <?= $employeelist_view ?>
-                    </div>
+                    <?php if ($has_permission): ?>
+                        <div class="tab-pane fade" id="pills-employeelist" role="tabpanel" aria-labelledby="pills-employeelist-tab">
+                            <?= $employeelist_view ?>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
 
@@ -360,11 +373,14 @@ main_header(['Employer_profile']);
                                             <option value="Finance and Banking">Finance and Banking</option>
                                             <option value="Healthcare">Healthcare</option>
                                             <option value="Education">Education</option>
-                                            <option value="Manufacturing and Engineering">Manufacturing and Engineering</option>
+                                            <option value="Manufacturing and Engineering">Manufacturing and
+                                                Engineering
+                                            </option>
                                             <option value="Hospitality and Tourism">Hospitality and Tourism</option>
                                             <option value="Media and Entertainment">Media and Entertainment</option>
                                             <option value="Energy and Utilities">Energy and Utilities</option>
-                                            <option value="Transportation and Logistics">Transportation and Logistics</option>
+                                            <option value="Transportation and Logistics">Transportation and Logistics
+                                            </option>
                                         </select>
                                     </div>
                                     <div class="col-md-6">
@@ -525,7 +541,8 @@ main_header(['Employer_profile']);
                             <div class="col-12">
                                 <div class="form-group" style="border: 0;">
                                     <label for="skills_req">Skills Requirements</label>
-                                    <label class="text-muted" style="font-size: 13px;">(click enter to separate skills)</label>
+                                    <label class="text-muted" style="font-size: 13px;">(click enter to separate
+                                        skills)</label>
                                     <input id="skills_req" name="skills_req" class="form-control border-0" style="resize: none; background-color: #F4F6F7; border-radius: 10px;" type="text" placeholder="Skill#1, Skill#2">
                                 </div>
                             </div>
@@ -537,7 +554,9 @@ main_header(['Employer_profile']);
                 </div>
                 <div class="modal-footer border-0">
                     <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-                    <button id="save" type="button" class="btn text-dark" style="border-radius:10px; width:100%; background-color: #F4F6F7;">Post</button>
+                    <button id="save" type="button" class="btn text-dark" style="border-radius:10px; width:100%; background-color: #F4F6F7;">
+                        Post
+                    </button>
                 </div>
             </div>
         </div>

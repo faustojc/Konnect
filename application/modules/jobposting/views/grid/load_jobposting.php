@@ -19,22 +19,11 @@
         $ci = &get_instance();
         if (!empty($details)) {
             foreach ($details as $job) {
-                $hasApplied = false;
-
                 if (strtoupper($job->filled) == 'CLOSED') {
                     continue;
                 }
 
-                if ($auth['user_type'] == 'EMPLOYEE' && !empty($applicant)) {
-                    foreach ($applicant as $applied) {
-                        if ($applied->job_id == $job->id) {
-                            $hasApplied = true;
-                            break;
-                        }
-                    }
-                }
-
-                if ($hasApplied) {
+                if ($auth['user_type'] == 'EMPLOYEE' && !empty($applicant) && $applicant->job_id == $job->id) {
                     continue;
                 }
 
@@ -44,16 +33,16 @@
 
                 if ($timeDiff < 60) {
                     $formattedTimeDiff = 'less than a minute ago';
-                } elseif ($timeDiff < 3600) {
+                } else if ($timeDiff < 3600) {
                     $minutes = floor($timeDiff / 60);
                     $formattedTimeDiff = $minutes . ' minute' . ($minutes > 1 ? 's' : '') . ' ago';
-                } elseif ($timeDiff < 86400) {
+                } else if ($timeDiff < 86400) {
                     $hours = floor($timeDiff / 3600);
                     $formattedTimeDiff = $hours . ' hour' . ($hours > 1 ? 's' : '') . ' ago';
-                } elseif ($timeDiff < 604800) {
+                } else if ($timeDiff < 604800) {
                     $days = floor($timeDiff / 86400);
                     $formattedTimeDiff = $days . ' day' . ($days > 1 ? 's' : '') . ' ago';
-                } elseif ($timeDiff < 2592000) {
+                } else if ($timeDiff < 2592000) {
                     $weeks = floor($timeDiff / 604800);
                     $formattedTimeDiff = $weeks . ' week' . ($weeks > 1 ? 's' : '') . ' ago';
                 } else {

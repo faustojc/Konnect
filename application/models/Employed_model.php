@@ -24,6 +24,7 @@ class Employed_model extends CI_Model
             ->join('tbl_jobposting', 'tbl_jobposting.id = tbl_employed.job_id')
             ->join('tbl_employee', 'tbl_employee.ID = tbl_employed.employee_id')
             ->join('tbl_employer', 'tbl_employer.id = tbl_jobposting.employer_id')
+            ->order_by('tbl_employed.date_started', 'DESC')
             ->get($this->Table->employed)->result();
     }
 

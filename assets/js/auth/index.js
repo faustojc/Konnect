@@ -113,22 +113,39 @@ function seeMoreBtnFunction() {
 }
 
 const seeMoreButtons = document.querySelectorAll(".see-more");
-seeMoreButtons.forEach(button => {
-    button.addEventListener("click", function (event) {
-        const button = event.target;
-        const target = button.dataset.target;
-        const jobDescription = button.previousElementSibling;
+if (seeMoreButtons) {
+    seeMoreButtons.forEach(button => {
+        button.addEventListener("click", function (event) {
+            const button = event.target;
+            const target = button.dataset.target;
+            const jobDescription = button.previousElementSibling;
 
-        if (jobDescription.matches(target)) {
-            if (button.textContent.toLowerCase().includes("see more")) {
-                button.textContent = "See less";
-                jobDescription.style.maxHeight = "none";
-                jobDescription.style.overflowY = "visible";
-            } else {
-                button.textContent = "See more";
-                jobDescription.style.maxHeight = '200px';
-                jobDescription.style.overflowY = "hidden";
+            if (jobDescription.matches(target)) {
+                if (button.textContent.toLowerCase().includes("see more")) {
+                    button.textContent = "See less";
+                    jobDescription.style.maxHeight = "none";
+                    jobDescription.style.overflowY = "visible";
+                } else {
+                    button.textContent = "See more";
+                    jobDescription.style.maxHeight = '200px';
+                    jobDescription.style.overflowY = "hidden";
+                }
             }
+        });
+    });
+}
+
+const skills_required_input = document.getElementById("skills_req");
+if (skills_required_input) {
+    skills_required_input.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            const input = event.target;
+            const currentCursorPosition = input.selectionStart;
+            const inputValue = input.value;
+
+            input.value = inputValue.slice(0, currentCursorPosition) + ", " + inputValue.slice(currentCursorPosition);
+            input.selectionStart = input.selectionEnd = currentCursorPosition + 2;
         }
     });
-});
+}

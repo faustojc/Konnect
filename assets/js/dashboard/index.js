@@ -73,16 +73,3 @@ function disableDotZero() {
         input.setSelectionRange(0, value.length - 3);
     }
 }
-
-document.getElementById("skills_req").addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-        event.preventDefault();
-        const input = event.target;
-        const currentCursorPosition = input.selectionStart;
-        const inputValue = input.value;
-        input.value = inputValue.slice(0, currentCursorPosition) +
-            ", " +
-            inputValue.slice(currentCursorPosition);
-        input.selectionStart = input.selectionEnd = currentCursorPosition + 2;
-    }
-});

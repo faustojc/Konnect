@@ -108,24 +108,27 @@ function seeMoreBtnFunction() {
             } else if (jobDescription.offsetHeight >= maxHeight) {
                 button.style.display = "block";
             }
-
-            button.addEventListener("click", function (event) {
-                const button = event.target;
-                const target = button.dataset.target;
-                const jobDescription = button.previousElementSibling;
-
-                if (jobDescription.matches(target)) {
-                    if (button.textContent === "See more") {
-                        button.textContent = "See less";
-                        jobDescription.style.maxHeight = "none";
-                        jobDescription.style.overflowY = "visible";
-                    } else {
-                        button.textContent = "See more";
-                        jobDescription.style.maxHeight = '150px';
-                        jobDescription.style.overflowY = "hidden";
-                    }
-                }
-            });
         });
     }
 }
+
+const seeMoreButtons = document.querySelectorAll(".see-more");
+seeMoreButtons.forEach(button => {
+    button.addEventListener("click", function (event) {
+        const button = event.target;
+        const target = button.dataset.target;
+        const jobDescription = button.previousElementSibling;
+
+        if (jobDescription.matches(target)) {
+            if (button.textContent.toLowerCase().includes("see more")) {
+                button.textContent = "See less";
+                jobDescription.style.maxHeight = "none";
+                jobDescription.style.overflowY = "visible";
+            } else {
+                button.textContent = "See more";
+                jobDescription.style.maxHeight = '200px';
+                jobDescription.style.overflowY = "hidden";
+            }
+        }
+    });
+});

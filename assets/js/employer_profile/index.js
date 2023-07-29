@@ -84,7 +84,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const jobpost_tab = document.querySelector('#pills-jobpost-tab');
     if (jobpost_tab) {
         jobpost_tab.addEventListener('click', function () {
-            seeMoreBtnFunction();
+            const target = document.querySelector('.job-description');
+            const observer = new ResizeObserver(() => seeMoreBtnFunction());
+
+            observer.observe(target);
         });
     }
 });

@@ -644,7 +644,6 @@ main_header(['employee_profile']);
                         <?php load_feedback($feedbacks, $has_permission) ?>
                     </div>
                 </div>
-                <!-- End tab -->
             </div>
 
             <div class="col-12 col-md-4 pl-2 pr-2 mt-4">
@@ -661,21 +660,21 @@ main_header(['employee_profile']);
                     </div>
                     <div class="card-body" style="padding-top:10px;padding-bottom:5px; font-size:12px;">
                         <b>STREET:</b>
-                        <h16 class="text-muted">
+                        <h6 class="text-muted">
                             <?= ucwords(@$details->Address) ?>
-                        </h16>
+                        </h6>
                     </div>
                     <div class="card-body " style="padding-top:10px;padding-bottom:5px; font-size:12px;">
                         <b>BARANGAY:</b>
-                        <h16 class="text-muted">
+                        <h6 class="text-muted">
                             <?= ucwords(@$details->Barangay) ?>
-                        </h16>
+                        </h6>
                     </div>
                     <div class="card-body" style="padding-top:10px;padding-bottom:5px; font-size:12px;">
                         <b>CITY:</b>
-                        <h16 class="text-muted">
+                        <h6 class="text-muted">
                             <?= ucwords(@$details->City) ?>
-                        </h16>
+                        </h6>
                     </div>
                 </div>
 
@@ -692,27 +691,27 @@ main_header(['employee_profile']);
                     </div>
                     <div class="card-body" style="padding-top:10px;padding-bottom:5px; font-size:12px;">
                         <b>SSS:</b>
-                        <h16 class="text-muted">
+                        <h6 class="text-muted">
                             <?= ucwords(@$details->SSS) ?>
-                        </h16>
+                        </h6>
                     </div>
                     <div class="card-body" style="padding-top:10px;padding-bottom:5px; font-size:12px;">
                         <b>TIN:</b>
-                        <h16 class="text-muted">
+                        <h6 class="text-muted">
                             <?= ucwords(@$details->Tin) ?>
-                        </h16>
+                        </h6>
                     </div>
                     <div class="card-body" style="padding-top:10px;padding-bottom:5px; font-size:12px;">
                         <b>PHIL HEALTH:</b>
-                        <h16 class="text-muted">
+                        <h6 class="text-muted">
                             <?= ucwords(@$details->Phil_health) ?>
-                        </h16>
+                        </h6>
                     </div>
                     <div class="card-body" style="padding-top:10px;padding-bottom:10px; font-size:12px;">
                         <b>PAG IBIG:</b>
-                        <h16 class="text-muted">
+                        <h6 class="text-muted">
                             <?= ucwords(@$details->Pag_ibig) ?>
-                        </h16>
+                        </h6>
                     </div>
                 </div>
 
@@ -777,7 +776,7 @@ main_header(['employee_profile']);
                     </div>
                 </div>
 
-                <!-- Description Modal -->
+                <!-- Introduction Modal -->
                 <div class="modal fade bd-example-modal-lg" id="Introduction_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
@@ -796,99 +795,6 @@ main_header(['employee_profile']);
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <button type="button" class="btn btn-info" id="update_introduction">Save</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Address Modal -->
-                <div class="modal fade" id="address_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Edit Address</h5>
-
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-
-                                <div class="row pb-3">
-                                    <div class="col-md-12">
-                                        <input type="text" id="ID" value="<?= @$details->ID ?>" hidden>
-                                        <label>Street</label>
-                                        <input type="text" class="form-control" id="Address" value="<?= @$details->Address ?>" placeholder="Enter First Name">
-                                    </div>
-                                </div>
-
-                                <div class="row pb-3">
-                                    <div class="col-md-6">
-                                        <label>Barangay</label>
-                                        <input type="text" class="form-control" id="Barangay" value="<?= @$details->Barangay ?>" placeholder="Enter First Name">
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label>City</label>
-                                        <input type="text" class="form-control" id="City" value="<?= @$details->City ?>" placeholder="Enter First Name">
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" id="update_address">Save</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Govt ID Modal -->
-                <div class="modal fade" id="id_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Edit Government ID</h5>
-
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-
-                                <div class="row pb-3">
-                                    <div class="col-md-6">
-                                        <input type="text" id="ID" value="<?= @$details->ID ?>" hidden>
-                                        <label>SSS</label>
-                                        <input type="text" class="form-control" id="SSS" value="<?= @$details->SSS ?>" placeholder="Enter First Name">
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label>Tin</label>
-                                        <input type="text" class="form-control" id="Tin" value="<?= @$details->Tin ?>" placeholder="Enter First Name">
-                                    </div>
-                                </div>
-
-                                <div class="row pb-3">
-                                    <div class="col-md-6">
-                                        <label>Phil_health</label>
-                                        <input type="text" class="form-control" id="Phil_health" value="<?= @$details->Phil_health ?>" placeholder="Enter First Name">
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label>Pag_ibig</label>
-                                        <input type="text" class="form-control" id="Pag_ibig" value="<?= @$details->Pag_ibig ?>" placeholder="Enter First Name">
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="modal-footer">
-                                <form>
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" id="update_id" formaction="employee_profile/views/index">
-                                        Save
-                                    </button>
-                                </form>
                             </div>
                         </div>
                     </div>
@@ -943,6 +849,5 @@ main_header(['employee_profile']);
 <?php
 main_footer();
 ?>
-
 
 <script src="<?php echo base_url() ?>assets/js/employee_profile/index.js"></script>

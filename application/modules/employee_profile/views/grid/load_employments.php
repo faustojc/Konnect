@@ -30,23 +30,23 @@
         z-index: 400;
     }
 
-    /*ul.timeline > li {*/
-    /*    margin: 0;*/
-    /*    padding-left: 50px;*/
-    /*}*/
+    /*ul.timeline > li {
+        margin: 0;
+        padding-left: 50px;
+    }*/
 
-    /*ul.timeline > li:before {*/
-    /*    content: ' ';*/
-    /*    background: white;*/
-    /*    display: inline-block;*/
-    /*    position: absolute;*/
-    /*    border-radius: 50%;*/
-    /*    border: 3px solid #0dcaf0;*/
-    /*    left: 20px;*/
-    /*    width: 20px;*/
-    /*    height: 20px;*/
-    /*    z-index: 400;*/
-    /*}*/
+    /*ul.timeline > li:before {
+        content: ' ';
+        background: white;
+        display: inline-block;
+        position: absolute;
+        border-radius: 50%;
+        border: 3px solid #0dcaf0;
+        left: 20px;
+        width: 20px;
+        height: 20px;
+        z-index: 400;
+    }*/
 
     .star-rating::before {
         content: "⭐⭐⭐⭐⭐";

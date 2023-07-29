@@ -84,9 +84,7 @@ class Search extends MY_Controller
     private function searchRelevantJobposts($query, $criteria): array
     {
         // Get all job posts that contain the query in their title
-        $this->db->cache_on();
         $job_posts = $this->jobposting_model->getJobsLike('title', $query, 'tbl_jobposting.*, tbl_employer.id AS employer_id, tbl_employer.tradename AS employer_name, tbl_employer.image AS employer_logo');
-        $this->db->cache_off();
 
         // Get following employers
         if ($this->auth['user_type'] == 'EMPLOYEE') {
@@ -176,14 +174,12 @@ class Search extends MY_Controller
         $employees_skills = []; // Only if the current user is employee
 
         // Get all employees
-        //$this->db->cache_on();
         if ($this->auth['user_type'] == 'EMPLOYEE') {
             $employees = $this->employee_model->get_all_employees(['Fname' => $query, 'Mname' => $query, 'Lname' => $query], $this->userdata->ID, 'ID, Fname, Mname ,Lname, Title, City');
             $employees_skills = $this->EmployeeSkills_model->getOtherEmployeeSkills($this->userdata->ID, 'skill');
         } else {
             $employees = $this->employee_model->getEmployeesLike(['Fname' => $query, 'Mname' => $query, 'Lname' => $query], NULL, 'ID, Fname, Mname, Lname, Title, City');
         }
-        //$this->db->cache_off();
 
         // Initialize an array to store the relevance scores
         $scores = [];
@@ -251,13 +247,11 @@ class Search extends MY_Controller
     private function searchRelevantEmployers($query, $criteria): array
     {
         // Get all the employers
-        //$this->db->cache_on();
         if ($this->auth['user_type'] == 'EMPLOYER') {
             $other_employers = $this->employer_model->getEmployersLike(['tradename' => $query, 'business_type' => $query], $this->userdata->id, 'id, tradename, business_type, address, barangay, city');
         } else {
             $other_employers = $this->employer_model->getEmployersLike(['tradename' => $query, 'business_type' => $query], NULL, 'id, tradename, business_type, address, barangay, city');
         }
-        //$this->db->cache_off();
 
         // Apply the scoring system to other employers using the defined criteria
         $scores = [];

@@ -27,28 +27,7 @@
                     continue;
                 }
 
-                $postDate = strtotime($job->date_posted);
-                $currentTime = time();
-                $timeDiff = $currentTime - $postDate;
-
-                if ($timeDiff < 60) {
-                    $formattedTimeDiff = 'less than a minute ago';
-                } else if ($timeDiff < 3600) {
-                    $minutes = floor($timeDiff / 60);
-                    $formattedTimeDiff = $minutes . ' minute' . ($minutes > 1 ? 's' : '') . ' ago';
-                } else if ($timeDiff < 86400) {
-                    $hours = floor($timeDiff / 3600);
-                    $formattedTimeDiff = $hours . ' hour' . ($hours > 1 ? 's' : '') . ' ago';
-                } else if ($timeDiff < 604800) {
-                    $days = floor($timeDiff / 86400);
-                    $formattedTimeDiff = $days . ' day' . ($days > 1 ? 's' : '') . ' ago';
-                } else if ($timeDiff < 2592000) {
-                    $weeks = floor($timeDiff / 604800);
-                    $formattedTimeDiff = $weeks . ' week' . ($weeks > 1 ? 's' : '') . ' ago';
-                } else {
-                    $months = floor($timeDiff / 2592000);
-                    $formattedTimeDiff = $months . ' month' . ($months > 1 ? 's' : '') . ' ago';
-                }
+                $formattedTimeDiff = formatTime($job->date_posted);
                 ?>
                 <div class="card card-light p-3 mb-2 job-link" role="button" data-id="<?= $job->id ?>">
                     <h5 class="card-title font-weight-bold text-dark mb-0">

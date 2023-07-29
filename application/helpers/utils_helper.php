@@ -31,9 +31,12 @@ if (!function_exists('formatTime')) {
         } else if ($timeDiff < 2592000) {
             $weeks = floor($timeDiff / 604800);
             $formattedTimeDiff = $weeks . ' week' . ($weeks > 1 ? 's' : '') . ' ago';
-        } else {
+        } else if ($timeDiff < 31536000) {
             $months = floor($timeDiff / 2592000);
             $formattedTimeDiff = $months . ' month' . ($months > 1 ? 's' : '') . ' ago';
+        } else {
+            $years = floor($timeDiff / 31536000);
+            $formattedTimeDiff = $years . ' year' . ($years > 1 ? 's' : '') . ' ago';
         }
 
         return $formattedTimeDiff;

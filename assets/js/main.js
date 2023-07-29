@@ -11,7 +11,7 @@ function validateForm(target) {
         let errors = 0;
 
         for (const input of inputs) {
-            errors = (input.value === '' || input.required) ? errors + 1 : errors;
+            errors = (input.value === '' && input.required) ? errors + 1 : errors;
 
             if (input.value === '') {
                 input.classList.add('is-invalid');

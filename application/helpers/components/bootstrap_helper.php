@@ -15,14 +15,14 @@ if (!function_exists('modal')) {
      */
     function modal(string $modalId, string $title, string $content, string $submitBtnId, string $submitBtnText, string $bgColor = '')
     {
-        $data = array(
+        $data = [
             'modalId' => $modalId,
             'title' => $title,
             'content' => $content,
             'submitBtnId' => $submitBtnId,
             'submitBtnText' => $submitBtnText,
-            'bgColor' => $bgColor
-        );
+            'bgColor' => $bgColor,
+        ];
 
         $CI = &get_instance();
         $CI->load->view('components/modal', $data);
@@ -43,9 +43,9 @@ if (!function_exists('jobpost_all_display')) {
     {
         $jobpostings = $data;
 
-        $data = array(
-            'jobpostings' => $jobpostings
-        );
+        $data = [
+            'jobpostings' => $jobpostings,
+        ];
 
         $CI = &get_instance();
         $CI->load->view('components/jobpost_all_display', $data);
@@ -60,17 +60,17 @@ if (!function_exists('jobpost_update_modal')) {
      *
      * USAGE: jobpost_update_modal($data, $modalId);
      *
-     * @param stdClass $data The data of jobpost must contain the same keys as the database table.
+     * @param object $data The data of jobpost must contain the same keys as the database table.
      * @param string $modalId The id of the modal.
      */
-    function jobpost_update_modal(stdClass $data, string $modalId)
+    function jobpost_update_modal(object $data, string $modalId)
     {
         $jobpost = $data;
 
-        $data = array(
+        $data = [
             'jobpost' => $jobpost,
             'modalId' => $modalId,
-        );
+        ];
 
         $CI = &get_instance();
         $CI->load->view('components/jobpost_update_modal', $data);
@@ -89,9 +89,9 @@ if (!function_exists('displayNotifications')) {
      */
     function displayNotifications(array $notifications)
     {
-        $data = array(
+        $data = [
             'notifications' => $notifications,
-        );
+        ];
 
         $CI = &get_instance();
         $CI->load->view('components/display_notifications', $data);
@@ -110,9 +110,9 @@ if (!function_exists('load_employees')) {
      */
     function load_employees(array $employees)
     {
-        $data = array(
-            'employees' => $employees
-        );
+        $data = [
+            'employees' => $employees,
+        ];
 
         $CI = &get_instance();
         $CI->load->view('components/load_employees', $data);
@@ -130,13 +130,13 @@ if (!function_exists('load_employers')) {
      * @param array $employers The array of employers.
      * @param array $following OPTIONAL: The array of employee's followed employers.
      */
-    function load_employers(array $employers, array $following = array())
+    function load_employers(array $employers, array $following = [])
     {
         $user_type = get_userdata(AUTH)['user_type'];
-        $data = array(
+        $data = [
             'employers' => $employers,
             'user_type' => $user_type,
-        );
+        ];
 
         if (!empty($following) && $user_type == 'EMPLOYEE') {
             $data['following'] = $following;
@@ -159,9 +159,9 @@ if (!function_exists('load_followers')) {
      */
     function load_followers(array $followers)
     {
-        $data = array(
-            'followers' => $followers
-        );
+        $data = [
+            'followers' => $followers,
+        ];
 
         $CI = &get_instance();
         $CI->load->view('components/load_followers', $data);
@@ -180,9 +180,9 @@ if (!function_exists('load_following')) {
      */
     function load_following(array $following)
     {
-        $data = array(
-            'following' => $following
-        );
+        $data = [
+            'following' => $following,
+        ];
 
         $CI = &get_instance();
         $CI->load->view('components/load_followings', $data);
@@ -202,10 +202,10 @@ if (!function_exists('apply_button')) {
      */
     function apply_button(int $job_id, string $status)
     {
-        $data = array(
+        $data = [
             'job_id' => $job_id,
             'status' => $status,
-        );
+        ];
 
         $CI = &get_instance();
         $CI->load->view('components/employee/dashboard/apply_button', $data);
@@ -225,10 +225,10 @@ if (!function_exists('load_feedback')) {
      */
     function load_feedback(array $feedback, bool $isAccount)
     {
-        $data = array(
+        $data = [
             'feedback' => $feedback,
             'has_permission' => $isAccount,
-        );
+        ];
 
         $CI = &get_instance();
         $CI->load->view('components/load_feedback', $data);

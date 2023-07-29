@@ -1,26 +1,5 @@
 <?php
-$postDate = strtotime($job->date_posted);
-$currentTime = time();
-$timeDiff = $currentTime - $postDate;
-
-if ($timeDiff < 60) {
-    $formattedTimeDiff = 'less than a minute ago';
-} elseif ($timeDiff < 3600) {
-    $minutes = floor($timeDiff / 60);
-    $formattedTimeDiff = $minutes . ' minute' . ($minutes > 1 ? 's' : '') . ' ago';
-} elseif ($timeDiff < 86400) {
-    $hours = floor($timeDiff / 3600);
-    $formattedTimeDiff = $hours . ' hour' . ($hours > 1 ? 's' : '') . ' ago';
-} elseif ($timeDiff < 604800) {
-    $days = floor($timeDiff / 86400);
-    $formattedTimeDiff = $days . ' day' . ($days > 1 ? 's' : '') . ' ago';
-} elseif ($timeDiff < 2592000) {
-    $weeks = floor($timeDiff / 604800);
-    $formattedTimeDiff = $weeks . ' week' . ($weeks > 1 ? 's' : '') . ' ago';
-} else {
-    $months = floor($timeDiff / 2592000);
-    $formattedTimeDiff = $months . ' month' . ($months > 1 ? 's' : '') . ' ago';
-}
+$time = formatTime($job->date_posted);
 ?>
 
 <div class="card card-light mb-0 sticky-top" style="top: 60px; max-height: calc(100vh - 70px);">
@@ -34,7 +13,7 @@ if ($timeDiff < 60) {
             <?= ucwords($job->EmployerTradename) ?>
         </h6>
         <small class="text-muted mb-2">Posted
-            <?= $formattedTimeDiff ?>
+            <?= $time ?>
         </small>
         <div class="card-tools mb-4">
             <span class="badge job-status">
@@ -46,17 +25,9 @@ if ($timeDiff < 60) {
         $auth = get_userdata(AUTH);
 
         if ($auth['user_type'] == 'EMPLOYEE' && !empty($applicant)) {
-            $hasApplied = false;
-
-            foreach ($applicant as $applied) {
-                if ($applied->job_id == $job->id && strtoupper($applied->status) != 'PENDING') {
-                    $hasApplied = true;
-                    apply_button($job->id, strtoupper($applied->status));
-                    break;
-                }
-            }
-
-            if (!$hasApplied) {
+            if ($applicant->job_id == $job->id && strtoupper($applicant->status) != 'PENDING') {
+                apply_button($job->id, strtoupper($applicant->status));
+            } else {
                 apply_button($job->id, 'APPLY NOW');
             }
         } ?>

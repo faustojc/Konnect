@@ -87,7 +87,7 @@ $db['default'] = [
     'db_debug' => (ENVIRONMENT !== 'production'),
     // 'db_debug' => (ENVIRONMENT == 'development'),
     'cache_on' => FALSE,
-    'cachedir' => '', //'application/cache/database',
+    'cachedir' => 'application/cache/database',
     'char_set' => 'utf8',
     'dbcollat' => 'utf8_general_ci',
     'swap_pre' => '',

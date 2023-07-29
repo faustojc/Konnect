@@ -11,24 +11,21 @@
 
 <?php if (!empty($jobpostings)) {
     foreach ($jobpostings as $jobpost) {
-        $hasApplied = FALSE;
+        $has_permission = FALSE;
+
+        if ($auth['user_type'] == 'EMPLOYER') {
+            $has_permission = get_userdata(USER)->id == $jobpost->employer_id;
+        }
 
         if (strtoupper($jobpost->filled) == 'CLOSED') {
             continue;
         }
 
-        if ($auth['user_type'] == 'EMPLOYEE' && !empty($applicant)) {
-            foreach ($applicant as $applied) {
-                if ($applied->job_id == $jobpost->id && strtoupper($applied->status) != 'PENDING') {
-                    $hasApplied = TRUE;
-                    break;
-                }
-            }
-        }
-
-        if ($hasApplied) {
+        if ($auth['user_type'] == 'EMPLOYEE' && !empty($applicant) && $applicant->job_id == $jobpost->id && strtoupper($applicant->status) != 'PENDING') {
+            $hasApplied = TRUE;
             continue;
         }
+
 
         $timeAgo = formatTime($jobpost->date_posted);
 
@@ -60,17 +57,19 @@
 
                             </div>
                         </div>
-                        <div class="col-1">
-                            <div class="btn-group dropleft pt-3" style="">
-                                <button type="button" class="btn card-tool text-muted " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                                </button>
-                                <div class="dropdown-menu" style="border-radius:10px; box-shadow: none;">
-                                    <a class="dropdown-item" data-toggle="modal" data-target="#modal<?= $jobpost->id ?>">Edit</a>
-                                    <a class="dropdown-item" href="#">Delete</a>
+                        <?php if ($has_permission): ?>
+                            <div class="col-1">
+                                <div class="btn-group dropleft pt-3" style="">
+                                    <button type="button" class="btn card-tool text-muted " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    </button>
+                                    <div class="dropdown-menu" style="border-radius:10px; box-shadow: none;">
+                                        <a class="dropdown-item" data-toggle="modal" data-target="#modal<?= $jobpost->id ?>">Edit</a>
+                                        <a class="dropdown-item" href="#">Delete</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        <?php endif; ?>
                     </div>
 
                     <?php jobpost_update_modal($jobpost, 'modal' . $jobpost->id); ?>
@@ -136,4 +135,18 @@
             </div>
         </div>
     <?php }
-} ?>
+} else {
+    if ($has_permission): ?>
+        <div class="card">
+            <div class="card-body">
+                <p class="card-text">You haven't posted any jobs.</p>
+            </div>
+        </div>
+    <?php else: ?>
+        <div class="card">
+            <div class="card-body">
+                <p class="card-text">The user haven't posted any jobs yet.</p>
+            </div>
+        </div>
+    <?php endif; ?>
+<?php } ?>

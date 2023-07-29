@@ -5,7 +5,7 @@ class beu_dashboard extends MY_Controller
 {
     protected $userdata;
     protected $auth;
-    private $data = [];
+    private array $data = [];
 
     public function __construct()
     {

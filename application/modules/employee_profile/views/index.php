@@ -635,7 +635,7 @@ main_header(['employee_profile']);
             </div>
 
             <div class="col-12 col-md-4 pl-2 pr-2 mt-4">
-                <div class="card card-white">
+                <!--<div class="card card-white">
                     <div class="card-header">
                         <h3 class="card-title fw-600" style="font-weight:600;">Address</h3>
                         <?php if ($has_permission): ?>
@@ -664,106 +664,45 @@ main_header(['employee_profile']);
                             <?= ucwords(@$details->City) ?>
                         </h6>
                     </div>
-                </div>
+                </div> -->
 
-                <div class="card card-white">
-                    <div class="card-header">
-                        <h3 class="card-title fw-500" style="font-weight:600;">Government ID</h3>
-                        <?php if ($has_permission): ?>
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-toggle="modal" data-target="#id_modal" style="opacity:1;  cursor: pointer;">
-                                    <i class="fa-solid fa-pen"></i>
-                                </button>
-                            </div>
-                        <?php endif; ?>
+                <?php if ($has_permission): ?>
+                    <div class="card card-white">
+                        <div class="card-header">
+                            <h3 class="card-title fw-500" style="font-weight:600;">Government ID</h3>
+                        </div>
+                        <div class="card-body" style="padding-top:10px;padding-bottom:5px; font-size:12px;">
+                            <b>SSS:</b>
+                            <h6 class="text-muted">
+                                <?= ucwords(@$details->SSS) ?>
+                            </h6>
+                        </div>
+                        <div class="card-body" style="padding-top:10px;padding-bottom:5px; font-size:12px;">
+                            <b>TIN:</b>
+                            <h6 class="text-muted">
+                                <?= ucwords(@$details->Tin) ?>
+                            </h6>
+                        </div>
+                        <div class="card-body" style="padding-top:10px;padding-bottom:5px; font-size:12px;">
+                            <b>PHIL HEALTH:</b>
+                            <h6 class="text-muted">
+                                <?= ucwords(@$details->Phil_health) ?>
+                            </h6>
+                        </div>
+                        <div class="card-body" style="padding-top:10px;padding-bottom:10px; font-size:12px;">
+                            <b>PAG IBIG:</b>
+                            <h6 class="text-muted">
+                                <?= ucwords(@$details->Pag_ibig) ?>
+                            </h6>
+                        </div>
                     </div>
-                    <div class="card-body" style="padding-top:10px;padding-bottom:5px; font-size:12px;">
-                        <b>SSS:</b>
-                        <h6 class="text-muted">
-                            <?= ucwords(@$details->SSS) ?>
-                        </h6>
-                    </div>
-                    <div class="card-body" style="padding-top:10px;padding-bottom:5px; font-size:12px;">
-                        <b>TIN:</b>
-                        <h6 class="text-muted">
-                            <?= ucwords(@$details->Tin) ?>
-                        </h6>
-                    </div>
-                    <div class="card-body" style="padding-top:10px;padding-bottom:5px; font-size:12px;">
-                        <b>PHIL HEALTH:</b>
-                        <h6 class="text-muted">
-                            <?= ucwords(@$details->Phil_health) ?>
-                        </h6>
-                    </div>
-                    <div class="card-body" style="padding-top:10px;padding-bottom:10px; font-size:12px;">
-                        <b>PAG IBIG:</b>
-                        <h6 class="text-muted">
-                            <?= ucwords(@$details->Pag_ibig) ?>
-                        </h6>
-                    </div>
-                </div>
+                <?php endif; ?>
 
-                <!-- EMPLOYEES -->
-                <div class="card card-widget widget-user-2 d-none d-md-block">
-                    <div class="card-header">
-                        <h3 class="card-title fw-500">Employees</h3>
-                    </div>
-                    <div id="load_employees_follow_section" style="margin-left: 1rem; margin-right:1rem;">
-                        <?php load_employees($employees) ?>
-                    </div>
-                </div>
+                <!-- JOBS EMPLOYED -->
 
-                <!-- EMPLOYERS -->
-                <div class="card card-widget widget-user-2 d-none d-md-block">
-                    <div class="card-header">
-                        <h3 class="card-title fw-500">Employers</h3>
-                    </div>
-                    <div id="load_employers_follow_section" style="margin-left:1rem; margin-right:1rem;">
-                        <?php load_employers($employers, $current_following) ?>
-                    </div>
-                </div>
             </div>
 
             <?php if ($has_permission): ?>
-                <div class="modal fade" id="contact" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">
-                                    <?= ucwords(@$details->Fname) . " " . ucwords(@$details->Mname) . " " . ucwords(@$details->Lname) ?>
-                                </h5>
-
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <h5>Contact Details</h5>
-                                <br>
-                                <h6 style="font-weight: normal;"><i class="fas fa-map-pin"></i> Address</h6>
-                                <h6 style="font-weight: normal;">
-                                    <?= ucwords(@$details->City) ?>
-                                </h6>
-                                <br>
-                                <h6 style="font-weight: normal;"><i class="fa fa-envelope"></i> Email</h6>
-                                <h6 style="font-weight: normal;">
-                                    <?= ucwords(@$details->Email) ?>
-                                </h6>
-                                <br>
-                                <h6 style="font-weight: normal;"><i class="fa fa-phone"></i> Number</h6>
-                                <h6 style="font-weight: normal;">
-                                    <?= ucwords(@$details->Cnum) ?>
-                                </h6>
-                                <br>
-                                <h6 style="font-weight: normal;"><i class="	fa fa-birthday-cake"></i> Birthday</h6>
-                                <h6 style="font-weight: normal;">
-                                    <?= ucwords(@$details->Bday) ?>
-                                </h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Introduction Modal -->
                 <div class="modal fade bd-example-modal-lg" id="Introduction_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">

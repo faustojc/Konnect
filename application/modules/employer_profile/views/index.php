@@ -196,51 +196,57 @@ main_header(['Employer_profile']);
                         <div class="card card-white">
                             <div class="card-header">
                                 <h3 class="card-title fw-500">Summary</h3>
-                                <div class="card-tools">
-                                    <button type="button" class="btn btn-tool edit-summary" data-toggle="modal" data-target="#summary-modal">
-                                        <i class="fa-solid fa-pen" style="color: grey;"></i>
-                                    </button>
-                                </div>
+                                <?php if ($has_permission): ?>
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool edit-summary" data-toggle="modal" data-target="#summary-modal">
+                                            <i class="fa-solid fa-pen" style="color: grey;"></i>
+                                        </button>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                             <div class="card-body card-widget widget-user-2" id="load_summary">
                                 <?= $current_employer->summary ?>
                             </div>
 
-                            <!-- MODAL SUMMARY -->
-                            <div class="modal fade" id="summary-modal" data-keyboard="false" tabindex="-1" aria-labelledby="summary-modal-label" aria-hidden="true">
-                                <div class="modal-dialog modal-xl">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="summary-modal-label">Edit summary</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="p-3">
-                                                <h3 class="font-weight-light mb-3">Edit your summary</h3>
-                                                <p class="text-muted">A summary of your company should be concise,
-                                                    informative, and engaging, highlighting the main reasons why someone
-                                                    would want to work for you.</p>
-                                                <textarea id="summary"></textarea>
-                                                <p class="text-danger float-left summary-warning" hidden>
-                                                    <i class="text-danger fa fa-exclamation-circle"></i>
-                                                    Character exceeds 2000
-                                                </p>
-                                                <p class="text-muted float-right" id="summary_character_count"></p>
+                            <?php if ($has_permission): ?>
+                                <!-- MODAL SUMMARY -->
+                                <div class="modal fade" id="summary-modal" data-keyboard="false" tabindex="-1" aria-labelledby="summary-modal-label" aria-hidden="true">
+                                    <div class="modal-dialog modal-xl">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="summary-modal-label">Edit summary</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
                                             </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
-                                                Dismiss
-                                            </button>
-                                            <button type="button" class="btn btn-outline-primary" id="update_summary">
-                                                Save Changes
-                                            </button>
+                                            <div class="modal-body">
+                                                <div class="p-3">
+                                                    <h3 class="font-weight-light mb-3">Edit your summary</h3>
+                                                    <p class="text-muted">A summary of your company should be concise,
+                                                        informative, and engaging, highlighting the main reasons why
+                                                        someone
+                                                        would want to work for you.</p>
+                                                    <textarea id="summary"></textarea>
+                                                    <p class="text-danger float-left summary-warning" hidden>
+                                                        <i class="text-danger fa fa-exclamation-circle"></i>
+                                                        Character exceeds 2000
+                                                    </p>
+                                                    <p class="text-muted float-right" id="summary_character_count"></p>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+                                                    Dismiss
+                                                </button>
+                                                <button type="button" class="btn btn-outline-primary" id="update_summary">
+                                                    Save Changes
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            <?php endif; ?>
+
                         </div>
                     </div>
 

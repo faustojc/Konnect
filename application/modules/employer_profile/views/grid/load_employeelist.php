@@ -86,8 +86,8 @@
                     <th>#</th>
                     <th>Name</th>
                     <th>Job Title</th>
-                    <th>Status</th>
-                    <th>Verified</th>
+                    <th>Is active</th>
+                    <th>Is verified</th>
                     <th>Start</th>
                     <th>End</th>
                 </tr>

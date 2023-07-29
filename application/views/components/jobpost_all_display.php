@@ -83,7 +83,7 @@
                             </span>
                         </h6>
                         <!-- <hr> -->
-                        <div class="job-description" style="max-height: 150px; overflow-y: hidden">
+                        <div class="job-description" style="max-height: 200px; overflow-y: hidden">
                             <div class="" style="font-weight:300;">
                                 <h5>
                                     <?php if (isset($jobpost->salary) && $jobpost->salary !== '') : ?>

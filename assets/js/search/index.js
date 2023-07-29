@@ -62,4 +62,3 @@ function handleSearch() {
     //     window.location.href = baseUrl + 'search?query=' + encodeURIComponent(searchTerm);
     // }
 }
-

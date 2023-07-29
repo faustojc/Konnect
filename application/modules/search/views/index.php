@@ -153,7 +153,7 @@ main_header(['Search']);
 
     .outline-gray {
         color: #6c757d;
-        border-radius: 15px;
+        border-radius: 50%;
         display: inline-block;
         font-weight: 400;
         /* color: #212529; */
@@ -228,7 +228,8 @@ main_header(['Search']);
                                             </label>
                                         </div>
                                         <hr>
-                                        <label for="" class="text-muted" style="font-weight:400;">Working Schedule</label>
+                                        <label for="" class="text-muted" style="font-weight:400;">Working
+                                            Schedule</label>
                                         <div class="form-check pt-1" style="font-size:14px;">
                                             <input class="form-check-input" type="checkbox" value="" id="day_shift" name="day_shift">
                                             <label class="form-check-label" for="day_shift" style="font-weight:300;">
@@ -262,10 +263,18 @@ main_header(['Search']);
                     <div class="card" style="">
                         <div class="card-body">
                             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                <a class="nav-link active" id="v-pills-all-tab" data-toggle="pill" href="#v-pills-all" role="tab" aria-controls="v-pills-all" aria-selected="true">All</a>
-                                <a class="nav-link" id="v-pills-posts-tab" data-toggle="pill" href="#v-pills-posts" role="tab" aria-controls="v-pills-posts" aria-selected="false">Job Posts</a>
-                                <a class="nav-link" id="v-pills-employer-tab" data-toggle="pill" href="#v-pills-employer" role="tab" aria-controls="v-pills-employer" aria-selected="false">Employer</a>
-                                <a class="nav-link" id="v-pills-employee-tab" data-toggle="pill" href="#v-pills-employee" role="tab" aria-controls="v-pills-employee" aria-selected="false">Employee</a>
+                                <a class="nav-link active" id="v-pills-all-tab" data-toggle="pill" href="#v-pills-all" role="tab" aria-controls="v-pills-all" aria-selected="true">
+                                    All
+                                </a>
+                                <a class="nav-link" id="v-pills-posts-tab" data-toggle="pill" href="#v-pills-posts" role="tab" aria-controls="v-pills-posts" aria-selected="false">Job
+                                    Posts
+                                </a>
+                                <a class="nav-link" id="v-pills-employer-tab" data-toggle="pill" href="#v-pills-employer" role="tab" aria-controls="v-pills-employer" aria-selected="false">
+                                    Employer
+                                </a>
+                                <a class="nav-link" id="v-pills-employee-tab" data-toggle="pill" href="#v-pills-employee" role="tab" aria-controls="v-pills-employee" aria-selected="false">
+                                    Employee
+                                </a>
                             </div>
                         </div>
                     </div>

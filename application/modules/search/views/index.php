@@ -178,6 +178,24 @@ main_header(['Search']);
         <div class="row pl-3 pr-3" style="margin-top: 3.5rem;">
             <div class="col-12 col-md-3 mt-4">
                 <div class="container sticky-top" style="top:80px;">
+                <div class="card">
+                    <div class="card-body py-3">
+                        <div class="search-results-container">
+                            <div class="row">
+                                <div class="col-12 d-flex align-items-center">
+                                    <h5 class="m-0 pr-1" style="font-weight:600; line-height:normal;">
+                                        Search Results
+                                    </h5>
+                                    <div class="total-job-postings ">
+                                        <h4 class="outline-gray m-0 rounded-pill " style="font-weight:300; line-height:normal;">
+                                            <?= $results['total_overall'] ?>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                     <div class="card ">
                         <div class="card-body">
                             <div class="row">

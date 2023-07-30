@@ -73,37 +73,20 @@
     }
 </style>
 
-<div class="card">
-    <div class="card-body py-1">
-        <div class="search-results-container">
-            <div class="row">
-                <div class="col-12 d-flex align-items-center">
-                    <h5 class="m-0 pr-1" style="font-weight:600; line-height:normal;">
-                        Search Results
-                    </h5>
-                    <div class="total-job-postings">
-                        <h4 class="outline-gray m-0" style="font-weight:300; line-height:normal;">
-                            <?= $results['total_overall'] ?>
-                        </h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 <div class="tab-content" id="v-pills-tabContent">
     <div class="tab-pane fade active show" id="v-pills-all" role="tabpanel" aria-labelledby="v-pills-all-tab">
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-body py-2">
+                    <div class="card-body py-3">
                         <div class="search-results-container">
                             <div class="row">
                                 <div class="col-12 d-flex align-items-center">
                                     <h5 class="m-0 pr-1" style="font-weight:600; line-height:normal;">Job posts</h5>
                                     <div class="total-job-postings">
-                                        <h4 class="outline-gray m-0" style="font-weight:300; line-height:normal;">
+                                        <h4 class="outline-gray m-0 rounded-pill" style="font-weight:300; line-height:normal;">
                                             <?= $results['total_jobposts'] ?>
                                         </h4>
                                     </div>
@@ -122,13 +105,13 @@
 
             <div class="col-12">
                 <div class="card">
-                    <div class="card-body py-2">
+                    <div class="card-body py-3">
                         <div class="search-results-container">
                             <div class="row">
                                 <div class="col-12 d-flex align-items-center">
                                     <h5 class="m-0 pr-1" style="font-weight:600; line-height:normal;">Employers</h5>
                                     <div class="total-job-postings">
-                                        <h4 class="outline-gray m-0" style="font-weight:300; line-height:normal;">
+                                        <h4 class="outline-gray m-0 rounded-pill" style="font-weight:300; line-height:normal;">
                                             <?= $results['total_employers'] ?>
                                         </h4>
                                     </div>

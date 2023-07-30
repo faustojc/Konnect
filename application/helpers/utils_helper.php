@@ -1,5 +1,22 @@
 <?php
-if (!function_exists('image_exist')) {
+if (!function_exists('numberShortForm')) {
+    function numberShortForm($number): string
+    {
+        if ($number >= 1000000000) {
+            $formattedNumber = number_format($number / 1000000000, 1) . 'B';
+        } else if ($number >= 1000000) {
+            $formattedNumber = number_format($number / 1000000, 1) . 'M';
+        } else if ($number >= 1000) {
+            $formattedNumber = number_format($number / 1000, 1) . 'K';
+        } else {
+            $formattedNumber = $number;
+        }
+
+        return $formattedNumber;
+    }
+}
+
+if (!function_exists('imageExists')) {
     function imageExists($url): bool
     {
         $ch = curl_init($url);
@@ -16,7 +33,6 @@ if (!function_exists('formatTime')) {
     function formatTime(string $time): string
     {
         $timeDiff = time() - strtotime($time);
-
         if ($timeDiff < 60) {
             $formattedTimeDiff = 'less than a minute ago';
         } else if ($timeDiff < 3600) {

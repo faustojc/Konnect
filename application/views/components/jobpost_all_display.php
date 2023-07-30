@@ -12,6 +12,7 @@
 <?php if (!empty($jobpostings)) {
     foreach ($jobpostings as $jobpost) {
         $has_permission = FALSE;
+        $hasApplied = FALSE;
 
         if ($auth['user_type'] == 'EMPLOYER') {
             $has_permission = get_userdata(USER)->id == $jobpost->employer_id;
@@ -21,11 +22,18 @@
             continue;
         }
 
-        if ($auth['user_type'] == 'EMPLOYEE' && !empty($applicant) && $applicant->job_id == $jobpost->id && strtoupper($applicant->status) != 'PENDING') {
-            $hasApplied = TRUE;
-            continue;
+        if ($auth['user_type'] == 'EMPLOYEE' && !empty($applicant)) {
+            foreach ($applicant as $applied) {
+                if ($applied->job_id == $jobpost->id && strtoupper($applied->status) != 'PENDING') {
+                    $hasApplied = TRUE;
+                    break;
+                }
+            }
         }
 
+        if ($hasApplied) {
+            continue;
+        }
 
         $timeAgo = formatTime($jobpost->date_posted);
 

@@ -5,6 +5,9 @@ class Employee_model extends CI_Model
 {
     public $Table;
 
+    /**
+     * @throws JsonException
+     */
     public function __construct()
     {
         parent::__construct();
@@ -16,7 +19,7 @@ class Employee_model extends CI_Model
 
         $model_list = [];
         $this->load->model($model_list);
-        $this->Table = json_decode(TABLE);
+        $this->Table = json_decode(TABLE, FALSE, 512, JSON_THROW_ON_ERROR);
     }
 
     public function getEmployee($id)
@@ -53,11 +56,17 @@ class Employee_model extends CI_Model
         return $this->db->get()->result();
     }
 
-    public function getEmployeesLike(array $arr, $id = NULL, $select = '*')
+    public function getEmployeesLike(array $arr, $id = NULL, $select = 'tbl_employee.*, GROUP_CONCAT(DISTINCT tbl_employee_skill.skill) AS skills, GROUP_CONCAT(DISTINCT tbl_follow.id) AS follow_ids, tbl_feedback.rating AS ratings')
     {
-        $this->db->select($select)->from($this->Table->employee);
+        $this->db->select($select)
+            ->from($this->Table->employee)
+            ->join('tbl_employee_skill', 'tbl_employee_skill.employee_id = tbl_employee.ID', 'left')
+            ->join('tbl_follow', 'tbl_follow.employee_id = tbl_employee.ID', 'left')
+            ->join('(SELECT user_id, GROUP_CONCAT(rating) AS rating FROM tbl_feedback GROUP BY user_id) AS tbl_feedback', 'tbl_feedback.user_id = tbl_employee.user_id', 'left')
+            ->group_by('tbl_employee.ID');
+
         if ($id != NULL) {
-            $this->db->where('ID !=', $id);
+            $this->db->where('tbl_employee.ID !=', $id);
         }
 
         if (!empty($arr)) {
@@ -66,9 +75,9 @@ class Employee_model extends CI_Model
 
             foreach ($arr as $key => $value) {
                 if ($count == 0) {
-                    $this->db->like($key, $value);
+                    $this->db->like('tbl_employee.' . $key, $value);
                 } else {
-                    $this->db->or_like($key, $value);
+                    $this->db->or_like('tbl_employee.' . $key, $value);
                 }
 
                 ++$count;

@@ -175,10 +175,10 @@ class Search extends MY_Controller
 
         // Get all employees
         if ($this->auth['user_type'] == 'EMPLOYEE') {
-            $employees = $this->employee_model->get_all_employees(['Fname' => $query, 'Mname' => $query, 'Lname' => $query], $this->userdata->ID, 'ID, Fname, Mname ,Lname, Title, City');
+            $employees = $this->employee_model->getEmployeesLike(['Fname' => $query, 'Mname' => $query, 'Lname' => $query], $this->userdata->ID);
             $employees_skills = $this->EmployeeSkills_model->getOtherEmployeeSkills($this->userdata->ID, 'skill');
         } else {
-            $employees = $this->employee_model->getEmployeesLike(['Fname' => $query, 'Mname' => $query, 'Lname' => $query], NULL, 'ID, Fname, Mname, Lname, Title, City');
+            $employees = $this->employee_model->getEmployeesLike(['Fname' => $query, 'Mname' => $query, 'Lname' => $query], NULL);
         }
 
         // Initialize an array to store the relevance scores

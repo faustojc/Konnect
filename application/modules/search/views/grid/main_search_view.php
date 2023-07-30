@@ -130,7 +130,7 @@
 
             <div class="col-12">
                 <div class="card ">
-                    <div class="card-body py-2">
+                    <div class="card-body py-3">
                         <div class="search-results-container">
                             <div class="row">
                                 <div class="col-12 d-flex align-items-center">
@@ -159,7 +159,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-body py-2">
+                    <div class="card-body py-3">
                         <div class="search-results-container">
                             <div class="row">
                                 <div class="col-12 d-flex align-items-center">
@@ -188,7 +188,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-body py-2">
+                    <div class="card-body py-3">
                         <div class="search-results-container">
                             <div class="row">
                                 <div class="col-12 d-flex align-items-center">
@@ -217,7 +217,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card ">
-                    <div class="card-body py-2">
+                    <div class="card-body py-3">
                         <div class="search-results-container">
                             <div class="row">
                                 <div class="col-12 d-flex align-items-center">

@@ -5,6 +5,9 @@ class Employer_model extends CI_Model
 {
     public $Table;
 
+    /**
+     * @throws JsonException
+     */
     public function __construct()
     {
         parent::__construct();
@@ -16,7 +19,7 @@ class Employer_model extends CI_Model
 
         $model_list = [];
         $this->load->model($model_list);
-        $this->Table = json_decode(TABLE);
+        $this->Table = json_decode(TABLE, FALSE, 512, JSON_THROW_ON_ERROR);
     }
 
     public function get_employers($limit = 0, $id = NULL, $select = '*')
@@ -36,11 +39,6 @@ class Employer_model extends CI_Model
         return $this->db->select($select)->from($this->Table->employer)->get()->result();
     }
 
-    public function get_employer($employer_id)
-    {
-        return $this->db->select()->from($this->Table->employer)->where('id', $employer_id)->get()->row();
-    }
-
     public function where($column_name, $value)
     {
         return $this->db->select()->from($this->Table->employer)->where($column_name, $value)->get()->row();
@@ -51,11 +49,15 @@ class Employer_model extends CI_Model
         return $this->db->select($select)->from($this->Table->employer)->where('id', $id)->get()->row();
     }
 
-    public function getEmployersLike(array $arr, $id = NULL, $select = '*')
+    public function getEmployersLike(array $arr, $id = NULL, $select = 'tbl_employer.*, GROUP_CONCAT(DISTINCT tbl_follow.id) AS follower_ids, tbl_feedback.rating AS ratings')
     {
-        $this->db->select($select)->from($this->Table->employer);
+        $this->db->select($select)->from($this->Table->employer)
+            ->join('tbl_feedback', 'tbl_feedback.user_id = tbl_employer.user_id', 'left')
+            ->join('tbl_follow', 'tbl_follow.employer_id = tbl_employer.id', 'left')
+            ->group_by('tbl_employer.id');
+
         if ($id != NULL) {
-            $this->db->where('ID !=', $id);
+            $this->db->where('tbl_employer.id !=', $id);
         }
 
         if (!empty($arr)) {

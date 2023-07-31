@@ -66,25 +66,11 @@ class Jobposting_services_model extends CI_Model
 
             if ($this->db->trans_status() === FALSE) {
                 $this->db->trans_rollback();
-                throw new Exception(ERROR_PROCESSING, TRUE);
+                throw new RuntimeException(ERROR_PROCESSING, TRUE);
             }
 
             $this->db->trans_commit();
             return ['message' => SAVED_SUCCESSFUL, 'has_error' => FALSE];
-        } catch (Exception $msg) {
-            return (['message' => $msg->getMessage(), 'has_error' => TRUE]);
-        }
-    }
-
-    public function search_jobs($search_text)
-    {
-        try {
-            $query = $this->db->select()
-                ->from($this->Table->jobposting)
-                ->like('title', $search_text)
-                ->get()->result();
-
-            return $query;
         } catch (Exception $msg) {
             return (['message' => $msg->getMessage(), 'has_error' => TRUE]);
         }

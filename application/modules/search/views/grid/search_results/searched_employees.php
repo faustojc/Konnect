@@ -47,7 +47,7 @@
                     <div class="row d-flex align-items-center mt-3">
                         <div class="col-12">
                             <div class="pt-0">
-                                <h5 class="m-0"><?= $employee_name ?></h5>
+                                <h5 class="m-0 text-truncate"><?= $employee_name ?></h5>
                             </div>
                             <div class="p-0">
                                 <small class="px-0 text-muted mb-1">
@@ -68,7 +68,8 @@
                                             $remaining = count($skills) - $limit;
                                             if ($remaining > 0):?>
                                                 <h6 class="outline-gray rounded-pill ml-1" style="font-size:12px;">
-                                                    +<?= $remaining ?></h6>
+                                                    +<?= $remaining ?>
+                                                </h6>
                                             <?php endif;
                                             break;
                                         endif;
@@ -84,9 +85,13 @@
     <?php endforeach; ?>
 <?php else: ?>
     <div class="col-12">
-        <div class="alert alert-danger" role="alert">
-            <h4 class="alert-heading">No results found!</h4>
-            <p>Try searching for another keyword.</p>
+        <div class="card">
+            <div class="card-body">
+                <div class="alert text-center">
+                    <h5 class="alert-heading">No results found</h5>
+                    <p class="mb-0">Try adjusting your search or filter to find what you're looking for.</p>
+                </div>
+            </div>
         </div>
     </div>
 <?php endif; ?>

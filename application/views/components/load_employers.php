@@ -3,18 +3,7 @@ $userdata = get_userdata(USER);
 $auth = get_userdata(AUTH);
 
 if (!empty($employers)) {
-    foreach ($employers as $index => $employer) {
-        $followed = false;
-
-        if ($auth['user_type'] == 'EMPLOYEE' && !empty($following)) {
-            foreach ($following as $follow) {
-                if ($follow->employer_id == $employer->id && $follow->employee_id == $userdata->ID) {
-                    $followed = true;
-                    break;
-                }
-            }
-        }
-        ?>
+    foreach ($employers as $index => $employer) { ?>
         <div class="card card-hover my-3 sec-color" style="border-radius:15px; height:80px; text-decoration: none;">
             <div class="card-body border-0 py-2">
                 <div class="widget-user-header <?php if ($index + 1 > 1) echo 'border-0'; ?>" style="padding:0.2rem;">
@@ -26,16 +15,9 @@ if (!empty($employers)) {
                             <?= ucwords($employer->employer_name) ?>
                         </a>
 
-                        <?php if ($auth['user_type'] == 'EMPLOYEE'): ?>
-                            <?php if ($followed): ?>
-                                <button type="button" class="btn btn-outline-success btn-sm rounded d-flex align-items-center follow" data-id="<?= $employer->id ?>">
-                                    <i class="fa fa-check mr-1"></i>
-                                    Following
-                                </button>
-                            <?php else: ?>
-                                <button type="button" class="btn btn-outline-info btn-sm rounded d-flex align-items-center follow" data-id="<?= $employer->id ?>">Follow</button>
-                            <?php endif; ?>
-                        <?php endif; ?>
+                        <?php if ($auth['user_type'] == 'EMPLOYEE') {
+                            follow_button($employer->id, $following);
+                        } ?>
 
                     </div>
                     <h6 class="widget-user-desc text-muted" style="font-weight: normal; font-size: 16px; margin-left: 60px">

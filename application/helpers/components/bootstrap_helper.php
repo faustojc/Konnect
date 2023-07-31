@@ -234,3 +234,26 @@ if (!function_exists('load_feedback')) {
         $CI->load->view('components/load_feedback', $data);
     }
 }
+
+if (!function_exists('follow_button')) {
+    /**
+     * Follow Button Component
+     *
+     * A component that displays a follow button for employee.
+     *
+     * USAGE: follow_button($user_id, $user_type, $isFollowing);
+     *
+     * @param int $employer_id
+     * @param array $following
+     */
+    function follow_button(int $employer_id, array $following)
+    {
+        $data = [
+            'employer_id' => $employer_id,
+            'following' => $following,
+        ];
+
+        $CI = &get_instance();
+        $CI->load->view('components/follow_button', $data);
+    }
+}

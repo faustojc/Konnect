@@ -30,7 +30,7 @@ class Employer_profile extends MY_Controller
 
         // get the id from get request and get the user and check if the user owns the profile
         $id = $this->input->get('id');
-        $this->current_user = $this->Employer_model->getEmployerOnly($id);
+        $this->current_user = $this->Employer_model->getEmployerOnly('*', $id);
         $this->isAccount = $this->Auth_model->check_permission($this->userdata, $this->current_user);
     }
 

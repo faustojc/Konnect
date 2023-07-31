@@ -73,6 +73,7 @@ class Applicant extends MY_Controller
 
         // Get the employee details by getting the user_id
         $applicant = $this->Applicant_model->getApplicant($data['application_id']);
+        $job = $this->Jobposting_model->getJob($data['job_id']);
 
         // Send a notification to the applicant by adding a new notification
         $notif_data = [
@@ -86,14 +87,15 @@ class Applicant extends MY_Controller
         $employment_data = [
             'employer_id' => $this->userdata->id,
             'employee_id' => $applicant->employeeUserID,
+            'job_title' => $job->title,
+            'status' => $job->job_type,
         ];
-        // I forgot the process of employment
+        $this->Employment_model->add($employment_data);
 
-        // TODO: also add newly employed to employer
         $employed_data = [
-            'job_id' => $data['job_id'],
             'employer_id' => $this->userdata->id,
             'employee_id' => $applicant->employee_id,
+            'job_title' => $job->title,
         ];
         $this->Employed_model->add($employed_data);
 

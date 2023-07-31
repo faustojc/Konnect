@@ -122,19 +122,11 @@
                             See more
                         </a>
 
-                        <?php if ($auth['user_type'] == 'EMPLOYEE' && !empty($applicant)) {
-                            $hasApplied = FALSE;
-
-                            foreach ($applicant as $applied) {
-                                if ($applied->job_id == $jobpost->id) {
-                                    apply_button($applied->job_id, $applied->status);
-                                    $hasApplied = TRUE;
-                                    break;
-                                }
-                            }
-
-                            if (!$hasApplied) {
-                                apply_button($jobpost->id, 'APPLY');
+                        <?php if ($auth['user_type'] == 'EMPLOYEE') {
+                            if (!empty($applicant) && $applicant->job_id == $jobpost->id && strtoupper($applicant->status) != 'PENDING') {
+                                apply_button($jobpost->id, strtoupper($applicant->status));
+                            } else {
+                                apply_button($jobpost->id, 'APPLY NOW');
                             }
                         } ?>
 

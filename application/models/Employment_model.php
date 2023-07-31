@@ -19,10 +19,12 @@ class Employment_model extends CI_Model
     {
         return $this->db->select('tbl_employment.*, 
         CONCAT_WS(" ", tbl_employee.Fname, tbl_employee.Mname, tbl_employee.Lname) AS employee_name,
+        tbl_employer.id as employer_id,
         tbl_employer.tradename AS employer_name')
-            ->where('tbl_employee.id', $employee_id)
+            ->where('tbl_employment.employee_id', $employee_id)
             ->join('tbl_employee', 'tbl_employee.ID = tbl_employment.employee_id')
             ->join('tbl_employer', 'tbl_employer.id = tbl_employment.employer_id')
+            ->order_by('tbl_employment.start_date', 'DESC')
             ->get($this->Table->employment)->result();
     }
 

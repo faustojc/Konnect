@@ -36,8 +36,10 @@ class Employee_profile extends MY_Controller
         $this->load->model($model_list);
 
         $ID = $this->input->get('id');
-        $this->current_user = $this->eModel->get_employee($ID);
-        $this->has_permission = $this->Auth_model->check_permission($this->userdata, $this->current_user);
+        if (!empty($ID)) {
+            $this->current_user = $this->employee_model->getEmployee($ID);
+            $this->has_permission = $this->Auth_model->check_permission($this->userdata, $this->current_user);
+        }
     }
 
     /** load main page */
@@ -99,11 +101,9 @@ class Employee_profile extends MY_Controller
         $this->load->view('layout', $this->data);
     }
 
-    public function get_all_employments()
+    public function getEmployments(): void
     {
-        $ID = $this->uri->segment(3);
-
-        $this->data['employments'] = $this->eModel->get_all_employments($ID);
+        $this->data['employments'] = $this->Employment_model->getEmployeesEmployment($this->userdata->ID);
         $this->data['content'] = 'grid/load_employments';
         $this->load->view('layout', $this->data);
     }

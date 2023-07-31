@@ -30,6 +30,10 @@ const confirmPasswordErrorMessage = document.createElement('p');
 confirmPasswordErrorMessage.classList.add('invalid-feedback', 'm-0', 'd-block');
 confirmPasswordErrorMessage.textContent = 'Password does not match.';
 
+const PasswordReqErrorMessage = document.createElement('p');
+PasswordReqErrorMessage.classList.add('invalid-feedback', 'm-0', 'd-block');
+PasswordReqErrorMessage.textContent = 'Password needs to have 1 number and 1 special character.';
+
 email.addEventListener('input', function () {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     emailIsValid = regex.test(email.value);
@@ -81,6 +85,25 @@ password.addEventListener('input', function () {
     }
 
     passwordIsValid = this.value.length >= 6;
+    setNextBtn();
+});
+
+const passwordRegex = new RegExp("^ (?=.* [A-Z]) (?=.*\\d) (?=.* [!@#$%^&*]) [A-Za-z\\d!@#$%^&*] {8,}$");
+const passwordReq = document.getElementById("passwordReq");
+
+
+password.addEventListener('input', function () {
+    const passwordValue = this.value;
+     const isValid = passwordRegex.test(passwordValue);
+
+    if (isValid) {
+     
+        PasswordReqErrorMessage.remove();
+    } else {
+        const passwordInput = document.querySelector('div.password-input');
+        passwordInput.parentElement.insertBefore(PasswordReqErrorMessage, passwordInput.nextElementSibling);
+    }
+
     setNextBtn();
 });
 

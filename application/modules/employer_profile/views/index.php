@@ -56,7 +56,7 @@ main_header(['Employer_profile']);
     }
 
     .nav-pills .nav-link.active,
-    .nav-pills .show > .nav-link {
+    .nav-pills .show>.nav-link {
         color: #fff;
         background-color: #0dcaf0;
     }
@@ -95,8 +95,8 @@ main_header(['Employer_profile']);
 
 <section class="content">
     <div class="container">
-        <div class="row pl-3 pr-3" style="margin-top: 3.5rem;">
-            <div class="col-12 col-md-8 pl-2 pr-2 mt-4">
+        <div class="row d-flex justify-content-center align-items-center" style="margin-top: 3.5rem;">
+            <div class="col-12 col-md-9 pl-5 mt-4">
                 <div class="card card-widget widget-user">
                     <div class="widget-user-header text-white" style="background: url('<?= base_url() ?>assets/images/Logo/cover-place.jpg') center center; min-height: 25vh; max-height: 50vh; background-repeat: no-repeat; background-size: cover; border-radius: 15px 15px 0px 0px;">
                     </div>
@@ -120,10 +120,10 @@ main_header(['Employer_profile']);
                                             </h5>
                                             <!-- <p class="text-left mb-1">
                                                 <?php if (empty($current_employer->employer_name)) {
-                                                echo $current_employer->tradename;
-                                            } else {
-                                                echo $current_employer->employer_name;
-                                            } ?>
+                                                    echo $current_employer->tradename;
+                                                } else {
+                                                    echo $current_employer->employer_name;
+                                                } ?>
                                             </p> -->
                                             <h5 class="widget-user-desc text-left text-dark py-2" style="font-weight: 550; font-size:18px; ">
                                                 <?= $current_employer->business_type ?>
@@ -163,9 +163,6 @@ main_header(['Employer_profile']);
 
                             <li class="nav-item">
                                 <a class="nav-link active" id="pills-overview-tab" data-toggle="pill" href="#pills-overview" role="tab" aria-controls="pills-overview" aria-selected="true">Overview</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="pills-jobpost-tab" data-toggle="pill" href="#pills-jobpost" role="tab" aria-controls="pills-jobpost" aria-selected="true">Jobpost</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="pills-followers-tab" data-toggle="pill" href="#pills-followers" role="tab" aria-controls="pills-followers" aria-selected="false">
@@ -208,6 +205,7 @@ main_header(['Employer_profile']);
                                 <?= $current_employer->summary ?>
                             </div>
 
+
                             <?php if ($has_permission): ?>
                                 <!-- MODAL SUMMARY -->
                                 <div class="modal fade" id="summary-modal" data-keyboard="false" tabindex="-1" aria-labelledby="summary-modal-label" aria-hidden="true">
@@ -247,20 +245,22 @@ main_header(['Employer_profile']);
                                 </div>
                             <?php endif; ?>
 
-                        </div>
-                    </div>
 
-                    <!-- JOB POSTINGS -->
-                    <div class="tab-pane" id="pills-jobpost" role="tabpanel" aria-labelledby="pills-jobpost-tab">
+                        </div>
                         <div class="card card-white">
                             <div class="card-header">
-                                <h3 class="card-title fw-500">Job Lists</h3>
+                                <h3 class="card-title fw-500">Job Post</h3>
                             </div>
-
-                            <?php jobpost_all_display($jobpostings) ?>
-
                         </div>
+                        <div>
+                            <?php jobpost_all_display($jobpostings) ?>
+                        </div>
+
+
+
                     </div>
+
+
 
                     <!-- Followers -->
                     <div class="tab-pane fade" id="pills-followers" role="tabpanel" aria-labelledby="pills-followers-tab">
@@ -280,25 +280,7 @@ main_header(['Employer_profile']);
                 </div>
             </div>
 
-            <div class="col-12 col-md-4 pl-2 pr-2 mt-4">
-                <div class="card card-white">
-                    <div class="card-header">
-                        <h3 class="card-title fw-500">Home Address</h3>
-                    </div>
-                    <div class="card-body" style="padding-top:10px;padding-bottom:10px">
-                        <strong>City: </strong>
-                        <?= $current_employer->city ?>
-                    </div>
-                    <div class="card-body" style="padding-top:10px;padding-bottom:10px">
-                        <strong>Barangay: </strong>
-                        <?= $current_employer->barangay ?>
-                    </div>
-                    <div class="card-body" style="padding-top:10px;padding-bottom:10px">
-                        <strong>Address: </strong>
-                        <?= $current_employer->address ?>
-                    </div>
-                </div>
-
+            <!-- <div class="col-12 col-md-4 pl-2 pr-2 mt-4">
                 <div class="modal fade" id="modal_edit_home_address" data-backdrop="static" tabindex="-1" aria-labelledby="modal_home_address" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -330,72 +312,47 @@ main_header(['Employer_profile']);
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
-                <?php if ($has_permission): ?>
-                    <div class="card card-white">
-                        <div class="card-header">
-                            <h3 class="card-title fw-500">
-                                Business Information
-                                <i class="fas fa-lock ml-1" data-toggle="tooltip" data-placement="auto" title="Only you can view this info"></i>
-                            </h3>
-                        </div>
-                        <div class="card-body" style="padding-top:10px;padding-bottom:10px">
-                            <strong>Trade Name: </strong>
-                            <?= $current_employer->tradename ?>
-                        </div>
-                        <div class="card-body" style="padding-top:10px;padding-bottom:10px">
-                            <strong>Business Type: </strong>
-                            <?= $current_employer->business_type ?>
-                        </div>
-                        <div class="card-body" style="padding-top:10px;padding-bottom:10px">
-                            <strong>SSS Number: </strong>
-                            <?= $current_employer->sss ?>
-                        </div>
-                        <div class="card-body" style="padding-top:10px;padding-bottom:10px">
-                            <strong>TIN Number: </strong>
-                            <?= $current_employer->tin ?>
-                        </div>
-                    </div>
-                <?php endif; ?>
 
-                <!-- EMPLOYEES -->
+
+            <!-- EMPLOYEES
                 <div class="card card-widget widget-user-2 d-none d-md-block">
                     <div class="card-header">
                         <h3 class="card-title fw-500">Employees</h3>
                     </div>
                     <div id="load_employees_follow_section" style="margin-left: 1rem; margin-right:1rem;">
-                        <?php load_employees($employees) ?>
+                        <php load_employees($employees) ?>
                     </div>
                 </div>
 
-                <!-- EMPLOYERS -->
+                EMPLOYERS
                 <div class="card card-widget widget-user-2 d-none d-md-block">
                     <div class="card-header">
                         <h3 class="card-title fw-500">Employers</h3>
                     </div>
                     <div id="load_employers_follow_section" style="margin-left:1rem; margin-right:1rem;">
-                        <?php load_employers($employers); ?>
+                        <php load_employers($employers); ?>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Contact Modal -->
             <div class="modal fade" id="contact" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">
+                            <h6 class="modal-title" id="exampleModalLabel">
                                 <?= ucwords($current_employer->tradename) ?>
-                            </h5>
+                            </h6>
 
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <h5>Contact Details</h5>
-                            <br>
+                            <h6 class="pb-3">Contact Details</h6>
+
                             <h6 style="font-weight: normal;"><i class="fas fa-map-pin"></i><strong> Address</strong>
                             </h6>
                             <h6 style="font-weight: normal;">
@@ -407,15 +364,27 @@ main_header(['Employer_profile']);
                                 <?= $current_employer->email ?>
                             </h6>
                             <br>
-                            <h6 style="font-weight: normal;"><i class="fa fa-phone"></i><strong> Contact Person</strong>
-                            </h6>
-                            <h6 style="font-weight: normal;">
-                                <?= ucwords($current_employer->employer_name) ?>
+                            <h6 style="font-weight: normal;"><i class="fa fa-phone"></i><strong> Contact Number</strong>
                             </h6>
                             <h6 style="font-weight: normal;">
                                 <?= $current_employer->contact_number ?>
                             </h6>
                             <br>
+
+                            <?php if ($has_permission): ?>
+                                <h6 style="font-weight: normal;"><i class="fa-solid fa-id-card"></i><strong> SSS</strong>
+                                </h6>
+
+                                <h6 style="font-weight: normal;">
+                                    <?= $current_employer->sss ?>
+                                </h6>
+                                <br>
+                                <h6 style="font-weight: normal;"><i class="fa-solid fa-id-card"></i><strong> TIN</strong>
+                                </h6>
+                                <h6 style="font-weight: normal;">
+                                    <?= $current_employer->tin ?>
+                                </h6>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

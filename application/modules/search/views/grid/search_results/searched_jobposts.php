@@ -48,6 +48,7 @@
         ?>
 
         <div class="col-lg-4 col-md-6 col-sm-12">
+        <a href="<?= base_url() ?>employer_profile?id=<?= $jobpost->employer_id ?>" class="job-link text-decoration-none text-dark" >
             <div class="card grow text-wrap">
                 <div class="card-body pt-2 mx-3 my-3 px-2 job-post pb-2"
                      style="border-radius:15px; background-color: <?= $randomBackgroundColor ?>">
@@ -63,11 +64,10 @@
                                 </div>
                             </div>
                             <h6 class="m-0 px-2 pt-3" style="font-size: 0.75rem; /* Adjust the value as needed */">
-                                <a href="<?= base_url() ?>employer_profile?id=<?= $jobpost->employer_id ?>"
-                                   class="job-title fw-bold text-decoration-none"
-                                   style="color:#000; font-size: 12px; font-weight:300;">
+                                
+                                   
                                     <?= ucwords($jobpost->employer_name) ?>
-                                </a>
+                                
                             </h6>
                             <div class="job-details pt-1" style="border: 0;">
                                 <h5 class="pb-2 pt-1 px-2" style="font-weight: bold;">
@@ -136,7 +136,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        
 
         <!-- modal -->
         <div class="modal fade px-0 border-0" id="modal<?= $key ?>" tabindex="-1" role="dialog"
@@ -160,6 +160,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+        </a>
         </div>
         <?php
         // Store the used color for this card and remove it from the array

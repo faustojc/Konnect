@@ -15,8 +15,8 @@
 
         ?>
         <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="card">
-                <div class="card-body flex-grow-1 flex-shrink-1" style="border-radius: 15px; height: 210px;">
+            <div class="card grow">
+                <div class="card-body flex-grow-1 flex-shrink-1 py-3" style="border-radius: 15px; height: 210px;">
                     <div class="row align-items-center">
                         <div class="col-3">
                             <img class="img-circle img-fluid" src="<?= base_url() ?>assets/images/employee/profile_pic/<?= $employee->Employee_image ?>" alt="<?= $employee_name ?>" style="white; object-fit: cover;">

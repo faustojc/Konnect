@@ -3,92 +3,52 @@
         color: black;
     }
 
-    .edit_btn,
-    .delete_btn {
-        padding-top: 2px;
-        border: none;
-    }
-
     a:hover {
         color: #435861;
     }
 
-    ul.timeline {
-        list-style-type: none;
-        position: relative;
-        margin: 0;
-    }
-
-    ul.timeline:before {
-        content: ' ';
-        background: #ececec;
-        display: inline-block;
-        position: absolute;
-        left: 29px;
-        width: 2px;
-        height: 134%;
-        z-index: 400;
-    }
-
-    /*ul.timeline > li {
-        margin: 0;
-        padding-left: 50px;
-    }*/
-
-    /*ul.timeline > li:before {
-        content: ' ';
-        background: white;
-        display: inline-block;
-        position: absolute;
-        border-radius: 50%;
-        border: 3px solid #0dcaf0;
-        left: 20px;
-        width: 20px;
-        height: 20px;
-        z-index: 400;
-    }*/
-
-    .star-rating::before {
-        content: "⭐⭐⭐⭐⭐";
-    }
-
-    .star-rating {
-        display: inline-block;
-        background-clip: text;
-        -webkit-background-clip: text;
-        color: rgba(0, 0, 0, 0.1);
-    }
 </style>
 
-<?php if (!empty($employments)): ?>
+<?php if (!empty($employments)):
+    $dates = [];
+    ?>
     <div class="timeline">
-        <?php foreach ($employments as $key => $employment): ?>
-            <?php if (date('M j, Y') != date('M j, Y', strtotime($employment->start_date))): ?>
+        <?php foreach ($employments as $key => $employment):
+            $start_date = date('M Y', strtotime($employment->start_date));
+
+            if (!in_array($start_date, $dates)): ?>
                 <div class="time-label">
-                    <span class="bg-green"><?= date('M j, Y', strtotime($employment->start_date)) ?></span>
+                    <span class="bg-gradient-info"><?= $start_date ?></span>
                 </div>
-            <?php endif; ?>
+                <?php $dates[] = $start_date;
+            endif; ?>
 
             <div>
                 <i class="fas fa-briefcase bg-orange"></i>
                 <div class="timeline-item">
-                    <span class="time"><i class="fas fa-clock"></i> 12:05</span>
-                    <h3 class="timeline-header">
-                        <a href="#">Support Team</a> sent you an email
-                    </h3>
-                    <div class="timeline-body">
-                        Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                        weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                        jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                        quora plaxo ideeli hulu weebly balihoo...
-                    </div>
-                    <!-- Placement of additional controls. Optional -->
+                    <span class="time"><i class="fas fa-clock mr-1"></i><?= date('d @ h:i', strtotime($employment->start_date)) ?>
+                        <?php try {
+                            $d = new DateTime($employment->start_date);
+                            echo $d->format('a');
+                        } catch (Exception $e) {
+                            throw new RuntimeException($e->getMessage());
+                        } ?>
+                    </span>
+                    <h5 class="timeline-header">
+                        Started working in <?= $employment->employer_name ?> as <?= $employment->position ?>
+                    </h5>
+                    <?php if (!empty($employment->job_description)): ?>
+                        <div class="timeline-body" style="max-height: 200px">
+                            <?= $employment->job_description ?>
+                        </div>
+                    <?php endif; ?>
+                    <!-- Placement of additional controls. Optional
                     <div class="timeline-footer">
                         <button class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#emp<?= $key ?>">
                             Read more
                         </button>
                         <button class="btn btn-danger btn-sm" type="button">Delete</button>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 

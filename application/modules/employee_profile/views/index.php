@@ -149,11 +149,10 @@ main_header(['employee_profile']);
 <section class="content">
 
     <div class="container">
-        <div class="row " style="margin-top: 3.5rem;">
-            <div class="col-12 col-md-8 pl-2 pr-2 mt-4">
+        <div class="row d-flex justify-content-center align-items-center" style="margin-top: 3.5rem;">
+            <div class="col-12 col-md-9 pl-5 mt-4">
                 <div class="card card-widget widget-user">
-                    <div class="widget-user-header text-white"
-                         style="background: url('<?= base_url() ?>assets/images/Logo/cover-place.jpg') center center; min-height: 25vh; max-height: 50vh; background-repeat: no-repeat; background-size: cover; border-radius: 15px 15px 0px 0px;">
+                    <div class="widget-user-header text-white" style="min-height: 25vh; max-height: 50vh; background: url('<?= base_url() ?>assets/images/Logo/cover-place.jpg') no-repeat center center;background-size: cover; border-radius: 15px 15px 0 0;">
                     </div>
 
                     <div class="card-footer bg-white" style="padding-top: 45px;">
@@ -215,7 +214,7 @@ main_header(['employee_profile']);
                                     <a class="dropdown-item" data-toggle="pill" href="#pills-training">Training</a>
                                     <a class="dropdown-item" data-toggle="pill" href="#pills-following">Following</a>
                                     <a class="dropdown-item" data-toggle="pill" href="#pills-feedback">Feedback</a>
-                                    <a class="dropdown-item" data-toggle="pill" href="#pills-info">More Info</a>
+                                    <a class="dropdown-item" data-toggle="pill" href="#pills-resume">Resume</a>
                                 </div>
                             </li>
                             <li class="nav-item d-none d-sm-block">
@@ -231,6 +230,9 @@ main_header(['employee_profile']);
                             </li>
                             <li class="nav-item d-none d-sm-block">
                                 <a class="nav-link" id="pills-feedback-tab" data-toggle="pill" href="#pills-feedback" role="tab" aria-controls="pills-feedback" aria-selected="false">Feedback</a>
+                            </li>
+                            <li class="nav-item d-none d-sm-block">
+                                <a class="nav-link" id="pills-resume-tab" data-toggle="pill" href="#pills-resume" role="tab" aria-controls="pills-resume" aria-selected="false">Resume</a>
                             </li>
                         </ul>
                     </div>
@@ -453,18 +455,17 @@ main_header(['employee_profile']);
 
                                         <!-- Modal -->
                                         <div class="modal fade" id="modalAddEmp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
+                                            <div class="modal-dialog modal-lg" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Add
-                                                            Employment</h5>
+                                                        <h5 class="modal-title" id="exampleModalLabel">Add Employment</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
                                                         <form class="px-2 py-2" id="#needs-validation">
-                                                            <input type="text" class="form-control" id="employee_id" name="employee_id" value="<?= @$details->ID ?>" hidden readonly>
+                                                            <input type="text" class="form-control" id="employee_id" name="employee_id" value="<?= $details->ID ?>" hidden readonly>
                                                             <div class="row pb-3">
                                                                 <div class="col-md">
                                                                     <label for="employer_id">Select Employer</label>
@@ -483,7 +484,7 @@ main_header(['employee_profile']);
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-md">
-                                                                    <label for="statusEmp">Status</label>
+                                                                    <label for="status">Status</label>
                                                                     <input type="text" class="form-control" id="status" name="status" placeholder="Enter Status">
                                                                 </div>
                                                             </div>
@@ -495,21 +496,22 @@ main_header(['employee_profile']);
                                                                     </p>
                                                                 </div>
                                                             </div>
-                                                            <div class="row pb-3">
-                                                                <div class="col-md">
-                                                                    <label for="ratingEmp">Rating</label>
-                                                                    <input type="number" class="form-control" id="rating" name="rating" placeholder="Enter Rating">
+                                                            <div class="row pb-2">
+                                                                <div class="col-12">
+                                                                    <label for="job_description">Job Description</label>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <textarea name="job_description" id="job_description"></textarea>
                                                                 </div>
                                                             </div>
                                                             <div class="row pb-2">
                                                                 <div class="col-md-6">
-                                                                    <label for="startDate">Start Date</label>
-                                                                    <input type="date" id="start_date" name="start_date" style="width:200px;">
+                                                                    <label for="start_date">Start Date</label>
+                                                                    <input class="form-control" type="date" id="start_date" name="start_date" style="width:200px;">
                                                                 </div>
-
                                                                 <div class="col-md-6">
-                                                                    <label for="endDate">End Date</label>
-                                                                    <input type="date" id="end_date" name="end_date" style="width:200px;">
+                                                                    <label for="end_date">End Date</label>
+                                                                    <input class="form-control" type="date" id="end_date" name="end_date" style="width:200px;">
                                                                 </div>
                                                             </div>
                                                         </form>
@@ -631,11 +633,51 @@ main_header(['employee_profile']);
                     <div class="tab-pane fade" id="pills-feedback" role="tabpanel" aria-labelledby="pills-feedback-tab">
                         <?php load_feedback($feedbacks, $has_permission) ?>
                     </div>
-                </div>
-            </div>
+                    <div class="tab-pane fade" id="pills-resume" role="tabpanel" aria-labelledby="pills-resume-tab">
+                        <div class="card ">
+                            <div class="card-header">
+                                <h3 class="card-title fw-500" style="font-weight:600;">Add Resume</h3>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <button type="button" class="btn btn-outline-info my-3" data-toggle="modal" data-target="#uploadModal" style="width: 250px;">
+                                    Upload File
+                                </button>
+                            </div>
 
-            <div class="col-12 col-md-4 pl-2 pr-2 mt-4">
-                <!--<div class="card card-white">
+                            <!-- The Modal -->
+                            <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="uploadModalLabel">Upload Resume</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="upload.php" method="post" enctype="multipart/form-data">
+                                                <div class="form-group">
+                                                    <label for="file">Select a file:</label>
+                                                    <input type="file" class="form-control-file" name="file" id="file">
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                Close
+                                            </button>
+                                            <button type="submit" class="btn btn-primary" name="submit">Upload Resume</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4 pl-2 pr-2 mt-4">
+                    <!--<div class="card card-white">
                     <div class="card-header">
                         <h3 class="card-title fw-600" style="font-weight:600;">Address</h3>
                         <?php if ($has_permission): ?>
@@ -666,110 +708,145 @@ main_header(['employee_profile']);
                     </div>
                 </div> -->
 
+
+                    <!-- JOBS EMPLOYED -->
+
+                </div>
+
                 <?php if ($has_permission): ?>
-                    <div class="card card-white">
-                        <div class="card-header">
-                            <h3 class="card-title fw-500" style="font-weight:600;">Government ID</h3>
+                    <!-- Introduction Modal -->
+                    <div class="modal fade bd-example-modal-lg" id="Introduction_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Enter Introduction</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div>
+                                        <input type="text" id="ID" value="<?= @$details->ID ?>" hidden>
+                                        <textarea class="form-control" name="Introduction" id="Introduction_Text" rows="4" placeholder="Enter Introduction"><?= @$details->Introduction ?></textarea>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-info" id="update_introduction">Save</button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-body" style="padding-top:10px;padding-bottom:5px; font-size:12px;">
-                            <b>SSS:</b>
-                            <h6 class="text-muted">
-                                <?= ucwords(@$details->SSS) ?>
-                            </h6>
+                    </div>
+
+                    <!-- Contact Modal -->
+                    <div class="modal fade" id="contact" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h6 class="modal-title" id="exampleModalLabel">
+                                        <?= ucwords(@$details->Fname) . " " . ucwords(@$details->Mname) . " " . ucwords(@$details->Lname) ?>
+                                    </h6>
+
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <h6 class="pb-3">Contact Details</h6>
+
+                                    <h6 style="font-weight: normal;">
+                                        <i class="fas fa-map-pin"></i><strong> Address</strong>
+                                    </h6>
+                                    <h6 style="font-weight: normal;">
+                                        <?= ucwords(@$details->Address) . ", " . ucwords(@$details->Barangay) . ", " . ucwords(@$details->City) ?>
+                                    </h6>
+                                    <br>
+                                    <h6 style="font-weight: normal;">
+                                        <i class="fa fa-envelope"></i><strong> Email</strong></h6>
+                                    <h6 style="font-weight: normal;">
+                                        <?= $details->Email ?>
+                                    </h6>
+                                    <br>
+                                    <h6 style="font-weight: normal;">
+                                        <i class="fa fa-phone"></i><strong> Contact Number</strong>
+                                    </h6>
+                                    <h6 style="font-weight: normal;">
+                                        <?= $details->Cnum ?>
+                                    </h6>
+                                    <br>
+
+                                    <?php if ($has_permission): ?>
+                                        <h6 style="font-weight: normal;">
+                                            <i class="fa-solid fa-id-card"></i><strong> SSS</strong>
+                                        </h6>
+
+                                        <h6 style="font-weight: normal;">
+                                            <?= $details->SSS ?>
+                                        </h6>
+                                        <br>
+                                        <h6 style="font-weight: normal;">
+                                            <i class="fa-solid fa-id-card"></i><strong> TIN</strong>
+                                        </h6>
+                                        <h6 style="font-weight: normal;">
+                                            <?= $details->Tin ?>
+                                        </h6>
+                                        <br>
+                                    <?php endif; ?>
+
+                                    <h6 style="font-weight: normal;">
+                                        <i class="fa-solid fa-cake-candles"></i><strong> Birthday</strong>
+                                    </h6>
+                                    <h6 style="font-weight: normal;">
+                                        <?= $details->Bday ?>
+                                    </h6>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-body" style="padding-top:10px;padding-bottom:5px; font-size:12px;">
-                            <b>TIN:</b>
-                            <h6 class="text-muted">
-                                <?= ucwords(@$details->Tin) ?>
-                            </h6>
-                        </div>
-                        <div class="card-body" style="padding-top:10px;padding-bottom:5px; font-size:12px;">
-                            <b>PHIL HEALTH:</b>
-                            <h6 class="text-muted">
-                                <?= ucwords(@$details->Phil_health) ?>
-                            </h6>
-                        </div>
-                        <div class="card-body" style="padding-top:10px;padding-bottom:10px; font-size:12px;">
-                            <b>PAG IBIG:</b>
-                            <h6 class="text-muted">
-                                <?= ucwords(@$details->Pag_ibig) ?>
-                            </h6>
+                    </div>
+
+                    <!-- Add Skill Modal -->
+                    <div class="modal fade" id="skill_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Add Skill</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="needs-validation">
+                                        <div class="form-group">
+                                            <label for="skill" class="col-form-label">Skill Name:</label>
+                                            <input type="text" class="form-control" id="skill">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="proficiency">Proficiency</label>
+                                            <select class="form-control" style="width:100%;" name="proficiency" id="proficiency">
+                                                <option value="beginner"> Beginner</option>
+                                                <option value="intermediate"> Intermediate</option>
+                                                <option value="advance"> Advance</option>
+                                                <option value="expert"> Expert</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="years_exp" class="col-form-label">Years of Experience:</label>
+                                            <input type="text" class="form-control" id="years_exp">
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-info" data-dismiss="modal" id="btn_skill">Add
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 <?php endif; ?>
 
-                <!-- JOBS EMPLOYED -->
-
             </div>
-
-            <?php if ($has_permission): ?>
-                <!-- Introduction Modal -->
-                <div class="modal fade bd-example-modal-lg" id="Introduction_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Enter Introduction</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div>
-                                    <input type="text" id="ID" value="<?= @$details->ID ?>" hidden>
-                                    <textarea class="form-control" name="Introduction" id="Introduction_Text" rows="4" placeholder="Enter Introduction"><?= @$details->Introduction ?></textarea>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-info" id="update_introduction">Save</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Add Skill Modal -->
-                <div class="modal fade" id="skill_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Add Skill</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="needs-validation">
-                                    <div class="form-group">
-                                        <label for="skill" class="col-form-label">Skill Name:</label>
-                                        <input type="text" class="form-control" id="skill">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="proficiency">Proficiency</label>
-                                        <select class="form-control" style="width:100%;" name="proficiency" id="proficiency">
-                                            <option value="beginner"> Beginner</option>
-                                            <option value="intermediate"> Intermediate</option>
-                                            <option value="advance"> Advance</option>
-                                            <option value="expert"> Expert</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="years_exp" class="col-form-label">Years of Experience:</label>
-                                        <input type="text" class="form-control" id="years_exp">
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-info" data-dismiss="modal" id="btn_skill">Add
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <?php endif; ?>
-
         </div>
-    </div>
 </section>
 
 <!-- ############ PAGE END-->

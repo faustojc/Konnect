@@ -11,7 +11,6 @@ if (!empty($employees)) {
                     </div>
                     <div class="d-flex justify-content-between">
                         <span class="card-title text-truncate text-info" style="width: 250px; margin-left: 10px;"><?= ucwords($employee->Fname) . ' ' . ucwords($employee->Lname) ?></span>
-                        <span class="badge badge-success fw-500" style="padding: 6px 12px;"><i class="fa-solid fa-check"></i> Verified</span>
                     </div>
                     <h6 class="widget-user-desc text-muted" style="font-weight: normal; font-size: 16px; margin-left: 60px">
                         <?= $employee->Title ?>

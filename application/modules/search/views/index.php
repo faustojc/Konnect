@@ -170,14 +170,31 @@ main_header(['Search']);
         /* line-height: 1.5; */
         /* border-radius: 0.25rem; */
         transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        
     }
+
+    .scrollfunc {
+    
+    overflow-y: scroll; /* Add the ability to scroll */
+    }
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .scrollfunc::-webkit-scrollbar {
+    display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .scrollfunc {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    }
+    
 </style>
 
 <section class="content ">
     <div class="container-fluid">
         <div class="row pl-3 pr-3" style="margin-top: 3.5rem;">
-            <div class="col-12 col-md-3 mt-4">
-                <div class="container sticky-top" style="top:80px;">
+        <div class="col-12 col-md-3 mt-4 ">
+            <div class="container sticky-top pb-5 scrollfunc" style="top: 80px; height: 100vh;">
                 <div class="card">
                     <div class="card-body py-3">
                         <div class="search-results-container">
@@ -196,6 +213,26 @@ main_header(['Search']);
                         </div>
                     </div>
                 </div>
+                <div class="card" style="">
+                        <div class="card-body">
+                            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                <a class="nav-link active" id="v-pills-all-tab" data-toggle="pill" href="#v-pills-all" role="tab" aria-controls="v-pills-all" aria-selected="true">
+                                    All
+                                </a>
+                                <a class="nav-link" id="v-pills-posts-tab" data-toggle="pill" href="#v-pills-posts" role="tab" aria-controls="v-pills-posts" aria-selected="false">Job
+                                    Posts
+                                </a>
+                                <a class="nav-link" id="v-pills-employer-tab" data-toggle="pill" href="#v-pills-employer" role="tab" aria-controls="v-pills-employer" aria-selected="false">
+                                    Employer
+                                </a>
+                                <a class="nav-link" id="v-pills-employee-tab" data-toggle="pill" href="#v-pills-employee" role="tab" aria-controls="v-pills-employee" aria-selected="false">
+                                    Employee
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
                     <div class="card ">
                         <div class="card-body">
                             <div class="row">
@@ -278,27 +315,10 @@ main_header(['Search']);
                     </div>
 
 
-                    <div class="card" style="">
-                        <div class="card-body">
-                            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                <a class="nav-link active" id="v-pills-all-tab" data-toggle="pill" href="#v-pills-all" role="tab" aria-controls="v-pills-all" aria-selected="true">
-                                    All
-                                </a>
-                                <a class="nav-link" id="v-pills-posts-tab" data-toggle="pill" href="#v-pills-posts" role="tab" aria-controls="v-pills-posts" aria-selected="false">Job
-                                    Posts
-                                </a>
-                                <a class="nav-link" id="v-pills-employer-tab" data-toggle="pill" href="#v-pills-employer" role="tab" aria-controls="v-pills-employer" aria-selected="false">
-                                    Employer
-                                </a>
-                                <a class="nav-link" id="v-pills-employee-tab" data-toggle="pill" href="#v-pills-employee" role="tab" aria-controls="v-pills-employee" aria-selected="false">
-                                    Employee
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    
 
-                </div>
             </div>
+        </div>
 
             <div class="col-12 col-md-9 mt-4">
                 <div id="search_result_content">
@@ -315,3 +335,23 @@ main_footer();
 ?>
 
 <script src="<?= base_url() ?>assets/js/applicant/index.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const toggleButton = document.getElementById("toggleButton");
+        const caretIcon = document.getElementById("caretIcon");
+        
+        toggleButton.addEventListener("click", function(event) {
+            event.preventDefault();
+            const collapseFilter = document.getElementById("collapseFilter");
+            
+            if (collapseFilter.classList.contains("show")) {
+                caretIcon.classList.remove("fa-caret-down");
+                caretIcon.classList.add("fa-caret-left");
+            } else {
+                caretIcon.classList.remove("fa-caret-left");
+                caretIcon.classList.add("fa-caret-down");
+            }
+        });
+    });
+</script>
+

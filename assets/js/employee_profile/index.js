@@ -8,14 +8,16 @@ const load_education = () => {
 
 const load_training = () => {
     $('#load_training').load(baseUrl + 'employee_profile/get_training/' + $('#emp_id').val(), function () {
-        console.log('Loaded successfully');
+
         tinymce.remove('textarea');
         textareaEditor('textarea', 400);
     });
 }
 
 const load_employment = () => {
-    $('#load_employments').load(baseUrl + 'employee_profile/get_all_employments/' + $('#emp_id').val());
+    fetch(baseUrl + 'employee_profile/getEmployments')
+        .then(response => response.text())
+        .then(data => document.querySelector('#load_employments').innerHTML = data);
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -23,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function () {
     textareaEditor('textarea', 400);
 
     const update_profile = document.querySelector('#update_profile');
-
     if (update_profile) {
         update_profile.addEventListener('click', function () {
             const form = update_profile.closest('#form_content').querySelector('.active.show form');
@@ -38,18 +39,24 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+const add_employment = document.querySelector('#btn_save_employment');
+if (add_employment) {
+    add_employment.addEventListener('click', () => {
+        const form = add_employment.closest('.modal-content').querySelector('form');
+        const formData = new FormData(form);
 
+        const show_status = (form.querySelector('#show_status').checked === true) ? 1 : 0;
+        const description = tinymce.activeEditor.getContent();
 
-$(document).on('keyup', '#search_employee', function () {
-    $(document).gmLoadPage({
-        url: 'employee/service/Employee_service/search_employee',
-        data: {
-            search_text: $('#search_employee').val()
-        },
-        load_on: '#load_employee'
+        formData.set('job_description', description);
+        formData.set('show_status', show_status.toString());
+
+        formAction(baseUrl + 'employee_profile/service/Employee_profile_service/set_employment', 'POST', formData, () => {
+            load_employment();
+            success('SUCCESS', 'Employment successfully added');
+        });
     });
-});
-
+}
 
 $(document).on('click', '#save_education', function () {
     const data = {
@@ -76,6 +83,7 @@ $(document).on('click', '#save_education', function () {
         }
     });
 });
+
 $(document).on('click', '#btn_save_training', function () {
     const form = this.closest('.modal-content').querySelector('form');
     const isValid = validateForm(form);
@@ -208,71 +216,6 @@ $(document).on('click', '#delete_train', function () {
         load_training();
         success('SUCCESS', 'Training successfully deleted');
     });
-});
-
-
-$(document).on('click', '#update_address', function () {
-    const data = {
-        ID: $('#ID').val(),
-        Address: $('#Address').val(),
-        Barangay: $('#Barangay').val(),
-        City: $('#City').val()
-    };
-
-    $.ajax({
-        url: baseUrl + 'employee_profile/service/employee_profile_service/update_address',
-        type: 'POST',
-        data: data,
-        success: function (response) {
-            success('SUCCESS', 'Address successfully updated');
-            window.location.reload();
-        },
-        error: function (response) {
-            error('ERROR', 'Address failed to update');
-        }
-    });
-});
-
-$(document).on('click', '#update_id', function () {
-    const data = {
-        ID: $('#ID').val(),
-        SSS: $('#SSS').val(),
-        Tin: $('#Tin').val(),
-        Phil_health: $('#Phil_health').val(),
-        Pag_ibig: $('#Pag_ibig').val()
-    };
-
-    $.ajax({
-        url: baseUrl + 'employee_profile/service/employee_profile_service/update_id',
-        type: 'POST',
-        data: data,
-        success: function (response) {
-            // Handle the success response (optional)
-            success('SUCCESS', 'Details successfully updated');
-            window.location.reload();
-        },
-        error: function (response) {
-            // Handle the error response (optional)
-            error('ERROR', 'Update failed');
-        }
-    });
-});
-
-$(document).on('click', '#btn_save_employment', function () {
-    const form = this.closest('.modal-content').querySelector('form');
-    const isValid = validateForm(form);
-
-    if (isValid) {
-        const formData = new FormData(form);
-        const show_status = (form.querySelector('#show_status').checked === true) ? 1 : 0;
-
-        formData.set('show_status', show_status.toString());
-
-        formAction(baseUrl + 'employment/service/Employment_service/save', 'POST', formData, function () {
-            load_employment();
-            success('SUCCESS', 'Employment successfully added');
-        });
-    }
 });
 
 $(document).on('click', '#edit_employment', function () {

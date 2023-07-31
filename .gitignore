@@ -1,6 +1,8 @@
-.idea
-.vs
-.vscode
+.idea/*
+.vs/*
+.vscode/
+
+.idea/discord.xml
 
 */config/development
 */logs/log-*.php

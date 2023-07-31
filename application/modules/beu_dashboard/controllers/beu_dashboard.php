@@ -47,10 +47,10 @@ class beu_dashboard extends MY_Controller
         $this->data['details'] = $this->userdata;
         $this->data['employees'] = $this->employee_model->get_all_employees(4);
         $this->data['employers'] = $this->employer_model->get_employers(4, $id);
-        $this->data['skills'] = $this->dashboard_model->get_skill($id);
         $this->data['jobpostings'] = $this->jobposting_model->get_all_jobposts();
 
         if ($this->auth['user_type'] == 'EMPLOYEE') {
+            $this->data['skills'] = $this->EmployeeSkills_model->getEmployeeSkills($id);
             $this->data['following'] = $this->follow_model->get_following($id);
             $this->data['applicant'] = $this->Applicant_model->getJobApplied($id);
 

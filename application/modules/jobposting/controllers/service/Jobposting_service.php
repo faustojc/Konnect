@@ -16,7 +16,7 @@ class Jobposting_service extends MY_Controller
 
         $model_list = [
             'jobposting/service/Jobposting_services_model' => 'job_service_model',
-            'employer/Employer_model' => 'employer_model',
+            'employer/Employer_model' => 'models\Employer_model',
         ];
         $this->load->model($model_list);
     }

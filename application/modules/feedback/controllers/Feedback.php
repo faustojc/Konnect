@@ -14,7 +14,10 @@ class Feedback extends MY_Controller
         // The Feedback_model is already loaded in autoload.php
     }
 
-    public function submitFeedback()
+    /**
+     * @throws JsonException
+     */
+    public function submitFeedback(): void
     {
         $data = $this->input->post();
         $data['from_user_id'] = $this->userdata->user_id;
@@ -22,9 +25,9 @@ class Feedback extends MY_Controller
         $result = $this->Feedback_model->add($data);
 
         if (!$result['has_error']) {
-            echo json_encode(array('status' => 'success', 'message' => $result['message']));
+            echo json_encode(['status' => 'success', 'message' => $result['message']], JSON_THROW_ON_ERROR);
         } else {
-            echo json_encode(array('status' => 'error', 'message' => $result['message']));
+            echo json_encode(['status' => 'error', 'message' => $result['message']], JSON_THROW_ON_ERROR);
         }
     }
 }

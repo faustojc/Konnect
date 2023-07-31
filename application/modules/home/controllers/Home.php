@@ -20,7 +20,6 @@ class Home extends MY_Controller
 
         $model_list = [
             'employee/Employee_model' => 'employee_model',
-            'employer/Employer_model' => 'employer_model',
             'jobposting/Jobposting_model' => 'jobposting_model',
             'follow/Follow_model' => 'follow_model',
         ];
@@ -45,7 +44,7 @@ class Home extends MY_Controller
 
         $this->data['details'] = $this->userdata;
         $this->data['employees'] = $this->employee_model->get_all_employees(4);
-        $this->data['employers'] = $this->employer_model->get_employers(4, $id);
+        $this->data['employers'] = $this->Employer_model->get_employers(4, $id);
         $this->data['jobpostings'] = $this->jobposting_model->get_all_jobposts();
 
         if ($this->auth['user_type'] == 'EMPLOYEE') {

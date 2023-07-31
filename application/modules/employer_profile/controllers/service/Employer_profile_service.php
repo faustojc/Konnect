@@ -1,30 +1,15 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class employer_profile_service extends MY_Controller
+class Employer_profile_service extends MY_Controller
 {
-    protected $session;
-    private $data = [];
-
-    public function __construct()
-    {
-        parent::__construct();
-        $this->session = (object)get_userdata(USER);
-
-        // if(is_empty_object($this->session)){
-        // 	redirect(base_url().'login/authentication', 'refresh');
-        // }
-
-        $model_list = [
-            'employer_profile/service/Employer_profile_services_model' => 'employer_profile_service_model'
-        ];
-        $this->load->model($model_list);
-    }
-
-    public function save()
+    /**
+     * @throws JsonException
+     */
+    public function save(): void
     {
         $response = [];
-        $data = null;
+        $data = NULL;
 
         $file['upload_path'] = './assets/images/employer/profile_pic/';
         $file['allowed_types'] = 'jpg|png|jpeg';
@@ -39,18 +24,7 @@ class employer_profile_service extends MY_Controller
             $response['file_success'] = 'File ' . $data['file_name'] . ' uploaded successfully';
         }
 
-        $info = array(
-            'employer_name' => $this->input->post('employer_name'),
-            'tradename' => $this->input->post("tradename"),
-            'city' => $this->input->post('city'),
-            'barangay' => $this->input->post('barangay'),
-            'address' => $this->input->post('address'),
-            'business_type' => $this->input->post("business_type"),
-            'contact_number' => $this->input->post("contact_number"),
-            'email' => $this->input->post("email"),
-            'sss' => $this->input->post('sss'),
-            'tin' => $this->input->post('tin'),
-        );
+        $info = $this->input->post();
 
         // Check if employer has image already
         $image = $this->input->post('image');
@@ -59,24 +33,30 @@ class employer_profile_service extends MY_Controller
             $info['image'] = isset($data) ? $data['file_name'] : 'default.png';
         }
 
-        $response[] = $this->employer_profile_service_model->save($info);
-        echo json_encode($response);
+        $response[] = $this->employer_model->save($info);
+        echo json_encode($response, JSON_THROW_ON_ERROR);
     }
 
-    public function update_summary()
+    /**
+     * @throws JsonException
+     */
+    public function update_summary(): void
     {
-        $info = array(
+        $info = [
             'id' => $this->input->post("id"),
             'summary' => $this->input->post('summary'),
-        );
+        ];
 
-        $response = $this->employer_profile_service_model->update($info);
-        echo json_encode($response);
+        $response = $this->employer_model->update($info);
+        echo json_encode($response, JSON_THROW_ON_ERROR);
     }
 
-    public function update()
+    /**
+     * @throws JsonException
+     */
+    public function update(): void
     {
-        $img = null;
+        $img = NULL;
 
         $file['upload_path'] = './assets/images/employer/profile_pic/';
         $file['allowed_types'] = 'jpg|png|jpeg';
@@ -97,7 +77,7 @@ class employer_profile_service extends MY_Controller
             $data['image'] = $img['file_name'];
         }
 
-        $response = $this->employer_profile_service_model->update($data);
-        echo json_encode($response);
+        $response = $this->Employer_model->update($data);
+        echo json_encode($response, JSON_THROW_ON_ERROR);
     }
 }

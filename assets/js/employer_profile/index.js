@@ -92,10 +92,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-const search_input = document.querySelector('#search_employed');
-if (search_input) {
-    search_input.addEventListener('input', () => {
-        let filter = search_input.value.toUpperCase();
+const search_employed_input = document.querySelector('#search_employed');
+if (search_employed_input) {
+    search_employed_input.addEventListener('input', () => {
+        let filter = search_employed_input.value.toUpperCase();
         const table_rows = document.querySelector('#employed_table').querySelectorAll('tbody tr');
 
         table_rows.forEach(table_row => {

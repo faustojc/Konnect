@@ -20,7 +20,6 @@ class Search extends MY_Controller
 
         $model_list = [
             'employee/Employee_model' => 'employee_model',
-            'employer/Employer_model' => 'employer_model',
             'jobposting/Jobposting_model' => 'jobposting_model',
             'follow/Follow_model' => 'follow_model',
         ];
@@ -100,7 +99,7 @@ class Search extends MY_Controller
             }, $followed_employers);
 
             $this->db->cache_on();
-            $employers = $this->employer_model->getEmployersWhereIn('id', $employer_ids, 'id, address, barangay, city');
+            $employers = $this->Employer_model->getEmployersWhereIn('id', $employer_ids, 'id, address, barangay, city');
             $this->db->cache_off();
         }
 
@@ -248,9 +247,9 @@ class Search extends MY_Controller
     {
         // Get all the employers
         if ($this->auth['user_type'] == 'EMPLOYER') {
-            $other_employers = $this->employer_model->getEmployersLike(['tradename' => $query, 'business_type' => $query], $this->userdata->id);
+            $other_employers = $this->Employer_model->getEmployersLike(['tradename' => $query, 'business_type' => $query], $this->userdata->id);
         } else {
-            $other_employers = $this->employer_model->getEmployersLike(['tradename' => $query, 'business_type' => $query], NULL);
+            $other_employers = $this->Employer_model->getEmployersLike(['tradename' => $query, 'business_type' => $query], NULL);
         }
 
         // Apply the scoring system to other employers using the defined criteria

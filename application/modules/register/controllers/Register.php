@@ -3,17 +3,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Register extends MY_Controller
 {
-    protected $userdata;
-    private $data = [];
+    private array $data = [];
 
     public function __construct()
     {
         parent::__construct();
-        $this->userdata = (object)get_userdata(USER);
-
-        // if(is_empty_object($this->session)){
-        // 	redirect(base_url().'login/authentication', 'refresh');
-        // }
 
         $model_list = [
             'register/Register_model' => 'register_model',
@@ -21,21 +15,24 @@ class Register extends MY_Controller
         $this->load->model($model_list);
     }
 
-    /** load main page */
-    public function index()
+    /** load main page
+     *
+     * @throws JsonException
+     */
+    public function index(): void
     {
-        $user = array(
+        $user = [
             'email' => $this->input->post("email"),
             'password' => $this->input->post("password"),
             'user_type' => $this->input->post("user_type"),
-        );
+        ];
 
         if (empty($user['email']) || empty($user['password'])) {
             $this->data['content'] = 'index';
             $this->load->view('layout', $this->data);
         } else {
             if ($user['user_type'] == 'EMPLOYEE') {
-                $info = array(
+                $info = [
                     'Fname' => $this->input->post("Fname"),
                     'Mname' => $this->input->post("Mname"),
                     'Lname' => $this->input->post("Lname"),
@@ -49,9 +46,9 @@ class Register extends MY_Controller
                     'Bday' => $this->input->post('Bday'),
                     'Employee_image' => 'default.png',
                     'Email' => $user['email'],
-                );
+                ];
             } else {
-                $info = array(
+                $info = [
                     'employer_name' => $this->input->post("employer_name"),
                     'tradename' => $this->input->post("tradename"),
                     'business_type' => $this->input->post("business_type"),
@@ -61,23 +58,23 @@ class Register extends MY_Controller
                     'contact_number' => $this->input->post("contact_number"),
                     'image' => 'default.png',
                     'email' => $user['email'],
-                );
+                ];
             }
 
             $response = $this->register_model->register($user, $info);
 
             if (!$response['has_error']) {
                 $this->load->driver('session');
-                $this->session->set_flashdata('has_registered', true);
+                $this->session->set_flashdata('has_registered', TRUE);
 
-                echo json_encode(['redirect' => base_url() . 'register/thankyou']);
+                echo json_encode(['redirect' => base_url() . 'register/thankyou'], JSON_THROW_ON_ERROR);
             } else {
-                echo json_encode($response);
+                echo json_encode($response, JSON_THROW_ON_ERROR);
             }
         }
     }
 
-    public function thankyou()
+    public function thankyou(): void
     {
         $this->load->driver('session');
         if (!$this->session->flashdata('has_registered')) {
@@ -88,20 +85,23 @@ class Register extends MY_Controller
         $this->load->view('layout', $this->data);
     }
 
-    public function employerForm()
+    public function employerForm(): void
     {
         $this->data['content'] = 'grid/create_employer';
-        echo $this->load->view('layout', $this->data, true);
+        $this->load->view('layout', $this->data);
     }
 
-    public function employeeForm()
+    public function employeeForm(): void
     {
         $this->data['content'] = 'grid/create_employee';
-        echo $this->load->view('layout', $this->data, true);
+        $this->load->view('layout', $this->data);
     }
 
-    public function records()
+    /**
+     * @throws JsonException
+     */
+    public function records(): void
     {
-        echo json_encode($this->register_model->records());
+        echo json_encode($this->register_model->records(), JSON_THROW_ON_ERROR);
     }
 }

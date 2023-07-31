@@ -23,7 +23,6 @@ class Employer_profile extends MY_Controller
         $model_list = [
             'employer_profile/Employer_profile_model' => 'employer_profile_model',
             'employee/Employee_model' => 'employee_model',
-            'employer/Employer_model' => 'employer_model',
             'jobposting/Jobposting_model' => 'jobposting_model',
             'follow/Follow_model' => 'follow_model',
         ];
@@ -31,7 +30,7 @@ class Employer_profile extends MY_Controller
 
         // get the id from get request and get the user and check if the user owns the profile
         $id = $this->input->get('id');
-        $this->current_user = $this->employer_profile_model->get_current_employer($id);
+        $this->current_user = $this->Employer_model->getEmployerOnly($id);
         $this->isAccount = $this->Auth_model->check_permission($this->userdata, $this->current_user);
     }
 
@@ -48,9 +47,9 @@ class Employer_profile extends MY_Controller
         // Enable query caching
         $this->db->cache_on();
 
-        $this->data['current_employer'] = $this->employer_profile_model->get_current_employer($id);
+        $this->data['current_employer'] = $this->current_user;
         $this->data['employees'] = $this->employee_model->get_all_employees(4);
-        $this->data['employers'] = $this->employer_model->get_employers(4, $id);
+        $this->data['employers'] = $this->Employer_model->get_employers(4, $id);
         $this->data['jobpostings'] = $this->jobposting_model->get_employer_jobposts($id, 0, 'tbl_jobposting.*, tbl_employer.id AS employer_id, tbl_employer.tradename AS EmployerTradename, tbl_employer.image AS EmployerLogo');
         $this->data['followers'] = $this->follow_model->get_followers($id);
         $this->data['feedbacks'] = $this->Feedback_model->getAllUsersFeedback($this->current_user->user_id);
@@ -72,27 +71,27 @@ class Employer_profile extends MY_Controller
         $this->load->view('layout', $this->data);
     }
 
-    public function get_jobpostings()
+    public function get_jobpostings(): void
     {
         $id = $this->input->get('id');
 
-        $this->data['jobpostings'] = $this->jobposting_model->get_jobpostings($id, 4);
+        $this->data['jobpostings'] = $this->jobposting_model->get_jobpostings($id);
         $this->data['content'] = 'grid/load_jobpostings';
         $this->load->view('layout', $this->data);
     }
 
-    public function edit_profile()
+    public function edit_profile(): void
     {
-        $this->data['employer'] = $this->employer_profile_model->get_current_employer($this->userdata->id);
+        $this->data['employer'] = $this->userdata;
         $this->data['content'] = 'profile';
         $this->load->view('layout', $this->data);
     }
 
-    public function get_summary()
+    public function get_summary(): void
     {
         $id = $this->input->get('id');
 
-        $this->data['current_employer'] = $this->employer_profile_model->get_summary($id);
+        $this->data['current_employer'] = $this->Employer_model->getEmployerOnly('summary', $id);
         $this->data['content'] = 'grid/load_summary';
         $this->load->view('layout', $this->data);
     }

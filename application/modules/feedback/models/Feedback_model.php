@@ -3,11 +3,19 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Feedback_model extends CI_Model
 {
+    /**
+     * @var mixed
+     */
+    private $Table;
+
+    /**
+     * @throws JsonException
+     */
     public function __construct()
     {
         parent::__construct();
 
-        $this->Table = json_decode(TABLE);
+        $this->Table = json_decode(TABLE, FALSE, 512, JSON_THROW_ON_ERROR);
     }
 
     public function getAllUsersFeedback($user_id)
@@ -48,10 +56,10 @@ class Feedback_model extends CI_Model
             if ($this->db->trans_status()) {
                 $this->db->trans_commit();
                 return ['has_error' => FALSE, 'message' => 'Feedback added successfully.'];
-            } else {
-                $this->db->trans_rollback();
-                return ['has_error' => TRUE, 'message' => 'Failed to add a new feedback.'];
             }
+
+            $this->db->trans_rollback();
+            return ['has_error' => TRUE, 'message' => 'Failed to add a new feedback.'];
         } catch (Exception $e) {
             throw new Exception($e->getMessage(), $e->getCode());
         }

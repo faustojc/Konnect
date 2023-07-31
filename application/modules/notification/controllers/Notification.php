@@ -13,16 +13,11 @@ class Notification extends MY_Controller
         if (empty($this->userdata)) {
             redirect(base_url() . 'login');
         }
-
-        $model_list = [
-            'jobposting/Jobposting_model',
-            'employee/Employee_model',
-            'employer/Employer_model',
-        ];
-
-        $this->load->model($model_list);
     }
 
+    /**
+     * @throws JsonException
+     */
     public function notify(): void
     {
         // Set the appropriate headers for SSE
@@ -37,7 +32,7 @@ class Notification extends MY_Controller
             foreach ($newNotifications as $notification) {
 
                 echo "event: notification\n";
-                echo 'data: ' . json_encode($notification) . "\n\n";
+                echo 'data: ' . json_encode($notification, JSON_THROW_ON_ERROR) . "\n\n";
 
                 usleep(300000);
             }
@@ -50,7 +45,7 @@ class Notification extends MY_Controller
             // Update the notification display from DisplayHandler
             $this->DisplayHandler->updateNotification();
         } else {
-            echo json_encode([]);
+            echo json_encode([], JSON_THROW_ON_ERROR);
         }
 
         // Flush the output buffer

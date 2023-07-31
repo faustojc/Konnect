@@ -4,6 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Employer_model extends CI_Model
 {
     public $Table;
+    private $userdata;
 
     /**
      * @throws JsonException
@@ -11,14 +12,8 @@ class Employer_model extends CI_Model
     public function __construct()
     {
         parent::__construct();
-        $this->session = (object)get_userdata(USER);
 
-        // if(is_empty_object($this->session)){
-        // 	redirect(base_url().'login/authentication', 'refresh');
-        // }
-
-        $model_list = [];
-        $this->load->model($model_list);
+        $this->userdata = get_userdata(USER);
         $this->Table = json_decode(TABLE, FALSE, 512, JSON_THROW_ON_ERROR);
     }
 
@@ -83,5 +78,50 @@ class Employer_model extends CI_Model
     public function getEmployersWhereIn(string $column, array $values, string $select = '*')
     {
         return $this->db->select($select)->from($this->Table->employer)->where_in($column, $values)->get()->result();
+    }
+
+    public function save($data): array
+    {
+        try {
+            $this->db->trans_start();
+            $this->db->insert($this->Table->employer, $data);
+            $this->db->trans_complete();
+
+            if ($this->db->trans_status() === FALSE) {
+                $this->db->trans_rollback();
+                return ['message' => ERROR_PROCESSING, 'has_error' => TRUE];
+            }
+
+            $this->db->trans_commit();
+            return ['message' => SAVED_SUCCESSFUL, 'has_error' => FALSE];
+        } catch (Exception $msg) {
+            return ['message' => $msg->getMessage(), 'has_error' => TRUE];
+        }
+    }
+
+    public function update($data): array
+    {
+        try {
+            $this->db->trans_start();
+            $this->db->where('id', $this->userdata->id)->update($this->Table->employer, $data);
+            $this->db->trans_complete();
+
+            if (!empty($data['email'])) {
+                $this->Auth_model->update_auth($this->userdata->user_id, ['email' => $data['email']]);
+            }
+
+            if ($this->db->trans_status() === FALSE) {
+                $this->db->trans_rollback();
+
+                set_userdata(USER, $this->getEmployerOnly('*', $this->userdata->id));
+
+                return ['message' => ERROR_PROCESSING, 'has_error' => TRUE];
+            }
+
+            $this->db->trans_commit();
+            return ['message' => UPDATE_SUCCESSFUL, 'has_error' => FALSE];
+        } catch (Exception $msg) {
+            return ['message' => $msg->getMessage(), 'has_error' => TRUE];
+        }
     }
 }

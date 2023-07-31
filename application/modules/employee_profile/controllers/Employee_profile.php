@@ -29,7 +29,6 @@ class Employee_profile extends MY_Controller
 
         $model_list = [
             'employee_profile/employee_profile_model' => 'eModel',
-            'employer/Employer_model' => 'employer_model',
             'employee/Employee_model' => 'employee_model',
             'follow/Follow_model' => 'follow_model',
         ];
@@ -59,7 +58,7 @@ class Employee_profile extends MY_Controller
         $this->data['train_val'] = $this->eModel->get_training();
         $this->data['employments'] = $this->Employment_model->getEmployeesEmployment($ID);
         $this->data['skills'] = $this->eModel->get_skill($ID);
-        $this->data['employers'] = $this->employer_model->get_employers(4);
+        $this->data['employers'] = $this->Employer_model->get_employers(4);
         $this->data['employees'] = $this->employee_model->get_all_employees(4, $ID);
         $this->data['feedbacks'] = $this->Feedback_model->getAllUsersFeedback($this->current_user->user_id);
 

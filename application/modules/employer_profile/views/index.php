@@ -56,7 +56,7 @@ main_header(['Employer_profile']);
     }
 
     .nav-pills .nav-link.active,
-    .nav-pills .show>.nav-link {
+    .nav-pills .show > .nav-link {
         color: #fff;
         background-color: #0dcaf0;
     }
@@ -120,10 +120,10 @@ main_header(['Employer_profile']);
                                             </h5>
                                             <!-- <p class="text-left mb-1">
                                                 <?php if (empty($current_employer->employer_name)) {
-                                                    echo $current_employer->tradename;
-                                                } else {
-                                                    echo $current_employer->employer_name;
-                                                } ?>
+                                                echo $current_employer->tradename;
+                                            } else {
+                                                echo $current_employer->employer_name;
+                                            } ?>
                                             </p> -->
                                             <h5 class="widget-user-desc text-left text-dark py-2" style="font-weight: 550; font-size:18px; ">
                                                 <?= $current_employer->business_type ?>
@@ -131,21 +131,18 @@ main_header(['Employer_profile']);
                                             <h6 class="widget-user-desc text-left text-muted" style="font-weight: normal; font-size: 15px; width: 500px;">
                                                 <?= ucwords(@$current_employer->address) . ", " . ucwords(@$current_employer->city) ?>
                                                 |
-                                                <a class="text-info" data-toggle="modal" data-target="#contact" style="cursor: pointer;">Contact
-                                                    details</a>
+                                                <a class="text-info" data-toggle="modal" data-target="#contact" style="cursor: pointer;">
+                                                    Contact details
+                                                </a>
                                             </h6>
-
-
                                         </div>
                                         <div class="col-md-6">
 
                                             <?php if ($has_permission): ?>
                                                 <?php employer_edit_button($current_employer->id); ?>
-                                            <?php elseif ($auth['user_type'] != 'EMPLOYER'): ?>
-                                                <div class="d-flex justify-content-end">
-                                                    <button type="button" class="btn btn-info" style=" line-height: 5px; border-radius:10px;">
-                                                        Follow
-                                                        <i class="fa-solid fa-plus"></i></button>
+                                            <?php elseif ($auth['user_type'] == 'EMPLOYEE'): ?>
+                                                <div class="float-right">
+                                                    <?php follow_button($current_employer->id, $following); ?>
                                                 </div>
                                             <?php endif; ?>
 
@@ -245,7 +242,6 @@ main_header(['Employer_profile']);
                                 </div>
                             <?php endif; ?>
 
-
                         </div>
                         <div class="card card-white">
                             <div class="card-header">
@@ -255,11 +251,7 @@ main_header(['Employer_profile']);
                         <div>
                             <?php jobpost_all_display($jobpostings) ?>
                         </div>
-
-
-
                     </div>
-
 
 
                     <!-- Followers -->
@@ -279,63 +271,6 @@ main_header(['Employer_profile']);
                     <?php endif; ?>
                 </div>
             </div>
-
-            <!-- <div class="col-12 col-md-4 pl-2 pr-2 mt-4">
-                <div class="modal fade" id="modal_edit_home_address" data-backdrop="static" tabindex="-1" aria-labelledby="modal_home_address" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="modal_home_address">Edit Home Address</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="pb-3">
-                                    <label for="address">City</label>
-                                    <input type="text" class="form-control" id="city" value="<?= $current_employer->city ?>" placeholder="Enter Address" required>
-                                </div>
-                                <div class="row pb-3">
-                                    <div class="col-md-6">
-                                        <label for="barangay">Barangay</label>
-                                        <input type="text" class="form-control" id="barangay" value="<?= $current_employer->barangay ?>" placeholder="Enter Barangay" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="city">Address</label>
-                                        <input type="text" class="form-control" id="address" value="<?= $current_employer->address ?>" placeholder="Enter City" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-
-
-
-            <!-- EMPLOYEES
-                <div class="card card-widget widget-user-2 d-none d-md-block">
-                    <div class="card-header">
-                        <h3 class="card-title fw-500">Employees</h3>
-                    </div>
-                    <div id="load_employees_follow_section" style="margin-left: 1rem; margin-right:1rem;">
-                        <php load_employees($employees) ?>
-                    </div>
-                </div>
-
-                EMPLOYERS
-                <div class="card card-widget widget-user-2 d-none d-md-block">
-                    <div class="card-header">
-                        <h3 class="card-title fw-500">Employers</h3>
-                    </div>
-                    <div id="load_employers_follow_section" style="margin-left:1rem; margin-right:1rem;">
-                        <php load_employers($employers); ?>
-                    </div>
-                </div>
-            </div> -->
 
             <!-- Contact Modal -->
             <div class="modal fade" id="contact" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -372,14 +307,16 @@ main_header(['Employer_profile']);
                             <br>
 
                             <?php if ($has_permission): ?>
-                                <h6 style="font-weight: normal;"><i class="fa-solid fa-id-card"></i><strong> SSS</strong>
+                                <h6 style="font-weight: normal;"><i class="fa-solid fa-id-card"></i><strong>
+                                        SSS</strong>
                                 </h6>
 
                                 <h6 style="font-weight: normal;">
                                     <?= $current_employer->sss ?>
                                 </h6>
                                 <br>
-                                <h6 style="font-weight: normal;"><i class="fa-solid fa-id-card"></i><strong> TIN</strong>
+                                <h6 style="font-weight: normal;"><i class="fa-solid fa-id-card"></i><strong>
+                                        TIN</strong>
                                 </h6>
                                 <h6 style="font-weight: normal;">
                                     <?= $current_employer->tin ?>
@@ -468,8 +405,9 @@ main_header(['Employer_profile']);
                             <div class="col-12">
                                 <div class="form-group" style="border: 0;">
                                     <label for="skills_req">Skills Requirements</label>
-                                    <label class="text-muted" style="font-size: 13px;">(click enter to separate
-                                        skills)</label>
+                                    <label class="text-muted" style="font-size: 13px;">
+                                        (click enter to separate skills)
+                                    </label>
                                     <input id="skills_req" name="skills_req" class="form-control border-0" style="resize: none; background-color: #F4F6F7; border-radius: 10px;" type="text" placeholder="Skill#1, Skill#2">
                                 </div>
                             </div>
@@ -496,3 +434,8 @@ main_footer();
 ?>
 
 <script src="<?= base_url() ?>assets/js/employer_profile/index.js"></script>
+
+<?php if ($auth['user_type'] == 'EMPLOYEE'): ?>
+    <script src="<?= base_url() ?>assets/js/follow/index.js"></script>
+    <script src="<?= base_url() ?>assets/js/applicant/index.js"></script>
+<?php endif; ?>

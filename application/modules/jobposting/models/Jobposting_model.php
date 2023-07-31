@@ -6,6 +6,9 @@ class Jobposting_model extends CI_Model
     protected $userdata;
     public $Table;
 
+    /**
+     * @throws JsonException
+     */
     public function __construct()
     {
         parent::__construct();
@@ -17,7 +20,7 @@ class Jobposting_model extends CI_Model
 
         $model_list = [];
         $this->load->model($model_list);
-        $this->Table = json_decode(TABLE);
+        $this->Table = json_decode(TABLE, FALSE, 512, JSON_THROW_ON_ERROR);
     }
 
     public function get_all_jobposts($limit = 0)

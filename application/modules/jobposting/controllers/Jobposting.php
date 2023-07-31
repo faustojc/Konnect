@@ -32,6 +32,9 @@ class Jobposting extends MY_Controller
         $this->load->view('layout', $this->data);
     }
 
+    /**
+     * @throws JsonException
+     */
     public function job_info()
     {
         $id = $this->input->get('id');
@@ -39,9 +42,7 @@ class Jobposting extends MY_Controller
         if ($id) {
             // check if the user is an employer, load the employer's jobpost and the selected jobpost views
             if ($this->auth['user_type'] == 'EMPLOYER') {
-                $employer_id = $this->job_model->getEmployerByJobpost($id)->id;
-
-                $this->data['details'] = $this->job_model->get_employer_jobposts($employer_id);
+                $this->data['own_jobposts'] = $this->job_model->get_employer_jobposts($this->userdata->id);
                 $view['jobs'] = $this->load->view('grid/employer/load_own_jobpost', $this->data, TRUE);
 
                 $this->data['job'] = $this->job_model->job_info($id);
@@ -59,7 +60,7 @@ class Jobposting extends MY_Controller
             }
 
             $view['user_type'] = $this->auth['user_type'];
-            echo json_encode($view);
+            echo json_encode($view, JSON_THROW_ON_ERROR);
         }
     }
 

@@ -27,9 +27,7 @@
 
 <div class="row justify-content-center job-content">
     <div class="col-md-4 pl-1" style="height: auto; ">
-        <?php
-        $ci = &get_instance();
-        if (!empty($own_jobposts)) {
+        <?php if (!empty($own_jobposts)) {
             foreach ($own_jobposts as $job) {
                 $formattedTimeDiff = formatTime($job->date_posted);
                 ?>

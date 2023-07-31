@@ -1,11 +1,16 @@
 function applyBtnFunction() {
     const applyBtn = document.querySelectorAll('.apply-button');
 
+    const spinner = document.createElement('span');
+    spinner.classList.add('spinner-border', 'spinner-border-sm', 'mx-2');
+
     if (applyBtn) {
         applyBtn.forEach(btn => {
             applyBtnHover(btn, btn.textContent);
 
             btn.addEventListener('click', function () {
+                btn.appendChild(spinner);
+
                 const job_id = btn.dataset.id;
                 const url = baseUrl + 'applicant/apply';
 
@@ -15,6 +20,8 @@ function applyBtnFunction() {
                     body: JSON.stringify({job_id: job_id})
                 }).then(response => response.text())
                     .then(data => {
+                        btn.removeChild(spinner);
+
                         let status = btn.textContent.replace(/\s+/g, '').toUpperCase();
 
                         if (status.includes('APPLY')) {
@@ -25,8 +32,11 @@ function applyBtnFunction() {
                             success('Application cancelled!', 'You cancelled your application to this job.');
                         }
 
-                        btn.textContent = status;
-                        applyBtnHover(btn, status);
+                        const newBtn = btn.cloneNode(true);
+                        btn.parentNode.replaceChild(newBtn, btn);
+
+                        newBtn.textContent = status;
+                        applyBtnHover(newBtn, status);
                     })
                     .catch(e => {
                         console.log(e);
@@ -101,18 +111,24 @@ function acceptRejectBtnFunction() {
 }
 
 const applyBtnHover = (btn, status) => {
-    if (status.includes('PENDING')) {
-        btn.addEventListener('mouseover', function () {
-            btn.textContent = 'Cancel';
-            btn.classList.add('btn-outline-danger');
-        });
-        btn.addEventListener('mouseout', function () {
-            btn.textContent = status;
+    if (btn) {
+        if (status.includes('PENDING')) {
+            btn.addEventListener('mouseover', () => {mouseoverFunc(btn)});
+            btn.addEventListener('mouseout', () => {mouseoutFunc(btn, status)});
+        } else {
+            btn.removeEventListener('mouseover', mouseoverFunc);
+            btn.removeEventListener('mouseout', mouseoutFunc);
             btn.classList.remove('btn-outline-danger');
-        });
-    } else {
-        btn.removeEventListener('mouseover', () => {});
-        btn.removeEventListener('mouseout', () => {});
-        btn.textContent = status;
+        }
     }
 }
+
+const mouseoverFunc = function (btn) {
+    btn.textContent = 'Cancel';
+    btn.classList.add('btn-outline-danger');
+};
+
+const mouseoutFunc = function (btn, status) {
+    btn.textContent = status;
+    btn.classList.remove('btn-outline-danger');
+};

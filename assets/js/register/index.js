@@ -32,7 +32,16 @@ confirmPasswordErrorMessage.textContent = 'Password does not match.';
 
 const PasswordReqErrorMessage = document.createElement('p');
 PasswordReqErrorMessage.classList.add('invalid-feedback', 'm-0', 'd-block');
-PasswordReqErrorMessage.textContent = 'Password needs to have 1 number and 1 special character.';
+PasswordReqErrorMessage.textContent = 'Password needs to have 1 special char.';
+
+const PasswordNumReqErrorMessage = document.createElement('p');
+PasswordNumReqErrorMessage.classList.add('invalid-feedback', 'm-0', 'd-block');
+PasswordNumReqErrorMessage.textContent = 'Password needs to have at least 1 number.';
+
+const PasswordUpReqErrorMessage = document.createElement('p');
+PasswordUpReqErrorMessage.classList.add('invalid-feedback', 'm-0', 'd-block');
+PasswordUpReqErrorMessage.textContent = 'Password needs to have at least 1 uppercase.';
+
 
 email.addEventListener('input', function () {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -88,22 +97,58 @@ password.addEventListener('input', function () {
     setNextBtn();
 });
 
-const passwordRegex = new RegExp("^ (?=.* [A-Z]) (?=.*\\d) (?=.* [!@#$%^&*]) [A-Za-z\\d!@#$%^&*] {8,}$");
-const passwordReq = document.getElementById("passwordReq");
+
 
 
 password.addEventListener('input', function () {
     const passwordValue = this.value;
-     const isValid = passwordRegex.test(passwordValue);
-
-    if (isValid) {
-     
+    const hasSpecialCharacter = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(passwordValue);
+ 
+    if (hasSpecialCharacter) {
+        password.classList.remove('is-invalid');
         PasswordReqErrorMessage.remove();
     } else {
+        password.classList.add('is-invalid');
         const passwordInput = document.querySelector('div.password-input');
         passwordInput.parentElement.insertBefore(PasswordReqErrorMessage, passwordInput.nextElementSibling);
     }
 
+    passwordIsValid = hasSpecialCharacter;
+    setNextBtn();
+});
+
+password.addEventListener('input', function () {
+    const passwordValue = this.value;
+    const hasNumber = /\d/.test(passwordValue);
+
+    if (hasNumber) {
+        password.classList.remove('is-invalid');
+        PasswordNumReqErrorMessage.remove();
+    } else {
+        password.classList.add('is-invalid');
+        const passwordInput = document.querySelector('div.password-input');
+        passwordInput.parentElement.insertBefore(PasswordNumReqErrorMessage, passwordInput.nextElementSibling);
+    }
+
+    passwordIsValid = hasNumber;
+    setNextBtn();
+});
+
+password.addEventListener('input', function () {
+    const passwordValue = this.value;
+    const hasUppercase = /[A-Z]/.test(passwordValue);
+ 
+
+    if (hasUppercase) {
+        password.classList.remove('is-invalid');
+        PasswordUpReqErrorMessage.remove();
+    } else {
+        password.classList.add('is-invalid');
+        const passwordInput = document.querySelector('div.password-input');
+        passwordInput.parentElement.insertBefore(PasswordUpReqErrorMessage, passwordInput.nextElementSibling);
+    }
+
+    passwordIsValid = hasUppercase;
     setNextBtn();
 });
 

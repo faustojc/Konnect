@@ -248,9 +248,9 @@ class Search extends MY_Controller
     {
         // Get all the employers
         if ($this->auth['user_type'] == 'EMPLOYER') {
-            $other_employers = $this->employer_model->getEmployersLike(['tradename' => $query, 'business_type' => $query], $this->userdata->id, 'id, tradename, business_type, address, barangay, city');
+            $other_employers = $this->employer_model->getEmployersLike(['tradename' => $query, 'business_type' => $query], $this->userdata->id);
         } else {
-            $other_employers = $this->employer_model->getEmployersLike(['tradename' => $query, 'business_type' => $query], NULL, 'id, tradename, business_type, address, barangay, city');
+            $other_employers = $this->employer_model->getEmployersLike(['tradename' => $query, 'business_type' => $query], NULL);
         }
 
         // Apply the scoring system to other employers using the defined criteria

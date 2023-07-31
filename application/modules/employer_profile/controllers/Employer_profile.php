@@ -58,6 +58,7 @@ class Employer_profile extends MY_Controller
             $this->data['following'] = $this->follow_model->get_following($this->userdata->ID);
         } else {
             $this->data['employed'] = $this->Employed_model->getEmployersEmployed($this->userdata->id);
+            $this->data['applicant'] = $this->Applicant_model->getApplicant($this->userdata->ID);
         }
 
         // Disable query caching

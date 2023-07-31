@@ -21,7 +21,7 @@ class Login extends MY_Controller
     public function index(): void
     {
         if (!empty($this->userdata)) {
-            redirect(base_url() . 'beu_dashboard');
+            redirect(base_url() . 'Home');
         }
 
         $this->data['content'] = 'index';
@@ -59,7 +59,7 @@ class Login extends MY_Controller
         if (!$response['has_error']) {
             set_userdata(AUTH, $info);
 
-            echo json_encode(['redirect' => base_url() . 'beu_dashboard'], JSON_THROW_ON_ERROR);
+            echo json_encode(['redirect' => base_url() . 'Home'], JSON_THROW_ON_ERROR);
         } else {
             echo json_encode($response, JSON_THROW_ON_ERROR);
         }

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class beu_dashboard extends MY_Controller
+class Home extends MY_Controller
 {
     protected $userdata;
     protected $auth;
@@ -19,7 +19,6 @@ class beu_dashboard extends MY_Controller
         }
 
         $model_list = [
-            'beu_dashboard/beu_dashboard_model' => 'dashboard_model',
             'employee/Employee_model' => 'employee_model',
             'employer/Employer_model' => 'employer_model',
             'jobposting/Jobposting_model' => 'jobposting_model',

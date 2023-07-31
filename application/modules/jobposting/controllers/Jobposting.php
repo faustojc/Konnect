@@ -25,7 +25,7 @@ class Jobposting extends MY_Controller
     }
 
     /** load main page */
-    public function index()
+    public function index(): void
     {
         $this->data['auth'] = $this->auth;
         $this->data['content'] = 'index';
@@ -35,7 +35,7 @@ class Jobposting extends MY_Controller
     /**
      * @throws JsonException
      */
-    public function job_info()
+    public function job_info(): void
     {
         $id = $this->input->get('id');
 
@@ -64,7 +64,7 @@ class Jobposting extends MY_Controller
         }
     }
 
-    public function create_job()
+    public function create_job(): void
     {
         $id = $this->input->get('id');
 
@@ -72,7 +72,7 @@ class Jobposting extends MY_Controller
         $this->load->view('layout', $this->data);
     }
 
-    public function job_feed()
+    public function job_feed(): void
     {
         $this->data['details'] = $this->job_model->get_all_jobposts();
         $this->data['auth'] = $this->auth;
@@ -89,7 +89,7 @@ class Jobposting extends MY_Controller
         $this->output->set_content_type('text/html')->set_output($view);
     }
 
-    public function get_selected_job()
+    public function get_selected_job(): void
     {
         $id = $this->input->get('id');
 
@@ -105,7 +105,7 @@ class Jobposting extends MY_Controller
         $this->output->set_content_type('text/html')->set_output($view);
     }
 
-    public function own_jobpost()
+    public function own_jobpost(): void
     {
         $this->data['own_jobposts'] = $this->job_model->get_employer_jobposts($this->userdata->id);
         $this->data['applicants'] = $this->Applicant_model->getEmployerApplicants($this->userdata->id);
@@ -116,7 +116,7 @@ class Jobposting extends MY_Controller
         $this->output->set_content_type('text/html')->set_output($view);
     }
 
-    public function get_own_selected_job()
+    public function get_own_selected_job(): void
     {
         $id = $this->input->get('id');
 
@@ -129,7 +129,7 @@ class Jobposting extends MY_Controller
         $this->output->set_content_type('text/html')->set_output($view);
     }
 
-    public function get_applied_jobs()
+    public function get_applied_jobs(): void
     {
         $this->data['applied_jobs'] = $this->Applicant_model->getAppliedJobs($this->userdata->ID);
         $this->data['content'] = 'grid/employee/load_applied_jobs';
@@ -138,7 +138,7 @@ class Jobposting extends MY_Controller
         $this->output->set_content_type('text/html')->set_output($view);
     }
 
-    public function get_selected_applied_job()
+    public function get_selected_applied_job(): void
     {
         $id = $this->input->get('id');
 

@@ -164,25 +164,28 @@ main_header(['Employer_profile']);
         border-radius: 1rem;
         /* Adjust the border radius as needed */
     }
+
     @media (max-width: 576px) {
         .img-circle {
             max-width: 100px;
             margin: 0 auto;
-        }        
+        }
     }
+
     .scrollfunc {
-    
-    overflow-y: scroll; /* Add the ability to scroll */
+
+        overflow-y: scroll; /* Add the ability to scroll */
     }
+
     /* Hide scrollbar for Chrome, Safari and Opera */
     .scrollfunc::-webkit-scrollbar {
-    display: none;
+        display: none;
     }
 
     /* Hide scrollbar for IE, Edge and Firefox */
     .scrollfunc {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
     }
 </style>
 
@@ -191,7 +194,6 @@ main_header(['Employer_profile']);
     <div class="container-fluid">
         <div class="row pl-3 pr-3" style="margin-top: 3.5rem;">
             <div class="col-12 col-md-3 mt-4">
-                <!-- -->
                 <div class="sticky-top" style="top:65px;" id="user">
                     <?= $user_display ?>
                 </div>
@@ -204,7 +206,7 @@ main_header(['Employer_profile']);
                         <div class="card-body">
                             <div class="row pb-2">
                                 <div class="col-1 d-flex justify-content-center">
-                                <img class="img-circle img-fluid " src="<?= base_url() ?>assets/images/employer/profile_pic/<?= $details->image ?> " alt="User Avatar" style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
+                                    <img class="img-circle img-fluid " src="<?= base_url() ?>assets/images/employer/profile_pic/<?= $details->image ?> " alt="User Avatar" style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
                                 </div>
                                 <div class="col-11">
                                     <div class="card shadow-none hovercard" style="border-radius:10px; width:100%; height:100%; background-color: #F4F6F7;">
@@ -333,7 +335,7 @@ main_header(['Employer_profile']);
             </div>
 
 
-            <div class="col-12 col-md-3 mt-4" >
+            <div class="col-12 col-md-3 mt-4">
                 <div class="sticky-top scrollfunc" style="top: 65px; height: calc(100vh - 65px); ;">
 
                     <!-- EMPLOYEES -->

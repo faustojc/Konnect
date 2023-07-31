@@ -147,7 +147,7 @@ if (!empty($auth)) {
             <!-- Left navbar links -->
             <ul class="navbar-nav align-items-center">
                 <li class="nav-item d-none d-sm-inline-block pr-3">
-                    <a href="<?= base_url() ?>beu_dashboard">
+                    <a href="<?= base_url() ?>home">
                         <img class="brand-image" src="<?= base_url() ?>assets/images/Logo/Konnect.png" alt="" style="
                             object-fit: cover;
                             /* min-width: 100px;
@@ -195,7 +195,7 @@ if (!empty($auth)) {
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="<?= base_url() ?>beu_dashboard" class="nav-link">
+                    <a href="<?= base_url() ?>home" class="nav-link">
                         <i class="fa-solid fa-house"></i>
                     </a>
                 </li>

@@ -3,35 +3,34 @@ $time = formatTime($job->date_posted);
 ?>
 
 <div class="card card-light mb-0 sticky-top" style="top: 60px; max-height: calc(100vh - 70px);">
-    <div class="card-header d-flex flex-column p-3">
-        <a href="<?php echo base_url() ?>jobposting/job_info/<?= $job->id ?>" class="text-dark">
-            <h4 class="card-title font-weight-bold mb-2" style="font-size: 18px;">
-                <?= ucwords($job->title) ?>
-            </h4>
-        </a>
-        <h6 class="mb-1">
-            <?= ucwords($job->EmployerTradename) ?>
-        </h6>
-        <small class="text-muted mb-2">Posted
-            <?= $time ?>
-        </small>
-        <div class="card-tools mb-4">
-            <span class="badge job-status">
-                <?= ucwords($job->filled) ?>
-            </span>
+    <div class="row card-header p-3">
+        <div class="col-12 mb-2">
+            <div class="d-flex justify-content-between align-items-center">
+                <a class="text-dark">
+                    <h4 class="card-title font-weight-bold" style="font-size: 18px;">
+                        <?= ucwords($job->title) ?>
+                    </h4>
+                </a>
+                <div class="card-tools">
+                    <span class="badge job-status"><?= ucwords($job->filled) ?></span>
+                </div>
+            </div>
         </div>
 
-        <?php
-        $auth = get_userdata(AUTH);
+        <div class="col-12">
+            <h6 class="m-0"><?= ucwords($job->EmployerTradename) ?></h6>
+            <small class="text-muted mb-2">Posted <?= $time ?></small>
 
-        if ($auth['user_type'] == 'EMPLOYEE' && !empty($applicant)) {
-            if ($applicant->job_id == $job->id && strtoupper($applicant->status) != 'PENDING') {
-                apply_button($job->id, strtoupper($applicant->status));
-            } else {
-                apply_button($job->id, 'APPLY NOW');
-            }
-        } ?>
+            <?php $auth = get_userdata(AUTH);
 
+            if ($auth['user_type'] == 'EMPLOYEE') {
+                if (!empty($applicant) && $applicant->job_id == $job->id && strtoupper($applicant->status) != 'PENDING') {
+                    apply_button($job->id, strtoupper($applicant->status));
+                } else {
+                    apply_button($job->id, 'APPLY NOW');
+                }
+            } ?>
+        </div>
     </div>
 
     <div class="pl-3 pt-3" style="font-weight:300;">

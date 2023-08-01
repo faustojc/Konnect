@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 31, 2023 at 08:41 PM
+-- Generation Time: Aug 01, 2023 at 07:29 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -39,6 +39,23 @@ CREATE TABLE `tbl_applicant` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_education`
+--
+
+CREATE TABLE `tbl_education` (
+  `id` int(11) NOT NULL,
+  `employee_id` int(11) NOT NULL,
+  `level` varchar(255) NOT NULL,
+  `institution` varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` varchar(1000) NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_employed`
 --
 
@@ -46,7 +63,9 @@ CREATE TABLE `tbl_employed` (
   `id` int(11) NOT NULL,
   `employer_id` int(11) NOT NULL,
   `employee_id` int(11) NOT NULL,
-  `job_title` varchar(255) DEFAULT NULL,
+  `job_title` varchar(255) NOT NULL,
+  `job_type` varchar(100) NOT NULL,
+  `job_description` text DEFAULT NULL,
   `is_active` tinyint(1) NOT NULL DEFAULT 1,
   `is_verified` tinyint(1) NOT NULL DEFAULT 0,
   `date_started` date NOT NULL DEFAULT current_timestamp(),
@@ -57,11 +76,8 @@ CREATE TABLE `tbl_employed` (
 -- Dumping data for table `tbl_employed`
 --
 
-INSERT INTO `tbl_employed` (`id`, `employer_id`, `employee_id`, `job_title`, `is_active`, `is_verified`, `date_started`, `date_ended`) VALUES
-(3, 1, 32, NULL, 1, 0, '2023-07-28', NULL),
-(4, 1, 32, NULL, 1, 0, '2023-07-28', NULL),
-(5, 1, 32, NULL, 1, 0, '2023-07-28', NULL),
-(6, 1, 32, NULL, 1, 0, '2023-07-28', NULL);
+INSERT INTO `tbl_employed` (`id`, `employer_id`, `employee_id`, `job_title`, `job_type`, `job_description`, `is_active`, `is_verified`, `date_started`, `date_ended`) VALUES
+(10, 1, 32, 'Full Stack Developer', 'Full time', '<p>hahahaha</p>', 0, 0, '2023-08-01', '2023-10-19');
 
 -- --------------------------------------------------------
 
@@ -105,24 +121,6 @@ INSERT INTO `tbl_employee` (`ID`, `user_id`, `Date_created`, `Fname`, `Lname`, `
 (40, 25, '2023-07-27 09:50:15', 'Katrina', 'Dizon', 'G.', '2001-03-27', 'female', 'single', 'Catholic', '5555', 'katrina@gmail.com', 'BACOLOD CITY', 'Villamonte', 'kat\'s street', '', '', '', '', '', '', 'default.png'),
 (41, 26, '2023-07-27 10:20:19', 'John Martis', 'mART', 'Bo', '2023-07-05', 'male', 'single', 'dgfdgfdgfdgd', '123444', 'doe@gmail.com', 'dfgdgdgd', 'dgfdgfd', 'dfgdgfdf', '', '', '', '', '', '<p>gwapo ko</p>', 'default.png'),
 (42, 27, '2023-07-27 10:36:16', 'Fausto JC', 'Boko', 'S.', '2023-07-13', 'male', 'single', 'sferferferf', '0908', 'test@gmail.com', 'Bacolod', 'dsff', 'Charito Heights', '', '', '', '', '', '', 'default.png');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_employee_educ`
---
-
-CREATE TABLE `tbl_employee_educ` (
-  `ID` int(11) NOT NULL,
-  `Employee_id` int(11) NOT NULL,
-  `Level` varchar(255) NOT NULL,
-  `Institution` varchar(255) NOT NULL,
-  `Title` varchar(255) NOT NULL,
-  `Description` varchar(1000) NOT NULL,
-  `Start_date` date NOT NULL,
-  `End_date` date NOT NULL,
-  `Hours` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -198,20 +196,19 @@ CREATE TABLE `tbl_employment` (
   `employer_id` int(11) NOT NULL,
   `employee_id` int(11) NOT NULL,
   `job_title` varchar(255) NOT NULL,
-  `start_date` datetime NOT NULL DEFAULT current_timestamp(),
-  `end_date` date DEFAULT NULL,
-  `status` varchar(255) NOT NULL,
+  `job_type` varchar(255) NOT NULL,
   `job_description` varchar(255) NOT NULL,
-  `show_status` tinyint(1) NOT NULL,
-  `is_verified` tinyint(1) DEFAULT 0
+  `is_verified` tinyint(1) DEFAULT 0,
+  `date_started` datetime NOT NULL DEFAULT current_timestamp(),
+  `date_ended` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `tbl_employment`
 --
 
-INSERT INTO `tbl_employment` (`id`, `employer_id`, `employee_id`, `job_title`, `start_date`, `end_date`, `status`, `job_description`, `show_status`, `is_verified`) VALUES
-(72, 1, 32, 'Full Stack Developer', '2023-07-29 00:00:00', NULL, 'Full-time', 'asdasda', 1, 127);
+INSERT INTO `tbl_employment` (`id`, `employer_id`, `employee_id`, `job_title`, `job_type`, `job_description`, `is_verified`, `date_started`, `date_ended`) VALUES
+(76, 1, 32, 'Full Stack Developer', 'Full time', '<p>hahahaha</p>', 0, '2023-08-01 00:00:00', '2023-10-19');
 
 -- --------------------------------------------------------
 
@@ -433,6 +430,13 @@ ALTER TABLE `tbl_applicant`
   ADD KEY `fk_applicant_job_id` (`job_id`);
 
 --
+-- Indexes for table `tbl_education`
+--
+ALTER TABLE `tbl_education`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_Employee_ID` (`employee_id`);
+
+--
 -- Indexes for table `tbl_employed`
 --
 ALTER TABLE `tbl_employed`
@@ -445,13 +449,6 @@ ALTER TABLE `tbl_employed`
 --
 ALTER TABLE `tbl_employee`
   ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `tbl_employee_educ`
---
-ALTER TABLE `tbl_employee_educ`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `fk_Employee_ID` (`Employee_id`);
 
 --
 -- Indexes for table `tbl_employee_skill`
@@ -536,22 +533,22 @@ ALTER TABLE `tbl_applicant`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
+-- AUTO_INCREMENT for table `tbl_education`
+--
+ALTER TABLE `tbl_education`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+
+--
 -- AUTO_INCREMENT for table `tbl_employed`
 --
 ALTER TABLE `tbl_employed`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tbl_employee`
 --
 ALTER TABLE `tbl_employee`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
-
---
--- AUTO_INCREMENT for table `tbl_employee_educ`
---
-ALTER TABLE `tbl_employee_educ`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `tbl_employee_skill`
@@ -569,7 +566,7 @@ ALTER TABLE `tbl_employer`
 -- AUTO_INCREMENT for table `tbl_employment`
 --
 ALTER TABLE `tbl_employment`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `tbl_feedback`
@@ -625,17 +622,17 @@ ALTER TABLE `tbl_applicant`
   ADD CONSTRAINT `fk_applicant_job_id` FOREIGN KEY (`job_id`) REFERENCES `tbl_jobposting` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `tbl_education`
+--
+ALTER TABLE `tbl_education`
+  ADD CONSTRAINT `fk_Employee_ID` FOREIGN KEY (`Employee_id`) REFERENCES `tbl_employee` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `tbl_employed`
 --
 ALTER TABLE `tbl_employed`
   ADD CONSTRAINT `fk_employed_employee_id` FOREIGN KEY (`employee_id`) REFERENCES `tbl_employee` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_employed_employer_id` FOREIGN KEY (`employer_id`) REFERENCES `tbl_employer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tbl_employee_educ`
---
-ALTER TABLE `tbl_employee_educ`
-  ADD CONSTRAINT `fk_Employee_ID` FOREIGN KEY (`Employee_id`) REFERENCES `tbl_employee` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_employee_skill`

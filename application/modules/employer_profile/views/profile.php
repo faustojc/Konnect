@@ -178,12 +178,13 @@ main_header(['employer_profile']);
     <h4 class="font-weight-bold pt-3 my-4">
         Edit Your Profile
     </h4>
-    <input type="text" class="form-control" name="ID" id="ID" value="<?= $employer->id ?>" hidden readonly>
+    <input type="text" class="form-control" name="id" id="id" value="<?= $employer->id ?>" hidden readonly>
     <div class="row">
         <div class="col-md-3 pt-0">
             <div class="card shadow-none">
                 <div class="card-body" style="padding:10px 20px; font-weight:650;">
-                    <a href="<?php echo base_url() ?>employer_profile?id=<?= $employer->id ?>" class=""><i class="fa-solid fa-chevron-left"></i> Back to profile</a>
+                    <a href="<?php echo base_url() ?>employer_profile?id=<?= $employer->id ?>" class=""><i class="fa-solid fa-chevron-left"></i>
+                        Back to profile</a>
                 </div>
             </div>
             <div class="card overflow-hidden shadow-none">
@@ -191,10 +192,13 @@ main_header(['employer_profile']);
                     <a class="list-group-item list-group-item-action active" data-toggle="list" href="#account-general">General</a>
                     <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-email">E-mail</a>
                     <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-info">Info</a>
-                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-govt-id">Government ID</a>
-                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-change-password">Change password</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-govt-id">Government
+                        ID</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-change-password">Change
+                        password</a>
                     <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-connections">Connections</a>
-                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-deletion">Account deletion</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-deletion">Account
+                        deletion</a>
                 </div>
             </div>
         </div>
@@ -237,11 +241,13 @@ main_header(['employer_profile']);
                                         <option value="Finance and Banking">Finance and Banking</option>
                                         <option value="Healthcare">Healthcare</option>
                                         <option value="Education">Education</option>
-                                        <option value="Manufacturing and Engineering">Manufacturing and Engineering</option>
+                                        <option value="Manufacturing and Engineering">Manufacturing and Engineering
+                                        </option>
                                         <option value="Hospitality and Tourism">Hospitality and Tourism</option>
                                         <option value="Media and Entertainment">Media and Entertainment</option>
                                         <option value="Energy and Utilities">Energy and Utilities</option>
-                                        <option value="Transportation and Logistics">Transportation and Logistics</option>
+                                        <option value="Transportation and Logistics">Transportation and Logistics
+                                        </option>
                                     </select>
                                 </div>
                             </div>
@@ -251,13 +257,21 @@ main_header(['employer_profile']);
                     <div class="tab-pane fade" id="account-email">
                         <form>
                             <div class="card-body pb-2">
-                            <div class="form-group">
-                                    <label class="form-label">E-mail Address</label>
+                                <div class="form-group">
+                                    <label for="email" class="form-label">E-mail Address</label>
                                     <input type="text" class="form-control" name="email" id="email" value="<?= $employer->email ?>" placeholder="Enter Email address" required>
-                                    <div class="alert alert-primary mt-3">
-                                        Your email is not confirmed. Please check your inbox.<br>
-                                        <a href="javascript:void(0)">Resend confirmation</a>
-                                    </div>
+                                    <?php if ($auth->is_verified == 1): ?>
+                                        <div class="alert alert-success mt-3">
+                                            Your account is verified.
+                                        </div>
+                                    <?php else: ?>
+                                        <div class="alert alert-default-primary mt-3">
+                                            Your account is not verified. Please check your inbox.<br>
+                                            <button class="btn btn-outline-info" id="resend_verify">
+                                                Resend confirmation
+                                            </button>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </form>
@@ -304,22 +318,18 @@ main_header(['employer_profile']);
                         <form>
                             <div class="card-body pb-2">
                                 <div class="form-group">
-                                    <label for="current_password" class="form-label">
-                                        Current password
-                                        <input name="current_password" type="password" class="form-control">
-                                    </label>
+                                    <label for="current_password" class="form-label"> Current password
+                                        <input name="current_password" type="password" class="form-control"> </label>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="form-label">
-                                        New password
+                                    <label class="form-label"> New password
                                         <input name="password" type="password" class="form-control" placeholder="at least 8 characters">
                                     </label>
                                 </div>
 
                                 <div class="form-group mb-0">
-                                    <label class="form-label">
-                                        Repeat new password
+                                    <label class="form-label"> Repeat new password
                                         <input name="repeat_password" type="password" class="form-control" placeholder="at least 8 characters">
                                     </label>
                                 </div>
@@ -333,25 +343,27 @@ main_header(['employer_profile']);
                     <div class="tab-pane fade" id="account-connections">
                         <div class="card-body">
                             <h5 class="mb-2">
-                                <a href="javascript:void(0)" class="float-right text-muted text-tiny"><i class="ion ion-md-close"></i> Remove</a>
-                                <i class="ion ion-logo-google text-google"></i>
-                                You are connected to Google:
+                                <a href="javascript:void(0)" class="float-right text-muted text-tiny"><i class="ion ion-md-close"></i>
+                                    Remove</a> <i class="ion ion-logo-google text-google"></i> You are connected to
+                                Google:
                             </h5>
                             <?= $employer->email ?>
                         </div>
                         <hr class="border-light m-0">
                         <div class="card-body">
                             <button type="button" class="btn btn-facebook">Connect to <strong>Facebook</strong></button>
-                            <button type="button" class="btn btn-instagram">Connect to <strong>Instagram</strong></button>
+                            <button type="button" class="btn btn-instagram">Connect to <strong>Instagram</strong>
+                            </button>
                         </div>
                     </div>
 
                     <div class="tab-pane fade" id="account-deletion">
                         <div class="card-body">
                             <h5>Delete your account</h5>
-                            <p><strong>Deleting your account is an irreversible action.</strong> This means that all your data, settings, and associated 
-                            information will be permanently removed and cannot be recovered. Please be certain of your decision before 
-                            proceeding with account deletion.</p>
+                            <p><strong>Deleting your account is an irreversible action.</strong> This means that all
+                                your data, settings, and associated information will be permanently removed and cannot
+                                be recovered. Please be certain of your decision before proceeding with account
+                                deletion.</p>
                         </div>
                     </div>
 
@@ -360,7 +372,9 @@ main_header(['employer_profile']);
                 <div class="text-right m-2">
                     <a href="<?php echo base_url() ?>employer_profile?id=<?= $employer->id ?>" class="btn btn-default">Cancel</a>&nbsp;
                     <button type="submit" class="btn btn-info" id="update_profile">Save changes</button>
-                    <button type="button" class="btn btn-danger delete" id="delete" data-id="<?=$employer->id?>" style="display:none;">Confirm deletion</button>
+                    <button type="button" class="btn btn-danger delete" id="delete" data-id="<?= $employer->id ?>" style="display:none;">
+                        Confirm deletion
+                    </button>
                 </div>
             </div>
         </div>
@@ -391,37 +405,37 @@ main_footer();
         });
     });
 
-    $(document).ready(function() {
-    // Button visibility based on active tab
-    $("#tab").on("shown.bs.tab", function(event) {
-      var activeTabId = $(event.target).attr("href"); // Get the ID of the active tab
-      var hiddenButtonTabs = ["#account-deletion"]; // Add more tab-ids if needed
+    $(document).ready(function () {
+        // Button visibility based on active tab
+        $("#tab").on("shown.bs.tab", function (event) {
+            var activeTabId = $(event.target).attr("href"); // Get the ID of the active tab
+            var hiddenButtonTabs = ["#account-deletion"]; // Add more tab-ids if needed
 
-      if (hiddenButtonTabs.includes(activeTabId)) {
-        $("#update_profile").hide(); // Hide the button for specific tabs
-      } else {
-        $("#update_profile").show(); // Show the button for other tabs
-      }
+            if (hiddenButtonTabs.includes(activeTabId)) {
+                $("#update_profile").hide(); // Hide the button for specific tabs
+            } else {
+                $("#update_profile").show(); // Show the button for other tabs
+            }
+        });
     });
-  });
 
-  $(document).ready(function() {
-    // Function to show or hide the button based on the active tab
-    function toggleButtonVisibility(activeTabId) {
-      var hiddenButtonTabs = ["#account-general", "#account-email", "#account-info", "#account-govt-id", "#account-change-password", "#account-connections"]; // Add more tab-ids if needed
+    $(document).ready(function () {
+        // Function to show or hide the button based on the active tab
+        function toggleButtonVisibility(activeTabId) {
+            var hiddenButtonTabs = ["#account-general", "#account-email", "#account-info", "#account-govt-id", "#account-change-password", "#account-connections"]; // Add more tab-ids if needed
 
-      if (hiddenButtonTabs.includes(activeTabId)) {
-        $("#delete").hide(); // Hide the button for specific tabs
-      } else {
-        $("#delete").show(); // Show the button for other tabs
-      }
-    }
+            if (hiddenButtonTabs.includes(activeTabId)) {
+                $("#delete").hide(); // Hide the button for specific tabs
+            } else {
+                $("#delete").show(); // Show the button for other tabs
+            }
+        }
 
-    // Button visibility based on active tab when tab changes
-    $("#tab").on("shown.bs.tab", function(event) {
-      var activeTabId = $(event.target).attr("href"); // Get the ID of the active tab
-      toggleButtonVisibility(activeTabId);
+        // Button visibility based on active tab when tab changes
+        $("#tab").on("shown.bs.tab", function (event) {
+            var activeTabId = $(event.target).attr("href"); // Get the ID of the active tab
+            toggleButtonVisibility(activeTabId);
+        });
     });
-  });
 </script>
 <script src="<?php echo base_url() ?>/assets/js/employer_profile/index.js"></script>

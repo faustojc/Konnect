@@ -6,11 +6,6 @@
         margin-top: 20px;
     }
 
-    .ui-w-80 {
-        width: 80px !important;
-        height: auto;
-    }
-
     .btn-default {
         border-color: rgba(24, 28, 33, 0.1);
         background: rgba(0, 0, 0, 0);
@@ -31,10 +26,6 @@
         cursor: pointer;
     }
 
-    .text-light {
-        color: #babbbc !important;
-    }
-
     .btn-facebook {
         border-color: rgba(0, 0, 0, 0);
         background: #3B5998;
@@ -51,10 +42,6 @@
         background-clip: padding-box;
         /* box-shadow: 0 1px 4px rgba(24,28,33,0.012); */
         border-radius: 15px;
-    }
-
-    .card-body {
-        box-shadow: 0;
     }
 
     .row-bordered {
@@ -77,7 +64,7 @@
         background: transparent !important;
     }
 
-    .account-settings-multiselect~.select2-container {
+    .account-settings-multiselect ~ .select2-container {
         width: 100% !important;
     }
 
@@ -185,7 +172,8 @@
         <div class="col-md-3 pt-0">
             <div class="card shadow-none">
                 <div class="card-body" style="padding:10px 20px; font-weight:650;">
-                    <a href="<?php echo base_url() ?>employee_profile?id=<?= $employee->ID ?>" class=""><i class="fa-solid fa-chevron-left"></i> Back to profile</a>
+                    <a href="<?php echo base_url() ?>employee_profile?id=<?= $employee->ID ?>" class=""><i class="fa-solid fa-chevron-left"></i>
+                        Back to profile</a>
                 </div>
             </div>
             <div class="card overflow-hidden shadow-none">
@@ -193,10 +181,13 @@
                     <a class="list-group-item list-group-item-action active" data-toggle="list" href="#account-general">General</a>
                     <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-email">E-mail</a>
                     <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-info">Info</a>
-                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-govt-id">Government ID</a>
-                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-change-password">Change password</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-govt-id">Government
+                        ID</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-change-password">Change
+                        password</a>
                     <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-connections">Connections</a>
-                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-deletion">Account deletion</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-deletion">Account
+                        deletion</a>
                 </div>
             </div>
         </div>
@@ -251,11 +242,19 @@
                             <div class="card-body pb-2">
                                 <div class="form-group">
                                     <label for="Email" class="form-label">E-mail Address</label>
-                                    <input type="email" class="form-control" name="Email" id="Email" value="<?= @$employee->Email ?>" placeholder="Enter Email address">
-                                    <div class="alert alert-primary mt-3">
-                                        Your email is not confirmed. Please check your inbox.<br>
-                                        <a href="javascript:void(0)">Resend confirmation</a>
-                                    </div>
+                                    <input type="email" class="form-control" name="Email" id="Email" value="<?= $employee->Email ?>" placeholder="Enter Email address">
+                                    <?php if ($auth->is_verified == 1): ?>
+                                        <div class="alert alert-success mt-3">
+                                            Your account is verified.
+                                        </div>
+                                    <?php else: ?>
+                                        <div class="alert alert-default-primary mt-3">
+                                            Your account is not verified. Please check your inbox.<br>
+                                            <button class="btn btn-outline-info" id="resend_verify">
+                                                Resend confirmation
+                                            </button>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </form>
@@ -331,22 +330,18 @@
                         <form>
                             <div class="card-body pb-2">
                                 <div class="form-group">
-                                    <label for="current_password" class="form-label">
-                                        Current password
-                                        <input name="current_password" type="password" class="form-control">
-                                    </label>
+                                    <label for="current_password" class="form-label"> Current password
+                                        <input name="current_password" type="password" class="form-control"> </label>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="form-label">
-                                        New password
+                                    <label class="form-label"> New password
                                         <input name="password" type="password" class="form-control" placeholder="at least 8 characters">
                                     </label>
                                 </div>
 
                                 <div class="form-group mb-0">
-                                    <label class="form-label">
-                                        Repeat new password
+                                    <label class="form-label"> Repeat new password
                                         <input name="repeat_password" type="password" class="form-control" placeholder="at least 8 characters">
                                     </label>
                                 </div>
@@ -360,25 +355,27 @@
                     <div class="tab-pane fade" id="account-connections">
                         <div class="card-body">
                             <h5 class="mb-2">
-                                <a href="javascript:void(0)" class="float-right text-muted text-tiny"><i class="ion ion-md-close"></i> Remove</a>
-                                <i class="ion ion-logo-google text-google"></i>
-                                You are connected to Google:
+                                <a href="javascript:void(0)" class="float-right text-muted text-tiny"><i class="ion ion-md-close"></i>
+                                    Remove</a> <i class="ion ion-logo-google text-google"></i> You are connected to
+                                Google:
                             </h5>
                             <?= @$employee->Email ?>
                         </div>
                         <hr class="border-light m-0">
                         <div class="card-body">
                             <button type="button" class="btn btn-facebook">Connect to <strong>Facebook</strong></button>
-                            <button type="button" class="btn btn-instagram">Connect to <strong>Instagram</strong></button>
+                            <button type="button" class="btn btn-instagram">Connect to <strong>Instagram</strong>
+                            </button>
                         </div>
                     </div>
 
                     <div class="tab-pane fade" id="account-deletion">
                         <div class="card-body">
                             <h5>Delete your account</h5>
-                            <p><strong>Deleting your account is an irreversible action.</strong> This means that all your data, settings, and associated
-                                information will be permanently removed and cannot be recovered. Please be certain of your decision before
-                                proceeding with account deletion.</p>
+                            <p><strong>Deleting your account is an irreversible action.</strong> This means that all
+                                your data, settings, and associated information will be permanently removed and cannot
+                                be recovered. Please be certain of your decision before proceeding with account
+                                deletion.</p>
                         </div>
                     </div>
                 </div>
@@ -386,7 +383,9 @@
                 <div class="text-right m-2">
                     <a href="<?php echo base_url() ?>employee_profile/index/<?= $employee->ID ?>" class="btn btn-default">Cancel</a>&nbsp;
                     <button type="submit" class="btn btn-info" id="update_profile">Save changes</button>
-                    <button type="button" class="btn btn-danger delete" id="delete_profile" data-id="<?= $employee->ID ?>" style="display:none;">Confirm deletion</button>
+                    <button type="button" class="btn btn-danger delete" id="delete_profile" data-id="<?= $employee->ID ?>" style="display:none;">
+                        Confirm deletion
+                    </button>
                 </div>
             </div>
         </div>

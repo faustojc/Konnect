@@ -18,7 +18,7 @@ class Employer_profile extends MY_Controller
             redirect(base_url() . 'login');
         }
 
-        $this->auth = get_userdata(AUTH);
+        $this->auth = $this->Auth_model->get_auth($this->userdata->user_id);
 
         $model_list = [
             'employer_profile/Employer_profile_model' => 'employer_profile_model',
@@ -51,14 +51,14 @@ class Employer_profile extends MY_Controller
         $this->data['employees'] = $this->employee_model->get_all_employees(4);
         $this->data['employers'] = $this->Employer_model->get_employers(4, $id);
         $this->data['jobpostings'] = $this->jobposting_model->get_employer_jobposts($id, 0, 'tbl_jobposting.*, tbl_employer.id AS employer_id, tbl_employer.tradename AS EmployerTradename, tbl_employer.image AS EmployerLogo');
-        $this->data['followers'] = $this->follow_model->get_followers($id);
         $this->data['feedbacks'] = $this->Feedback_model->getAllUsersFeedback($this->current_user->user_id);
 
         if ($this->auth['user_type'] == 'EMPLOYEE') {
             $this->data['following'] = $this->follow_model->get_following($this->userdata->ID);
+            $this->data['applicant'] = $this->Applicant_model->getApplicant($this->userdata->ID);
         } else {
             $this->data['employed'] = $this->Employed_model->getEmployersEmployed($this->userdata->id);
-            $this->data['applicant'] = $this->Applicant_model->getApplicant($this->userdata->ID);
+            $this->data['followers'] = $this->follow_model->get_followers($id);
         }
 
         // Disable query caching
@@ -84,6 +84,7 @@ class Employer_profile extends MY_Controller
     public function edit_profile(): void
     {
         $this->data['employer'] = $this->userdata;
+        $this->data['auth'] = $this->auth;
         $this->data['content'] = 'profile';
         $this->load->view('layout', $this->data);
     }

@@ -5,21 +5,17 @@ class Register_model extends CI_Model
 {
     public $Table;
 
+    /**
+     * @throws JsonException
+     */
     public function __construct()
     {
         parent::__construct();
-        $this->session = get_userdata(USER);
 
-        // if(is_empty_object($this->session)){
-        // 	redirect(base_url().'login/authentication', 'refresh');
-        // }
-
-        $model_list = [];
-        $this->load->model($model_list);
-        $this->Table = json_decode(TABLE);
+        $this->Table = json_decode(TABLE, FALSE, 512, JSON_THROW_ON_ERROR);
     }
 
-    public function register($user, $info)
+    public function register($user, $info): array
     {
         try {
             $locker = locker();
@@ -37,26 +33,33 @@ class Register_model extends CI_Model
 
             if ($user['user_type'] == 'EMPLOYEE') {
                 $this->db->insert($this->Table->employee, $info);
-            }
-            else {
+            } else {
                 $this->db->insert($this->Table->employer, $info);
             }
 
             $this->db->trans_complete();
 
             if ($this->db->trans_status()) {
-                return array(
-                    'has_error' => false,
-                    'message' => 'Thank you for registering. You will be redirect to login page.',
+                sendEmail(
+                    'no-reply@konnect.com',
+                    'Konnect',
+                    $user['email'],
+                    'Email Verification',
+                    'Please click on the link below to verify your email address: ' . base_url() . 'verify/' . $user['locker'],
                 );
-            } else {
-                return array('message' => ERROR_PROCESSING, 'has_error' => true);
+
+                return [
+                    'has_error' => FALSE,
+                    'message' => 'Thank you for registering. You will be redirect to login page.',
+                ];
             }
+
+            return ['message' => ERROR_PROCESSING, 'has_error' => TRUE];
         } catch (Exception $e) {
-            return array('message' => $e->getMessage(), 'has_error' => true);
+            return ['message' => $e->getMessage(), 'has_error' => TRUE];
         }
     }
-    
+
     public function records()
     {
         return $this->db->get($this->Table->user)->result();

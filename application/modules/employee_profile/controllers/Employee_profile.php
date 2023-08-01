@@ -18,7 +18,7 @@ class Employee_profile extends MY_Controller
         if (empty($this->userdata)) {
             redirect(base_url() . 'login');
         } else {
-            $this->auth = get_userdata(AUTH);
+            $this->auth = $this->Auth_model->get_user($this->userdata->user_id);
         }
 
         if ($this->auth['user_type'] == 'EMPLOYEE') {
@@ -44,6 +44,7 @@ class Employee_profile extends MY_Controller
         }
 
         $this->has_permission = $this->Auth_model->check_permission($this->userdata, $this->current_user);
+        $this->data['userdata'] = $this->userdata;
     }
 
     /** load main page */

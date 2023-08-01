@@ -8,11 +8,12 @@ if (!function_exists('employer_edit_button')) {
      * USAGE: edit_profile_button($id);
      *
      * @param int $id The id of the employer.
+     *
      * @return void
      */
     function employer_edit_button(int $id)
     {
-        $data = array('id' => $id);
+        $data = ['id' => $id];
 
         $CI = &get_instance();
         $CI->load->view('components/auth/employer_profile_button', $data);
@@ -27,14 +28,11 @@ if (!function_exists('employee_edit_button')) {
      *
      * USAGE: edit_profile_button($id);
      *
-     * @param int $id The id of the employee.
      * @return void
      */
-    function employee_edit_button(int $id)
+    function employee_edit_button()
     {
-        $data = array('id' => $id);
-
         $CI = &get_instance();
-        $CI->load->view('components/auth/employee_profile_button', $data);
+        $CI->load->view('components/auth/employee_profile_button');
     }
 }

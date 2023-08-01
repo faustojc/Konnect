@@ -35,9 +35,11 @@ class Employment_model extends CI_Model
             $this->db->insert($this->Table->employment, $data);
             $this->db->trans_complete();
 
+            $id = $this->db->insert_id();
+
             if ($this->db->trans_status()) {
                 $this->db->trans_commit();
-                return ['status' => 'success', 'message' => 'Employed added successfully.'];
+                return ['status' => 'success', 'message' => 'Employed added successfully.', 'id' => $id];
             }
 
             $this->db->trans_rollback();

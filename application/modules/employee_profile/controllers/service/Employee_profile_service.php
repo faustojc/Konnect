@@ -68,21 +68,16 @@ class Employee_profile_service extends MY_Controller
      */
     public function set_employment(): void
     {
-        $data = $this->input->post();
+        $data = $this->input->post(NULL, TRUE);
 
         if (isset($data['id'])) {
             $response = $this->Employment_model->update($data['id'], $data);
         } else {
             $response = $this->Employment_model->add($data);
 
-            $employed_data = [
-                'employer_id' => $data['employer_id'],
-                'employee_id' => $this->userdata->ID,
-                'job_title' => $data['job_title'],
-                'is_active' => 0,
-                'date_started' => $data['start_date'],
-                'date_ended' => $data['end_date'],
-            ];
+            $employed_data = $data;
+            $employed_data['employee_id'] = $this->userdata->ID;
+            $employed_data['is_active'] = 0;
 
             $this->Employed_model->add($employed_data);
         }

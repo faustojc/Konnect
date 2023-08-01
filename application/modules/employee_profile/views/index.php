@@ -454,20 +454,20 @@ main_header(['employee_profile']);
                                                                     <input type="text" class="form-control" id="job_title" name="job_title" placeholder="Enter Position">
                                                                 </div>
                                                             </div>
-                                                            <div class="row">
+                                                            <div class="row pb-3">
                                                                 <div class="col-md">
-                                                                    <label for="status">Status</label>
-                                                                    <input type="text" class="form-control" id="status" name="status" placeholder="Enter Status">
+                                                                    <label for="job_type">Job Type</label>
+                                                                    <input type="text" class="form-control" id="job_type" name="job_type" placeholder="Enter Job Type">
                                                                 </div>
                                                             </div>
-                                                            <div class="row px-3">
+                                                            <!-- <div class="row px-3">
                                                                 <div class="d-flex align-items-center">
                                                                     <p class="text-muted" style="font-weight: normal; font-size: 15px;">
                                                                         <input type="checkbox" id="show_status" name="show_status">
                                                                         Show Status
                                                                     </p>
                                                                 </div>
-                                                            </div>
+                                                            </div> -->
                                                             <div class="row pb-2">
                                                                 <div class="col-12">
                                                                     <label for="job_description">Job Description</label>
@@ -478,12 +478,12 @@ main_header(['employee_profile']);
                                                             </div>
                                                             <div class="row pb-2">
                                                                 <div class="col-md-6">
-                                                                    <label for="start_date">Start Date</label>
-                                                                    <input class="form-control" type="date" id="start_date" name="start_date" style="width:200px;">
+                                                                    <label for="date_started">Date Started</label>
+                                                                    <input class="form-control w-100" type="date" id="date_started" name="date_started" style="width:200px;">
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    <label for="end_date">End Date</label>
-                                                                    <input class="form-control" type="date" id="end_date" name="end_date" style="width:200px;">
+                                                                    <label for="date_ended">Date Ended</label>
+                                                                    <input class="form-control w-100" type="date" id="date_ended" name="date_ended" style="width:200px;">
                                                                 </div>
                                                             </div>
                                                         </form>

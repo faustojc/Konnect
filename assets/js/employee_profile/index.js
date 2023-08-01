@@ -68,11 +68,11 @@ if (add_employment) {
         const form = add_employment.closest('.modal-content').querySelector('form');
         const formData = new FormData(form);
 
-        const show_status = (form.querySelector('#show_status').checked === true) ? 1 : 0;
+        //const show_status = (form.querySelector('#show_status').checked === true) ? 1 : 0;
         const description = tinymce.activeEditor.getContent();
 
         formData.set('job_description', description);
-        formData.set('show_status', show_status.toString());
+        //formData.set('show_status', show_status.toString());
 
         formAction(baseUrl + 'employee_profile/service/Employee_profile_service/set_employment', 'POST', formData, () => {
             load_employment();

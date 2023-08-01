@@ -26,6 +26,18 @@ class Employed_model extends CI_Model
             ->get($this->Table->employed)->result();
     }
 
+    public function getEmployeeEmployed($employee_id)
+    {
+        return $this->db->select('tbl_employed.*,
+        CONCAT_WS(" ", tbl_employee.Fname, tbl_employee.Mname, tbl_employee.Lname) AS employee_name,
+        tbl_employer.tradename AS tradename')
+            ->where('tbl_employed.employee_id', $employee_id)
+            ->join('tbl_employee', 'tbl_employee.ID = tbl_employed.employee_id')
+            ->join('tbl_employer', 'tbl_employer.id = tbl_employed.employer_id')
+            ->order_by('tbl_employed.date_started', 'DESC')
+            ->get($this->Table->employed)->result();
+    }
+
     /**
      * @throws Exception
      */

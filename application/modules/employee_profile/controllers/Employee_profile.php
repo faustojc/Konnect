@@ -61,7 +61,7 @@ class Employee_profile extends MY_Controller
         $this->data['details'] = $this->eModel->get_employee($ID);
         $this->data['educations'] = $this->education_model->getEmployeeEducations($ID);
         $this->data['train_val'] = $this->eModel->get_training();
-        $this->data['employments'] = $this->Employment_model->getEmployeesEmployment($ID);
+        $this->data['employments'] = $this->Employed_model->getEmployeeEmployed($ID);
         $this->data['skills'] = $this->eModel->get_skill($ID);
         $this->data['employers'] = $this->Employer_model->get_employers(4);
         $this->data['employees'] = $this->employee_model->get_all_employees(4, $ID);
@@ -97,7 +97,7 @@ class Employee_profile extends MY_Controller
     public function getEmployments(): void
     {
         $this->data['has_permission'] = $this->has_permission;
-        $this->data['employments'] = $this->Employment_model->getEmployeesEmployment($this->current_user->ID);
+        $this->data['employments'] = $this->Employed_model->getEmployeeEmployed($this->current_user->ID);
         $this->data['content'] = 'grid/load_employments';
         $this->load->view('layout', $this->data);
     }

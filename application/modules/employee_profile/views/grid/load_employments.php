@@ -14,7 +14,7 @@
     ?>
     <div class="timeline">
         <?php foreach ($employments as $key => $employment):
-            $start_date = date('M Y', strtotime($employment->start_date));
+            $start_date = date('M Y', strtotime($employment->date_started));
 
             if (!in_array($start_date, $dates)): ?>
                 <div class="time-label">
@@ -28,7 +28,7 @@
                 <div class="timeline-item">
                     <span class="time">
                         <i class="fas fa-clock mr-1"></i>
-                        <?= date('D, d M', strtotime($employment->start_date)) ?>
+                        <?= date('D, d M', strtotime($employment->date_started)) ?>
                     </span>
                     <h5 class="timeline-header">
                         Started working in <?= $employment->tradename ?> as <?= $employment->job_title ?>

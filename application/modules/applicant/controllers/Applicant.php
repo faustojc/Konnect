@@ -90,12 +90,13 @@ class Applicant extends MY_Controller
             'job_title' => $job->title,
             'status' => $job->job_type,
         ];
-        $this->Employment_model->add($employment_data);
+        //$employment_id = $this->Employment_model->add($employment_data)['id'];
 
         $employed_data = [
             'employer_id' => $this->userdata->id,
             'employee_id' => $applicant->employee_id,
             'job_title' => $job->title,
+            'job_type' => $job->job_type,
         ];
         $this->Employed_model->add($employed_data);
 

@@ -22,6 +22,10 @@ class Feedback_model extends CI_Model
     {
         return $this->db->select('tbl_feedback.*, 
         (CASE
+            WHEN tbl_employee.ID IS NOT NULL THEN tbl_employee.ID
+            WHEN tbl_employer.id IS NOT NULL THEN tbl_employer.id
+        END) AS userId,
+        (CASE
             WHEN tbl_employee.Fname IS NOT NULL THEN CONCAT_WS(" ", tbl_employee.Fname, tbl_employee.Mname, tbl_employee.Lname)
             WHEN tbl_employer.tradename IS NOT NULL THEN tbl_employer.tradename
         END) AS userName,

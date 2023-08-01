@@ -11,13 +11,13 @@ function auth_head()
         <link rel="icon" type="image/x-icon" href="<?= base_url() ?>assets/images/Logo/Konnect2.ico">
 
         <!-- Font Awesome Icons -->
-        <link rel="stylesheet" href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/fontawesome-free/css/all.min.css">
+        <link rel="stylesheet" href="<?= base_url() ?>assets/theme/font-awesome/css/all.css">
         <!-- Theme style -->
         <link rel="stylesheet" href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/dist/css/adminlte.min.css">
         <!-- Bootstrap -->
         <link rel="stylesheet" href="<?= base_url() ?>assets/theme/bootstrap/dist/css/bootstrap.min.css">
 
-        <link href='<?= base_url() ?>/assets/css/auth/style.css' rel="stylesheet" type="text/css"/>
+        <link href='<?= base_url() ?>/assets/css/auth/style.css' rel="stylesheet" type="text/css" />
 
         <!-- REQUIRED SCRIPTS -->
         <script>
@@ -33,7 +33,7 @@ function auth_head()
             </a>
         </div>
     </nav> -->
-    <section class="d-flex justify-content-center align-items-center">
+    <section class="d-flex justify-content-center align-items-center h-100">
 <?php }
 
 function auth_footer()

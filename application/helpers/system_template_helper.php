@@ -44,7 +44,8 @@ if (!empty($auth)) {
     <!-- Google Font: Source Sans Pro -->
     <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> -->
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/fontawesome-free/css/all.min.css">
+    <!-- <link rel="stylesheet" href="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/fontawesome-free/css/all.min.css"> -->
+    <link rel="stylesheet" href="<?= base_url() ?>assets/theme/font-awesome/css/all.css">
 
     <!-- YOB ADDED 5-17 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
@@ -155,8 +156,7 @@ if (!empty($auth)) {
                             min-height: 45px;
                             max-height: 45px; */
                             width:125px;
-                            height:auto;">
-                    </a>
+                            height:auto;"> </a>
                 </li>
                 <!-- Search -->
                 <li class="nav-item d-none d-sm-inline-block" style="position: absolute; left: 50%; margin-left: -250px">
@@ -171,8 +171,7 @@ if (!empty($auth)) {
 
                     <div class="d-block d-lg-none">
                         <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                            <i class="fas fa-search"></i>
-                        </a>
+                            <i class="fas fa-search"></i> </a>
                         <div class="navbar-search-block">
                             <form class="form-inline">
                                 <div class="input-group input-group-sm">
@@ -195,21 +194,15 @@ if (!empty($auth)) {
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="<?= base_url() ?>home" class="nav-link">
-                        <i class="fa-solid fa-house"></i>
-                    </a>
+                    <a href="<?= base_url() ?>home" class="nav-link"> <i class="fa-solid fa-house"></i> </a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="<?= base_url() ?>jobposting" class="nav-link">
-                        <i class="fa-solid fa-briefcase"></i>
-                    </a>
+                    <a href="<?= base_url() ?>jobposting" class="nav-link"> <i class="fa-solid fa-briefcase"></i> </a>
                 </li>
                 <!-- MY PROFILE -->
                 <!-- Messages Dropdown Menu -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" role="button">
-                        <i class="fa-solid fa-user"></i>
-                    </a>
+                    <a class="nav-link" data-toggle="dropdown" role="button"> <i class="fa-solid fa-user"></i> </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-left border-0 shadow-sm" style="border-radius:15px;">
                         <div>
                             <div class="media ml-3 mt-3 mb-3 d-flex justify-content-center align-items-center">
@@ -225,9 +218,8 @@ if (!empty($auth)) {
                             </div>
                         </div>
                         <div class="dropdown-divider"></div>
-                        <a href="<?= base_url() ?>login/logout" class="dropdown-item dropdown-footer" id="logout">
-                            Log out
-                        </a>
+                        <a href="<?= base_url() ?>login/logout" class="dropdown-item dropdown-footer" id="logout"> Log
+                            out </a>
                     </div>
                 </li>
 
@@ -237,8 +229,7 @@ if (!empty($auth)) {
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                        <i class="fas fa-expand-arrows-alt"></i>
-                    </a>
+                        <i class="fas fa-expand-arrows-alt"></i> </a>
                 </li>
             </ul>
         </nav>

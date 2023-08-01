@@ -139,15 +139,7 @@ main_header(['employee_profile']);
     }
 </style>
 
-<head>
-    <title>Rating Form with Vue.js and Bootstrap Vue</title>
-    <!-- Include Vue.js and Bootstrap Vue CSS -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-vue@2.21.2/dist/bootstrap-vue.css">
-</head>
-
 <section class="content">
-
     <div class="container">
         <div class="row d-flex justify-content-center align-items-center" style="margin-top: 3.5rem;">
             <div class="col-12 col-md-9 pl-5 mt-4">
@@ -176,7 +168,7 @@ main_header(['employee_profile']);
                                         <input type="text" value="<?= @$details->ID ?>" id="emp_id" hidden>
                                         <div>
                                             <?php if ($has_permission) {
-                                                employee_edit_button($details->ID);
+                                                employee_edit_button();
                                             } ?>
                                         </div>
                                     </div>

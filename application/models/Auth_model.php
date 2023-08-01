@@ -3,14 +3,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Auth_model extends CI_Model
 {
-    protected $auth;
-    protected $Table;
+    private $Table;
 
+    /**
+     * @throws JsonException
+     */
     public function __construct()
     {
         parent::__construct();
 
-        $this->Table = json_decode(TABLE);
+        $this->Table = json_decode(TABLE, FALSE, 512, JSON_THROW_ON_ERROR);
     }
 
     public function get_all_auth()
@@ -22,10 +24,7 @@ class Auth_model extends CI_Model
 
     public function get_auth($user_id)
     {
-        return $this->db->select()
-            ->from($this->Table->user)
-            ->where('id', $user_id)
-            ->get()->row();
+        return $this->db->get_where($this->Table->user, ['id' => $user_id])->row();
     }
 
     public function check_permission($user, $other): bool
@@ -48,13 +47,25 @@ class Auth_model extends CI_Model
 
             if ($this->db->trans_status()) {
                 $this->db->trans_commit();
-                return array('status' => true, 'message' => 'Successfully updated user.');
-            } else {
-                $this->db->trans_rollback();
-                return array('status' => false, 'message' => 'Failed to update user.');
+                return ['status' => TRUE, 'message' => 'Successfully updated user.'];
             }
+
+            $this->db->trans_rollback();
+            return ['status' => FALSE, 'message' => 'Failed to update user.'];
         } catch (Exception $e) {
-            throw new Exception($e->getMessage(), $e->getCode());
+            throw new RuntimeException($e->getMessage(), $e->getCode());
         }
+    }
+
+    public function verifyUser($user, $verification): bool
+    {
+        $auth = $this->get_auth($user->user_id);
+
+        if ($auth->locker == $verification) {
+            $this->db->where('id', $user->id)->update($this->Table->user, ['verified' => 1]);
+            return TRUE;
+        }
+
+        return FALSE;
     }
 }

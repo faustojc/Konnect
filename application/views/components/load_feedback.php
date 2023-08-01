@@ -1,10 +1,10 @@
 <?php
 $user_type = $auth['user_type'];
-$has_given_feedback = false;
+$has_given_feedback = FALSE;
 
 foreach ($feedbacks as $feedback) {
     if ($feedback->from_user_id == $user_id) {
-        $has_given_feedback = true;
+        $has_given_feedback = TRUE;
         break;
     }
 }
@@ -68,7 +68,7 @@ foreach ($feedbacks as $feedback) {
                                         <div class="rating" data-value="0" data-max="5" data-precision="1">
                                             <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                                         </div>
-                                        <input name="rating" class="d-inline-block bg-transparent border-0 w-auto m-0" id="ratingValue" value="0" readonly/>
+                                        <input name="rating" class="d-inline-block bg-transparent border-0 w-auto m-0" id="ratingValue" value="0" readonly />
                                     </div>
                                 </div>
                                 <!-- Feedback Comment -->
@@ -76,8 +76,7 @@ foreach ($feedbacks as $feedback) {
                                     <label for="message">Your Feedback</label>
                                     <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
                                     <p class="text-danger float-left" id="feedback_warning" hidden>
-                                        <i class="text-danger fa fa-exclamation-circle"></i>
-                                        Character exceeds 2000
+                                        <i class="text-danger fa fa-exclamation-circle"></i> Character exceeds 2000
                                     </p>
                                     <p class="text-muted text-right" id="feedback_char_count"></p>
                                 </div>
@@ -86,7 +85,8 @@ foreach ($feedbacks as $feedback) {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-info" id="btn_feedback" data-dismiss="modal">Submit</button>
+                        <button type="button" class="btn btn-info" id="btn_feedback" data-dismiss="modal">Submit
+                        </button>
                     </div>
                 </div>
             </div>
@@ -144,9 +144,11 @@ foreach ($feedbacks as $feedback) {
             <div class="row px-2">
                 <?php foreach ($feedbacks as $feedback):
                     $image = base_url() . 'assets/images/employee/profile_pic/' . $feedback->userImage;
+                    $link = base_url() . 'employee_profile?id=' . $feedback->userId;
 
                     if (!imageExists($image)) {
                         $image = base_url() . 'assets/images/employer/profile_pic/' . $feedback->userImage;
+                        $link = base_url() . 'employer_profile?id=' . $feedback->userId;
                     }
 
                     ?>
@@ -154,8 +156,7 @@ foreach ($feedbacks as $feedback) {
                         <div class="bg-white rounded  px-3 restaurant-detailed-ratings-and-reviews">
                             <div class="reviews-members pt-2 pb-2">
                                 <div class="media">
-                                    <a href="#"><img class="mr-5 rounded-pill" src="<?= $image ?>" alt="<?= $feedback->userName ?>"
-                                                     style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
+                                    <a href="<?= $link ?>"><img class="mr-5 rounded-pill" src="<?= $image ?>" alt="<?= $feedback->userName ?>" style="border: 0.2rem solid #F4F6F7 ;object-fit: cover; height:3.5rem; width:3.5rem; position:absolute;">
                                         <div class="media-body m-2">
                                             <div class="reviews-members-header ml-5">
                                                 <div class="float-right" style="color:#FFC107;">
@@ -170,7 +171,7 @@ foreach ($feedbacks as $feedback) {
 
                                                 </div>
                                                 <h6 class="mb-1 ml-3">
-                                                    <a class="text-black" href="#">
+                                                    <a class="text-black" href="<?= $link ?>">
                                                         <?= $feedback->userName ?>
                                                     </a>
                                                 </h6>

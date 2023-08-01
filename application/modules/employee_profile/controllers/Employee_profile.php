@@ -28,7 +28,7 @@ class Employee_profile extends MY_Controller
         }
 
         $model_list = [
-            'employee_profile/employee_profile_model' => 'eModel',
+            'employee_profile/Employee_profile_model' => 'eModel',
             'employee/Employee_model' => 'employee_model',
             'follow/Follow_model' => 'follow_model',
             'education/Education_model' => 'education_model',
@@ -36,10 +36,14 @@ class Employee_profile extends MY_Controller
         $this->load->model($model_list);
 
         $ID = $this->input->get('id');
-        if (!empty($ID)) {
+        if (!empty($ID) && empty($this->current_user)) {
             $this->current_user = $this->employee_model->getEmployee($ID);
-            $this->has_permission = $this->Auth_model->check_permission($this->userdata, $this->current_user);
+            set_userdata('current_user', $this->current_user);
+        } else {
+            $this->current_user = get_userdata('current_user');
         }
+
+        $this->has_permission = $this->Auth_model->check_permission($this->userdata, $this->current_user);
     }
 
     /** load main page */
@@ -84,10 +88,36 @@ class Employee_profile extends MY_Controller
 
     public function getEducations(): void
     {
+        $this->data['has_permission'] = $this->has_permission;
         $this->data['educations'] = $this->education_model->getEmployeeEducations($this->current_user->ID);
         $this->data['content'] = 'grid/load_educations';
         $this->load->view('layout', $this->data);
     }
+
+    public function getEmployments(): void
+    {
+        $this->data['has_permission'] = $this->has_permission;
+        $this->data['employments'] = $this->Employment_model->getEmployeesEmployment($this->current_user->ID);
+        $this->data['content'] = 'grid/load_employments';
+        $this->load->view('layout', $this->data);
+    }
+
+    public function getSkills(): void
+    {
+        $this->data['has_permission'] = $this->has_permission;
+        $this->data['skills'] = $this->EmployeeSkills_model->getEmployeeSkills($this->current_user->ID);
+        $this->data['content'] = 'grid/load_skill';
+        $this->load->view('layout', $this->data);
+    }
+
+    public function edit(): void
+    {
+        $this->data['employee'] = $this->employee_model->getEmployee($this->userdata->ID);
+        $this->data['content'] = 'edit';
+        $this->load->view('layout', $this->data);
+    }
+
+    // ------------------ LEGACY CODES ------------------
 
     public function get_training()
     {
@@ -96,33 +126,6 @@ class Employee_profile extends MY_Controller
 
         $this->data['train_val'] = $this->eModel->get_training();
         $this->data['content'] = 'grid/load_training';
-        $this->load->view('layout', $this->data);
-    }
-
-    public function getEmployments(): void
-    {
-        $this->data['employments'] = $this->Employment_model->getEmployeesEmployment($this->current_user->ID);
-        $this->data['content'] = 'grid/load_employments';
-        $this->load->view('layout', $this->data);
-    }
-
-    public function getSkills()
-    {
-        $this->data['skills'] = $this->EmployeeSkills_model->getEmployeeSkills($this->current_user->ID);
-        $this->data['content'] = 'grid/load_skill';
-        $this->load->view('layout', $this->data);
-    }
-
-    public function edit(): void
-    {
-        $ID = $this->input->get('id');
-
-        if (!$this->has_permission) {
-            redirect('employee_profile?id=' . $ID);
-        }
-
-        $this->data['employee'] = $this->eModel->get_employee($ID);
-        $this->data['content'] = 'edit';
         $this->load->view('layout', $this->data);
     }
 
@@ -145,13 +148,6 @@ class Employee_profile extends MY_Controller
         $this->load->view('layout', $this->data);
     }
 
-    public function add_employee_educ()
-    {
-        $this->data['details'] = $this->eModel->get_employees();
-        $this->data['content'] = 'education';
-        $this->load->view('layout', $this->data);
-    }
-
     public function add_employee_train()
     {
         $this->data['details'] = $this->eModel->get_employees();
@@ -168,27 +164,5 @@ class Employee_profile extends MY_Controller
         $this->data['train_val'] = $this->eModel->education_edit();
         $this->data['content'] = 'education_edit';
         $this->load->view('layout', $this->data);
-    }
-
-    // /Training
-
-    public function education_edit()
-    {
-
-        $ID = $this->uri->segment(3);
-        $this->eModel->ID = $ID;
-
-        $this->data['educ_val'] = $this->eModel->education_edit();
-        $this->data['content'] = 'education_edit';
-        $this->load->view('layout', $this->data);
-    }
-
-    public function edit_employment()
-    {
-        $ID = $this->uri->segment(3);
-
-        $data['details'] = $this->eModel->get_employment($ID);
-        $data['content'] = 'grid/load_employments';
-        $this->load->view('layout', $data);
     }
 }

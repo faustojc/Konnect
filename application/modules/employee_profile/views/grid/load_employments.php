@@ -35,7 +35,7 @@
                         } ?>
                     </span>
                     <h5 class="timeline-header">
-                        Started working in <?= $employment->employer_name ?> as <?= $employment->position ?>
+                        Started working in <?= $employment->employer_name ?> as <?= $employment->job_title ?>
                     </h5>
                     <?php if (!empty($employment->job_description)): ?>
                         <div class="timeline-body" style="max-height: 200px">

@@ -1,7 +1,5 @@
-<?php
-// $ci = & get_instance();
-if (!empty($educ_val)) {
-    foreach ($educ_val as $key => $value) { ?>
+<?php if (!empty($educations)) {
+    foreach ($educations as $key => $education) { ?>
         <div class="card-body card-widget widget-user-2" style="padding-bottom:0.5rem; padding-top:0.5rem;">
             <div class="row">
                 <div class="col-10  ">
@@ -13,103 +11,137 @@ if (!empty($educ_val)) {
                               min-height: 60px;
                               max-height: 60px;">
                     </div>
-                    <!-- /.widget-user-image -->
-
                     <h5 class="widget-user-username mt-0" style="font-size: 18px; font-weight: 600;">
-                        <?= (@$value->Institution) ?>
+                        <?= $education->institution ?>
                     </h5>
                     <h6 class="widget-user-desc mb-0" style="font-weight: normal; font-size: 16px;">
-                        <?= (@$value->Title) ?>
+                        <?= $education->title ?>
                     </h6>
                     <p class="widget-user-desc mb-0 mt-0 text-muted" style="font-weight: normal; font-size: 16px;">
-                        <?= (@$value->Level) ?>
+                        <?= $education->level ?>
                     </p>
                     <p class="widget-user-desc mb-0 mt-0 text-muted" style="font-weight: normal; font-size: 16px;">
-                        <?= date("Y", strtotime(@$value->Start_date)) ?> -
-                        <?= date("Y", strtotime(@$value->End_date)) ?>
+                        <?= date("M d, Y", strtotime($education->start_date)) ?> -
+                        <?php if (!empty($education->end_date)): ?>
+                            <?= date("M d, Y", strtotime($education->end_date)) ?>
+                        <?php else: ?>
+                            Present
+                        <?php endif; ?>
                     </p>
-                    <!-- <p class="widget-user-desc mb-0 mt-0 text-justify" style="font-weight: normal; font-size: 16px;">
-                        <span style="font-weight:500;">
-                            <?= (@$value->Description) ?>
-                    </p> -->
+                    <p class="widget-user-desc mb-0 mt-0 text-justify" style="font-weight: normal; font-size: 16px;">
+                        <?= $education->Description ?>
+                    </p>
                 </div>
 
                 <div class="col-2 text-right">
-                    <button class="btn btn-tool  delete" id="delete_educ" data-id="<?= @$value->ID ?>">
-                        <i class="fa fa-trash"></i></button>
-                    <button class="btn btn-tool" data-toggle="modal" data-target="#ModalEducEdit<?= $key ?>">
-                        <i class="fa fa-pen"></i></button>
+                    <button class="btn btn-tool delete" id="delete_educ" data-id="<?= $education->id ?>">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                    <button class="btn btn-tool" data-toggle="modal" data-target="#educ<?= $key ?>">
+                        <i class="fas fa-pen"></i>
+                    </button>
                 </div>
             </div>
-            &nbsp;
         </div>
 
-        <?php
-        $modalId = 'ModalEducEdit' . $key;
-        $content = '<form id="needs-validation">
-                        <div class="px-2 py-2">
-                            <input type="text" value="' . $value->ID . '" id="ID2" hidden>
-                            <input type="text" value="' . $value->Employee_id . '" id="Employee_id2" hidden>
+        <div class="modal fade" id="educ<?= $key ?>" tabindex="-1" role="dialog" aria-labelledby="MODAL-<?= $key ?>" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="MODAL<?= $key ?>">Edit Education</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="education-form">
+                            <input name="id" id="id" value="<?= $education->id ?>">
+                            <div class="px-2 py-2">
+                                <div class="row pb-3">
+                                    <div class="col-md-6">
+                                        <label for="level">Level</label>
+                                        <select class="form-control select2" name="level" id="level" value="<?= $education->level ?>" style="width: 100%;">
+                                            <option>ELEMENTARY</option>
+                                            <option>JUNIOR HIGH</option>
+                                            <option>SENIOR HIGH</option>
+                                            <option>COLLEGE</option>
+                                            <option>VOCATIONAL SCHOOL</option>
+                                            <option>TECHNICAL SCHOOL</option>
+                                            <option>UNIVERSITY</option>
+                                            <option>GRADUATE SCHOOL</option>
+                                            <option>CERTIFICATE PROGRAM</option>
+                                            <option>DIPLOMA PROGRAM</option>
+                                            <option>APPRENTICESHIP</option>
+                                            <option>ONLINE LEARNING</option>
+                                            <option>CONTINUING EDUCATION</option>
+                                            <option>EXECUTIVE EDUCATION</option>
+                                            <option>PROFESSIONAL DEVELOPMENT</option>
+                                            <option>SELF-TAUGHT</option>
+                                            <option>LANGUAGE SCHOOL</option>
+                                            <option>ART SCHOOL</option>
+                                            <option>BUSINESS SCHOOL</option>
+                                            <option>MEDICAL SCHOOL</option>
+                                            <option>LAW SCHOOL</option>
+                                            <option>ENGINEERING SCHOOL</option>
+                                            <option>DESIGN SCHOOL</option>
+                                            <option>CULINARY SCHOOL</option>
+                                            <option>PERFORMING ARTS SCHOOL</option>
+                                            <option>MILITARY TRAINING</option>
+                                            <option>RELIGIOUS EDUCATION</option>
+                                            <option>REMOTE LEARNING</option>
+                                            <option>WORKPLACE TRAINING</option>
+                                            <option>SPECIAL EDUCATION</option>
+                                            <option>EXTRACURRICULAR</option>
+                                            <option>TUTORIALS</option>
+                                            <option>INTERNSHIP</option>
+                                            <option>HOMESCHOOLING</option>
+                                            <option>RESEARCH PROGRAM</option>
+                                            <option>SKILL DEVELOPMENT PROGRAM</option>
+                                            <option>LECTURE SERIES</option>
+                                        </select>
+                                    </div>
 
-                            <div class="row pb-3">
-                                <div class="col-md-6">
-                                    <label for="Level2">Level</label>
-                                    <input type="text" class="form-control dropdown-toggle" id="Level2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" placeholder="Enter Level" value="' . $value->Level . '">
-                                    <div class="dropdown-menu level-content" aria-labelledby="Level2">
-                                        <p class="dropdown-item">ELEMENTARY</p>
-                                        <p class="dropdown-item">JUNIOR HIGH</p>
-                                        <p class="dropdown-item">SENIOR HIGH</p>
-                                        <p class="dropdown-item">COLLEGE</p>
-                                        <p class="dropdown-item">UBRA</p>
+                                    <div class="col-md-6">
+                                        <label for="title">Title</label>
+                                        <input type="text" class="form-control" name="title" id="title" placeholder="Enter Title">
+                                    </div>
+                                </div>
+                                <div class="pb-3">
+                                    <label for="institution">Institution</label>
+                                    <input type="text" class="form-control" name="institution" id="institution" placeholder="Enter Institution">
+                                </div>
+                                <div class="row pb-4">
+                                    <div class="col-md">
+                                        <label for="description">Description</label>
+                                        <div>
+                                            <textarea class="form-control" name="description" id="description" rows="4" placeholder="Enter Description"></textarea>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
-                                    <label>Title</label>
-                                    <input type="text" value="' . $value->Title . '" class="form-control" id="Title2" placeholder="Enter Title">
-                                </div>
-                            </div>
-
-                            <section class="pb-3">
-                                <label>Institution</label>
-                                <input type="text" class="form-control" value="' . $value->Institution . '" id="Institution2" placeholder="Enter Institution">
-                            </section>
-
-                            <div class="row pb-4">
-                                <div class="col-md">
-                                    <label>Grade Level</label>
-                                    <div>
-                                        <input type="text" class="form-control" value="' . $value->Description . '" id="Description2" placeholder="Enter ...">
+                                <div class="row pb-3">
+                                    <div class="col-md-6">
+                                        <label for="start_date">Start Date</label>
+                                        <input type="date" class="form-control" id="start_date" name="start_date">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="end_date">End Date</label>
+                                        <input type="date" class="form-control" id="end_date" name="end_date">
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="row pb-3">
-                                <div class="col-md-4">
-                                    <label>Start Date</label>
-                                    <input type="date" class="form-control" id="Start_date2" name="start_date" value="' . $value->Start_date . '">
-                                </div>
-
-                                <div class="col-md-4">
-                                    <label>End Date</label>
-                                    <div>
-                                        <input type="date" class="form-control" id="End_date2" name="end_date" value="' . $value->End_date . '">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <label>Hours</label>
-                                    <input type="Number" class="form-control" id="Hours2" placeholder="Enter Hours" value="' . $value->Hours . '">
-                                </div>
-                            </div>
-                        </div>
-                    </form>';
-
-        modal($modalId, 'Add Education', $content, 'btn_edit_educ', 'Save Changes');
-        ?>
-
-        <?php
-    }
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-info" id="btn_edit_educ" data-dismiss="modal">
+                            Save Changes
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php }
 } else { ?>
 
     <div class="d-flex flex-column flex-grow-1 px-2 py-2">
@@ -119,7 +151,9 @@ if (!empty($educ_val)) {
             </div>
             <div class="d-flex flex-column flex-grow-1">
                 <p class="fs-14">Showcase your academic background to strengthen your professional profile.</p>
-                <button type="button" class="btn btn-light rounded-pill edit-summary" style="border-width: 2px" data-toggle="modal" data-target="#ModalEduc">Add Education</button>
+                <button type="button" class="btn btn-light rounded-pill edit-summary" style="border-width: 2px" data-toggle="modal" data-target="#ModalEduc">
+                    Add Education
+                </button>
             </div>
         <?php else: ?>
             <div>
@@ -127,4 +161,5 @@ if (!empty($educ_val)) {
             </div>
         <?php endif; ?>
     </div>
+
 <?php } ?>

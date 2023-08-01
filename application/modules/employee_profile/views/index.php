@@ -208,8 +208,7 @@ main_header(['employee_profile']);
                             </li>
                             <li class="nav-item dropdown d-sm-none">
                                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                    More
-                                </a>
+                                    More </a>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" data-toggle="pill" href="#pills-training">Training</a>
                                     <a class="dropdown-item" data-toggle="pill" href="#pills-following">Following</a>
@@ -222,11 +221,9 @@ main_header(['employee_profile']);
                             </li>
                             <li class="nav-item d-none d-sm-block">
                                 <a class="nav-link" id="pills-following-tab" data-toggle="pill" href="#pills-following" role="tab" aria-controls="pills-following" aria-selected="false">
-                                    Following
-                                    <span class="badge badge-info">
+                                    Following <span class="badge badge-info">
                                         <?= count($following) ?>
-                                    </span>
-                                </a>
+                                    </span> </a>
                             </li>
                             <li class="nav-item d-none d-sm-block">
                                 <a class="nav-link" id="pills-feedback-tab" data-toggle="pill" href="#pills-feedback" role="tab" aria-controls="pills-feedback" aria-selected="false">Feedback</a>
@@ -326,101 +323,82 @@ main_header(['employee_profile']);
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <!-- #Modal Education Content -->
-                                                <div class="px-2 py-2">
-                                                    <div class="pb-3">
-                                                    </div>
-                                                    <div class="row pb-3">
-                                                        <div class="col-md-6">
-                                                            <label>Level</label>
-                                                            <select class="form-control select2" style="width: 100%;">
-                                                                <option selected="selected">ELEMENTARY</option>
-                                                                <option>JUNIOR HIGH</option>
-                                                                <option>SENIOR HIGH</option>
-                                                                <option>COLLEGE</option>
-                                                                <option>VOCATIONAL SCHOOL</option>
-                                                                <option>TECHNICAL SCHOOL</option>
-                                                                <option>UNIVERSITY</option>
-                                                                <option>GRADUATE SCHOOL</option>
-                                                                <option>CERTIFICATE PROGRAM</option>
-                                                                <option>DIPLOMA PROGRAM</option>
-                                                                <option>APPRENTICESHIP</option>
-                                                                <option>ONLINE LEARNING</option>
-                                                                <option>CONTINUING EDUCATION</option>
-                                                                <option>EXECUTIVE EDUCATION</option>
-                                                                <option>PROFESSIONAL DEVELOPMENT</option>
-                                                                <option>SELF-TAUGHT</option>
-                                                                <option>LANGUAGE SCHOOL</option>
-                                                                <option>ART SCHOOL</option>
-                                                                <option>BUSINESS SCHOOL</option>
-                                                                <option>MEDICAL SCHOOL</option>
-                                                                <option>LAW SCHOOL</option>
-                                                                <option>ENGINEERING SCHOOL</option>
-                                                                <option>DESIGN SCHOOL</option>
-                                                                <option>CULINARY SCHOOL</option>
-                                                                <option>PERFORMING ARTS SCHOOL</option>
-                                                                <option>MILITARY TRAINING</option>
-                                                                <option>RELIGIOUS EDUCATION</option>
-                                                                <option>REMOTE LEARNING</option>
-                                                                <option>WORKPLACE TRAINING</option>
-                                                                <option>SPECIAL EDUCATION</option>
-                                                                <option>EXTRACURRICULAR</option>
-                                                                <option>TUTORIALS</option>
-                                                                <option>INTERNSHIP</option>
-                                                                <option>HOMESCHOOLING</option>
-                                                                <option>RESEARCH PROGRAM</option>
-                                                                <option>SKILL DEVELOPMENT PROGRAM</option>
-                                                                <option>LECTURE SERIES</option>
+                                                <form>
+                                                    <div class="px-2 py-2">
+                                                        <div class="row pb-3">
+                                                            <div class="col-md-6">
+                                                                <label for="level">Level</label>
+                                                                <select class="form-control select2" name="level" id="level" style="width: 100%;">
+                                                                    <option selected="selected">ELEMENTARY</option>
+                                                                    <option>JUNIOR HIGH</option>
+                                                                    <option>SENIOR HIGH</option>
+                                                                    <option>COLLEGE</option>
+                                                                    <option>VOCATIONAL SCHOOL</option>
+                                                                    <option>TECHNICAL SCHOOL</option>
+                                                                    <option>UNIVERSITY</option>
+                                                                    <option>GRADUATE SCHOOL</option>
+                                                                    <option>CERTIFICATE PROGRAM</option>
+                                                                    <option>DIPLOMA PROGRAM</option>
+                                                                    <option>APPRENTICESHIP</option>
+                                                                    <option>ONLINE LEARNING</option>
+                                                                    <option>CONTINUING EDUCATION</option>
+                                                                    <option>EXECUTIVE EDUCATION</option>
+                                                                    <option>PROFESSIONAL DEVELOPMENT</option>
+                                                                    <option>SELF-TAUGHT</option>
+                                                                    <option>LANGUAGE SCHOOL</option>
+                                                                    <option>ART SCHOOL</option>
+                                                                    <option>BUSINESS SCHOOL</option>
+                                                                    <option>MEDICAL SCHOOL</option>
+                                                                    <option>LAW SCHOOL</option>
+                                                                    <option>ENGINEERING SCHOOL</option>
+                                                                    <option>DESIGN SCHOOL</option>
+                                                                    <option>CULINARY SCHOOL</option>
+                                                                    <option>PERFORMING ARTS SCHOOL</option>
+                                                                    <option>MILITARY TRAINING</option>
+                                                                    <option>RELIGIOUS EDUCATION</option>
+                                                                    <option>REMOTE LEARNING</option>
+                                                                    <option>WORKPLACE TRAINING</option>
+                                                                    <option>SPECIAL EDUCATION</option>
+                                                                    <option>EXTRACURRICULAR</option>
+                                                                    <option>TUTORIALS</option>
+                                                                    <option>INTERNSHIP</option>
+                                                                    <option>HOMESCHOOLING</option>
+                                                                    <option>RESEARCH PROGRAM</option>
+                                                                    <option>SKILL DEVELOPMENT PROGRAM</option>
+                                                                    <option>LECTURE SERIES</option>
+                                                                </select>
+                                                            </div>
 
-                                                            </select>
-                                                            <!-- <input type="text" class="form-control dropdown-toggle" id="Level" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" placeholder="Enter Level" value="">
-                                                            <div class="dropdown-menu level-content" aria-labelledby="Level">
-                                                            <p class="dropdown-item">ELEMENTARY</p>
-                                                            <p class="dropdown-item">JUNIOR HIGH</p>
-                                                            <p class="dropdown-item">SENIOR HIGH</p>
-                                                            <p class="dropdown-item">COLLEGE</p>
-                                                        
-                                                            </div> -->
-
+                                                            <div class="col-md-6">
+                                                                <label for="title">Title</label>
+                                                                <input type="text" class="form-control" name="title" id="title" placeholder="Enter Title">
+                                                            </div>
+                                                        </div>
+                                                        <div class="pb-3">
+                                                            <label for="institution">Institution</label>
+                                                            <input type="text" class="form-control" name="institution" id="institution" placeholder="Enter Institution">
+                                                        </div>
+                                                        <div class="row pb-4">
+                                                            <div class="col-md">
+                                                                <label for="description">Description</label>
+                                                                <div>
+                                                                    <textarea class="form-control" name="description" id="description" rows="4" placeholder="Enter Description"></textarea>
+                                                                </div>
+                                                            </div>
                                                         </div>
 
-                                                        <div class="col-md-6">
-                                                            <label>Title</label>
-                                                            <input type="text" class="form-control" id="Title" placeholder="Enter Title">
-                                                        </div>
-                                                    </div>
-
-                                                    <section class="pb-3">
-                                                        <label>Institution</label>
-                                                        <input type="text" class="form-control" id="Institution" placeholder="Enter Institution">
-                                                    </section>
-
-                                                    <div class="row pb-4">
-                                                        <div class="col-md">
-                                                            <label>Description</label>
-                                                            <div>
-                                                                <textarea class="form-control" name="description" id="Description" rows="4" placeholder="Enter Description"></textarea>
+                                                        <div class="row pb-3">
+                                                            <div class="col-md-6">
+                                                                <label for="start_date">Start Date</label>
+                                                                <input type="date" class="form-control" id="start_date" name="start_date">
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label for="end_date">End Date</label>
+                                                                <input type="date" class="form-control" id="end_date" name="end_date">
                                                             </div>
                                                         </div>
                                                     </div>
-
-                                                    <div class="row pb-3">
-                                                        <div class="col-md-4">
-                                                            <label>Start Date</label>
-                                                            <input type="date" class="form-control" id="Start_date" name="start_date">
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <label>End Date</label>
-                                                            <div>
-                                                                <input type="date" class="form-control" id="End_date" name="end_date">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <label>Hours</label>
-                                                            <input type="Number" class="form-control" id="Hours" placeholder="Enter Hours">
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                </form>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
@@ -458,7 +436,9 @@ main_header(['employee_profile']);
                                             <div class="modal-dialog modal-lg" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Add Employment</h5>
+                                                        <h5 class="modal-title" id="exampleModalLabel">
+                                                            Add Employment
+                                                        </h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
@@ -478,8 +458,8 @@ main_header(['employee_profile']);
                                                             </div>
                                                             <div class="row pb-3">
                                                                 <div class="col-md">
-                                                                    <label for="position">Position</label>
-                                                                    <input type="text" class="form-control" id="position" name="position" placeholder="Enter Position">
+                                                                    <label for="job_title">Job Title</label>
+                                                                    <input type="text" class="form-control" id="job_title" name="job_title" placeholder="Enter Position">
                                                                 </div>
                                                             </div>
                                                             <div class="row">
@@ -666,7 +646,8 @@ main_header(['employee_profile']);
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                                 Close
                                             </button>
-                                            <button type="submit" class="btn btn-primary" name="submit">Upload Resume</button>
+                                            <button type="submit" class="btn btn-primary" name="submit">Upload Resume
+                                            </button>
                                         </div>
                                     </div>
                                 </div>

@@ -3,7 +3,14 @@ const load_skill = () => {
 }
 
 const load_education = () => {
-    $('#load_educations').load(baseUrl + 'employee_profile/get_educations/' + $('#emp_id').val());
+    fetch(baseUrl + 'employee_profile/getEducations')
+        .then(response => response.text())
+        .then(data => {
+            document.querySelector('#load_educations').innerHTML = data;
+
+            tinymce.remove('textarea');
+            textareaEditor('textarea', 400);
+        });
 }
 
 const load_training = () => {
@@ -37,6 +44,18 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
+
+    const education_level = document.querySelectorAll('form.education-form select[name="level"]');
+    if (education_level) {
+        education_level.forEach(level => {
+            const options = level.querySelectorAll("option");
+            options.forEach(option => {
+                if (option.textContent.toUpperCase().includes(level.value.toUpperCase())) {
+                    option.setAttribute("selected", "selected");
+                }
+            });
+        });
+    }
 });
 
 const add_employment = document.querySelector('#btn_save_employment');
@@ -58,31 +77,53 @@ if (add_employment) {
     });
 }
 
-$(document).on('click', '#save_education', function () {
-    const data = {
-        Employee_id: document.querySelector('#Employee_id').value,
-        Level: document.querySelector('#Level').value,
-        Title: document.querySelector('#Title').value,
-        Institution: document.querySelector('#Institution').value,
-        Description: document.querySelector('#Description').value,
-        Start_date: document.querySelector('#Start_date').value,
-        End_date: document.querySelector('#End_date').value,
-        Hours: document.querySelector('#Hours').value
-    }
+const add_education = document.querySelector('#btn_add_educ');
+if (add_education) {
+    add_education.addEventListener('click', () => {
+        const form = add_education.closest('.modal-content').querySelector('form');
+        const formData = new FormData(form);
 
-    $.ajax({
-        url: baseUrl + 'employee_profile/service/employee_profile_service/save_education',
-        type: 'POST',
-        data: data,
-        success: function () {
+        const description = tinymce.activeEditor.getContent();
+        formData.set('description', description);
+
+        formAction(baseUrl + 'education/add', 'POST', formData, () => {
             load_education();
             success('SUCCESS', 'Education successfully added');
-        },
-        error: function (response) {
-            error('ERROR', 'Education failed to add');
-        }
+        });
     });
-});
+}
+
+const update_education = document.querySelectorAll('#btn_edit_educ');
+if (update_education) {
+    update_education.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const form = btn.closest('.modal-content').querySelector('form');
+            const formData = new FormData(form);
+
+            const description = tinymce.activeEditor.getContent();
+            formData.set('description', description);
+
+            formAction(baseUrl + 'education/update', 'POST', formData, () => {
+                load_education();
+                success('SUCCESS', 'Education successfully updated');
+            });
+        });
+    });
+}
+
+const delete_education = document.querySelectorAll('#delete_educ');
+if (delete_education) {
+    delete_education.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const id = btn.getAttribute('data-id');
+
+            formAction(baseUrl + 'education/delete', 'POST', {id: id}, () => {
+                load_education();
+                success('SUCCESS', 'Education successfully deleted');
+            });
+        });
+    });
+}
 
 $(document).on('click', '#btn_save_training', function () {
     const form = this.closest('.modal-content').querySelector('form');
@@ -118,35 +159,6 @@ $('#btn_save_training').click(function () {
         // Dismiss the modal after a delay of 2 seconds (2000 milliseconds)
         $('#ModalTrain').modal('hide');
     }, 1000);
-});
-
-$(document).on('click', '#btn_edit_educ', function () {
-    const currentContainer = $(this).closest('.modal-content').find('form');
-
-    const data = {
-        ID: currentContainer.find('#ID2').val(),
-        Employee_id: currentContainer.find('#Employee_id2').val(),
-        Level: currentContainer.find('#Level2').val(),
-        Title: currentContainer.find('#Title2').val(),
-        Institution: currentContainer.find('#Institution2').val(),
-        Description: currentContainer.find('#Description2').val(),
-        Start_date: currentContainer.find('#Start_date2').val(),
-        End_date: currentContainer.find('#End_date2').val(),
-        Hours: currentContainer.find('#Hours2').val()
-    }
-
-    $.ajax({
-        url: baseUrl + 'employee_educ/service/employee_educ_service/edit',
-        type: 'POST',
-        data: data,
-        success: function (response) {
-            success('SUCCESS', 'Education successfully updated');
-            load_education();
-        },
-        error: function (response) {
-            error('ERROR', 'Education failed to update');
-        }
-    });
 });
 
 $(document).on('click', '#btn_edit_train', function () {
@@ -358,4 +370,3 @@ $(document).on('click', '#update_profile', function () {
         }
     });
 });
-

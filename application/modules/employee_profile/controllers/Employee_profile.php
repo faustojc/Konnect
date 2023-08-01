@@ -31,6 +31,7 @@ class Employee_profile extends MY_Controller
             'employee_profile/employee_profile_model' => 'eModel',
             'employee/Employee_model' => 'employee_model',
             'follow/Follow_model' => 'follow_model',
+            'education/Education_model' => 'education_model',
         ];
         $this->load->model($model_list);
 
@@ -54,7 +55,7 @@ class Employee_profile extends MY_Controller
         $this->db->cache_on();
 
         $this->data['details'] = $this->eModel->get_employee($ID);
-        $this->data['educ_val'] = $this->eModel->get_educations();
+        $this->data['educations'] = $this->education_model->getEmployeeEducations($ID);
         $this->data['train_val'] = $this->eModel->get_training();
         $this->data['employments'] = $this->Employment_model->getEmployeesEmployment($ID);
         $this->data['skills'] = $this->eModel->get_skill($ID);
@@ -81,11 +82,9 @@ class Employee_profile extends MY_Controller
         $this->load->view('layout', $this->data);
     }
 
-    public function get_educations()
+    public function getEducations(): void
     {
-        $ID = $this->input->get('id');
-
-        $this->data['educ_val'] = $this->eModel->get_educations();
+        $this->data['educations'] = $this->education_model->getEmployeeEducations($this->current_user->ID);
         $this->data['content'] = 'grid/load_educations';
         $this->load->view('layout', $this->data);
     }
@@ -102,23 +101,19 @@ class Employee_profile extends MY_Controller
 
     public function getEmployments(): void
     {
-        $this->data['employments'] = $this->Employment_model->getEmployeesEmployment($this->userdata->ID);
+        $this->data['employments'] = $this->Employment_model->getEmployeesEmployment($this->current_user->ID);
         $this->data['content'] = 'grid/load_employments';
         $this->load->view('layout', $this->data);
     }
 
-    public function get_skill()
+    public function getSkills()
     {
-        $ID = $this->uri->segment(3);
-
-        $this->data['skills'] = $this->eModel->get_skill($ID);
+        $this->data['skills'] = $this->EmployeeSkills_model->getEmployeeSkills($this->current_user->ID);
         $this->data['content'] = 'grid/load_skill';
         $this->load->view('layout', $this->data);
     }
 
-    // Employee Education Section
-
-    public function edit()
+    public function edit(): void
     {
         $ID = $this->input->get('id');
 

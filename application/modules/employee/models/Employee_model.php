@@ -11,14 +11,7 @@ class Employee_model extends CI_Model
     public function __construct()
     {
         parent::__construct();
-        $this->session = (object)get_userdata(USER);
 
-        // if(is_empty_object($this->session)){
-        // 	redirect(base_url().'login/authentication', 'refresh');
-        // }
-
-        $model_list = [];
-        $this->load->model($model_list);
         $this->Table = json_decode(TABLE, FALSE, 512, JSON_THROW_ON_ERROR);
     }
 
@@ -89,4 +82,41 @@ class Employee_model extends CI_Model
         return $this->db->get()->result();
     }
 
+    public function update($id, $data): array
+    {
+        try {
+            $this->db->trans_start();
+            $this->db->where('ID', $id)->update($this->Table->employee, $data);
+            $this->db->trans_complete();
+
+            if ($this->db->trans_status()) {
+                $this->db->trans_commit();
+                return ['message' => UPDATE_SUCCESSFUL, 'has_error' => FALSE];
+            }
+
+            $this->db->trans_rollback();
+            throw new RuntimeException(ERROR_PROCESSING, TRUE);
+        } catch (Exception $e) {
+            return ['message' => $e->getMessage(), 'has_error' => TRUE];
+        }
+    }
+
+    public function delete($id): array
+    {
+        try {
+            $this->db->trans_start();
+            $this->db->where('ID', $id)->delete($this->Table->employee);
+            $this->db->trans_complete();
+
+            if ($this->db->trans_status() === FALSE) {
+                $this->db->trans_rollback();
+                throw new RuntimeException(ERROR_PROCESSING, TRUE);
+            }
+
+            $this->db->trans_commit();
+            return ['message' => DELETED_SUCCESSFUL, 'has_error' => FALSE];
+        } catch (Exception $msg) {
+            return (['message' => $msg->getMessage(), 'has_error' => TRUE]);
+        }
+    }
 }

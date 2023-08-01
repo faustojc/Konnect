@@ -16,25 +16,21 @@
 
 </style>
 
-<body style="background-color:rgb(241, 246, 249);">
-    
-</body>
-
 <div class="container d-flex align-content-center">
     <div class="thank-you-container w-75 mx-auto">
         <img src="<?= base_url() ?>assets/images/Logo/Konnect3.png" class="img-fluid mb-4" alt="Konnect logo">
         <h1 class="mb-5">Thank You for Registering</h1>
-        <p class="mb-5 text-justify">Welcome to Konnect! You are now part of our vibrant community connecting jobseekers and employers. Get ready to explore exciting opportunities and take your career to new heights.</p>
+        <p class="mb-5 text-justify">Welcome to Konnect! You are now part of our vibrant community connecting jobseekers
+            and employers. Get ready to explore exciting opportunities and take your career to new heights.</p>
         <h6 class="mb-3">You will be redirected to login page shortly</h6>
         <p>
-            Didn't redirect?
-            <a href="<?= base_url() ?>login">Click here</a>
+            Didn't redirect? <a href="<?= base_url() ?>login">Click here</a>
         </p>
     </div>
 </div>
 
-<!-- <script type="text/javascript">
-    setTimeout(function() {window.location.href = "<?= base_url() ?>login"}, 3000);
-</script> -->
+<script type="text/javascript">
+    setTimeout(() => window.location.href = "<?= base_url() ?>login", 3000);
+</script>
 
 <?php auth_footer() ?>

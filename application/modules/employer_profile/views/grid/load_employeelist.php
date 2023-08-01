@@ -99,7 +99,9 @@
                             <?= $employee->employee_id ?>
                         </td>
                         <td>
-                            <?= ucwords($employee->employee_name) ?>
+                            <a href="<?= base_url() ?>employee_profile?id=<?= $employee->employee_id ?>">
+                                <?= ucwords($employee->employee_name) ?>
+                            </a>
                         </td>
                         <td>
                             <?= $employee->job_title ?>
@@ -107,14 +109,12 @@
                         <td class="pr-0">
                             <label class="switch">
                                 <input type="checkbox" checked data-toggle="toggle" data-on="Ready" data-off="Not Ready" data-onstyle="success" data-offstyle="danger">
-                                <span class="slider round"></span>
-                            </label>
+                                <span class="slider round"></span> </label>
                         </td>
                         <td class="pr-0">
                             <label class="switch">
                                 <input type="checkbox" checked data-toggle="toggle" data-on="Ready" data-off="Not Ready" data-onstyle="success" data-offstyle="danger">
-                                <span class="slider round"></span>
-                            </label>
+                                <span class="slider round"></span> </label>
                         </td>
                         <td>
                             <!-- Start Date -->

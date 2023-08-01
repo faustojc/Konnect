@@ -176,12 +176,12 @@ main_header(['employee_profile']);
                                     <h5 class="widget-user-desc text-left text-dark" style="font-weight: 550; font-size:18px;">
                                         <?= ucwords(@$details->Title) ?>
                                     </h5>
-                                    <h6 class="widget-user-desc text-left text-muted" style="font-weight: normal; font-size:15px;">
+                                    <div class="widget-user-desc text-left text-muted" style="font-weight: normal; font-size:15px;">
                                         <?= ucwords(@$details->Address) . ", " . ucwords(@$details->Barangay) . ", " . ucwords(@$details->City) ?>
                                         |
-                                        <a class="" data-toggle="modal" data-target="#contact" style="color:#0dcaf0; cursor: pointer;">Contact
-                                            details</a>
-                                    </h6>
+                                        <a data-toggle="modal" data-target="#profile_contact" style="color:#0dcaf0; cursor: pointer">
+                                            Profile details </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -460,14 +460,6 @@ main_header(['employee_profile']);
                                                                     <input type="text" class="form-control" id="job_type" name="job_type" placeholder="Enter Job Type">
                                                                 </div>
                                                             </div>
-                                                            <!-- <div class="row px-3">
-                                                                <div class="d-flex align-items-center">
-                                                                    <p class="text-muted" style="font-weight: normal; font-size: 15px;">
-                                                                        <input type="checkbox" id="show_status" name="show_status">
-                                                                        Show Status
-                                                                    </p>
-                                                                </div>
-                                                            </div> -->
                                                             <div class="row pb-2">
                                                                 <div class="col-12">
                                                                     <label for="job_description">Job Description</label>
@@ -627,7 +619,7 @@ main_header(['employee_profile']);
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="upload.php" method="post" enctype="multipart/form-data">
+                                            <form action="#" method="post" enctype="multipart/form-data">
                                                 <div class="form-group">
                                                     <label for="file">Select a file:</label>
                                                     <input type="file" class="form-control-file" name="file" id="file">
@@ -638,7 +630,8 @@ main_header(['employee_profile']);
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                                 Close
                                             </button>
-                                            <button type="submit" class="btn btn-primary" name="submit">Upload Resume
+                                            <button type="submit" class="btn btn-primary" name="submit">
+                                                Upload Resume
                                             </button>
                                         </div>
                                     </div>
@@ -711,72 +704,6 @@ main_header(['employee_profile']);
                         </div>
                     </div>
 
-                    <!-- Contact Modal -->
-                    <div class="modal fade" id="contact" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h6 class="modal-title" id="exampleModalLabel">
-                                        <?= ucwords(@$details->Fname) . " " . ucwords(@$details->Mname) . " " . ucwords(@$details->Lname) ?>
-                                    </h6>
-
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <h6 class="pb-3">Contact Details</h6>
-
-                                    <h6 style="font-weight: normal;">
-                                        <i class="fas fa-map-pin"></i><strong> Address</strong>
-                                    </h6>
-                                    <h6 style="font-weight: normal;">
-                                        <?= ucwords(@$details->Address) . ", " . ucwords(@$details->Barangay) . ", " . ucwords(@$details->City) ?>
-                                    </h6>
-                                    <br>
-                                    <h6 style="font-weight: normal;">
-                                        <i class="fa fa-envelope"></i><strong> Email</strong></h6>
-                                    <h6 style="font-weight: normal;">
-                                        <?= $details->Email ?>
-                                    </h6>
-                                    <br>
-                                    <h6 style="font-weight: normal;">
-                                        <i class="fa fa-phone"></i><strong> Contact Number</strong>
-                                    </h6>
-                                    <h6 style="font-weight: normal;">
-                                        <?= $details->Cnum ?>
-                                    </h6>
-                                    <br>
-
-                                    <?php if ($has_permission): ?>
-                                        <h6 style="font-weight: normal;">
-                                            <i class="fa-solid fa-id-card"></i><strong> SSS</strong>
-                                        </h6>
-
-                                        <h6 style="font-weight: normal;">
-                                            <?= $details->SSS ?>
-                                        </h6>
-                                        <br>
-                                        <h6 style="font-weight: normal;">
-                                            <i class="fa-solid fa-id-card"></i><strong> TIN</strong>
-                                        </h6>
-                                        <h6 style="font-weight: normal;">
-                                            <?= $details->Tin ?>
-                                        </h6>
-                                        <br>
-                                    <?php endif; ?>
-
-                                    <h6 style="font-weight: normal;">
-                                        <i class="fa-solid fa-cake-candles"></i><strong> Birthday</strong>
-                                    </h6>
-                                    <h6 style="font-weight: normal;">
-                                        <?= $details->Bday ?>
-                                    </h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- Add Skill Modal -->
                     <div class="modal fade" id="skill_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -820,6 +747,81 @@ main_header(['employee_profile']);
 
             </div>
         </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div class="modal fade" id="profile_contact" tabindex="-1" aria-labelledby="modal_contact" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="modal_contact">
+                        <?= ucwords(@$details->Fname) . " " . ucwords(@$details->Mname) . " " . ucwords(@$details->Lname) ?>
+                    </h6>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h6 class="pb-3">Profile Details</h6>
+
+                    <h6 style="font-weight: normal;">
+                        <i class="fas fa-map-pin"></i><strong> Address</strong>
+                    </h6>
+                    <h6 style="font-weight: normal;">
+                        <?= ucwords(@$details->Address) . ", " . ucwords(@$details->Barangay) . ", " . ucwords(@$details->City) ?>
+                    </h6>
+                    <br>
+                    <h6 style="font-weight: normal;">
+                        <i class="fas fa-envelope"></i><strong> Email</strong></h6>
+                    <h6 style="font-weight: normal;">
+                        <?= $details->Email ?>
+                    </h6>
+                    <br>
+                    <h6 style="font-weight: normal;">
+                        <i class="fas fa-phone"></i><strong> Contact Number</strong>
+                    </h6>
+                    <h6 style="font-weight: normal;">
+                        <?= $details->Cnum ?>
+                    </h6>
+                    <br>
+                    <h6 style="font-weight: normal;">
+                        <i class="fas fa-solid fa-cake-candles"></i><strong> Birthday</strong>
+                    </h6>
+                    <h6 style="font-weight: normal;">
+                        <?= $details->Bday ?>
+                    </h6>
+                    <?php
+                    $isEmployed = FALSE;
+
+                    if ($auth['user_type'] == 'EMPLOYER') {
+                        $isEmployed = array_filter($employments, static function ($employment) use ($details, $userdata) {
+                            return $employment->employee_id == $details->ID && $employment->employer_id == $userdata->id;
+                        });
+                    }
+
+                    if ($has_permission || $isEmployed): ?>
+                        <hr>
+                        <h6 style="font-weight: normal;">
+                            <i class="fas fa-solid fa-id-card"></i><strong> SSS</strong>
+                        </h6>
+
+                        <h6 style="font-weight: normal;">
+                            <?= $details->SSS ?>
+                        </h6>
+                        <br>
+                        <h6 style="font-weight: normal;">
+                            <i class="fas fa-solid fa-id-card"></i><strong> TIN</strong>
+                        </h6>
+                        <h6 style="font-weight: normal;">
+                            <?= $details->Tin ?>
+                        </h6>
+                        <br>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <!-- ############ PAGE END-->

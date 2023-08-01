@@ -314,7 +314,7 @@ $config['error_views_path'] = '';
 | application/cache/ directory.  Use a full server path with trailing slash.
 |
 */
-$config['cache_path'] = '';
+$config['cache_path'] = 'application/cache';
 
 /*
 |--------------------------------------------------------------------------
@@ -474,7 +474,7 @@ $config['csrf_token_name'] = 'csrf_konnect_api';
 $config['csrf_cookie_name'] = 'csrf_cookie_konnect_api_888';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = FALSE;
-$config['csrf_exclude_uris'] = array();
+$config['csrf_exclude_uris'] = [];
 
 /*
 |--------------------------------------------------------------------------

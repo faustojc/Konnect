@@ -1,5 +1,8 @@
 const load_skill = () => {
-    $('#load_skill').load(baseUrl + 'employee_profile/get_skill/' + $('#emp_id').val());
+    fetch(baseUrl + 'employee_profile/getSkills')
+        .then(response => response.text())
+        .then(data => document.querySelector('#load_skill').innerHTML = data)
+        .catch(() => error('ERROR!', 'Something went wrong'));
 }
 
 const load_education = () => {
@@ -10,7 +13,8 @@ const load_education = () => {
 
             tinymce.remove('textarea');
             textareaEditor('textarea', 400);
-        });
+        })
+        .catch(() => error('ERROR!', 'Something went wrong'));
 }
 
 const load_training = () => {

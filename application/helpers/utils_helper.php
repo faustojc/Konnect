@@ -59,6 +59,22 @@ if (!function_exists('formatTime')) {
     }
 }
 
+if (!function_exists('sendEmail')) {
+    function sendEmail($from, $name, $to, $subject, $message): void
+    {
+        $CI = &get_instance();
+        $CI->load->library('email');
+
+        $CI->email->from($from, $name);
+        $CI->email->to($to);
+
+        $CI->email->subject($subject);
+        $CI->email->message($message);
+
+        $CI->email->send();
+    }
+}
+
 function is_empty_object($obj): bool
 {
     return $obj == new stdClass();

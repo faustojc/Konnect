@@ -149,3 +149,25 @@ if (skills_required_input) {
         }
     });
 }
+
+const resend_verify = document.querySelector('#resend_verify');
+if (resend_verify) {
+    const spinner = document.createElement('span');
+    spinner.classList.add('spinner-border', 'spinner-border-sm', 'mx-2');
+
+    resend_verify.addEventListener('click', () => {
+        resend_verify.appendChild(spinner);
+
+        fetch(baseUrl + 'verify/resend',)
+            .then(response => response.json())
+            .then(data => {
+                success('SUCCESS', data.message, 6000);
+            })
+            .catch(() => {
+                error('ERROR', 'Something went wrong. Please try again later');
+            })
+            .finally(() => {
+                resend_verify.removeChild(spinner);
+            });
+    });
+}

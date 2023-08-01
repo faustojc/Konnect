@@ -26,16 +26,12 @@
             <div>
                 <i class="fas fa-briefcase bg-orange"></i>
                 <div class="timeline-item">
-                    <span class="time"><i class="fas fa-clock mr-1"></i><?= date('d @ h:i', strtotime($employment->start_date)) ?>
-                        <?php try {
-                            $d = new DateTime($employment->start_date);
-                            echo $d->format('a');
-                        } catch (Exception $e) {
-                            throw new RuntimeException($e->getMessage());
-                        } ?>
+                    <span class="time">
+                        <i class="fas fa-clock mr-1"></i>
+                        <?= date('D, d M', strtotime($employment->start_date)) ?>
                     </span>
                     <h5 class="timeline-header">
-                        Started working in <?= $employment->employer_name ?> as <?= $employment->job_title ?>
+                        Started working in <?= $employment->tradename ?> as <?= $employment->job_title ?>
                     </h5>
                     <?php if (!empty($employment->job_description)): ?>
                         <div class="timeline-body" style="max-height: 200px">
@@ -64,9 +60,7 @@
                         </div>
                         <div class="modal-body">
                             <form class="px-2 py-2" id="needs-validation">
-                                <input type="text" class="form-control" id="ID" name="ID" value="<?= $employment->ID ?>" hidden readonly>
-                                <input type="text" class="form-control" id="employer_id" name="employer_id" value="<?= $employment->employer_id ?>" hidden readonly>
-                                <input type="text" class="form-control" id="employee_id" name="employee_id" value="<?= $employment->employee_id ?>" hidden readonly>
+                                <input type="text" class="form-control" id="od" name="id" value="<?= $employment->id ?>" hidden readonly>
                                 <div class="row pb-3">
                                     <div class="col-md">
                                         <label for="employer_name">Employer Name</label>
@@ -77,7 +71,7 @@
                                 <div class="row pb-3">
                                     <div class="col-md">
                                         <label for="positionEmp">Position</label>
-                                        <input type="text" class="form-control" id="position" name="position" value="<?= $employment->position ?>">
+                                        <input type="text" class="form-control" id="position" name="position" value="<?= $employment->job_title ?>">
                                     </div>
                                 </div>
 
@@ -127,7 +121,6 @@
                 </div>
             </div> -->
         <?php endforeach; ?>
-        <!-- The last icon means the story is complete -->
         <div>
             <i class="fas fa-clock bg-gray"></i>
         </div>
@@ -140,8 +133,7 @@
             </div>
             <div class="d-flex flex-column flex-grow-1">
                 <p class="fs-14">
-                    Share your professional experience to establish credibility for potential
-                    employers.
+                    Share your professional experience to establish credibility for potential employers.
                 </p>
                 <button type="button" class="btn btn-light rounded-pill edit-summary" style="border-width: 2px" data-toggle="modal" data-target="#modalAddEmp">
                     Add Employment

@@ -261,7 +261,7 @@ main_header(['employee_profile']);
                                     </div>
                                 <?php else: ?>
                                     <div class="card-body card-widget widget-user-2" style="padding-top:0.5rem;">
-                                        <div class="widget-user-header px-2 py-2" style="padding:0; ">
+                                        <div class="widget-user-header px-2 py-2" id="load_intro" style="padding:0; ">
                                             <?= $details->Introduction ?>
                                         </div>
                                     </div>
@@ -646,43 +646,6 @@ main_header(['employee_profile']);
                     </div>
                 </div>
 
-                <div class="col-12 col-md-4 pl-2 pr-2 mt-4">
-                    <!--<div class="card card-white">
-                    <div class="card-header">
-                        <h3 class="card-title fw-600" style="font-weight:600;">Address</h3>
-                        <?php if ($has_permission): ?>
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-toggle="modal" data-target="#address_modal" style="opacity:1;  cursor: pointer;">
-                                    <i class="fa-solid fa-pen"></i>
-                                </button>
-                            </div>
-                        <?php endif; ?>
-                    </div>
-                    <div class="card-body" style="padding-top:10px;padding-bottom:5px; font-size:12px;">
-                        <b>STREET:</b>
-                        <h6 class="text-muted">
-                            <?= ucwords(@$details->Address) ?>
-                        </h6>
-                    </div>
-                    <div class="card-body " style="padding-top:10px;padding-bottom:5px; font-size:12px;">
-                        <b>BARANGAY:</b>
-                        <h6 class="text-muted">
-                            <?= ucwords(@$details->Barangay) ?>
-                        </h6>
-                    </div>
-                    <div class="card-body" style="padding-top:10px;padding-bottom:5px; font-size:12px;">
-                        <b>CITY:</b>
-                        <h6 class="text-muted">
-                            <?= ucwords(@$details->City) ?>
-                        </h6>
-                    </div>
-                </div> -->
-
-
-                    <!-- JOBS EMPLOYED -->
-
-                </div>
-
                 <?php if ($has_permission): ?>
                     <!-- Introduction Modal -->
                     <div class="modal fade bd-example-modal-lg" id="Introduction_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -696,13 +659,14 @@ main_header(['employee_profile']);
                                 </div>
                                 <div class="modal-body">
                                     <div>
-                                        <input type="text" id="ID" value="<?= @$details->ID ?>" hidden>
                                         <textarea class="form-control" name="Introduction" id="Introduction_Text" rows="4" placeholder="Enter Introduction"><?= @$details->Introduction ?></textarea>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-info" id="update_introduction">Save</button>
+                                    <button type="button" class="btn btn-info" data-dismiss="modal" id="update_introduction">
+                                        Save
+                                    </button>
                                 </div>
                             </div>
                         </div>

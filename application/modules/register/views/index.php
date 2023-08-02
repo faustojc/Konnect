@@ -16,12 +16,14 @@
 
         <!-- Registration Form -->
         <div class="col-md-6 col-lg-6 ml-auto">
-            <div class="row m-0 p-4">
+            <div class="row m-0">
                 <div class="card shadow-none border-0" style="border-radius:15px;">
                     <div class="card-body">
                         <div class="col-12 mb-4">
                             <h1>Create an Account</h1>
-                            <p class="font-italic text-muted mb-0">Join the Konnect community and connect with other job seekers and employers</p>
+                            <p class="font-italic text-muted mb-0">
+                                Join the Konnect community and connect with other job-seekers and employers
+                            </p>
                         </div>
                         <div class="col-12 form-display">
                             <form id="needs-validation">
@@ -30,7 +32,7 @@
                                         <span class="input-group-text px-4 border-0" style="border-radius:15px 0 0 15px; background-color: #F4F6F7;">
                                             <i class="fa fa-user text-muted"></i>
                                         </span>
-                                        <input id="email" type="email" name="email" placeholder="Enter valid email" class="form-control border-0" style="border-radius:0 15px 15px 0; background-color: #F4F6F7;">
+                                        <input id="email" type="email" name="email" placeholder="Enter valid email" class="form-control border-0" style="border-radius:0 15px 15px 0; background-color: #F4F6F7;" required>
                                     </div>
                                 </div>
 
@@ -39,7 +41,7 @@
                                         <span class="input-group-text px-4 border-0" style="border-radius:15px 0 0 15px; background-color: #F4F6F7;">
                                             <i class="fa fa-lock text-muted"></i>
                                         </span>
-                                        <input id="password" type="password" name="password" placeholder="At least 6 characters long" class="form-control border-0" style="border-radius:0 15px 15px 0; background-color: #F4F6F7;">
+                                        <input id="password" type="password" name="password" placeholder="At least 6 characters long" class="form-control border-0" style="border-radius:0 15px 15px 0; background-color: #F4F6F7;" required>
                                     </div>
                                 </div>
 
@@ -48,12 +50,12 @@
                                         <span class="input-group-text px-4 border-0" style="border-radius:15px 0 0 15px; background-color: #F4F6F7;">
                                             <i class="fa fa-lock text-muted"></i>
                                         </span>
-                                        <input id="password_confirm" type="password" placeholder="Confirm password" class="form-control border-0" style="border-radius:0 15px 15px 0; background-color: #F4F6F7;">
+                                        <input id="password_confirm" type="password" placeholder="Confirm password" class="form-control border-0" style="border-radius:0 15px 15px 0; background-color: #F4F6F7;" required>
                                     </div>
                                 </div>
 
                                 <div class="input-group mb-4">
-                                    <select id="user_type" name="user_type" class="form-control custom-select border-0 shadow-none" style="border-radius:15px; background-color: #F4F6F7;">
+                                    <select id="user_type" name="user_type" class="form-control custom-select border-0 shadow-none" style="border-radius:15px; background-color: #F4F6F7;" required>
                                         <option value="" selected disabled>-- Choose user type --</option>
                                         <option value="EMPLOYER">EMPLOYER</option>
                                         <option value="EMPLOYEE">EMPLOYEE</option>
@@ -68,8 +70,7 @@
                             </form>
                             <div class="col-12 mt-3">
                                 <p>
-                                    Have a Konnect account?
-                                    <a href="<?= base_url() ?>login">Sign in here!</a>
+                                    Have a Konnect account? <a href="<?= base_url() ?>login">Sign in here!</a>
                                 </p>
                             </div>
                         </div>

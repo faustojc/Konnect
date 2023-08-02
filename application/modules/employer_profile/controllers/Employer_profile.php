@@ -7,7 +7,7 @@ class Employer_profile extends MY_Controller
     protected $auth;
     protected $isAccount;
     protected $current_user;
-    private $data = [];
+    private array $data = [];
 
     public function __construct()
     {

@@ -18,7 +18,7 @@ class Employer_profile extends MY_Controller
             redirect(base_url() . 'login');
         }
 
-        $this->auth = $this->Auth_model->get_auth($this->userdata->user_id);
+        $this->auth = (array)$this->Auth_model->get_auth($this->userdata->user_id);
 
         $model_list = [
             'employer_profile/Employer_profile_model' => 'employer_profile_model',

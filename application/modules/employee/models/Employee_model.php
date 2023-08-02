@@ -15,9 +15,9 @@ class Employee_model extends CI_Model
         $this->Table = json_decode(TABLE, FALSE, 512, JSON_THROW_ON_ERROR);
     }
 
-    public function getEmployee($id)
+    public function getEmployee($id, $select = '*')
     {
-        return $this->db->select()
+        return $this->db->select($select)
             ->from($this->Table->employee)
             ->where('ID', $id)
             ->or_where('user_id', $id)

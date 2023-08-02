@@ -31,44 +31,37 @@
 
 <div class="row pb-3">
     <div class="col-md-12">
-        <label>Address</label>
+        <label for="Address">Address</label>
         <input type="text" class="form-control border-0" name="Address" id="Address" style=" font-size:14px;border-radius:15px; background-color: #F4F6F7;" required>
     </div>
 </div>
 
 <div class="row pb-3">
     <div class="col-md-6">
-        <label>Region</label><br>
-        <select id="region" class="form-control border-0" style="border-radius:15px; background-color: #F4F6F7;" required></select>
-        <input type="hidden" name="region_text" id="region-text">
+        <label for="Region">Region</label><br>
+        <select name="Region" id="Region" class="form-control border-0" style="border-radius:15px; background-color: #F4F6F7;" required></select>
     </div>
     <div class="col-md-6">
-        <label>Province</label><br>
-        <select id="province" class="form-control border-0" style="border-radius:15px; background-color: #F4F6F7;" required></select>
-        <input type="hidden" name="province_text" id="province-text">
+        <label for="Province">Province</label><br>
+        <select name="Province" id="Province" class="form-control border-0" style="border-radius:15px; background-color: #F4F6F7;" required></select>
     </div>
 </div>
 
 <div class="row pb-3">
     <div class="col-md-6">
-        <label>City</label><br>
-        <select id="city" class="form-control border-0" style="border-radius:15px; background-color: #F4F6F7;" required></select>
-        <input type="hidden" name="city_text" id="city-text">
-
+        <label for="City">City</label><br>
+        <select name="City" id="City" class="form-control border-0" style="border-radius:15px; background-color: #F4F6F7;" required></select>
     </div>
 
     <div class="col-md-6">
-        <label>Barangay</label><br>
-        <select id="barangay" class="form-control border-0" style="border-radius:15px; background-color: #F4F6F7;" required></select>
-        <input type="hidden" name="barangay_text" id="barangay-text">
+        <label for="Barangay">Barangay</label><br>
+        <select name="Barangay" id="Barangay" class="form-control border-0" style="border-radius:15px; background-color: #F4F6F7;" required></select>
     </div>
 </div>
-
-
 
 <div class="row pb-3">
     <div class="col-md-4">
-        <label>Gender</label>
+        <label for="Gender">Gender</label>
         <select class="form-control border-0" name="Gender" id="Gender" style="border-radius:15px; background-color: #F4F6F7;" required>
             <option value="male">Male</option>
             <option value="female">Female</option>
@@ -77,7 +70,7 @@
     </div>
 
     <div class="col-md-4">
-        <label>Civil Status</label>
+        <label for="Cstat">Civil Status</label>
         <select class="form-control border-0" name="Cstat" id="Cstat" style="border-radius:15px; background-color: #F4F6F7;" required>
             <option value="single">Single</option>
             <option value="married">Married</option>
@@ -88,8 +81,8 @@
     </div>
 
     <div class="col-md-4">
-        <label>Religion</label>
-        <input type="text" class="form-control border-0" name="Religion" id="Religion" style=" font-size:14px;border-radius:15px; background-color: #F4F6F7;" required>
+        <label for="Religion">Religion</label>
+        <input type="text" class="form-control border-0 p-2" name="Religion" id="Religion" style=" font-size:14px;border-radius:15px; background-color: #F4F6F7;" required>
     </div>
 </div>
 

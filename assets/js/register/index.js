@@ -183,9 +183,38 @@ nextBtn.addEventListener('click', function () {
                 form.appendChild(usertypeInput);
                 form.appendChild(email);
                 form.appendChild(password);
-                register();
+
+                let address = document.querySelector('#address');
+                if (!address) {
+                    address = document.querySelector('#Address');
+                }
+
+                let region = document.querySelector('#region');
+                if (!region) {
+                    region = document.querySelector('#Region');
+                }
+
+                let province = document.querySelector('#province');
+                if (!province) {
+                    province = document.querySelector('#Province');
+                }
+
+                let city = document.querySelector('#city');
+                if (!city) {
+                    city = document.querySelector('#City');
+                }
+
+                let barangay = document.querySelector('#barangay');
+                if (!barangay) {
+                    barangay = document.querySelector('#Barangay');
+                }
+
+                locationDropdown(region, province, city, barangay);
+                register(address, region, province, city, barangay);
             });
-    } else {
+    }
+
+    if (!user_type.value) {
         user_type.classList.add('is-invalid');
         user_type.parentElement.insertBefore(userTypeErrorMessage, user_type.nextElementSibling);
     }
@@ -196,7 +225,7 @@ if (select_user_type) {
     select_user_type.addEventListener('change', function () {
         const user_type = document.querySelector('select#user_type');
 
-        if (user_type.value === 'EMPLOYEE' || user_type.value === 'EMPLOYER') {
+        if ((user_type.value === 'EMPLOYEE' || user_type.value === 'EMPLOYER') && user_type.nextElementSibling !== null) {
             user_type.classList.remove('is-invalid');
             user_type.nextElementSibling.remove();
         }
@@ -212,7 +241,7 @@ const setNextBtn = () => {
 }
 
 // For Register Form
-const register = () => {
+const register = (address, region, province, city, barangay) => {
     document.querySelector('#register').addEventListener('click', function () {
         const validForm = validateForm('#needs-validation');
 
@@ -220,13 +249,49 @@ const register = () => {
             const form = document.querySelector('form');
             const formData = new FormData(form);
 
-            fetch(baseUrl + 'register', {
-                method: 'POST',
-                body: formData
-            }).then(response => response.json())
-                .then(data => {
-                    window.location.href = data.redirect;
-                })
+            formData.forEach((value, key) => {
+                if (key === 'address') {
+                    formData.set('address', address.value.trim());
+                } else {
+                    formData.set('Address', address.value.trim());
+                }
+
+                if (key === 'region') {
+                    formData.set('region', region.options[region.selectedIndex].text.trim());
+                } else {
+                    formData.set('Region', region.options[region.selectedIndex].text.trim());
+                }
+
+                if (key === 'province') {
+                    formData.set('province', province.options[province.selectedIndex].text.trim());
+                } else {
+                    formData.set('Province', province.options[province.selectedIndex].text.trim());
+                }
+
+                if (key === 'city') {
+                    formData.set('city', city.options[city.selectedIndex].text.trim());
+                } else {
+                    formData.set('City', city.options[city.selectedIndex].text.trim());
+                }
+
+                if (key === 'barangay') {
+                    formData.set('barangay', barangay.options[barangay.selectedIndex].text.trim());
+                } else {
+                    formData.set('Barangay', barangay.options[barangay.selectedIndex].text.trim());
+                }
+            });
+
+            const data = [...formData.entries()];
+
+            console.log(data);
+
+            // fetch(baseUrl + 'register', {
+            //     method: 'POST',
+            //     body: formData
+            // }).then(response => response.json())
+            //     .then(data => {
+            //         window.location.href = data.redirect;
+            //     })
         }
     });
 }
@@ -251,182 +316,81 @@ function validatePassword() {
 // Automatically validate on input change
 passwordConfirmInput.addEventListener("input", validatePassword);
 
-document.addEventListener("DOMContentLoaded", function() {
-      var my_handlers = {
-            // fill province
-            fill_provinces: function () {
-                //selected region
-                var region_code = $(this).val();
+function locationDropdown(region, province, city, barangay) {
+    function fillProvinces() {
+        province.innerHTML = '<option selected disabled>Choose State/Province</option>';
+        city.innerHTML = '<option selected disabled>Choose city/municipality</option>';
+        barangay.innerHTML = '<option selected disabled>Choose barangay</option>';
 
-                // set selected text to input
-                var region_text = $(this).find("option:selected").text();
-                let region_input = $('#region-text');
-                region_input.val(region_text);
-                //clear province & city & barangay input
-                $('#province-text').val('');
-                $('#city-text').val('');
-                $('#barangay-text').val('');
+        fetch(baseUrl + 'assets/location/province.json')
+            .then(response => response.json())
+            .then(data => {
+                const result = data.filter(value => value.region_code === region.value);
+                result.sort((a, b) => a.province_name.localeCompare(b.province_name));
 
-                //province
-                let dropdown = $('#province');
-                dropdown.empty();
-                dropdown.append('<option selected="true" disabled>Choose State/Province</option>');
-                dropdown.prop('selectedIndex', 0);
+                result.forEach(entry => {
+                    const option = document.createElement('option');
 
-                //city
-                let city = $('#city');
-                city.empty();
-                city.append('<option selected="true" disabled></option>');
-                city.prop('selectedIndex', 0);
-
-                //barangay
-                let barangay = $('#barangay');
-                barangay.empty();
-                barangay.append('<option selected="true" disabled></option>');
-                barangay.prop('selectedIndex', 0);
-
-                // filter & fill
-                var url = baseUrl+'assets/location/province.json';
-                $.getJSON(url, function (data) {
-                    var result = data.filter(function (value) {
-                        return value.region_code == region_code;
-                    });
-
-                    result.sort(function (a, b) {
-                        return a.province_name.localeCompare(b.province_name);
-                    });
-
-                    $.each(result, function (key, entry) {
-                        dropdown.append($('<option></option>').attr('value', entry.province_code).text(entry.province_name));
-                    })
-
+                    option.value = entry.province_code;
+                    option.text = entry.province_name;
+                    province.appendChild(option);
                 });
-            },
-            // fill city
-            fill_cities: function () {
-                //selected province
-                var province_code = $(this).val();
-
-                // set selected text to input
-                var province_text = $(this).find("option:selected").text();
-                let province_input = $('#province-text');
-                province_input.val(province_text);
-                //clear city & barangay input
-                $('#city-text').val('');
-                $('#barangay-text').val('');
-
-                //city
-                let dropdown = $('#city');
-                dropdown.empty();
-                dropdown.append('<option selected="true" disabled>Choose city/municipality</option>');
-                dropdown.prop('selectedIndex', 0);
-
-                //barangay
-                let barangay = $('#barangay');
-                barangay.empty();
-                barangay.append('<option selected="true" disabled></option>');
-                barangay.prop('selectedIndex', 0);
-
-                // filter & fill
-                var url = baseUrl+'assets/location/city.json';
-                $.getJSON(url, function (data) {
-                    var result = data.filter(function (value) {
-                        return value.province_code == province_code;
-                    });
-
-                    result.sort(function (a, b) {
-                        return a.city_name.localeCompare(b.city_name);
-                    });
-
-                    $.each(result, function (key, entry) {
-                        dropdown.append($('<option></option>').attr('value', entry.city_code).text(entry.city_name));
-                    })
-
-                });
-            },
-            // fill barangay
-            fill_barangays: function () {
-                // selected barangay
-                var city_code = $(this).val();
-
-                // set selected text to input
-                var city_text = $(this).find("option:selected").text();
-                let city_input = $('#city-text');
-                city_input.val(city_text);
-                //clear barangay input
-                $('#barangay-text').val('');
-
-                // barangay
-                let dropdown = $('#barangay');
-                dropdown.empty();
-                dropdown.append('<option selected="true" disabled>Choose barangay</option>');
-                dropdown.prop('selectedIndex', 0);
-
-                // filter & Fill
-                var url = baseUrl+'assets/location/barangay.json';
-                $.getJSON(url, function (data) {
-                    var result = data.filter(function (value) {
-                        return value.city_code == city_code;
-                    });
-
-                    result.sort(function (a, b) {
-                        return a.brgy_name.localeCompare(b.brgy_name);
-                    });
-
-                    $.each(result, function (key, entry) {
-                        dropdown.append($('<option></option>').attr('value', entry.brgy_code).text(entry.brgy_name));
-                    })
-
-                });
-            },
-
-            onchange_barangay: function () {
-                // set selected text to input
-                var barangay_text = $(this).find("option:selected").text();
-                let barangay_input = $('#barangay-text');
-                barangay_input.val(barangay_text);
-            },
-
-        };
-
-
-        $(function () {
-            // events
-            $('#region').on('change', my_handlers.fill_provinces);
-            $('#province').on('change', my_handlers.fill_cities);
-            $('#city').on('change', my_handlers.fill_barangays);
-            $('#barangay').on('change', my_handlers.onchange_barangay);
-
-            // load region
-            let dropdown = $('#region');
-            dropdown.empty();
-            dropdown.append('<option selected="true" disabled>Choose Region</option>');
-            dropdown.prop('selectedIndex', 0);
-            const url = baseUrl+'assets/location/region.json';
-            // Populate dropdown with list of regions
-            $.getJSON(url, function (data) {
-                $.each(data, function (key, entry) {
-                    dropdown.append($('<option></option>').attr('value', entry.region_code).text(entry.region_name));
-                })
             });
+    }
 
-        });
-        // events
-        $('#region').on('change', my_handlers.fill_provinces);
-        $('#province').on('change', my_handlers.fill_cities);
-        $('#city').on('change', my_handlers.fill_barangays);
-        $('#barangay').on('change', my_handlers.onchange_barangay);
+    function fillCities() {
+        city.innerHTML = '<option selected disabled>Choose city/municipality</option>';
+        barangay.innerHTML = '<option selected disabled>Choose barangay</option>';
 
-        // load region
-        let dropdown = $('#region');
-        dropdown.empty();
-        dropdown.append('<option selected="true" disabled>Choose Region</option>');
-        dropdown.prop('selectedIndex', 0);
-        const url = baseUrl+'assets/location/region.json';
-        // Populate dropdown with list of regions
-        $.getJSON(url, function (data) {
-            $.each(data, function (key, entry) {
-                dropdown.append($('<option></option>').attr('value', entry.region_code).text(entry.region_name));
-            })
+        fetch(baseUrl + 'assets/location/city.json')
+            .then(response => response.json())
+            .then(data => {
+                const result = data.filter(value => value.province_code === province.value);
+                result.sort((a, b) => a.city_name.localeCompare(b.city_name));
+
+                result.forEach(entry => {
+                    const option = document.createElement('option');
+                    option.value = entry.city_code;
+                    option.text = entry.city_name;
+                    city.appendChild(option);
+                });
+            });
+    }
+
+    function fillBarangays() {
+        barangay.innerHTML = '<option selected disabled>Choose barangay</option>';
+
+        fetch(baseUrl + 'assets/location/barangay.json')
+            .then(response => response.json())
+            .then(data => {
+                const result = data.filter(value => value.city_code === city.value);
+                result.sort((a, b) => a.brgy_name.localeCompare(b.brgy_name));
+
+                result.forEach(entry => {
+                    const option = document.createElement('option');
+                    option.value = entry.brgy_code;
+                    option.text = entry.brgy_name;
+                    barangay.appendChild(option);
+                });
+            });
+    }
+
+    region.addEventListener('change', fillProvinces);
+    province.addEventListener('change', fillCities);
+    city.addEventListener('change', fillBarangays);
+
+    // Load region
+    region.innerHTML = '<option selected disabled>Choose Region</option>';
+
+    fetch(baseUrl + 'assets/location/region.json')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(entry => {
+                const option = document.createElement('option');
+
+                option.value = entry.region_code;
+                option.text = entry.region_name;
+                region.appendChild(option);
+            });
         });
-});
+}

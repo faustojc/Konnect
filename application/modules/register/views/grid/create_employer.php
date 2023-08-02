@@ -29,25 +29,32 @@
     </div>
 
     <div class="row pb-3">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <label for="address">Address</label>
-            <input type="text" class="form-control border-0" name="address" id="address" style=" font-size:14px; border-radius:15px; background-color: #F4F6F7;" required>
-        </div>
-
-        <div class="col-md-6">
-            <label for="barangay">Barangay</label>
-            <input type="text" class="form-control border-0" name="barangay" id="barangay" style=" font-size:14px; border-radius:15px; background-color: #F4F6F7;" required>
+            <input type="text" class="form-control border-0" name="address" id="address" style=" font-size:14px;border-radius:15px; background-color: #F4F6F7;" required>
         </div>
     </div>
 
     <div class="row pb-3">
         <div class="col-md-6">
-            <label for="contact_number">Contact Number</label>
-            <input type="number" class="form-control border-0" name="contact_number" id="contact_number" style="border-radius:15px; background-color: #F4F6F7;" required>
+            <label for="region">Region</label><br>
+            <select name="region" id="region" class="form-control border-0" style="border-radius:15px; background-color: #F4F6F7;" required></select>
         </div>
         <div class="col-md-6">
-            <label for="city">City</label>
-            <input type="text" class="form-control border-0" name="city" id="city" style=" font-size:14px;border-radius:15px; background-color: #F4F6F7;" required>
+            <label for="province">Province</label><br>
+            <select name="province" id="province" class="form-control border-0" style="border-radius:15px; background-color: #F4F6F7;" required></select>
+        </div>
+    </div>
+
+    <div class="row pb-3">
+        <div class="col-md-6">
+            <label for="city">City</label><br>
+            <select name="city" id="city" class="form-control border-0" style="border-radius:15px; background-color: #F4F6F7;" required></select>
+        </div>
+
+        <div class="col-md-6">
+            <label for="barangay">Barangay</label><br>
+            <select name="barangay" id="barangay" class="form-control border-0" style="border-radius:15px; background-color: #F4F6F7;" required></select>
         </div>
     </div>
 

@@ -37,9 +37,11 @@
                             </div>
                             <div class="row mb-1 mt-1">
                                 <div class="col-12 px-2">
-                                    <button class="btn btn-outline-info btn-sm mt-1" style="border-radius:80px; width:100%;">
-                                        <i class="fas fa-solid fa-user-plus"></i> View
-                                    </button> <!-- Replace 'Click Me' with the desired button text -->
+                                    <a href="<?= base_url() ?>employee_profile?id=<?= $employee->ID ?>">
+                                        <button class="btn btn-outline-info btn-sm mt-1" style="border-radius:80px; width:100%;">
+                                            <i class="fas fa-solid fa-user-plus"></i> View
+                                        </button> <!-- Replace 'Click Me' with the desired button text -->
+                                    </a>
                                 </div>
                             </div>
                         </div>

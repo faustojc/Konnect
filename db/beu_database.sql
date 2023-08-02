@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 01, 2023 at 07:18 PM
+-- Generation Time: Aug 02, 2023 at 06:08 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -35,6 +35,13 @@ CREATE TABLE `tbl_applicant` (
   `status` varchar(255) NOT NULL,
   `date_created` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `tbl_applicant`
+--
+
+INSERT INTO `tbl_applicant` (`id`, `job_id`, `employee_id`, `job_title`, `status`, `date_created`) VALUES
+(90, 51, 50, '', 'PENDING', '2023-08-02');
 
 -- --------------------------------------------------------
 
@@ -98,6 +105,8 @@ CREATE TABLE `tbl_employee` (
   `Religion` varchar(255) NOT NULL,
   `Cnum` varchar(255) NOT NULL,
   `Email` varchar(255) NOT NULL,
+  `Region` int(11) NOT NULL,
+  `Province` int(11) NOT NULL,
   `City` varchar(255) NOT NULL,
   `Barangay` varchar(255) NOT NULL,
   `Address` varchar(255) NOT NULL,
@@ -106,7 +115,7 @@ CREATE TABLE `tbl_employee` (
   `Tin` varchar(255) NOT NULL,
   `Phil_health` varchar(255) NOT NULL,
   `Pag_ibig` varchar(255) NOT NULL,
-  `Introduction` varchar(1000) NOT NULL,
+  `Introduction` text NOT NULL,
   `Employee_image` tinytext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
@@ -114,13 +123,13 @@ CREATE TABLE `tbl_employee` (
 -- Dumping data for table `tbl_employee`
 --
 
-INSERT INTO `tbl_employee` (`ID`, `user_id`, `Date_created`, `Fname`, `Lname`, `Mname`, `Bday`, `Gender`, `Cstat`, `Religion`, `Cnum`, `Email`, `City`, `Barangay`, `Address`, `Title`, `SSS`, `Tin`, `Phil_health`, `Pag_ibig`, `Introduction`, `Employee_image`) VALUES
-(32, 6, '0000-00-00 00:00:00', 'LEFT', 'DEADZZ', 'FOUR', '2022-08-16', 'male', 'single', 'Chicken Joyism', '5655656', 'chicken@gmail.com', 'Bacolod City', 'Chicken', 'Charito Heights', 'L4D2', '1233', '22222', '331313', '12323131', '<p>hahahaha</p>', 'le_four_ded_2.jpg'),
-(33, 7, '0000-00-00 00:00:00', 'Kayla', 'Pajanconi', 'Tangub', '1999-10-13', 'female', 'single', 'Roman Catholic', '09222667813', 'kaypajanconi@gmail.com', 'Hinigaran', 'camba-og', 'Dinandan', '', '', '', '', '', '', 'default.png'),
-(36, 20, '2023-07-19 13:15:15', 'Martin', 'Cuenca', 'Benedicto', '2001-11-24', 'male', 'single', 'Catholic', '0947950555', 'polcuenca242@gmail.com', 'BACOLOD CITY', 'Mansilingan', 'adelfa st. victorina heights', '', '19292', '020', '2626', '626', '', '347548042_184571507478516_7611925746711583073_n2.jpg'),
-(40, 25, '2023-07-27 09:50:15', 'Katrina', 'Dizon', 'G.', '2001-03-27', 'female', 'single', 'Catholic', '5555', 'katrina@gmail.com', 'BACOLOD CITY', 'Villamonte', 'kat\'s street', '', '', '', '', '', '', 'default.png'),
-(41, 26, '2023-07-27 10:20:19', 'John Martis', 'mART', 'Bo', '2023-07-05', 'male', 'single', 'dgfdgfdgfdgd', '123444', 'doe@gmail.com', 'dfgdgdgd', 'dgfdgfd', 'dfgdgfdf', '', '', '', '', '', '<p>gwapo ko</p>', 'default.png'),
-(42, 27, '2023-07-27 10:36:16', 'Fausto JC', 'Boko', 'S.', '2023-07-13', 'male', 'single', 'sferferferf', '0908', 'test@gmail.com', 'Bacolod', 'dsff', 'Charito Heights', '', '', '', '', '', '', 'default.png');
+INSERT INTO `tbl_employee` (`ID`, `user_id`, `Date_created`, `Fname`, `Lname`, `Mname`, `Bday`, `Gender`, `Cstat`, `Religion`, `Cnum`, `Email`, `Region`, `Province`, `City`, `Barangay`, `Address`, `Title`, `SSS`, `Tin`, `Phil_health`, `Pag_ibig`, `Introduction`, `Employee_image`) VALUES
+(32, 6, '0000-00-00 00:00:00', 'LEFT', 'DEADZZ', 'FOUR', '2022-08-16', 'male', 'single', 'Chicken Joyism', '5655656', 'chicken@gmail.com', 0, 0, 'Bacolod City', 'Chicken', 'Charito Heights', 'L4D2', '1233', '22222', '331313', '12323131', '<p>hahahaha</p>', 'le_four_ded_2.jpg'),
+(33, 7, '0000-00-00 00:00:00', 'Kayla', 'Pajanconi', 'Tangub', '1999-10-13', 'female', 'single', 'Roman Catholic', '09222667813', 'kaypajanconi@gmail.com', 0, 0, 'Hinigaran', 'camba-og', 'Dinandan', '', '', '', '', '', '', 'default.png'),
+(36, 20, '2023-07-19 13:15:15', 'Martin', 'Cuenca', 'Benedicto', '2001-11-24', 'male', 'single', 'Catholic', '0947950555', 'polcuenca242@gmail.com', 0, 0, 'BACOLOD CITY', 'Mansilingan', 'adelfa st. victorina heights', '', '19292', '020', '2626', '626', '', '347548042_184571507478516_7611925746711583073_n2.jpg'),
+(40, 25, '2023-07-27 09:50:15', 'Katrina', 'Dizon', 'G.', '2001-03-27', 'female', 'single', 'Catholic', '5555', 'katrina@gmail.com', 0, 0, 'BACOLOD CITY', 'Villamonte', 'kat\'s street', '', '', '', '', '', '', 'default.png'),
+(41, 26, '2023-07-27 10:20:19', 'John Martis', 'mART', 'Bo', '2023-07-05', 'male', 'single', 'dgfdgfdgfdgd', '123444', 'doe@gmail.com', 0, 0, 'dfgdgdgd', 'dgfdgfd', 'dfgdgfdf', '', '', '', '', '', '<p>gwapo ko</p>', 'default.png'),
+(50, 35, '2023-08-02 12:14:28', 'Fausto JC', 'Boko', '', '2023-06-02', 'male', 'single', 'Chicken', '09085579204', 'faustojcboko@gmail.com', 0, 0, 'Bacolod City', 'Granada', 'Charito Heights', '', '', '', '', '', '<p><strong>GWAPO KO</strong></p>', 'pp.jpg');
 
 -- --------------------------------------------------------
 
@@ -148,7 +157,8 @@ INSERT INTO `tbl_employee_skill` (`id`, `employee_id`, `skill`, `proficiency`, `
 (39, 36, 'PHP', 'beginner', 2),
 (40, 41, 'PHP', 'beginner', 123),
 (41, 41, 'Javascript', 'beginner', 123),
-(42, 32, 'C#', 'beginner', 1);
+(42, 32, 'C#', 'beginner', 1),
+(43, 50, 'PHP', 'advance', 2);
 
 -- --------------------------------------------------------
 
@@ -163,6 +173,8 @@ CREATE TABLE `tbl_employer` (
   `email` varchar(255) NOT NULL,
   `summary` mediumtext NOT NULL,
   `tradename` varchar(255) NOT NULL,
+  `region` varchar(255) NOT NULL,
+  `province` varchar(255) NOT NULL,
   `city` varchar(255) NOT NULL,
   `barangay` varchar(255) NOT NULL,
   `address` varchar(255) NOT NULL,
@@ -179,11 +191,11 @@ CREATE TABLE `tbl_employer` (
 -- Dumping data for table `tbl_employer`
 --
 
-INSERT INTO `tbl_employer` (`id`, `user_id`, `employer_name`, `email`, `summary`, `tradename`, `city`, `barangay`, `address`, `business_type`, `contact_number`, `sss`, `tin`, `image`, `is_verified`, `date_created`) VALUES
-(1, 3, 'LOPUES EAST', 'lopues@gmail.com', '<p>In the year 1992, Lopue\'s Department Store incorporated underwent changes in its corporate structure and establishes three (3) new independent corporations. From mere branch, Lopue\'s San Sebastian had stood independently to rebuild its own image and identity as it has under the stewardship of <span style=\"text-decoration: underline;\">Mr. Leonito D. Lopue</span>. XD<br><br>Despite the store reorganization, it has maintained its structure as one of the top taxpayers of Bacolod City. Starting with annual sales of 35 million, the store had steadily increased its share in the market to i85 million and now relishes a sales volume of 220 million. as befits a pioneer organization has stood the test of time as it has maintained its image as \"<strong>Your complete Department store and supermarket for high quality products and services.</strong>\"</p>', 'Lopues ni Gonrad', 'Bacolod city', 'villamonte', 'Sa lopues east ngayunn', 'Retail', '123456', '123456789', 2147483647, 'Screenshot_2023-03-08_101524.png', 0, '2023-06-27 09:47:55'),
-(6, 2, 'Business Inn', 'businessinn@gmail.com', '<p><span style=\"font-family: \'arial black\', sans-serif;\">Table of truth</span></p>\n<table style=\"border-collapse: collapse; width: 99.9807%;\" border=\"1\"><colgroup><col style=\"width: 25.0241%;\"><col style=\"width: 25.0241%;\"><col style=\"width: 25.0241%;\"><col style=\"width: 25.0241%;\"></colgroup>\n<tbody>\n<tr>\n<td style=\"text-align: center;\">&nbsp;</td>\n<td style=\"text-align: center;\">gwapo</td>\n<td style=\"text-align: center;\">mas gwapo</td>\n<td style=\"text-align: center;\">pinaka gwapo</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">bok</td>\n<td style=\"text-align: center;\">x</td>\n<td style=\"text-align: center;\">&nbsp;</td>\n<td style=\"text-align: center;\">x</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">pol</td>\n<td style=\"text-align: center;\">x</td>\n<td style=\"text-align: center;\">x</td>\n<td style=\"text-align: center;\">&nbsp;</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">jide</td>\n<td style=\"text-align: center;\">&nbsp;</td>\n<td style=\"text-align: center;\">x</td>\n<td style=\"text-align: center;\">x</td>\n</tr>\n</tbody>\n</table>', 'Business Inn Hotel', 'Bacolod city', 'Granadaaa', 'Charito Heights', 'Hospitality and Tourism', '0908', '22222', 90855, 'Screenshot_20221206_074006.png', 0, '2023-06-27 16:23:54'),
-(7, 4, 'Chowking Bing Chilling', 'pol@gmail.com', '<p>TELUS International designs, builds and delivers next-generation digital solutions to enhance the customer experience (CX) for global and disruptive brands. The company&rsquo;s services support the full lifecycle of its clients&rsquo; digital transformation journeys and enable them to more quickly embrace next-generation digital technologies to deliver better business outcomes. TELUS International&rsquo;s integrated solutions and capabilities span digital strategy, innovation, consulting and design, digital transformation and IT lifecycle solutions, data annotation and intelligent automation, and omnichannel CX solutions that include content moderation, trust and safety solutions, and other managed solutions. Fueling all stages of company growth, TELUS International partners with brands across high growth industry verticals, including tech and games, communications and media, eCommerce and fintech, healthcare, and travel and hospitality.</p>\n<p><strong>Industry</strong><br><span style=\"color: rgb(126, 140, 141);\">IT Services and IT Consulting</span><br><br><strong>Company size</strong><br><span style=\"color: rgb(126, 140, 141);\">10,001+ employees</span><br><span style=\"color: rgb(126, 140, 141);\">29,162 on LinkedIn&nbsp;</span><br><br><strong>Headquarters</strong><br><span style=\"color: rgb(126, 140, 141);\">Vancouver, British Columbia</span></p>', 'Chowking Bing Chilling', 'Bacolod city', 'Brgy Balay', 'Balay', 'Education', '13579', '9999', 8888, 'chowking.png', 0, '2023-06-29 10:57:41'),
-(12, 24, 'AKKKKKIIIINNGGGG SINNTAAAAA', 'watsons@gmail.com', '', 'AKKKKKIIIINNGGGG SINNTAAAAA', 'Bacolod city', 'Barangay 12', 'GF SM City Bacolod North Wing Poblacion Reclamation Area', 'Retail', '09123456789', '', 0, 'gelo.png', 0, '2023-07-20 09:21:01');
+INSERT INTO `tbl_employer` (`id`, `user_id`, `employer_name`, `email`, `summary`, `tradename`, `region`, `province`, `city`, `barangay`, `address`, `business_type`, `contact_number`, `sss`, `tin`, `image`, `is_verified`, `date_created`) VALUES
+(1, 3, 'LOPUES EAST', 'lopues@gmail.com', '<p>In the year 1992, Lopue\'s Department Store incorporated underwent changes in its corporate structure and establishes three (3) new independent corporations. From mere branch, Lopue\'s San Sebastian had stood independently to rebuild its own image and identity as it has under the stewardship of <span style=\"text-decoration: underline;\">Mr. Leonito D. Lopue</span>. XD<br><br>Despite the store reorganization, it has maintained its structure as one of the top taxpayers of Bacolod City. Starting with annual sales of 35 million, the store had steadily increased its share in the market to i85 million and now relishes a sales volume of 220 million. as befits a pioneer organization has stood the test of time as it has maintained its image as \"<strong>Your complete Department store and supermarket for high quality products and services.</strong>\"</p>', 'Lopues ni Gonrad', '', '', 'Bacolod city', 'villamonte', 'Sa lopues east ngayunn', 'Retail', '123456', '123456789', 2147483647, 'Screenshot_2023-03-08_101524.png', 0, '2023-06-27 09:47:55'),
+(6, 2, 'Business Inn', 'businessinn@gmail.com', '<p><span style=\"font-family: \'arial black\', sans-serif;\">Table of truth</span></p>\n<table style=\"border-collapse: collapse; width: 99.9807%;\" border=\"1\"><colgroup><col style=\"width: 25.0241%;\"><col style=\"width: 25.0241%;\"><col style=\"width: 25.0241%;\"><col style=\"width: 25.0241%;\"></colgroup>\n<tbody>\n<tr>\n<td style=\"text-align: center;\">&nbsp;</td>\n<td style=\"text-align: center;\">gwapo</td>\n<td style=\"text-align: center;\">mas gwapo</td>\n<td style=\"text-align: center;\">pinaka gwapo</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">bok</td>\n<td style=\"text-align: center;\">x</td>\n<td style=\"text-align: center;\">&nbsp;</td>\n<td style=\"text-align: center;\">x</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">pol</td>\n<td style=\"text-align: center;\">x</td>\n<td style=\"text-align: center;\">x</td>\n<td style=\"text-align: center;\">&nbsp;</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">jide</td>\n<td style=\"text-align: center;\">&nbsp;</td>\n<td style=\"text-align: center;\">x</td>\n<td style=\"text-align: center;\">x</td>\n</tr>\n</tbody>\n</table>', 'Business Inn Hotel', '', '', 'Bacolod city', 'Granadaaa', 'Charito Heights', 'Hospitality and Tourism', '0908', '22222', 90855, 'Screenshot_20221206_074006.png', 0, '2023-06-27 16:23:54'),
+(7, 4, 'Chowking Bing Chilling', 'pol@gmail.com', '<p>TELUS International designs, builds and delivers next-generation digital solutions to enhance the customer experience (CX) for global and disruptive brands. The company&rsquo;s services support the full lifecycle of its clients&rsquo; digital transformation journeys and enable them to more quickly embrace next-generation digital technologies to deliver better business outcomes. TELUS International&rsquo;s integrated solutions and capabilities span digital strategy, innovation, consulting and design, digital transformation and IT lifecycle solutions, data annotation and intelligent automation, and omnichannel CX solutions that include content moderation, trust and safety solutions, and other managed solutions. Fueling all stages of company growth, TELUS International partners with brands across high growth industry verticals, including tech and games, communications and media, eCommerce and fintech, healthcare, and travel and hospitality.</p>\n<p><strong>Industry</strong><br><span style=\"color: rgb(126, 140, 141);\">IT Services and IT Consulting</span><br><br><strong>Company size</strong><br><span style=\"color: rgb(126, 140, 141);\">10,001+ employees</span><br><span style=\"color: rgb(126, 140, 141);\">29,162 on LinkedIn&nbsp;</span><br><br><strong>Headquarters</strong><br><span style=\"color: rgb(126, 140, 141);\">Vancouver, British Columbia</span></p>', 'Chowking Bing Chilling', '', '', 'Bacolod city', 'Brgy Balay', 'Balay', 'Education', '13579', '9999', 8888, 'chowking.png', 0, '2023-06-29 10:57:41'),
+(12, 24, 'AKKKKKIIIINNGGGG SINNTAAAAA', 'watsons@gmail.com', '', 'AKKKKKIIIINNGGGG SINNTAAAAA', '', '', 'Bacolod city', 'Barangay 12', 'GF SM City Bacolod North Wing Poblacion Reclamation Area', 'Retail', '09123456789', '', 0, 'gelo.png', 0, '2023-07-20 09:21:01');
 
 -- --------------------------------------------------------
 
@@ -263,8 +275,8 @@ INSERT INTO `tbl_follow` (`id`, `employee_id`, `employer_id`) VALUES
 (30, 36, 1),
 (31, 36, 6),
 (33, 41, 1),
-(34, 42, 1),
-(35, 42, 6);
+(37, 50, 6),
+(38, 50, 1);
 
 -- --------------------------------------------------------
 
@@ -320,32 +332,6 @@ CREATE TABLE `tbl_notification` (
   `is_read` tinyint(1) NOT NULL DEFAULT 0,
   `date_created` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tbl_notification`
---
-
-INSERT INTO `tbl_notification` (`id`, `user_id`, `from_user_id`, `title`, `message`, `link`, `is_displayed`, `is_read`, `date_created`) VALUES
-(85, 6, 3, 'Application Accepted', 'lopues east has accepted your application.', 'jobposting?id=54', 1, 0, '2023-07-24 15:25:11'),
-(86, 6, 3, 'Application Accepted', 'lopues east has accepted your application.', 'jobposting?id=53', 1, 0, '2023-07-24 15:26:03'),
-(87, 2, 26, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'jobposting?id=56', 1, 0, '2023-07-27 10:25:33'),
-(88, 2, 26, 'Application Cancelled', 'The applicant has cancelled his/her application.', NULL, 1, 0, '2023-07-27 10:25:34'),
-(89, 2, 26, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'jobposting?id=56', 1, 0, '2023-07-27 10:25:51'),
-(90, 2, 26, 'Application Cancelled', 'The applicant has cancelled his/her application.', NULL, 1, 0, '2023-07-27 10:25:51'),
-(104, 6, 3, 'Application Accepted', 'Lopues ni Gonrad has accepted your application.', 'jobposting?id=52', 1, 0, '2023-07-27 12:00:22'),
-(112, 6, 3, 'Application Accepted', 'Lopues Ni Gonrad has accepted your application.', 'jobposting?id=54', 1, 0, '2023-07-28 23:39:19'),
-(113, 6, 3, 'Application Accepted', 'Lopues Ni Gonrad has accepted your application.', 'jobposting?id=53', 1, 0, '2023-07-28 23:48:44'),
-(114, 6, 3, 'Application Accepted', 'Lopues Ni Gonrad has accepted your application.', 'jobposting?id=52', 1, 0, '2023-07-28 23:49:01'),
-(115, 6, 3, 'Application Accepted', 'Lopues Ni Gonrad has accepted your application.', 'jobposting?id=51', 1, 0, '2023-07-28 23:49:17'),
-(116, 3, 6, 'Application Cancelled', 'The applicant has cancelled his/her application.', NULL, 1, 0, '2023-07-31 21:06:38'),
-(117, 3, 6, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'jobposting?id=58', 1, 0, '2023-07-31 21:11:46'),
-(118, 3, 6, 'Application Cancelled', 'The applicant has cancelled his/her application.', NULL, 1, 0, '2023-07-31 21:12:21'),
-(119, 3, 6, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'jobposting?id=58', 1, 0, '2023-07-31 21:30:07'),
-(120, 3, 6, 'Application Cancelled', 'The applicant has cancelled his/her application.', NULL, 1, 0, '2023-07-31 21:30:16'),
-(121, 3, 6, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'jobposting?id=58', 1, 0, '2023-07-31 21:39:31'),
-(122, 3, 6, 'Application Cancelled', 'The applicant has cancelled his/her application.', NULL, 1, 0, '2023-07-31 21:40:12'),
-(123, 3, 6, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'jobposting?id=58', 1, 0, '2023-07-31 21:43:00'),
-(124, 3, 6, 'Application Cancelled', 'The applicant has cancelled his/her application.', NULL, 1, 0, '2023-07-31 21:44:26');
 
 -- --------------------------------------------------------
 
@@ -416,7 +402,8 @@ INSERT INTO `tbl_user` (`id`, `email`, `password`, `user_type`, `locker`, `is_ve
 (24, 'watsons@gmail.com', 'd9abaa4ec106938b7f2ebdf26f24455f4b270477', 'EMPLOYER', 'qfbLy!3)b7~X@($0TXBemGcbs$Sog$8^R1hiT@2DmwN9qJsSnB', 0),
 (25, 'katrina@gmail.com', '6c33f9ac86beaa164a915929d89fe42406e63fd2', 'EMPLOYEE', 'wBxN?K!?1P#ryQ(#41OT/&\\JE1ZKSN315?BhfjnG1TB7z7GY.K', 0),
 (26, 'doe@gmail.com', '2326f71d5942bd4efa5d2cafbaa57e8071c42c75', 'EMPLOYEE', '11ue!uwwgV9^>14&bN/<Vz3s90(1Wp\\#p910asxYlbzc*^f!m9', 0),
-(27, 'test@gmail.com', '39f5693f9e10015320360641b0b96a3ed82f506a', 'EMPLOYEE', 'j5EuCVi/$kuru4i%&6Ua>T9q3>EpIoKTIFhvXd$PtqRF%AdpRL', 0);
+(27, 'test@gmail.com', '39f5693f9e10015320360641b0b96a3ed82f506a', 'EMPLOYEE', 'j5EuCVi/$kuru4i%&6Ua>T9q3>EpIoKTIFhvXd$PtqRF%AdpRL', 0),
+(35, 'faustojcboko@gmail.com', '8d3a4faf661a8a99db16fca4646aaddfb41537a5', 'EMPLOYEE', '0626caa95006fdb28aea578620236724d07e2691:cc0f8391e3f14cc6221ce2ec00593d821632abb2:f1df4f63298002def98bde589c616b0b4966f5b8', 1);
 
 --
 -- Indexes for dumped tables
@@ -531,7 +518,7 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT for table `tbl_applicant`
 --
 ALTER TABLE `tbl_applicant`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
 -- AUTO_INCREMENT for table `tbl_education`
@@ -549,13 +536,13 @@ ALTER TABLE `tbl_employed`
 -- AUTO_INCREMENT for table `tbl_employee`
 --
 ALTER TABLE `tbl_employee`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `tbl_employee_skill`
 --
 ALTER TABLE `tbl_employee_skill`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `tbl_employer`
@@ -579,7 +566,7 @@ ALTER TABLE `tbl_feedback`
 -- AUTO_INCREMENT for table `tbl_follow`
 --
 ALTER TABLE `tbl_follow`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `tbl_jobposting`
@@ -591,7 +578,7 @@ ALTER TABLE `tbl_jobposting`
 -- AUTO_INCREMENT for table `tbl_notification`
 --
 ALTER TABLE `tbl_notification`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
 
 --
 -- AUTO_INCREMENT for table `tbl_skill`
@@ -609,7 +596,7 @@ ALTER TABLE `tbl_training`
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- Constraints for dumped tables

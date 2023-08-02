@@ -1,3 +1,4 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <div class="row pb-3">
     <div class="col-md-4">
         <label>First Name</label>
@@ -29,31 +30,44 @@
 
 
 <div class="row pb-3">
-    <div class="col-md-6">
+    <div class="col-md-12">
         <label>Address</label>
         <input type="text" class="form-control border-0" name="Address" id="Address" style=" font-size:14px;border-radius:15px; background-color: #F4F6F7;" required>
     </div>
+</div>
 
+<div class="row pb-3">
     <div class="col-md-6">
-        <label>Barangay</label>
-        <input type="text" class="form-control border-0" name="Barangay" id="Barangay" style=" font-size:14px;border-radius:15px; background-color: #F4F6F7;" required>
+        <label>Region</label><br>
+        <select id="region" class="form-control border-0" style="border-radius:15px; background-color: #F4F6F7;" required></select>
+        <input type="hidden" name="region_text" id="region-text">
+    </div>
+    <div class="col-md-6">
+        <label>Province</label><br>
+        <select id="province" class="form-control border-0" style="border-radius:15px; background-color: #F4F6F7;" required></select>
+        <input type="hidden" name="province_text" id="province-text">
     </div>
 </div>
 
 <div class="row pb-3">
     <div class="col-md-6">
-        <label>City</label>
-        <input type="text" class="form-control border-0" name="City" id="City" style=" font-size:14px;border-radius:15px; background-color: #F4F6F7;" required>
+        <label>City</label><br>
+        <select id="city" class="form-control border-0" style="border-radius:15px; background-color: #F4F6F7;" required></select>
+        <input type="hidden" name="city_text" id="city-text">
+
     </div>
 
     <div class="col-md-6">
-        <label>Religion</label>
-        <input type="text" class="form-control border-0" name="Religion" id="Religion" style=" font-size:14px;border-radius:15px; background-color: #F4F6F7;" required>
+        <label>Barangay</label><br>
+        <select id="barangay" class="form-control border-0" style="border-radius:15px; background-color: #F4F6F7;" required></select>
+        <input type="hidden" name="barangay_text" id="barangay-text">
     </div>
 </div>
 
+
+
 <div class="row pb-3">
-    <div class="col-md-6">
+    <div class="col-md-4">
         <label>Gender</label>
         <select class="form-control border-0" name="Gender" id="Gender" style="border-radius:15px; background-color: #F4F6F7;" required>
             <option value="male">Male</option>
@@ -62,7 +76,7 @@
         </select>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-4">
         <label>Civil Status</label>
         <select class="form-control border-0" name="Cstat" id="Cstat" style="border-radius:15px; background-color: #F4F6F7;" required>
             <option value="single">Single</option>
@@ -72,10 +86,18 @@
             <option value="separated">Separated</option>
         </select>
     </div>
+
+    <div class="col-md-4">
+        <label>Religion</label>
+        <input type="text" class="form-control border-0" name="Religion" id="Religion" style=" font-size:14px;border-radius:15px; background-color: #F4F6F7;" required>
+    </div>
 </div>
+
 
 <div class="row pb-3">
     <div class="col-md-12 d-flex justify-content-center">
         <button type="submit" class="btn btn-info btn-block" id="register" style="border-radius:15px;">Register</button>
     </div>
 </div>
+
+<script src="<?= base_url() ?>assets/js/register/index.js" type="text/javascript"></script>

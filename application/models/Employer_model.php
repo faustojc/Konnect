@@ -115,17 +115,17 @@ class Employer_model extends CI_Model
         try {
             $this->db->trans_start();
             $this->db->where('id', $this->userdata->id)->update($this->Table->employer, $data);
-            $this->db->trans_complete();
 
             if (!empty($data['email'])) {
                 $this->Auth_model->update_auth($this->userdata->user_id, ['email' => $data['email']]);
             }
 
+            $this->db->trans_complete();
+
             if ($this->db->trans_status() === FALSE) {
                 $this->db->trans_rollback();
 
                 set_userdata(USER, $this->getEmployerOnly('*', $this->userdata->id));
-
                 return ['message' => ERROR_PROCESSING, 'has_error' => TRUE];
             }
 

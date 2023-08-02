@@ -19,7 +19,7 @@ class SortHandler
             return get_object_vars($skill)['skill'];
         }, $employee_skills);
 
-        $employee_location = $this->userdata->Address . ' ' . $this->userdata->Barangay . ' ' . $this->userdata->City;
+        $employee_location = $this->userdata->Province . ' ' . $this->userdata->City . ' ' . $this->userdata->Barangay;
 
         $relevantJobposts = array_map(function ($job) use ($employee_skills, $employee_location) {
             // Check if the job skills match the employee's skills
@@ -67,7 +67,7 @@ class SortHandler
     public function sortRelevantOtherEmployers($employers): array
     {
         $employer_business_type = $this->userdata->business_type;
-        $employer_location = $this->userdata->address . ' ' . $this->userdata->barangay . ' ' . $this->userdata->city;
+        $employer_location = $this->userdata->province . ' ' . $this->userdata->city . ' ' . $this->userdata->barangay;
 
         $relevantEmployers = array_map(static function ($employer) use ($employer_business_type, $employer_location) {
             // Check if the employer's business type matches the employee's business type

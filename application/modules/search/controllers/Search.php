@@ -50,7 +50,7 @@ class Search extends MY_Controller
             // Get the employer's search criteria
             $criteria = [
                 'business_type' => $this->userdata->business_type,
-                'location' => $this->userdata->address . ' ' . $this->userdata->barangay . ' ' . $this->userdata->city,
+                'location' => $this->userdata->province . ' ' . $this->userdata->city . ' ' . $this->userdata->barangay,
             ];
         }
 

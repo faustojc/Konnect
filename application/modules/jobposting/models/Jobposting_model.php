@@ -27,9 +27,10 @@ class Jobposting_model extends CI_Model
                 ->order_by('date_posted', 'DESC')->get()->result();
         }
 
-        return $this->db->select('tbl_jobposting.*, tbl_employer.tradename AS EmployerTradename, tbl_employer.image AS EmployerLogo')
+        return $this->db->select('tbl_jobposting.*, tbl_user.is_verified AS user_verified, tbl_employer.tradename AS EmployerTradename, tbl_employer.image AS EmployerLogo')
             ->from($this->Table->jobposting)
             ->join($this->Table->employer, $this->Table->employer . '.id = ' . $this->Table->jobposting . '.employer_id')
+            ->join($this->Table->user, $this->Table->user . '.id = ' . $this->Table->employer . '.user_id')
             ->order_by('date_posted', 'DESC')->limit($limit)->get()->result();
     }
 
@@ -90,6 +91,18 @@ class Jobposting_model extends CI_Model
             ->join('tbl_employer', 'tbl_employer.id = tbl_jobposting.employer_id')
             ->join($this->Table->user, 'tbl_user.id = tbl_employer.user_id')
             ->like($field, $keyword)
+            ->order_by('date_posted', 'DESC')
+            ->get($this->Table->jobposting)->result();
+    }
+
+    public function getEmployerJobsLike($field, $keyword, $select = 'tbl_jobposting.*, tbl_user.is_verified AS user_verified, tbl_employer.* AS employer')
+    {
+        return $this->db->select($select)
+            ->join($this->Table->employer, 'tbl_employer.id = tbl_jobposting.employer_id')
+            ->join($this->Table->user, 'tbl_user.id = tbl_employer.user_id')
+            ->where('tbl_employer.user_id', $this->userdata->id)
+            ->like($field, $keyword)
+            ->order_by('date_posted', 'DESC')
             ->get($this->Table->jobposting)->result();
     }
 

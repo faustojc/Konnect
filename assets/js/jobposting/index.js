@@ -215,6 +215,73 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+const search_btn = document.querySelector('#search_btn');
+if (search_btn) {
+    search_btn.addEventListener('click', searchEvent);
+}
+
+const search_job = document.querySelector('#search_job');
+if (search_job) {
+    search_job.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            searchEvent();
+        }
+    });
+}
+
+function searchEvent() {
+    const activeTab = document.querySelector('.tab-pane.show.active');
+    const query = search_job.value.trim();
+
+    // if the active tab is the feed-tab, search for all jobs
+    if (activeTab.id.toLowerCase() === 'feed-tab') {
+        const job_feed = document.querySelector('#job_feed');
+
+        displayLoadingCard('#job_feed');
+
+        fetch(baseUrl + 'jobposting/job_feed?query=' + query)
+            .then(response => response.text())
+            .then(data => {
+                job_feed.innerHTML = data;
+
+                status_badge();
+                jobSelectedDisplayEvent(baseUrl + 'jobposting/get_selected_job');
+            });
+    }
+
+    // if active tab is posted-tab, search for own job posts
+    if (activeTab.id.toLowerCase() === 'posted-tab') {
+        const own_job_posted = document.querySelector('#job_posted');
+
+        displayLoadingCard('#job_posted');
+
+        fetch(baseUrl + 'jobposting/own_jobpost?query=' + query)
+            .then(response => response.text())
+            .then(data => {
+                own_job_posted.innerHTML = data;
+
+                status_badge();
+                jobSelectedDisplayEvent(baseUrl + 'jobposting/get_own_selected_job');
+            });
+    }
+
+    // if active tab is application-tab, search for own job applications
+    if (activeTab.id.toLowerCase() === 'application-tab') {
+        const applied_jobs = document.querySelector('#job_applied');
+
+        displayLoadingCard('#job_applied');
+
+        fetch(baseUrl + 'jobposting/get_applied_jobs?query=' + query)
+            .then(response => response.text())
+            .then(data => {
+                applied_jobs.innerHTML = data;
+
+                status_badge();
+                jobSelectedDisplayEvent(baseUrl + 'jobposting/get_selected_applied_job');
+            });
+    }
+}
+
 /**
  * @param {string} selectors
  */

@@ -82,7 +82,7 @@ class Applicant_model extends CI_Model
         tbl_jobposting.job_type AS jobType,
         tbl_jobposting.date_posted as jobDatePosted,
         tbl_jobposting.filled AS jobStatus,
-        tlb_user.is_verified AS user_verified,
+        tbl_user.is_verified AS user_verified,
         tbl_employer.tradename AS employerName,
         tbl_employer.business_type AS employerType,
         tbl_employer.image AS employerLogo')
@@ -91,6 +91,31 @@ class Applicant_model extends CI_Model
             ->join($this->Table->employer, 'tbl_employer.id = tbl_jobposting.employer_id')
             ->join($this->Table->user, 'tbl_user.id = tbl_employer.user_id')
             ->where('employee_id', $employee_id)
+            ->order_by('tbl_applicant.date_created', 'DESC')
+            ->get()->result();
+    }
+
+    public function getAppliedJobsLike($employee_id, $field, $value)
+    {
+        return $this->db->select('tbl_applicant.*,
+        tbl_jobposting.id AS jobID,
+        tbl_jobposting.title AS jobTitle,
+        tbl_jobposting.description AS jobDescription,
+        tbl_jobposting.salary AS jobSalary,
+        tbl_jobposting.shift AS jobShift,
+        tbl_jobposting.job_type AS jobType,
+        tbl_jobposting.date_posted as jobDatePosted,
+        tbl_jobposting.filled AS jobStatus,
+        tbl_user.is_verified AS user_verified,
+        tbl_employer.tradename AS employerName,
+        tbl_employer.business_type AS employerType,
+        tbl_employer.image AS employerLogo')
+            ->from($this->Table->applicant)
+            ->join($this->Table->jobposting, 'tbl_jobposting.id = tbl_applicant.job_id')
+            ->join($this->Table->employer, 'tbl_employer.id = tbl_jobposting.employer_id')
+            ->join($this->Table->user, 'tbl_user.id = tbl_employer.user_id')
+            ->where('employee_id', $employee_id)
+            ->like($field, $value)
             ->order_by('tbl_applicant.date_created', 'DESC')
             ->get()->result();
     }
@@ -106,7 +131,7 @@ class Applicant_model extends CI_Model
         tbl_jobposting.job_type AS jobType,
         tbl_jobposting.date_posted as jobDatePosted,
         tbl_jobposting.filled AS jobStatus,
-        tlb_user.is_verified AS user_verified,
+        tbl_user.is_verified AS user_verified,
         tbl_employer.tradename AS employerName,
         tbl_employer.business_type AS employerType,
         tbl_employer.image AS employerLogo')

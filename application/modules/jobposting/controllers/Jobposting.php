@@ -74,7 +74,14 @@ class Jobposting extends MY_Controller
 
     public function job_feed(): void
     {
-        $this->data['details'] = $this->job_model->get_all_jobposts();
+        $query = $this->input->get('query');
+
+        if (!empty($query)) {
+            $this->data['details'] = $this->job_model->getJobsLike('tbl_jobposting.title', $query, 'tbl_jobposting.*, tbl_user.is_verified AS user_verified, tbl_employer.tradename AS EmployerTradename, tbl_employer.image AS EmployerLogo');
+        } else {
+            $this->data['details'] = $this->job_model->get_all_jobposts();
+        }
+
         $this->data['auth'] = $this->auth;
 
         if ($this->auth['user_type'] == 'EMPLOYEE') {
@@ -107,7 +114,14 @@ class Jobposting extends MY_Controller
 
     public function own_jobpost(): void
     {
-        $this->data['own_jobposts'] = $this->job_model->get_employer_jobposts($this->userdata->id);
+        $query = $this->input->get('query');
+
+        if (!empty($query)) {
+            $this->data['own_jobposts'] = $this->job_model->getEmployerJobsLike('tbl_jobposting.title', $query, 'tbl_jobposting.*, tbl_user.is_verified AS user_verified, tbl_employer.id AS employer_id, tbl_employer.tradename AS EmployerTradename, tbl_employer.image AS EmployerLogo');
+        } else {
+            $this->data['own_jobposts'] = $this->job_model->get_employer_jobposts($this->userdata->id);
+        }
+
         $this->data['applicants'] = $this->Applicant_model->getEmployerApplicants($this->userdata->id);
 
         $this->data['content'] = 'grid/employer/load_own_jobpost';
@@ -131,7 +145,14 @@ class Jobposting extends MY_Controller
 
     public function get_applied_jobs(): void
     {
-        $this->data['applied_jobs'] = $this->Applicant_model->getAppliedJobs($this->userdata->ID);
+        $query = $this->input->get('query');
+
+        if (!empty($query)) {
+            $this->data['applied_jobs'] = $this->Applicant_model->getAppliedJobsLike($this->userdata->ID, 'job_title', $query);
+        } else {
+            $this->data['applied_jobs'] = $this->Applicant_model->getAppliedJobs($this->userdata->ID);
+        }
+
         $this->data['content'] = 'grid/employee/load_applied_jobs';
         $view = $this->load->view('layout', $this->data, TRUE);
 

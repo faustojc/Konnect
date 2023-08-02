@@ -51,10 +51,11 @@ document.addEventListener('DOMContentLoaded', function () {
     if (update_profile) {
         update_profile.addEventListener('click', function () {
             const form = update_profile.closest('#form_content').querySelector('.active.show form');
+            const formData = new FormData(form);
             const isValid = validateForm(form);
 
             if (isValid) {
-                formAction(baseUrl + 'employee_profile/service/employee_profile_service/update_profile', 'POST', new FormData(form), function (response) {
+                formAction(baseUrl + 'employee_profile/service/employee_profile_service/update_profile', 'POST', formData, function (response) {
                     success('SUCCESS', 'Profile successfully updated');
                 });
             }
@@ -378,18 +379,18 @@ $(document).on('click', '#update_profile', function () {
     });
 });
 
-$(document).on('change', '.file-input', function() {
-        
+$(document).on('change', '.file-input', function () {
 
-  var filesCount = $(this)[0].files.length;
-  
-  var textbox = $(this).prev();
 
-  if (filesCount === 1) {
-    var fileName = $(this).val().split('\\').pop();
-    textbox.text(fileName);
-    
-  } else {
-    textbox.text(filesCount + ' files selected');
-  }
+    var filesCount = $(this)[0].files.length;
+
+    var textbox = $(this).prev();
+
+    if (filesCount === 1) {
+        var fileName = $(this).val().split('\\').pop();
+        textbox.text(fileName);
+
+    } else {
+        textbox.text(filesCount + ' files selected');
+    }
 });

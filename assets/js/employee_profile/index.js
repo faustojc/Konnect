@@ -1,3 +1,15 @@
+const load_intro = () => {
+    fetch(baseUrl + 'employee_profile/getIntro')
+        .then(response => response.text())
+        .then(data => {
+            document.querySelector('#load_intro').innerHTML = data;
+
+            tinymce.remove('textarea');
+            textareaEditor('textarea', 400);
+        })
+        .catch(() => error('ERROR!', 'Something went wrong'));
+}
+
 const load_skill = () => {
     fetch(baseUrl + 'employee_profile/getSkills')
         .then(response => response.text())
@@ -61,6 +73,20 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+const update_intro = document.querySelector('#update_introduction');
+if (update_intro) {
+    update_intro.addEventListener('click', () => {
+        const data = {
+            Introduction: tinymce.activeEditor.getContent(),
+        }
+
+        formAction(baseUrl + 'employee_profile/service/employee_profile_service/update_introduction', 'POST', data, () => {
+            load_intro();
+            success('SUCCESS', 'Introduction successfully updated');
+        });
+    });
+}
 
 const add_employment = document.querySelector('#btn_save_employment');
 if (add_employment) {
@@ -189,29 +215,6 @@ $(document).on('click', '#btn_edit_train', function () {
             // Handle the success response (optional)
             success('SUCCESS', 'Training successfully updated');
             load_training();
-        },
-        error: function (response) {
-            const data = JSON.parse(response.responseText);
-            error('ERROR', data.message);
-        }
-    });
-});
-
-$(document).on('click', '#update_introduction', function () {
-    const intro = tinymce.activeEditor.getContent();
-
-    const data = {
-        ID: $('#emp_id').val(),
-        Introduction: intro,
-    };
-
-    $.ajax({
-        url: baseUrl + 'employee_profile/service/employee_profile_service/update_introduction',
-        type: 'POST',
-        data: data,
-        success: function (response) {
-            // Handle the success response (optional)
-            success('SUCCESS', 'Introduction successfully updated');
         },
         error: function (response) {
             const data = JSON.parse(response.responseText);

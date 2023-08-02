@@ -91,6 +91,14 @@ class Employee_profile extends MY_Controller
         $this->load->view('layout', $this->data);
     }
 
+    public function getIntro(): void
+    {
+        $this->data['has_permission'] = $this->has_permission;
+        $intro = $this->employee_model->getEmployee($this->current_user->ID, 'Introduction');
+
+        echo $intro->Introduction;
+    }
+
     public function getEducations(): void
     {
         $this->data['has_permission'] = $this->has_permission;

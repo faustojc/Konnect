@@ -4,8 +4,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Employee_profile_service extends MY_Controller
 {
     private $userdata;
-    private $current_user;
-    private $has_permission;
 
     public function __construct()
     {

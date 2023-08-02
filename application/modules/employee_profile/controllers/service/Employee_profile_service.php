@@ -53,8 +53,8 @@ class Employee_profile_service extends MY_Controller
     public function update_introduction(): void
     {
         $data = [
-            'ID' => $this->input->post("ID"),
-            'Introduction' => $this->input->post("Introduction", TRUE),
+            'ID' => $this->userdata->ID,
+            'Introduction' => $this->input->post("Introduction"),
         ];
 
         $response = $this->Employee_model->update($data['ID'], $data);

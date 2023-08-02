@@ -98,10 +98,17 @@ class Employee_model extends CI_Model
         try {
             $this->db->trans_start();
             $this->db->where('ID', $id)->update($this->Table->employee, $data);
+
+            if (!empty($data['Email'])) {
+                $this->Auth_model->update_auth($this->userdata->user_id, ['email' => $data['Email']]);
+            }
+
             $this->db->trans_complete();
 
             if ($this->db->trans_status()) {
                 $this->db->trans_commit();
+
+                set_userdata(USER, $this->getEmployee($id));
                 return ['message' => UPDATE_SUCCESSFUL, 'has_error' => FALSE];
             }
 

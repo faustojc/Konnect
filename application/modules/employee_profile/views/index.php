@@ -94,7 +94,7 @@ main_header(['employee_profile']);
     }
 
     .nav-pills .nav-link.active,
-    .nav-pills .show > .nav-link {
+    .nav-pills .show>.nav-link {
         color: #fff;
         background-color: #0dcaf0;
     }
@@ -136,6 +136,54 @@ main_header(['employee_profile']);
             width: 80px;
             height: 80px;
         }
+    }
+
+    .file-drop-area {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 450px;
+        max-width: 100%;
+        padding: 25px;
+        border: 1px dashed rgba(255, 255, 255, 0.4);
+        border-radius: 3px;
+        transition: 0.2s;
+
+    }
+
+    .choose-file-button {
+        flex-shrink: 0;
+        background-color: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 3px;
+        padding: 8px 15px;
+        margin-right: 10px;
+        font-size: 12px;
+        text-transform: uppercase;
+    }
+
+    .file-message {
+        font-size: small;
+        font-weight: 300;
+        line-height: 1.4;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .file-input {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        cursor: pointer;
+        opacity: 0;
+
+    }
+
+    .mt-100 {
+        margin-top: 100px;
     }
 </style>
 
@@ -608,6 +656,7 @@ main_header(['employee_profile']);
                                     <button type="button" class="btn btn-outline-info my-3" data-toggle="modal" data-target="#uploadModal" style="width: 250px;">
                                         Upload File
                                     </button>
+
                                 <?php endif; ?>
 
                             </div>
@@ -623,18 +672,17 @@ main_header(['employee_profile']);
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="#" method="post" enctype="multipart/form-data">
-                                                <div class="form-group">
-                                                    <label for="file">Select a file:</label>
-                                                    <input type="file" class="form-control-file" name="file" id="file">
-                                                </div>
-                                            </form>
+                                            <div class="file-drop-area d-flex justify-content-center py-5" style="background-color:#lightgrey;">
+                                                <span class="choose-file-button" style="background-color:#0dcaf0; color: #fff;">Choose files</span>
+                                                <span class="file-message">or drag and drop files here</span>
+                                                <input class="file-input" type="file" multiple>
+                                            </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                                 Close
                                             </button>
-                                            <button type="submit" class="btn btn-primary" name="submit">
+                                            <button type="submit" class="btn btn-info" name="submit">
                                                 Upload Resume
                                             </button>
                                         </div>

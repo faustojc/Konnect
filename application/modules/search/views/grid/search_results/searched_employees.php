@@ -24,11 +24,14 @@
                         <div class="col-9">
                             <div class="row">
                                 <div class="col-6 text-center">
-                                    <p class="m-0"><?= $total_followed ?></p>
+                                    <p class="m-0">
+                                        <?= $total_followed ?>
+                                    </p>
                                     <h6 class="font-sm m-0">Following</h6>
                                 </div>
                                 <div class="col-6 text-center">
-                                    <p class="m-0 "><?= $total_rating ?>
+                                    <p class="m-0 ">
+                                        <?= $total_rating ?>
                                         <i class="fas fa-solid fa-star" style="color: #eeff00;"></i>
                                     </p>
                                     <h6 class="font-sm m-0">Rating</h6>
@@ -37,9 +40,11 @@
                             </div>
                             <div class="row mb-1 mt-1">
                                 <div class="col-12 px-2">
-                                    <button class="btn btn-outline-info btn-sm mt-1" style="border-radius:80px; width:100%;">
-                                        <i class="fas fa-solid fa-user-plus"></i> View
-                                    </button> <!-- Replace 'Click Me' with the desired button text -->
+                                    <a href="<?= base_url() ?>employee_profile?id=<?= $employee->ID ?>">
+                                        <button class="btn btn-outline-info btn-sm mt-1" style="border-radius:80px; width:100%;">
+                                            <i class="fas fa-solid fa-user-plus"></i> View
+                                        </button> <!-- Replace 'Click Me' with the desired button text -->
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -47,11 +52,14 @@
                     <div class="row d-flex align-items-center mt-3">
                         <div class="col-12">
                             <div class="pt-0">
-                                <h5 class="m-0 text-truncate"><?= $employee_name ?></h5>
+                                <h5 class="m-0 text-truncate">
+                                    <?= $employee_name ?>
+                                </h5>
                             </div>
                             <div class="p-0">
                                 <small class="px-0 text-muted mb-1">
-                                    <?= ucwords($employee->Barangay) ?>, <?= ucwords($employee->City) ?> |
+                                    <?= ucwords($employee->Barangay) ?>,
+                                    <?= ucwords($employee->City) ?> |
                                     <?= ucwords($employee->Title) ?>
                                 </small>
                             </div>
@@ -61,14 +69,17 @@
                                     $limit = 3;
                                     $count = 0;
                                     foreach ($skills as $skill):
-                                        if ($count < $limit):?>
-                                            <h6 class="outline-gray rounded-pill ml-1" style="font-size:12px;"><?= ucwords($skill) ?></h6>
+                                        if ($count < $limit): ?>
+                                            <h6 class="outline-gray rounded-pill ml-1" style="font-size:12px;">
+                                                <?= ucwords($skill) ?>
+                                            </h6>
                                             <?php $count++;
                                         else:
                                             $remaining = count($skills) - $limit;
-                                            if ($remaining > 0):?>
+                                            if ($remaining > 0): ?>
                                                 <h6 class="outline-gray rounded-pill ml-1" style="font-size:12px;">
-                                                    +<?= $remaining ?>
+                                                    +
+                                                    <?= $remaining ?>
                                                 </h6>
                                             <?php endif;
                                             break;

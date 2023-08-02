@@ -94,7 +94,7 @@ main_header(['employee_profile']);
     }
 
     .nav-pills .nav-link.active,
-    .nav-pills .show > .nav-link {
+    .nav-pills .show>.nav-link {
         color: #fff;
         background-color: #0dcaf0;
     }
@@ -603,12 +603,15 @@ main_header(['employee_profile']);
                     <div class="tab-pane fade" id="pills-resume" role="tabpanel" aria-labelledby="pills-resume-tab">
                         <div class="card ">
                             <div class="card-header">
-                                <h3 class="card-title fw-500" style="font-weight:600;">Add Resume</h3>
+                                <h3 class="card-title fw-500" style="font-weight:600;">View Resume</h3>
                             </div>
                             <div class="d-flex justify-content-center">
-                                <button type="button" class="btn btn-outline-info my-3" data-toggle="modal" data-target="#uploadModal" style="width: 250px;">
-                                    Upload File
-                                </button>
+                                <?php if ($has_permission): ?>
+                                    <button type="button" class="btn btn-outline-info my-3" data-toggle="modal" data-target="#uploadModal" style="width: 250px;">
+                                        Upload File
+                                    </button>
+                                <?php endif; ?>
+
                             </div>
 
                             <!-- The Modal -->
@@ -776,7 +779,8 @@ main_header(['employee_profile']);
                     </h6>
                     <br>
                     <h6 style="font-weight: normal;">
-                        <i class="fas fa-envelope"></i><strong> Email</strong></h6>
+                        <i class="fas fa-envelope"></i><strong> Email</strong>
+                    </h6>
                     <h6 style="font-weight: normal;">
                         <?= $details->Email ?>
                     </h6>

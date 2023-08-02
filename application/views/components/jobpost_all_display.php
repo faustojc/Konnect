@@ -122,10 +122,18 @@
                         <a class="text-center see-more" data-target=".job-description" style="display: block;" role="button">
                             See more </a>
 
-                        <?php if ($auth['user_type'] == 'EMPLOYEE') {
-                            if (!empty($applicant) && $applicant->job_id == $jobpost->id && strtoupper($applicant->status) != 'PENDING') {
-                                apply_button($jobpost->id, strtoupper($applicant->status));
-                            } else {
+                        <?php if ($auth['user_type'] == 'EMPLOYEE' && !empty($applicant)) {
+                            $hasApplied = FALSE;
+
+                            foreach ($applicant as $applied) {
+                                if ($applied->job_id == $jobpost->id && strtoupper($applied->status) == 'PENDING') {
+                                    apply_button($jobpost->id, strtoupper($applied->status));
+                                    $hasApplied = TRUE;
+                                    break;
+                                }
+                            }
+
+                            if (!$hasApplied) {
                                 apply_button($jobpost->id, 'APPLY NOW');
                             }
                         } ?>

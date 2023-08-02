@@ -41,6 +41,7 @@
                                 </div>
                                 <h6 class="m-0 px-2 pt-3" style="font-size: 0.75rem; /* Adjust the value as needed */">
                                     <?= ucwords($jobpost->employer_name) ?>
+                                    <?php verifyBadge($jobpost->user_verified); ?>
                                 </h6>
                                 <div class="job-details pt-1" style="border: 0;">
                                     <h5 class="pb-2 pt-1 px-2" style="font-weight: bold;">

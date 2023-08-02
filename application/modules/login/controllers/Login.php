@@ -57,8 +57,6 @@ class Login extends MY_Controller
         $response = $this->login_model->authenticate($info);
 
         if (!$response['has_error']) {
-            set_userdata(AUTH, $info);
-
             echo json_encode(['redirect' => base_url() . 'Home'], JSON_THROW_ON_ERROR);
         } else {
             echo json_encode($response, JSON_THROW_ON_ERROR);

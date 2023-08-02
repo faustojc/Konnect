@@ -1,6 +1,6 @@
 <?php if (!empty($details)): ?>
     <style>
-        div.summary>* {
+        div.summary > * {
             overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
@@ -14,7 +14,8 @@
     <div class="card card-widget widget-user">
         <div class="widget-user-header text-white" style="background: url('<?= base_url() ?>assets/images/Logo/cover-place.jpg') no-repeat center center; background-size: cover; border-radius: 15px 15px 0 0;">
             <div class="text-right">
-                <button class="btn text-white hoverbutton" style="background-color: rgba( 27, 38, 49, 0.5);"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                <button class="btn text-white hoverbutton" style="background-color: rgba( 27, 38, 49, 0.5);">
+                    <i class="fa-solid fa-ellipsis-vertical"></i></button>
             </div>
 
         </div>
@@ -27,6 +28,9 @@
                     <div class="description-block">
                         <h4 class="widget-user-username text-center" style="font-weight: 500; font-size: 20px;">
                             <?= $details->tradename ?>
+                            <?php if ($auth['is_verified'] == 1): ?>
+                                <i class="fa fa-check-circle text-success"></i>
+                            <?php endif; ?>
                         </h4>
                         <h6 class="widget-user-desc text-center text-muted mt-1" style="font-weight: normal; font-size: 15px;">
                             <?= $details->business_type ?>
@@ -65,7 +69,8 @@
         <hr class="m-0">
         <div class="card-footer border-0 p-3" style="background-color:#FFF;">
             <div class="d-flex justify-content-center">
-                <a href="<?= base_url() ?>employer_profile?id=<?= $details->id ?>" class="btn hoverbutton" style=" background-color:#F4F6F7;border-radius:10px; width:100%;">View Profile <i class="fa-solid fa-arrow-right fs-14 ml-1"></i></a>
+                <a href="<?= base_url() ?>employer_profile?id=<?= $details->id ?>" class="btn hoverbutton" style=" background-color:#F4F6F7;border-radius:10px; width:100%;">View
+                    Profile <i class="fa-solid fa-arrow-right fs-14 ml-1"></i></a>
             </div>
         </div>
     </div>

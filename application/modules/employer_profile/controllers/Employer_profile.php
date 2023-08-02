@@ -32,6 +32,8 @@ class Employer_profile extends MY_Controller
         $id = $this->input->get('id');
         $this->current_user = $this->Employer_model->getEmployerOnly('*', $id);
         $this->isAccount = $this->Auth_model->check_permission($this->userdata, $this->current_user);
+
+        $this->data['curr_auth'] = (array)$this->Auth_model->get_auth($this->current_user->user_id);
     }
 
     /** load main page */
@@ -50,7 +52,7 @@ class Employer_profile extends MY_Controller
         $this->data['current_employer'] = $this->current_user;
         $this->data['employees'] = $this->employee_model->get_all_employees(4);
         $this->data['employers'] = $this->Employer_model->get_employers(4, $id);
-        $this->data['jobpostings'] = $this->jobposting_model->get_employer_jobposts($id, 0, 'tbl_jobposting.*, tbl_employer.id AS employer_id, tbl_employer.tradename AS EmployerTradename, tbl_employer.image AS EmployerLogo');
+        $this->data['jobpostings'] = $this->jobposting_model->get_employer_jobposts($id);
         $this->data['feedbacks'] = $this->Feedback_model->getAllUsersFeedback($this->current_user->user_id);
         $this->data['followers'] = $this->follow_model->get_followers($id);
 
@@ -85,6 +87,7 @@ class Employer_profile extends MY_Controller
     {
         $this->data['employer'] = $this->userdata;
         $this->data['auth'] = $this->auth;
+
         $this->data['content'] = 'profile';
         $this->load->view('layout', $this->data);
     }

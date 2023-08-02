@@ -47,7 +47,10 @@
                     <div class="row d-flex align-items-center mt-3">
                         <div class="col-12">
                             <div class="pt-0">
-                                <h5 class="m-0 text-truncate"><?= $employee_name ?></h5>
+                                <h5 class="m-0 text-truncate">
+                                    <?= $employee_name ?>
+                                    <?php verifyBadge($employee->user_verified); ?>
+                                </h5>
                             </div>
                             <div class="p-0">
                                 <small class="px-0 text-muted mb-1">

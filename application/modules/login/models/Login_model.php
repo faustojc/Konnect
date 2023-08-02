@@ -22,7 +22,7 @@ class Login_model extends CI_Model
                 return ['message' => REQUIRED_FIELD, 'has_error' => TRUE];
             }
 
-            $query = $this->db->select('id, email, user_type, password, locker')
+            $query = $this->db->select()
                 ->from($this->Table->user)
                 ->where('email', $info['email'])
                 ->where('user_type', $info['user_type'])
@@ -49,7 +49,7 @@ class Login_model extends CI_Model
             }
 
             set_userdata(USER, $user);
-            set_userdata(AUTH, $query);
+            set_userdata(AUTH, (array)$query);
             return [
                 'has_error' => FALSE,
                 'message' => 'Login Success',

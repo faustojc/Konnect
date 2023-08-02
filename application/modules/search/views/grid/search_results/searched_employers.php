@@ -27,9 +27,7 @@
                                     <h5 class="m-0 align-middle pr-1 text-truncate">
                                         <?= ucwords($employer->tradename) ?>
                                     </h5>
-                                    <?php if ($employer->is_verified == 1): ?>
-                                        <i class="fa-solid fa-circle-check" style="color: #0dcaf0; scale:0.8;"></i>
-                                    <?php endif; ?>
+                                    <?php verifyBadge($employer->user_verified); ?>
                                     <!-- <span class="badge badge-pill badge-light text-muted" style="border-radius:80px; scale:0.8; font-weight:400;">COMPANY</span> -->
                                 </div>
                                 <div class="p-0">
@@ -58,8 +56,7 @@
 
                                 </small> -->
                                 <a href="<?= base_url() ?>employer_profile?id=<?= $employer->id ?>" class="btn btn-outline-info mt-1" style="border-radius:80px; width:100%;">
-                                    <i class="fas fa-solid fa-user-plus"></i> View
-                                </a>
+                                    <i class="fas fa-solid fa-user-plus"></i> View </a>
                             </div>
                         </div>
                     </div>

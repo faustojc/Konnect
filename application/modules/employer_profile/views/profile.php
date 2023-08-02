@@ -260,18 +260,7 @@ main_header(['employer_profile']);
                                 <div class="form-group">
                                     <label for="email" class="form-label">E-mail Address</label>
                                     <input type="text" class="form-control" name="email" id="email" value="<?= $employer->email ?>" placeholder="Enter Email address" required>
-                                    <?php if ($auth->is_verified == 1): ?>
-                                        <div class="alert alert-success mt-3">
-                                            Your account is verified.
-                                        </div>
-                                    <?php else: ?>
-                                        <div class="alert alert-default-primary mt-3">
-                                            Your account is not verified. Please check your inbox.<br>
-                                            <button class="btn btn-outline-info" id="resend_verify">
-                                                Resend confirmation
-                                            </button>
-                                        </div>
-                                    <?php endif; ?>
+                                    <?php verify_message($auth); ?>
                                 </div>
                             </div>
                         </form>

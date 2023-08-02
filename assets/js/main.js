@@ -13,7 +13,7 @@ function validateForm(target) {
         for (const input of inputs) {
             errors = (input.value === '' && input.required) ? errors + 1 : errors;
 
-            if (input.value === '') {
+            if (input.value === '' && input.required) {
                 input.classList.add('is-invalid');
                 input.classList.remove('is-valid');
             } else {

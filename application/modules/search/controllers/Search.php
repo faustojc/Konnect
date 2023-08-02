@@ -83,7 +83,7 @@ class Search extends MY_Controller
     private function searchRelevantJobposts($query, $criteria): array
     {
         // Get all job posts that contain the query in their title
-        $job_posts = $this->jobposting_model->getJobsLike('title', $query, 'tbl_jobposting.*, tbl_employer.id AS employer_id, tbl_employer.tradename AS employer_name, tbl_employer.image AS employer_logo');
+        $job_posts = $this->jobposting_model->getJobsLike('title', $query, 'tbl_jobposting.*, tbl_user.is_verified AS user_verified, tbl_employer.id AS employer_id, tbl_employer.tradename AS employer_name, tbl_employer.image AS employer_logo');
 
         // Get following employers
         if ($this->auth['user_type'] == 'EMPLOYEE') {

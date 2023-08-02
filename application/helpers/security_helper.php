@@ -1,107 +1,107 @@
 <?php
 date_default_timezone_set("Asia/Manila");
-function locker($length=50)
+function locker($length = 50): string
 {
     $result = "";
     $chars = CHAR_SET;
     $charArray = str_split($chars);
-    
-    for($i = 0; $i < $length; $i++)
-    {
-	    $randItem = array_rand($charArray);
-	    $result .= "".$charArray[$randItem];
+
+    for ($i = 0; $i < $length; $i++) {
+        $randItem = array_rand($charArray);
+        $result .= "" . $charArray[$randItem];
     }
-    
+
     return $result;
 }
 
-function auth_token($id = 1, $length = 50)
+function auth_token($length = 30): string
 {
-    
+
     // $bytes = random_bytes(ceil($length / 2));
-    $bytes = uniqid();
+    $bytes = uniqid('', TRUE);
     $random = substr(bin2hex($bytes), 0, $length);
-    $auth = (sha1($random. date('y-m-d:h:i:s').$random. date('y-m-d:h:i:s')).':'.sha1(date('y-m-d:h:i:s')).':'.sha1($random)).$id;
-    
-    return $auth;
+    return (sha1($random . date('y-m-d:h:i:s') . $random . date('y-m-d:h:i:s')) . '-' . sha1(date('y-m-d:h:i:s')) . '-' . sha1($random));
 }
 
-function password_generator($password,$locker,$length=100){
-    $result = "";    
-    
-    for($i = 0; $i < $length; $i++)
-    {	    
-	    $result .= "".strrev($password).$locker;
-    }
-    
-    return $result;
+function password_generator($password, $locker, $length = 100): string
+{
+
+    return str_repeat(strrev($password) . $locker, $length);
 }
 
-function check_user_info(){
-    if(empty($_SESSION[USER])){
-        redirect(base_url().'login');
+function check_user_info()
+{
+    if (empty($_SESSION[USER])) {
+        redirect(base_url() . 'login');
     }
 }
-function reset_session(){
+
+function reset_session()
+{
     unset($_SESSION[USER]);
 }
 
-function check_permission($position='',$condition=[]){
+function check_permission($position = '', $condition = [])
+{
     if (in_array($position, $condition))
-        return true;
-    return false;
+        return TRUE;
+    return FALSE;
 }
 
-function unit_permission($condition='', $values=''){
+function unit_permission($condition = '', $values = '')
+{
     switch ($condition) {
         case 'admin':
-            return true;
+            return TRUE;
             break;
         case 'doctor':
-            return  true;
+            return TRUE;
             break;
         case 'accounting':
-            return true;
+            return TRUE;
             break;
         case 'medtech':
-            return true;
+            return TRUE;
             break;
         default:
-            return false;
+            return FALSE;
             break;
     }
 }
 
-function id_code($brgy='',$no=''){   
-    $str = str_replace(' ','',$brgy);
+function id_code($brgy = '', $no = '')
+{
+    $str = str_replace(' ', '', $brgy);
     $trim = strtok($str, '(');
-    $trim = preg_replace('/ -]/','',$trim);
-    
+    $trim = preg_replace('/ -]/', '', $trim);
+
     $brgy = $trim;
-    
-    if (strpos(strtolower(@$brgy), 'barangay') !== false) {        
+
+    if (strpos(strtolower(@$brgy), 'barangay') !== FALSE) {
         $result = strtoupper(explode('barangay', strtolower($brgy), 2)[1]);
-         
-        $data = 'BRGY'.@$result.'-'.$no;
-    }else{                
-        $data = strtoupper(substr($brgy, 0, 3)).'-'.$no;
+
+        $data = 'BRGY' . @$result . '-' . $no;
+    } else {
+        $data = strtoupper(substr($brgy, 0, 3)) . '-' . $no;
     }
 
     return $data;
 }
 
-function order_number_gen($id){
+function order_number_gen($id)
+{
     $byte = random_bytes(ceil(5 / 2));
-    $rand = substr(bin2hex($byte), 0, 5).''.$id;    
+    $rand = substr(bin2hex($byte), 0, 5) . '' . $id;
 
     return $rand;
 }
 
 /** password verification */
-function password_verify_laravel($plain_text, $hash){
+function password_verify_laravel($plain_text, $hash)
+{
     if (password_verify($plain_text, $hash)) {
-        return true;
+        return TRUE;
     } else {
-        return false;
+        return FALSE;
     }
 }

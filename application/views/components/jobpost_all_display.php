@@ -54,6 +54,7 @@
                                             <h6 class="m-0">
                                                 <a href="<?= base_url() ?>employer_profile?id=<?= $jobpost->employer_id ?>" class="job-title fw-bold text-decoration-none" style="color: #000;">
                                                     <?= ucwords($jobpost->EmployerTradename) ?>
+                                                    <?php verifyBadge($jobpost->user_verified); ?>
                                                 </a>
                                             </h6>
                                             <p class="text-muted" style="font-size: 12px;">
@@ -119,8 +120,7 @@
 
                         </div>
                         <a class="text-center see-more" data-target=".job-description" style="display: block;" role="button">
-                            See more
-                        </a>
+                            See more </a>
 
                         <?php if ($auth['user_type'] == 'EMPLOYEE') {
                             if (!empty($applicant) && $applicant->job_id == $jobpost->id && strtoupper($applicant->status) != 'PENDING') {

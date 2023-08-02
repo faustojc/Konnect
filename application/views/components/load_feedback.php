@@ -173,6 +173,7 @@ foreach ($feedbacks as $feedback) {
                                                 <h6 class="mb-1 ml-3">
                                                     <a class="text-black" href="<?= $link ?>">
                                                         <?= $feedback->userName ?>
+                                                        <?php verifyBadge($feedback->user_verified); ?>
                                                     </a>
                                                 </h6>
                                                 <p class="text-gray ml-3">

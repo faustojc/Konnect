@@ -17,7 +17,7 @@ class Verify extends MY_Controller
         parent::__construct();
 
         $this->userdata = get_userdata(USER);
-        $this->auth = $this->Auth_model->get_user($this->userdata->user_id);
+        $this->auth = (array)$this->Auth_model->get_auth($this->userdata->user_id);
     }
 
     /**
@@ -26,7 +26,7 @@ class Verify extends MY_Controller
     public function index(): void
     {
         // get the verify code from link
-        $verification = $this->uri->segment(3);
+        $verification = $this->input->get('v');
 
         $isVerified = $this->Auth_model->verifyUser($this->userdata, $verification);
 
@@ -53,11 +53,11 @@ class Verify extends MY_Controller
     public function resend(): void
     {
         sendEmail(
-            'no-reply@konnect.com',
+            'unofficial.konnect.me@gmail.com',
             'Konnect',
             $this->auth['email'],
             'Email Verification',
-            'Please click on the link below to verify your email address: ' . base_url() . 'verify/' . $this->auth['locker'],
+            'Please click on the link below to verify your email address: ' . base_url() . 'verify?v=' . $this->auth['locker'],
         );
 
         echo json_encode(['status' => 'success', 'message' => 'Resend successfully, please check your email.'], JSON_THROW_ON_ERROR);

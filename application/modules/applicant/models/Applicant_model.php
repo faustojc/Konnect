@@ -20,11 +20,12 @@ class Applicant_model extends CI_Model
 
     public function getApplicant($id)
     {
-        return $this->db->select('tbl_applicant.*, 
+        return $this->db->select('tbl_applicant.*, tbl_user.is_verified AS user_verified, 
         CONCAT_WS(" ", tbl_employee.Fname, tbl_employee.Mname, tbl_employee.Lname) AS employeeName, 
         tbl_employee.user_id AS employeeUserID,')
             ->from($this->Table->applicant)
             ->join($this->Table->employee, 'tbl_employee.ID = tbl_applicant.employee_id', 'inner')
+            ->join($this->Table->user, 'tbl_user.id = tbl_employee.user_id', 'inner')
             ->where('tbl_applicant.id', $id)
             ->or_where('tbl_applicant.employee_id', $id)
             ->get()->row();
@@ -79,12 +80,14 @@ class Applicant_model extends CI_Model
         tbl_jobposting.job_type AS jobType,
         tbl_jobposting.date_posted as jobDatePosted,
         tbl_jobposting.filled AS jobStatus,
+        tlb_user.is_verified AS user_verified,
         tbl_employer.tradename AS employerName,
         tbl_employer.business_type AS employerType,
         tbl_employer.image AS employerLogo')
             ->from($this->Table->applicant)
             ->join($this->Table->jobposting, 'tbl_jobposting.id = tbl_applicant.job_id')
             ->join($this->Table->employer, 'tbl_employer.id = tbl_jobposting.employer_id')
+            ->join($this->Table->user, 'tbl_user.id = tbl_employer.user_id')
             ->where('employee_id', $employee_id)
             ->order_by('tbl_applicant.date_created', 'DESC')
             ->get()->result();
@@ -101,6 +104,7 @@ class Applicant_model extends CI_Model
         tbl_jobposting.job_type AS jobType,
         tbl_jobposting.date_posted as jobDatePosted,
         tbl_jobposting.filled AS jobStatus,
+        tlb_user.is_verified AS user_verified,
         tbl_employer.tradename AS employerName,
         tbl_employer.business_type AS employerType,
         tbl_employer.image AS employerLogo')
@@ -108,6 +112,7 @@ class Applicant_model extends CI_Model
             ->where('tbl_applicant.id', $id)
             ->join($this->Table->jobposting, 'tbl_jobposting.id = tbl_applicant.job_id')
             ->join($this->Table->employer, 'tbl_employer.id = tbl_jobposting.employer_id')
+            ->join($this->Table->user, 'tbl_user.id = tbl_employer.user_id')
             ->get()->row();
     }
 
@@ -143,7 +148,7 @@ class Applicant_model extends CI_Model
             $this->db->trans_rollback();
             return ['status' => 'error', 'message' => 'Applicant status update failed.'];
         } catch (Exception $e) {
-            throw new Exception($e->getMessage(), $e->getCode());
+            throw new RuntimeException($e->getMessage(), $e->getCode());
         }
     }
 
@@ -191,7 +196,7 @@ class Applicant_model extends CI_Model
             $this->db->trans_rollback();
             return ['status' => 'error', 'message' => 'Application failed.'];
         } catch (Exception $e) {
-            throw new Exception($e->getMessage(), $e->getCode());
+            throw new RuntimeException($e->getMessage(), $e->getCode());
         }
     }
 }

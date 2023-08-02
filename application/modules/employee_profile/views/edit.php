@@ -243,18 +243,7 @@
                                 <div class="form-group">
                                     <label for="Email" class="form-label">E-mail Address</label>
                                     <input type="email" class="form-control" name="Email" id="Email" value="<?= $employee->Email ?>" placeholder="Enter Email address">
-                                    <?php if ($auth->is_verified == 1): ?>
-                                        <div class="alert alert-success mt-3">
-                                            Your account is verified.
-                                        </div>
-                                    <?php else: ?>
-                                        <div class="alert alert-default-primary mt-3">
-                                            Your account is not verified. Please check your inbox.<br>
-                                            <button class="btn btn-outline-info" id="resend_verify">
-                                                Resend confirmation
-                                            </button>
-                                        </div>
-                                    <?php endif; ?>
+                                    <?php verify_message($auth); ?>
                                 </div>
                             </div>
                         </form>

@@ -24,21 +24,31 @@ class Employee_model extends CI_Model
             ->get()->row();
     }
 
-    public function get_all_employees($limit = 0, $id = NULL, $select = '*')
+    public function get_all_employees($limit = 0, $id = NULL, $select = 'tbl_employee.*, tbl_user.is_verified AS user_verified')
     {
         if ($limit == 0 && $id != NULL) {
-            return $this->db->select($select)->from($this->Table->employee)->where('ID !=', $id)->get()->result();
+            return $this->db->select($select)->from($this->Table->employee)
+                ->join($this->Table->user, 'tbl_user.id = tbl_employee.user_id')
+                ->where('tbl_employee.ID !=', $id)
+                ->get()->result();
         }
 
         if ($limit != 0 && $id != NULL) {
-            return $this->db->select($select)->from($this->Table->employee)->where('ID !=', $id)->limit($limit)->get()->result();
+            return $this->db->select($select)->from($this->Table->employee)
+                ->join($this->Table->user, 'tbl_user.id = tbl_employee.user_id')
+                ->where('tbl_employee.ID !=', $id)->limit($limit)
+                ->get()->result();
         }
 
         if ($limit != 0 && $id == NULL) {
-            return $this->db->select($select)->from($this->Table->employee)->limit($limit)->get()->result();
+            return $this->db->select($select)->from($this->Table->employee)
+                ->join($this->Table->user, 'tbl_user.id = tbl_employee.user_id')
+                ->limit($limit)->get()->result();
         }
 
-        return $this->db->select($select)->from($this->Table->employee)->get()->result();
+        return $this->db->select($select)->from($this->Table->employee)
+            ->join($this->Table->user, 'tbl_user.id = tbl_employee.user_id')
+            ->get()->result();
     }
 
     public function get_educ()
@@ -49,13 +59,14 @@ class Employee_model extends CI_Model
         return $this->db->get()->result();
     }
 
-    public function getEmployeesLike(array $arr, $id = NULL, $select = 'tbl_employee.*, GROUP_CONCAT(DISTINCT tbl_employee_skill.skill) AS skills, GROUP_CONCAT(DISTINCT tbl_follow.id) AS follow_ids, tbl_feedback.rating AS ratings')
+    public function getEmployeesLike(array $arr, $id = NULL, $select = 'tbl_employee.*, tbl_user.is_verified as user_verified, GROUP_CONCAT(DISTINCT tbl_employee_skill.skill) AS skills, GROUP_CONCAT(DISTINCT tbl_follow.id) AS follow_ids, tbl_feedback.rating AS ratings')
     {
         $this->db->select($select)
             ->from($this->Table->employee)
             ->join('tbl_employee_skill', 'tbl_employee_skill.employee_id = tbl_employee.ID', 'left')
             ->join('tbl_follow', 'tbl_follow.employee_id = tbl_employee.ID', 'left')
             ->join('(SELECT user_id, GROUP_CONCAT(rating) AS rating FROM tbl_feedback GROUP BY user_id) AS tbl_feedback', 'tbl_feedback.user_id = tbl_employee.user_id', 'left')
+            ->join('tbl_user', 'tbl_user.id = tbl_employee.user_id', 'left')
             ->group_by('tbl_employee.ID');
 
         if ($id != NULL) {

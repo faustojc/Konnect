@@ -6,7 +6,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $displayHandler = new DisplayHandler();
 
 $userdata = get_userdata(USER);
-$auth = get_userdata('auth');
+$auth = get_userdata(AUTH);
 
 $image_url = '';
 $name = '';
@@ -211,6 +211,9 @@ if (!empty($auth)) {
                                     <div class="media-body">
                                         <h3 class="dropdown-item-title" style="font-weight: 500;">
                                             <?= ucwords($name) ?>
+                                            <?php if ($auth['is_verified'] == 1): ?>
+                                                <i class="fa fa-check-circle text-success"></i>
+                                            <?php endif; ?>
                                         </h3>
                                         <a href="<?= $profile_url ?>" class="text-info">View Profile </a>
                                     </div>

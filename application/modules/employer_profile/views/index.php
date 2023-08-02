@@ -116,7 +116,7 @@ main_header(['Employer_profile']);
                                         <div class="col-md-6 mb-3 m-md-0">
                                             <h5 class="widget-user-username text-left" style="font-weight: 500;  width: 500px;">
                                                 <?= $current_employer->tradename ?>
-
+                                                <?php verifyBadge($curr_auth); ?>
                                             </h5>
                                             <!-- <p class="text-left mb-1">
                                                 <?php if (empty($current_employer->employer_name)) {
@@ -132,8 +132,7 @@ main_header(['Employer_profile']);
                                                 <?= ucwords(@$current_employer->address) . ", " . ucwords(@$current_employer->city) ?>
                                                 |
                                                 <a class="text-info" data-toggle="modal" data-target="#contact" style="cursor: pointer;">
-                                                    Contact details
-                                                </a>
+                                                    Contact details </a>
                                             </h6>
                                         </div>
                                         <div class="col-md-6">
@@ -163,22 +162,18 @@ main_header(['Employer_profile']);
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="pills-followers-tab" data-toggle="pill" href="#pills-followers" role="tab" aria-controls="pills-followers" aria-selected="false">
-                                    Followers
-                                    <span class="badge badge-info d-none d-sm-inline-block">
+                                    Followers <span class="badge badge-info d-none d-sm-inline-block">
                                         <?= count($followers) ?>
-                                    </span>
-                                </a>
+                                    </span> </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="pills-feedback-tab" data-toggle="pill" href="#pills-feedback" role="tab" aria-controls="pills-feedback" aria-selected="false">
-                                    Feedback
-                                </a>
+                                    Feedback </a>
                             </li>
                             <?php if ($has_permission): ?>
                                 <li class="nav-item">
                                     <a class="nav-link" id="pills-employeelist-tab" data-toggle="pill" href="#pills-employeelist" role="tab" aria-controls="pills-employeelist" aria-selected="true">
-                                        Employee List <i class="fas fa-lock ml-2"></i>
-                                    </a>
+                                        Employee List <i class="fas fa-lock ml-2"></i> </a>
                                 </li>
                             <?php endif; ?>
                         </ul>
@@ -219,12 +214,11 @@ main_header(['Employer_profile']);
                                                     <h3 class="font-weight-light mb-3">Edit your summary</h3>
                                                     <p class="text-muted">A summary of your company should be concise,
                                                         informative, and engaging, highlighting the main reasons why
-                                                        someone
-                                                        would want to work for you.</p>
+                                                        someone would want to work for you.</p>
                                                     <textarea id="summary"></textarea>
                                                     <p class="text-danger float-left summary-warning" hidden>
-                                                        <i class="text-danger fa fa-exclamation-circle"></i>
-                                                        Character exceeds 2000
+                                                        <i class="text-danger fa fa-exclamation-circle"></i> Character
+                                                        exceeds 2000
                                                     </p>
                                                     <p class="text-muted float-right" id="summary_character_count"></p>
                                                 </div>
@@ -405,9 +399,8 @@ main_header(['Employer_profile']);
                             <div class="col-12">
                                 <div class="form-group" style="border: 0;">
                                     <label for="skills_req">Skills Requirements</label>
-                                    <label class="text-muted" style="font-size: 13px;">
-                                        (click enter to separate skills)
-                                    </label>
+                                    <label class="text-muted" style="font-size: 13px;"> (click enter to separate
+                                        skills) </label>
                                     <input id="skills_req" name="skills_req" class="form-control border-0" style="resize: none; background-color: #F4F6F7; border-radius: 10px;" type="text" placeholder="Skill#1, Skill#2">
                                 </div>
                             </div>

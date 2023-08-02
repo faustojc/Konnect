@@ -36,3 +36,30 @@ if (!function_exists('employee_edit_button')) {
         $CI->load->view('components/auth/employee_profile_button');
     }
 }
+
+if (!function_exists('verify_message')) {
+    function verify_message($auth)
+    {
+        $data = ['auth' => $auth];
+
+        $CI = &get_instance();
+        $CI->load->view('components/auth/verify_message', $data);
+    }
+}
+
+if (!function_exists('verifyBadge')) {
+    /**
+     * @var array|bool $auth
+     */
+    function verifyBadge($auth)
+    {
+        if (is_array($auth)) {
+            $data = ['is_verified' => $auth['is_verified']];
+        } else {
+            $data = ['is_verified' => $auth];
+        }
+
+        $CI = &get_instance();
+        $CI->load->view('components/auth/verify_badge', $data);
+    }
+}

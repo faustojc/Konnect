@@ -18,7 +18,10 @@ $time = formatTime($job->date_posted);
         </div>
 
         <div class="col-12">
-            <h6 class="m-0"><?= ucwords($job->EmployerTradename) ?></h6>
+            <h6 class="m-0">
+                <?= ucwords($job->EmployerTradename) ?>
+                <?php verifyBadge($job->user_verified); ?>
+            </h6>
             <small class="text-muted mb-2">Posted <?= $time ?></small>
 
             <?php $auth = get_userdata(AUTH);

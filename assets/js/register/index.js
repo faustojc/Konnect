@@ -1,5 +1,6 @@
 let emailIsValid = false;
 let passwordIsValid = false;
+let confirmPasswordIsValid = false;
 let records = null;
 
 const nextBtn = document.querySelector('button.next-btn');
@@ -9,9 +10,7 @@ const password = document.querySelector('input#password');
 const getRecords = () => {
     fetch(baseUrl + 'register/records')
         .then(response => response.json())
-        .then(data => {
-            records = data;
-        });
+        .then(data => records = data);
 }
 getRecords();
 
@@ -98,12 +97,10 @@ password.addEventListener('input', function () {
 });
 
 
-
-
 password.addEventListener('input', function () {
     const passwordValue = this.value;
     const hasSpecialCharacter = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(passwordValue);
- 
+
     if (hasSpecialCharacter) {
         password.classList.remove('is-invalid');
         PasswordReqErrorMessage.remove();
@@ -137,7 +134,7 @@ password.addEventListener('input', function () {
 password.addEventListener('input', function () {
     const passwordValue = this.value;
     const hasUppercase = /[A-Z]/.test(passwordValue);
- 
+
 
     if (hasUppercase) {
         password.classList.remove('is-invalid');
@@ -194,14 +191,17 @@ nextBtn.addEventListener('click', function () {
     }
 });
 
-document.querySelector('select#user_type').addEventListener('change', function () {
-    const user_type = document.querySelector('select#user_type');
+const select_user_type = document.querySelector('select#user_type');
+if (select_user_type) {
+    select_user_type.addEventListener('change', function () {
+        const user_type = document.querySelector('select#user_type');
 
-    if (user_type.value === 'EMPLOYEE' || user_type.value === 'EMPLOYER') {
-        user_type.classList.remove('is-invalid');
-        user_type.nextElementSibling.remove();
-    }
-});
+        if (user_type.value === 'EMPLOYEE' || user_type.value === 'EMPLOYER') {
+            user_type.classList.remove('is-invalid');
+            user_type.nextElementSibling.remove();
+        }
+    });
+}
 
 const setNextBtn = () => {
     if (!emailIsValid || !passwordIsValid || !confirmPasswordIsValid) {
@@ -225,9 +225,7 @@ const register = () => {
                 body: formData
             }).then(response => response.json())
                 .then(data => {
-                    setTimeout(() => {
-                        window.location.href = data.redirect;
-                    }, 500);
+                    window.location.href = data.redirect;
                 })
         }
     });
@@ -236,17 +234,17 @@ const register = () => {
 const passwordConfirmInput = document.getElementById("password_confirm");
 
 function validatePassword() {
-    if (this.value == password.value) {
+    if (this.value === password.value) {
         passwordConfirmInput.classList.remove('is-invalid');
         confirmPasswordErrorMessage.remove();
     } else {
         passwordConfirmInput.classList.add('is-invalid');
-        
+
         const confirmPassInput = document.querySelector('div.confirm-password-input');
         confirmPassInput.parentElement.insertBefore(confirmPasswordErrorMessage, confirmPassInput.nextElementSibling);
     }
 
-    confirmPasswordIsValid = this.value == passwordConfirmInput.value;
+    confirmPasswordIsValid = this.value === passwordConfirmInput.value;
     setNextBtn();
 }
 

@@ -4,9 +4,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Employee_profile extends MY_Controller
 {
     protected $userdata;
-    protected $auth;
+    protected array $auth;
     protected $has_permission;
-    protected $current_user;
+    private $current_user;
     private array $data = [];
     private $curr_id;
 
@@ -38,9 +38,13 @@ class Employee_profile extends MY_Controller
         $ID = $this->input->get('id');
         if (!empty($ID) && empty($this->current_user)) {
             $this->current_user = $this->employee_model->getEmployee($ID);
+            $this->data['curr_auth'] = (array)$this->Auth_model->get_auth($this->current_user->user_id);
+
             set_userdata('current_user', $this->current_user);
+            set_userdata('curr_auth', $this->data['curr_auth']);
         } else {
             $this->current_user = get_userdata('current_user');
+            $this->data['curr_auth'] = get_userdata('curr_auth');
         }
 
         $this->has_permission = $this->Auth_model->check_permission($this->userdata, $this->current_user);
@@ -114,6 +118,8 @@ class Employee_profile extends MY_Controller
     public function edit(): void
     {
         $this->data['employee'] = $this->employee_model->getEmployee($this->userdata->ID);
+        $this->data['auth'] = $this->auth;
+
         $this->data['content'] = 'edit';
         $this->load->view('layout', $this->data);
     }

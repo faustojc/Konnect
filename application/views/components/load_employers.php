@@ -13,6 +13,7 @@ if (!empty($employers)) {
                     <div class="d-flex justify-content-between">
                         <a class="card-title text-truncate text-info" href="<?php echo base_url() ?>employer_profile?id=<?= $employer->id ?>" style="margin-left: 10px;">
                             <?= ucwords($employer->employer_name) ?>
+                            <?php verifyBadge($employer->user_verified); ?>
                         </a>
 
                         <?php if ($auth['user_type'] == 'EMPLOYEE') {

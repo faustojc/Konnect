@@ -14,21 +14,16 @@ class Jobposting_model extends CI_Model
         parent::__construct();
         $this->userdata = get_userdata(USER);
 
-        // if(is_empty_object($this->session)){
-        // 	redirect(base_url().'login/authentication', 'refresh');
-        // }
-
-        $model_list = [];
-        $this->load->model($model_list);
         $this->Table = json_decode(TABLE, FALSE, 512, JSON_THROW_ON_ERROR);
     }
 
     public function get_all_jobposts($limit = 0)
     {
         if ($limit == 0) {
-            return $this->db->select('tbl_jobposting.*, tbl_employer.id AS EmployerId, tbl_employer.tradename AS EmployerTradename, tbl_employer.image AS EmployerLogo')
+            return $this->db->select('tbl_jobposting.*, tbl_user.is_verified AS user_verified, tbl_employer.id AS EmployerId, tbl_employer.tradename AS EmployerTradename, tbl_employer.image AS EmployerLogo')
                 ->from($this->Table->jobposting)
                 ->join($this->Table->employer, $this->Table->employer . '.id = ' . $this->Table->jobposting . '.employer_id')
+                ->join($this->Table->user, $this->Table->user . '.id = ' . $this->Table->employer . '.user_id')
                 ->order_by('date_posted', 'DESC')->get()->result();
         }
 
@@ -38,11 +33,12 @@ class Jobposting_model extends CI_Model
             ->order_by('date_posted', 'DESC')->limit($limit)->get()->result();
     }
 
-    public function get_employer_jobposts($id, $limit = 0, $select = 'tbl_jobposting.*, tbl_employer.id AS EmployerId, tbl_employer.tradename AS EmployerTradename, tbl_employer.image AS EmployerLogo')
+    public function get_employer_jobposts($id, $limit = 0, $select = 'tbl_jobposting.*, tbl_user.is_verified AS user_verified, tbl_employer.id AS employer_id, tbl_employer.tradename AS EmployerTradename, tbl_employer.image AS EmployerLogo')
     {
         if ($limit == 0) {
             return $this->db->select($select)->from($this->Table->jobposting)
                 ->join('tbl_employer', 'tbl_employer.id = tbl_jobposting.employer_id')
+                ->join('tbl_user', 'tbl_user.id = tbl_employer.user_id')
                 ->where('tbl_jobposting.employer_id', $id)
                 ->order_by('date_posted', 'DESC')
                 ->get()->result();
@@ -57,9 +53,10 @@ class Jobposting_model extends CI_Model
 
     public function job_info($id)
     {
-        return $this->db->select('tbl_jobposting.*, tbl_employer.tradename AS EmployerTradename, tbl_employer.image AS EmployerLogo')
+        return $this->db->select('tbl_jobposting.*, tbl_user.is_verified AS user_verified, tbl_employer.tradename AS EmployerTradename, tbl_employer.image AS EmployerLogo')
             ->from($this->Table->jobposting)
             ->join($this->Table->employer, $this->Table->employer . '.id = ' . $this->Table->jobposting . '.employer_id')
+            ->join($this->Table->user, 'tbl_user.id = tbl_employer.user_id')
             ->where('tbl_jobposting.id', $id)
             ->order_by('date_posted', 'DESC')->get()->row();
     }
@@ -87,10 +84,11 @@ class Jobposting_model extends CI_Model
             ->get($this->Table->jobposting)->result();
     }
 
-    public function getJobsLike($field, $keyword, $select = '*')
+    public function getJobsLike($field, $keyword, $select = 'tbl_jobposting.*, tbl_user.is_verified AS user_verified, tbl_employer.* AS employer')
     {
         return $this->db->select($select)
             ->join('tbl_employer', 'tbl_employer.id = tbl_jobposting.employer_id')
+            ->join($this->Table->user, 'tbl_user.id = tbl_employer.user_id')
             ->like($field, $keyword)
             ->get($this->Table->jobposting)->result();
     }

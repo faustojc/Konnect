@@ -17,18 +17,20 @@ class Follow_model extends CI_Model
 
     public function get_following($id)
     {
-        return $this->db->select('tbl_follow.*, tbl_employer.tradename AS employerName, tbl_employer.business_type AS employerType, tbl_employer.image AS employerLogo')
+        return $this->db->select('tbl_follow.*, tbl_user.is_verified as user_verified, tbl_employer.tradename AS employerName, tbl_employer.business_type AS employerType, tbl_employer.image AS employerLogo')
             ->from($this->Table->follow)
             ->join($this->Table->employer, 'tbl_employer.id = tbl_follow.employer_id')
+            ->join($this->Table->user, 'tbl_user.id = tbl_employer.user_id')
             ->where('employee_id', $id)
             ->get()->result();
     }
 
     public function get_followers($id)
     {
-        return $this->db->select('tbl_follow.*, CONCAT_WS(" ", tbl_employee.Fname, tbl_employee.Mname, tbl_employee.Lname) AS employeeName, tbl_employee.Title AS employeeTitle, tbl_employee.Employee_image AS employeeImage')
+        return $this->db->select('tbl_follow.*, tbl_user.is_verified as user_verified, CONCAT_WS(" ", tbl_employee.Fname, tbl_employee.Mname, tbl_employee.Lname) AS employeeName, tbl_employee.Title AS employeeTitle, tbl_employee.Employee_image AS employeeImage')
             ->from($this->Table->follow)
             ->join($this->Table->employee, 'tbl_employee.ID = tbl_follow.employee_id')
+            ->join($this->Table->user, 'tbl_user.id = tbl_employee.user_id')
             ->where('employer_id', $id)
             ->get()->result();
     }

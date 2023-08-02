@@ -1,3 +1,5 @@
+<?php $auth = get_userdata(AUTH); ?>
+
 <div class="card card-white">
     <div class="card-header">
         <h3 class="card-title fw-500">Following</h3>
@@ -15,6 +17,7 @@
                             </div>
                             <h5 class="widget-user-username mt-0" style="font-size: 18px; font-weight: 500;">
                                 <?= $followed->employerName ?>
+                                <?php verifyBadge($followed->user_verified); ?>
                             </h5>
                             <h6 class="widget-user-desc mb-0" style="font-weight: normal; font-size: 16px;">
                                 <?= $followed->employerType ?>

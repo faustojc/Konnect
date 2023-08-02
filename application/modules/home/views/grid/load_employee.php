@@ -10,6 +10,9 @@
                     <div class="description-block">
                         <h4 class="widget-user-username text-center" style="font-weight: 500; font-size: 20px;">
                             <?= ucwords(@$details->Fname) . " " . ucwords(@$details->Lname) ?>
+                            <?php if ($auth['is_verified'] == 1): ?>
+                                <i class="fa fa-check-circle text-success"></i>
+                            <?php endif; ?>
                         </h4>
                         <h6 class="widget-user-desc text-center text-muted mt-1" style="font-weight: normal; font-size: 14px;">
                             <?= ucwords(@$details->Title) ?>
@@ -20,7 +23,7 @@
         </div>
 
         <div class="card-footer pt-2" style="padding-top: 35px; background-color:#FFF;">
-        <hr class="m-0">
+            <hr class="m-0">
             <div class="row">
                 <div class="col-12">
                     <div class="description-block mb-0">
@@ -47,11 +50,12 @@
         </div>
 
         <div class="card-footer pt-2" style="padding-top: 35px; background-color:#FFF;">
-        <hr class="m-0">
+            <hr class="m-0">
             <div class="row">
                 <div class="col-12">
                     <div class="description-block mb-0">
-                        <h6 class="widget-user-desc text-left mt-3 mb-2" style="font-weight: 500; font-size:15px;"> Skills</h6>
+                        <h6 class="widget-user-desc text-left mt-3 mb-2" style="font-weight: 500; font-size:15px;">
+                            Skills</h6>
                         <div class="row pt-0 pb-1 px-1 py-1" id="dash_load_skill">
                             <?= $skills_section_view ?>
                         </div>
@@ -61,7 +65,7 @@
         </div>
 
         <div class="card-footer pt-3 pb-3" style="padding-top: 35px; background-color:#FFF;">
-        <hr class="m-0 pt-3">
+            <hr class="m-0 pt-3">
             <div class="row">
                 <div class="col-12">
                     <a href="<?= base_url() ?>employee_profile?id=<?= @$details->ID ?>" class="hoveropac">

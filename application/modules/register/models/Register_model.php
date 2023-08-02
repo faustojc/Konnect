@@ -18,7 +18,7 @@ class Register_model extends CI_Model
     public function register($user, $info): array
     {
         try {
-            $locker = locker();
+            $locker = auth_token();
             $password = sha1(password_generator($user['password'], $locker));
             $user['password'] = $password;
             $user['locker'] = $locker;
@@ -41,11 +41,11 @@ class Register_model extends CI_Model
 
             if ($this->db->trans_status()) {
                 sendEmail(
-                    'no-reply@konnect.com',
+                    'unofficial.konnect.me@gmail.com',
                     'Konnect',
                     $user['email'],
                     'Email Verification',
-                    'Please click on the link below to verify your email address: ' . base_url() . 'verify/' . $user['locker'],
+                    'Please click on the link below to verify your email address: ' . base_url() . 'verify?v=' . $user['locker'],
                 );
 
                 return [

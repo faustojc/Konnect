@@ -20,7 +20,7 @@ class Feedback_model extends CI_Model
 
     public function getAllUsersFeedback($user_id)
     {
-        return $this->db->select('tbl_feedback.*, 
+        return $this->db->select('tbl_feedback.*, tbl_user.is_verified AS user_verified, 
         (CASE
             WHEN tbl_employee.ID IS NOT NULL THEN tbl_employee.ID
             WHEN tbl_employer.id IS NOT NULL THEN tbl_employer.id
@@ -44,7 +44,6 @@ class Feedback_model extends CI_Model
             ->where('tbl_feedback.user_id', $user_id)
             ->order_by('tbl_feedback.date_created', 'DESC')
             ->get()->result();
-
     }
 
     /**
@@ -65,7 +64,7 @@ class Feedback_model extends CI_Model
             $this->db->trans_rollback();
             return ['has_error' => TRUE, 'message' => 'Failed to add a new feedback.'];
         } catch (Exception $e) {
-            throw new Exception($e->getMessage(), $e->getCode());
+            throw new RuntimeException($e->getMessage(), $e->getCode());
         }
     }
 }

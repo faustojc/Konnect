@@ -32,8 +32,8 @@ if (!empty($jobpostings)) {
                         <div class="col-md-9 d-flex align-items-center justify-content-between">
                             <span class="font-weight-bold text-dark text-break">
                                 <?= ucwords($job->title) ?>
-                            </span>
-                            <span class="ml-2 badge status ">
+                                <?php verifyBadge($job->user_verified); ?>
+                            </span> <span class="ml-2 badge status ">
                                 <?= $job->filled ?>
                             </span>
                         </div>
@@ -66,6 +66,6 @@ if (!empty($jobpostings)) {
             <p class="lead">We can't find the job posted that you are looking for or there are no jobs posted.</p>
         </div>
     </div>
-<?php
+    <?php
 }
 ?>

@@ -35,6 +35,7 @@
                     </h5>
                     <h5 class="pt-2" style="font-weight:normal; font-size:14px;">
                         <?= ucwords($job->EmployerTradename) ?>
+                        <?php verifyBadge($job->user_verified); ?>
                     </h5>
                     <small class="text-muted mb-">Posted
                         <?= $formattedTimeDiff ?>

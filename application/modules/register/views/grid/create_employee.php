@@ -1,7 +1,7 @@
 <div class="row pb-3">
     <div class="col-md-4">
         <label>First Name</label>
-        <input type="text" class="form-control border-0" name="Fname" id="Fname" style=" font-size:14px; border-radius:15px; background-color: #F4F6F7;">
+        <input type="text" class="form-control border-0" name="Fname" id="Fname" style=" font-size:14px; border-radius:15px; background-color: #F4F6F7;" required>
     </div>
 
     <div class="col-md-4">
@@ -11,19 +11,19 @@
 
     <div class="col-md-4">
         <label>Last Name</label>
-        <input type="text" class="form-control border-0" name="Lname" id="Lname" style=" font-size:14px; border-radius:15px; background-color: #F4F6F7;">
+        <input type="text" class="form-control border-0" name="Lname" id="Lname" style=" font-size:14px; border-radius:15px; background-color: #F4F6F7;" required>
     </div>
 </div>
 
 <div class="row pb-3">
     <div class="col-md-6">
         <label>Contact Number</label>
-        <input type="number" class="form-control border-0 " name="Cnum" id="Cnum" style="border-radius:15px; background-color: #F4F6F7;">
+        <input type="number" class="form-control border-0 " name="Cnum" id="Cnum" style="border-radius:15px; background-color: #F4F6F7;" required>
     </div>
 
     <div class="col-md-6">
         <label>Birth Date</label>
-        <input type="date" class="form-control border-0" name="Bday" id="Bday" style="border-radius:15px; background-color: #F4F6F7;">
+        <input type="date" class="form-control border-0" name="Bday" id="Bday" style="border-radius:15px; background-color: #F4F6F7;" required>
     </div>
 </div>
 
@@ -31,31 +31,31 @@
 <div class="row pb-3">
     <div class="col-md-6">
         <label>Address</label>
-        <input type="text" class="form-control border-0" name="Address" id="Address" style=" font-size:14px;border-radius:15px; background-color: #F4F6F7;">
+        <input type="text" class="form-control border-0" name="Address" id="Address" style=" font-size:14px;border-radius:15px; background-color: #F4F6F7;" required>
     </div>
 
     <div class="col-md-6">
         <label>Barangay</label>
-        <input type="text" class="form-control border-0" name="Barangay" id="Barangay" style=" font-size:14px;border-radius:15px; background-color: #F4F6F7;">
+        <input type="text" class="form-control border-0" name="Barangay" id="Barangay" style=" font-size:14px;border-radius:15px; background-color: #F4F6F7;" required>
     </div>
 </div>
 
 <div class="row pb-3">
     <div class="col-md-6">
         <label>City</label>
-        <input type="text" class="form-control border-0" name="City" id="City" style=" font-size:14px;border-radius:15px; background-color: #F4F6F7;">
+        <input type="text" class="form-control border-0" name="City" id="City" style=" font-size:14px;border-radius:15px; background-color: #F4F6F7;" required>
     </div>
 
     <div class="col-md-6">
         <label>Religion</label>
-        <input type="text" class="form-control border-0" name="Religion" id="Religion" style=" font-size:14px;border-radius:15px; background-color: #F4F6F7;">
+        <input type="text" class="form-control border-0" name="Religion" id="Religion" style=" font-size:14px;border-radius:15px; background-color: #F4F6F7;" required>
     </div>
 </div>
 
 <div class="row pb-3">
     <div class="col-md-6">
         <label>Gender</label>
-        <select class="form-control border-0" name="Gender" id="Gender" style="border-radius:15px; background-color: #F4F6F7;">
+        <select class="form-control border-0" name="Gender" id="Gender" style="border-radius:15px; background-color: #F4F6F7;" required>
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="others">Others</option>
@@ -64,7 +64,7 @@
 
     <div class="col-md-6">
         <label>Civil Status</label>
-        <select class="form-control border-0" name="Cstat" id="Cstat" style="border-radius:15px; background-color: #F4F6F7;">
+        <select class="form-control border-0" name="Cstat" id="Cstat" style="border-radius:15px; background-color: #F4F6F7;" required>
             <option value="single">Single</option>
             <option value="married">Married</option>
             <option value="widowed">Widowed</option>

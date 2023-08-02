@@ -80,7 +80,7 @@ class Applicant extends MY_Controller
             'user_id' => $applicant->employeeUserID,
             'from_user_id' => $this->userdata->user_id,
             'title' => 'Application Accepted',
-            'message' => ucwords($this->userdata->tradename) . ' has accepted your application.',
+            'message' => ucwords($this->userdata->tradename) . ' has accepted your application in the job post ' . $job->title . '.',
             'link' => 'jobposting?id=' . $data['job_id'],
         ];
 
@@ -101,6 +101,14 @@ class Applicant extends MY_Controller
         $this->Employed_model->add($employed_data);
 
         $this->Notification_model->add($notif_data);
+
+        sendEmail(
+            $this->auth['email'],
+            ucwords($this->userdata->tradename),
+            $applicant->email,
+            'Application Accepted',
+            'Your application has been accepted in ' . $job->title . '. Please contact me for further details.',
+        );
     }
 
     /**
@@ -113,16 +121,25 @@ class Applicant extends MY_Controller
 
         // Get the employee details by getting the user_id
         $applicant = $this->Applicant_model->getApplicant($data['application_id']);
+        $job = $this->Jobposting_model->getJob($data['job_id']);
 
         // Send a notification to the applicant by adding a new notification
         $notif_data = [
             'user_id' => $applicant->employee_id,
             'from_user_id' => $this->userdata->user_id,
             'title' => 'Application Rejected',
-            'message' => ucwords($this->userdata->tradename) . ' has rejected your application.',
+            'message' => ucwords($this->userdata->tradename) . ' has rejected your application in the job post ' . $job->title . '.',
             'link' => 'jobposting?id=' . $data['job_id'],
         ];
 
         $this->Notification_model->add($notif_data);
+
+        sendEmail(
+            $this->auth['email'],
+            ucwords($this->userdata->tradename),
+            $applicant->email,
+            'Application Rejected',
+            'Your application has been rejected in ' . $job->title . '.',
+        );
     }
 }

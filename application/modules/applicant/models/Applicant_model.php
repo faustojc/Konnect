@@ -20,7 +20,9 @@ class Applicant_model extends CI_Model
 
     public function getApplicant($id)
     {
-        return $this->db->select('tbl_applicant.*, tbl_user.is_verified AS user_verified, 
+        return $this->db->select('tbl_applicant.*, 
+        tbl_user.is_verified AS user_verified, 
+        tbl_user.email AS email,
         CONCAT_WS(" ", tbl_employee.Fname, tbl_employee.Mname, tbl_employee.Lname) AS employeeName, 
         tbl_employee.user_id AS employeeUserID,')
             ->from($this->Table->applicant)

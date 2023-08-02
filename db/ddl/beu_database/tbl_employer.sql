@@ -7,6 +7,8 @@ CREATE TABLE beu_database.tbl_employer
     email          VARCHAR(255)                           NOT NULL,
     summary        MEDIUMTEXT                             NOT NULL,
     tradename      VARCHAR(255)                           NOT NULL,
+    region         VARCHAR(255)                           NOT NULL,
+    province       VARCHAR(255)                           NOT NULL,
     city           VARCHAR(255)                           NOT NULL,
     barangay       VARCHAR(255)                           NOT NULL,
     address        VARCHAR(255)                           NOT NULL,

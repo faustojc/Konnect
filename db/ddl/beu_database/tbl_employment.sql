@@ -5,12 +5,11 @@ CREATE TABLE beu_database.tbl_employment
     employer_id     INT                                    NOT NULL,
     employee_id     INT                                    NOT NULL,
     job_title       VARCHAR(255)                           NOT NULL,
-    start_date      DATETIME   DEFAULT CURRENT_TIMESTAMP() NOT NULL,
-    end_date        DATE                                   NULL,
-    status          VARCHAR(255)                           NOT NULL,
+    job_type        VARCHAR(255)                           NOT NULL,
     job_description VARCHAR(255)                           NOT NULL,
-    show_status     TINYINT(1)                             NOT NULL,
     is_verified     TINYINT(1) DEFAULT 0                   NULL,
+    date_started    DATETIME   DEFAULT CURRENT_TIMESTAMP() NOT NULL,
+    date_ended      DATE                                   NULL,
     CONSTRAINT fk_employment_employee_id
         FOREIGN KEY (employee_id) REFERENCES beu_database.tbl_employee (ID)
             ON UPDATE CASCADE ON DELETE CASCADE,

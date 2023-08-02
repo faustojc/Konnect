@@ -94,7 +94,7 @@ main_header(['employee_profile']);
     }
 
     .nav-pills .nav-link.active,
-    .nav-pills .show>.nav-link {
+    .nav-pills .show > .nav-link {
         color: #fff;
         background-color: #0dcaf0;
     }
@@ -164,9 +164,7 @@ main_header(['employee_profile']);
                                     <div class="d-flex justify-content-between">
                                         <h5 class="widget-user-username text-left text-dark" style="font-weight: 600;">
                                             <?= ucwords(@$details->Fname) . " " . ucwords(@$details->Mname) . " " . ucwords(@$details->Lname) ?>
-                                            <?php if ($curr_auth['is_verified'] == 1): ?>
-                                                <i class="fa fa-check-circle-o"></i>
-                                            <?php endif; ?>
+                                            <?php verifyBadge($curr_auth); ?>
                                         </h5>
                                         <input type="text" value="<?= @$details->ID ?>" id="emp_id" hidden>
                                         <div>

@@ -281,17 +281,13 @@ const register = (address, region, province, city, barangay) => {
                 }
             });
 
-            const data = [...formData.entries()];
-
-            console.log(data);
-
-            // fetch(baseUrl + 'register', {
-            //     method: 'POST',
-            //     body: formData
-            // }).then(response => response.json())
-            //     .then(data => {
-            //         window.location.href = data.redirect;
-            //     })
+            fetch(baseUrl + 'register', {
+                method: 'POST',
+                body: formData
+            }).then(response => response.json())
+                .then(data => {
+                    window.location.href = data.redirect;
+                })
         }
     });
 }

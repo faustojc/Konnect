@@ -132,7 +132,7 @@ $autoload['language'] = [];
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = ['Auth_model', 'Employer_model', 'EmployeeSkills_model', 'Employed_model', 'Employment_model', 'feedback/Feedback_model', 'applicant/Applicant_model', 'notification/Notification_model'];
+$autoload['model'] = ['Auth_model', 'Resume_model', 'Employer_model', 'EmployeeSkills_model', 'Employed_model', 'Employment_model', 'feedback/Feedback_model', 'applicant/Applicant_model', 'notification/Notification_model'];
 
 // Include the components_helper file
 require_once(APPPATH . 'helpers/components_helper.php');

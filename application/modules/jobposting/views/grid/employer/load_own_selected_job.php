@@ -27,8 +27,7 @@ $formattedTimeDiff = formatTime($job->date_posted);
                     <i class="fa-solid fa-ellipsis-vertical"></i>
                 </button>
                 <div class="dropdown-menu" style="border-radius: 10px; box-shadow: none;">
-                    <a class="dropdown-item" href="#">Edit</a>
-                    <a class="dropdown-item" href="#">Delete</a>
+                    <a class="dropdown-item" href="#">Edit</a> <a class="dropdown-item" href="#">Delete</a>
                 </div>
             </div>
         </div>
@@ -76,10 +75,10 @@ $formattedTimeDiff = formatTime($job->date_posted);
                     </div>
                     <div style="transform: scale(0.8);" class="col-12 col-md-6 pt-3 pt-md-0 d-flex align-items-center">
                         <div class="d-flex justify-content-start">
-                            <button type="button" class="btn btn-info mr-2 text-dark btn-accept" data-id="<?= $applicant->id ?>" data-job-id="<?= $applicant->job_id ?>">
+                            <button type="button" class="btn btn-outline-info mr-2 text-dark btn-accept" data-id="<?= $applicant->id ?>" data-job-id="<?= $applicant->job_id ?>">
                                 Accept
                             </button>
-                            <button type="button" class="btn btn-secondary btn-reject" data-id="<?= $applicant->id ?>" data-job-id="<?= $applicant->job_id ?>">
+                            <button type="button" class="btn btn-outline-danger btn-reject" data-id="<?= $applicant->id ?>" data-job-id="<?= $applicant->job_id ?>">
                                 Reject
                             </button>
                         </div>
@@ -90,8 +89,7 @@ $formattedTimeDiff = formatTime($job->date_posted);
             <?php if ($counter == 0): ?>
                 <div class="col-12">
                     <div class="alert alert-secondary mb-0">
-                        <i class="fas fa-info-circle mr-2"></i>
-                        No applications yet
+                        <i class="fas fa-info-circle mr-2"></i> No applications yet
                     </div>
                 </div>
             <?php endif; ?>
@@ -99,8 +97,7 @@ $formattedTimeDiff = formatTime($job->date_posted);
         <?php else: ?>
             <div class="col-12">
                 <div class="alert alert-info mb-0">
-                    <i class="fas fa-info-circle mr-2"></i>
-                    No applications yet
+                    <i class="fas fa-info-circle mr-2"></i> No applications yet
                 </div>
             </div>
         <?php endif; ?>

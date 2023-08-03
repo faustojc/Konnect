@@ -50,6 +50,75 @@ class Employee_profile_service extends MY_Controller
     /**
      * @throws JsonException
      */
+    public function uploadResume(): void
+    {
+        $file_details = [
+            'upload_path' => './assets/documents/resume/' . $this->userdata->ID . '/',
+            'allowed_types' => 'pdf|doc|docx|docs',
+            'max_size' => '5000',
+        ];
+
+        $resume = NULL;
+        $directory_exist = TRUE;
+
+        $this->load->library('upload', $file_details);
+
+        if (!is_dir($file_details['upload_path']) &&
+            !mkdir($concurrentDirectory = $file_details['upload_path'], 0777, TRUE) &&
+            !is_dir($concurrentDirectory)) {
+            $directory_exist = FALSE;
+            //throw new RuntimeException(sprintf('Directory "%s" was not created', $concurrentDirectory));
+        }
+
+        if (!$this->upload->do_upload('resume')) {
+            if (!$directory_exist) {
+                rmdir($file_details['upload_path']);
+            }
+
+            $response['file_error'] = $this->upload->error_msg;
+        } else {
+            $resume = $this->upload->data();
+            $response['file_success'] = 'File ' . $resume['file_name'] . ' uploaded successfully';
+        }
+
+        $data = [
+            'employee_id' => $this->userdata->ID,
+            'file_name' => $resume['file_name'],
+            'file_size' => $resume['file_size'],
+        ];
+
+        $response = array_merge($response, $this->Resume_model->save($data));
+
+        echo json_encode($response, JSON_THROW_ON_ERROR);
+    }
+
+    /**
+     * @throws JsonException
+     */
+    public function deleteResume(): void
+    {
+        $directory = './assets/documents/resume/' . $this->userdata->ID . '/';
+
+        if (is_dir($directory)) {
+            $files = glob($directory . '*', GLOB_MARK);
+
+            foreach ($files as $file) {
+                unlink($file);
+            }
+
+            rmdir($directory);
+        }
+
+        $data = $this->input->post();
+
+        $response = $this->Resume_model->delete($data['id']);
+
+        echo json_encode($response, JSON_THROW_ON_ERROR);
+    }
+
+    /**
+     * @throws JsonException
+     */
     public function update_introduction(): void
     {
         $data = [

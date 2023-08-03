@@ -10,6 +10,13 @@ const load_intro = () => {
         .catch(() => error('ERROR!', 'Something went wrong'));
 }
 
+const load_resume = () => {
+    fetch(baseUrl + 'employee_profile/getResume')
+        .then(response => response.text())
+        .then(data => document.querySelector('#load_resume').innerHTML = data)
+        .catch(() => error('ERROR!', 'Something went wrong'));
+}
+
 const load_skill = () => {
     fetch(baseUrl + 'employee_profile/getSkills')
         .then(response => response.text())
@@ -241,6 +248,31 @@ if (file_input) {
         } else {
             textbox.textContent = filesCount + ' file(s) selected';
         }
+    });
+}
+
+const upload_resume = document.querySelector('#upload_resume');
+if (upload_resume) {
+    upload_resume.addEventListener('click', () => {
+        const form = upload_resume.closest('.modal-content').querySelector('form');
+        const formData = new FormData(form);
+
+        formAction(baseUrl + 'employee_profile/service/employee_profile_service/uploadResume', 'POST', formData, () => {
+            load_resume();
+            success('SUCCESS', 'Resume/CV uploaded successfully');
+        });
+    });
+}
+
+const delete_resume = document.querySelector('#delete_resume');
+if (delete_resume) {
+    delete_resume.addEventListener('click', () => {
+        const id = delete_resume.getAttribute('data-id');
+
+        formAction(baseUrl + 'employee_profile/service/employee_profile_service/deleteResume', 'POST', {id: id}, () => {
+            load_resume();
+            success('SUCCESS', 'Resume/CV deleted successfully');
+        });
     });
 }
 

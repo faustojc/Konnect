@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 02, 2023 at 06:08 PM
+-- Generation Time: Aug 03, 2023 at 02:24 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -41,7 +41,9 @@ CREATE TABLE `tbl_applicant` (
 --
 
 INSERT INTO `tbl_applicant` (`id`, `job_id`, `employee_id`, `job_title`, `status`, `date_created`) VALUES
-(90, 51, 50, '', 'PENDING', '2023-08-02');
+(90, 51, 50, 'Short-term Project-based Back End Web Developer', 'ACCEPTED', '2023-08-02'),
+(94, 53, 50, 'Web developer (Pasig)', 'ACCEPTED', '2023-08-03'),
+(95, 54, 50, 'Remote Software Developer', 'ACCEPTED', '2023-08-03');
 
 -- --------------------------------------------------------
 
@@ -84,7 +86,10 @@ CREATE TABLE `tbl_employed` (
 --
 
 INSERT INTO `tbl_employed` (`id`, `employer_id`, `employee_id`, `job_title`, `job_type`, `job_description`, `is_active`, `is_verified`, `date_started`, `date_ended`) VALUES
-(10, 1, 32, 'Full Stack Developer', 'Full time', '<p>hahahaha</p>', 0, 0, '2023-08-01', '2023-10-19');
+(10, 1, 32, 'Full Stack Developer', 'Full time', '<p>hahahaha</p>', 0, 0, '2023-08-01', '2023-10-19'),
+(11, 1, 50, 'Web developer (Pasig)', 'Permanent', NULL, 1, 0, '2023-08-03', NULL),
+(12, 1, 50, 'Short-term Project-based Back End Web Developer', 'Shift work', NULL, 1, 0, '2023-08-03', NULL),
+(13, 1, 50, 'Remote Software Developer', 'Full time', NULL, 1, 0, '2023-08-03', NULL);
 
 -- --------------------------------------------------------
 
@@ -129,7 +134,7 @@ INSERT INTO `tbl_employee` (`ID`, `user_id`, `Date_created`, `Fname`, `Lname`, `
 (36, 20, '2023-07-19 13:15:15', 'Martin', 'Cuenca', 'Benedicto', '2001-11-24', 'male', 'single', 'Catholic', '0947950555', 'polcuenca242@gmail.com', 0, 0, 'BACOLOD CITY', 'Mansilingan', 'adelfa st. victorina heights', '', '19292', '020', '2626', '626', '', '347548042_184571507478516_7611925746711583073_n2.jpg'),
 (40, 25, '2023-07-27 09:50:15', 'Katrina', 'Dizon', 'G.', '2001-03-27', 'female', 'single', 'Catholic', '5555', 'katrina@gmail.com', 0, 0, 'BACOLOD CITY', 'Villamonte', 'kat\'s street', '', '', '', '', '', '', 'default.png'),
 (41, 26, '2023-07-27 10:20:19', 'John Martis', 'mART', 'Bo', '2023-07-05', 'male', 'single', 'dgfdgfdgfdgd', '123444', 'doe@gmail.com', 0, 0, 'dfgdgdgd', 'dgfdgfd', 'dfgdgfdf', '', '', '', '', '', '<p>gwapo ko</p>', 'default.png'),
-(50, 35, '2023-08-02 12:14:28', 'Fausto JC', 'Boko', '', '2023-06-02', 'male', 'single', 'Chicken', '09085579204', 'faustojcboko@gmail.com', 0, 0, 'Bacolod City', 'Granada', 'Charito Heights', '', '', '', '', '', '<p><strong>GWAPO KO</strong></p>', 'pp.jpg');
+(50, 35, '2023-08-02 12:14:28', 'Fausto JC', 'Boko', '', '2001-05-06', 'male', 'single', 'Catholic', '09085579204', 'faustojcboko@gmail.com', 0, 0, 'Bacolod City (Capital)', 'Granada', 'Charito Heights', 'Full Stack Developer', '', '', '', '', '<p><strong>GWAPO KO</strong></p>', 'pp.jpg');
 
 -- --------------------------------------------------------
 
@@ -158,7 +163,8 @@ INSERT INTO `tbl_employee_skill` (`id`, `employee_id`, `skill`, `proficiency`, `
 (40, 41, 'PHP', 'beginner', 123),
 (41, 41, 'Javascript', 'beginner', 123),
 (42, 32, 'C#', 'beginner', 1),
-(43, 50, 'PHP', 'advance', 2);
+(43, 50, 'PHP', 'advance', 2),
+(44, 50, 'JavaScript', 'advance', 2);
 
 -- --------------------------------------------------------
 
@@ -333,6 +339,39 @@ CREATE TABLE `tbl_notification` (
   `date_created` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `tbl_notification`
+--
+
+INSERT INTO `tbl_notification` (`id`, `user_id`, `from_user_id`, `title`, `message`, `link`, `is_displayed`, `is_read`, `date_created`) VALUES
+(144, 3, 35, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'jobposting?id=53', 1, 0, '2023-08-03 12:35:55'),
+(145, 35, 3, 'Application Accepted', 'Lopues Ni Gonrad has accepted your application in the job post Web developer (Pasig).', 'jobposting?id=53', 1, 0, '2023-08-03 12:37:13'),
+(146, 35, 3, 'Application Accepted', 'Lopues Ni Gonrad has accepted your application in the job post Short-term Project-based Back End Web Developer.', 'jobposting?id=51', 1, 0, '2023-08-03 13:20:14'),
+(147, 3, 35, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'jobposting?id=53', 1, 0, '2023-08-03 13:31:03'),
+(148, 3, 35, 'New Applicant in your job post', 'A new applicant has applied to your job post.', 'jobposting?id=54', 1, 0, '2023-08-03 13:49:06'),
+(149, 35, 3, 'Application Accepted', 'Lopues Ni Gonrad has accepted your application in the job post Remote Software Developer.', 'jobposting?id=54', 1, 0, '2023-08-03 13:50:20');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_resume`
+--
+
+CREATE TABLE `tbl_resume` (
+  `id` int(11) NOT NULL,
+  `employee_id` int(11) NOT NULL,
+  `file_name` varchar(255) NOT NULL,
+  `file_size` float NOT NULL,
+  `date_uploaded` date NOT NULL DEFAULT curdate()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `tbl_resume`
+--
+
+INSERT INTO `tbl_resume` (`id`, `employee_id`, `file_name`, `file_size`, `date_uploaded`) VALUES
+(1, 50, 'Fausto_John_Claire_Boko_Software_Engineer_Internship_Resume.docx', 20.62, '2023-08-03');
+
 -- --------------------------------------------------------
 
 --
@@ -491,6 +530,13 @@ ALTER TABLE `tbl_notification`
   ADD KEY `fk_notif_from_user_id` (`from_user_id`);
 
 --
+-- Indexes for table `tbl_resume`
+--
+ALTER TABLE `tbl_resume`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_resume_employee_id` (`employee_id`);
+
+--
 -- Indexes for table `tbl_skill`
 --
 ALTER TABLE `tbl_skill`
@@ -518,7 +564,7 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT for table `tbl_applicant`
 --
 ALTER TABLE `tbl_applicant`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
 -- AUTO_INCREMENT for table `tbl_education`
@@ -530,7 +576,7 @@ ALTER TABLE `tbl_education`
 -- AUTO_INCREMENT for table `tbl_employed`
 --
 ALTER TABLE `tbl_employed`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tbl_employee`
@@ -542,7 +588,7 @@ ALTER TABLE `tbl_employee`
 -- AUTO_INCREMENT for table `tbl_employee_skill`
 --
 ALTER TABLE `tbl_employee_skill`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `tbl_employer`
@@ -578,7 +624,13 @@ ALTER TABLE `tbl_jobposting`
 -- AUTO_INCREMENT for table `tbl_notification`
 --
 ALTER TABLE `tbl_notification`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
+
+--
+-- AUTO_INCREMENT for table `tbl_resume`
+--
+ALTER TABLE `tbl_resume`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_skill`
@@ -661,6 +713,12 @@ ALTER TABLE `tbl_jobposting`
 ALTER TABLE `tbl_notification`
   ADD CONSTRAINT `fk_notif_from_user_id` FOREIGN KEY (`from_user_id`) REFERENCES `tbl_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_notif_user_id` FOREIGN KEY (`user_id`) REFERENCES `tbl_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tbl_resume`
+--
+ALTER TABLE `tbl_resume`
+  ADD CONSTRAINT `fk_resume_employee_id` FOREIGN KEY (`employee_id`) REFERENCES `tbl_employee` (`ID`);
 
 --
 -- Constraints for table `tbl_training`

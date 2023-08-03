@@ -16,6 +16,7 @@ class EmployeeSkills extends MY_Controller
     public function save_skill(): void
     {
         $data = $this->input->post();
+        $data['employee_id'] = $this->userdata->ID;
 
         $response = $this->EmployeeSkills_model->save($data);
         echo json_encode($response, JSON_THROW_ON_ERROR);
@@ -27,6 +28,7 @@ class EmployeeSkills extends MY_Controller
     public function edit_skill(): void
     {
         $data = $this->input->post();
+        $data['employee_id'] = $this->userdata->ID;
 
         $response = $this->EmployeeSkills_model->update($data['id'], $data);
         echo json_encode($response, JSON_THROW_ON_ERROR);

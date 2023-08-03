@@ -86,6 +86,7 @@ class Employee_profile extends MY_Controller
         $this->data['employments_section_view'] = $this->load->view('grid/load_employments', $this->data, TRUE);
         $this->data['skills_section_view'] = $this->load->view('grid/load_skill', $this->data, TRUE);
         $this->data['training_section_view'] = $this->load->view('grid/load_training', $this->data, TRUE);
+        $this->data['resume_section_view'] = $this->load->view('grid/load_resume', $this->data, TRUE);
 
         $this->data['content'] = 'index';
         $this->load->view('layout', $this->data);

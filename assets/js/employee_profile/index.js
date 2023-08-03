@@ -198,6 +198,8 @@ if (delete_skill) {
     });
 }
 
+// ------------------ LEGACY CODES ------------------
+
 $(document).on('click', '#btn_save_training', function () {
     const form = this.closest('.modal-content').querySelector('form');
     const isValid = validateForm(form);

@@ -83,7 +83,6 @@
             <table id="employed_table" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                    <th>#</th>
                     <th>Name</th>
                     <th>Job Title</th>
                     <th>Is active</th>
@@ -96,9 +95,6 @@
                 <?php foreach ($employed as $index => $employee) { ?>
                     <tr>
                         <td>
-                            <?= $employee->employee_id ?>
-                        </td>
-                        <td>
                             <a href="<?= base_url() ?>employee_profile?id=<?= $employee->employee_id ?>">
                                 <?= ucwords($employee->employee_name) ?>
                             </a>
@@ -108,13 +104,15 @@
                         </td>
                         <td class="pr-0">
                             <label class="switch">
-                                <input type="checkbox" checked data-toggle="toggle" data-on="Ready" data-off="Not Ready" data-onstyle="success" data-offstyle="danger">
-                                <span class="slider round"></span> </label>
+                                <input type="checkbox" data-toggle="toggle" data-on="Ready" data-off="Not Ready" data-onstyle="success" data-offstyle="danger"
+                                    <?= ($employee->is_active == 1) ? 'checked' : '' ?>
+                                /> <span class="slider round"></span> </label>
                         </td>
                         <td class="pr-0">
                             <label class="switch">
-                                <input type="checkbox" checked data-toggle="toggle" data-on="Ready" data-off="Not Ready" data-onstyle="success" data-offstyle="danger">
-                                <span class="slider round"></span> </label>
+                                <input type="checkbox" data-toggle="toggle" data-on="Ready" data-off="Not Ready" data-onstyle="success" data-offstyle="danger"
+                                    <?= ($employee->is_verified == 1) ? 'checked' : '' ?>
+                                /> <span class="slider round"></span> </label>
                         </td>
                         <td>
                             <!-- Start Date -->

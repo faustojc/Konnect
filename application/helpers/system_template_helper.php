@@ -166,7 +166,7 @@ if (!empty($auth)) {
                                 <i class="fa fa-search"></i>
                             </span>
                         </div>
-                        <input id="searchInput" type="text" class="form-control border-0 bg-gray-light" placeholder="Search" aria-label="search" aria-describedby="addon-wrapping" style="border-radius: 0 10px 10px 0; ">
+                        <input id="searchInput" type="text" class="form-control border-0 bg-gray-light" placeholder="Search for Jobs, Employees, and Employers" aria-label="search" aria-describedby="addon-wrapping" style="border-radius: 0 10px 10px 0; ">
                     </div>
 
                     <div class="d-block d-lg-none">

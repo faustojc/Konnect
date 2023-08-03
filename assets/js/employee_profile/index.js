@@ -44,6 +44,30 @@ const load_employment = () => {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+    let address;
+    let region;
+    let province;
+    let city;
+    let barangay;
+
+    const account_info = document.querySelector('#account-info');
+    const observer = new MutationObserver(function (mutations) {
+        // check if the account info class name contains .active.show
+        if (account_info.classList.contains('active') && account_info.classList.contains('show')) {
+            address = document.querySelector('#Address');
+            region = document.querySelector('#Region');
+            province = document.querySelector('#Province');
+            city = document.querySelector('#City');
+            barangay = document.querySelector('#Barangay');
+
+            if (address && region && province && city && barangay) {
+                locationDropdown(region, province, city, barangay);
+            }
+        }
+    });
+
+    observer.observe(account_info, {attributes: true, childList: true, characterData: true});
+
     // TinyMCE
     textareaEditor('textarea', 400);
 
@@ -53,6 +77,14 @@ document.addEventListener('DOMContentLoaded', function () {
             const form = update_profile.closest('#form_content').querySelector('.active.show form');
             const formData = new FormData(form);
             const isValid = validateForm(form);
+
+            if (formData.has('Region') && formData.has('Province') && formData.has('City') && formData.has('Barangay')) {
+                formData.set('Address', address.value.trim());
+                formData.set('Region', region.options[region.selectedIndex].text.trim());
+                formData.set('Province', province.options[province.selectedIndex].text.trim());
+                formData.set('City', city.options[city.selectedIndex].text.trim());
+                formData.set('Barangay', barangay.options[barangay.selectedIndex].text.trim());
+            }
 
             if (isValid) {
                 formAction(baseUrl + 'employee_profile/service/employee_profile_service/update_profile', 'POST', formData, function (response) {
@@ -94,12 +126,9 @@ if (add_employment) {
     add_employment.addEventListener('click', () => {
         const form = add_employment.closest('.modal-content').querySelector('form');
         const formData = new FormData(form);
-
-        //const show_status = (form.querySelector('#show_status').checked === true) ? 1 : 0;
         const description = tinymce.activeEditor.getContent();
 
         formData.set('job_description', description);
-        //formData.set('show_status', show_status.toString());
 
         formAction(baseUrl + 'employee_profile/service/Employee_profile_service/set_employment', 'POST', formData, () => {
             load_employment();
@@ -197,6 +226,22 @@ if (delete_skill) {
         });
     });
 }
+
+// For File upload
+const file_input = document.querySelector('.file-input');
+if (file_input) {
+    file_input.addEventListener('change', () => {
+        const filesCount = file_input.files.length;
+        const textbox = file_input.previousElementSibling;
+
+        if (filesCount === 1) {
+            textbox.textContent = file_input.value.split('\\').pop();
+        } else {
+            textbox.textContent = filesCount + ' file(s) selected';
+        }
+    });
+}
+
 
 // ------------------ LEGACY CODES ------------------
 
@@ -300,137 +345,3 @@ $(document).on('click', '.level-content > *', function () {
     const value = this.value();
     $('#Level2').val(value);
 });
-
-$(document).on('click', '#update_profile', function () {
-    const data = {
-        employee_ID: $('#employee_ID').val(),
-        Fname: $('#Fname').val(),
-        Lname: $('#Lname').val(),
-        Mname: $('#Mname').val(),
-        Cnum: $('#Cnum').val(),
-        Address: $('#Address').val(),
-        Title: $('#Title').val(),
-        Gender: $('#Gender').val(),
-        Cstat: $('#Cstat').val(),
-        Religion: $('#Religion').val(),
-        Email: $('#Email').val(),
-        Bday: $('#Bday').val(),
-        City: $('#City').val(),
-        Barangay: $('#Barangay').val(),
-        SSS: $('#SSS').val(),
-        Tin: $('#Tin').val(),
-        Phil_health: $('#Phil_health').val(),
-        Pag_ibig: $('#Pag_ibig').val(),
-        Employee_image: $('#Employee_image')[0].files[0],
-    };
-
-    $.ajax({
-        url: baseUrl + 'employee_profile/service/employee_profile_service/update_profile',
-        type: 'POST',
-        data: data,
-        success: function (response) {
-            // Handle the success response (optional)
-            console.log(response);
-            // window.location.reload();
-        },
-        error: function (response) {
-            // Handle the error response (optional)
-            console.error("Update failed!");
-        }
-    });
-});
-
-$(document).on('change', '.file-input', function () {
-
-
-    var filesCount = $(this)[0].files.length;
-
-    var textbox = $(this).prev();
-
-    if (filesCount === 1) {
-        var fileName = $(this).val().split('\\').pop();
-        textbox.text(fileName);
-
-    } else {
-        textbox.text(filesCount + ' files selected');
-    }
-});
-
-function locationDropdown(region, province, city, barangay) {
-    function fillProvinces() {
-        province.innerHTML = '<option selected disabled>Choose State/Province</option>';
-        city.innerHTML = '<option selected disabled>Choose city/municipality</option>';
-        barangay.innerHTML = '<option selected disabled>Choose barangay</option>';
-
-        fetch(baseUrl + 'assets/location/province.json')
-            .then(response => response.json())
-            .then(data => {
-                const result = data.filter(value => value.region_code === region.value);
-                result.sort((a, b) => a.province_name.localeCompare(b.province_name));
-
-                result.forEach(entry => {
-                    const option = document.createElement('option');
-
-                    option.value = entry.province_code;
-                    option.text = entry.province_name;
-                    province.appendChild(option);
-                });
-            });
-    }
-
-    function fillCities() {
-        city.innerHTML = '<option selected disabled>Choose city/municipality</option>';
-        barangay.innerHTML = '<option selected disabled>Choose barangay</option>';
-
-        fetch(baseUrl + 'assets/location/city.json')
-            .then(response => response.json())
-            .then(data => {
-                const result = data.filter(value => value.province_code === province.value);
-                result.sort((a, b) => a.city_name.localeCompare(b.city_name));
-
-                result.forEach(entry => {
-                    const option = document.createElement('option');
-                    option.value = entry.city_code;
-                    option.text = entry.city_name;
-                    city.appendChild(option);
-                });
-            });
-    }
-
-    function fillBarangays() {
-        barangay.innerHTML = '<option selected disabled>Choose barangay</option>';
-
-        fetch(baseUrl + 'assets/location/barangay.json')
-            .then(response => response.json())
-            .then(data => {
-                const result = data.filter(value => value.city_code === city.value);
-                result.sort((a, b) => a.brgy_name.localeCompare(b.brgy_name));
-
-                result.forEach(entry => {
-                    const option = document.createElement('option');
-                    option.value = entry.brgy_code;
-                    option.text = entry.brgy_name;
-                    barangay.appendChild(option);
-                });
-            });
-    }
-
-    region.addEventListener('change', fillProvinces);
-    province.addEventListener('change', fillCities);
-    city.addEventListener('change', fillBarangays);
-
-    // Load region
-    region.innerHTML = '<option selected disabled>Choose Region</option>';
-
-    fetch(baseUrl + 'assets/location/region.json')
-        .then(response => response.json())
-        .then(data => {
-            data.forEach(entry => {
-                const option = document.createElement('option');
-
-                option.value = entry.region_code;
-                option.text = entry.region_name;
-                region.appendChild(option);
-            });
-        });
-}

@@ -22,18 +22,45 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    let address;
+    let region;
+    let province;
+    let city;
+    let barangay;
+
+    const account_info = document.querySelector('#account-info');
+    const observer = new MutationObserver(function (mutations) {
+        // check if the account info class name contains .active.show
+        if (account_info.classList.contains('active') && account_info.classList.contains('show')) {
+            address = document.querySelector('#address');
+            region = document.querySelector('#region');
+            province = document.querySelector('#province');
+            city = document.querySelector('#city');
+            barangay = document.querySelector('#barangay');
+
+            if (address && region && province && city && barangay) {
+                locationDropdown(region, province, city, barangay);
+            }
+        }
+    });
+
+    observer.observe(account_info, {attributes: true});
+
     // TinyMCE
     textareaEditor('#summary', 350, function (editor) {
         editor.on('input', function (event) {
             let count = editor.getContent({format: 'text'}).length;
+            const summary_warning = document.querySelector('.summary-warning');
+            const update_summary = document.querySelector('#update_summary');
+
             document.getElementById('summary_character_count').innerText = count + '/2000';
 
             if (count > 2000) {
-                $('.summary-warning').removeAttr('hidden')
-                $('#update_summary').attr('disabled', 'disabled');
+                summary_warning.removeAttribute('hidden');
+                update_summary.setAttribute('disabled', 'disabled');
             } else {
-                $('.summary-warning').attr('hidden', 'hidden');
-                $('#update_summary').removeAttr('disabled');
+                summary_warning.setAttribute('hidden', 'hidden');
+                update_summary.removeAttribute('disabled');
             }
         });
     });
@@ -50,7 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const update_summary = document.querySelector('#update_summary');
-
     if (update_summary) {
         update_summary.addEventListener('click', function () {
             const id = new URLSearchParams(window.location.search).get('id');
@@ -71,10 +97,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (update_profile) {
         update_profile.addEventListener('click', function () {
             const form = update_profile.closest('#form_content').querySelector('div.active.show > form');
+            const formData = new FormData(form);
             const isValid = validateForm(form);
 
+            if (formData.has('region') && formData.has('province') && formData.has('city') && formData.has('barangay')) {
+                formData.set('address', address.value.trim());
+                formData.set('region', region.options[region.selectedIndex].text.trim());
+                formData.set('province', province.options[province.selectedIndex].text.trim());
+                formData.set('city', city.options[city.selectedIndex].text.trim());
+                formData.set('barangay', barangay.options[barangay.selectedIndex].text.trim());
+            }
+
             if (isValid) {
-                formAction(baseUrl + 'employer_profile/service/Employer_profile_service/update', 'POST', new FormData(form), () => {
+                formAction(baseUrl + 'employer_profile/service/Employer_profile_service/update', 'POST', formData, () => {
                     success('SUCCESS', 'Profile successfully updated');
                 });
             }

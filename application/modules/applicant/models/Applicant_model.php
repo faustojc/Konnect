@@ -182,11 +182,12 @@ class Applicant_model extends CI_Model
     /**
      * @throws Exception
      */
-    public function setApplication($job_id, $employee_id): array
+    public function setApplication($job_id, $employee_id, $title): array
     {
         $data = [
             'employee_id' => $employee_id,
             'job_id' => $job_id,
+            'job_title' => $title,
             'status' => 'PENDING',
         ];
 

@@ -3,16 +3,20 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Education extends MY_Controller
 {
-    protected $session;
+
+
+    /**
+     * @var array|mixed|null
+     */
+    private $userdata;
 
     public function __construct()
     {
         parent::__construct();
 
-        $model_list = [
-            'education/Education_model',
-        ];
-        $this->load->model($model_list);
+        $this->userdata = get_userdata(USER);
+
+        $this->load->model('education/Education_model');
     }
 
     /**
@@ -21,6 +25,7 @@ class Education extends MY_Controller
     public function add(): void
     {
         $data = $this->input->post(NULL, TRUE);
+        $data['employee_id'] = $this->userdata->ID;
 
         $result = $this->Education_model->add($data);
         echo json_encode($result, JSON_THROW_ON_ERROR);
@@ -32,6 +37,7 @@ class Education extends MY_Controller
     public function update(): void
     {
         $data = $this->input->post(NULL, TRUE);
+        $data['employee_id'] = $this->userdata->ID;
 
         $result = $this->Education_model->update($data);
         echo json_encode($result, JSON_THROW_ON_ERROR);

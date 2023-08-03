@@ -3,9 +3,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class EmployeeSkills extends MY_Controller
 {
+    /**
+     * @var array|mixed|null
+     */
+    private $userdata;
+
     public function __construct()
     {
         parent::__construct();
+
+        $this->userdata = get_userdata(USER);
 
         $this->load->model('employeeskills/EmployeeSkills_model');
     }

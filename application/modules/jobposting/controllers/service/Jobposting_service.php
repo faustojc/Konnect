@@ -10,13 +10,10 @@ class Jobposting_service extends MY_Controller
         parent::__construct();
         $this->userdata = get_userdata(USER);
 
-        // if(is_empty_object($this->session)){
-        // 	redirect(base_url().'login/authentication', 'refresh');
-        // }
 
         $model_list = [
             'jobposting/service/Jobposting_services_model' => 'job_service_model',
-            'employer/Employer_model' => 'models\Employer_model',
+            'employer/Employer_model' => 'employer_model',
         ];
         $this->load->model($model_list);
     }
@@ -26,7 +23,7 @@ class Jobposting_service extends MY_Controller
      */
     public function postJob(): void
     {
-        $data = $this->input->post();
+        $data = $this->input->post(NULL, TRUE);
         $data['employer_id'] = $this->userdata->id;
 
         $response = $this->job_service_model->save($data);

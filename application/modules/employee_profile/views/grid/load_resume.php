@@ -23,15 +23,20 @@
                                         <i class="fa fa-file text-info"></i>
                                     </div>
                                     <div class="file-name">
-                                        <p class="m-b-5 text-muted"><?= $resume->file_name ?></p>
-                                        <small><?= $resume->file_size ?> KB
-                                            <span class="date text-muted"><?= date('d M, Y', strtotime($resume->date_uploaded)) ?></span>
+                                        <p class="m-b-5 text-muted">
+                                            <?= $resume->file_name ?>
+                                        </p>
+                                        <small>
+                                            <?= $resume->file_size ?> KB
+                                            <span class="date text-muted">
+                                                <?= date('d M, Y', strtotime($resume->date_uploaded)) ?>
+                                            </span>
                                         </small>
                                     </div>
                                 </a>
                                 <?php if ($has_permission): ?>
-                                    <button type="button" class="btn btn-icon btn-outline-danger mt-3" data-toggle="modal" data-target="#deleteFileModal">
-                                        <i class="fa fa-trash mr-2"></i> Delete Resume/CV
+                                    <button type="button" class="btn btn-tool my-3 ml-2" data-toggle="modal" data-target="#deleteFileModal">
+                                        <i class="fa fa-trash mr-2"></i>
                                     </button>
                                 <?php endif; ?>
                             </div>

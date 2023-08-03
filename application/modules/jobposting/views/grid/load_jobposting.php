@@ -15,15 +15,24 @@
 
 <div class="row justify-content-center job-content">
     <div class="col-md-4 pl-1" style="height: auto; ">
-        <?php
-        $ci = &get_instance();
-        if (!empty($details)) {
+        <?php if (!empty($details)) {
             foreach ($details as $job) {
+                $hasApplied = FALSE;
+
                 if (strtoupper($job->filled) == 'CLOSED') {
                     continue;
                 }
 
-                if ($auth['user_type'] == 'EMPLOYEE' && !empty($applicant) && $applicant->job_id == $job->id) {
+                if ($auth['user_type'] == 'EMPLOYEE' && !empty($applications)) {
+                    foreach ($applications as $application) {
+                        if ($application->job_id == $job->id) {
+                            $hasApplied = TRUE;
+                            break;
+                        }
+                    }
+                }
+
+                if ($hasApplied) {
                     continue;
                 }
 
@@ -76,19 +85,15 @@
                         </div>
                     </div>
                 </div>
-                <?php
-            }
-        } else {
-            ?>
+            <?php }
+        } else { ?>
             <div class="jumbotron">
                 <div class="container">
                     <h1 class="display-4">No Jobs Found</h1>
                     <p class="lead">We can't find the jobs that you are looking for or there are no jobs available.</p>
                 </div>
             </div>
-            <?php
-        }
-        ?>
+        <?php } ?>
     </div>
 
     <div class="col-md-5 job-details"></div>

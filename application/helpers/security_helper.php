@@ -14,18 +14,17 @@ function locker($length = 50): string
     return $result;
 }
 
-function auth_token($length = 30): string
+function auth_token($value, $length = 30): string
 {
 
     // $bytes = random_bytes(ceil($length / 2));
     $bytes = uniqid('', TRUE);
     $random = substr(bin2hex($bytes), 0, $length);
-    return (sha1($random . date('y-m-d:h:i:s') . $random . date('y-m-d:h:i:s')) . '-' . sha1(date('y-m-d:h:i:s')) . '-' . sha1($random));
+    return (sha1($random . $value . date('y-m-d:h:i:s')));
 }
 
 function password_generator($password, $locker, $length = 100): string
 {
-
     return str_repeat(strrev($password) . $locker, $length);
 }
 

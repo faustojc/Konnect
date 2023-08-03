@@ -117,7 +117,7 @@ class Jobposting extends MY_Controller
         $query = $this->input->get('query');
 
         if (!empty($query)) {
-            $this->data['own_jobposts'] = $this->job_model->getEmployerJobsLike('tbl_jobposting.title', $query, 'tbl_jobposting.*, tbl_user.is_verified AS user_verified, tbl_employer.id AS employer_id, tbl_employer.tradename AS EmployerTradename, tbl_employer.image AS EmployerLogo');
+            $this->data['own_jobposts'] = $this->job_model->getEmployerJobsLike('tbl_jobposting.title', $query, $this->userdata->id, 'tbl_jobposting.*, tbl_user.is_verified AS user_verified, tbl_employer.id AS employer_id, tbl_employer.tradename AS EmployerTradename, tbl_employer.image AS EmployerLogo');
         } else {
             $this->data['own_jobposts'] = $this->job_model->get_employer_jobposts($this->userdata->id);
         }

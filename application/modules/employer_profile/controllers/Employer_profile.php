@@ -58,7 +58,7 @@ class Employer_profile extends MY_Controller
 
         if ($this->auth['user_type'] == 'EMPLOYEE') {
             $this->data['following'] = $this->follow_model->get_following($this->userdata->ID);
-            $this->data['applicant'] = $this->Applicant_model->getApplicant($this->userdata->ID);
+            $this->data['applicant'] = $this->Applicant_model->getAppliedJobs($this->userdata->ID);
         } else {
             $this->data['employed'] = $this->Employed_model->getEmployersEmployed($this->userdata->id);
         }

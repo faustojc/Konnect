@@ -38,9 +38,6 @@ const CHAR_SET = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789
 const USER = 'user';
 const AUTH = 'auth';
 const SYSTEM_NAME = 'Konnect';
-const SYSTEM_ALT = '';
-const FOOTER_NAME = '';
-const FOOTER_YEAR = '';
 const SYSTEM_MODULE = 'Konnect';
 const MB = 1048576;
 
@@ -59,6 +56,11 @@ $tables = [
     'user' => 'tbl_user',
     'follow' => 'tbl_follow',
     'notification' => 'tbl_notification',
+    'resume' => 'tbl_resume',
 ];
 
-define('TABLE', json_encode($tables));
+try {
+    define('TABLE', json_encode($tables, JSON_THROW_ON_ERROR));
+} catch (JsonException $e) {
+    throw new RuntimeException($e->getMessage(), $e->getCode(), $e);
+}

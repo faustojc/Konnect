@@ -238,27 +238,6 @@ $(document).on('click', '#delete_train', function () {
     });
 });
 
-$(document).on('click', '#edit_employment', function () {
-    const form = this.closest('.modal-content').querySelector('form');
-    const formData = new FormData(form);
-    const url = baseUrl + 'employment/service/Employment_service/edit';
-
-    const show_status = form.querySelector('#show_status').checked === true ? 1 : 0;
-    formData.set('show_status', show_status.toString());
-
-    formAction(url, 'POST', formData, function () {
-        load_employment();
-        success('SUCCESS', 'Employment successfully updated');
-    });
-});
-
-$(document).on('click', '#delete_employment', function () {
-    formAction(baseUrl + 'employee_profile/service/employee_profile_service/delete_employment', 'POST', {employment_id: $(this).data('id')}, function (data) {
-        load_employment();
-        success('SUCCESS', 'Employment successfully deleted');
-    });
-});
-
 $(document).on('click', '#btn_skill', function () {
     const currentElem = this.closest('.modal-content').querySelector('form');
     const id = document.querySelector('#emp_id').value;

@@ -1,7 +1,10 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class EmployeeSkills_model extends CI_Model
+/**
+ * Relationship with employee: ONE TO ONE
+ */
+class Resume_model extends CI_Model
 {
     /**
      * @var mixed
@@ -18,14 +21,14 @@ class EmployeeSkills_model extends CI_Model
         $this->Table = json_decode(TABLE, FALSE, 512, JSON_THROW_ON_ERROR);
     }
 
-    public function getEmployeeSkills($id, string $select = '*')
+    /**
+     * @param int $employee_id
+     *
+     * @return array|mixed|object|null
+     */
+    public function getEmployeesResume(int $employee_id)
     {
-        return $this->db->select($select)->get_where('tbl_employee_skill', ['employee_id' => $id])->result();
-    }
-
-    public function getOtherEmployeeSkills($id, string $select = '*')
-    {
-        return $this->db->select($select)->get_where('tbl_employee_skill', ['employee_id !=' => $id])->result();
+        return $this->db->get_where($this->Table->resume, ['employee_id' => $employee_id])->row();
     }
 
     public function save($info): array
@@ -51,7 +54,7 @@ class EmployeeSkills_model extends CI_Model
     {
         try {
             $this->db->trans_start();
-            $this->db->where('id', $id)->update($this->Table->employee_skill, $data);
+            $this->db->where('id', $id)->or_where('employee_id', $id)->update($this->Table->employee_skill, $data);
             $this->db->trans_complete();
 
             if ($this->db->trans_status() === FALSE) {
@@ -71,7 +74,7 @@ class EmployeeSkills_model extends CI_Model
     {
         try {
             $this->db->trans_start();
-            $this->db->where('id', $id)->delete($this->Table->employee_skill);
+            $this->db->where('id', $id)->or_where('employee_id')->delete($this->Table->resume);
             $this->db->trans_complete();
 
             if ($this->db->trans_status() === FALSE) {

@@ -156,6 +156,48 @@ if (delete_education) {
     });
 }
 
+const save_skill = document.querySelector('#btn_skill');
+if (save_skill) {
+    save_skill.addEventListener('click', () => {
+        const form = save_skill.closest('.modal-content').querySelector('form');
+        const formData = new FormData(form);
+
+        formAction(baseUrl + 'employeeskills/EmployeeSkills/save_skill', 'POST', formData, () => {
+            load_skill();
+            success('SUCCESS', 'Skill successfully added');
+        });
+    });
+}
+
+const update_skill = document.querySelectorAll('.update-skill');
+if (update_skill) {
+    update_skill.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const form = btn.closest('.modal-content').querySelector('form');
+            const formData = new FormData(form);
+
+            formAction(baseUrl + 'employeeskills/EmployeeSkills/update_skill', 'POST', formData, () => {
+                load_skill();
+                success('SUCCESS', 'Skill successfully updated');
+            });
+        });
+    });
+}
+
+const delete_skill = document.querySelectorAll('.delete-skill');
+if (delete_skill) {
+    delete_skill.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const id = btn.getAttribute('data-id');
+
+            formAction(baseUrl + 'employeeskills/EmployeeSkills/delete_skill', 'POST', {id: id}, () => {
+                load_skill();
+                success('SUCCESS', 'Skill successfully deleted');
+            });
+        });
+    });
+}
+
 $(document).on('click', '#btn_save_training', function () {
     const form = this.closest('.modal-content').querySelector('form');
     const isValid = validateForm(form);
@@ -237,68 +279,6 @@ $(document).on('click', '#delete_train', function () {
         success('SUCCESS', 'Training successfully deleted');
     });
 });
-
-$(document).on('click', '#btn_skill', function () {
-    const currentElem = this.closest('.modal-content').querySelector('form');
-    const id = document.querySelector('#emp_id').value;
-
-    const data = {
-        employee_id: id,
-        skill: currentElem.querySelector('#skill').value,
-        proficiency: currentElem.querySelector('#proficiency').value,
-        years_exp: currentElem.querySelector('#years_exp').value,
-    }
-
-    $.ajax({
-        url: baseUrl + 'employee_profile/service/employee_profile_service/save_skill',
-        type: 'POST',
-        data: data,
-        success: function () {
-            success('SUCCESS', 'Skill successfully added');
-            load_skill();
-        },
-        error: function () {
-            error('ERROR', 'Failed to add skill');
-        }
-    });
-});
-
-$(document).on('click', '#btn_update_skill', function () {
-    const form = this.closest('.modal-content').querySelector('form');
-    const id = document.querySelector('#emp_id').value;
-
-    const data = {
-        skill_id: form.querySelector('#skill_id').value,
-        employee_id: id,
-        skill: form.querySelector('#skill').value,
-        proficiency: form.querySelector('#proficiency').value,
-        years_exp: form.querySelector('#years_exp').value
-    };
-
-    $.ajax({
-        url: baseUrl + 'employee_profile/service/employee_profile_service/edit_skill',
-        type: 'POST',
-        data: data,
-        success: function () {
-            success('SUCCESS', 'Skill successfully updated');
-            load_skill();
-        },
-        error: function () {
-            // Handle the error response (optional)
-            error("ERROR", "Update failed!");
-        }
-    });
-});
-
-$(document).on('click', '#delete_skill', function () {
-    const id = this.getAttribute('data-id');
-
-    formAction(baseUrl + 'employee_profile/service/employee_profile_service/delete_skill', 'POST', {id: id}, function (data) {
-        load_skill();
-        success('SUCCESS', 'Skill successfully deleted');
-    });
-});
-
 
 // Filter the dropdown list of Level element
 $(document).on('input', '#Level2', function () {

@@ -120,41 +120,6 @@ class Employee_profile_service extends MY_Controller
         echo json_encode($response);
     }
 
-    public function save_skill()
-    {
-        $data = [
-            'employee_id' => $this->input->post("employee_id"),
-            'skill' => $this->input->post("skill"),
-            'proficiency' => $this->input->post("proficiency"),
-            'years_exp' => $this->input->post("years_exp"),
-        ];
-
-        $response = $this->esModel->save('tbl_employee_skill', $data);
-        echo json_encode($response);
-    }
-
-    public function edit_skill()
-    {
-        $data = [
-            'id' => $this->input->post("skill_id"),
-            'employee_id' => $this->input->post("employee_id"),
-            'skill' => $this->input->post("skill"),
-            'proficiency' => $this->input->post("proficiency"),
-            'years_exp' => $this->input->post("years_exp"),
-        ];
-
-        $response = $this->esModel->update('tbl_employee_skill', 'id', $data['id'], $data);
-        echo json_encode($response);
-    }
-
-    public function delete_skill()
-    {
-        $id = $this->input->post("id");
-
-        $response = $this->esModel->delete('tbl_employee_skill', 'id', $id);
-        echo json_encode($response);
-    }
-
     public function delete_training()
     {
         $id = $this->input->post("ID");

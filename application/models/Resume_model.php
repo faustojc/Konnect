@@ -26,7 +26,7 @@ class Resume_model extends CI_Model
      *
      * @return array|mixed|object|null
      */
-    public function getEmployeesResume(int $employee_id)
+    public function getResume(int $employee_id)
     {
         return $this->db->get_where($this->Table->resume, ['employee_id' => $employee_id])->row();
     }

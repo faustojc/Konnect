@@ -760,9 +760,9 @@ main_header(['employee_profile']);
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <div>
+                                    <form>
                                         <textarea class="form-control" name="Introduction" id="Introduction_Text" rows="4" placeholder="Enter Introduction"><?= @$details->Introduction ?></textarea>
-                                    </div>
+                                    </form>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

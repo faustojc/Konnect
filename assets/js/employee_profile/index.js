@@ -118,8 +118,11 @@ document.addEventListener('DOMContentLoaded', function () {
 const update_intro = document.querySelector('#update_introduction');
 if (update_intro) {
     update_intro.addEventListener('click', () => {
+        const form = update_intro.closest('.modal-content').querySelector('form');
+        const textarea = form.querySelector('textarea');
+
         const data = {
-            Introduction: tinymce.activeEditor.getContent(),
+            Introduction: tinymce.get(textarea.id).getContent(),
         }
 
         formAction(baseUrl + 'employee_profile/service/employee_profile_service/update_introduction', 'POST', data, () => {
@@ -136,7 +139,7 @@ if (add_employment) {
     add_employment.addEventListener('click', () => {
         const form = add_employment.closest('.modal-content').querySelector('form');
         const formData = new FormData(form);
-        const description = tinymce.activeEditor.getContent();
+        const description = tinymce.get(form.querySelector('textarea').id).getContent();
 
         formData.set('job_description', description);
 
@@ -244,8 +247,8 @@ if (save_education) {
     save_education.addEventListener('click', () => {
         const form = save_education.closest('.modal-content').querySelector('form');
         const formData = new FormData(form);
+        const description = tinymce.get(form.querySelector('textarea').id).getContent();
 
-        const description = tinymce.activeEditor.getContent();
         formData.set('description', description);
 
         const isValid = validateForm(form);
@@ -264,8 +267,8 @@ if (update_education) {
         btn.addEventListener('click', () => {
             const form = btn.closest('.modal-content').querySelector('form');
             const formData = new FormData(form);
+            const description = tinymce.get(form.querySelector('textarea').id).getContent();
 
-            const description = tinymce.activeEditor.getContent();
             formData.set('description', description);
 
             const isValid = validateForm(form);
@@ -301,7 +304,7 @@ $(document).on('click', '#btn_save_training', function () {
 
     if (isValid) {
         const formData = new FormData(form);
-        const training_description = tinymce.activeEditor.getContent();
+        const training_description = tinymce.get(form.querySelector('textarea').id).getContent();
 
         formData.append('training_description', training_description);
 
@@ -326,7 +329,7 @@ $('#btn_save_training').click(function () {
 
 $(document).on('click', '#btn_edit_train', function () {
     const form = this.closest('.modal-content').querySelector('form');
-    const training_description = tinymce.activeEditor.getContent();
+    const training_description = tinymce.get(form.querySelector('textarea').id).getContent();
 
     const data = {
         ID: form.querySelector('#ID').value,

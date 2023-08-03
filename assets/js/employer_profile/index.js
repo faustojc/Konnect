@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (update_summary) {
         update_summary.addEventListener('click', function () {
             const id = new URLSearchParams(window.location.search).get('id');
-            const summary = tinymce.activeEditor.getContent();
+            const summary = tinymce.get('summary').getContent();
 
             formAction(baseUrl + 'employer_profile/service/Employer_profile_service/update_summary', 'POST', {
                 id: id,

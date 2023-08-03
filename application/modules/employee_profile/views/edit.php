@@ -214,6 +214,10 @@
                             <hr class="border-light m-0">
                             <div class="card-body ">
                                 <div class="form-group">
+                                    <label for="Title" class="form-label">Title</label>
+                                    <input type="text" class="form-control" name="Title" id="Title" value="<?= $employee->Title ?>" placeholder="Enter Title">
+                                </div>
+                                <div class="form-group">
                                     <label for="Fname" class="form-label">First Name</label>
                                     <input type="text" class="form-control" name="Fname" id="Fname" value="<?= $employee->Fname ?>" placeholder="Enter First Name">
                                 </div>

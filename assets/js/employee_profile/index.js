@@ -241,7 +241,7 @@ const file_input = document.querySelector('.file-input');
 if (file_input) {
     file_input.addEventListener('change', () => {
         const filesCount = file_input.files.length;
-        const textbox = file_input.previousElementSibling;
+        const textbox = document.querySelector('.file-message');
 
         if (filesCount === 1) {
             textbox.textContent = file_input.value.split('\\').pop();

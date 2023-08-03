@@ -64,14 +64,6 @@ class Jobposting extends MY_Controller
         }
     }
 
-    public function create_job(): void
-    {
-        $id = $this->input->get('id');
-
-        $this->data['content'] = 'create_job';
-        $this->load->view('layout', $this->data);
-    }
-
     public function job_feed(): void
     {
         $query = $this->input->get('query');

@@ -73,7 +73,7 @@ class Applicant extends MY_Controller
         $this->Applicant_model->setApplicantStatus($data['application_id'], 'ACCEPTED');
 
         // Get the employee details by getting the user_id
-        $applicant = $this->Applicant_model->getApplicant($data['application_id']);
+        $applicant = $this->Applicant_model->getApplicant($data['application_id'], $data['job_id']);
         $job = $this->Jobposting_model->getJob($data['job_id']);
 
         // Send a notification to the applicant by adding a new notification
@@ -108,7 +108,7 @@ class Applicant extends MY_Controller
             'no-reply-Konnect',
             $applicant->email,
             'Application Accepted',
-            ucwords($this->userdata->tradename) . 'Accepted your application in ' . $job->title . '. You may now contact ' . ucwords($this->userdata->tradename) . '(' . $this->auth['email'] . ')' . ' for more details. Thank you!',
+            ucwords($this->userdata->tradename) . ' has accepted your application for the ' . $job->title . '. You may now contact now ' . ucwords($this->userdata->tradename) . ' at ' . $this->auth['email'] . ' for more details. Thank you!',
         );
     }
 
@@ -140,7 +140,7 @@ class Applicant extends MY_Controller
             'no-reply-Konnect',
             $applicant->email,
             'Application Rejected',
-            ucwords($this->userdata->tradename) . 'rejected your application in ' . $job->title . '. Thank you!',
+            ucwords($this->userdata->tradename) . ' has rejected your application for the ' . $job->title . '. Thank you!',
         );
     }
 }

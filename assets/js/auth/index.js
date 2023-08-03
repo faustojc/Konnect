@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (feedbackBtn) {
         feedbackBtn.addEventListener('click', () => {
             const form = feedbackBtn.closest('.modal-content').querySelector('form');
-            const message = tinymce.activeEditor.getContent();
+            const message = tinymce.get('message').getContent();
 
             const feedbackWarning = document.querySelector('#feedback_warning');
             const user_id = form.querySelector('#user_id').value;

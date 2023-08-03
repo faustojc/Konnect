@@ -136,6 +136,8 @@
                             if (!$hasApplied) {
                                 apply_button($jobpost->id, 'APPLY NOW');
                             }
+                        } else {
+                            apply_button($jobpost->id, 'APPLY NOW');
                         } ?>
 
                     </div>

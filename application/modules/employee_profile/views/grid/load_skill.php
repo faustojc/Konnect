@@ -61,19 +61,17 @@ if (!empty($skills)) {
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-
                             <h5 class="modal-title" id="exampleModalLabel">Edit Skill</h5>
-
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
                             <form>
-                                <input type="text" id="id" value="<?= @$value->id ?>" hidden>
+                                <input type="text" id="id" name="id" value="<?= @$value->id ?>" hidden>
                                 <div class="form-group">
                                     <label for="skill" class="col-form-label">Skill Name:</label>
-                                    <input type="text" class="form-control" id="skill" value="<?= @$value->skill ?>">
+                                    <input type="text" class="form-control" id="skill" name="skill" value="<?= @$value->skill ?>" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="proficiency">Proficiency</label>
@@ -96,7 +94,7 @@ if (!empty($skills)) {
                                 </div>
                                 <div class="form-group">
                                     <label for="years_exp" class="col-form-label">Years of Experience:</label>
-                                    <input type="text" class="form-control" id="years_exp" value="<?= @$value->years_exp ?>">
+                                    <input type="text" class="form-control" id="years_exp" name="years_exp" value="<?= @$value->years_exp ?>" required>
                                 </div>
                             </form>
                         </div>

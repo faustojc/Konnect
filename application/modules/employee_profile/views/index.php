@@ -94,7 +94,7 @@ main_header(['employee_profile']);
     }
 
     .nav-pills .nav-link.active,
-    .nav-pills .show>.nav-link {
+    .nav-pills .show > .nav-link {
         color: #fff;
         background-color: #0dcaf0;
     }
@@ -449,11 +449,11 @@ main_header(['employee_profile']);
                                 <?php endif; ?>
                             </div>
                             <?php if ($has_permission): ?>
-                                <div class="modal fade" id="ModalEduc" tabindex="-1" role="dialog" aria-labelledby="ModalEduc" aria-hidden="true">
+                                <div class="modal fade" id="ModalEduc" tabindex="-1" role="dialog" aria-labelledby="ModalEducLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Add Education</h5>
+                                                <h5 class="modal-title" id="ModalEducLabel">Add Education</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -507,12 +507,12 @@ main_header(['employee_profile']);
 
                                                             <div class="col-md-6">
                                                                 <label for="title">Title</label>
-                                                                <input type="text" class="form-control" name="title" id="title" placeholder="Enter Title">
+                                                                <input type="text" class="form-control" name="title" id="title" placeholder="Enter Title" required>
                                                             </div>
                                                         </div>
                                                         <div class="pb-3">
                                                             <label for="institution">Institution</label>
-                                                            <input type="text" class="form-control" name="institution" id="institution" placeholder="Enter Institution">
+                                                            <input type="text" class="form-control" name="institution" id="institution" placeholder="Enter Institution" required>
                                                         </div>
                                                         <div class="row pb-4">
                                                             <div class="col-md">
@@ -526,11 +526,11 @@ main_header(['employee_profile']);
                                                         <div class="row pb-3">
                                                             <div class="col-md-6">
                                                                 <label for="start_date">Start Date</label>
-                                                                <input type="date" class="form-control" id="start_date" name="start_date">
+                                                                <input type="date" class="form-control" id="start_date" name="start_date" required>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label for="end_date">End Date</label>
-                                                                <input type="date" class="form-control" id="end_date" name="end_date">
+                                                                <input type="date" class="form-control" id="end_date" name="end_date" required>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -788,7 +788,7 @@ main_header(['employee_profile']);
                                     <form id="needs-validation">
                                         <div class="form-group">
                                             <label for="skill" class="col-form-label">Skill Name:</label>
-                                            <input type="text" class="form-control" id="skill">
+                                            <input type="text" class="form-control" id="skill" name="skill" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="proficiency">Proficiency</label>
@@ -801,7 +801,7 @@ main_header(['employee_profile']);
                                         </div>
                                         <div class="form-group">
                                             <label for="years_exp" class="col-form-label">Years of Experience:</label>
-                                            <input type="text" class="form-control" id="years_exp">
+                                            <input type="text" class="form-control" id="years_exp" name="years_exp" required>
                                         </div>
                                     </form>
                                 </div>

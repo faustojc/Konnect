@@ -116,6 +116,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+// ------------------- FOR INTRODUCTION -------------------
+
 const update_intro = document.querySelector('#update_introduction');
 if (update_intro) {
     update_intro.addEventListener('click', () => {
@@ -129,6 +131,8 @@ if (update_intro) {
         });
     });
 }
+
+// ------------------- FOR EMPLOYMENT -------------------
 
 const add_employment = document.querySelector('#btn_save_employment');
 if (add_employment) {
@@ -146,64 +150,21 @@ if (add_employment) {
     });
 }
 
-const add_education = document.querySelector('#btn_add_educ');
-if (add_education) {
-    add_education.addEventListener('click', () => {
-        const form = add_education.closest('.modal-content').querySelector('form');
-        const formData = new FormData(form);
-
-        const description = tinymce.activeEditor.getContent();
-        formData.set('description', description);
-
-        formAction(baseUrl + 'education/add', 'POST', formData, () => {
-            load_education();
-            success('SUCCESS', 'Education successfully added');
-        });
-    });
-}
-
-const update_education = document.querySelectorAll('#btn_edit_educ');
-if (update_education) {
-    update_education.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const form = btn.closest('.modal-content').querySelector('form');
-            const formData = new FormData(form);
-
-            const description = tinymce.activeEditor.getContent();
-            formData.set('description', description);
-
-            formAction(baseUrl + 'education/update', 'POST', formData, () => {
-                load_education();
-                success('SUCCESS', 'Education successfully updated');
-            });
-        });
-    });
-}
-
-const delete_education = document.querySelectorAll('#delete_educ');
-if (delete_education) {
-    delete_education.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const id = btn.getAttribute('data-id');
-
-            formAction(baseUrl + 'education/delete', 'POST', {id: id}, () => {
-                load_education();
-                success('SUCCESS', 'Education successfully deleted');
-            });
-        });
-    });
-}
+// ------------------- FOR SKILLS -------------------
 
 const save_skill = document.querySelector('#btn_skill');
 if (save_skill) {
     save_skill.addEventListener('click', () => {
         const form = save_skill.closest('.modal-content').querySelector('form');
         const formData = new FormData(form);
+        const isValid = validateForm(form);
 
-        formAction(baseUrl + 'employeeskills/EmployeeSkills/save_skill', 'POST', formData, () => {
-            load_skill();
-            success('SUCCESS', 'Skill successfully added');
-        });
+        if (isValid) {
+            formAction(baseUrl + 'employeeskills/EmployeeSkills/saveSkill', 'POST', formData, () => {
+                load_skill();
+                success('SUCCESS', 'Skill successfully added');
+            });
+        }
     });
 }
 
@@ -213,11 +174,14 @@ if (update_skill) {
         btn.addEventListener('click', () => {
             const form = btn.closest('.modal-content').querySelector('form');
             const formData = new FormData(form);
+            const isValid = validateForm(form);
 
-            formAction(baseUrl + 'employeeskills/EmployeeSkills/update_skill', 'POST', formData, () => {
-                load_skill();
-                success('SUCCESS', 'Skill successfully updated');
-            });
+            if (isValid) {
+                formAction(baseUrl + 'employeeskills/EmployeeSkills/editSkill', 'POST', formData, () => {
+                    load_skill();
+                    success('SUCCESS', 'Skill successfully updated');
+                });
+            }
         });
     });
 }
@@ -228,7 +192,7 @@ if (delete_skill) {
         btn.addEventListener('click', () => {
             const id = btn.getAttribute('data-id');
 
-            formAction(baseUrl + 'employeeskills/EmployeeSkills/delete_skill', 'POST', {id: id}, () => {
+            formAction(baseUrl + 'employeeskills/EmployeeSkills/deleteSkill', 'POST', {id: id}, () => {
                 load_skill();
                 success('SUCCESS', 'Skill successfully deleted');
             });
@@ -236,7 +200,7 @@ if (delete_skill) {
     });
 }
 
-// For File upload
+// ------------------- FILE UPLOAD RESUME -------------------
 const file_input = document.querySelector('.file-input');
 if (file_input) {
     file_input.addEventListener('change', () => {
@@ -276,6 +240,56 @@ if (delete_resume) {
     });
 }
 
+// ---------- FOR EDUCATION ---------- //
+
+const save_education = document.querySelector('#save_education');
+if (save_education) {
+    save_education.addEventListener('click', () => {
+        const form = save_education.closest('.modal-content').querySelector('form');
+        const formData = new FormData(form);
+
+        const description = tinymce.activeEditor.getContent();
+        formData.set('description', description);
+
+        formAction(baseUrl + 'education/add', 'POST', formData, () => {
+            load_education();
+            success('SUCCESS', 'Education successfully added');
+        });
+    });
+}
+
+const update_education = document.querySelectorAll('.edit-education');
+if (update_education) {
+    update_education.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const form = btn.closest('.modal-content').querySelector('form');
+            const formData = new FormData(form);
+
+            const description = tinymce.activeEditor.getContent();
+            formData.set('description', description);
+
+            formAction(baseUrl + 'education/update', 'POST', formData, () => {
+                load_education();
+                success('SUCCESS', 'Education successfully updated');
+            });
+        });
+    });
+}
+
+const delete_education = document.querySelectorAll('#delete_educ');
+if (delete_education) {
+    delete_education.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const id = btn.getAttribute('data-id');
+
+            formAction(baseUrl + 'education/delete', 'POST', {id: id}, () => {
+                load_education();
+                success('SUCCESS', 'Education successfully deleted');
+            });
+        });
+    });
+}
+
 // ------------------ LEGACY CODES ------------------
 
 $(document).on('click', '#btn_save_training', function () {
@@ -298,13 +312,6 @@ $(document).on('click', '#btn_save_training', function () {
             load_training();
         });
     }
-});
-
-$('#btn_save').click(function () {
-    setTimeout(function () {
-        // Dismiss the modal after a delay of 2 seconds (2000 milliseconds)
-        $('#ModalEduc').modal('hide');
-    }, 1000);
 });
 
 $('#btn_save_training').click(function () {
@@ -343,13 +350,6 @@ $(document).on('click', '#btn_edit_train', function () {
             const data = JSON.parse(response.responseText);
             error('ERROR', data.message);
         }
-    });
-});
-
-$(document).on('click', '#delete_educ', function () {
-    formAction(baseUrl + 'employee_profile/service/employee_profile_service/delete_education', 'POST', {ID: $(this).data('id')}, function () {
-        load_education();
-        success('SUCCESS', 'Education successfully deleted');
     });
 });
 

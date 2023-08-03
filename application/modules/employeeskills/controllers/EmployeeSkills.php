@@ -13,9 +13,9 @@ class EmployeeSkills extends MY_Controller
     /**
      * @throws JsonException
      */
-    public function save_skill(): void
+    public function saveSkill(): void
     {
-        $data = $this->input->post();
+        $data = $this->input->post(NULL, TRUE);
         $data['employee_id'] = $this->userdata->ID;
 
         $response = $this->EmployeeSkills_model->save($data);
@@ -25,9 +25,9 @@ class EmployeeSkills extends MY_Controller
     /**
      * @throws JsonException
      */
-    public function edit_skill(): void
+    public function editSkill(): void
     {
-        $data = $this->input->post();
+        $data = $this->input->post(NULL, TRUE);
         $data['employee_id'] = $this->userdata->ID;
 
         $response = $this->EmployeeSkills_model->update($data['id'], $data);
@@ -37,7 +37,7 @@ class EmployeeSkills extends MY_Controller
     /**
      * @throws JsonException
      */
-    public function delete_skill(): void
+    public function deleteSkill(): void
     {
         $id = $this->input->post('id');
 

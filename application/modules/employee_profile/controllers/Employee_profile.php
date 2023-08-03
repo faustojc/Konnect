@@ -71,6 +71,7 @@ class Employee_profile extends MY_Controller
         $this->data['employers'] = $this->Employer_model->get_employers(4);
         $this->data['employees'] = $this->employee_model->get_all_employees(4, $ID);
         $this->data['feedbacks'] = $this->Feedback_model->getAllUsersFeedback($this->current_user->user_id);
+        $this->data['resume'] = $this->Resume_model->getResume($ID);
 
         if ($this->has_permission) {
             $this->data['following'] = $this->follow_model->get_following($this->userdata->ID);
@@ -98,6 +99,17 @@ class Employee_profile extends MY_Controller
         $intro = $this->employee_model->getEmployee($this->current_user->ID, 'Introduction');
 
         echo $intro->Introduction;
+    }
+
+    /**
+     * @throws JsonException
+     */
+    public function getResume(): void
+    {
+        $this->data['has_permission'] = $this->has_permission;
+        $resume = $this->Resume_model->getResume($this->current_user->ID);
+
+        echo json_encode($resume, JSON_THROW_ON_ERROR);
     }
 
     public function getEducations(): void

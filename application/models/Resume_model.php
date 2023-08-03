@@ -28,7 +28,10 @@ class Resume_model extends CI_Model
      */
     public function getResume(int $employee_id)
     {
-        return $this->db->get_where($this->Table->resume, ['employee_id' => $employee_id])->row();
+        return $this->db->select('tbl_resume.*, tbl_employee.id AS employee_id')
+            ->join($this->Table->employee, 'tbl_employee.id = tbl_resume.employee_id')
+            ->where('tbl_resume.employee_id', $employee_id)
+            ->get($this->Table->resume)->row();
     }
 
     public function save($info): array

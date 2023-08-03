@@ -29,22 +29,24 @@ document.addEventListener('DOMContentLoaded', () => {
     let barangay;
 
     const account_info = document.querySelector('#account-info');
-    const observer = new MutationObserver(function (mutations) {
-        // check if the account info class name contains .active.show
-        if (account_info.classList.contains('active') && account_info.classList.contains('show')) {
-            address = document.querySelector('#address');
-            region = document.querySelector('#region');
-            province = document.querySelector('#province');
-            city = document.querySelector('#city');
-            barangay = document.querySelector('#barangay');
+    if (account_info) {
+        const observer = new MutationObserver(function (mutations) {
+            // check if the account info class name contains .active.show
+            if (account_info.classList.contains('active') && account_info.classList.contains('show')) {
+                address = document.querySelector('#address');
+                region = document.querySelector('#region');
+                province = document.querySelector('#province');
+                city = document.querySelector('#city');
+                barangay = document.querySelector('#barangay');
 
-            if (address && region && province && city && barangay) {
-                locationDropdown(region, province, city, barangay);
+                if (address && region && province && city && barangay) {
+                    locationDropdown(region, province, city, barangay);
+                }
             }
-        }
-    });
+        });
 
-    observer.observe(account_info, {attributes: true});
+        observer.observe(account_info, {attributes: true});
+    }
 
     // TinyMCE
     textareaEditor('#summary', 350, function (editor) {
@@ -126,6 +128,35 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+const post_job = document.querySelector('#post_job');
+if (post_job) {
+    post_job.addEventListener('click', function () {
+        const form = post_job.closest('.modal-content').querySelector('form');
+        const description = tinymce.get(form.querySelector('textarea').id).getContent();
+        const formData = new FormData(form);
+
+        formData.set('description', description);
+
+        const isValid = validateForm(form);
+        if (isValid) {
+            const spinner = document.createElement('span');
+
+            spinner.classList.add('spinner-border', 'spinner-border-sm', 'mx-2');
+            post_job.append(spinner);
+
+            formAction(baseUrl + 'jobposting/service/Jobposting_service/post_job', 'POST', formData, (data) => {
+                post_job.querySelector('span.spinner-border').remove();
+                success('SUCCESS', 'Job successfully posted');
+
+                if (typeof data === 'string') {
+                    const jobPostSection = document.querySelector('#jobpost_view_section');
+                    jobPostSection.insertAdjacentElement('afterbegin', data);
+                }
+            });
+        }
+    });
+}
 
 const search_employed_input = document.querySelector('#search_employed');
 if (search_employed_input) {

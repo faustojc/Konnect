@@ -1,8 +1,5 @@
 <?php
 const DUPLICATE_RECORD = 'Duplicate record already found in the system.';
-const EXIST_COLLECTION_LINE = 'Sorry this transaction cannot be process, this invoice was collected. ';
-const EXIST_INVOICE_TRANSACTION = 'Sorry this transaction cannot be process, this client has invoice transacted. ';
-const EXIST_COLLECTION_TRANSACTION = 'Sorry this transaction cannot be process, this invoice has collection transacted. ';
 const REQUIRED_FIELD = 'Please fill in required fields.';
 const PASSWORD_LENGTH = 'Password should not be less than 6 (six) characters long.';
 const USERNAME_LENGTH = 'Username should not be less than 6 (six) characters long.';

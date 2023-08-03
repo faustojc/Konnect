@@ -3,8 +3,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Jobposting_services_model extends CI_Model
 {
-    public $ID;
-    public $Table;
+    /**
+     * @var mixed
+     */
+    private $Table;
 
     /**
      * @throws JsonException
@@ -21,17 +23,16 @@ class Jobposting_services_model extends CI_Model
         try {
             $this->db->trans_start();
             $this->db->insert($this->Table->jobposting, $info);
-            $this->db->trans_complete();
-
             $new_id = $this->db->insert_id();
+            $this->db->trans_complete();
 
             if ($this->db->trans_status() === FALSE) {
                 $this->db->trans_rollback();
-                return ['message' => ERROR_PROCESSING, 'has_error' => TRUE, 'id' => $new_id];
+                return ['message' => ERROR_PROCESSING, 'has_error' => TRUE];
             }
 
             $this->db->trans_commit();
-            return ['message' => SAVED_SUCCESSFUL, 'has_error' => FALSE];
+            return ['message' => SAVED_SUCCESSFUL, 'has_error' => FALSE, 'id' => $new_id];
         } catch (Exception $msg) {
             return ['message' => $msg->getMessage(), 'has_error' => TRUE];
         }

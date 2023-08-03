@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     if (typeof data === 'string') {
                         const jobPostSection = document.querySelector('#jobpost_section');
-                        jobPostSection.insertAdjacentElement('afterbegin', data);
+                        jobPostSection.insertAdjacentHTML('afterbegin', data);
                     }
                 });
             }

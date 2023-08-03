@@ -22,6 +22,28 @@ if (!function_exists('jobpost_all_display')) {
     }
 }
 
+if (!function_exists('displayJobpost')) {
+    /**
+     * Jobpost Display Component
+     *
+     * A component that displays a jobpost.
+     *
+     * USAGE: displayJobpost($data);
+     *
+     * @var object $data The data of jobpost must contain the same keys as the database table.
+     */
+    function displayJobpost(object $data)
+    {
+        $jobpost = [
+            'jobpost' => $data,
+            'auth' => get_userdata(AUTH),
+        ];
+
+        $CI = &get_instance();
+        $CI->load->view('components/load_jobpost', $jobpost);
+    }
+}
+
 if (!function_exists('jobpost_update_modal')) {
     /**
      * Modal for Jobpost Editing Component

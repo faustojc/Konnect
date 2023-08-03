@@ -5,22 +5,14 @@ const load_summary = () => {
         .then(response => response.text())
         .then(data => {
             document.querySelector('#load_summary').innerHTML = data;
-        });
 
+            tinymce.remove('#summary');
+            textareaEditor('#summary', 350);
+        });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const status = document.querySelectorAll('span.status');
-
-    status.forEach(value => {
-        if (value.textContent === 'OPEN') {
-            value.classList.add('badge-success');
-            value.classList.remove('badge-danger');
-        } else {
-            value.classList.add('badge-danger');
-            value.classList.remove('badge-success');
-        }
-    });
+    setJobStatus();
 
     let address;
     let region;
@@ -66,6 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    textareaEditor('#description', 500);
 
     const edit_summary = document.querySelector('.edit-summary');
     if (edit_summary) {
@@ -133,7 +127,7 @@ const post_job = document.querySelector('#post_job');
 if (post_job) {
     post_job.addEventListener('click', function () {
         const form = post_job.closest('.modal-content').querySelector('form');
-        const description = tinymce.get(form.querySelector('textarea').id).getContent();
+        const description = tinymce.activeEditor.getContent();
         const formData = new FormData(form);
 
         formData.set('description', description);
@@ -145,13 +139,17 @@ if (post_job) {
             spinner.classList.add('spinner-border', 'spinner-border-sm', 'mx-2');
             post_job.append(spinner);
 
-            formAction(baseUrl + 'jobposting/service/Jobposting_service/post_job', 'POST', formData, (data) => {
+            info('Processing', 'Please wait...', 3000);
+
+            formAction(baseUrl + 'jobposting/service/Jobposting_service/postJob', 'POST', formData, (data) => {
                 post_job.querySelector('span.spinner-border').remove();
                 success('SUCCESS', 'Job successfully posted');
 
                 if (typeof data === 'string') {
                     const jobPostSection = document.querySelector('#jobpost_view_section');
-                    jobPostSection.insertAdjacentElement('afterbegin', data);
+                    jobPostSection.insertAdjacentHTML('afterbegin', data);
+
+                    setJobStatus();
                 }
             });
         }
@@ -180,5 +178,39 @@ if (search_employed_input) {
                 table_row.style.display = "none";
             }
         })
+    });
+}
+
+const check_active = document.querySelectorAll('.check-active');
+if (check_active) {
+    check_active.forEach(check => {
+        check.addEventListener('click', function () {
+
+            const data = {
+                id: this.getAttribute('data-id'),
+                is_active: this.checked ? 1 : 0
+            }
+
+            formAction(baseUrl + 'employer_profile/service/Employer_profile_service/setActive', 'POST', data, function (response) {
+                success('SUCCESS', response.message);
+            });
+        });
+    });
+}
+
+const check_verified = document.querySelectorAll('.check-verified');
+if (check_verified) {
+    check_verified.forEach(check => {
+        check.addEventListener('click', function () {
+
+            const data = {
+                id: this.getAttribute('data-id'),
+                is_verified: this.checked ? 1 : 0
+            }
+
+            formAction(baseUrl + 'employer_profile/service/Employer_profile_service/setVerified', 'POST', data, function (response) {
+                success('SUCCESS', response.message);
+            });
+        });
     });
 }

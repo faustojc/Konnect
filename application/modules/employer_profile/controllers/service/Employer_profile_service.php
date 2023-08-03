@@ -80,4 +80,26 @@ class Employer_profile_service extends MY_Controller
         $response = $this->Employer_model->update($data);
         echo json_encode($response, JSON_THROW_ON_ERROR);
     }
+
+    /**
+     * @throws JsonException
+     */
+    public function setActive(): void
+    {
+        $data = $this->input->post();
+        $response = $this->Employed_model->update($data['id'], ['is_active' => $data['is_active']]);
+
+        echo json_encode($response, JSON_THROW_ON_ERROR);
+    }
+
+    /**
+     * @throws JsonException
+     */
+    public function setVerified(): void
+    {
+        $data = $this->input->post();
+        $response = $this->Employed_model->update($data['id'], ['is_verified' => $data['is_verified']]);
+
+        echo json_encode($response, JSON_THROW_ON_ERROR);
+    }
 }

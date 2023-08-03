@@ -81,7 +81,7 @@
                     <a class="text-center see-more" data-target=".job-description" style="display: block;" role="button">See
                         more</a>
 
-                    <?php if ($auth['user_type'] != 'EMPLOYER') {
+                    <?php if ($auth['user_type'] == 'EMPLOYEE') {
                         $hasApplied = FALSE;
 
                         foreach ($applicant as $applied) {

@@ -173,7 +173,7 @@
         <div class="col-md-3 pt-0">
             <div class="card shadow-none">
                 <div class="card-body" style="padding:10px 20px; font-weight:650;">
-                    <a href="<?php echo base_url() ?>employee_profile?id=<?= $employee->ID ?>" class=""><i class="fa-solid fa-chevron-left"></i>
+                    <a href="<?php echo base_url() ?>employee_profile?id=<?= $emp->ID ?>" class=""><i class="fa-solid fa-chevron-left"></i>
                         Back to profile</a>
                 </div>
             </div>
@@ -203,8 +203,8 @@
                                         <label class="form-label">Profile Picture</label>
                                         <div class="picture-container">
                                             <div class="picture">
-                                                <img src="<?= base_url() ?>assets/images/employee/profile_pic/<?= $employee->Employee_image ?>" class="picture-src" id="wizardPicturePreview" title="" alt="">
-                                                <input type="file" name="Employee_image" id="Employee_image" value="<?= $employee->Employee_image ?>">
+                                                <img src="<?= base_url() ?>assets/images/employee/profile_pic/<?= $emp->Employee_image ?>" class="picture-src" id="wizardPicturePreview" title="" alt="">
+                                                <input type="file" name="Employee_image" id="Employee_image" value="<?= $emp->Employee_image ?>">
                                             </div>
                                             <h6 class="my-3">Upload New Picture</h6>
                                         </div>
@@ -215,23 +215,23 @@
                             <div class="card-body ">
                                 <div class="form-group">
                                     <label for="Title" class="form-label">Title</label>
-                                    <input type="text" class="form-control" name="Title" id="Title" value="<?= $employee->Title ?>" placeholder="Enter Title">
+                                    <input type="text" class="form-control" name="Title" id="Title" value="<?= $emp->Title ?>" placeholder="Enter Title">
                                 </div>
                                 <div class="form-group">
                                     <label for="Fname" class="form-label">First Name</label>
-                                    <input type="text" class="form-control" name="Fname" id="Fname" value="<?= $employee->Fname ?>" placeholder="Enter First Name">
+                                    <input type="text" class="form-control" name="Fname" id="Fname" value="<?= $emp->Fname ?>" placeholder="Enter First Name">
                                 </div>
                                 <div class="form-group">
                                     <label for="Mname" class="form-label">Middle Name</label>
-                                    <input type="text" class="form-control" name="Mname" id="Mname" value="<?= $employee->Mname ?>" placeholder="Enter Middle Name">
+                                    <input type="text" class="form-control" name="Mname" id="Mname" value="<?= $emp->Mname ?>" placeholder="Enter Middle Name">
                                 </div>
                                 <div class="form-group">
                                     <label for="Lname" class="form-label">Last Name</label>
-                                    <input type="text" class="form-control" name="Lname" id="Lname" value="<?= $employee->Lname ?>" placeholder="Enter Last Name">
+                                    <input type="text" class="form-control" name="Lname" id="Lname" value="<?= $emp->Lname ?>" placeholder="Enter Last Name">
                                 </div>
                                 <div class="form-group">
                                     <label for="Gender" class="form-label">Gender</label>
-                                    <select name="Gender" class="form-control" id="Gender" value="<?= $employee->Gender ?>" style="width:250px;">
+                                    <select name="Gender" class="form-control" id="Gender" value="<?= $emp->Gender ?>" style="width:250px;">
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
                                         <option value="others">Others</option>
@@ -246,7 +246,7 @@
                             <div class="card-body pb-2">
                                 <div class="form-group">
                                     <label for="Email" class="form-label">E-mail Address</label>
-                                    <input type="email" class="form-control" name="Email" id="Email" value="<?= $employee->Email ?>" placeholder="Enter Email address">
+                                    <input type="email" class="form-control" name="Email" id="Email" value="<?= $emp->Email ?>" placeholder="Enter Email address">
                                     <?php verify_message($auth); ?>
                                 </div>
                             </div>
@@ -258,24 +258,24 @@
                             <div class="card-body pb-2">
                                 <div class="form-group">
                                     <label for="Cnum" class="form-label">Contact Number</label>
-                                    <input type="number" class="form-control" name="Cnum" id="Cnum" value="<?= @$employee->Cnum ?>" placeholder="Enter Contact number">
+                                    <input type="number" class="form-control" name="Cnum" id="Cnum" value="<?= @$emp->Cnum ?>" placeholder="Enter Contact number">
                                 </div>
                                 <div class="form-group">
                                     <label for="Address" class="form-label">Address</label>
-                                    <input type="text" class="form-control" name="Address" id="Address" value="<?= @$employee->Address ?>" placeholder="Enter Address">
+                                    <input type="text" class="form-control" name="Address" id="Address" value="<?= @$emp->Address ?>" placeholder="Enter Address">
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="Region" class="form-label">Region</label>
-                                            <select name="Region" id="Region" class="form-control" value="<?= @$employee->Region ?>"> </select>
+                                            <select name="Region" id="Region" class="form-control" value="<?= @$emp->Region ?>"> </select>
                                         </div>
 
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="Province" class="form-label">Province</label>
-                                            <select name="Province" id="Province" class="form-control" value="<?= @$employee->Province ?>"> </select>
+                                            <select name="Province" id="Province" class="form-control" value="<?= @$emp->Province ?>"> </select>
                                         </div>
                                     </div>
 
@@ -284,30 +284,30 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="City" class="form-label">City</label>
-                                            <select name="City" id="City" class="form-control" value="<?= @$employee->City ?>"> </select>
+                                            <select name="City" id="City" class="form-control" value="<?= @$emp->City ?>"> </select>
                                         </div>
 
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="Barangay" class="form-label">Barangay</label>
-                                            <select name="Barangay" id="Barangay" class="form-control" value="<?= @$employee->Barangay ?>"> </select>
+                                            <select name="Barangay" id="Barangay" class="form-control" value="<?= @$emp->Barangay ?>"> </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="Religion" class="form-label">Religion</label>
-                                    <input type="text" class="form-control" name="Religion" id="Religion" value="<?= @$employee->Religion ?>" placeholder="Enter Religion">
+                                    <input type="text" class="form-control" name="Religion" id="Religion" value="<?= @$emp->Religion ?>" placeholder="Enter Religion">
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for="Bday" class="form-label">Birthday</label>
-                                        <input type="date" class="form-control" id="Bday" name="Bday" value="<?= @$employee->Bday ?>" style="width:395px;">
+                                        <input type="date" class="form-control" id="Bday" name="Bday" value="<?= @$emp->Bday ?>" style="width:395px;">
                                     </div>
 
                                     <div class="col-md-6">
                                         <label for="Cstat" class="form-label">Civil Status</label>
-                                        <select name="Cstat" class="form-control" id="Cstat" value="<?= @$employee->Cstat ?>" style="width:395px;">
+                                        <select name="Cstat" class="form-control" id="Cstat" value="<?= @$emp->Cstat ?>" style="width:395px;">
                                             <option value="single">Single</option>
                                             <option value="married">Married</option>
                                             <option value="widowed">Widowed</option>
@@ -324,19 +324,19 @@
                             <div class="card-body pb-2">
                                 <div class="form-group">
                                     <label for="SSS" class="form-label">SSS</label>
-                                    <input type="number" class="form-control" name="SSS" id="SSS" value="<?= @$employee->SSS ?>" placeholder="Enter SSS number">
+                                    <input type="number" class="form-control" name="SSS" id="SSS" value="<?= @$emp->SSS ?>" placeholder="Enter SSS number">
                                 </div>
                                 <div class="form-group">
                                     <label for="Tin" class="form-label">Tin</label>
-                                    <input type="number" class="form-control" name="Tin" id="Tin" value="<?= @$employee->Tin ?>" placeholder="Enter Tin number">
+                                    <input type="number" class="form-control" name="Tin" id="Tin" value="<?= @$emp->Tin ?>" placeholder="Enter Tin number">
                                 </div>
                                 <div class="form-group">
                                     <label for="Phil_health" class="form-label">Phil Health</label>
-                                    <input type="number" class="form-control" name="Phil_health" id="Phil_health" value="<?= @$employee->Phil_health ?>" placeholder="Enter Phil Health number">
+                                    <input type="number" class="form-control" name="Phil_health" id="Phil_health" value="<?= @$emp->Phil_health ?>" placeholder="Enter Phil Health number">
                                 </div>
                                 <div class="form-group">
                                     <label for="Pag_ibig" class="form-label">Pag-IBIG</label>
-                                    <input type="number" class="form-control" name="Pag_ibig" id="Pag_ibig" value="<?= @$employee->Pag_ibig ?>" placeholder="Enter Pag-IBIG number">
+                                    <input type="number" class="form-control" name="Pag_ibig" id="Pag_ibig" value="<?= @$emp->Pag_ibig ?>" placeholder="Enter Pag-IBIG number">
                                 </div>
                             </div>
                         </form>
@@ -380,9 +380,9 @@
                 </div>
                 <hr class="border-light mb-2">
                 <div class="text-right m-2">
-                    <a href="<?php echo base_url() ?>employee_profile/index/<?= $employee->ID ?>" class="btn btn-default">Cancel</a>&nbsp;
+                    <a href="<?php echo base_url() ?>employee_profile/index/<?= $emp->ID ?>" class="btn btn-default">Cancel</a>&nbsp;
                     <button type="submit" class="btn btn-info" id="update_profile">Save changes</button>
-                    <button type="button" class="btn btn-danger delete" id="delete_profile" data-id="<?= $employee->ID ?>" style="display:none;">
+                    <button type="button" class="btn btn-danger delete" id="delete_profile" data-id="<?= $emp->ID ?>" style="display:none;">
                         Confirm deletion
                     </button>
                 </div>

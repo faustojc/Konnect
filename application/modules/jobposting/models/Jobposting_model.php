@@ -54,7 +54,7 @@ class Jobposting_model extends CI_Model
 
     public function job_info($id)
     {
-        return $this->db->select('tbl_jobposting.*, tbl_user.is_verified AS user_verified, tbl_employer.tradename AS EmployerTradename, tbl_employer.image AS EmployerLogo')
+        return $this->db->select('tbl_jobposting.*, tbl_user.is_verified AS user_verified, tbl_employer.id AS employer_id, tbl_employer.tradename AS EmployerTradename, tbl_employer.image AS EmployerLogo')
             ->from($this->Table->jobposting)
             ->join($this->Table->employer, $this->Table->employer . '.id = ' . $this->Table->jobposting . '.employer_id')
             ->join($this->Table->user, 'tbl_user.id = tbl_employer.user_id')

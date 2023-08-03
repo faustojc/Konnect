@@ -102,10 +102,8 @@ function formAction(url, request_type, data, callback = () => {}) {
     }
 
     const successFunc = (response) => {
-        if (typeof response === 'string') {
+        if (typeof response === 'string' || typeof response === 'object') {
             callback(response);
-        } else if (typeof response === 'object') {
-            callback(data);
         } else {
             const data = JSON.parse(response);
             callback(data);
@@ -124,8 +122,6 @@ function formAction(url, request_type, data, callback = () => {}) {
             }
         } catch (e) {
             error('ERROR', 'Something went wrong', 3000);
-        } finally {
-            console.log(response);
         }
     }
 }

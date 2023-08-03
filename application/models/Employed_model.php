@@ -67,7 +67,7 @@ class Employed_model extends CI_Model
     {
         try {
             $this->db->trans_start();
-            $this->db->where('id', $id)->update($this->Table->notification, $data);
+            $this->db->where('id', $id)->update($this->Table->employed, $data);
             $this->db->trans_complete();
 
             if ($this->db->trans_status()) {

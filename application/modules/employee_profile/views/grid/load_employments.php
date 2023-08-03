@@ -6,7 +6,6 @@
     a:hover {
         color: #435861;
     }
-
 </style>
 
 <?php if (!empty($employments)):
@@ -18,20 +17,24 @@
 
             if (!in_array($start_date, $dates)): ?>
                 <div class="time-label">
-                    <span class="bg-gradient-info"><?= $start_date ?></span>
+                    <span class="bg-gradient-info">
+                        <?= $start_date ?>
+                    </span>
                 </div>
                 <?php $dates[] = $start_date;
             endif; ?>
 
             <div>
-                <i class="fas fa-briefcase bg-orange"></i>
+                <i class="fas fa-briefcase bg-info"></i>
                 <div class="timeline-item">
                     <span class="time">
                         <i class="fas fa-clock mr-1"></i>
                         <?= date('D, d M', strtotime($employment->date_started)) ?>
                     </span>
                     <h5 class="timeline-header">
-                        Started working in <?= $employment->tradename ?> as <?= $employment->job_title ?>
+                        Started working in
+                        <?= $employment->tradename ?> as
+                        <?= $employment->job_title ?>
                     </h5>
                     <?php if (!empty($employment->job_description)): ?>
                         <div class="timeline-body" style="max-height: 200px">

@@ -18,7 +18,7 @@ class Applicant_model extends CI_Model
         $this->Table = json_decode(TABLE, FALSE, 512, JSON_THROW_ON_ERROR);
     }
 
-    public function getApplicant($id)
+    public function getApplicant($id, $job_id)
     {
         return $this->db->select('tbl_applicant.*, 
         tbl_user.is_verified AS user_verified, 
@@ -30,6 +30,7 @@ class Applicant_model extends CI_Model
             ->join($this->Table->user, 'tbl_user.id = tbl_employee.user_id', 'inner')
             ->where('tbl_applicant.id', $id)
             ->or_where('tbl_applicant.employee_id', $id)
+            ->where('tbl_applicant.job_id', $job_id)
             ->get()->row();
     }
 

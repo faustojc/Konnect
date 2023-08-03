@@ -18,8 +18,22 @@ class Applicant_model extends CI_Model
         $this->Table = json_decode(TABLE, FALSE, 512, JSON_THROW_ON_ERROR);
     }
 
-    public function getApplicant($id, $job_id)
+    public function getApplicant($id, $job_id = NULL)
     {
+        if ($job_id == NULL) {
+            return $this->db->select('tbl_applicant.*, 
+        tbl_user.is_verified AS user_verified, 
+        tbl_user.email AS email,
+        CONCAT_WS(" ", tbl_employee.Fname, tbl_employee.Mname, tbl_employee.Lname) AS employeeName, 
+        tbl_employee.user_id AS employeeUserID,')
+                ->from($this->Table->applicant)
+                ->join($this->Table->employee, 'tbl_employee.ID = tbl_applicant.employee_id', 'inner')
+                ->join($this->Table->user, 'tbl_user.id = tbl_employee.user_id', 'inner')
+                ->where('tbl_applicant.id', $id)
+                ->or_where('tbl_applicant.employee_id', $id)
+                ->get()->row();
+        }
+
         return $this->db->select('tbl_applicant.*, 
         tbl_user.is_verified AS user_verified, 
         tbl_user.email AS email,

@@ -56,7 +56,7 @@ main_header(['Employer_profile']);
     }
 
     .nav-pills .nav-link.active,
-    .nav-pills .show > .nav-link {
+    .nav-pills .show>.nav-link {
         color: #fff;
         background-color: #0dcaf0;
     }
@@ -120,16 +120,16 @@ main_header(['Employer_profile']);
                                             </h5>
                                             <!-- <p class="text-left mb-1">
                                                 <?php if (empty($current_employer->employer_name)) {
-                                                echo $current_employer->tradename;
-                                            } else {
-                                                echo $current_employer->employer_name;
-                                            } ?>
+                                                    echo $current_employer->tradename;
+                                                } else {
+                                                    echo $current_employer->employer_name;
+                                                } ?>
                                             </p> -->
                                             <h5 class="widget-user-desc text-left text-dark py-2" style="font-weight: 550; font-size:18px; ">
                                                 <?= $current_employer->business_type ?>
                                             </h5>
                                             <h6 class="widget-user-desc text-left text-muted" style="font-weight: normal; font-size: 15px; width: 500px;">
-                                                <?= ucwords(@$current_employer->address) . ", " . ucwords(@$current_employer->city) ?>
+                                                <?= ucwords(@$current_employer->city) ?>
                                                 |
                                                 <a class="text-info" data-toggle="modal" data-target="#contact" style="cursor: pointer;">
                                                     Contact details </a>

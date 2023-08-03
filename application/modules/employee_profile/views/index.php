@@ -94,7 +94,7 @@ main_header(['employee_profile']);
     }
 
     .nav-pills .nav-link.active,
-    .nav-pills .show > .nav-link {
+    .nav-pills .show>.nav-link {
         color: #fff;
         background-color: #0dcaf0;
     }
@@ -321,7 +321,7 @@ main_header(['employee_profile']);
                                         <?= ucwords(@$details->Title) ?>
                                     </h5>
                                     <div class="widget-user-desc text-left text-muted" style="font-weight: normal; font-size:15px;">
-                                        <?= ucwords(@$details->Address) . ", " . ucwords(@$details->Barangay) . ", " . ucwords(@$details->City) ?>
+                                        <?= ucwords(@$details->City) ?>
                                         |
                                         <a data-toggle="modal" data-target="#profile_contact" style="color:#0dcaf0; cursor: pointer">
                                             Profile details </a>

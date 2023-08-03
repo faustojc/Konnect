@@ -51,22 +51,24 @@ document.addEventListener('DOMContentLoaded', function () {
     let barangay;
 
     const account_info = document.querySelector('#account-info');
-    const observer = new MutationObserver(function (mutations) {
-        // check if the account info class name contains .active.show
-        if (account_info.classList.contains('active') && account_info.classList.contains('show')) {
-            address = document.querySelector('#Address');
-            region = document.querySelector('#Region');
-            province = document.querySelector('#Province');
-            city = document.querySelector('#City');
-            barangay = document.querySelector('#Barangay');
+    if (account_info) {
+        const observer = new MutationObserver(function (mutations) {
+            // check if the account info class name contains .active.show
+            if (account_info.classList.contains('active') && account_info.classList.contains('show')) {
+                address = document.querySelector('#Address');
+                region = document.querySelector('#Region');
+                province = document.querySelector('#Province');
+                city = document.querySelector('#City');
+                barangay = document.querySelector('#Barangay');
 
-            if (address && region && province && city && barangay) {
-                locationDropdown(region, province, city, barangay);
+                if (address && region && province && city && barangay) {
+                    locationDropdown(region, province, city, barangay);
+                }
             }
-        }
-    });
+        });
 
-    observer.observe(account_info, {attributes: true, childList: true, characterData: true});
+        observer.observe(account_info, {attributes: true, childList: true, characterData: true});
+    }
 
     // TinyMCE
     textareaEditor('textarea', 400);
@@ -241,7 +243,6 @@ if (file_input) {
         }
     });
 }
-
 
 // ------------------ LEGACY CODES ------------------
 

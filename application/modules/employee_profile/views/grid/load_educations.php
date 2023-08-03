@@ -55,7 +55,7 @@
                     </div>
                     <div class="modal-body">
                         <form class="education-form">
-                            <input name="id" id="id" value="<?= $education->id ?>">
+                            <input name="id" id="id" value="<?= $education->id ?>" hidden>
                             <div class="px-2 py-2">
                                 <div class="row pb-3">
                                     <div class="col-md-6">

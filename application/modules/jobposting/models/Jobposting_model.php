@@ -95,19 +95,14 @@ class Jobposting_model extends CI_Model
             ->get($this->Table->jobposting)->result();
     }
 
-    public function getEmployerJobsLike($field, $keyword, $select = 'tbl_jobposting.*, tbl_user.is_verified AS user_verified, tbl_employer.* AS employer')
+    public function getEmployerJobsLike($field, $keyword, $id, $select = 'tbl_jobposting.*, tbl_user.is_verified AS user_verified, tbl_employer.* AS employer')
     {
         return $this->db->select($select)
             ->join($this->Table->employer, 'tbl_employer.id = tbl_jobposting.employer_id')
             ->join($this->Table->user, 'tbl_user.id = tbl_employer.user_id')
-            ->where('tbl_employer.user_id', $this->userdata->id)
+            ->where('tbl_employer.id', $id)
             ->like($field, $keyword)
             ->order_by('date_posted', 'DESC')
             ->get($this->Table->jobposting)->result();
-    }
-
-    public function getJobpostSelect($id, $select = '*')
-    {
-        return $this->db->select($select)->get_where($this->Table->jobposting, ['id' => $id])->row();
     }
 }

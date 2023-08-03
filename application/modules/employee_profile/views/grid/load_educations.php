@@ -103,12 +103,12 @@
 
                                     <div class="col-md-6">
                                         <label for="title">Title</label>
-                                        <input type="text" class="form-control" name="title" id="title" placeholder="Enter Title" required>
+                                        <input type="text" class="form-control" name="title" id="title" value="<?= $education->title ?>" placeholder="Enter Title" required>
                                     </div>
                                 </div>
                                 <div class="pb-3">
                                     <label for="institution">Institution</label>
-                                    <input type="text" class="form-control" name="institution" id="institution" placeholder="Enter Institution" required>
+                                    <input type="text" class="form-control" name="institution" id="institution" value="<?= $education->institution ?>" placeholder="Enter Institution" required>
                                 </div>
                                 <div class="row pb-4">
                                     <div class="col-md">
@@ -122,11 +122,11 @@
                                 <div class="row pb-3">
                                     <div class="col-md-6">
                                         <label for="start_date">Start Date</label>
-                                        <input type="date" class="form-control" id="start_date" name="start_date" required>
+                                        <input type="date" class="form-control" id="start_date" name="start_date" value="<?= $education->start_date ?>" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="end_date">End Date</label>
-                                        <input type="date" class="form-control" id="end_date" name="end_date" required>
+                                        <input type="date" class="form-control" id="end_date" name="end_date" value="<?= $education->end_date ?>" required>
                                     </div>
                                 </div>
                             </div>

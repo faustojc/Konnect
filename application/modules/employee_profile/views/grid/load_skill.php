@@ -43,8 +43,12 @@ if (!empty($skills)) {
                     </div>
                     <?php if ($has_permission): ?>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" id="delete_skill" data-dismiss="modal" data-id="<?= $value->id ?>">Delete</button>
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#skill<?= $key ?>" data-proficiency="<?= ucwords(@$value->proficiency) ?>">Edit</button>
+                            <button type="button" class="btn btn-secondary delete-skill" data-dismiss="modal" data-id="<?= $value->id ?>">
+                                Delete
+                            </button>
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#skill<?= $key ?>" data-proficiency="<?= ucwords(@$value->proficiency) ?>">
+                                Edit
+                            </button>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -66,7 +70,7 @@ if (!empty($skills)) {
                         </div>
                         <div class="modal-body">
                             <form>
-                                <input type="text" id="skill_id" value="<?= @$value->id ?>" hidden>
+                                <input type="text" id="id" value="<?= @$value->id ?>" hidden>
                                 <div class="form-group">
                                     <label for="skill" class="col-form-label">Skill Name:</label>
                                     <input type="text" class="form-control" id="skill" value="<?= @$value->skill ?>">
@@ -98,7 +102,7 @@ if (!empty($skills)) {
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-info" id="btn_update_skill" data-dismiss="modal">Save</button>
+                            <button type="button" class="btn btn-info update-skill" data-dismiss="modal">Save</button>
                         </div>
                     </div>
                 </div>
@@ -114,7 +118,9 @@ if (!empty($skills)) {
             </div>
             <div class="d-flex flex-column flex-grow-1">
                 <p class="fs-14">Showcase your skills to increase visibility to potential employers or clients.</p>
-                <button type="button" class="btn btn-light rounded-pill edit-summary" style="border-width: 2px" data-toggle="modal" data-target="#skill_modal">Add Skill</button>
+                <button type="button" class="btn btn-light rounded-pill edit-summary" style="border-width: 2px" data-toggle="modal" data-target="#skill_modal">
+                    Add Skill
+                </button>
             </div>
         <?php else: ?>
             <div>

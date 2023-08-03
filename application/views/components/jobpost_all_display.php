@@ -122,7 +122,7 @@
                         <a class="text-center see-more" data-target=".job-description" style="display: block;" role="button">
                             See more </a>
 
-                        <?php if ($auth['user_type'] == 'EMPLOYEE' && !empty($applicant)) {
+                        <?php if ($auth['user_type'] == 'EMPLOYEE') {
                             $hasApplied = FALSE;
 
                             foreach ($applicant as $applied) {
@@ -136,8 +136,6 @@
                             if (!$hasApplied) {
                                 apply_button($jobpost->id, 'APPLY NOW');
                             }
-                        } else {
-                            apply_button($jobpost->id, 'APPLY NOW');
                         } ?>
 
                     </div>

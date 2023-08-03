@@ -87,7 +87,7 @@ class Jobposting extends MY_Controller
         if ($this->auth['user_type'] == 'EMPLOYEE') {
             $sortHandler = new SortHandler();
             $this->data['details'] = $sortHandler->sortEmployeeRelevantJobposts($this->data['details']);
-            $this->data['applicant'] = $this->Applicant_model->getApplicant($this->userdata->ID);
+            $this->data['applications'] = $this->Applicant_model->getAppliedJobs($this->userdata->ID);
         }
 
         $this->data['content'] = 'grid/load_jobposting';
@@ -103,7 +103,7 @@ class Jobposting extends MY_Controller
         $this->data['job'] = $this->job_model->job_info($id);
 
         if ($this->auth['user_type'] == 'EMPLOYEE') {
-            $this->data['applicant'] = $this->Applicant_model->getApplicant($this->userdata->ID);
+            $this->data['applicant'] = $this->Applicant_model->getApplicant($this->userdata->ID, $id);
         }
 
         $this->data['content'] = 'grid/load_selected_job';

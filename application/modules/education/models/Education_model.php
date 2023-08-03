@@ -20,7 +20,7 @@ class Education_model extends CI_Model
         return $this->db->where('employee_id', $employee_id)->get($this->Table->education)->result();
     }
 
-    public function save($data): array
+    public function add($data): array
     {
         try {
             $this->db->trans_start();

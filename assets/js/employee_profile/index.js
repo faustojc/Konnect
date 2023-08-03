@@ -77,9 +77,6 @@ document.addEventListener('DOMContentLoaded', function () {
         observer.observe(account_info, {attributes: true, childList: true, characterData: true});
     }
 
-    // TinyMCE
-    textareaEditor('textarea', 400);
-
     const update_profile = document.querySelector('#update_profile');
     if (update_profile) {
         update_profile.addEventListener('click', function () {
@@ -251,10 +248,13 @@ if (save_education) {
         const description = tinymce.activeEditor.getContent();
         formData.set('description', description);
 
-        formAction(baseUrl + 'education/add', 'POST', formData, () => {
-            load_education();
-            success('SUCCESS', 'Education successfully added');
-        });
+        const isValid = validateForm(form);
+        if (isValid) {
+            formAction(baseUrl + 'education/add', 'POST', formData, () => {
+                load_education();
+                success('SUCCESS', 'Education successfully added');
+            });
+        }
     });
 }
 
@@ -268,10 +268,13 @@ if (update_education) {
             const description = tinymce.activeEditor.getContent();
             formData.set('description', description);
 
-            formAction(baseUrl + 'education/update', 'POST', formData, () => {
-                load_education();
-                success('SUCCESS', 'Education successfully updated');
-            });
+            const isValid = validateForm(form);
+            if (isValid) {
+                formAction(baseUrl + 'education/update', 'POST', formData, () => {
+                    load_education();
+                    success('SUCCESS', 'Education successfully updated');
+                });
+            }
         });
     });
 }

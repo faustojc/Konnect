@@ -29,7 +29,7 @@
                         <?php endif; ?>
                     </p>
                     <p class="widget-user-desc mb-0 mt-0 text-justify" style="font-weight: normal; font-size: 16px;">
-                        <?= $education->Description ?>
+                        <?= $education->description ?>
                     </p>
                 </div>
 

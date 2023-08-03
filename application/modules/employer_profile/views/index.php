@@ -56,7 +56,7 @@ main_header(['Employer_profile']);
     }
 
     .nav-pills .nav-link.active,
-    .nav-pills .show>.nav-link {
+    .nav-pills .show > .nav-link {
         color: #fff;
         background-color: #0dcaf0;
     }
@@ -120,10 +120,10 @@ main_header(['Employer_profile']);
                                             </h5>
                                             <!-- <p class="text-left mb-1">
                                                 <?php if (empty($current_employer->employer_name)) {
-                                                    echo $current_employer->tradename;
-                                                } else {
-                                                    echo $current_employer->employer_name;
-                                                } ?>
+                                                echo $current_employer->tradename;
+                                            } else {
+                                                echo $current_employer->employer_name;
+                                            } ?>
                                             </p> -->
                                             <h5 class="widget-user-desc text-left text-dark py-2" style="font-weight: 550; font-size:18px; ">
                                                 <?= $current_employer->business_type ?>
@@ -242,7 +242,7 @@ main_header(['Employer_profile']);
                                 <h3 class="card-title fw-500">Job Post</h3>
                             </div>
                         </div>
-                        <div>
+                        <div id="jobpost_view_section">
                             <?php jobpost_all_display($jobpostings) ?>
                         </div>
                     </div>
@@ -341,7 +341,7 @@ main_header(['Employer_profile']);
                     <form>
                         <div class="pb-1">
                             <label for="title" style="">Job Title</label>
-                            <input id="title" name="title" class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:10px;" type="text" placeholder="Enter Job Name">
+                            <input id="title" name="title" class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:10px;" type="text" placeholder="Enter Job Name" required>
                         </div>
 
                         <div class="row pt-2">
@@ -357,7 +357,7 @@ main_header(['Employer_profile']);
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="job_type">Job Type</label>
-                                    <select id="job_type" name="job_type" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;">
+                                    <select id="job_type" name="job_type" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;" required>
                                         <option>Full time</option>
                                         <option>Part time</option>
                                         <option>Internship</option>
@@ -372,7 +372,7 @@ main_header(['Employer_profile']);
                             <div class="col-4">
                                 <div class="form-group">
                                     <label for="shift">Schedule</label>
-                                    <select id="shift" name="shift" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;">
+                                    <select id="shift" name="shift" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;" required>
                                         <option>Day</option>
                                         <option>Night</option>
                                         <option>Flextime</option>
@@ -381,14 +381,14 @@ main_header(['Employer_profile']);
                             </div>
                             <div class="col-4">
                                 <label for="start_date">Start Date</label>
-                                <input id="start_date" name="start_date" type="date" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;">
+                                <input id="start_date" name="start_date" type="date" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;" required>
                             </div>
 
 
                             <div class=" col-4">
                                 <div class="form-group">
                                     <label for="filled">Status</label>
-                                    <select id="filled" name="filled" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;">
+                                    <select id="filled" name="filled" class="form-control border-0" style="width:100%; background-color: #F4F6F7; border-radius:10px;" required>
                                         <option>Open</option>
                                         <option>Closed</option>
                                     </select>
@@ -406,13 +406,12 @@ main_header(['Employer_profile']);
                             </div>
                         </div>
                         <div>
-                            <textarea id="description" name="description" class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:15px;" cols="30" rows="10"></textarea>
+                            <textarea id="description" name="description" class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:15px;"></textarea>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer border-0">
-                    <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-                    <button id="save" type="button" class="btn text-dark" style="border-radius:10px; width:100%; background-color: #F4F6F7;">
+                    <button id="post_job" type="button" class="btn text-dark" style="border-radius:10px; width:100%; background-color: #F4F6F7;">
                         Post
                     </button>
                 </div>

@@ -65,7 +65,7 @@
         background: transparent !important;
     }
 
-    .account-settings-multiselect~.select2-container {
+    .account-settings-multiselect ~ .select2-container {
         width: 100% !important;
     }
 
@@ -186,7 +186,6 @@
                         ID</a>
                     <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-change-password">Change
                         password</a>
-                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-connections">Connections</a>
                     <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-deletion">Account
                         deletion</a>
                 </div>
@@ -367,23 +366,6 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
-
-                    <div class="tab-pane fade" id="account-connections">
-                        <div class="card-body">
-                            <h5 class="mb-2">
-                                <a href="javascript:void(0)" class="float-right text-muted text-tiny"><i class="ion ion-md-close"></i>
-                                    Remove</a> <i class="ion ion-logo-google text-google"></i> You are connected to
-                                Google:
-                            </h5>
-                            <?= @$employee->Email ?>
-                        </div>
-                        <hr class="border-light m-0">
-                        <div class="card-body">
-                            <button type="button" class="btn btn-facebook">Connect to <strong>Facebook</strong></button>
-                            <button type="button" class="btn btn-instagram">Connect to <strong>Instagram</strong>
-                            </button>
-                        </div>
                     </div>
 
                     <div class="tab-pane fade" id="account-deletion">

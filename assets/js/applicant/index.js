@@ -1,8 +1,8 @@
+const spinner = document.createElement('span');
+spinner.classList.add('spinner-border', 'spinner-border-sm', 'mx-2');
+
 function applyBtnFunction() {
     const applyBtn = document.querySelectorAll('.apply-button');
-
-    const spinner = document.createElement('span');
-    spinner.classList.add('spinner-border', 'spinner-border-sm', 'mx-2');
 
     if (applyBtn) {
         applyBtn.forEach(btn => {
@@ -52,6 +52,8 @@ function acceptRejectBtnFunction() {
                 const job_id = btn.getAttribute('data-job-id');
                 const url = baseUrl + 'applicant/accept';
 
+                btn.appendChild(spinner);
+
                 fetch(url, {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
@@ -82,6 +84,8 @@ function acceptRejectBtnFunction() {
                 const job_id = btn.getAttribute('data-job-id');
                 const url = baseUrl + 'applicant/reject';
 
+                btn.appendChild(spinner);
+
                 fetch(url, {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
@@ -95,6 +99,8 @@ function acceptRejectBtnFunction() {
 
                         const acceptBtn = document.querySelector(`.btn-accept[data-id="${application_id}"]`);
                         acceptBtn.disabled = true;
+
+                        success('Application rejected!', 'The applicant will be notified.');
                     })
                     .catch(e => {
                         error('Error!', 'Something went wrong. Please try again later.');

@@ -185,6 +185,101 @@ main_header(['employee_profile']);
     .mt-100 {
         margin-top: 100px;
     }
+
+    .file_manager .file a:hover .hover,
+    .file_manager .file .file-name small {
+        display: block
+    }
+
+    .file_manager .file {
+        padding: 0 !important
+    }
+
+    .file_manager .file .icon {
+        text-align: center
+    }
+
+
+    .file_manager .file {
+        position: relative;
+        border-radius: .55rem;
+        overflow: hidden;
+    }
+
+    .file_manager .file .image,
+    .file_manager .file .icon {
+        max-height: 180px;
+        overflow: hidden;
+        background-size: cover;
+        background-position: top;
+    }
+
+    .file_manager .file .hover {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        display: none;
+        transition: all 0.2s ease-in-out
+    }
+
+    .file_manager .file a:hover .hover {
+        transition: all 0.2s ease-in-out
+    }
+
+    .file_manager .file .icon {
+        padding: 15px 10px;
+        display: table;
+        width: 100%
+    }
+
+    .file_manager .file .icon i {
+        display: table-cell;
+        font-size: 30px;
+        vertical-align: middle;
+        color: #777;
+        line-height: 100px
+    }
+
+    .file_manager .file .file-name {
+        padding: 10px;
+        border-top: 1px solid #f7f7f7
+    }
+
+    .file_manager .file .file-name small .date {
+        float: right
+    }
+
+    .folder {
+        padding: 20px;
+        display: block;
+        color: #777
+    }
+
+    @media only screen and (max-width: 992px) {
+        .file_manager .nav-tabs {
+            padding-left: 0;
+            padding-right: 0
+        }
+
+        .file_manager .nav-tabs .nav-item {
+            display: inline-block
+        }
+    }
+
+    .card_resume {
+        background: #fff;
+        transition: .5s;
+        border: 0;
+        margin-bottom: 30px;
+        border-radius: .55rem;
+        position: relative;
+        width: 100%;
+        box-shadow: 0 1px 5px 0 rgb(0 0 0 / 15%);
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
 </style>
 
 <section class="content">
@@ -650,15 +745,46 @@ main_header(['employee_profile']);
                         <div class="card ">
                             <div class="card-header">
                                 <h3 class="card-title fw-500" style="font-weight:600;">View Resume</h3>
+                                <?php if ($has_permission): ?>
+                                    <div class="card-tools">
+                                        <button type="button" data-toggle="modal" data-target="#uploadModal" class="btn btn-tool">
+                                            <i class="fa-solid fa-plus" style=" font-size: 16.5px;"></i>
+                                        </button>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                             <div class="d-flex justify-content-center">
-                                <?php if ($has_permission): ?>
-                                    <button type="button" class="btn btn-outline-info my-3" data-toggle="modal" data-target="#uploadModal" style="width: 250px;">
-                                        Upload File
-                                    </button>
 
-                                <?php endif; ?>
+                            </div>
 
+
+                            <div id="main-content" class="file_manager">
+                                <div class="container">
+                                    <div class="row clearfix">
+                                        <div class="col-md-12 px-3 py-3">
+                                            <div class="card_resume">
+                                                <div class="file">
+                                                    <a href="javascript:void(0);">
+                                                        <?php if ($has_permission): ?>
+                                                            <div class="hover">
+                                                                <button type="button" class="btn btn-icon btn-danger">
+                                                                    <i class="fa fa-trash"></i>
+                                                                </button>
+                                                            </div>
+                                                        <?php endif; ?>
+                                                        <div class="icon">
+                                                            <i class="fa fa-file text-info"></i>
+                                                        </div>
+                                                        <div class="file-name">
+                                                            <p class="m-b-5 text-muted">Document_2017.doc</p>
+                                                            <small>Size: 42KB <span class="date text-muted">Nov 02, 2017</span></small>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <!-- The Modal -->

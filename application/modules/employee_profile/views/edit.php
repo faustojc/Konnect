@@ -1,5 +1,6 @@
 <?php main_header(['employee']); ?>
 <!-- ############ PAGE START-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
     body {
         background: #f5f5f5;
@@ -64,7 +65,7 @@
         background: transparent !important;
     }
 
-    .account-settings-multiselect ~ .select2-container {
+    .account-settings-multiselect~.select2-container {
         width: 100% !important;
     }
 
@@ -264,19 +265,42 @@
                                     <label for="Address" class="form-label">Address</label>
                                     <input type="text" class="form-control" name="Address" id="Address" value="<?= @$employee->Address ?>" placeholder="Enter Address">
                                 </div>
-                                <div class="form-group">
-                                    <label for="Barangay" class="form-label">Barangay</label>
-                                    <input type="text" class="form-control" name="Barangay" id="Barangay" value="<?= @$employee->Barangay ?>" placeholder="Enter Barangay">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="Region" class="form-label">Region</label>
+                                            <select name="Region" id="Region" class="form-control" value="<?= @$employee->Region ?>"> </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="Province" class="form-label">Province</label>
+                                            <select name="Province" id="Province" class="form-control" value="<?= @$employee->Province ?>"> </select>
+                                        </div>
+                                    </div>
+
                                 </div>
-                                <div class="form-group">
-                                    <label for="City" class="form-label">City</label>
-                                    <input type="text" class="form-control" name="City" id="City" value="<?= @$employee->City ?>" placeholder="Enter City">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="City" class="form-label">City</label>
+                                            <select name="City" id="City" class="form-control" value="<?= @$employee->City ?>"> </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="Barangay" class="form-label">Barangay</label>
+                                            <select name="Barangay" id="Barangay" class="form-control" value="<?= @$employee->Barangay ?>"> </select>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="Religion" class="form-label">Religion</label>
                                     <input type="text" class="form-control" name="Religion" id="Religion" value="<?= @$employee->Religion ?>" placeholder="Enter Religion">
                                 </div>
-                                <div class="row pb-3">
+                                <div class="row">
                                     <div class="col-md-6">
                                         <label for="Bday" class="form-label">Birthday</label>
                                         <input type="date" class="form-control" id="Bday" name="Bday" value="<?= @$employee->Bday ?>" style="width:395px;">

@@ -80,7 +80,7 @@ main_header(['employer_profile']);
         background: transparent !important;
     }
 
-    .account-settings-multiselect ~ .select2-container {
+    .account-settings-multiselect~.select2-container {
         width: 100% !important;
     }
 
@@ -277,13 +277,35 @@ main_header(['employer_profile']);
                                     <label class="form-label">Address</label>
                                     <input type="text" class="form-control" name="address" id="address" value="<?= $employer->address ?>" placeholder="Enter Address" required>
                                 </div>
-                                <div class="form-group">
-                                    <label class="form-label">Barangay</label>
-                                    <input type="text" class="form-control" name="barangay" id="barangay" value="<?= $employer->barangay ?>" placeholder="Enter Barangay" required>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="Region" class="form-label">Region</label>
+                                            <select name="region" id="region" class="form-control" value="<?= @$employer->region ?>"> </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="province" class="form-label">Province</label>
+                                            <select name="province" id="province" class="form-control" value="<?= @$employer->province ?>"> </select>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="form-label">City</label>
-                                    <input type="text" class="form-control" name="city" id="city" value="<?= $employer->city ?>" placeholder="Enter City" required>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="City" class="form-label">City</label>
+                                            <select name="city" id="city" class="form-control" value="<?= @$employer->city ?>"> </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="barangay" class="form-label">Barangay</label>
+                                            <select name="barangay" id="barangay" class="form-control" value="<?= @$employer->barangay ?>"> </select>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </form>

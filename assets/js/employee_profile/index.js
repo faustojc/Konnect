@@ -394,3 +394,82 @@ $(document).on('change', '.file-input', function () {
         textbox.text(filesCount + ' files selected');
     }
 });
+
+function locationDropdown(region, province, city, barangay) {
+    function fillProvinces() {
+        province.innerHTML = '<option selected disabled>Choose State/Province</option>';
+        city.innerHTML = '<option selected disabled>Choose city/municipality</option>';
+        barangay.innerHTML = '<option selected disabled>Choose barangay</option>';
+
+        fetch(baseUrl + 'assets/location/province.json')
+            .then(response => response.json())
+            .then(data => {
+                const result = data.filter(value => value.region_code === region.value);
+                result.sort((a, b) => a.province_name.localeCompare(b.province_name));
+
+                result.forEach(entry => {
+                    const option = document.createElement('option');
+
+                    option.value = entry.province_code;
+                    option.text = entry.province_name;
+                    province.appendChild(option);
+                });
+            });
+    }
+
+    function fillCities() {
+        city.innerHTML = '<option selected disabled>Choose city/municipality</option>';
+        barangay.innerHTML = '<option selected disabled>Choose barangay</option>';
+
+        fetch(baseUrl + 'assets/location/city.json')
+            .then(response => response.json())
+            .then(data => {
+                const result = data.filter(value => value.province_code === province.value);
+                result.sort((a, b) => a.city_name.localeCompare(b.city_name));
+
+                result.forEach(entry => {
+                    const option = document.createElement('option');
+                    option.value = entry.city_code;
+                    option.text = entry.city_name;
+                    city.appendChild(option);
+                });
+            });
+    }
+
+    function fillBarangays() {
+        barangay.innerHTML = '<option selected disabled>Choose barangay</option>';
+
+        fetch(baseUrl + 'assets/location/barangay.json')
+            .then(response => response.json())
+            .then(data => {
+                const result = data.filter(value => value.city_code === city.value);
+                result.sort((a, b) => a.brgy_name.localeCompare(b.brgy_name));
+
+                result.forEach(entry => {
+                    const option = document.createElement('option');
+                    option.value = entry.brgy_code;
+                    option.text = entry.brgy_name;
+                    barangay.appendChild(option);
+                });
+            });
+    }
+
+    region.addEventListener('change', fillProvinces);
+    province.addEventListener('change', fillCities);
+    city.addEventListener('change', fillBarangays);
+
+    // Load region
+    region.innerHTML = '<option selected disabled>Choose Region</option>';
+
+    fetch(baseUrl + 'assets/location/region.json')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(entry => {
+                const option = document.createElement('option');
+
+                option.value = entry.region_code;
+                option.text = entry.region_name;
+                region.appendChild(option);
+            });
+        });
+}

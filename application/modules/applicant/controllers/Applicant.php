@@ -39,7 +39,8 @@ class Applicant extends MY_Controller
 
         // Filter the job_id for potential XSS attacks
         $job_id = $this->security->xss_clean($data['job_id']);
-        $result = $this->Applicant_model->setApplication($job_id, $this->userdata->ID);
+        $job_info = $this->Jobposting_model->getJob($job_id, 'title');
+        $result = $this->Applicant_model->setApplication($job_id, $this->userdata->ID, $job_info->title);
         $targetDetails = $this->Jobposting_model->getEmployerByJobpost($job_id);
 
         if ($result['apply_status'] == 'PENDING') {
@@ -104,10 +105,10 @@ class Applicant extends MY_Controller
 
         sendEmail(
             $this->auth['email'],
-            ucwords($this->userdata->tradename),
+            'no-reply-Konnect',
             $applicant->email,
             'Application Accepted',
-            'Your application has been accepted in ' . $job->title . '. Please contact me for further details.',
+            ucwords($this->userdata->tradename) . 'Accepted your application in ' . $job->title . '. You may now contact ' . ucwords($this->userdata->tradename) . '(' . $this->auth['email'] . ')' . ' for more details. Thank you!',
         );
     }
 
@@ -136,10 +137,10 @@ class Applicant extends MY_Controller
 
         sendEmail(
             $this->auth['email'],
-            ucwords($this->userdata->tradename),
+            'no-reply-Konnect',
             $applicant->email,
             'Application Rejected',
-            'Your application has been rejected in ' . $job->title . '.',
+            ucwords($this->userdata->tradename) . 'rejected your application in ' . $job->title . '. Thank you!',
         );
     }
 }

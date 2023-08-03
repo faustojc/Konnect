@@ -2,7 +2,6 @@
 main_header(['employer_profile']);
 ?>
 <!-- ############ PAGE START-->
-
 <style>
     body {
         background: #f5f5f5;
@@ -80,7 +79,7 @@ main_header(['employer_profile']);
         background: transparent !important;
     }
 
-    .account-settings-multiselect~.select2-container {
+    .account-settings-multiselect ~ .select2-container {
         width: 100% !important;
     }
 

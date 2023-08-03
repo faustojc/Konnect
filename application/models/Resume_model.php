@@ -38,7 +38,7 @@ class Resume_model extends CI_Model
     {
         try {
             $this->db->trans_start();
-            $this->db->insert($this->Table->employee_skill, $info);
+            $this->db->insert($this->Table->resume, $info);
             $this->db->trans_complete();
 
             if ($this->db->trans_status() === FALSE) {
@@ -57,7 +57,7 @@ class Resume_model extends CI_Model
     {
         try {
             $this->db->trans_start();
-            $this->db->where('id', $id)->or_where('employee_id', $id)->update($this->Table->employee_skill, $data);
+            $this->db->where('id', $id)->or_where('employee_id', $id)->update($this->Table->resume, $data);
             $this->db->trans_complete();
 
             if ($this->db->trans_status() === FALSE) {

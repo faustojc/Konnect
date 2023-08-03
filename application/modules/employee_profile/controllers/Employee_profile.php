@@ -107,9 +107,9 @@ class Employee_profile extends MY_Controller
     public function getResume(): void
     {
         $this->data['has_permission'] = $this->has_permission;
-        $resume = $this->Resume_model->getResume($this->current_user->ID);
+        $this->data['resume'] = $this->Resume_model->getResume($this->current_user->ID);
 
-        echo json_encode($resume, JSON_THROW_ON_ERROR);
+        $this->load->view('grid/load_resume', $this->data);
     }
 
     public function getEducations(): void

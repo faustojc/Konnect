@@ -94,7 +94,7 @@ main_header(['employee_profile']);
     }
 
     .nav-pills .nav-link.active,
-    .nav-pills .show>.nav-link {
+    .nav-pills .show > .nav-link {
         color: #fff;
         background-color: #0dcaf0;
     }
@@ -742,80 +742,8 @@ main_header(['employee_profile']);
                         <?php load_feedback($feedbacks, $has_permission) ?>
                     </div>
                     <div class="tab-pane fade" id="pills-resume" role="tabpanel" aria-labelledby="pills-resume-tab">
-                        <div class="card ">
-                            <div class="card-header">
-                                <h3 class="card-title fw-500" style="font-weight:600;">View Resume</h3>
-                                <?php if ($has_permission): ?>
-                                    <div class="card-tools">
-                                        <button type="button" data-toggle="modal" data-target="#uploadModal" class="btn btn-tool">
-                                            <i class="fa-solid fa-plus" style=" font-size: 16.5px;"></i>
-                                        </button>
-                                    </div>
-                                <?php endif; ?>
-                            </div>
-                            <div class="d-flex justify-content-center">
-
-                            </div>
-
-
-                            <div id="main-content" class="file_manager">
-                                <div class="container">
-                                    <div class="row clearfix">
-                                        <div class="col-md-12 px-3 py-3">
-                                            <div class="card_resume">
-                                                <div class="file">
-                                                    <a href="javascript:void(0);">
-                                                        <?php if ($has_permission): ?>
-                                                            <div class="hover">
-                                                                <button type="button" class="btn btn-icon btn-danger">
-                                                                    <i class="fa fa-trash"></i>
-                                                                </button>
-                                                            </div>
-                                                        <?php endif; ?>
-                                                        <div class="icon">
-                                                            <i class="fa fa-file text-info"></i>
-                                                        </div>
-                                                        <div class="file-name">
-                                                            <p class="m-b-5 text-muted">Document_2017.doc</p>
-                                                            <small>Size: 42KB <span class="date text-muted">Nov 02, 2017</span></small>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- The Modal -->
-                            <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="uploadModalLabel">Upload Resume</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="file-drop-area d-flex justify-content-center py-5" style="background-color:#lightgrey;">
-                                                <span class="choose-file-button" style="background-color:#0dcaf0; color: #fff;">Choose files</span>
-                                                <span class="file-message">or drag and drop files here</span>
-                                                <input class="file-input" type="file" multiple>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                                                Close
-                                            </button>
-                                            <button type="submit" class="btn btn-info" name="submit">
-                                                Upload Resume
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
+                        <div id="load_resume">
+                            <?= $resume_section_view ?>
                         </div>
                     </div>
                 </div>

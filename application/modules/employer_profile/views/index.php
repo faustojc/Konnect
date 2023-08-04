@@ -56,7 +56,7 @@ main_header(['Employer_profile']);
     }
 
     .nav-pills .nav-link.active,
-    .nav-pills .show > .nav-link {
+    .nav-pills .show>.nav-link {
         color: #fff;
         background-color: #0dcaf0;
     }
@@ -120,10 +120,10 @@ main_header(['Employer_profile']);
                                             </h5>
                                             <!-- <p class="text-left mb-1">
                                                 <?php if (empty($current_employer->employer_name)) {
-                                                echo $current_employer->tradename;
-                                            } else {
-                                                echo $current_employer->employer_name;
-                                            } ?>
+                                                    echo $current_employer->tradename;
+                                                } else {
+                                                    echo $current_employer->employer_name;
+                                                } ?>
                                             </p> -->
                                             <h5 class="widget-user-desc text-left text-dark py-2" style="font-weight: 550; font-size:18px; ">
                                                 <?= $current_employer->business_type ?>
@@ -171,6 +171,10 @@ main_header(['Employer_profile']);
                                     Feedback </a>
                             </li>
                             <?php if ($has_permission): ?>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="pills-aplicants-tab" data-toggle="pill" href="#pills-aplicants" role="tab" aria-controls="pills-aplicants" aria-selected="true">
+                                        Applicants <i class="fas fa-lock ml-2"></i> </a>
+                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="pills-employeelist-tab" data-toggle="pill" href="#pills-employeelist" role="tab" aria-controls="pills-employeelist" aria-selected="true">
                                         Employee List <i class="fas fa-lock ml-2"></i> </a>
@@ -238,7 +242,7 @@ main_header(['Employer_profile']);
 
                         </div>
                         <div class="card card-white">
-                            <div class="card-header">
+                            <div class="card-header border-0">
                                 <h3 class="card-title fw-500">Job Post</h3>
                             </div>
                         </div>
@@ -261,6 +265,10 @@ main_header(['Employer_profile']);
                     <?php if ($has_permission): ?>
                         <div class="tab-pane fade" id="pills-employeelist" role="tabpanel" aria-labelledby="pills-employeelist-tab">
                             <?= $employeelist_view ?>
+                        </div>
+                        <div class="tab-pane fade" id="pills-aplicants" role="tabpanel" aria-labelledby="pills-aplicants-tab">
+                            <?= $applicant_view ?>
+
                         </div>
                     <?php endif; ?>
                 </div>

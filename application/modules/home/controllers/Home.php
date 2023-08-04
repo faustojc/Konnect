@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Home extends MY_Controller
 {
     protected $userdata;
-    protected $auth;
+    protected array $auth;
     private array $data = [];
 
     public function __construct()
@@ -15,7 +15,7 @@ class Home extends MY_Controller
         if (empty($this->userdata)) {
             redirect(base_url() . 'login');
         } else {
-            $this->auth = get_userdata(AUTH);
+            $this->auth = (array)get_userdata(AUTH);
         }
 
         $model_list = [

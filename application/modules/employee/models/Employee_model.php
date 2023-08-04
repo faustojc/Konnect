@@ -108,6 +108,7 @@ class Employee_model extends CI_Model
             if ($this->db->trans_status()) {
                 $this->db->trans_commit();
 
+                unset_userdata(USER);
                 set_userdata(USER, $this->getEmployee($id));
                 return ['message' => UPDATE_SUCCESSFUL, 'has_error' => FALSE];
             }

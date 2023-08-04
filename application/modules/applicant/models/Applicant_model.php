@@ -52,7 +52,8 @@ class Applicant_model extends CI_Model
         return $this->db->select('tbl_applicant.*, 
         CONCAT_WS(" ", tbl_employee.Fname, tbl_employee.Mname, tbl_employee.Lname) AS employeeName, 
         tbl_employee.Title AS employeeTitle, 
-        tbl_employee.Employee_image AS employeeImage')
+        tbl_employee.Employee_image AS employeeImage, 
+        tbl_jobposting.title AS jobtitle')
             ->from($this->Table->applicant)
             ->join($this->Table->jobposting, 'tbl_jobposting.id = tbl_applicant.job_id')
             ->join($this->Table->employer, 'tbl_employer.id = tbl_jobposting.employer_id')

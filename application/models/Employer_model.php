@@ -124,12 +124,12 @@ class Employer_model extends CI_Model
 
             if ($this->db->trans_status() === FALSE) {
                 $this->db->trans_rollback();
-
-                set_userdata(USER, $this->getEmployerOnly('*', $this->userdata->id));
                 return ['message' => ERROR_PROCESSING, 'has_error' => TRUE];
             }
 
             $this->db->trans_commit();
+
+            set_userdata(USER, $this->getEmployerOnly('*', $this->userdata->id));
             return ['message' => UPDATE_SUCCESSFUL, 'has_error' => FALSE];
         } catch (Exception $msg) {
             return ['message' => $msg->getMessage(), 'has_error' => TRUE];

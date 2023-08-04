@@ -33,7 +33,7 @@ class Employer_profile_service extends MY_Controller
             $info['image'] = isset($data) ? $data['file_name'] : 'default.png';
         }
 
-        $response[] = $this->employer_model->save($info);
+        $response = array_merge($response, $this->Employer_model->save($info));
         echo json_encode($response, JSON_THROW_ON_ERROR);
     }
 
@@ -47,7 +47,7 @@ class Employer_profile_service extends MY_Controller
             'summary' => $this->input->post('summary'),
         ];
 
-        $response = $this->employer_model->update($info);
+        $response = $this->Employer_model->update($info);
         echo json_encode($response, JSON_THROW_ON_ERROR);
     }
 

@@ -31,6 +31,7 @@ class Verify extends MY_Controller
         $isVerified = $this->Auth_model->verifyUser($this->userdata, $verification);
 
         if ($isVerified) {
+            set_userdata(AUTH, $this->Auth_model->get_auth($this->userdata->user_id));
             redirect(base_url() . 'verify/success');
         } else {
             redirect(base_url() . 'verify/error');
@@ -39,12 +40,16 @@ class Verify extends MY_Controller
 
     public function success(): void
     {
-        $this->load->view('success');
+        $data['auth'] = $this->auth;
+
+        $this->load->view('success', $data);
     }
 
     public function error(): void
     {
-        $this->load->view('error');
+        $data['auth'] = $this->auth;
+
+        $this->load->view('error', $data);
     }
 
     /**

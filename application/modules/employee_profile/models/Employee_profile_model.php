@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Employee_profile_model extends CI_Model
 {
     private $userdata;
-    private $auth;
+    private array $auth;
     private $id;
     public $Table;
 
@@ -12,7 +12,7 @@ class Employee_profile_model extends CI_Model
     {
         parent::__construct();
         $this->userdata = get_userdata(USER);
-        $this->auth = get_userdata(AUTH);
+        $this->auth = (array)get_userdata(AUTH);
 
         if ($this->auth['user_type'] == 'EMPLOYEE') {
             $this->id = $this->userdata->ID;

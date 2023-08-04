@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Employer_profile extends MY_Controller
 {
     protected $userdata;
-    protected $auth;
+    protected array $auth;
     protected $isAccount;
     protected $current_user;
     private array $data = [];
@@ -18,7 +18,7 @@ class Employer_profile extends MY_Controller
             redirect(base_url() . 'login');
         }
 
-        $this->auth = (array)$this->Auth_model->get_auth($this->userdata->user_id);
+        $this->auth = (array) $this->Auth_model->get_auth($this->userdata->user_id);
 
         $model_list = [
             'employer_profile/Employer_profile_model' => 'employer_profile_model',
@@ -33,7 +33,7 @@ class Employer_profile extends MY_Controller
         $this->current_user = $this->Employer_model->getEmployerOnly('*', $id);
         $this->isAccount = $this->Auth_model->check_permission($this->userdata, $this->current_user);
 
-        $this->data['curr_auth'] = (array)$this->Auth_model->get_auth($this->current_user->user_id);
+        $this->data['curr_auth'] = (array) $this->Auth_model->get_auth($this->current_user->user_id);
     }
 
     /** load main page */
@@ -61,14 +61,15 @@ class Employer_profile extends MY_Controller
             $this->data['applicant'] = $this->Applicant_model->getAppliedJobs($this->userdata->ID);
         } else {
             $this->data['employed'] = $this->Employed_model->getEmployersEmployed($this->userdata->id);
+            $this->data['applicants'] = $this->Applicant_model->getEmployerApplicants($this->userdata->id);
         }
 
         // Disable query caching
         $this->db->cache_off();
-
         $this->data['current_employer']->summary = $this->load->view('grid/load_summary', $this->data, TRUE);
         $this->data['jobpostings_view'] = $this->load->view('grid/load_jobpostings', $this->data, TRUE);
         $this->data['employeelist_view'] = $this->load->view('grid/load_employeelist', $this->data, TRUE);
+        $this->data['applicant_view'] = $this->load->view('grid/load_applicants', $this->data, TRUE);
 
         $this->data['content'] = 'index';
         $this->load->view('layout', $this->data);

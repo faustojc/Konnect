@@ -61,7 +61,7 @@ class Auth_model extends CI_Model
     {
         $auth = $this->get_auth($user->user_id);
 
-        if ($auth->locker == $verification) {
+        if ($auth['locker'] == $verification) {
             $this->db->where('id', $user->user_id)->update($this->Table->user, ['is_verified' => 1]);
             return TRUE;
         }

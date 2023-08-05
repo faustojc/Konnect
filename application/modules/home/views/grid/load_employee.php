@@ -10,9 +10,7 @@
                     <div class="description-block">
                         <h4 class="widget-user-username text-center" style="font-weight: 500; font-size: 20px;">
                             <?= ucwords(@$details->Fname) . " " . ucwords(@$details->Lname) ?>
-                            <?php if ($auth['is_verified'] == 1): ?>
-                                <i class="fa fa-check-circle text-success"></i>
-                            <?php endif; ?>
+                            <?php verifyBadge($auth['is_verified']); ?>
                         </h4>
                         <h6 class="widget-user-desc text-center text-muted mt-1" style="font-weight: normal; font-size: 14px;">
                             <?= ucwords(@$details->Title) ?>

@@ -1,12 +1,13 @@
 <?php
 $formattedTimeDiff = formatTime($job->date_posted);
+
+jobpost_update_modal($job, 'job_modal' . $job->id);
 ?>
 <style>
     .alert.alert-secondary {
         color: #313131;
         border: none;
         background-color: #D9D9D9;
-
     }
 </style>
 
@@ -27,20 +28,17 @@ $formattedTimeDiff = formatTime($job->date_posted);
                     <i class="fa-solid fa-ellipsis-vertical"></i>
                 </button>
                 <div class="dropdown-menu" style="border-radius: 10px; box-shadow: none;">
-                    <a class="dropdown-item" href="#">Edit</a> <a class="dropdown-item" href="#">Delete</a>
+                    <a class="dropdown-item edit-job-btn" data-toggle="modal" data-target="#job_modal<?= $job->id ?>" data-id="<?= $job->id ?>" role="button">Edit</a>
+                    <a class="dropdown-item delete-job-btn" data-id="<?= $job->id ?>" role="button">Delete</a>
                 </div>
             </div>
         </div>
     </div>
-
     <small class="text-muted mb-2">Posted
         <?= $formattedTimeDiff ?>
     </small>
-    <div class="card-tools mb-2">
-
-    </div>
-
 </div>
+
 <div class="card-body">
     <div class="row pl-3 py-2">
         <h5 style="font-size: 18px;">Applicants:</h5>
@@ -93,7 +91,6 @@ $formattedTimeDiff = formatTime($job->date_posted);
                     </div>
                 </div>
             <?php endif; ?>
-
         <?php else: ?>
             <div class="col-12">
                 <div class="alert alert-info mb-0">

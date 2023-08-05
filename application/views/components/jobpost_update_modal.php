@@ -1,6 +1,5 @@
-<div class="modal fade" id="<?= $modalId ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true" style="border-radius:15px;">
-    <div class="modal-dialog modal-lg modal-dialog-centered " role="document" style="width:;">
+<div class="modal fade" id="<?= $modalId ?>" tabindex="5000" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="border-radius:15px;">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content border-0" style="border-radius:15px;">
             <form>
                 <input name="id" id="id" value="<?= $jobpost->id ?>" hidden readonly />
@@ -18,7 +17,7 @@
                         <label for="title" style="">Job Title</label>
                         <input id="title" name="title" class="form-control border-0"
                                style="resize:none;background-color: #F4F6F7; border-radius:10px;"
-                               value="<?= ucwords($jobpost->title) ?>" type="text" placeholder="Enter Job Name">
+                               value="<?= ucwords($jobpost->title) ?>" type="text" placeholder="Enter Job Name" required>
                     </div>
 
                     <div class="row pt-2">
@@ -40,7 +39,7 @@
                             <label for="start_date">Start Date</label>
                             <input id="start_date" name="start_date" value="<?= $jobpost->start_date ?>" type="date"
                                    class="form-control border-0"
-                                   style="width:100%; background-color: #F4F6F7; border-radius:10px;">
+                                   style="width:100%; background-color: #F4F6F7; border-radius:10px;" required>
                         </div>
                         <div class="col-md-5">
                             <div class="form-group">
@@ -48,7 +47,7 @@
                                 <input id="job_type" name="job_type" class="form-control border-0"
                                        value="<?= $jobpost->job_type ?>"
                                        style="width:100%; background-color: #F4F6F7; border-radius:10px;"
-                                       placeholder="e.g. Full-time/Part-time">
+                                       placeholder="e.g. Full-time/Part-time" required>
                             </div>
                         </div>
                         <div class="col-md-5">
@@ -57,7 +56,7 @@
                                 <input id="shift" name="shift" class="form-control border-0"
                                        value="<?= $jobpost->shift ?>"
                                        style="width:100%; background-color: #F4F6F7; border-radius:10px;"
-                                       placeholder="e.g. Day/Night/Flextime/8 hour shift">
+                                       placeholder="e.g. Day/Night/Flextime/8 hour shift" required>
                             </div>
                         </div>
                         <div class="col-md-2">
@@ -88,15 +87,15 @@
                         </div>
                     </div>
                     <div>
-                        <textarea id="description<?= $jobpost->id ?>" name="description" class="form-control border-0"
-                                  style="resize:none;background-color: #F4F6F7; border-radius:15px;" cols="30"
-                                  rows="10"></textarea>
+                        <textarea id="description<?= $jobpost->id ?>" name="description" class="form-control border-0" style="resize:none;background-color: #F4F6F7; border-radius:15px;" hidden readonly>
+                            <?= $jobpost->description ?>
+                        </textarea>
                     </div>
                 </div>
             </form>
             <div class="modal-footer border-0">
-                <button type="button" class="btn text-dark btn-update-job"
-                        style="border-radius:10px; width:100%; background-color: #F4F6F7;">Update
+                <button type="button" class="btn text-dark btn-update-job" style="border-radius:10px; width:100%; background-color: #F4F6F7;">
+                    Update
                 </button>
             </div>
         </div>

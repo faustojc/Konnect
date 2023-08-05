@@ -77,9 +77,82 @@ const jobSelectedDisplayEvent = (url) => {
                     status_badge();
                     applyBtnFunction();
                     acceptRejectBtnFunction();
+                    setJobFunctionality();
+
+                    tinymce.remove('textarea');
+                    textareaEditor('#description' + id, 400);
+
+                    const description = document.querySelector('#description' + id);
+
+                    if (description) {
+                        tinymce.get('description' + id).setContent(description.innerHTML);
+                    }
                 });
         });
     });
+}
+
+const setJobFunctionality = () => {
+    const updateJobBtn = document.querySelector('.btn-update-job');
+    const deleteJobBtn = document.querySelector('.delete-job-btn');
+
+    if (updateJobBtn) {
+        updateJobBtn.addEventListener('click', () => {
+            const form = updateJobBtn.closest('.modal-content').querySelector('form');
+            const id = form.querySelector('input[name="id"]').value;
+            const description = tinymce.get('description' + id).getContent();
+
+            const formData = new FormData(form);
+            formData.append('description', description);
+
+            const isValid = validateForm(form);
+
+            if (isValid && description !== '') {
+                const spinner = document.createElement('span');
+                spinner.classList.add('spinner-border', 'spinner-border-sm', 'mx-2');
+
+                updateJobBtn.append(spinner);
+
+                formAction(baseUrl + 'jobposting/service/Jobposting_service/update', 'POST', formData, () => {
+                    success('SUCCESS!', 'Job updated successfully!');
+
+                    updateJobBtn.querySelector('span.spinner-border').remove();
+
+                    const modal_close = document.querySelector('#job_modal' + id).querySelector('.close');
+                    const click_event = new MouseEvent('click', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: true
+                    });
+
+                    modal_close.dispatchEvent(click_event);
+                });
+            }
+        });
+    }
+
+    if (deleteJobBtn) {
+        deleteJobBtn.addEventListener('click', () => {
+            const id = deleteJobBtn.dataset.id;
+
+            if (confirm('Are you sure you want to delete this job?')) {
+                formAction(baseUrl + 'jobposting/service/Jobposting_service/delete', 'POST', {id: id}, () => {
+                    const ownJobList = document.querySelector('#job_posted');
+
+                    success('SUCCESS!', 'Job deleted successfully!');
+                    displayLoadingCard('#job_posted');
+                    fetch(baseUrl + 'jobposting/own_jobpost')
+                        .then(response => response.text())
+                        .then(data => {
+                            ownJobList.innerHTML = data;
+
+                            status_badge();
+                            jobSelectedDisplayEvent(baseUrl + 'jobposting/get_own_selected_job');
+                        });
+                });
+            }
+        });
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function () {

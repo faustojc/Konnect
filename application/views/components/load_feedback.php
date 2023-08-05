@@ -1,9 +1,10 @@
 <?php
 $user_type = $auth['user_type'];
 $has_given_feedback = FALSE;
+$curr_auth = get_userdata('curr_auth');
 
 foreach ($feedbacks as $feedback) {
-    if ($feedback->from_user_id == $user_id) {
+    if ($feedback->from_user_id == $auth['id']) {
         $has_given_feedback = TRUE;
         break;
     }
@@ -36,7 +37,7 @@ foreach ($feedbacks as $feedback) {
     <div class="card-header">
         <h3 class="card-title fw-500" style="font-weight:600; py-2">All Ratings and Reviews</h3>
 
-        <?php if (!$has_permission && !$has_given_feedback): ?>
+        <?php if (!$has_permission && !$has_given_feedback && ($curr_auth['user_type'] == 'EMPLOYEE' && $user_type == 'EMPLOYER')): ?>
             <div class="card-tools">
                 <button type="button" data-toggle="modal" data-target="#ModalFeedback" class="btn btn-tool">
                     <i class="fa-solid fa-plus" style="font-size: 16px;" id="add_feedback"></i>
@@ -60,7 +61,7 @@ foreach ($feedbacks as $feedback) {
                         <!-- Feedback form Content -->
                         <div class="container">
                             <form>
-                                <input name="user_id" id="user_id" value="<?= $user_id ?>" hidden readonly>
+                                <input name="user_id" id="user_id" value="<?= $auth['id'] ?>" hidden readonly>
                                 <!-- Feedback Rating -->
                                 <div class="form-group">
                                     <label for="rating">Your Rating</label>
@@ -98,7 +99,6 @@ foreach ($feedbacks as $feedback) {
 
             function updateRating() {
                 const value = parseFloat(rating.dataset.value);
-                const max = parseInt(rating.dataset.max);
                 const precision = parseFloat(rating.dataset.precision);
 
                 const stars = rating.querySelectorAll('span');

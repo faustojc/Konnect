@@ -50,30 +50,28 @@
                         </span>
                     </h6>
                     <!-- <hr> -->
-                    <div class="job-description" style="max-height: 150px; overflow-y: hidden">
-                        <div class="" style="font-weight:300;">
-                            <h5>
-                                <?php if (isset($jobpost->salary) && $jobpost->salary !== ''): ?>
-                                    <span class="badge badge-light">
+                    <div style="max-height: 150px; overflow-y: hidden; font-weight:300;">
+                        <h5>
+                            <?php if (isset($jobpost->salary) && $jobpost->salary !== ''): ?>
+                                <span class="badge badge-light">
                                         ₱
                                         <?= $jobpost->salary ?>
                                     </span>
-                                <?php endif; ?>
+                            <?php endif; ?>
 
-                                <?php if (isset($jobpost->shift) && $jobpost->shift !== ''): ?>
-                                    <span class="badge badge-light">
+                            <?php if (isset($jobpost->shift) && $jobpost->shift !== ''): ?>
+                                <span class="badge badge-light">
                                         <?= $jobpost->shift ?>
                                     </span>
-                                <?php endif; ?>
+                            <?php endif; ?>
 
-                                <?php if (isset($jobpost->job_type) && $jobpost->job_type !== ''): ?>
-                                    <span class="badge badge-light">
+                            <?php if (isset($jobpost->job_type) && $jobpost->job_type !== ''): ?>
+                                <span class="badge badge-light">
                                         <?= $jobpost->job_type ?>
                                     </span>
-                                <?php endif; ?>
-                            </h5>
-                        </div>
-                        <div class="" style="font-size:14px">
+                            <?php endif; ?>
+                        </h5>
+                        <div class="job-description<?= $jobpost->id ?>" style="font-size:14px">
                             <?= $jobpost->description ?>
                         </div>
 

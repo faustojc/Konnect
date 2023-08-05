@@ -22,9 +22,9 @@ class Auth_model extends CI_Model
             ->get()->result();
     }
 
-    public function get_auth($user_id)
+    public function get_auth($user_id): ?array
     {
-        return $this->db->get_where($this->Table->user, ['id' => $user_id])->row();
+        return $this->db->get_where($this->Table->user, ['id' => $user_id])->row_array();
     }
 
     public function check_permission($user, $other): bool
@@ -32,7 +32,7 @@ class Auth_model extends CI_Model
         $current = $this->get_auth($user->user_id);
         $other = $this->get_auth($other->user_id);
 
-        return $current->locker == $other->locker;
+        return $current['locker'] == $other['locker'];
     }
 
     /**

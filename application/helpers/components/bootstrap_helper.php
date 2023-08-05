@@ -7,18 +7,16 @@ if (!function_exists('jobpost_all_display')) {
      *
      * USAGE: jobpost_display($data);
      *
-     * @param array $data The array of jobposts.
+     * @param array|array[] $data The array of jobposts.
      */
     function jobpost_all_display(array $data)
     {
-        $jobpostings = $data;
-
-        $data = [
-            'jobpostings' => $jobpostings,
+        $jobpostings = [
+            'jobpostings' => $data,
         ];
 
         $CI = &get_instance();
-        $CI->load->view('components/jobpost_all_display', $data);
+        $CI->load->view('components/jobpost_all_display', $jobpostings);
     }
 }
 

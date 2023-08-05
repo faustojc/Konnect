@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", function () {
     textareaEditor('textarea', 400);
     setJobStatus();
     applyBtnFunction();
+    setJobDescription();
+    setJobBtn();
 
     const postJobBtn = document.querySelector('#btn_post');
     if (postJobBtn) {
@@ -19,14 +21,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 spinner.classList.add('spinner-border', 'spinner-border-sm', 'mx-2');
                 postJobBtn.append(spinner);
 
-                formAction(baseUrl + 'jobposting/service/Jobposting_service/postJob', 'POST', formData, (data) => {
+                formAction(baseUrl + 'jobposting/service/Jobposting_service/postJob', 'POST', formData, () => {
                     success('SUCCESS!', 'Job posted successfully!');
                     postJobBtn.querySelector('span.spinner-border').remove();
 
-                    if (typeof data === 'string') {
-                        const jobPostSection = document.querySelector('#jobpost_section');
-                        jobPostSection.insertAdjacentHTML('afterbegin', data);
-                    }
+                    window.location.reload();
                 });
             }
         });

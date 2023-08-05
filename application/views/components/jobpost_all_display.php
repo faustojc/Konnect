@@ -1,3 +1,5 @@
+<?php $auth = get_userdata(AUTH); ?>
+
 <style>
     .badge-light {
         color: #313131;
@@ -77,9 +79,8 @@
                                         <i class="fa-solid fa-ellipsis-vertical"></i>
                                     </button>
                                     <div class="dropdown-menu" style="border-radius:10px; box-shadow: none;">
-                                        <a class="dropdown-item edit-job" data-toggle="modal"
-                                           data-target="#modal<?= $jobpost->id ?>">Edit</a>
-                                        <a class="dropdown-item delete-job" data-id="<?= $jobpost->id ?>">Delete</a>
+                                        <a class="dropdown-item edit-job-btn" data-toggle="modal" data-target="#modal<?= $jobpost->id ?>" data-id="<?= $jobpost->id ?>" role="button">Edit</a>
+                                        <a class="dropdown-item delete-job-btn" data-id="<?= $jobpost->id ?>" role="button">Delete</a>
                                     </div>
                                 </div>
                             </div>
@@ -118,15 +119,13 @@
                                     <?php endif; ?>
                                 </h5>
                             </div>
-                            <div class="description<?= $jobpost->id ?>" style="font-size:14px">
+                            <div class="job-description<?= $jobpost->id ?>" style="font-size:14px">
                                 <?= $jobpost->description ?>
                             </div>
 
                         </div>
-                        <a class="text-center see-more" data-target=".job-description" style="display: block;"
-                           role="button">
-                            See more
-                        </a>
+                        <a class="text-center see-more" data-target=".job-description" style="display: block;" role="button">
+                            See more </a>
 
                         <?php if ($auth['user_type'] == 'EMPLOYEE') {
                             $hasApplied = FALSE;

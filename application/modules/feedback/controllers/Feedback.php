@@ -11,7 +11,7 @@ class Feedback extends MY_Controller
 
         $this->userdata = get_userdata(USER);
 
-        // The Feedback_model is already loaded in autoload.php
+        $this->load->model('employee/Employee_model');
     }
 
     /**
@@ -19,7 +19,7 @@ class Feedback extends MY_Controller
      */
     public function submitFeedback(): void
     {
-        $data = $this->input->post();
+        $data = $this->input->post(NULL, TRUE);
         $data['from_user_id'] = $this->userdata->user_id;
 
         $result = $this->Feedback_model->add($data);
@@ -29,5 +29,22 @@ class Feedback extends MY_Controller
         } else {
             echo json_encode(['status' => 'error', 'message' => $result['message']], JSON_THROW_ON_ERROR);
         }
+    }
+
+    public function getFeedbacks(): void
+    {
+        $id = $this->input->get('id');
+
+        $curr_user = $this->Employee_model->getEmployee($id, 'ID, user_id');
+
+        if (empty($curr_user)) {
+            $curr_user = $this->Employer_model->getEmployerOnly('id, user_id', $id);
+        }
+
+        $feedbacks = $this->Feedback_model->getAllUsersFeedback($curr_user->user_id);
+        $is_account = $this->Auth_model->check_permission($this->userdata, $curr_user);
+
+
+        load_feedback($feedbacks, $is_account);
     }
 }

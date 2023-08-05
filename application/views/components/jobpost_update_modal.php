@@ -3,6 +3,7 @@
     <div class="modal-dialog modal-lg modal-dialog-centered " role="document" style="width:;">
         <div class="modal-content border-0" style="border-radius:15px;">
             <form>
+                <input name="id" id="id" value="<?= $jobpost->id ?>" hidden readonly />
                 <div class="border-0">
                     <h5 class="text-center pt-3 pb-2" id="exampleModalLabel" style="font-weight:650;">
                         <i class="fa-solid fa-pen-to-square"></i> Edit Jobpost
@@ -78,13 +79,11 @@
                         <div class="col-12">
                             <div class="form-group" style="border: 0;">
                                 <label for="skills_req">Skills Requirements
-                                    <span class="text-muted"
-                                          style="font-size: 13px;">(click enter to separate skills)</span>
-                                </label>
-                                <input id="skills_req" name="skills_req" class="form-control border-0"
-                                       style="resize: none; background-color: #F4F6F7; border-radius: 10px;" type="text"
-                                       value="<?= $jobpost->skills_req ?>"
-                                       placeholder="Skill#1, Skill#2">
+                                    <span class="text-muted" style="font-size: 13px;">(click enter to separate skills)</span>
+                                </label> <input id="skills_req" name="skills_req" class="form-control border-0"
+                                                style="resize: none; background-color: #F4F6F7; border-radius: 10px;" type="text"
+                                                value="<?= $jobpost->skills_req ?>"
+                                                placeholder="Skill#1, Skill#2">
                             </div>
                         </div>
                     </div>

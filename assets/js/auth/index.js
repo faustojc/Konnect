@@ -2,15 +2,100 @@
  * This script will execute only if the user authenticates and is authorized to access the page
  */
 
-async function pollNotifications() {
-    const response = await fetch(baseUrl + 'notification/notify');
-    const data = await response.json();
+const load_feedbacks = () => {
+    const id = new URLSearchParams(window.location.search).get('id');
+    const feedbacks = document.querySelector('#load_feedbacks');
 
-    if (data.length > 0) {
-        for (const notification of data) {
-            // Display notification
-            info(notification.title, notification.message, 6000);
-        }
+    fetch(baseUrl + 'feedback/getFeedbacks?id=' + id)
+        .then(response => response.text())
+        .then(data => feedbacks.innerHTML = data)
+        .catch(() => error('ERROR', 'Something went wrong. Please try again later'));
+}
+
+// ------------------------------ Employer's Job Function Section ------------------------------
+
+const load_jobs = () => {
+    fetch(baseUrl + 'jobposting/loadJobposts')
+        .then(response => response.text())
+        .then(data => {
+            const jobpost_section = document.querySelector('#jobpost_section');
+            jobpost_section.innerHTML = data;
+
+            tinymce.remove('textarea');
+            textareaEditor('textarea', 400);
+            setJobDescription();
+            setJobBtn();
+            seeMoreBtnFunction();
+            setJobStatus();
+        });
+}
+
+const setJobDescription = () => {
+    const edit_job_btn = document.querySelectorAll('.edit-job-btn');
+    if (edit_job_btn) {
+        edit_job_btn.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const content = document.querySelector('.job-description' + btn.getAttribute('data-id')).innerHTML;
+                tinymce.get('description' + btn.getAttribute('data-id')).setContent(content);
+            });
+        });
+    }
+}
+
+const setJobBtn = () => {
+    const update_job = document.querySelectorAll('.btn-update-job');
+    if (update_job) {
+        update_job.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const form = btn.closest('.modal-content').querySelector('form');
+                const id = form.querySelector('#id').value;
+                const description = tinymce.get('description' + id).getContent();
+
+                const formData = new FormData(form);
+                formData.set('description', description);
+
+                const is_valid = validateForm(form);
+                if (is_valid) {
+                    const spinner = document.createElement('span');
+                    spinner.classList.add('spinner-border', 'spinner-border-sm', 'mx-2');
+                    btn.append(spinner);
+
+                    formAction(baseUrl + 'jobposting/service/Jobposting_service/update', 'POST', formData, () => {
+                        success('SUCCESS!', 'Job updated successfully!');
+                        btn.querySelector('span.spinner-border').remove();
+
+                        const modal_close = document.querySelector('#modal' + id).querySelector('.close');
+                        const click_event = new MouseEvent('click', {
+                            view: window,
+                            bubbles: true,
+                            cancelable: true
+                        });
+
+                        modal_close.dispatchEvent(click_event);
+
+                        load_jobs();
+                    });
+                }
+            });
+        });
+    }
+
+    const delete_job = document.querySelectorAll('.delete-job-btn');
+    if (delete_job) {
+        delete_job.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const id = btn.getAttribute('data-id');
+
+                if (confirm('Are you sure you want to delete this job?')) {
+                    info('Please wait...', 'Deleting job...');
+
+                    formAction(baseUrl + 'jobposting/service/Jobposting_service/delete', 'POST', {id: id}, () => {
+                        success('SUCCESS!', 'Job deleted successfully!');
+                        load_jobs();
+                    });
+                }
+            });
+        });
     }
 }
 
@@ -53,6 +138,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             formAction(baseUrl + 'feedback/submitFeedback', 'POST', data, function (data) {
+                load_feedbacks();
                 success('SUCCESS', 'Feedback submitted successfully');
             });
         });
@@ -108,31 +194,26 @@ function seeMoreBtnFunction() {
             } else if (jobDescription.offsetHeight >= maxHeight) {
                 button.style.display = "block";
             }
+
+            button.addEventListener("click", function (event) {
+                const button = event.target;
+                const target = button.dataset.target;
+                const jobDescription = button.previousElementSibling;
+
+                if (jobDescription.matches(target)) {
+                    if (button.textContent.toLowerCase().includes("see more")) {
+                        button.textContent = "See less";
+                        jobDescription.style.maxHeight = "none";
+                        jobDescription.style.overflowY = "visible";
+                    } else {
+                        button.textContent = "See more";
+                        jobDescription.style.maxHeight = '200px';
+                        jobDescription.style.overflowY = "hidden";
+                    }
+                }
+            });
         });
     }
-}
-
-const seeMoreButtons = document.querySelectorAll(".see-more");
-if (seeMoreButtons) {
-    seeMoreButtons.forEach(button => {
-        button.addEventListener("click", function (event) {
-            const button = event.target;
-            const target = button.dataset.target;
-            const jobDescription = button.previousElementSibling;
-
-            if (jobDescription.matches(target)) {
-                if (button.textContent.toLowerCase().includes("see more")) {
-                    button.textContent = "See less";
-                    jobDescription.style.maxHeight = "none";
-                    jobDescription.style.overflowY = "visible";
-                } else {
-                    button.textContent = "See more";
-                    jobDescription.style.maxHeight = '200px';
-                    jobDescription.style.overflowY = "hidden";
-                }
-            }
-        });
-    });
 }
 
 const skills_required_input = document.getElementById("skills_req");

@@ -38,7 +38,7 @@ class Feedback_model extends CI_Model
             WHEN tbl_employer.image IS NOT NULL THEN tbl_employer.image
         END) AS userImage')
             ->from($this->Table->feedback)
-            ->join($this->Table->user, 'tbl_user.id = tbl_feedback.user_id')
+            ->join($this->Table->user, 'tbl_user.id = tbl_feedback.from_user_id', 'left')
             ->join($this->Table->employee, 'tbl_employee.user_id = tbl_feedback.from_user_id', 'left')
             ->join($this->Table->employer, 'tbl_employer.user_id = tbl_feedback.from_user_id', 'left')
             ->where('tbl_feedback.user_id', $user_id)

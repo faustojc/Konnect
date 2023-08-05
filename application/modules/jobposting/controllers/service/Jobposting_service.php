@@ -37,33 +37,39 @@ class Jobposting_service extends MY_Controller
         }
     }
 
+    /**
+     * @throws JsonException
+     */
     public function save(): void
     {
-        $info = $this->input->post();
+        $data = $this->input->post(NULL, TRUE);
+        $data['employer_id'] = $this->userdata->id;
 
-        $response = $this->job_service_model->save($info);
-        echo json_encode($response);
+        $response = $this->job_service_model->save($data);
+        echo json_encode($response, JSON_THROW_ON_ERROR);
     }
 
+    /**
+     * @throws JsonException
+     */
     public function update(): void
     {
-        $info = [
-            'id' => $this->input->post("id"),
-            'employer_id' => $this->input->post("employer_id"),
-            'title' => $this->input->post("title"),
-            'description' => $this->input->post("description"),
-            'filled' => $this->input->post("filled"),
-        ];
+        $data = $this->input->post(NULL, TRUE);
+        $data['employer_id'] = $this->userdata->id;
 
-        $response = $this->job_service_model->update($info);
-        echo json_encode($response);
+        $response = $this->job_service_model->update($data);
+        echo json_encode($response, JSON_THROW_ON_ERROR);
     }
 
-    public function delete()
+
+    /**
+     * @throws JsonException
+     */
+    public function delete(): void
     {
         $id = $this->input->post("id");
         $response = $this->job_service_model->delete($id);
 
-        echo json_encode($response);
+        echo json_encode($response, JSON_THROW_ON_ERROR);
     }
 }

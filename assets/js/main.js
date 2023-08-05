@@ -48,7 +48,7 @@ function textareaEditor(selector, height = 350, setupFunction = () => {
         setup: function (editor) {
             setupFunction(editor);
         },
-        plugins: 'advlist anchor autolink charmap code codesample emoticons link lists searchreplace table visualblocks wordcount',
+        plugins: 'advlist anchor autolink charmap code codesample link lists searchreplace wordcount',
     });
 }
 

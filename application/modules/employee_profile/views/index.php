@@ -739,7 +739,9 @@ main_header(['employee_profile']);
                         <?php load_following($following) ?>
                     </div>
                     <div class="tab-pane fade" id="pills-feedback" role="tabpanel" aria-labelledby="pills-feedback-tab">
-                        <?php load_feedback($feedbacks, $has_permission) ?>
+                        <div id="load_feedback">
+                            <?php load_feedback($feedbacks, $has_permission) ?>
+                        </div>
                     </div>
                     <div class="tab-pane fade" id="pills-resume" role="tabpanel" aria-labelledby="pills-resume-tab">
                         <div id="load_resume">

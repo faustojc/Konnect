@@ -18,7 +18,7 @@ class Employer_profile extends MY_Controller
             redirect(base_url() . 'login');
         }
 
-        $this->auth = (array) $this->Auth_model->get_auth($this->userdata->user_id);
+        $this->auth = $this->Auth_model->get_auth($this->userdata->user_id);
 
         $model_list = [
             'employer_profile/Employer_profile_model' => 'employer_profile_model',
@@ -33,7 +33,8 @@ class Employer_profile extends MY_Controller
         $this->current_user = $this->Employer_model->getEmployerOnly('*', $id);
         $this->isAccount = $this->Auth_model->check_permission($this->userdata, $this->current_user);
 
-        $this->data['curr_auth'] = (array) $this->Auth_model->get_auth($this->current_user->user_id);
+        $this->data['curr_auth'] = $this->Auth_model->get_auth($this->current_user->user_id);
+        set_userdata('curr_auth', $this->data['curr_auth']);
     }
 
     /** load main page */

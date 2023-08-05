@@ -88,6 +88,13 @@ class Jobposting extends MY_Controller
         $this->output->set_content_type('text/html')->set_output($view);
     }
 
+    public function loadJobposts(): void
+    {
+        $data = $this->job_model->get_all_jobposts();
+
+        jobpost_all_display($data);
+    }
+
     public function get_selected_job(): void
     {
         $id = $this->input->get('id');

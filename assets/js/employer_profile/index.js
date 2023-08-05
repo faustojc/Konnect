@@ -11,8 +11,13 @@ const load_summary = () => {
         });
 }
 
+// Function calls
+seeMoreBtnFunction();
+
 document.addEventListener('DOMContentLoaded', () => {
     setJobStatus();
+    setJobDescription();
+    setJobBtn();
 
     let address;
     let region;

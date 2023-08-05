@@ -26,30 +26,30 @@ class Login_model extends CI_Model
                 ->from($this->Table->user)
                 ->where('email', $info['email'])
                 ->where('user_type', $info['user_type'])
-                ->get()->row();
+                ->get()->row_array();
 
             if (empty($query)) {
                 return ['message' => NO_ACCOUNT, 'has_error' => TRUE];
             }
 
-            if ($query->password !== sha1(password_generator($info['password'], $query->locker))) {
+            if ($query['password'] !== sha1(password_generator($info['password'], $query['locker']))) {
                 return ['message' => NOT_MATCH, 'has_error' => TRUE];
             }
 
             if ($info['user_type'] == 'EMPLOYER') {
                 $user = $this->db->select()
                     ->from($this->Table->employer)
-                    ->where('user_id', $query->id)
+                    ->where('user_id', $query['id'])
                     ->get()->row();
             } else {
                 $user = $this->db->select()
                     ->from($this->Table->employee)
-                    ->where('user_id', $query->id)
+                    ->where('user_id', $query['id'])
                     ->get()->row();
             }
 
             set_userdata(USER, $user);
-            set_userdata(AUTH, (array)$query);
+            set_userdata(AUTH, $query);
             return [
                 'has_error' => FALSE,
                 'message' => 'Login Success',

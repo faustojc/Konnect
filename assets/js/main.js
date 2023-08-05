@@ -48,7 +48,10 @@ function textareaEditor(selector, height = 350, setupFunction = () => {
         setup: function (editor) {
             setupFunction(editor);
         },
-        plugins: 'advlist anchor autolink charmap code codesample link lists searchreplace wordcount',
+        menubar: 'edit | insert',
+        plugins: ['advlist', 'anchor', 'autolink', 'charmap', 'link', 'lists', 'searchreplace', 'wordcount'],
+        toolbar: 'undo redo | formatselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link | searchreplace | wordcount',
+        default_link_target: '_blank',
     });
 }
 

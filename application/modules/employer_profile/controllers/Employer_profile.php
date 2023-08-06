@@ -85,6 +85,12 @@ class Employer_profile extends MY_Controller
         $this->load->view('layout', $this->data);
     }
 
+    public function getApplicants(): void
+    {
+        $this->data['applicants'] = $this->Applicant_model->getEmployerApplicants($this->userdata->id);
+        $this->load->view('grid/load_applicants', $this->data);
+    }
+
     public function edit_profile(): void
     {
         $this->data['employer'] = $this->userdata;

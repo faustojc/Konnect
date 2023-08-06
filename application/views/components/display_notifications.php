@@ -1,18 +1,12 @@
 <style>
-    @keyframes growDown {
-        0% {
-            transform: scaleY(0);
-        }
-        100% {
-            transform: scaleY(1);
-        }
-    }
-
     .notification-message {
-        max-width: 200px;
-        white-space: nowrap;
+        /* Allow wrapping */
+        white-space: normal;
+        word-break: break-word;
+
+        /* Truncate if too tall */
+        max-height: 100px;
         overflow: hidden;
-        text-overflow: ellipsis;
     }
 </style>
 
@@ -28,13 +22,13 @@
 
     ?>
 
-    <a class="nav-link" data-toggle="dropdown" href="#"> <i class="far fa-bell"></i>
+    <a class="nav-link" data-toggle="dropdown" role="button"> <i class="far fa-bell"></i>
         <?php if ($count != 0): ?>
             <span class="badge badge-warning navbar-badge"><?= $count ?></span>
         <?php endif; ?>
     </a>
-    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right animated growDown">
-        <div style="max-height: 300px; overflow-y: auto">
+    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        <div class="d-flex flex-column">
             <span class="dropdown-item dropdown-header">
                 <?php if ($count != 0): ?>
                     <?= $count ?> Unread Notification<?= $count > 1 ? 's' : '' ?>
@@ -53,15 +47,15 @@
                 }
 
                 ?>
-                <div class="dropdown-item p-2 <?= ($notification->is_read == 0) ? 'bg-gray-light' : '' ?>" style="max-height: 100px; overflow-y: hidden">
+                <div class="dropdown-item p-2 notification-body <?= ($notification->is_read == 0) ? 'bg-gray-light' : '' ?>" data-id="<?= $notification->id ?>" style="width: 300px; overflow-y: hidden">
                     <a href="<?= base_url() . $notification->link ?>" class="d-flex align-items-center text-decoration-none text-dark">
-                        <img class="img-fluid rounded-circle mr-2"
+                        <img class="img-fluid rounded-circle flex-shrink-0 mr-2"
                              src="<?= $image ?>"
                              alt="<?= $notification->userName ?>"
-                             style="width: 70px; height: 50px; object-fit: cover;"
+                             style="width: 50px; height: 50px; object-fit: cover;"
                         >
-                        <div>
-                            <p class="mb-0 notification-message"><?= $notification->message ?></p>
+                        <div class="ml-2 w-100">
+                            <div class="notification-message text-truncate m-0" style="flex: 1"><?= $notification->message ?></div>
                             <small class="text-muted"><?= $timeAgo ?></small>
                         </div>
                     </a>

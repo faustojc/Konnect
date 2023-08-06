@@ -157,25 +157,6 @@ class Employee_profile extends MY_Controller
         $this->load->view('layout', $this->data);
     }
 
-    public function add_skill()
-    {
-        $ID = $this->uri->segment(3);
-
-        $this->data['details'] = $this->eModel->get_skill($ID);
-        $this->data['content'] = 'index';
-        $this->load->view('layout', $this->data);
-    }
-
-    public function edit_skill()
-    {
-        $ID = $this->uri->segment(3);
-        $this->eModel->ID = $ID;
-
-        $this->data['details'] = $this->eModel->edit_skill();
-        $this->data['content'] = 'edit_skill';
-        $this->load->view('layout', $this->data);
-    }
-
     public function add_employee_train()
     {
         $this->data['details'] = $this->eModel->get_employees();

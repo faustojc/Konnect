@@ -3,6 +3,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Applicant extends MY_Controller
 {
+    public const PENDING = 'PENDING';
+    public const ACCEPTED = 'ACCEPTED';
+    public const REJECTED = 'REJECTED';
+    public const UNDER_REVIEW = 'UNDER REVIEW';
+    public const SCHEDULED = 'SCHEDULE FOR INTERVIEW';
+
     private $userdata;
     private $auth;
 
@@ -70,7 +76,7 @@ class Applicant extends MY_Controller
     public function accept(): void
     {
         $data = json_decode($this->input->raw_input_stream, TRUE, 512, JSON_THROW_ON_ERROR);
-        $this->Applicant_model->setApplicantStatus($data['application_id'], 'ACCEPTED');
+        $this->Applicant_model->setApplicantStatus($data['application_id'], self::UNDER_REVIEW);
 
         // Get the employee details by getting the user_id
         $applicant = $this->Applicant_model->getApplicant($data['application_id'], $data['job_id']);
@@ -81,25 +87,9 @@ class Applicant extends MY_Controller
             'user_id' => $applicant->employeeUserID,
             'from_user_id' => $this->userdata->user_id,
             'title' => 'Application Accepted',
-            'message' => ucwords($this->userdata->tradename) . ' has accepted your application in the job post ' . $job->title . '.',
+            'message' => ucwords($this->userdata->tradename) . ' has accepted your application in the job post ' . $job->title . ' and is now under review. Thank you',
             'link' => 'jobposting?id=' . $data['job_id'],
         ];
-
-        $employment_data = [
-            'employer_id' => $this->userdata->id,
-            'employee_id' => $applicant->employeeUserID,
-            'job_title' => $job->title,
-            'status' => $job->job_type,
-        ];
-        //$employment_id = $this->Employment_model->add($employment_data)['id'];
-
-        $employed_data = [
-            'employer_id' => $this->userdata->id,
-            'employee_id' => $applicant->employee_id,
-            'job_title' => $job->title,
-            'job_type' => $job->job_type,
-        ];
-        $this->Employed_model->add($employed_data);
 
         $this->Notification_model->add($notif_data);
 
@@ -108,7 +98,7 @@ class Applicant extends MY_Controller
             'no-reply-Konnect',
             $applicant->email,
             'Application Accepted',
-            ucwords($this->userdata->tradename) . ' has accepted your application for the ' . $job->title . '. You may now contact now ' . ucwords($this->userdata->tradename) . ' at ' . $this->auth['email'] . ' for more details. Thank you!',
+            ucwords($this->userdata->tradename) . ' has accepted your application for the ' . $job->title . ' and is now ' . $applicant->status . '. You can contact ' . ucwords($this->userdata->tradename) . ' at ' . $this->auth['email'] . ' for more details. Thank you!',
         );
     }
 
@@ -118,7 +108,7 @@ class Applicant extends MY_Controller
     public function reject(): void
     {
         $data = json_decode($this->input->raw_input_stream, TRUE, 512, JSON_THROW_ON_ERROR);
-        $this->Applicant_model->setApplicantStatus($data['application_id'], 'REJECTED');
+        $this->Applicant_model->setApplicantStatus($data['application_id'], self::REJECTED);
 
         // Get the employee details by getting the user_id
         $applicant = $this->Applicant_model->getApplicant($data['application_id']);
@@ -142,5 +132,42 @@ class Applicant extends MY_Controller
             'Application Rejected',
             ucwords($this->userdata->tradename) . ' has rejected your application for the ' . $job->title . '. Thank you!',
         );
+    }
+
+    public function setStatus(): void
+    {
+        $data = $this->input->post();
+        $this->Applicant_model->setApplicantStatus($data['id'], $data['status']);
+
+        $applicant = $this->Applicant_model->getApplicant($data['id'], $data['job_id']);
+
+        $employed_data = [
+            'employer_id' => $this->userdata->id,
+            'employee_id' => $applicant->employee_id,
+            'job_title' => $applicant->jobTitle,
+            'job_type' => $applicant->jobType,
+        ];
+        $this->Employed_model->add($employed_data);
+
+        // Send a notification to the applicant by adding a new notification
+        $notif_data = [
+            'user_id' => $applicant->employee_id,
+            'from_user_id' => $this->userdata->user_id,
+            'title' => 'Application Status',
+            'message' => 'Your application in the job post ' . $applicant->jobTitle . ' has been ' . $data['status'] . '.',
+            'link' => 'jobposting?id=' . $data['job_id'],
+        ];
+        $this->Notification_model->add($notif_data);
+
+        // Send email when the application is accepted
+        if ($data['status'] == self::ACCEPTED) {
+            sendEmail(
+                $this->auth['email'],
+                'no-reply-Konnect',
+                $applicant->email,
+                'Application Accepted',
+                ucwords($this->userdata->tradename) . ' has accepted your application for the ' . $job->title . ' and is now ' . $applicant->status . '. You can contact ' . ucwords($this->userdata->tradename) . ' at ' . $this->auth['email'] . ' for more details. Thank you!',
+            );
+        }
     }
 }

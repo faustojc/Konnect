@@ -192,12 +192,15 @@ if (!function_exists('apply_button')) {
      */
     function apply_button(int $job_id, string $status)
     {
+        $CI = &get_instance();
+
         $data = [
             'job_id' => $job_id,
             'status' => $status,
+            'employee' => get_userdata(USER),
+            'resume' => $CI->Resume_model->getResume(get_userdata(USER)->ID),
         ];
 
-        $CI = &get_instance();
         $CI->load->view('components/employee/dashboard/apply_button', $data);
     }
 }
@@ -245,5 +248,26 @@ if (!function_exists('follow_button')) {
 
         $CI = &get_instance();
         $CI->load->view('components/follow_button', $data);
+    }
+}
+
+if (!function_exists('resumeDisplay')) {
+    /**
+     * Resume Display Component
+     *
+     * A component that displays the resume of the employee.
+     *
+     * USAGE: resumeDisplay($resume);
+     *
+     * @param object $resume The resume of the employee.
+     */
+    function resumeDisplay(object $resume)
+    {
+        $data = [
+            'resume' => $resume,
+        ];
+
+        $CI = &get_instance();
+        $CI->load->view('components/resume_display', $data);
     }
 }

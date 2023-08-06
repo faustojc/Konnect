@@ -172,7 +172,7 @@ main_header(['Employer_profile']);
                             </li>
                             <?php if ($has_permission): ?>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="pills-aplicants-tab" data-toggle="pill" href="#pills-aplicants" role="tab" aria-controls="pills-aplicants" aria-selected="true">
+                                    <a class="nav-link" id="pills-applicants-tab" data-toggle="pill" href="#pills-applicants" role="tab" aria-controls="pills-applicants" aria-selected="true">
                                         Applicants <i class="fas fa-lock ml-2"></i> </a>
                                 </li>
                                 <li class="nav-item">
@@ -200,7 +200,6 @@ main_header(['Employer_profile']);
                             <div class="card-body card-widget widget-user-2" id="load_summary">
                                 <?= $current_employer->summary ?>
                             </div>
-
 
                             <?php if ($has_permission): ?>
                                 <!-- MODAL SUMMARY -->
@@ -263,12 +262,11 @@ main_header(['Employer_profile']);
                     </div>
 
                     <?php if ($has_permission): ?>
+                        <div class="tab-pane fade" id="pills-applicants" role="tabpanel" aria-labelledby="pills-applicants-tab">
+                            <?= $applicant_view ?>
+                        </div>
                         <div class="tab-pane fade" id="pills-employeelist" role="tabpanel" aria-labelledby="pills-employeelist-tab">
                             <?= $employeelist_view ?>
-                        </div>
-                        <div class="tab-pane fade" id="pills-aplicants" role="tabpanel" aria-labelledby="pills-aplicants-tab">
-                            <?= $applicant_view ?>
-
                         </div>
                     <?php endif; ?>
                 </div>

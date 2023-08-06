@@ -59,6 +59,32 @@ if (!function_exists('formatTime')) {
     }
 }
 
+if (!function_exists('getTimeDiff')) {
+    function getTimeDiff($time): int
+    {
+        $currentTime = new DateTime();
+        $diff = NULL;
+        try {
+            $diff = $currentTime->diff(new DateTime($time));
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+        $minutes = $diff->i;
+        $hours = $diff->h;
+        $days = $diff->d;
+
+        if ($minutes < 60) {
+            $timeAgo = $minutes . "min";
+        } else if ($hours < 24) {
+            $timeAgo = $hours . "hr";
+        } else {
+            $timeAgo = $days . "day";
+        }
+
+        return $timeAgo;
+    }
+}
+
 if (!function_exists('sendEmail')) {
     function sendEmail($from, $name, $to, $subject, $message): void
     {

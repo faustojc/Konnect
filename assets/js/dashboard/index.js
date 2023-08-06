@@ -21,11 +21,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 spinner.classList.add('spinner-border', 'spinner-border-sm', 'mx-2');
                 postJobBtn.append(spinner);
 
-                formAction(baseUrl + 'jobposting/service/Jobposting_service/postJob', 'POST', formData, () => {
+                formAction(baseUrl + 'jobposting/service/Jobposting_service/postJob', 'POST', formData, (data) => {
                     success('SUCCESS!', 'Job posted successfully!');
                     postJobBtn.querySelector('span.spinner-border').remove();
 
-                    window.location.reload();
+                    if (typeof data === 'string') {
+                        const jobpost_section = document.querySelector('#jobpost_section');
+                        jobpost_section.insertAdjacentHTML('afterbegin', data);
+
+                        setJobStatus();
+                    }
                 });
             }
         });

@@ -1,6 +1,46 @@
 const spinner = document.createElement('span');
 spinner.classList.add('spinner-border', 'spinner-border-sm', 'mx-2');
 
+const upload_resume_input = document.querySelectorAll('.upload-resume');
+if (upload_resume_input) {
+    upload_resume_input.forEach(input => {
+        input.addEventListener('change', event => {
+            const file = event.target.files[0];
+            const url = baseUrl + 'employee_profile/service/employee_profile_service/uploadResume';
+
+            const formData = new FormData();
+            formData.append('resume', file);
+
+            input.after(spinner);
+
+            fetch(url, {
+                method: 'POST',
+                body: formData
+            }).then(response => response.text())
+                .then(() => {
+                    input.parentElement.removeChild(spinner);
+
+                    // Get the resume view
+                    fetch(baseUrl + 'resume/getResume')
+                        .then(response => response.text())
+                        .then(data => {
+                            const resume_info = input.closest('.modal-body').querySelector('.resume-info');
+                            resume_info.innerHTML = data;
+                        })
+                        .catch(e => console.log(e));
+                })
+                .catch(() => error('Error!', 'Something went wrong. Please try again later.'));
+        });
+    });
+}
+
+const btn_apply = document.querySelectorAll('.btn-apply');
+if (btn_apply) {
+    btn_apply.forEach(btn => {
+
+    });
+}
+
 function applyBtnFunction() {
     const applyBtn = document.querySelectorAll('.apply-button');
 
@@ -17,7 +57,7 @@ function applyBtnFunction() {
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({job_id: job_id})
                 }).then(response => response.text())
-                    .then(data => {
+                    .then(() => {
                         btn.removeChild(spinner);
 
                         let status = btn.textContent.replace(/\s+/g, '').toUpperCase();
@@ -31,6 +71,9 @@ function applyBtnFunction() {
                         }
 
                         btn.textContent = status;
+
+                        const applyBtn = document.querySelector(`button[data-target="#apply${job_id}"]`);
+                        applyBtn.textContent = status;
                     })
                     .catch(e => {
                         console.log(e);

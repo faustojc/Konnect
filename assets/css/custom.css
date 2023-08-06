@@ -1,34 +1,45 @@
-.status-box{
+.status-box {
     text-align: center;
     width: 99%;
     color: white;
     padding: 0.5rem 5px;
 }
-.text-center.div{
+
+.text-center.div {
     text-align: center;
 }
-#status-holder{
+
+#status-holder {
     /* background-color: rgb(225, 173, 1 ); */
     color: white;
     padding: 0.2rem;
     text-align: center;
 }
 
-hr.custom-hr{
+hr.custom-hr {
     border: 1px solid rgb(226, 222, 222);
 }
 
-.insp-tab-grid{
+.insp-tab-grid {
     background-color: #f4f6f9;
     padding: 0px 0px;
     margin: 0px;
 }
 
-.no-p p{
+.no-p p {
     padding: 0%;
     margin-bottom: 0px;
 }
 
 .inspection-status-and-remarks, .remarks-history, .assessment-billing {
     background-color: white;
+}
+
+.upload-resume {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
 }

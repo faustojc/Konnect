@@ -39,15 +39,15 @@
         transition: .4s;
     }
 
-    input:checked + .slider {
+    input:checked+.slider {
         background-color: #2196F3;
     }
 
-    input:focus + .slider {
+    input:focus+.slider {
         box-shadow: 0 0 1px #2196F3;
     }
 
-    input:checked + .slider:before {
+    input:checked+.slider:before {
         -webkit-transform: translateX(13px);
         -ms-transform: translateX(13px);
         transform: translateX(13px);
@@ -82,53 +82,49 @@
 
             <table id="employed_table" class="table table-bordered table-striped">
                 <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Job Title</th>
-                    <th>Is active</th>
-                    <th>Is verified</th>
-                    <th>Start</th>
-                    <th>End</th>
-                </tr>
+                    <tr>
+                        <th>Name</th>
+                        <th>Job Title</th>
+                        <th>Is active</th>
+                        <th>Is verified</th>
+                        <th>Start</th>
+                        <th>End</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($employed as $index => $emp) { ?>
-                    <tr>
-                        <td>
-                            <a href="<?= base_url() ?>employee_profile?id=<?= $emp->employee_id ?>">
-                                <?= ucwords($emp->employee_name) ?>
-                            </a>
-                        </td>
-                        <td>
-                            <?= $emp->job_title ?>
-                        </td>
-                        <td class="pr-0">
-                            <label class="switch">
-                                <input class="check-active" data-id="<?= $emp->id ?>" type="checkbox" data-toggle="toggle" data-on="Ready" data-off="Not Ready" data-onstyle="success" data-offstyle="danger"
-                                    <?= ($emp->is_active == 1) ? 'checked' : '' ?>
-                                /> <span class="slider round"></span> </label>
-                        </td>
-                        <td class="pr-0">
-                            <label class="switch">
-                                <input class="check-verified" data-id="<?= $emp->id ?>" type="checkbox" data-toggle="toggle" data-on="Ready" data-off="Not Ready" data-onstyle="success" data-offstyle="danger"
-                                    <?= ($emp->is_verified == 1) ? 'checked' : '' ?>
-                                /> <span class="slider round"></span> </label>
-                        </td>
-                        <td>
-                            <!-- Start Date -->
-                            <?= date("M j, Y", strtotime($emp->date_started)) ?>
-                        </td>
-                        <td>
-                            <?php if (!empty($emp->date_ended)): ?>
-                                <!-- End Date -->
-                                <?= date("M j, Y", strtotime($emp->date_ended)) ?>
-                            <?php else: ?>
-                                <span class="badge badge-success">Present</span>
-                            <?php endif; ?>
-                        </td>
+                    <?php foreach ($employed as $index => $emp) { ?>
+                        <tr>
+                            <td>
+                                <a href="<?= base_url() ?>employee_profile?id=<?= $emp->employee_id ?>" style="color:black;">
+                                    <?= ucwords($emp->employee_name) ?>
+                                </a>
+                            </td>
+                            <td>
+                                <?= $emp->job_title ?>
+                            </td>
+                            <td class="pr-0">
+                                <label class="switch">
+                                    <input class="check-active" data-id="<?= $emp->id ?>" type="checkbox" data-toggle="toggle" data-on="Ready" data-off="Not Ready" data-onstyle="success" data-offstyle="danger" <?= ($emp->is_active == 1) ? 'checked' : '' ?> /> <span class="slider round"></span> </label>
+                            </td>
+                            <td class="pr-0">
+                                <label class="switch">
+                                    <input class="check-verified" data-id="<?= $emp->id ?>" type="checkbox" data-toggle="toggle" data-on="Ready" data-off="Not Ready" data-onstyle="success" data-offstyle="danger" <?= ($emp->is_verified == 1) ? 'checked' : '' ?> /> <span class="slider round"></span> </label>
+                            </td>
+                            <td>
+                                <!-- Start Date -->
+                                <?= date("M j, Y", strtotime($emp->date_started)) ?>
+                            </td>
+                            <td>
+                                <?php if (!empty($emp->date_ended)): ?>
+                                    <!-- End Date -->
+                                    <?= date("M j, Y", strtotime($emp->date_ended)) ?>
+                                <?php else: ?>
+                                    <span class="badge badge-success">Present</span>
+                                <?php endif; ?>
+                            </td>
 
-                    </tr>
-                <?php } ?>
+                        </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>

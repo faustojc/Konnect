@@ -24,8 +24,11 @@ class Applicant_model extends CI_Model
         tbl_user.is_verified AS user_verified, 
         tbl_user.email AS email,
         CONCAT_WS(" ", tbl_employee.Fname, tbl_employee.Mname, tbl_employee.Lname) AS employeeName, 
-        tbl_employee.user_id AS employeeUserID,')
+        tbl_employee.user_id AS employeeUserID,
+        tbl_jobposting.title AS jobTitle,
+        tbl_jobposting.job_type AS jobType,')
             ->from($this->Table->applicant)
+            ->join('tbl_jobposting', 'tbl_jobposting.id = tbl_applicant.job_id', 'inner')
             ->join($this->Table->employee, 'tbl_employee.ID = tbl_applicant.employee_id', 'inner')
             ->join($this->Table->user, 'tbl_user.id = tbl_employee.user_id', 'inner')
             ->where('tbl_applicant.id', $id)
@@ -53,11 +56,17 @@ class Applicant_model extends CI_Model
         CONCAT_WS(" ", tbl_employee.Fname, tbl_employee.Mname, tbl_employee.Lname) AS employeeName, 
         tbl_employee.Title AS employeeTitle, 
         tbl_employee.Employee_image AS employeeImage, 
-        tbl_jobposting.title AS jobtitle')
+        tbl_employee.Province AS employeeProvince,
+        tbl_employee.City AS employeeCity,
+        tbl_employee.Address AS employeeAddress,
+        tbl_employee.Email AS employeeEmail,
+        tbl_resume.file_name AS resumeFileName,
+        tbl_resume.file_size AS resumeFileSize,')
             ->from($this->Table->applicant)
             ->join($this->Table->jobposting, 'tbl_jobposting.id = tbl_applicant.job_id')
             ->join($this->Table->employer, 'tbl_employer.id = tbl_jobposting.employer_id')
             ->join($this->Table->employee, 'tbl_employee.ID = tbl_applicant.employee_id')
+            ->join($this->Table->resume, 'tbl_resume.employee_id = tbl_applicant.employee_id', 'left')
             ->where('tbl_employer.id', $employer_id)
             ->order_by('tbl_applicant.date_created', 'DESC')
             ->get()->result();
@@ -203,17 +212,17 @@ class Applicant_model extends CI_Model
             $this->db->trans_start();
 
             // If the status is pending, then cancel the application, else, apply to the job.
-            if (!empty($status) && $status->status == 'PENDING') {
+            if (!empty($status) && $status->status == Applicant::PENDING) {
                 $this->db->where('job_id', $job_id)
                     ->where('employee_id', $employee_id)
                     ->delete($this->Table->applicant);
 
                 $message = 'Job application cancelled.';
-                $apply_status = 'APPLY';
+                $apply_status = Applicant::ACCEPTED;
             } else {
                 $this->db->insert($this->Table->applicant, $data);
                 $message = 'Successfully applied to the job, waiting for the employer to accept your application.';
-                $apply_status = 'PENDING';
+                $apply_status = Applicant::PENDING;
             }
 
             $this->db->trans_complete();

@@ -40,6 +40,8 @@
     </div>
 </div>
 
+<!-- Review Application Modal -->
+
 <div class="modal fade" id="apply" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">

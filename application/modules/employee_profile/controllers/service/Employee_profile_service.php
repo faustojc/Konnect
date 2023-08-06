@@ -68,6 +68,12 @@ class Employee_profile_service extends MY_Controller
             !is_dir($concurrentDirectory)) {
             $directory_exist = FALSE;
             //throw new RuntimeException(sprintf('Directory "%s" was not created', $concurrentDirectory));
+        } else {
+            $files = glob($file_details['upload_path'] . '*', GLOB_MARK);
+
+            foreach ($files as $file) {
+                unlink($file);
+            }
         }
 
         if (!$this->upload->do_upload('resume')) {
@@ -87,7 +93,13 @@ class Employee_profile_service extends MY_Controller
             'file_size' => $resume['file_size'],
         ];
 
-        $response = array_merge($response, $this->Resume_model->save($data));
+        $resume = $this->Resume_model->getResume($this->userdata->ID);
+
+        if (empty($resume)) {
+            $response = array_merge($response, $this->Resume_model->save($data), $data);
+        } else {
+            $response = array_merge($response, $this->Resume_model->update($this->userdata->ID, $data), $data);
+        }
 
         echo json_encode($response, JSON_THROW_ON_ERROR);
     }

@@ -27,11 +27,9 @@
                                             <?= $resume->file_name ?>
                                         </p>
                                         <small>
-                                            <?= $resume->file_size ?> KB
-                                            <span class="date text-muted">
+                                            <?= $resume->file_size ?> KB <span class="date text-muted">
                                                 <?= date('d M, Y', strtotime($resume->date_uploaded)) ?>
-                                            </span>
-                                        </small>
+                                            </span> </small>
                                     </div>
                                 </a>
                                 <?php if ($has_permission): ?>
@@ -73,7 +71,7 @@
                             <div class="file-drop-area d-flex justify-content-center align-items-center py-5 mx-auto bg-gray-light">
                                 <span class="choose-file-button" style="background-color:#0dcaf0; color: #fff;">Choose files</span>
                                 <span class="file-message">or drag and drop files here</span>
-                                <input class="file-input" type="file" id="resume" name="resume" accept="application/msword, application/pdf, .doc, .docx, .docs" size="5000">
+                                <input class="file-input" type="file" id="resume" name="resume" accept="application/msword, application/pdf, .doc, .docx, .docs" size="3000">
                             </div>
                         </form>
                     </div>

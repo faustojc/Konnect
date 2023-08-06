@@ -60,7 +60,7 @@ if (!function_exists('formatTime')) {
 }
 
 if (!function_exists('getTimeDiff')) {
-    function getTimeDiff($time): int
+    function getTimeDiff($time): string
     {
         $currentTime = new DateTime();
         $diff = NULL;

@@ -37,7 +37,7 @@ class Notification extends MY_Controller
                 usleep(300000);
             }
 
-            $ids = array_map(function ($notification) {
+            $ids = array_map(static function ($notification) {
                 return $notification->id;
             }, $newNotifications);
             $this->Notification_model->updateBatch($ids, ['is_displayed' => 1]);
@@ -53,14 +53,14 @@ class Notification extends MY_Controller
         flush();
     }
 
-    public function displayNotifications()
+    /**
+     * @throws JsonException
+     */
+    public function setRead(): void
     {
-        $result = $this->Notification_model->getNotifications($this->userdata->user_id);
+        $id = $this->input->get('id');
+        $response = $this->Notification_model->update($id, ['is_read' => 1]);
 
-        $data = [
-            'notifications' => $result,
-        ];
-
-        $this->load->view('components/display_notifications', $data);
+        echo json_encode($response, JSON_THROW_ON_ERROR);
     }
 }

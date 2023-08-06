@@ -61,6 +61,17 @@
     .slider.round:before {
         border-radius: 50%;
     }
+
+    .review_h {
+        font-size: 13px;
+        font-weight: 500;
+        border: 1px solid black;
+        border-radius: 10px;
+        ;
+        /* You can change the color and width of the border here */
+        padding: 5px;
+        /* Adjust the padding as needed */
+    }
 </style>
 <?php if (!empty($applicants)) { ?>
     <div class="card">
@@ -95,26 +106,60 @@
                     <?php foreach ($applicants as $index => $emp) { ?>
                         <tr>
                             <td>
-                                <a href="<?= base_url() ?>employee_profile?id=<?= $emp->employee_id ?>">
+                                <a href="<?= base_url() ?>employee_profile?id=<?= $emp->employee_id ?>" style="color:black;">
                                     <?= ucwords($emp->employeeName) ?>
                                 </a>
                             </td>
                             <td>
                                 <?= $emp->jobtitle ?>
                             </td>
-                            <td></td>
+                            <!-- Application Status -->
+                            <td><span class="badge badge-light">Under Review</span> </td>
                             <td>
                                 <!-- Start Date -->
-                                <?= date("M j, Y", strtotime($emp->date_created)) ?>
+                                <?= date("m/d/y", strtotime($emp->date_created)) ?>
                             </td>
 
-                            <td></td>
-
+                            <td>
+                                <button type="button" class="btn" data-toggle="modal" data-target="#edit_status">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </button>
+                            </td>
 
                         </tr>
                     <?php } ?>
                 </tbody>
             </table>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="edit_status" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Status</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <label>Applicant Name</label>
+                    <input type="text" class="form-control border-0" name="Fname" id="Fname" value="Applicant Name" style=" font-size:14px; border-radius:15px; background-color: #F4F6F7;" disabled>
+
+                    <label for="Gender" class="pt-3">Application Status</label>
+                    <select class="form-control border-0" name="application_stat" id="application_stat" style="border-radius:15px; background-color: #F4F6F7;" required>
+                        <option value="male">Under Review</option>
+                        <option value="female">Schedule for Interview</option>
+                        <option value="others">Accepted</option>
+                        <option value="others">Rejected</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-info">Update</button>
+                </div>
+            </div>
         </div>
     </div>
 

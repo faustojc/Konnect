@@ -250,6 +250,7 @@ if (!empty($auth)) {
 <script src="<?= base_url() ?>assets/js/auth/index.js"></script>
 
 <script src="<?= base_url() ?>assets/js/search/index.js"></script>
+<script src="<?= base_url() ?>assets/js/notification/index.js"></script>
 
 <!-- jQuery -->
 <script src="<?= base_url() ?>assets/theme/adminlte/AdminLTE/plugins/jquery/jquery.min.js"></script>

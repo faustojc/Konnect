@@ -11,6 +11,16 @@ const load_summary = () => {
         });
 }
 
+const loadApplicants = () => {
+    fetch(baseUrl + 'employer_profile/getApplicants')
+        .then(response => response.text())
+        .then(data => {
+            const applicant_view = document.querySelector('#pills-applicants');
+            applicant_view.innerHTML = data;
+        })
+        .catch(() => error('ERROR', 'Something went wrong!'))
+}
+
 // Function calls
 seeMoreBtnFunction();
 
@@ -140,7 +150,6 @@ if (post_job) {
         const isValid = validateForm(form);
         if (isValid) {
             const spinner = document.createElement('span');
-
             spinner.classList.add('spinner-border', 'spinner-border-sm', 'mx-2');
             post_job.append(spinner);
 
@@ -160,6 +169,8 @@ if (post_job) {
         }
     });
 }
+
+// ------------------------------ SEARCH EMPLOYED ------------------------------
 
 const search_employed_input = document.querySelector('#search_employed');
 if (search_employed_input) {
@@ -185,6 +196,35 @@ if (search_employed_input) {
         })
     });
 }
+
+// ------------------------------ SEARCH APPLICANTS ------------------------------
+
+const search_applicant_input = document.querySelector('#search_applicant');
+if (search_applicant_input) {
+    search_applicant_input.addEventListener('input', () => {
+        let filter = search_applicant_input.value.toUpperCase();
+        const rows = document.querySelector('#applicants_table').querySelectorAll('tbody tr');
+
+        rows.forEach(row => {
+            const cells = row.querySelectorAll('td');
+            let textValue = '';
+
+            cells.forEach(cell => {
+                textValue += cell.textContent || cell.innerHTML;
+            });
+
+            textValue = textValue.trim().toUpperCase();
+
+            if (textValue.indexOf(filter) > -1) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        })
+    });
+}
+
+// ------------------------------ SET ACTIVE AND VERIFIED FOR EMPLOYEES ------------------------------
 
 const check_active = document.querySelectorAll('.check-active');
 if (check_active) {
@@ -215,6 +255,46 @@ if (check_verified) {
 
             formAction(baseUrl + 'employer_profile/service/Employer_profile_service/setVerified', 'POST', data, function (response) {
                 success('SUCCESS', response.message);
+            });
+        });
+    });
+}
+
+// ------------------------------ FOR APPLICANTS ------------------------------
+
+const update_status = document.querySelectorAll('.update-status');
+if (update_status) {
+    update_status.forEach(update => {
+        update.addEventListener('click', () => {
+            const id = update.closest('.modal-content').querySelector('input[name="id"]').value;
+            const job_id = update.closest('.modal-content').querySelector('input[name="job_id"]').value;
+            const employee_id = update.closest('.modal-content').querySelector('input[name="employee_id"]').value;
+            const status = update.closest('.modal-content').querySelector('select[name="status"]').value;
+
+            const close = update.closest('.modal-content').querySelector('.close');
+            const data = {
+                id: id,
+                employee_id: employee_id,
+                job_id: job_id,
+                status: status
+            }
+
+            const spinner = document.createElement('span');
+            spinner.classList.add('spinner-border', 'spinner-border-sm', 'mx-2');
+            update.append(spinner);
+
+            formAction(baseUrl + 'applicant/setStatus', 'POST', data, () => {
+                success('SUCCESS', 'Status successfully updated');
+                update.querySelector('span.spinner-border').remove();
+
+                const event = new Event('click', {
+                    bubbles: true,
+                    cancelable: true,
+                });
+
+                close.dispatchEvent(event);
+
+                loadApplicants();
             });
         });
     });

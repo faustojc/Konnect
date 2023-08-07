@@ -16,7 +16,13 @@ class Resume extends MY_Controller
 
     public function getResume(): void
     {
-        $resume = $this->Resume_model->getResume($this->userdata->ID);
+        $id = $this->input->get('id');
+
+        if (!empty($id)) {
+            $resume = $this->Resume_model->getResume($id);
+        } else {
+            $resume = $this->Resume_model->getResume($this->userdata->ID);
+        }
 
         resumeDisplay($resume);
     }

@@ -22,6 +22,14 @@ class Resume_model extends CI_Model
     }
 
     /**
+     * @return array|array[]|object|object[]
+     */
+    public function getAllResume()
+    {
+        return $this->db->get($this->Table->resume)->result();
+    }
+
+    /**
      * @param int $employee_id
      *
      * @return array|mixed|object|null

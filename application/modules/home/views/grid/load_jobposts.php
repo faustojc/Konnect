@@ -9,6 +9,8 @@
     }
 </style>
 
+<?php applyModal(); ?>
+
 <?php if (!empty($jobpostings)) {
     foreach ($jobpostings as $jobpost) {
         if (strtoupper($jobpost->filled) == 'CLOSE') {

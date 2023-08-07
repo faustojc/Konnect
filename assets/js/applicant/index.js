@@ -1,153 +1,141 @@
 const spinner = document.createElement('span');
 spinner.classList.add('spinner-border', 'spinner-border-sm', 'mx-2');
 
-const upload_resume_input = document.querySelectorAll('.upload-resume');
+const upload_resume_input = document.querySelector('.upload-resume');
 if (upload_resume_input) {
-    upload_resume_input.forEach(input => {
-        input.addEventListener('change', event => {
-            const file = event.target.files[0];
-            const url = baseUrl + 'employee_profile/service/employee_profile_service/uploadResume';
+    upload_resume_input.addEventListener('change', event => {
+        const file = event.target.files[0];
+        const url = baseUrl + 'employee_profile/service/employee_profile_service/uploadResume';
 
-            const formData = new FormData();
-            formData.append('resume', file);
+        const formData = new FormData();
+        formData.append('resume', file);
 
-            input.after(spinner);
+        upload_resume_input.after(spinner);
 
-            fetch(url, {
-                method: 'POST',
-                body: formData
-            }).then(response => response.text())
-                .then(() => {
-                    input.parentElement.removeChild(spinner);
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        }).then(response => response.text())
+            .then(() => {
+                upload_resume_input.parentElement.removeChild(spinner);
 
-                    // Get the resume view
-                    fetch(baseUrl + 'resume/getResume')
-                        .then(response => response.text())
-                        .then(data => {
-                            const resume_info = input.closest('.modal-body').querySelector('.resume-info');
-                            resume_info.innerHTML = data;
-                        })
-                        .catch(e => console.log(e));
-                })
-                .catch(() => error('Error!', 'Something went wrong. Please try again later.'));
-        });
+                // Get the resume view
+                fetch(baseUrl + 'resume/getResume')
+                    .then(response => response.text())
+                    .then(data => {
+                        const resume_info = upload_resume_input.closest('.modal-body').querySelector('.resume-info');
+                        resume_info.innerHTML = data;
+                    })
+                    .catch(e => console.log(e));
+            })
+            .catch(() => error('Error!', 'Something went wrong. Please try again later.'));
     });
 }
 
 const btn_apply = document.querySelectorAll('.btn-apply');
 if (btn_apply) {
     btn_apply.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const apply_modal = document.querySelector('#apply');
+            const observer = new MutationObserver(mutations => {
+                mutations.forEach(mutation => {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                        if (apply_modal.classList.contains('show')) {
+                            apply_modal.querySelector('input[name="job_id"]').value = btn.getAttribute('data-id');
+                        }
+                    }
+                });
+            });
 
+            observer.observe(apply_modal, {attributes: true, attributeFilter: ['class']})
+        });
     });
 }
 
+
 function applyBtnFunction() {
-    const applyBtn = document.querySelectorAll('.apply-button');
+    const applyBtn = document.querySelector('.apply-button');
 
     if (applyBtn) {
-        applyBtn.forEach(btn => {
-            btn.addEventListener('click', function () {
-                btn.appendChild(spinner);
+        applyBtn.addEventListener('click', () => {
+            applyBtn.appendChild(spinner);
 
-                const job_id = btn.dataset.id;
-                const url = baseUrl + 'applicant/apply';
+            const job_id = applyBtn.closest('.modal-content').querySelector('input[name="job_id"]').value;
+            const url = baseUrl + 'applicant/apply';
 
-                fetch(url, {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({job_id: job_id})
-                }).then(response => response.text())
-                    .then(() => {
-                        btn.removeChild(spinner);
+            const close = applyBtn.closest('.modal-content').querySelector('.close');
 
-                        let status = btn.textContent.replace(/\s+/g, '').toUpperCase();
+            fetch(url, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({job_id: job_id})
+            }).then(response => response.text())
+                .then(() => {
+                    applyBtn.removeChild(spinner);
 
-                        if (status.includes('APPLY')) {
-                            status = 'PENDING';
-                            success('Application sent successfully!', 'You will be notified once the employer accepts your application.');
-                        } else if (status.includes('CANCEL') || status.includes('PENDING')) {
-                            status = 'APPLY';
-                            success('Application cancelled!', 'You cancelled your application to this job.');
-                        }
+                    let status = applyBtn.textContent.replace(/\s+/g, '').toUpperCase();
 
-                        btn.textContent = status;
+                    if (status.includes('APPLY')) {
+                        status = 'PENDING';
+                        success('Application sent successfully!', 'You will be notified once the employer accepts your application.');
+                    } else if (status.includes('CANCEL') || status.includes('PENDING')) {
+                        status = 'APPLY';
+                        success('Application cancelled!', 'You cancelled your application to this job.');
+                    }
 
-                        const applyBtn = document.querySelector(`button[data-target="#apply${job_id}"]`);
-                        applyBtn.textContent = status;
-                    })
-                    .catch(e => {
-                        console.log(e);
-                        error('Error!', 'Something went wrong. Please try again later.');
+                    applyBtn.textContent = status;
+                    const applyBtnModal = document.querySelector(`button[data-id="${job_id}"]`);
+                    applyBtnModal.textContent = status;
+
+                    const event = new Event('click', {
+                        bubbles: true,
+                        cancelable: true,
                     });
-            });
+
+                    close.dispatchEvent(event);
+                })
+                .catch(e => {
+                    console.log(e);
+                    error('Error!', 'Something went wrong. Please try again later.');
+                });
         });
     }
 }
 
 function acceptRejectBtnFunction() {
-    const acceptBtn = document.querySelectorAll('.btn-accept');
-    const rejectBtn = document.querySelectorAll('.btn-reject');
+    const acceptBtn = document.querySelector('.btn-accept');
+    const rejectBtn = document.querySelector('.btn-reject');
 
     if (acceptBtn) {
-        acceptBtn.forEach(btn => {
-            btn.addEventListener('click', function (event) {
-                const application_id = btn.getAttribute('data-id');
-                const job_id = btn.getAttribute('data-job-id');
-                const url = baseUrl + 'applicant/accept';
+        acceptBtn.addEventListener('click', () => {
+            const form = acceptBtn.closest('.modal-content').querySelector('form');
+            const fromData = new FormData(form);
 
-                btn.appendChild(spinner);
+            acceptBtn.appendChild(spinner);
 
-                fetch(url, {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({application_id: application_id, job_id: job_id})
-                }).then(response => response.text())
-                    .then(data => {
-                        btn.textContent = 'ACCEPTED';
-                        btn.classList.remove('btn-info');
-                        btn.classList.add('btn-outline-success');
-                        btn.disabled = true;
+            formAction(baseUrl + 'applicant/accept', 'POST', fromData, () => {
+                acceptBtn.removeChild(spinner);
 
-                        const rejectBtn = document.querySelector(`.btn-reject[data-id="${application_id}"]`);
-                        rejectBtn.disabled = true;
+                success('Application accepted!', 'You can now contact the applicant.');
 
-                        success('Application accepted!', 'You can now contact the applicant.');
-                    })
-                    .catch(e => {
-                        error('Error!', 'Something went wrong. Please try again later.');
-                    });
+                jobSelectedDisplayEvent(baseUrl + 'jobposting/get_own_selected_job');
             });
         });
     }
 
     if (rejectBtn) {
-        rejectBtn.forEach(btn => {
-            btn.addEventListener('click', function (event) {
-                const application_id = btn.getAttribute('data-id');
-                const job_id = btn.getAttribute('data-job-id');
-                const url = baseUrl + 'applicant/reject';
+        rejectBtn.addEventListener('click', () => {
+            const form = rejectBtn.closest('.modal-content').querySelector('form');
+            const fromData = new FormData(form);
 
-                btn.appendChild(spinner);
+            rejectBtn.appendChild(spinner);
 
-                fetch(url, {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({application_id: application_id, job_id: job_id})
-                }).then(response => response.text())
-                    .then(data => {
-                        btn.textContent = 'REJECTED';
-                        btn.classList.remove('btn-secondary');
-                        btn.classList.add('btn-outline-danger');
-                        btn.disabled = true;
+            formAction(baseUrl + 'applicant/accept', 'POST', fromData, () => {
+                rejectBtn.removeChild(spinner);
 
-                        const acceptBtn = document.querySelector(`.btn-accept[data-id="${application_id}"]`);
-                        acceptBtn.disabled = true;
+                success('Application accepted!', 'You can now contact the applicant.');
 
-                        success('Application rejected!', 'The applicant will be notified.');
-                    })
-                    .catch(e => {
-                        error('Error!', 'Something went wrong. Please try again later.');
-                    });
+                jobSelectedDisplayEvent(baseUrl + 'jobposting/get_own_selected_job');
             });
         });
     }

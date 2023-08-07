@@ -130,6 +130,8 @@ class Jobposting extends MY_Controller
 
         $this->data['job'] = $this->job_model->job_info($id);
         $this->data['applicants'] = $this->Applicant_model->getJobApplicants($id);
+        $this->data['resumes'] = $this->Resume_model->getAllResume();
+
         $view = $this->load->view('grid/employer/load_own_selected_job', $this->data, TRUE);
 
         $this->output->set_content_type('text/html')->set_output($view);

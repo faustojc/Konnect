@@ -192,16 +192,41 @@ if (!function_exists('apply_button')) {
      */
     function apply_button(int $job_id, string $status)
     {
-        $CI = &get_instance();
-
         $data = [
             'job_id' => $job_id,
             'status' => $status,
-            'employee' => get_userdata(USER),
-            'resume' => $CI->Resume_model->getResume(get_userdata(USER)->ID),
         ];
 
-        $CI->load->view('components/employee/dashboard/apply_button', $data);
+        $CI = &get_instance();
+        $CI->load->view('components/employee/apply_button', $data);
+    }
+}
+
+if (!function_exists('applyModal')) {
+    /**
+     * Apply Modal Component for Employee
+     *
+     * A component that creates an apply modal for employee.
+     *
+     * USAGE: applyModal();
+     *
+     */
+    function applyModal()
+    {
+        $CI = &get_instance();
+
+        $user = get_userdata(USER);
+        $auth = get_userdata(AUTH);
+        $data = [];
+
+        if ($auth['user_type'] == 'EMPLOYEE') {
+            $data = [
+                'employee' => $user,
+                'resume' => $CI->Resume_model->getResume($user->ID),
+            ];
+        }
+
+        $CI->load->view('components/employee/apply_modal', $data);
     }
 }
 

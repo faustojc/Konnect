@@ -43,3 +43,32 @@ hr.custom-hr {
     right: 0;
     opacity: 0;
 }
+
+.review_h {
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.review_l {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.review_l h4 {
+    margin-right: 10px;
+}
+
+.review_l h6 {
+    font-size: 13px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.review_l .uploaded {
+    font-weight: 400;
+}

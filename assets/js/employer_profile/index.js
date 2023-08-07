@@ -17,6 +17,10 @@ const loadApplicants = () => {
         .then(data => {
             const applicant_view = document.querySelector('#pills-applicants');
             applicant_view.innerHTML = data;
+
+            viewDetailsFunc();
+            editDetailsFunc();
+            updateStatusFunc();
         })
         .catch(() => error('ERROR', 'Something went wrong!'))
 }
@@ -260,33 +264,110 @@ if (check_verified) {
     });
 }
 
-// ------------------------------ FOR APPLICANTS ------------------------------
+// ------------------------------ TRANSFER DATA TO MODAL ------------------------------
+const viewDetailsFunc = () => {
+    const view_details = document.querySelectorAll('.btn-view-applicant');
+    if (view_details) {
+        view_details.forEach(view => {
+            view.addEventListener('click', () => {
+                const view_applicant = document.querySelector('#view_details');
 
-const update_status = document.querySelectorAll('.update-status');
-if (update_status) {
-    update_status.forEach(update => {
-        update.addEventListener('click', () => {
-            const id = update.closest('.modal-content').querySelector('input[name="id"]').value;
-            const job_id = update.closest('.modal-content').querySelector('input[name="job_id"]').value;
-            const employee_id = update.closest('.modal-content').querySelector('input[name="employee_id"]').value;
-            const status = update.closest('.modal-content').querySelector('select[name="status"]').value;
+                const observer = new MutationObserver(() => {
+                    if (view_applicant.classList.contains('show')) {
+                        const id = view.getAttribute('data-id');
+                        const job_id = view.getAttribute('data-job-id');
 
-            const close = update.closest('.modal-content').querySelector('.close');
-            const data = {
-                id: id,
-                employee_id: employee_id,
-                job_id: job_id,
-                status: status
-            }
+                        formAction(baseUrl + 'applicant/getApplicant', 'POST', {id: id, job_id: job_id}, (data) => {
+                            view_applicant.querySelector('img').setAttribute('src', baseUrl + 'assets/images/employee/profile_pic/' + data.employeeImage);
+                            view_applicant.querySelector('#employee_name').innerHTML = data.employeeName;
+                            view_applicant.querySelector('#employee_title').innerHTML = data.employeeTitle;
+                            view_applicant.querySelector('#employee_address').innerHTML = data.employeeAddress;
 
-            const spinner = document.createElement('span');
-            spinner.classList.add('spinner-border', 'spinner-border-sm', 'mx-2');
-            update.append(spinner);
+                            view_applicant.querySelector('#employee_email').innerHTML = data.email;
+                            view_applicant.querySelector('#employee_city').innerHTML = data.employeeCity;
 
-            formAction(baseUrl + 'applicant/setStatus', 'POST', data, () => {
-                success('SUCCESS', 'Status successfully updated');
-                update.querySelector('span.spinner-border').remove();
+                            // resume html
+                            const resume_info = view_applicant.querySelector('.resume-info');
 
+                            // Get the resume view
+                            fetch(baseUrl + 'resume/getResume?id=' + data.employee_id)
+                                .then(response => response.text())
+                                .then(data => resume_info.innerHTML = data)
+                                .catch(e => console.log(e));
+                        });
+
+                        observer.disconnect();
+                    }
+                });
+
+                observer.observe(view_applicant, {attributes: true, attributeFilter: ['class']})
+            });
+        });
+    }
+}
+
+const editDetailsFunc = () => {
+    const btn_edit_applicant = document.querySelectorAll('.btn-edit-applicant');
+    if (btn_edit_applicant) {
+        btn_edit_applicant.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const edit_status_modal = document.querySelector('#edit_status');
+
+                const observer = new MutationObserver(() => {
+                    if (edit_status_modal.classList.contains('show')) {
+                        const id = btn.getAttribute('data-id');
+                        const job_id = btn.getAttribute('data-job-id');
+
+                        formAction(baseUrl + 'applicant/getApplicant', 'POST', {id: id, job_id: job_id}, (data) => {
+                            edit_status_modal.querySelector('input[name="id"]').value = data.id;
+                            edit_status_modal.querySelector('input[name="job_id"]').value = data.job_id;
+                            edit_status_modal.querySelector('input[name="employee_id"]').value = data.employee_id;
+                            edit_status_modal.querySelector('input[id="name"]').value = data.employeeName;
+
+                            const select = edit_status_modal.querySelector('select[name="status"]');
+                            select.value = data.status;
+
+                            const options = select.querySelectorAll('option');
+                            options.forEach(option => {
+                                if (option.value.toUpperCase().includes(data.status)) {
+                                    option.setAttribute('selected', 'selected');
+                                } else {
+                                    option.removeAttribute('selected');
+                                }
+                            });
+                        });
+
+                        observer.disconnect();
+                    }
+                });
+
+                observer.observe(edit_status_modal, {attributes: true, attributeFilter: ['class']})
+            });
+        });
+    }
+}
+
+viewDetailsFunc();
+editDetailsFunc();
+
+// ------------------------------ UPDATE Applicant Status ------------------------------
+
+const updateStatusFunc = () => {
+    const update_applicant_status = document.querySelector('.update-status');
+    if (update_applicant_status) {
+        const spinner = document.createElement('span');
+        spinner.classList.add('spinner-border', 'spinner-border-sm', 'mx-2');
+
+        update_applicant_status.addEventListener('click', () => {
+            const form = update_applicant_status.closest('.modal-content').querySelector('form');
+            const formData = new FormData(form);
+
+            update_applicant_status.append(spinner);
+
+            formAction(baseUrl + 'applicant/setStatus', 'POST', formData, () => {
+                update_applicant_status.querySelector('span.spinner-border').remove();
+
+                const close = update_applicant_status.closest('.modal-content').querySelector('.close');
                 const event = new Event('click', {
                     bubbles: true,
                     cancelable: true,
@@ -294,8 +375,11 @@ if (update_status) {
 
                 close.dispatchEvent(event);
 
+                success('SUCCESS', 'Status successfully updated');
                 loadApplicants();
             });
         });
-    });
+    }
 }
+
+updateStatusFunc();

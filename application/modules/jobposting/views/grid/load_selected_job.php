@@ -1,5 +1,7 @@
 <?php
 $time = formatTime($job->date_posted);
+
+applyModal();
 ?>
 
 <div class="card card-light mb-0 sticky-top" style="top: 60px; max-height: calc(100vh - 70px);">

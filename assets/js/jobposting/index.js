@@ -78,6 +78,7 @@ const jobSelectedDisplayEvent = (url) => {
                     applyBtnFunction();
                     acceptRejectBtnFunction();
                     setJobFunctionality();
+                    setViewApplicant();
 
                     tinymce.remove('textarea');
                     textareaEditor('#description' + id, 400);
@@ -131,6 +132,7 @@ const setJobFunctionality = () => {
         });
     }
 
+
     if (deleteJobBtn) {
         deleteJobBtn.addEventListener('click', () => {
             const id = deleteJobBtn.dataset.id;
@@ -151,6 +153,50 @@ const setJobFunctionality = () => {
                         });
                 });
             }
+        });
+    }
+}
+
+const setViewApplicant = () => {
+    const btn_view_details = document.querySelector('.btn-view-details');
+    if (btn_view_details) {
+        btn_view_details.addEventListener('click', () => {
+            const view_applicant = document.querySelector('#view_details');
+
+            const observer = new MutationObserver(() => {
+                if (view_applicant.classList.contains('show')) {
+                    const id = btn_view_details.getAttribute('data-id');
+                    const job_id = btn_view_details.getAttribute('data-job-id');
+
+                    formAction(baseUrl + 'applicant/getApplicant', 'POST', {id: id, job_id: job_id}, (data) => {
+                        view_applicant.querySelector('img').setAttribute('src', baseUrl + 'assets/images/employee/profile_pic/' + data.employeeImage);
+                        view_applicant.querySelector('#employee_name').innerHTML = data.employeeName;
+                        view_applicant.querySelector('#employee_title').innerHTML = data.employeeTitle;
+                        view_applicant.querySelector('#employee_address').innerHTML = data.employeeAddress;
+
+                        view_applicant.querySelector('#employee_email').innerHTML = data.email;
+                        view_applicant.querySelector('#employee_city').innerHTML = data.employeeCity;
+
+                        const form = view_applicant.querySelector('form');
+                        form.querySelector('input[name="id"]').value = data.id;
+                        form.querySelector('input[name="job_id"]').value = data.job_id;
+                        form.querySelector('input[name="employee_id"]').value = data.employee_id;
+
+                        // resume html
+                        const resume_info = view_applicant.querySelector('.resume-info');
+
+                        // Get the resume view
+                        fetch(baseUrl + 'resume/getResume?id=' + data.employee_id)
+                            .then(response => response.text())
+                            .then(data => resume_info.innerHTML = data)
+                            .catch(e => console.log(e));
+                    });
+
+                    observer.disconnect();
+                }
+            });
+
+            observer.observe(view_applicant, {attributes: true, attributeFilter: ['class']})
         });
     }
 }
@@ -240,6 +286,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
 
                 let jobContent;
+                let url = '';
 
                 if (data.user_type.toUpperCase() === 'EMPLOYER') {
                     const navJobPosted = document.querySelector('#nav-job-posted');
@@ -253,7 +300,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     jobPosted.innerHTML = data.jobs;
 
                     jobContent = jobPosted;
-                    jobSelectedDisplayEvent(baseUrl + 'jobposting/get_own_selected_job');
+                    url = baseUrl + 'jobposting/get_own_selected_job';
                 } else {
                     const navApplication = document.querySelector('#nav-application');
                     navApplication.classList.toggle('active');
@@ -266,14 +313,20 @@ document.addEventListener('DOMContentLoaded', function () {
                     ownJobApplied.innerHTML = data.jobs;
 
                     jobContent = ownJobApplied;
-                    jobSelectedDisplayEvent(baseUrl + 'jobposting/get_selected_applied_job');
+                    url = baseUrl + 'jobposting/get_selected_applied_job';
                 }
 
                 const jobDetails = jobContent.querySelector('.job-content .job-details')
                 jobDetails.innerHTML = data.selected;
 
+                jobSelectedDisplayEvent(url);
                 status_badge();
+                applyBtnFunction();
+
+                // EMPLOYER FUNCTIONALITY
                 acceptRejectBtnFunction();
+                setJobFunctionality();
+                setViewApplicant();
             });
     } else {
         fetch(baseUrl + 'jobposting/job_feed')

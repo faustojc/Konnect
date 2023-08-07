@@ -1,4 +1,6 @@
 <?php if (!empty($jobpost)) {
+    applyModal();
+
     $timeAgo = formatTime($jobpost->date_posted);
     ?>
     <div class="card">

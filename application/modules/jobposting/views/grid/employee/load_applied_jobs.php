@@ -2,28 +2,7 @@
     <div class="row justify-content-center job-content">
         <div class="col-md-4 pl-1" style="height: auto; ">
             <?php foreach ($applied_jobs as $info) {
-                $postDate = strtotime($info->jobDatePosted);
-                $timeDiff = time() - $postDate;
-
-                if ($timeDiff < 60) {
-                    $formattedTimeDiff = 'less than a minute ago';
-                } elseif ($timeDiff < 3600) {
-                    $minutes = floor($timeDiff / 60);
-                    $formattedTimeDiff = $minutes . ' minute' . ($minutes > 1 ? 's' : '') . ' ago';
-                } elseif ($timeDiff < 86400) {
-                    $hours = floor($timeDiff / 3600);
-                    $formattedTimeDiff = $hours . ' hour' . ($hours > 1 ? 's' : '') . ' ago';
-                } elseif ($timeDiff < 604800) {
-                    $days = floor($timeDiff / 86400);
-                    $formattedTimeDiff = $days . ' day' . ($days > 1 ? 's' : '') . ' ago';
-                } elseif ($timeDiff < 2592000) {
-                    $weeks = floor($timeDiff / 604800);
-                    $formattedTimeDiff = $weeks . ' week' . ($weeks > 1 ? 's' : '') . ' ago';
-                } else {
-                    $months = floor($timeDiff / 2592000);
-                    $formattedTimeDiff = $months . ' month' . ($months > 1 ? 's' : '') . ' ago';
-                }
-                ?>
+                $formattedTimeDiff = formatTime($info->jobDatePosted); ?>
                 <div class="card card-light p-3 mb-3 job-link" role="button" data-id="<?= $info->id ?>">
                     <h5 class="card-title font-weight-bold text-dark mb-2">
                         <?= ucwords($info->jobTitle) ?>

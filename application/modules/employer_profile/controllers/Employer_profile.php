@@ -7,6 +7,7 @@ class Employer_profile extends MY_Controller
     protected array $auth;
     protected $isAccount;
     protected $current_user;
+    private $current_auth;
     private array $data = [];
 
     public function __construct()
@@ -30,11 +31,21 @@ class Employer_profile extends MY_Controller
 
         // get the id from get request and get the user and check if the user owns the profile
         $id = $this->input->get('id');
-        $this->current_user = $this->Employer_model->getEmployerOnly('*', $id);
-        $this->isAccount = $this->Auth_model->check_permission($this->userdata, $this->current_user);
 
-        $this->data['curr_auth'] = $this->Auth_model->get_auth($this->current_user->user_id);
-        set_userdata('curr_auth', $this->data['curr_auth']);
+        if (!empty($id)) {
+            $this->current_user = $this->Employer_model->getEmployerOnly('*', $id);
+            $this->current_auth = $this->Auth_model->get_auth($this->current_user->user_id);
+
+            set_userdata('current_user', $this->current_user);
+            set_userdata('curr_auth', $this->current_auth);
+        } else {
+            $this->current_user = get_userdata('current_user');
+            $this->current_auth = get_userdata('curr_auth');
+        }
+
+
+        $this->isAccount = $this->Auth_model->check_permission($this->userdata, $this->current_user);
+        $this->data['curr_auth'] = $this->current_auth;
     }
 
     /** load main page */
@@ -57,6 +68,8 @@ class Employer_profile extends MY_Controller
         $this->data['feedbacks'] = $this->Feedback_model->getAllUsersFeedback($this->current_user->user_id);
         $this->data['followers'] = $this->follow_model->get_followers($id);
 
+        $this->db->cache_off();
+
         if ($this->auth['user_type'] == 'EMPLOYEE') {
             $this->data['following'] = $this->follow_model->get_following($this->userdata->ID);
             $this->data['applicant'] = $this->Applicant_model->getAppliedJobs($this->userdata->ID);
@@ -65,8 +78,6 @@ class Employer_profile extends MY_Controller
             $this->data['applicants'] = $this->Applicant_model->getEmployerApplicants($this->userdata->id);
         }
 
-        // Disable query caching
-        $this->db->cache_off();
         $this->data['current_employer']->summary = $this->load->view('grid/load_summary', $this->data, TRUE);
         $this->data['jobpostings_view'] = $this->load->view('grid/load_jobpostings', $this->data, TRUE);
         $this->data['employeelist_view'] = $this->load->view('grid/load_employeelist', $this->data, TRUE);
@@ -87,6 +98,7 @@ class Employer_profile extends MY_Controller
 
     public function getApplicants(): void
     {
+        $this->data['has_permission'] = $this->isAccount;
         $this->data['applicants'] = $this->Applicant_model->getEmployerApplicants($this->userdata->id);
         $this->load->view('grid/load_applicants', $this->data);
     }

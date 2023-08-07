@@ -1,12 +1,5 @@
-<div class="row">
-    <div class="col-lg-12 col-md-4 col-sm-12">
-        <hr>
-        <button type="button" class="btn btn-light btn-block btn-apply" data-toggle="modal" data-id="<?= $job_id ?>" data-target="#apply<?= $job_id ?>"><?= $status ?></button>
-    </div>
-</div>
-
 <!-- Review Application Modal -->
-<div class="modal fade" id="apply<?= $job_id ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="apply" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -17,6 +10,8 @@
             </div>
             <div class="modal-body">
                 <form>
+                    <input name="job_id" value="" hidden readonly/>
+
                     <div class="row">
                         <div class="col-md-12">
                             <h6>Contact Info</h6>
@@ -38,8 +33,8 @@
                             <h6 class="pt-3">Email Address</h6>
                             <h6 class="review_h p-2" style="font-size: 13px; font-weight: 400;"><?= $employee->Email ?></h6>
 
-                            <h6 class="pt-3">City/Province</h6>
-                            <small class="review_h p-2" style="font-size: 13px; font-weight: 400;"><?= $employee->Province . ', ' . $employee->City ?></small>
+                            <h6 class="pt-3">City</h6>
+                            <small class="review_h p-2" style="font-size: 13px; font-weight: 400;"><?= $employee->City ?></small>
 
                             <h6 class="pt-3">Resume</h6>
                             <h6 style="font-size: 13px; font-weight: 400;">Be sure to include an updated resume</h6>
@@ -61,7 +56,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light btn-block apply-button" data-id="<?= $job_id ?>"><?= $status ?></button>
+                <button type="button" class="btn btn-light btn-block apply-button">APPLY NOW</button>
             </div>
         </div>
     </div>

@@ -156,28 +156,34 @@ main_header(['Employer_profile']);
                 <div class="card card-white">
                     <div class="card-body" style="padding:1rem;">
                         <ul class="nav nav-pills flex-wrap" id="pills-tab" role="tablist">
-
-                            <li class="nav-item">
-                                <a class="nav-link active" id="pills-overview-tab" data-toggle="pill" href="#pills-overview" role="tab" aria-controls="pills-overview" aria-selected="true">Overview</a>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link active" id="pills-overview-tab" data-toggle="pill" href="#pills-overview" role="tab" aria-controls="pills-overview" aria-selected="true">
+                                    Overview
+                                </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" role="presentation">
                                 <a class="nav-link" id="pills-followers-tab" data-toggle="pill" href="#pills-followers" role="tab" aria-controls="pills-followers" aria-selected="false">
-                                    Followers <span class="badge badge-info d-none d-sm-inline-block">
+                                    Followers
+                                    <span class="badge badge-info d-none d-sm-inline-block">
                                         <?= count($followers) ?>
-                                    </span> </a>
+                                    </span>
+                                </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" role="presentation">
                                 <a class="nav-link" id="pills-feedback-tab" data-toggle="pill" href="#pills-feedback" role="tab" aria-controls="pills-feedback" aria-selected="false">
-                                    Feedback </a>
+                                    Feedback
+                                </a>
                             </li>
                             <?php if ($has_permission): ?>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="pills-applicants-tab" data-toggle="pill" href="#pills-applicants" role="tab" aria-controls="pills-applicants" aria-selected="true">
-                                        Applicants <i class="fas fa-lock ml-2"></i> </a>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="pills-applicants-tab" data-toggle="pill" href="#pills-applicants" role="tab" aria-controls="pills-applicants" aria-selected="false">
+                                        Applicants <i class="fas fa-lock ml-2"></i>
+                                    </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="pills-employeelist-tab" data-toggle="pill" href="#pills-employeelist" role="tab" aria-controls="pills-employeelist" aria-selected="true">
-                                        Employee List <i class="fas fa-lock ml-2"></i> </a>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="pills-employeelist-tab" data-toggle="pill" href="#pills-employeelist" role="tab" aria-controls="pills-employeelist" aria-selected="false">
+                                        Employee List <i class="fas fa-lock ml-2"></i>
+                                    </a>
                                 </li>
                             <?php endif; ?>
                         </ul>
@@ -250,7 +256,6 @@ main_header(['Employer_profile']);
                         </div>
                     </div>
 
-
                     <!-- Followers -->
                     <div class="tab-pane fade" id="pills-followers" role="tabpanel" aria-labelledby="pills-followers-tab">
                         <?php load_followers($followers); ?>
@@ -271,65 +276,69 @@ main_header(['Employer_profile']);
                     <?php endif; ?>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <!-- Contact Modal -->
-            <div class="modal fade" id="contact" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h6 class="modal-title" id="exampleModalLabel">
-                                <?= ucwords($current_employer->tradename) ?>
-                            </h6>
+    <?php if ($auth['user_type'] == 'EMPLOYEE') {
+        applyModal();
+    } ?>
 
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <h6 class="pb-3">Contact Details</h6>
+    <!-- Contact Modal -->
+    <div class="modal fade" id="contact" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="exampleModalLabel">
+                        <?= ucwords($current_employer->tradename) ?>
+                    </h6>
 
-                            <h6 style="font-weight: normal;"><i class="fas fa-map-pin"></i><strong> Address</strong>
-                            </h6>
-                            <h6 style="font-weight: normal;">
-                                <?= ucwords($current_employer->address . ', ' . $current_employer->barangay . ', ' . $current_employer->city) ?>
-                            </h6>
-                            <br>
-                            <h6 style="font-weight: normal;"><i class="fa fa-envelope"></i><strong> Email</strong></h6>
-                            <h6 style="font-weight: normal;">
-                                <?= $current_employer->email ?>
-                            </h6>
-                            <br>
-                            <h6 style="font-weight: normal;"><i class="fa fa-phone"></i><strong> Contact Number</strong>
-                            </h6>
-                            <h6 style="font-weight: normal;">
-                                <?= $current_employer->contact_number ?>
-                            </h6>
-                            <br>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h6 class="pb-3">Contact Details</h6>
 
-                            <?php if ($has_permission): ?>
-                                <h6 style="font-weight: normal;"><i class="fa-solid fa-id-card"></i><strong>
-                                        SSS</strong>
-                                </h6>
+                    <h6 style="font-weight: normal;"><i class="fas fa-map-pin"></i><strong> Address</strong>
+                    </h6>
+                    <h6 style="font-weight: normal;">
+                        <?= ucwords($current_employer->address . ', ' . $current_employer->barangay . ', ' . $current_employer->city) ?>
+                    </h6>
+                    <br>
+                    <h6 style="font-weight: normal;"><i class="fa fa-envelope"></i><strong> Email</strong></h6>
+                    <h6 style="font-weight: normal;">
+                        <?= $current_employer->email ?>
+                    </h6>
+                    <br>
+                    <h6 style="font-weight: normal;"><i class="fa fa-phone"></i><strong> Contact Number</strong>
+                    </h6>
+                    <h6 style="font-weight: normal;">
+                        <?= $current_employer->contact_number ?>
+                    </h6>
+                    <br>
 
-                                <h6 style="font-weight: normal;">
-                                    <?= $current_employer->sss ?>
-                                </h6>
-                                <br>
-                                <h6 style="font-weight: normal;"><i class="fa-solid fa-id-card"></i><strong>
-                                        TIN</strong>
-                                </h6>
-                                <h6 style="font-weight: normal;">
-                                    <?= $current_employer->tin ?>
-                                </h6>
-                            <?php endif; ?>
-                        </div>
-                    </div>
+                    <?php if ($has_permission): ?>
+                        <h6 style="font-weight: normal;"><i class="fa-solid fa-id-card"></i><strong>
+                                SSS</strong>
+                        </h6>
+
+                        <h6 style="font-weight: normal;">
+                            <?= $current_employer->sss ?>
+                        </h6>
+                        <br>
+                        <h6 style="font-weight: normal;"><i class="fa-solid fa-id-card"></i><strong>
+                                TIN</strong>
+                        </h6>
+                        <h6 style="font-weight: normal;">
+                            <?= $current_employer->tin ?>
+                        </h6>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Job Post Modal -->
     <div class="modal fade" id="jobpostmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="border-radius:15px;">
         <div class="modal-dialog modal-lg modal-dialog-centered " role="document" style="width:;">
             <div class="modal-content border-0" style="border-radius:15px;">

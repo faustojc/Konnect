@@ -23,9 +23,12 @@ class Applicant_model extends CI_Model
         return $this->db->select('tbl_applicant.*, 
         tbl_user.is_verified AS user_verified, 
         tbl_user.email AS email,
+        tbl_user.id AS user_id,
         CONCAT_WS(" ", tbl_employee.Fname, tbl_employee.Mname, tbl_employee.Lname) AS employeeName, 
-        tbl_employee.user_id AS employeeUserID,
-        tbl_jobposting.title AS jobTitle,
+        tbl_employee.title as employeeTitle,
+        tbl_employee.Employee_image AS employeeImage,
+        tbl_employee.Address AS employeeAddress,
+        tbl_employee.City AS employeeCity,
         tbl_jobposting.job_type AS jobType,')
             ->from($this->Table->applicant)
             ->join('tbl_jobposting', 'tbl_jobposting.id = tbl_applicant.job_id', 'inner')
@@ -39,9 +42,12 @@ class Applicant_model extends CI_Model
 
     public function getJobApplicants($job_id)
     {
-        return $this->db->select('tbl_applicant.*, 
+        return $this->db->select('tbl_applicant.*,  
         CONCAT_WS(" ", tbl_employee.Fname, tbl_employee.Mname, tbl_employee.Lname) AS employeeName, 
-        tbl_employee.Title AS employeeTitle, 
+        tbl_employee.title as employeeTitle,
+        tbl_employee.Employee_image AS employeeImage,
+        tbl_employee.Address AS employeeAddress,
+        tbl_employee.City AS employeeCity,
         tbl_employee.Employee_image AS employeeImage')
             ->from($this->Table->applicant)
             ->join($this->Table->employee, 'tbl_employee.ID = tbl_applicant.employee_id', 'inner')

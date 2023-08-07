@@ -31,6 +31,97 @@ foreach ($feedbacks as $feedback) {
     }
 </style>
 
+<?php if (!$has_permission && !$has_given_feedback): ?>
+    <div class="modal fade" id="ModalFeedback" tabindex="-1" role="dialog" aria-labelledby="ModalFeedback" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="feedbackModalLabel">Add Feedback</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Feedback form Content -->
+                    <div class="container">
+                        <form>
+                            <input name="user_id" id="user_id" value="<?= $auth['id'] ?>" hidden readonly>
+                            <!-- Feedback Rating -->
+                            <div class="form-group">
+                                <label for="rating">Your Rating</label>
+                                <div class="d-flex flex-nowrap">
+                                    <div class="rating" data-value="0" data-max="5" data-precision="1">
+                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                    </div>
+                                    <input name="rating" class="d-inline-block bg-transparent border-0 w-auto m-0" id="ratingValue" value="0" readonly/>
+                                </div>
+                            </div>
+                            <!-- Feedback Comment -->
+                            <div class="form-group">
+                                <label for="message">Your Feedback</label>
+                                <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+                                <p class="text-danger float-left" id="feedback_warning" hidden>
+                                    <i class="text-danger fa fa-exclamation-circle"></i> Character exceeds 2000
+                                </p>
+                                <p class="text-muted text-right" id="feedback_char_count"></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-info" id="btn_feedback" data-dismiss="modal">Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const rating = document.querySelector('.rating');
+        const ratingValue = document.querySelector('#ratingValue');
+
+        function updateRating() {
+            const value = parseFloat(rating.dataset.value);
+            const precision = parseFloat(rating.dataset.precision);
+
+            const stars = rating.querySelectorAll('span');
+
+            stars.forEach((star, index) => {
+                star.textContent = index < Math.floor(value) ? '★' : '☆';
+            });
+
+            if (value % 1 >= precision) {
+                stars[Math.ceil(value) - 1].textContent = '★';
+                stars[Math.ceil(value) - 1].style.position = 'relative';
+                stars[Math.ceil(value) - 1].style.overflow = 'hidden';
+
+                const ratingValueElement = rating.querySelector('.rating-value');
+                ratingValueElement.textContent = '★';
+                ratingValueElement.style.width = `${(value % 1) / precision * 100}%`;
+                ratingValueElement.style.position = 'absolute';
+                ratingValueElement.style.top = '0';
+                ratingValueElement.style.left = '0';
+                ratingValueElement.style.zIndex = '1';
+                ratingValueElement.style.color = 'gold';
+            }
+
+            ratingValue.value = value.toString();
+        }
+
+        updateRating();
+
+        rating.addEventListener('click', (e) => {
+            if (e.target.matches('span')) {
+                const stars = rating.querySelectorAll('span');
+                rating.dataset.value = Array.from(stars).indexOf(e.target) + 1;
+
+                updateRating();
+            }
+        });
+    </script>
+<?php endif; ?>
+
 
 <!-- feedback -->
 <div class="card card-white">
@@ -46,97 +137,6 @@ foreach ($feedbacks as $feedback) {
         <?php endif; ?>
 
     </div>
-
-    <?php if (!$has_permission && !$has_given_feedback): ?>
-        <div class="modal fade" id="ModalFeedback" tabindex="-1" role="dialog" aria-labelledby="ModalFeedback" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="feedbackModalLabel">Add Feedback</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- Feedback form Content -->
-                        <div class="container">
-                            <form>
-                                <input name="user_id" id="user_id" value="<?= $auth['id'] ?>" hidden readonly>
-                                <!-- Feedback Rating -->
-                                <div class="form-group">
-                                    <label for="rating">Your Rating</label>
-                                    <div class="d-flex flex-nowrap">
-                                        <div class="rating" data-value="0" data-max="5" data-precision="1">
-                                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                                        </div>
-                                        <input name="rating" class="d-inline-block bg-transparent border-0 w-auto m-0" id="ratingValue" value="0" readonly />
-                                    </div>
-                                </div>
-                                <!-- Feedback Comment -->
-                                <div class="form-group">
-                                    <label for="message">Your Feedback</label>
-                                    <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
-                                    <p class="text-danger float-left" id="feedback_warning" hidden>
-                                        <i class="text-danger fa fa-exclamation-circle"></i> Character exceeds 2000
-                                    </p>
-                                    <p class="text-muted text-right" id="feedback_char_count"></p>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-info" id="btn_feedback" data-dismiss="modal">Submit
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <script>
-            const rating = document.querySelector('.rating');
-            const ratingValue = document.querySelector('#ratingValue');
-
-            function updateRating() {
-                const value = parseFloat(rating.dataset.value);
-                const precision = parseFloat(rating.dataset.precision);
-
-                const stars = rating.querySelectorAll('span');
-
-                stars.forEach((star, index) => {
-                    star.textContent = index < Math.floor(value) ? '★' : '☆';
-                });
-
-                if (value % 1 >= precision) {
-                    stars[Math.ceil(value) - 1].textContent = '★';
-                    stars[Math.ceil(value) - 1].style.position = 'relative';
-                    stars[Math.ceil(value) - 1].style.overflow = 'hidden';
-
-                    const ratingValueElement = rating.querySelector('.rating-value');
-                    ratingValueElement.textContent = '★';
-                    ratingValueElement.style.width = `${(value % 1) / precision * 100}%`;
-                    ratingValueElement.style.position = 'absolute';
-                    ratingValueElement.style.top = '0';
-                    ratingValueElement.style.left = '0';
-                    ratingValueElement.style.zIndex = '1';
-                    ratingValueElement.style.color = 'gold';
-                }
-
-                ratingValue.value = value.toString();
-            }
-
-            updateRating();
-
-            rating.addEventListener('click', (e) => {
-                if (e.target.matches('span')) {
-                    const stars = rating.querySelectorAll('span');
-                    rating.dataset.value = Array.from(stars).indexOf(e.target) + 1;
-
-                    updateRating();
-                }
-            });
-        </script>
-    <?php endif; ?>
 
     <!-- feedback -->
     <?php if (!empty($feedbacks)): ?>

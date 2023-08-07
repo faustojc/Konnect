@@ -334,7 +334,6 @@ main_header(['Employer_profile']);
                 </div>
             </div>
 
-
             <div class="col-12 col-md-3 mt-4">
                 <div class="sticky-top scrollfunc" style="top: 65px; height: calc(100vh - 65px); ;">
 
@@ -374,9 +373,10 @@ main_header(['Employer_profile']);
                 </div>
             </div>
 
+            <?php applyModal(); ?>
 
-        </div><!--row-->
-    </div><!--container fluid-->
+        </div>
+    </div>
 </section>
 
 <!-- ############ PAGE END-->

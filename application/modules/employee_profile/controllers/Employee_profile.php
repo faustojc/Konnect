@@ -60,9 +60,6 @@ class Employee_profile extends MY_Controller
 
         $ID = $this->input->get('id');
 
-        $this->load->driver('cache');
-        $this->db->cache_on();
-
         $this->data['details'] = $this->eModel->get_employee($ID);
         $this->data['educations'] = $this->education_model->getEmployeeEducations($ID);
         $this->data['train_val'] = $this->eModel->get_training();
@@ -80,8 +77,6 @@ class Employee_profile extends MY_Controller
         }
 
         $this->data['current_following'] = $this->follow_model->get_following($this->curr_id);
-
-        $this->db->cache_off();
 
         $this->data['educations_section_view'] = $this->load->view('grid/load_educations', $this->data, TRUE);
         $this->data['employments_section_view'] = $this->load->view('grid/load_employments', $this->data, TRUE);

@@ -56,8 +56,7 @@ jobpost_update_modal($job, 'job_modal' . $job->id);
             <div class="modal-body">
                 <form>
                     <input name="id" id="id" value="" hidden readonly>
-                    <input name="employee_id" value="" hidden readonly>
-                    <input name="job_id" value="" hidden readonly>
+                    <input name="employee_id" value="" hidden readonly> <input name="job_id" value="" hidden readonly>
                 </form>
                 <div class="row">
                     <div class="col-md-12">
@@ -140,7 +139,7 @@ jobpost_update_modal($job, 'job_modal' . $job->id);
     <div class="row">
         <?php if (!empty($applicants)): $counter = 0; ?>
             <?php foreach ($applicants as $applicant): ?>
-                <?php if ($applicant->status != 'ACCEPTED' && $applicant->status != 'REJECTED'):
+                <?php if ($applicant->status == 'PENDING'):
                     $counter++; ?>
                     <div class="col-12 col-md-6">
                         <a href="<?= base_url() ?>employee_profile?id=<?= $applicant->employee_id ?>" style="color:#000;">

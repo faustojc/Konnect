@@ -73,14 +73,9 @@ Jquery 3.6.0
   CKEditor.
 - [ ] Enable location/map features - show jobs on a map, location search and filters, candidate proximity. Integrate
   Google Maps API.
-
 - [ ] Add ability for employers to directly contact applicants through the platform via messaging.
-- [ ] Implement admin dashboard for managing jobs, users, stats. Add reporting features. Use a third-party analytics
-  service like Google Analytics.
 - [ ] Add payment capabilities for premium job listings or highlighted profiles. Integrate with payment gateways. Use
   Stripe or Braintree.
-- [ ] Implement web push notifications using service workers for real-time updates. Use a third-party service like
-  OneSignal or Pusher.
 - [ ] Add social login and sharing features. Integrate with Facebook, Twitter, LinkedIn, etc. Use OAuth.
 - [ ] Build a mobile-optimized version of the app or create mobile apps for iOS and Android. Use React Native or Ionic.
 - [ ] Optimize SEO with meta tags, sitemaps, structured data. Integrate with Google Analytics.

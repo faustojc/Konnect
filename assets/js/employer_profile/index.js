@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setJobStatus();
     setJobDescription();
     setJobBtn();
+    applyBtnFunction();
 
     let address;
     let region;

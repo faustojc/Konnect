@@ -1,3 +1,6 @@
+const spinner = document.createElement('span');
+spinner.classList.add('spinner-border', 'spinner-border-sm', 'mx-2');
+
 const load_intro = () => {
     fetch(baseUrl + 'employee_profile/getIntro')
         .then(response => response.text())
@@ -160,53 +163,90 @@ if (add_employment) {
 // ------------------- FOR SKILLS -------------------
 
 const skillFunc = () => {
-    const save_skill = document.querySelector('#btn_skill');
-    if (save_skill) {
-        save_skill.addEventListener('click', () => {
-            const form = save_skill.closest('.modal-content').querySelector('form');
-            const formData = new FormData(form);
-            const isValid = validateForm(form);
+    const modal_footer = document.querySelectorAll('.modal-footer');
+    if (modal_footer) {
+        modal_footer.forEach(footer => {
+            footer.addEventListener('click', (event) => {
+                if (event.target.matches('#btn_skill, .update-skill')) {
+                    const form = footer.closest('.modal-content').querySelector('form');
+                    const formData = new FormData(form);
+                    const isValid = validateForm(form);
 
-            if (isValid) {
-                formAction(baseUrl + 'employeeskills/EmployeeSkills/saveSkill', 'POST', formData, () => {
-                    load_skill();
-                    success('SUCCESS', 'Skill successfully added');
-                });
-            }
-        });
-    }
+                    let url = (event.target.matches('#btn_skill')) ?
+                        baseUrl + 'employeeskills/EmployeeSkills/saveSkill' :
+                        baseUrl + 'employeeskills/EmployeeSkills/editSkill';
 
-    const update_skill = document.querySelectorAll('.update-skill');
-    if (update_skill) {
-        update_skill.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const form = btn.closest('.modal-content').querySelector('form');
-                const formData = new FormData(form);
-                const isValid = validateForm(form);
+                    let message = (event.target.matches('#btn_skill')) ?
+                        'Skill successfully added' :
+                        'Skill successfully updated';
 
-                if (isValid) {
-                    formAction(baseUrl + 'employeeskills/EmployeeSkills/editSkill', 'POST', formData, () => {
+                    if (isValid) {
+                        formAction(url, 'POST', formData, () => {
+                            load_skill();
+                            success('SUCCESS', message);
+                        });
+                    }
+                }
+
+                if (event.target.matches('.delete-skill')) {
+                    const id = event.target.getAttribute('data-id');
+
+                    formAction(baseUrl + 'employeeskills/EmployeeSkills/deleteSkill', 'POST', {id: id}, () => {
                         load_skill();
-                        success('SUCCESS', 'Skill successfully updated');
+                        success('SUCCESS', 'Skill successfully deleted');
                     });
                 }
             });
         });
     }
 
-    const delete_skill = document.querySelectorAll('.delete-skill');
-    if (delete_skill) {
-        delete_skill.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const id = btn.getAttribute('data-id');
-
-                formAction(baseUrl + 'employeeskills/EmployeeSkills/deleteSkill', 'POST', {id: id}, () => {
-                    load_skill();
-                    success('SUCCESS', 'Skill successfully deleted');
-                });
-            });
-        });
-    }
+    // const save_skill = document.querySelector('#btn_skill');
+    // if (save_skill) {
+    //     save_skill.addEventListener('click', (event) => {
+    //         const form = save_skill.closest('.modal-content').querySelector('form');
+    //         const formData = new FormData(form);
+    //         const isValid = validateForm(form);
+    //
+    //         if (isValid) {
+    //             formAction(baseUrl + 'employeeskills/EmployeeSkills/saveSkill', 'POST', formData, () => {
+    //                 load_skill();
+    //                 success('SUCCESS', 'Skill successfully added');
+    //             });
+    //         }
+    //     });
+    // }
+    //
+    // const update_skill = document.querySelectorAll('.update-skill');
+    // if (update_skill) {
+    //     update_skill.forEach(btn => {
+    //         btn.addEventListener('click', (event) => {
+    //             const form = btn.closest('.modal-content').querySelector('form');
+    //             const formData = new FormData(form);
+    //             const isValid = validateForm(form);
+    //
+    //             if (isValid) {
+    //                 formAction(baseUrl + 'employeeskills/EmployeeSkills/editSkill', 'POST', formData, () => {
+    //                     load_skill();
+    //                     success('SUCCESS', 'Skill successfully updated');
+    //                 });
+    //             }
+    //         });
+    //     });
+    // }
+    //
+    // const delete_skill = document.querySelectorAll('.delete-skill');
+    // if (delete_skill) {
+    //     delete_skill.forEach(btn => {
+    //         btn.addEventListener('click', () => {
+    //             const id = btn.getAttribute('data-id');
+    //
+    //             formAction(baseUrl + 'employeeskills/EmployeeSkills/deleteSkill', 'POST', {id: id}, () => {
+    //                 load_skill();
+    //                 success('SUCCESS', 'Skill successfully deleted');
+    //             });
+    //         });
+    //     });
+    // }
 }
 skillFunc();
 

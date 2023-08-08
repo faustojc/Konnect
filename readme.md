@@ -26,6 +26,26 @@ Jquery 3.6.0
 - A JavaScript library that simplifies the manipulation of HTML elements, the handling of events, the creation of
   animations, and the communication with the server using AJAX.
 
+*******************
+
+## Installation
+
+1. Download the project from the repository, extract the Konnect folder, and/or copy the folder to the htdocs folder of
+   your
+   XAMPP installation.
+2. Create a database named beu_database in phpMyAdmin. Import the beu_database.sql file located in the Konnect/db
+   folder.
+3. Then you can now run the project by typing the url localhost/Konnect in your browser.
+
+*******************
+
+## Issues
+
+- If you encounter any issues, open a new issue in the issues tab of the repository.
+- Please explain the issue in detail and provide screenshots if possible.
+
+*******************
+
 ## Check List for Planned Features
 
 ### HIGH Priority

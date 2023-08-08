@@ -79,6 +79,7 @@ const jobSelectedDisplayEvent = (url) => {
                     acceptRejectBtnFunction();
                     setJobFunctionality();
                     setViewApplicant();
+                    btnApplyFunc();
 
                     tinymce.remove('textarea');
                     textareaEditor('#description' + id, 400);

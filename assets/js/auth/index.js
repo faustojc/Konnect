@@ -8,7 +8,12 @@ const load_feedbacks = () => {
 
     fetch(baseUrl + 'feedback/getFeedbacks?id=' + id)
         .then(response => response.text())
-        .then(data => feedbacks.innerHTML = data)
+        .then(data => {
+            feedbacks.innerHTML = data;
+
+            tinymce.remove('#message');
+            textareaEditor('#message', 400);
+        })
         .catch(() => error('ERROR', 'Something went wrong. Please try again later'));
 }
 

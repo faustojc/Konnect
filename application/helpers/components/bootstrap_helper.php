@@ -238,13 +238,13 @@ if (!function_exists('load_feedback')) {
      *
      * USAGE: load_feedback($feedback, $isAccount);
      *
-     * @param array $feedback The array of feedback.
+     * @param array $feedbacks The array of feedback.
      * @param bool $isAccount The boolean value if the user is the account owner.
      */
-    function load_feedback(array $feedback, bool $isAccount)
+    function load_feedback(array $feedbacks, bool $isAccount)
     {
         $data = [
-            'feedback' => $feedback,
+            'feedbacks' => $feedbacks,
             'has_permission' => $isAccount,
         ];
 

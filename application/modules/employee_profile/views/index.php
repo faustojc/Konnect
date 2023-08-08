@@ -94,7 +94,7 @@ main_header(['employee_profile']);
     }
 
     .nav-pills .nav-link.active,
-    .nav-pills .show > .nav-link {
+    .nav-pills .show>.nav-link {
         color: #fff;
         background-color: #0dcaf0;
     }
@@ -739,7 +739,7 @@ main_header(['employee_profile']);
                         <?php load_following($following) ?>
                     </div>
                     <div class="tab-pane fade" id="pills-feedback" role="tabpanel" aria-labelledby="pills-feedback-tab">
-                        <div id="load_feedback">
+                        <div id="load_feedbacks">
                             <?php load_feedback($feedbacks, $has_permission) ?>
                         </div>
                     </div>

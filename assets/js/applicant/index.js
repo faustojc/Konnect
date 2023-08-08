@@ -32,26 +32,29 @@ if (upload_resume_input) {
     });
 }
 
-const btn_apply = document.querySelectorAll('.btn-apply');
-if (btn_apply) {
-    btn_apply.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const apply_modal = document.querySelector('#apply');
-            const observer = new MutationObserver(mutations => {
-                mutations.forEach(mutation => {
-                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-                        if (apply_modal.classList.contains('show')) {
-                            apply_modal.querySelector('input[name="job_id"]').value = btn.getAttribute('data-id');
+const btnApplyFunc = () => {
+    const btn_apply = document.querySelectorAll('.btn-apply');
+    if (btn_apply) {
+        btn_apply.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const apply_modal = document.querySelector('#apply');
+                const observer = new MutationObserver(mutations => {
+                    mutations.forEach(mutation => {
+                        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                            if (apply_modal.classList.contains('show')) {
+                                apply_modal.querySelector('input[name="job_id"]').value = btn.getAttribute('data-id');
+                            }
                         }
-                    }
+                    });
                 });
-            });
 
-            observer.observe(apply_modal, {attributes: true, attributeFilter: ['class']})
+                observer.observe(apply_modal, {attributes: true, attributeFilter: ['class']})
+            });
         });
-    });
+    }
 }
 
+btnApplyFunc();
 
 function applyBtnFunction() {
     const applyBtn = document.querySelector('.apply-button');

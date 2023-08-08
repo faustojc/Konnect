@@ -35,6 +35,10 @@ class Feedback extends MY_Controller
     {
         $id = $this->input->get('id');
 
+        if (empty($id)) {
+            $id = get_userdata('current_user');
+        }
+
         $curr_user = $this->Employee_model->getEmployee($id, 'ID, user_id');
 
         if (empty($curr_user)) {

@@ -18,7 +18,7 @@ class Employee_profile extends MY_Controller
         if (empty($this->userdata)) {
             redirect(base_url() . 'login');
         } else {
-            $this->auth = (array)$this->Auth_model->get_auth($this->userdata->user_id);
+            $this->auth = (array) $this->Auth_model->get_auth($this->userdata->user_id);
         }
 
         if ($this->auth['user_type'] == 'EMPLOYEE') {
@@ -38,7 +38,7 @@ class Employee_profile extends MY_Controller
         $ID = $this->input->get('id');
         if (!empty($ID) && empty($this->current_user)) {
             $this->current_user = $this->employee_model->getEmployee($ID);
-            $this->data['curr_auth'] = (array)$this->Auth_model->get_auth($this->current_user->user_id);
+            $this->data['curr_auth'] = (array) $this->Auth_model->get_auth($this->current_user->user_id);
 
             set_userdata('current_user', $this->current_user);
             set_userdata('curr_auth', $this->data['curr_auth']);

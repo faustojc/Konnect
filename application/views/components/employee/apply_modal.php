@@ -10,7 +10,7 @@
             </div>
             <div class="modal-body">
                 <form>
-                    <input name="job_id" value="" hidden readonly/>
+                    <input name="job_id" value="" hidden readonly />
 
                     <div class="row">
                         <div class="col-md-12">
@@ -24,17 +24,27 @@
                                     </div>
                                 </div>
                                 <div class="col-10 pl-2">
-                                    <h6 class="p-0" style="font-size: 13px; font-weight: 500;"><?= ucwords($employee->Fname . ' ' . $employee->Lname) ?></h6>
-                                    <h6 class="p-0" style="font-size: 13px; font-weight: 400;"><?= ucwords($employee->Title) ?></h6>
-                                    <h6 class="p-0" style="font-size: 13px; font-weight: 400;"><?= $employee->Address ?></h6>
+                                    <h6 class="p-0" style="font-size: 13px; font-weight: 500;">
+                                        <?= ucwords($employee->Fname . ' ' . $employee->Lname) ?>
+                                    </h6>
+                                    <h6 class="p-0" style="font-size: 13px; font-weight: 400;">
+                                        <?= ucwords($employee->Title) ?>
+                                    </h6>
+                                    <h6 class="p-0" style="font-size: 13px; font-weight: 400;">
+                                        <?= $employee->Address ?>
+                                    </h6>
                                 </div>
                             </div>
 
                             <h6 class="pt-3">Email Address</h6>
-                            <h6 class="review_h p-2" style="font-size: 13px; font-weight: 400;"><?= $employee->Email ?></h6>
+                            <h6 class="review_h p-2" style="font-size: 13px; font-weight: 400;">
+                                <?= $employee->Email ?>
+                            </h6>
 
                             <h6 class="pt-3">City</h6>
-                            <small class="review_h p-2" style="font-size: 13px; font-weight: 400;"><?= $employee->City ?></small>
+                            <h6 class="review_h p-2" style="font-size: 13px; font-weight: 400;">
+                                <?= $employee->City ?>
+                            </h6>
 
                             <h6 class="pt-3">Resume</h6>
                             <h6 style="font-size: 13px; font-weight: 400;">Be sure to include an updated resume</h6>

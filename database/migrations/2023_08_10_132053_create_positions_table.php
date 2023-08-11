@@ -12,15 +12,11 @@ return new class extends Migration {
     {
         Schema::create('positions', static function (Blueprint $table) {
             $table->id();
-            $table->foreignId('employed_id')->nullable()->constrained('employed')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
 
             $table->string('name');
             $table->string('level');
 
             $table->string('current_position')->nullable();
-
             $table->json('search_terms');
 
             $table->timestamps();

@@ -12,13 +12,6 @@ return new class extends Migration {
     {
         Schema::create('followings', static function (Blueprint $table) {
             $table->id();
-            $table->foreignId('employee_id')->constrained('employees')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
-            $table->foreignId('employer_id')->constrained('employers')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
-
             $table->timestamps();
         });
     }
@@ -28,6 +21,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('followings');
     }
 };

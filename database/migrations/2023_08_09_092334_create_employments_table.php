@@ -12,16 +12,8 @@ return new class extends Migration {
     {
         Schema::create('employments', static function (Blueprint $table) {
             $table->id();
-            $table->foreignId('employee_id')->constrained('employees')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
-            $table->foreignId('employer_id')->constrained('employers')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
-            $table->foreignId('job_id')->constrained('jobs')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
 
+            $table->string('job_title');
             $table->date('start_date');
             $table->date('end_date')->nullable();
 

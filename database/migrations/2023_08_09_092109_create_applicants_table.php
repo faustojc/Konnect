@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,12 +12,6 @@ return new class extends Migration
     {
         Schema::create('applicants', static function (Blueprint $table) {
             $table->id();
-            $table->foreignId('employee_id')->constrained(table: 'employees')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
-            $table->foreignId('job_id')->constrained(table: 'jobs')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
 
             $table->date('application_date');
             $table->string('status');

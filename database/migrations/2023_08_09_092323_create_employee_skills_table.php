@@ -12,12 +12,6 @@ return new class extends Migration {
     {
         Schema::create('employee_skills', static function (Blueprint $table) {
             $table->id();
-            $table->foreignId('employee_id')->constrained('employees')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
-            $table->foreignId('skill_id')->constrained('skills')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
 
             $table->string('proficiency');
             $table->unsignedInteger('months_of_experience');
@@ -38,6 +32,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('employee_skills');
     }
 };

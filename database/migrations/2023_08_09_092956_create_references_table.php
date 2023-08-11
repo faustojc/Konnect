@@ -12,12 +12,6 @@ return new class extends Migration {
     {
         Schema::create('references', static function (Blueprint $table) {
             $table->id();
-            $table->foreignId('employee_id')->constrained('employees')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
-            $table->foreignId('employer_id')->constrained('employers')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
 
             $table->text('relationship');
             $table->integer('rating')->nullable();
@@ -36,6 +30,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('references');
     }
 };

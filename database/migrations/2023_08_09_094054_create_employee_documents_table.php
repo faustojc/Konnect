@@ -10,14 +10,8 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('employee_files', static function (Blueprint $table) {
+        Schema::create('employee_documents', static function (Blueprint $table) {
             $table->id();
-            $table->foreignId('employee_id')->constrained('employees')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
-            $table->foreignId('applicant_id')->nullable()->constrained('applicants')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
 
             $table->string('file_path');
             $table->string('file_name');

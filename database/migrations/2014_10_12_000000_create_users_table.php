@@ -12,9 +12,6 @@ return new class extends Migration {
     {
         Schema::create('users', static function (Blueprint $table) {
             $table->id();
-            $table->foreignId('government_id')->nullable()->constrained('government_ids')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
 
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -30,6 +27,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('users');
     }
 };

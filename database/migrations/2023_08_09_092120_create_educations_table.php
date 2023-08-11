@@ -12,12 +12,6 @@ return new class extends Migration {
     {
         Schema::create('educations', static function (Blueprint $table) {
             $table->id();
-            $table->foreignId('employee_id')->constrained('employees')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
-            $table->foreignId('school_id')->nullable()->constrained('employers')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
 
             $table->string('school_name');
             $table->string('degree');

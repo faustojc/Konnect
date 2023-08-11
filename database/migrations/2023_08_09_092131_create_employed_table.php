@@ -12,15 +12,6 @@ return new class extends Migration {
     {
         Schema::create('employed', static function (Blueprint $table) {
             $table->id();
-            $table->foreignId('employer_id')->constrained('employers')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
-            $table->foreignId('employee_id')->constrained('employees')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
-            $table->foreignId('job_id')->nullable()->constrained('jobs')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
 
             $table->string('job_title');
             $table->string('department');

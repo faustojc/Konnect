@@ -6,10 +6,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Laravel\Sanctum\HasApiTokens;
 
 class Employer extends Model
 {
-    use HasFactory;
+    use HasFactory, HasApiTokens;
+
+    public function abilities(): array
+    {
+        return [
+            'post-job' => 'post jobs',
+            'view-applicants' => 'view applicants',
+            'manage-employed' => 'manage employed',
+        ];
+    }
 
     public function user(): BelongsTo
     {

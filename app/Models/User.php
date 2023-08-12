@@ -45,6 +45,13 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function abilities(): array
+    {
+        return [
+            'edit-profile' => 'edit profile',
+        ];
+    }
+
     public function employee(): HasOne
     {
         return $this->hasOne(Employee::class);

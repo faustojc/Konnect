@@ -1,3 +1,5 @@
+require('./bootstrap');
+
 import {createInertiaApp} from '@inertiajs/react';
 import {hydrateRoot} from 'react-dom/client';
 

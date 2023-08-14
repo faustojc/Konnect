@@ -4,8 +4,19 @@
     "isEntry": true,
     "src": "resources/css/app.css"
   },
+  "resources/js/Pages/Auth/Login.jsx": {
+    "file": "assets/Login-42d7d1e1.js",
+    "imports": [
+      "resources/js/app.jsx"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Auth/Login.jsx"
+  },
   "resources/js/app.jsx": {
-    "file": "assets/app-056c7176.js",
+    "dynamicImports": [
+      "resources/js/Pages/Auth/Login.jsx"
+    ],
+    "file": "assets/app-65d83097.js",
     "isEntry": true,
     "src": "resources/js/app.jsx"
   }

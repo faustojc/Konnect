@@ -1,5 +1,6 @@
 import {createInertiaApp} from '@inertiajs/react'
 import createServer from '@inertiajs/react/server'
+import React from "react";
 import {renderToString} from 'react-dom/server'
 
 createServer(page =>

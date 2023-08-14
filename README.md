@@ -36,6 +36,15 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 *******************
 
+## Run for development
+1. Save changes of components in <code>Pages/</code> folder
+2. Run in terminal <code>npm run build</code>
+3. Start the local server <code>php artisan serve</code>
+
+See the routes in <code>routes/web.php</code>
+- For login <code>localhost:8000/login</code>
+- For register <code>localhost:8000/register</code>
+
 ## Check List for Planned Features
 
 ### HIGH Priority

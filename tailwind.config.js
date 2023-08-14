@@ -8,8 +8,12 @@ export default {
         "./resources/**/*.tsx",
         "./resources/**/*.vue",
     ],
+    media: false, // or 'media' or 'class'
     theme: {
         extend: {},
     },
+    variants: {
+        extend: {},
+    },
     plugins: [],
-}
+};
